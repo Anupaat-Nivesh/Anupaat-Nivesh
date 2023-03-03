@@ -1,15 +1,12 @@
 import React from 'react';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import {Footer,About,Offerings, Whyanupaat,Home} from './containers';
-import { Team, Brand ,Navbar,NotFound} from './components' ;
-
+import { Team, Brand ,Navbar,NotFound,Contact} from './components' ;
 import './App.css' ;
 function App() {
   return (
     <BrowserRouter>
       <Navbar/>
-      
-      
       <Routes>
         <Route path='home'element ={<Home/>}/>
         <Route path='about' element={<About/>}/>
@@ -20,7 +17,7 @@ function App() {
 
       </Routes>
       
-       
+       <Contact/>
        
       <Footer/>
     

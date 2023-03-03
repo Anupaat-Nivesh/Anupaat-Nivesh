@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.090f2adb.css",
+    "main.js": "/static/js/main.c8f0aae0.js",
+    "static/js/787.ad98b615.chunk.js": "/static/js/787.ad98b615.chunk.js",
+    "static/media/whyanupaat-titleimage.jpg": "/static/media/whyanupaat-titleimage.0e4364f770e801140446.jpg",
+    "static/media/logo.png": "/static/media/logo.c3bc4ce99a8afc8f28a5.png",
+    "static/media/investor.svg": "/static/media/investor.288718e782afc85960d44237ea483cec.svg",
+    "static/media/savings.svg": "/static/media/savings.1a094e20626b4795d5622ebda59fa6c6.svg",
+    "static/media/stocks.svg": "/static/media/stocks.bf2abe368e40330c927b6e37471f77e3.svg",
+    "index.html": "/index.html",
+    "main.090f2adb.css.map": "/static/css/main.090f2adb.css.map",
+    "main.c8f0aae0.js.map": "/static/js/main.c8f0aae0.js.map",
+    "787.ad98b615.chunk.js.map": "/static/js/787.ad98b615.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.090f2adb.css",
+    "static/js/main.c8f0aae0.js"
+  ]
+}
