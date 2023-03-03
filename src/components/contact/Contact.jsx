@@ -34,7 +34,7 @@ const Contact = (props) => {
                                 <label htmlFor="contact-number">Phone</label>
                                 <div>
                                 <input id='contact-number' placeholder='+91 9499424123' type="tel"/>
-                                <div className='phone-error error' >*InValid mobile number</div>
+                               
                                 </div>
                             </div>
                     

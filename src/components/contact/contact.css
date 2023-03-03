@@ -64,9 +64,7 @@
   box-shadow: 0 0 0 0.5rem #ffb3b3;
 }
 
-.error {
-  color: #ff3333;
-}
+
 
 .cta-meassage-section {
   grid-column: 1/-1;
