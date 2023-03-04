@@ -59,6 +59,11 @@
   color: #aaa;
 }
 
+.error{
+  color: var(--color-blog);
+  padding: 1rem;
+}
+
 .cta *:focus {
   outline: 0;
   box-shadow: 0 0 0 0.5rem #ffb3b3;
