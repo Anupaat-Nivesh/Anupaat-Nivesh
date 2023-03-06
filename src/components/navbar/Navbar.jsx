@@ -35,7 +35,7 @@ const Navbar = () => {
             <div className="anupaat__navbar-links">
                 <div className="anupaat__navbar-links_logo">
                     <Link to="/home" className='logo' onClick={() => setToggleMenu(false)}>
-                        <img src={logo} alt="Nav Logo" />
+                        <img src={logo} alt="Anupaat Nivesh Logo" />
                     </Link>
                 </div>
                 <ul className="anupaat__navbar-links_container">
@@ -43,7 +43,7 @@ const Navbar = () => {
                         links.map(({ name, path }, index) => {
                             return (
                                 <li>
-                                    <NavLink to={path}>{name}</NavLink>
+                                    <NavLink className="nav-link" to={path}>{name}</NavLink>
                                 </li>
                             )
                         })
@@ -52,8 +52,7 @@ const Navbar = () => {
 
             </div>
             <div className="anupaat__navbar-sign">
-
-                <button type="button">Download</button>
+                <button type="button app-btn">Get The App</button>
             </div>
 
             <div className="anupaat__navbar-menu">
@@ -76,7 +75,7 @@ const Navbar = () => {
                         </ul>
                         <div className="anupaat__navbar-menu_container-links-sign">
 
-                            <button type="button">Download App</button>
+                            <button type="button">Get The App</button>
                         </div>
                     </div>
                 )}

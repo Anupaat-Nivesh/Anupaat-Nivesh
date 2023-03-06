@@ -23,7 +23,7 @@
 }
 
 .cta-text-box {
-  background-color: #ffe6e6;
+  background-color: var(--color-primary-light);
   padding: 2.4rem;
 }
 
@@ -66,7 +66,7 @@
 
 .cta *:focus {
   outline: 0;
-  box-shadow: 0 0 0 0.5rem #ffb3b3;
+  box-shadow: 0 0 0 0.5rem var(--color-focus);
 }
 
 
@@ -145,7 +145,7 @@
   transform: translate(40%, 40%);
   position: absolute;
   border-radius: 50%;
-  background-color: #ffb3b3;
+  background-color: var(--color-focus);
 }
 
 
@@ -226,7 +226,7 @@
   }
 
   .cta *:focus {
-    box-shadow: 0 0 0 0.3rem #ffb3b3;
+    box-shadow: 0 0 0 0.3rem var(--color-focus);
   }
 }
 
@@ -306,7 +306,7 @@
   .connect-info::before {
     width: 8rem;
     height: 8rem;
-    background-color: #ffb3b3;
+    background-color: var(--color-focus);
     bottom: 0;
     left: 0;
     transform: translate(-40%, 40%);

@@ -1,6 +1,7 @@
 .anupaat__header {
     display: flex;
     flex-direction: row;
+    
 }
 
 .anupaat__header-content {

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './carousel.css';
 import { CarouselItem } from "./CarouselItem";
+
 export const Carousel = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const items = [
@@ -32,9 +33,12 @@ export const Carousel = () => {
 
         setActiveIndex(newIndex);
     };
+
+
+
     return (
         <div className="carousel">
-            <div
+            <div 
                 className="inner"
                 style={{
                     transform: `translate(-${activeIndex * 100}%)`
