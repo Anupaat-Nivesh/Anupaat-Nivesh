@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap');
-
 
 
 .contact-section {
@@ -8,7 +6,7 @@
 }
 
 * {
-  font-family: 'rubik', sans-serif;
+  font-family: var( --font-family);
   margin: 0;
   padding: 0;
 }
@@ -123,6 +121,8 @@
 
 }
 
+
+
 .connect-info::before {
   content: "";
   width: 10rem;
@@ -154,6 +154,8 @@
   font-size: 5rem;
   /* box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1); */
 }
+
+
 
 
 

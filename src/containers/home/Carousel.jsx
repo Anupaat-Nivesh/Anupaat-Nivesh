@@ -45,7 +45,7 @@ export const Carousel = () => {
                 }}
             >
                 {items.map((item) => {
-                    return <CarouselItem item={item} width={"100%"} />;
+                    return <CarouselItem item={item} width={"100%"} itemIndex={activeIndex} />;
                 })}
             </div>
 
