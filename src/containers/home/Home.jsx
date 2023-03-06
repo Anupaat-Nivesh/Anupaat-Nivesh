@@ -2,6 +2,7 @@ import React from 'react'
 import './home.css';
 import { Carousel } from './Carousel';
 
+
 const Home = () => {
     return (
         <>

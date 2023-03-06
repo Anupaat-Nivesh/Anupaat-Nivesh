@@ -1,10 +1,30 @@
 import React from 'react'
 import './contact.css';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faFacebook,faWhatsapp,faTwitter,faYoutube } from "@fortawesome/free-brands-svg-icons"
+import { SiFacebook, SiTwitter, SiYoutube,SiWhatsapp } from "react-icons/si";
 
 
 const Contact = (props) => {
+    
+
+    const [phoneNumber,setPhoneNumber] = React.useState('');
+
+    const handlePhoneNumberChange = (e)=>{
+        const phoneError = document.querySelector('.phone-error');
+    
+        const inputPhoneNumber = e.target.value;
+
+        const indianPhoneNumberRegex = /^[6-9]\d{9}$/;
+
+        if(indianPhoneNumberRegex.test(inputPhoneNumber)||inputPhoneNumber===''){
+            setPhoneNumber(inputPhoneNumber);
+            console.log(inputPhoneNumber);
+            phoneError.textContent='';
+        }else{
+            phoneError.textContent='*Invalid Number';
+        }
+    };
+
+
 
     return (
         <div className='contact-section'>
@@ -33,8 +53,8 @@ const Contact = (props) => {
                             <div>
                                 <label htmlFor="contact-number">Phone</label>
                                 <div>
-                                <input id='contact-number' placeholder='+91 9499424123' type="tel"/>
-                               
+                                <input id='contact-number' placeholder='+91 9499424123' type="tel" onChange={handlePhoneNumberChange}/>
+                               <div className='error phone-error'> </div>
                                 </div>
                             </div>
                     
@@ -50,11 +70,11 @@ const Contact = (props) => {
                 <div className='connect-info'>
                     <div className='cta-social'>
 
-                    <a href='https://www.facebook.com/anupaatnivesh'><FontAwesomeIcon className='cta-social-icon' icon={faFacebook} /></a>
-                    <a href='https://twitter.com/Anupaatnivesh'><FontAwesomeIcon className='cta-social-icon' icon={faTwitter}/></a>
+                    <a href='https://www.facebook.com/anupaatnivesh'><SiFacebook className='cta-social-icon' /></a>
+                    <a href='https://twitter.com/Anupaatnivesh'><SiTwitter className='cta-social-icon' /></a>
                     
-                    <a href='https://www.youtube.com/@anupaatnivesh'><FontAwesomeIcon className='cta-social-icon' icon={faYoutube}/></a>
-                    <a href="#"><FontAwesomeIcon className='cta-social-icon' icon={faWhatsapp}/></a>
+                    <a href='https://www.youtube.com/@anupaatnivesh'><SiYoutube className='cta-social-icon' /></a>
+                    <a href="#"><SiWhatsapp className='cta-social-icon' /></a>
                     
                     </div>
                 </div>

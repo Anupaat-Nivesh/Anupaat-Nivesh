@@ -8,7 +8,8 @@ function App() {
     <BrowserRouter>
       <Navbar/>
       <Routes>
-        <Route path='home'element ={<Home/>}/>
+        <Route index element ={<Home/>}/>
+        <Route path='home' element={<Home/>} />
         <Route path='about' element={<About/>}/>
         <Route path='whyanupaat' element={<Whyanupaat/>}/>
         <Route path='offerings' element={<Offerings/>}/>
