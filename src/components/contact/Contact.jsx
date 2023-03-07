@@ -1,67 +1,85 @@
 import React from 'react'
 import './contact.css';
-import { SiFacebook, SiTwitter, SiYoutube,SiWhatsapp } from "react-icons/si";
+import { SiFacebook, SiTwitter, SiYoutube, SiWhatsapp } from "react-icons/si";
 
 
 const Contact = (props) => {
-    
 
-    const [phoneNumber,setPhoneNumber] = React.useState('');
 
-    const handlePhoneNumberChange = (e)=>{
+    const [phoneNumber, setPhoneNumber] = React.useState('');
+    const [mail, setMail] = React.useState('');
+
+    const handlePhoneNumberChange = (e) => {
         const phoneError = document.querySelector('.phone-error');
-    
+
         const inputPhoneNumber = e.target.value;
 
         const indianPhoneNumberRegex = /^[6-9]\d{9}$/;
+        const validEmailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-        if(indianPhoneNumberRegex.test(inputPhoneNumber)||inputPhoneNumber===''){
+        if (indianPhoneNumberRegex.test(inputPhoneNumber) || inputPhoneNumber === '') {
             setPhoneNumber(inputPhoneNumber);
             console.log(inputPhoneNumber);
-            phoneError.textContent='';
-        }else{
-            phoneError.textContent='*Invalid Number';
+            phoneError.textContent = '';
+        } else {
+            phoneError.textContent = '*Invalid Number';
         }
     };
 
+    const handleMailChange = (e) => {
+        const mailError = document.querySelector('.mail-error');
 
+        const inputMail = e.target.value;
+
+
+        const validEmailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        if (validEmailRegex.test(inputMail) || inputMail === '') {
+            setMail(inputMail);
+            console.log(inputMail);
+            mailError.textContent = '';
+        } else {
+            mailError.textContent = '*Invalid E-mail';
+        }
+    };
 
     return (
         <div className='contact-section'>
             <div className='cta'>
                 <div className='cta-text-box'>
                     <div className='cta-description'>
-                    <h2 className='heading-secondary'>Contact Information</h2>
-                    <p className='cta-text'>Fill up the form and our team will get back to you within <b>24 hours.</b></p> 
+                        <h2 className='heading-secondary'>Contact Information</h2>
+                        <p className='cta-text'>Fill up the form and our team will get back to you within <b>24 hours.</b></p>
                     </div>
                     <form action="" className='cta-form'>
                         <div>
                             <label htmlFor="first-name">First Name</label>
-                            <input id='first-name' type="text" placeholder='Lokesh' required/>
+                            <input id='first-name' type="text" placeholder='Lokesh' required />
                         </div>
                         <div>
                             <label htmlFor="last-name">Last Name</label>
-                            <input id='last-name' type="text" placeholder='Singh' required/>
+                            <input id='last-name' type="text" placeholder='Singh' required />
                         </div>
 
-                        
-                            <div>
-                                <label htmlFor="email">Email Address</label>
-                                <input type="email" id='email' placeholder='abc@example.com' required />
-                            </div>
 
+                        <div>
+                            <label htmlFor="email">Email Address</label>
+                            <input type="email" id='email' placeholder='abc@example.com' required onChange={handleMailChange} />
+                            <div className='error mail-error'> </div>
+                        </div>
+
+                        <div>
+                            <label htmlFor="contact-number">Phone</label>
                             <div>
-                                <label htmlFor="contact-number">Phone</label>
-                                <div>
-                                <input id='contact-number' placeholder='+91 9499424123' type="tel" onChange={handlePhoneNumberChange}/>
-                               <div className='error phone-error'> </div>
-                                </div>
+                                <input id='contact-number' placeholder='+91 9499424123' type="tel" onChange={handlePhoneNumberChange} />
+                                <div className='error phone-error'> </div>
                             </div>
-                    
-                        
+                        </div>
+
+
                         <div className='cta-meassage-section'>
                             <label htmlFor="message">Message</label>
-                            <textarea type="text" id='messsage' name='message' rows="8" cols="80"  placeholder='Write your message...' ></textarea>
+                            <textarea type="text" id='messsage' name='message' rows="8" cols="80" placeholder='Write your message...' ></textarea>
                         </div>
 
                         <button className='btn btn--form'>Send Message</button>
@@ -70,12 +88,12 @@ const Contact = (props) => {
                 <div className='connect-info'>
                     <div className='cta-social'>
 
-                    <a href='https://www.facebook.com/anupaatnivesh'><SiFacebook className='cta-social-icon' /></a>
-                    <a href='https://twitter.com/Anupaatnivesh'><SiTwitter className='cta-social-icon' /></a>
-                    
-                    <a href='https://www.youtube.com/@anupaatnivesh'><SiYoutube className='cta-social-icon' /></a>
-                    <a href="#"><SiWhatsapp className='cta-social-icon' /></a>
-                    
+                        <a href='https://www.facebook.com/anupaatnivesh'><SiFacebook className='cta-social-icon' /></a>
+                        <a href='https://twitter.com/Anupaatnivesh'><SiTwitter className='cta-social-icon' /></a>
+
+                        <a href='https://www.youtube.com/@anupaatnivesh'><SiYoutube className='cta-social-icon' /></a>
+                        <a href="#"><SiWhatsapp className='cta-social-icon' /></a>
+
                     </div>
                 </div>
 

@@ -8,19 +8,22 @@ export const Carousel = () => {
         {
             title: "Investment",
             description:
-                "Let's get you started with INVESTING!  stack up with your financial foundation and get personalized recommendations",
+                "Let's get you started with INVESTING!  ",
+                subDescription:"Stack up with your financial foundation and get personalized recommendations",
             icon: require("../../assets/illustrations/investor.svg"),
         },
         {
             title: "Savings",
             description:
-                " Looking for Financial Freedom. Start your SIP with us and get personlized consulting for your asset allocation",
+                " Looking for Financial Freedom",
+                subDescription:"Start your SIP with us and get personlized consulting for your asset allocation",
             icon: require("../../assets/illustrations/savings.svg"),
         },
         {
             title: "Stocks",
             description:
-                "Be a part of the next INVESTMENT wave - Subscribe to our curated Equity Baskets & be ahead in your investment journey",
+                "Be a part of the next INVESTMENT wave ",
+                subDescription:"Subscribe to our curated Equity Baskets & be ahead in your investment journey",
             icon: require("../../assets/illustrations/stocks.svg"),
         },
     ];

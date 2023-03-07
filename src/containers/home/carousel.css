@@ -16,28 +16,37 @@
 
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    height: 490px;
+    justify-content: space-around;
+    /* height: 490px; */
     background-color: #fff;
     position: relative;
+    gap: 2rem;
 
 }
 
 
 
-
+.carousel-item-text-section{
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    z-index: 2;
+}
 
 .carousel-item-text {
     text-align: left;
-    margin: 10px 0 30px 0;
-    padding: 0 20px 0 20px;
     white-space: normal;
     font-family: var(--font-family);
-    font-weight: 500;
+    font-weight: 600;
     font-size: 4rem;
     line-height: 1.2;
-    letter-spacing: -0.04em;
-    z-index: 2;
+    letter-spacing: -0.03em;
+    
+}
+
+.carousel-item-subtext{
+    font-size: 1rem;
 }
 
 .img-container {

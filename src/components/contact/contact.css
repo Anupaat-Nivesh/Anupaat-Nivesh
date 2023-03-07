@@ -153,6 +153,11 @@
 .cta-social-icon {
   font-size: 5rem;
   /* box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1); */
+  transition: all 0.3s;
+}
+
+.cta-social-icon:hover{
+  scale: 1.1;
 }
 
 
