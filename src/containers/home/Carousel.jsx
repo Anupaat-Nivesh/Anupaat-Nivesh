@@ -8,23 +8,23 @@ export const Carousel = () => {
         {
             title: "Investment",
             description:
-                "An Investment Solution For Every Need ",
+                "Let's get you started with INVESTING!  stack up with your financial foundation and get personalized recommendations",
             icon: require("../../assets/illustrations/investor.svg"),
         },
         {
             title: "Savings",
             description:
-                "We Help You Create A Plan ",
+                " Looking for Financial Freedom. Start your SIP with us and get personlized consulting for your asset allocation",
             icon: require("../../assets/illustrations/savings.svg"),
         },
         {
             title: "Stocks",
             description:
-                "Invest Today for the Future Use",
+                "Be a part of the next INVESTMENT wave - Subscribe to our curated Equity Baskets & be ahead in your investment journey",
             icon: require("../../assets/illustrations/stocks.svg"),
         },
     ];
-    const updateIndex = (newIndex) => {
+    function updateIndex(newIndex) {
         if (newIndex < 0) {
             newIndex = 0;
         } else if (newIndex >= items.length) {
@@ -32,7 +32,7 @@ export const Carousel = () => {
         }
 
         setActiveIndex(newIndex);
-    };
+    }
 
 
 
