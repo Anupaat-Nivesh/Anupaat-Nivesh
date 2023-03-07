@@ -8,10 +8,11 @@ const carouselImg =[carouselImage1,carouselImage2,carouselImage1];
 export const CarouselItem = ({ item, width,itemIndex }) => {
     return (
         <div className="carousel-item" style={{ width: width }}>
-            <div></div>
             <img src={wallet} alt="animationImage" className="wallet-anm anm" />
-            <div className="carousel-item-subtext">{ }</div>
+            <div className="carousel-item-text-section">
             <div className="carousel-item-text">{item.description}</div>
+            <div className="carousel-item-subtext">{ item.subDescription}</div>
+            </div>
             <div className="img-container">
             <img src={flower} alt="animationImage" className="flower-anm anm" />
             <img src={carouselImg[itemIndex]} alt="Carouselimage" className="carouselImage1"/>

@@ -18,12 +18,13 @@
 
 .anupaat__navbar-links_logo {
     margin-right: 2.5rem;
+    
 }
 
 .anupaat__navbar-links_logo img {
     margin-left: -36px;
-    width: 260px;
-    height: 80px;
+    
+    width: 15rem;
 }
 
 .anupaat__navbar-links_container {

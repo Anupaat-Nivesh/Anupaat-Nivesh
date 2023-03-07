@@ -52,7 +52,9 @@ const Navbar = () => {
 
             </div>
             <div className="anupaat__navbar-sign">
-                <button type="button app-btn">Get The App</button>
+                <a href="https://play.google.com/store/apps/details?id=com.dwt.AnupaatNivesh" target="_blank" rel="noreferrer">
+                    <button type="button app-btn">Get The App</button>
+                </a>
             </div>
 
             <div className="anupaat__navbar-menu">
