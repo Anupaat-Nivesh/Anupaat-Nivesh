@@ -8,25 +8,25 @@ export const Carousel = () => {
         {
             title: "Investment",
             description:
-                "Let's get you started with INVESTING!  ",
-                subDescription:"High income does not lead to wealth. It is high savings with right Investment.",
-                subDescription:"Stack up with your financial foundation and get personalized recommendations",
+                "Let's get you started with INVESTING!",
+            subDescription: "High income does not lead to wealth. It is high savings with right Investment.",
+            subText: "Stack up with your financial foundation and get personalized recommendations",
             icon: require("../../assets/illustrations/investor.svg"),
         },
         {
             title: "Savings",
             description:
                 " Looking for Financial Freedom",
-                subDescription:"When it comes to long-term investing, doing 'LESS' is often 'MORE'.",
-                subDescription:"Stack up with your financial foundation and get personalized recommendations",
+            subDescription: "When it comes to long-term investing, doing 'LESS' is often 'MORE'.",
+            subText: "Stack up with your financial foundation and get personalized recommendations",
             icon: require("../../assets/illustrations/savings.svg"),
         },
         {
             title: "Stocks",
             description:
                 "Be a part of the next INVESTMENT wave ",
-                subDescription:"You will make big money if you don't go behind quick money.",
-                subDescription:"Subscribe to our curated Equity Baskets & be ahead in your investment journey",
+            subDescription: "You will make big money if you don't go behind quick money.",
+            subText: "Subscribe to our curated Equity Baskets & be ahead in your investment journey",
             icon: require("../../assets/illustrations/stocks.svg"),
         },
     ];
@@ -44,7 +44,7 @@ export const Carousel = () => {
 
     return (
         <div className="carousel">
-            <div 
+            <div
                 className="inner"
                 style={{
                     transform: `translate(-${activeIndex * 100}%)`

@@ -9,6 +9,7 @@
 
 .inner {
     white-space: nowrap;
+
     transition: transform 1s;
 }
 
@@ -26,32 +27,45 @@
 
 
 
-.carousel-item-text-section{
+.carousel-item-text-section {
     text-align: left;
     display: flex;
     flex-direction: column;
+    margin-left: 1rem;
+    margin-right: auto;
     gap: 2rem;
-    z-index: 2;
+
+
 }
 
 .carousel-item-text {
     text-align: left;
     white-space: normal;
     font-family: var(--font-family);
-    font-weight: 600;
-    font-size: 4rem;
+    font-weight: 500;
+    font-size: 3rem;
     line-height: 1.2;
     letter-spacing: -0.03em;
-    
+
+
 }
 
-.carousel-item-subtext{
+.carousel-item-subDes {
     font-size: 1rem;
+    font-weight: 400;
 }
+
+.carousel-item-subtext {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+
 
 .img-container {
     background-color: var(--color-primary-light);
     padding: 4rem;
+
     border-bottom-left-radius: 20%;
     border-top-left-radius: 20px;
     animation-name: onLoading;
@@ -64,42 +78,25 @@
 .carousel-img {
     z-index: 99;
     position: relative;
-    width: 450px;
-    padding: 0 20px 0 20px;
+    width: 240px;
+    height: 220px;
+    padding: 0;
 }
+
+
 
 .carouselImage1 {
     position: absolute;
     bottom: 0;
+
     border-radius: 10px;
     left: 0;
-    width: 10rem;
+    width: 5rem;
     transform: translate(-50%, 0);
 }
 
 
 
-.wallet-anm {
-    position: absolute;
-    top: 1rem;
-    left: 5rem;
-    width: 5rem;
-    animation-name: wallet;
-    animation-duration: 10s;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease;
-}
-
-.flower-anm {
-    position: absolute;
-    top: 1rem;
-    left: 15rem;
-    width: 5rem;
-    z-index: 0;
-    animation-name: flower;
-    animation-duration: 60s;
-    animation-iteration-count: infinite;
-}
 
 
 
@@ -151,41 +148,4 @@
         opacity: 1;
         transform: translate(0%, 0);
     }
-}
-
-@keyframes wallet {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    50% {
-        transform: rotate(20deg);
-    }
-
-    100% {
-        transform: rotate(0deg);
-    }
-}
-
-@keyframes flower {
-    0% {
-        transform: translate(0, 0);
-    }
-
-    25% {
-        transform: translate(15rem, 0);
-    }
-
-    50% {
-        transform: translate(15rem, 20rem);
-    }
-
-    75% {
-        transform: translate(-50rem, 20rem);
-    }
-
-    100% {
-        transform: translate(0, 0);
-    }
-
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import './home.css';
 import { Carousel } from './Carousel';
+import { Testimonials } from './testimonials/Testimonials';
 
 
 const Home = () => {
@@ -8,6 +9,9 @@ const Home = () => {
         <>
             <div className="anupaat__header section__padding" id="home">
                 <Carousel />
+            </div>
+            <div>
+                <Testimonials />
             </div>
 
         </>
