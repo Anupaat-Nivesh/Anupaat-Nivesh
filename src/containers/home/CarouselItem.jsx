@@ -10,15 +10,10 @@ export const CarouselItem = ({ item, width, itemIndex }) => {
         <div className="carousel-item" style={{ width: width }}>
 
             <div className="carousel-item-text-section">
-<<<<<<< HEAD
                 <div className="carousel-item-text">{item.description}</div>
                 <div className="carousel-item-subDes"><q>{item.subDescription}</q></div>
                 <div className="carousel-item-subtext">{item.subText}</div>
-=======
-            <div className="carousel-item-text">{item.description}</div>
-            <div className="carousel-item-text">{item.quote}</div>
-            <div className="carousel-item-subtext">{ item.subDescription}</div>
->>>>>>> 0fc80be3f6504291286b2cdfd7d11b4ab58025a4
+
             </div>
             <div className="img-container">
 
