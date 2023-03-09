@@ -28,10 +28,10 @@
 }
 
 .anupaat__navbar-links_container {
-    margin-left: 100px;
+    margin-left: 80px;
     display: flex;
     flex-direction: row;
-    gap: 2rem;
+    gap: 1.5rem;
     align-items: center;
     margin-right: 20px;
 }
@@ -40,6 +40,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    margin-right: 20px;
 }
 
 .anupaat__navbar-links_container li,
@@ -91,15 +92,16 @@
 .anupaat__navbar-sign button,
 .anupaat__navbar-menu_container button {
     padding: 0.8rem 2rem;
+
     color: #fff;
     background: #FE0101;
     font-family: var(--font-family);
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 15px;
     line-height: 25px;
     outline: none;
     cursor: pointer;
-    border-radius: 20px;
+    border-radius: 60px;
     transition: all 0.3s;
 }
 
@@ -197,5 +199,6 @@ anupaat__navbar-sign button:focus {
 
     .anupaat__navbar-menu_container-links-sign {
         display: block;
+
     }
 }

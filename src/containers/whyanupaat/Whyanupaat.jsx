@@ -1,13 +1,17 @@
 import React from 'react';
 import titleimg from '../../assets/whyanupaat-titleimage.jpg';
 import './whyanupaat.css';
+import Card from 'react-bootstrap/Card';
+
+import { whyanupaatData } from '../../data';
+
 const Whyanupaat = () => {
     return (
         <div className="anupaat__whyanupaat section__margin" id="wanupaat">
             <div className='anupaat__whyanupaat-main'>
 
                 <div className="anupaat__whyanupaat-heading">
-                    <h1> WhyAnupaat Nivesh?</h1>
+                    <h1> Why Anupaat Nivesh?</h1>
 
                     <div className='anupaat_whyanupaat-heading-explanation'>
                         <div className='whyanupaat-subheading'>
@@ -23,6 +27,24 @@ const Whyanupaat = () => {
                     <img src={titleimg} />
                 </div>
             </div>
+            <div className="anupaat__card-container">
+                {
+                    whyanupaatData.map(({ icon, id, title, text }) => {
+                        return (
+                            <Card className="whyanupaat_data" key={id}>
+                                <span>{icon}</span>
+                                <h4>{title}</h4>
+                                <small>{text}</small>
+                            </Card>
+                        )
+                    })
+                }
+
+
+
+
+            </div>
+
 
 
         </div>
