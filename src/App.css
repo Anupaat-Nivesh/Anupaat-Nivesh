@@ -17,16 +17,12 @@ a {
   transition: all 0.3s;
 }
 
-
-
-
-
 .section__padding {
-  padding: 4rem 6rem;
+  padding: 4rem 0rem;
 }
 
 .section__margin {
-  padding: 4rem 6rem;
+  margin: 4rem auto;
 }
 
 .scale-up-center {
