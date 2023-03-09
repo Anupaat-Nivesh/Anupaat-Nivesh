@@ -15,7 +15,7 @@ const links = [
         path: '/about'
     },
     {
-        name: "Why Anupaat",
+        name: "WhyAnupaat",
         path: '/whyanupaat'
     },
     {
@@ -52,8 +52,13 @@ const Navbar = () => {
 
             </div>
             <div className="anupaat__navbar-sign">
+<<<<<<< HEAD
+                <a href="https://play.google.com/store/apps/details?id=com.dwt.AnupaatNivesh" target="_blank" rel="noreferrer">
+                    <button type="button app-btn">Download</button>
+=======
                 <a href="#ourapp" rel="noreferrer">
                     <button type="button app-btn">Get The App</button>
+>>>>>>> 0fc80be3f6504291286b2cdfd7d11b4ab58025a4
                 </a>
             </div>
 
@@ -77,7 +82,7 @@ const Navbar = () => {
                         </ul>
                         <div className="anupaat__navbar-menu_container-links-sign">
 
-                            <button type="button">Get The App</button>
+                            <button type="button">Download</button>
                         </div>
                     </div>
                 )}

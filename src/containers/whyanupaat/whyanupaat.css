@@ -3,6 +3,7 @@
     flex-direction: column;
     padding: 2rem;
     background: #fffdfd;
+    margin-top: 0rem;
 }
 
 .anupaat__whyanupaat-main {
@@ -22,11 +23,13 @@
     margin: 4rem 0 2rem;
 }
 
-.anupaat_whyanupaat-heading-explanation h2 {
+.anupaat_whyanupaat-heading-explanation h2,
+p {
     padding: 5px;
     margin-top: 1rem;
 
 }
+
 
 .anupaat__whyanupaat-heading h1 {
     font-size: 34px;
@@ -53,13 +56,75 @@
     height: 320px;
     justify-content: center;
     z-index: 10;
+}
 
+.whyanupaat_data {
+    background: #f4cccc;
+    border: 2px solid transparent;
+    text-align: center;
+    padding: 3rem 2rem;
+    border-radius: 0 3rem 0 3rem;
+    transition: var(--transition);
 
 }
 
-/*MEDIA QUERIES*/
+.whyanupaat_data:hover {
+    background: transparent;
+    border-color: grey;
+    cursor: default;
+}
 
-@media screen and (max-width: 850px) {
+.whyanupaat_data span {
+    width: 3rem;
+    height: 3rem;
+    background: #fe0101;
+    color: var(--color-text);
+    font-size: 1.5rem;
+    padding: 0.8rem;
+    display: grid;
+    place-items: center;
+    margin-bottom: 1.5rem;
+    margin-inline: auto;
+    border-radius: 1rem;
+    transition: var(--transition);
+}
+
+.whyanupaat_data span:hover {
+    background: var(--color-subtext);
+}
+
+.anupaat__card-container {
+    margin-top: 8.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+
+
+
+@media screen and (max-width: 990px) {
+    .anupaat__whyanupaat-main {
+        flex-direction: column-reverse;
+    }
+
+    .anupaat_whyanupaat-heading-explanation {
+        width: 48%;
+    }
+
+    .anupaat__whyanupaat-heading {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: left;
+
+        margin: 4rem 0 2rem;
+    }
+
+    .anupaat__whyanupaat-heading p {
+        align-items: center;
+    }
+
     .anupaat__whyanupaat-heading {
         flex-direction: column;
         align-items: flex-start;
@@ -69,14 +134,37 @@
     .anupaat__whyanupaat-heading p {
         margin-top: 1rem;
     }
+
+
+}
+
+@media screen and (max-width: 700px) {
+    .anupaat__card-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .anupaat__card-container {
+        width: 100%;
+    }
+
+    .whyanupaat_data h4 {
+        font-size: 20px;
+        line-height: 52px;
+    }
 }
 
 @media screen and (max-width: 650px) {
 
 
-
+    .anupaat__card-container,
     .anupaat__whyanupaat-main {
         flex-direction: column;
+    }
+
+
+
+    .anupaat__card-container small {
+        margin-top: 0.5rem;
     }
 
     .anupaat__whyanupaat-heading h1 {
@@ -88,11 +176,21 @@
 @media screen and (max-width: 350px) {
 
 
-
+    .anupaat_whyanupaat-heading-explanation,
     .anupaat__whyanupaat-main {
         margin: 1rem 0;
         min-width: 100%;
     }
+
+    .anupaat__whyanupaat-heading {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin: 4rem 0 2rem;
+    }
+
+
 
     .whyanupaat-title-image img {
         width: 100px;
