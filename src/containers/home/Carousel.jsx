@@ -9,6 +9,7 @@ export const Carousel = () => {
             title: "Investment",
             description:
                 "Let's get you started with INVESTING!  ",
+                subDescription:"High income does not lead to wealth. It is high savings with right Investment.",
                 subDescription:"Stack up with your financial foundation and get personalized recommendations",
             icon: require("../../assets/illustrations/investor.svg"),
         },
@@ -16,13 +17,15 @@ export const Carousel = () => {
             title: "Savings",
             description:
                 " Looking for Financial Freedom",
-                subDescription:"Start your SIP with us and get personlized consulting for your asset allocation",
+                subDescription:"When it comes to long-term investing, doing 'LESS' is often 'MORE'.",
+                subDescription:"Stack up with your financial foundation and get personalized recommendations",
             icon: require("../../assets/illustrations/savings.svg"),
         },
         {
             title: "Stocks",
             description:
                 "Be a part of the next INVESTMENT wave ",
+                subDescription:"You will make big money if you don't go behind quick money.",
                 subDescription:"Subscribe to our curated Equity Baskets & be ahead in your investment journey",
             icon: require("../../assets/illustrations/stocks.svg"),
         },
