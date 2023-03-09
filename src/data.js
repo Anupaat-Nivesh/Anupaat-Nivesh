@@ -1,3 +1,5 @@
+import {SiOpenaigym} from 'react-icons/si'
+
 export const featuresData = [
     {
         title: "Systematic Investment Plan",
@@ -19,48 +21,99 @@ export const featuresData = [
         text: "Get out of rat-race with our Financial Freedom planning",
 
     },
-];
+]
 export const whyanupaatData = [
     {
         id: 1,
-        img: blog01,
-        title: "GOAL BASED INVEMESTMENT",
+        icon:<SiOpenaigym/>,
+        title: "GOAL BASED INVESTMENT",
         text: "Investment plans for Goals like Children education, Children Marriage, retirement, Vacation",
 
     },
     {
         id: 2,
-        img: blog02,
+        icon:<SiOpenaigym/>,
         title: "EXPERT ADVISORS",
         text: "Investments are managed by experienced, qualified, certified and professional advisors",
 
     },
     {
         id: 3,
-        img: blog03,
+        icon:<SiOpenaigym/>,
         title: "SKIN IN THE GAME",
         text: "Having our own skin in the game demonstrates the willingness to link our financial well-being with yours.",
 
     },
     {
         id: 4,
-        img: blog04,
+        icon:<SiOpenaigym/>,
         title: "MONITORING",
         text: "Continuous monitoring of Market, Economy. Quarterly review of Investments.",
 
     },
     {
         id: 5,
-        img: blog05,
+        icon:<SiOpenaigym/>,
         title: "100% DIGITAL",
         text: "Digital process for onboarding and transactions. No hassle of paper-work",
 
     },
     {
         id: 6,
-        img: blog01,
+        icon:<SiOpenaigym/>,
         title: "पंचम: FRAMEWORK PORTFOLIO",
         text: "GPortfolio construction using five different style of investing for ex Value, Growth, Emerging etc",
 
     },
-];
+]
+ /*------TESTIMONIALS------*/ 
+ const Avatar1 = require('../src/assets/avatar1.jpg')
+ const Avatar2 = require('../src/assets/avatar2.jpg')
+ const Avatar3 = require('../src/assets/avatar3.jpg')
+
+
+
+export const testimonials = [
+    {
+        id: 1,
+        name: "Diana Ayi",
+        quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium ipsam facere ea a laboriosam sed? Quod vel voluptates a! Maxime minima cumque aut? In expedita numquam consectetur non officia iusto.",
+        job: "Student",
+        avatar: Avatar1,
+    },
+    {
+        id: 2,
+        name: "Daniel Vinyo",
+        quote: "Harum quaerat hic consequuntur molestias repellat ad quo tenetur vitae rem, labore quisquam? Atque, assumenda rerum this and that odit harum quaerat hic praesentium quisquam quae, enim iste ipsam id repellat.",
+        job: "Software Egineer",
+        avatar:Avatar2,
+        socials: ['https://instagram.com/', 'https://twitter.com/', 'https://facebook.com/', 'https://linkedin.com/']
+    },
+    {
+        id: 3,
+        name: "Edem Quist",
+        quote: "Quaerat hic praesentium consequuntur molestias repellat ad quo tenetur vitae rem, labore quisquam? Atque, assumenda rerum odit harum quaerat hic praesentium quisquam quae, enim iste ipsam id repellat.",
+        job: "University Lecturer",
+        avatar: Avatar3,
+        socials: ['https://instagram.com/', 'https://twitter.com/', 'https://facebook.com/', 'https://linkedin.com/']
+    },
+    {
+        id: 4,
+        name: "Grace Lavoe",
+        quote: "Cupiditate deleniti sint consequuntur molestias repellat ad quo tenetur vitae rem, labore quisquam? Atque, assumenda rerum odit harum quaerat hic praesentium quisquam quae, enim iste ipsam id repellat.",
+        job: "Talking Parrot",
+        avatar: Avatar1,
+        socials: ['https://instagram.com/', 'https://twitter.com/', 'https://facebook.com/', 'https://linkedin.com/']
+    },
+    {
+        id: 5,
+        name: "Nana Yaa Dankwa",
+        quote: "Maxime minima cumque sit amet consectetur adipisicing elit. Praesentium ipsam facere ea a laboriosam sed? Quod vel voluptates a! Maxime minima cumque aut? In expedita numquam consectetur non officia iusto.",
+        job: "Pharmacist",
+        avatar: Avatar2,
+        socials: ['https://instagram.com/', 'https://twitter.com/', 'https://facebook.com/', 'https://linkedin.com/']
+    }
+]
+
+
+

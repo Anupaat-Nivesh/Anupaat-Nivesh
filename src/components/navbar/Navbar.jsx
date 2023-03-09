@@ -15,7 +15,7 @@ const links = [
         path: '/about'
     },
     {
-        name: "Why Anupaat",
+        name: "WhyAnupaat",
         path: '/whyanupaat'
     },
     {
