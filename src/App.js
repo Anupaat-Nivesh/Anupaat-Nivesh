@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import {Footer,About,Offerings, Whyanupaat,Home} from './containers';
 import { Team, Brand ,Navbar,NotFound,Contact} from './components' ;
+import OurApp from './components/OurApp/OurApp';
 import './App.css' ;
 function App() {
   return (
@@ -12,13 +13,12 @@ function App() {
         <Route path='home' element={<Home/>} />
         <Route path='about' element={<About/>}/>
         <Route path='whyanupaat' element={<Whyanupaat/>}/>
-        <Route path='offerings' element={<Offerings/>}/>
-       
+        <Route path='offerings' element={<Offerings/>}/>     
         <Route path='*' element={<NotFound/>}/>
-
       </Routes>
       
        <Contact/>
+       <OurApp />
        
       <Footer/>
     
