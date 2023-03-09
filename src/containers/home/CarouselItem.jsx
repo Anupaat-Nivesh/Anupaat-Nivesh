@@ -11,6 +11,7 @@ export const CarouselItem = ({ item, width,itemIndex }) => {
             <img src={wallet} alt="animationImage" className="wallet-anm anm" />
             <div className="carousel-item-text-section">
             <div className="carousel-item-text">{item.description}</div>
+            <div className="carousel-item-text">{item.quote}</div>
             <div className="carousel-item-subtext">{ item.subDescription}</div>
             </div>
             <div className="img-container">
