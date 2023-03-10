@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../assets/logo.png';
 import { FaRegCopyright, FaPhoneAlt } from 'react-icons/fa';
-import { SiFacebook, SiInstagram, SiTwitter, SiLinkedin, SiYoutube, SiGmail,SiWhatsapp } from "react-icons/si";
+import { SiFacebook, SiTwitter, SiLinkedin, SiYoutube, SiGmail, SiWhatsapp } from "react-icons/si";
 import './footer.css';
 
 const Footer = () => (
@@ -17,35 +17,37 @@ const Footer = () => (
             <div className="anupaat__footer-links_div">
                 <h3 className='footer-heading'> Quick Links</h3>
                 <div className='footer-links'>
-                <p><a href='#faqs'>FAQs</a></p>
-                <p><a href='#knowledge-center'>Knowledge Center</a></p>
-                <p><a href='#newsroom'>Newsroom</a></p>
-                <p><a href='#documents-and-forms'>Documents & Forms</a></p>
-                <p><a href='#investor-charter'>Investor Charter</a></p>
-                <p><a href='#investor-grievances-data'>Investor Grievances Data</a></p>
-                <p><a href='#shareholder-eVoting'>Shareholder eVoting</a></p>
+                    <p><a href='#faqs'>FAQs</a></p>
+                    <p><a href='#knowledge-center'>Knowledge Center</a></p>
+                    <p><a href='#newsroom'>Newsroom</a></p>
+                    <p><a href='#documents-and-forms'>Documents & Forms</a></p>
+                    <p><a href='#investor-charter'>Investor Charter</a></p>
+                    <p><a href='#investor-grievances-data'>Investor Grievances Data</a></p>
+                    <p><a href='#shareholder-eVoting'>Shareholder eVoting</a></p>
                 </div>
 
             </div>
             <div className="anupaat__footer-links_div">
                 <h3 className='footer-heading'>Company</h3>
                 <div className='footer-links'>
-                <p><a href='#terms-and-conditions'>Terms & Conditions</a></p>
-                <p><a href='#privacy-policy'>Privacy Policy</a></p>
-                <p><a href='#contact-us'>Reach Us</a></p>
+                    <p><a href='#terms-and-conditions'>Terms & Conditions</a></p>
+                    <p><a href='#privacy-policy'>Privacy Policy</a></p>
+                    <p><a href='#contact-us'>Reach Us</a></p>
                 </div>
             </div>
             <div className="anupaat__footer-links_div">
                 <h3 className='footer-heading'>Connect with us</h3>
                 <div className='contact-info footer-links'>
-                <div className='anupaat__footer-socialicons'>
-                <a href='#'><SiWhatsapp /></a>
-                    <a href='https://www.facebook.com/anupaatnivesh'><SiFacebook /></a>
-                    <a href='https://twitter.com/Anupaatnivesh'><SiTwitter /></a>
-                    <a href='https://www.youtube.com/@anupaatnivesh'><SiYoutube /></a>
-                </div>
-                <a className='contact-number' href='tel:95011 95200' ><FaPhoneAlt /> +91-95011 95200</a>
-                <a className='contact-mail' href="mailto:anupaatnivesh@gmail.com">< SiGmail /> anupaatnivesh@gmail.com</a>
+                    <div className='anupaat__footer-socialicons'>
+                        <a href='#'><SiWhatsapp /></a>
+                        <a href='https://www.facebook.com/anupaatnivesh'><SiFacebook /></a>
+                        <a href='https://twitter.com/Anupaatnivesh'><SiTwitter /></a>
+                        <a href='https://www.youtube.com/@anupaatnivesh'><SiYoutube /></a>
+
+                        <a href='#'><SiLinkedin /></a>
+                    </div>
+                    <a className='contact-number' href='tel:95011 95200' ><FaPhoneAlt /> +91-95011 95200</a>
+                    <a className='contact-mail' href="mailto:anupaatnivesh@gmail.com">< SiGmail /> anupaatnivesh@gmail.com</a>
                 </div>
             </div>
         </div>

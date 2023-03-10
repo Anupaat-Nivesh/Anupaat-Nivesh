@@ -7,10 +7,16 @@ import "./OurApp.css";
 
 
 const appDescription = [
-  { item: "Start your Investment journey with quick digital Onbaording" }
-  { item: "24x7 access to your wealth portfolio with our user friendly mobile app"},
-  { item: "View, analyse, manage, and invest your and your family's wealth" },
-  
+  {
+    item: "Start your Investment journey with quick digital Onbaording"
+  },
+  {
+    item: "24x7 access to your wealth portfolio with our user friendly mobile app"
+  },
+  {
+    item: "View, analyse, manage, and invest your and your family's wealth"
+  },
+
 ];
 
 const OurApp = (props) => {

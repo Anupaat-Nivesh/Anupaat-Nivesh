@@ -1,5 +1,6 @@
 .app-section {
   /* background-color: var(--color-primary-light); */
+
   width: 1300px;
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -11,12 +12,12 @@
   padding: 2rem;
 }
 
-.appScreenShot-box
-{
+.appScreenShot-box {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .description {
   color: var(--color-text);
   font-weight: 600;
@@ -27,7 +28,7 @@
   color: #0b7285;
   letter-spacing: 2px;
   font-weight: 500;
-  
+
 }
 
 .app-description-list {
@@ -57,5 +58,3 @@
 .android-app:hover {
   box-shadow: 0 0 10px 6px rgba(0, 0, 0.5, 0.1);
 }
-
-

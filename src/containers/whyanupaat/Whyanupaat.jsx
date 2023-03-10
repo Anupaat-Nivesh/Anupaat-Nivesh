@@ -24,7 +24,7 @@ const Whyanupaat = () => {
                     </div>
                 </div>
                 <div className='whyanupaat-title-image'>
-                    <img src={titleimg} />
+                    <img src={titleimg} alt="questionimage" />
                 </div>
             </div>
             <div className="anupaat__card-container">
