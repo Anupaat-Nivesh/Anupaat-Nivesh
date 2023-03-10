@@ -7,11 +7,10 @@ import "./OurApp.css";
 
 
 const appDescription = [
-  {
-    item: "Always be within hands reach with State of the Art mobile apps"
-  },
-  { item: "Android - 25 lakh Indians use an Android phone Daily. Be part of a daily experience" },
-  { item: "Iphone - 85% HNIs conduct business through their Iphones.Tap into the HNI market" }
+  { item: "Start your Investment journey with quick digital Onbaording" }
+  { item: "24x7 access to your wealth portfolio with our user friendly mobile app"},
+  { item: "View, analyse, manage, and invest your and your family's wealth" },
+  
 ];
 
 const OurApp = (props) => {
@@ -27,7 +26,7 @@ const OurApp = (props) => {
         <h3 className="section-heading app-secondary-heading">OUR APP</h3>
         <div className="app-heading-box">
           <p className="app-heading">Be Available Everywhere With
-            our Finance App</p>
+            our Mobile App</p>
         </div>
 
         <ul className="app-description-list">
