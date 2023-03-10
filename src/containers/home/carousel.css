@@ -51,13 +51,14 @@
 }
 
 .carousel-item-subDes {
-    font-size: 1rem;
-    font-weight: 400;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #FE0101;
 }
 
 .carousel-item-subtext {
-    font-size: 14px;
-    font-weight: 300;
+    font-size: 20px;
+    font-weight: 400;
 }
 
 

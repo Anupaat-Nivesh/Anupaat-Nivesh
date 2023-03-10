@@ -7,9 +7,7 @@ export const Carousel = () => {
     const items = [
         {
             title: "Investment",
-            description:
-
-                "Let's get you started with INVESTING!",
+            description:"Let's get you started with", bold:"INVESTING!",
             subDescription: "High income does not lead to wealth. It is high savings with right Investment.",
             subText: "Stack up with your financial foundation and get personalized recommendations",
 
@@ -21,7 +19,7 @@ export const Carousel = () => {
 
                 " Looking for Financial Freedom",
             subDescription: "When it comes to long-term investing, doing 'LESS' is often 'MORE'.",
-            subText: "Stack up with your financial foundation and get personalized recommendations",
+            subText: "Start SIP with us to meet your long-term financial goals",
 
             icon: require("../../assets/illustrations/savings.svg"),
         },
