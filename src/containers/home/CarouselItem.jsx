@@ -1,6 +1,4 @@
 import React from "react";
-import wallet from "../../assets/wallet.svg";
-import flower from "../../assets/flower.svg";
 import carouselImage1 from "../../assets/carouselComponentimg1.svg";
 import carouselImage2 from "../../assets/hands.svg";
 

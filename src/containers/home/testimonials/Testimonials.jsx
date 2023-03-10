@@ -44,7 +44,7 @@ export const Testimonials = () => {
                         className="mySwiper"
                     >
                         {
-                            testimonials.map(({ name, id, avatar, quote, job, socials }) => {
+                            testimonials.map(({ name, id, avatar, quote, job }) => {
                                 return (
                                     <SwiperSlide key={id}>
                                         <div className="testimonial-content">
@@ -53,7 +53,7 @@ export const Testimonials = () => {
                                             <div className="testimonial__text">
 
 
-                                                <p>{quote}</p>
+                                                <p><q>{quote}</q></p>
                                                 <small className="job">{job}</small>
 
                                             </div>

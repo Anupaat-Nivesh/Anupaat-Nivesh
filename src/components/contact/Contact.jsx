@@ -1,6 +1,6 @@
 import React from 'react'
 import './contact.css';
-import { SiFacebook, SiTwitter, SiYoutube, SiWhatsapp } from "react-icons/si";
+/*import { SiFacebook, SiTwitter, SiYoutube, SiWhatsapp } from "react-icons/si";*/
 
 import FacebookLogo from "../../assets/facebook-logo.png";
 import TwitterLogo from "../../assets/twitter-logo.png";
@@ -95,12 +95,12 @@ const Contact = (props) => {
                 <div className='connect-info'>
                     <div className='cta-social'>
 
-                        <a href='https://www.facebook.com/anupaatnivesh'><img src={FacebookLogo} className='cta-social-icon'/></a>
-                        <a href='https://twitter.com/Anupaatnivesh'><img src={TwitterLogo} className='cta-social-icon'/></a>
+                        <a href='https://www.facebook.com/anupaatnivesh'><img src={FacebookLogo} className='cta-social-icon' /></a>
+                        <a href='https://twitter.com/Anupaatnivesh'><img src={TwitterLogo} className='cta-social-icon' /></a>
 
                         <a href='https://www.youtube.com/@anupaatnivesh'><img src={YoutubeLogo} className='cta-social-icon' /></a>
-                        <a href="#"><img src={WhatsappLogo} className='cta-social-icon'/></a>
-                        <a href="#"><img src={LinkedInLogo} className='cta-social-icon'/></a>
+                        <a href="#"><img src={WhatsappLogo} className='cta-social-icon' /></a>
+                        <a href="#"><img src={LinkedInLogo} className='cta-social-icon' /></a>
 
                     </div>
                 </div>
