@@ -2,10 +2,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
-    z-index: 99;
-    padding: 2rem 6rem;
+    margin-top: -10px;
+    z-index: 10;
+    padding: 1rem 6rem 0rem;
     font-size: 1.2rem;
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+}
+
+.anupaat__navbar.active {
+    background: rgb(252, 248, 212);
 }
 
 .anupaat__navbar-links {
@@ -22,8 +32,8 @@
 }
 
 .anupaat__navbar-links_logo img {
-    margin-left: -36px;
-
+    margin-left: -80px;
+    margin-top: 5px;
     width: 15rem;
 }
 
@@ -128,15 +138,14 @@ anupaat__navbar-sign button:focus {
     justify-content: flex-end;
     align-items: flex-end;
     flex-direction: column;
-
     text-align: end;
-    background: #eb0f0fd2;
+    background: #eb0f0f;
     padding: 2rem;
     position: absolute;
     right: 0;
     top: 40px;
     margin-top: 1rem;
-    min-width: 210px;
+    min-width: 250px;
     border-radius: 5px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
@@ -156,6 +165,7 @@ anupaat__navbar-sign button:focus {
 /*only shows on medium and small screens*/
 .anupaat__navbar-menu_container-links-sign {
     display: none;
+
 }
 
 /*MEDIA QUERIES*/
@@ -170,8 +180,8 @@ anupaat__navbar-sign button:focus {
     }
 
     .anupaat__navbar-menu_container-links-sign button {
-        height: 60px;
-        width: 120px;
+        height: 50px;
+        width: 150px;
     }
 
 }
@@ -186,7 +196,7 @@ anupaat__navbar-sign button:focus {
 
 @media screen and (max-width: 550px) {
     .anupaat__navbar {
-        padding: 2rem;
+        padding: 1rem;
     }
 
     .anupaat__navbar-sign {
@@ -200,5 +210,9 @@ anupaat__navbar-sign button:focus {
     .anupaat__navbar-menu_container-links-sign {
         display: block;
 
+    }
+
+    .anupaat__navbar-links_logo img {
+        margin-left: 1px;
     }
 }

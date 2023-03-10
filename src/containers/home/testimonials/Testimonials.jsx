@@ -18,7 +18,7 @@ export const Testimonials = () => {
 
 
     return (
-        < section className="testimonials">
+        < section className="testimonials " id="testimonials">
             <div className="testimonials__container">
                 <div className="testimonial_title">
                     <ImQuotesLeft className='quotes' />

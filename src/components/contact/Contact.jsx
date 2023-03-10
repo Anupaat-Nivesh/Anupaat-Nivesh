@@ -51,7 +51,7 @@ const Contact = (props) => {
     };
 
     return (
-        <div className='contact-section'>
+        <div className='contact-section section__padding' id='contact'>
             <div className='cta'>
                 <div className='cta-text-box'>
                     <div className='cta-description'>
