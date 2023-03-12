@@ -11,6 +11,7 @@
 }
 
 .cta {
+  background-color: var(--color-primary-light);
   display: grid;
   grid-template-columns: 4fr auto;
   overflow: hidden;
@@ -20,7 +21,7 @@
 }
 
 .cta-text-box {
-  background-color: var(--color-primary-light);
+
   padding: 2.4rem;
 }
 
@@ -105,6 +106,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  justify-content: space-around;
   align-items: center;
 
 }
@@ -148,7 +150,7 @@
 
 
 .cta-social-icon {
-  width: 8rem;
+  width: 5rem;
   /* box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1); */
   transition: all 0.3s;
 }
