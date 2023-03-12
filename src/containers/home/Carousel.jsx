@@ -16,8 +16,8 @@ export const Carousel = () => {
         },
         {
             title: "Savings",
-            description: "Looking for Financial Freedom",
-            bold:'',
+            description: "Looking for ",
+            bold:'Financial Freedom',
             subDescription: "When it comes to long-term investing, doing 'LESS' is often 'MORE'.",
             subText: "Start SIP with us to meet your long-term financial goals",
 
@@ -25,8 +25,8 @@ export const Carousel = () => {
         },
         {
             title: "Stocks",
-            description:"Be a part of the next INVESTMENT wave ",
-            bold:'',
+            description:"Be a part of the next ",
+            bold:'Investment Wave',
             subDescription: "You will make big money if you don't go behind quick money.",
             subText: "Subscribe to our curated Equity Baskets & be ahead in your investment journey",
             icon: require("../../assets/illustrations/stocks.svg"),
