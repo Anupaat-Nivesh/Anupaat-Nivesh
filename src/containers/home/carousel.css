@@ -51,18 +51,19 @@
 
 .bold-text{
     color: blue;
+    font-weight: 500;
 }
 
 .carousel-item-subDes {
     font-size: 1.2rem;
-    margin-top: 2rem;
-    font-weight: 500;
+    margin-top: 1rem;
+    font-weight: 600;
     color: #FE0101;
 }
 
 .carousel-item-subtext {
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 600;
 }
 
 
