@@ -1,9 +1,9 @@
 import React from 'react'
 import './offerings.css';
 
-const Offerings = () => {
+export const Offerings = () => {
     return (
-        <div>Offerings</div>
+        <div id='offerings'>Offerings</div>
     )
 }
 
