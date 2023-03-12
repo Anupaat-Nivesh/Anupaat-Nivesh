@@ -17,9 +17,11 @@ const Home = () => {
                 </div>
                 <div className='home-section'> <About /></div>
                 <div className='home-section'>   <Whyanupaat /></div>
-
-                <div className='home-section'> <Contact /></div>
                 <Testimonials />
+                <offerings />
+                <div className='home-section'>   <offerings /></div>
+                <div className='home-section'> <Contact /></div>
+                
 
 
 
