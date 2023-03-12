@@ -17,10 +17,10 @@
 :root {
   --font-family: 'Poppins', sans-serif;
   --color-bg: #fff;
-  --color-footer: #d1c8c8d0;
+  --color-footer: #f1f6fa;
   --color-blog: #FE0101;
-  --color-primary-light:#f1f3f5;
-  --color-focus:#ffb3b3;
+  --color-primary-light: #f1f3f5;
+  --color-focus: #ffb3b3;
   --color-text: #1b1b1b;
   --color-subtext: #323232;
   --transition: all 500ms ease;
