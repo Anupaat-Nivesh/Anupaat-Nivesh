@@ -76,14 +76,14 @@ export const whyanupaatData = [
 export const testimonials = [
     {
         id: 1,
-        name: "Diana Ayi",
+        name: "A",
         quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium ipsam facere ea a laboriosam sed? Quod vel voluptates a! Maxime minima cumque aut? In expedita numquam consectetur non officia iusto.",
         job: "Student",
         avatar: Avatar1,
     },
     {
         id: 2,
-        name: "Daniel Vinyo",
+        name: "B",
         quote: "Harum quaerat hic consequuntur molestias repellat ad quo tenetur vitae rem, labore quisquam? Atque, assumenda rerum this and that odit harum quaerat hic praesentium quisquam quae, enim iste ipsam id repellat.",
         job: "Software Egineer",
         avatar:Avatar2,
@@ -91,7 +91,7 @@ export const testimonials = [
     },
     {
         id: 3,
-        name: "Edem Quist",
+        name: "C",
         quote: "Quaerat hic praesentium consequuntur molestias repellat ad quo tenetur vitae rem, labore quisquam? Atque, assumenda rerum odit harum quaerat hic praesentium quisquam quae, enim iste ipsam id repellat.",
         job: "University Lecturer",
         avatar: Avatar3,
@@ -99,7 +99,7 @@ export const testimonials = [
     },
     {
         id: 4,
-        name: "Grace Lavoe",
+        name: "D",
         quote: "Cupiditate deleniti sint consequuntur molestias repellat ad quo tenetur vitae rem, labore quisquam? Atque, assumenda rerum odit harum quaerat hic praesentium quisquam quae, enim iste ipsam id repellat.",
         job: "Talking Parrot",
         avatar: Avatar1,
@@ -107,7 +107,7 @@ export const testimonials = [
     },
     {
         id: 5,
-        name: "Nana Yaa Dankwa",
+        name: "E",
         quote: "Maxime minima cumque sit amet consectetur adipisicing elit. Praesentium ipsam facere ea a laboriosam sed? Quod vel voluptates a! Maxime minima cumque aut? In expedita numquam consectetur non officia iusto.",
         job: "Pharmacist",
         avatar: Avatar2,

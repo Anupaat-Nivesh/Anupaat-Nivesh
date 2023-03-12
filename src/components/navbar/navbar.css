@@ -167,6 +167,8 @@ anupaat__navbar-sign button:focus {
 
 }
 
+
+
 /*MEDIA QUERIES*/
 @media screen and (max-width: 1050px) {
     .anupaat__navbar-links_container {
