@@ -10,7 +10,7 @@ export const Carousel = () => {
             description: "Let's get you started with",
             bold: " INVESTING!",
             subDescription: "High income does not lead to wealth. It is high savings with right Investment.",
-            subText: "Stack up with your financial foundation and get personalized recommendations",
+            subText: "Stack up with your financial foundation and get personalized advisory",
 
             img: require("../../assets/illustrations/carousel1-illustration.png"),
         },
@@ -19,7 +19,7 @@ export const Carousel = () => {
             description: "Looking for ",
             bold: 'Financial Freedom',
             subDescription: "When it comes to long-term investing, doing 'LESS' is often 'MORE'.",
-            subText: "Start SIP with us to meet your long-term financial goals",
+            subText: "Start SIP to meet your long-term financial goals",
 
             img:require("../../assets/illustrations/carousel2-illustration.png"),
         },

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 import './navbar.css';
 import { Link, NavLink } from 'react-router-dom';
-import { Link as LinkS } from 'react-scroll';
+import { Link as LinkS, animateScroll as scroll } from 'react-scroll';
 import logo from '../../assets/logo.png';
 
 const links = [
@@ -49,12 +49,16 @@ const Navbar = () => {
     }
     useEffect(() => {
         window.addEventListener('scroll', changeNav)
-    }, [])
+    }, []);
+    /*On clicking the logo it will scroll to top*/
+    const toggleHome = () => {
+        scroll.scrollToTop();
+    }
     return (
         <div className={anupaat__navbar ? 'anupaat__navbar active' : 'anupaat__navbar'}>
             <div className="anupaat__navbar-links">
                 <div className="anupaat__navbar-links_logo">
-                    <Link to="/home" className='logo' onClick={() => setToggleMenu(false)}>
+                    <Link to="/" className='logo' onClick={toggleHome}>
                         <img src={logo} alt="Anupaat Nivesh Logo" />
                     </Link>
                 </div>
@@ -63,7 +67,7 @@ const Navbar = () => {
                         links.map(({ name, id }) => {
                             return (
                                 <li>
-                                    <LinkS className="nav-link" to={id}>{name}</LinkS></li>
+                                    <LinkS className="nav-link" to={id} smooth={true} exact='true' offset={-80} spy={true}>{name}  </LinkS></li>
                             )
                         })
                     }

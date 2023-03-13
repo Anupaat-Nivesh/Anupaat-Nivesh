@@ -1,4 +1,5 @@
 import React from 'react'
+import { ListGroupItem } from 'react-bootstrap';
 import './about.css';
 const About = () => {
     return (
@@ -21,6 +22,7 @@ const About = () => {
                 </ul>
                 </div>
             </div>
+
         </div>
     )
 }

@@ -5,13 +5,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 import "./testimonials.css";
 import { ImQuotesLeft } from "react-icons/im";
 
 // import required modules
-import { EffectCoverflow, Pagination } from "swiper";
-import { testimonials } from '../../data.js';
+
+import { EffectCoverflow, Pagination, Navigation } from "swiper";
+import { testimonials } from '../../data';
+
 
 
 export const Testimonials = () => {
@@ -28,19 +31,22 @@ export const Testimonials = () => {
                 <div className=" testimonial-card ">
                     <Swiper
                         effect={"coverflow"}
-                        grabCursor={true}
+
                         centeredSlides={true}
-                        loop={true}
+                        rewind={true}
                         slidesPerView={"auto"}
                         coverflowEffect={{
-                            rotate: 50,
+                            rotate: 0,
                             stretch: 0,
-                            depth: 100,
-                            modifier: 1,
+                            depth: 150,
+                            modifier: 2.5,
                             slideShadows: true,
                         }}
-                        pagination={true}
-                        modules={[EffectCoverflow, Pagination]}
+                        pagination={{
+                            clickable: true,
+                        }}
+                        navigation={true}
+                        modules={[EffectCoverflow, Pagination, Navigation]}
                         className="mySwiper"
                     >
                         {
@@ -59,10 +65,12 @@ export const Testimonials = () => {
                                             </div>
                                         </div>
                                     </SwiperSlide>
+
                                 )
                             })
 
                         }
+
 
                     </Swiper>
                 </div>

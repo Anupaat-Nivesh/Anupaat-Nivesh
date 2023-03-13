@@ -53,6 +53,7 @@ padding,margin,gap: 1rem, 4rem
 }
 
 .bold-text{
+
     display: block;
     color: blue;
     font-weight: 500;
@@ -63,6 +64,7 @@ padding,margin,gap: 1rem, 4rem
     margin-top: 5rem;
     font-weight: 500;font-style: italic;
     color: var(--color-subtext-light);
+
 }
 
 .carousel-item-subtext {
