@@ -1,15 +1,26 @@
 .anupaat__footer {
+    margin-top: 8rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 0.9rem;
+    font-size: 1.6rem;
     background: var(--color-footer);
     gap: 3rem;
     padding: 4rem 6rem 1rem 6rem;
+    font-family: var(--font-family);
 }
 
-
+.anupaat__footer-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    text-align: left;
+    align-items: stretch;
+}
 
 .anupaat__footer-btn {
     display: flex;
@@ -28,16 +39,7 @@
     font-size: 12rem;
 }
 
-.anupaat__footer-links {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    text-align: left;
-    align-items: stretch;
-}
+
 
 
 
@@ -56,9 +58,7 @@
 }
 
 .anupaat__footer-links_logo img {
-    width: 13rem;
-
-
+    width: 20rem;
 }
 
 .anupaat__footer-links_about h3 {
@@ -95,10 +95,9 @@
 }
 
 .anupaat__footer-links_div h3 {
-    font-size: 1.1rem;
+    font-size: 1.8rem;
     line-height: 17px;
-    font-weight: 500;
-    font-family: var(--font-family);
+    font-weight: 500; 
     color: var(--color-text);
     margin-bottom: 2rem;
 }
@@ -113,7 +112,7 @@
 }
 
 .anupaat__footer-socialicons a {
-    font-size: 1.5rem;
+    font-size: 2.4rem;
     transition: all 0.1s;
 }
 
@@ -127,7 +126,7 @@
     padding: 1rem 0;
     text-align: center;
     border-top: 1px solid #767676;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     color: #767676;
 }
 
@@ -135,6 +134,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    color: var(--color-subtext);
 }
 
 .footer-links a:hover {
