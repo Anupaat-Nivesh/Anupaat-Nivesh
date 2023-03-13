@@ -6,7 +6,7 @@
 
 .cta {
   background-color: var(--color-primary-light);
-  color: var(--color-subtext);
+  color: var( );
   display: grid;
   grid-template-columns: 4fr auto;
   overflow: hidden;
