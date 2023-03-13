@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import {Footer,About,Offerings, Whyanupaat,Home} from './containers';
-import {OurApp,Navbar,NotFound,Contact} from './components' ;
+import {Navbar,NotFound,Contact} from './components' ;
 
 import './App.css' ;
 function App() {
@@ -24,7 +24,7 @@ function App() {
        
 
       
-       <OurApp />
+       
        
       <Footer/>
     

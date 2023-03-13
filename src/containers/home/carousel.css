@@ -1,28 +1,30 @@
+/* 
+font-Size: 5rem,1.8rem
+padding,margin,gap: 1rem, 4rem
+*/
+
+
+
 .carousel {
     overflow: hidden;
     padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-top: 5rem;
-
 }
 
-.inner {
+.inner-carousel-section {
     white-space: nowrap;
     transition: transform 1s;
 }
 
 .carousel-item {
-
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
-    /* height: 490px; */
     background-color: #fff;
     position: relative;
     gap: 1rem;
-
 }
 
 
@@ -31,19 +33,19 @@
     text-align: left;
     display: flex;
     flex-direction: column;
-    margin-left: 2rem;
-    gap: 1rem;
+    margin-left: 4rem;
+    gap: 2rem;
 
 
 }
 
 .carousel-item-text {
     /* display: inline; */
-    text-align: left;
+    /* text-align: left; */
     white-space: normal;
     font-family: var(--font-family);
     font-weight: 500;
-    font-size: 3rem;
+    font-size: 5rem;
     line-height: 1.2;
     letter-spacing: -0.03em;
 
@@ -51,28 +53,27 @@
 }
 
 .bold-text{
+    display: block;
     color: blue;
     font-weight: 500;
 }
 
 .carousel-item-subDes {
-    font-size: 1.2rem;
-    margin-top: 1rem;
-    font-weight: 600;
-    color: #FE0101;
+    font-size: 1.8rem;
+    margin-top: 5rem;
+    font-weight: 500;font-style: italic;
+    color: var(--color-subtext-light);
 }
 
 .carousel-item-subtext {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 1.8rem;
+    font-weight: 500;
 }
 
 
 
 .img-container {
-    background-color: var(--color-primary-light);
-    padding: 4rem;
-
+    padding: 2rem;
     border-bottom-left-radius: 20%;
     border-top-left-radius: 20px;
     animation-name: onLoading;
@@ -85,8 +86,7 @@
 .carousel-img {
     z-index: 99;
     position: relative;
-    width: 25rem;
-    
+    width: 52rem;
     padding: 0;
 }
 

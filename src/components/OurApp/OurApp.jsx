@@ -31,15 +31,15 @@ const OurApp = (props) => {
       <div className="app-description-box">
         
         <div className="app-heading-box">
-          <p className="app-heading">Be Available Everywhere With
-            our Mobile App</p>
+          <h2 className="app-heading primary-heading">Be Available Everywhere With
+            our Mobile App</h2>
         </div>
 
         <ul className="app-description-list">
           <AppDecription appDescription={appDescription} />
         </ul>
 
-        <p className="description">Explore Our Apps</p>
+        <h3 className="description secondary-heading">Explore Our Apps</h3>
 
         <a href="https://play.google.com/store/apps/details?id=com.dwt.AnupaatNivesh" target="_blank" className="app-download android-app" rel="noreferrer">
           <img src={playStore} alt="playstore" className="playstore" />

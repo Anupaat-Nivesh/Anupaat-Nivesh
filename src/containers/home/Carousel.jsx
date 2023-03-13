@@ -7,29 +7,29 @@ export const Carousel = () => {
     const items = [
         {
             title: "Investment",
-            description:"Let's get you started with", 
-            bold:" INVESTING!",
+            description: "Let's get you started with",
+            bold: " INVESTING!",
             subDescription: "High income does not lead to wealth. It is high savings with right Investment.",
             subText: "Stack up with your financial foundation and get personalized recommendations",
 
-            icon: require("../../assets/illustrations/investor.svg"),
+            img: require("../../assets/illustrations/carousel1-illustration.png"),
         },
         {
             title: "Savings",
             description: "Looking for ",
-            bold:'Financial Freedom',
+            bold: 'Financial Freedom',
             subDescription: "When it comes to long-term investing, doing 'LESS' is often 'MORE'.",
             subText: "Start SIP with us to meet your long-term financial goals",
 
-            icon: require("../../assets/illustrations/savings.svg"),
+            img:require("../../assets/illustrations/carousel2-illustration.png"),
         },
         {
             title: "Stocks",
-            description:"Be a part of the next ",
-            bold:'Investment Wave',
+            description: "Be a part of the next ",
+            bold: 'Investment Wave',
             subDescription: "You will make big money if you don't go behind quick money.",
             subText: "Subscribe to our curated Equity Baskets & be ahead in your investment journey",
-            icon: require("../../assets/illustrations/stocks.svg"),
+            img: require("../../assets/illustrations/carousel3-illustration.png"),
         },
     ];
     function updateIndex(newIndex) {
@@ -47,7 +47,7 @@ export const Carousel = () => {
     return (
         <div className="carousel">
             <div
-                className="inner"
+                className="inner-carousel-section"
                 style={{
                     transform: `translate(-${activeIndex * 100}%)`
                 }}
