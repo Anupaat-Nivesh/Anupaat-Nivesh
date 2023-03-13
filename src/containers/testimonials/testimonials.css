@@ -1,26 +1,21 @@
 .testimonials {
     width: 100%;
     margin-inline: auto;
-    padding: 5rem 2rem;
 
-    justify-content: center;
-
-
-}
-
-.testimonial_title {
     font-family: var(--font-family);
-    font-weight: 600;
-    font-size: 25px;
-    display: flex;
-    justify-content: center;
-    margin-bottom: -1rem;
-
-
-
 
 }
 
+.testimonial_title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.testimonial-card{
+    margin-top: 4rem;
+} 
 .name {
     margin-left: 2rem;
     margin-top: 5px;

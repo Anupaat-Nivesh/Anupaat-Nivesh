@@ -11,22 +11,24 @@ import "./testimonials.css";
 import { ImQuotesLeft } from "react-icons/im";
 
 // import required modules
+
 import { EffectCoverflow, Pagination, Navigation } from "swiper";
 import { testimonials } from '../../data';
+
 
 
 export const Testimonials = () => {
 
 
     return (
-        < section className="testimonials " id="testimonials">
-            <div className="testimonials__container">
-                <div className="testimonial_title">
-                    <ImQuotesLeft className='quotes' />
-                    <h1>Testimonials</h1>
+        <section className="testimonials section__padding" id="testimonials">
+            <div className="testimonials__container section__padding">
+                <div className="testimonial_title ">
+                    {/* <ImQuotesLeft className='quotes' /> */}
+                    <h1 className="primary-heading">Testimonials</h1>
 
                 </div>
-                <div className=" testimonial-card section__padding">
+                <div className=" testimonial-card ">
                     <Swiper
                         effect={"coverflow"}
 

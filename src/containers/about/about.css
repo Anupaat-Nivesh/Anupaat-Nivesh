@@ -1,0 +1,22 @@
+/* Margin/padding: 4rem, 1rem */
+
+
+.aboutus-description-section{
+  margin-top: 4rem;
+}
+
+
+.aboutus-description{
+  line-height: 2;
+}
+.aboutus-description-points{
+  margin-top: 4rem;
+  padding: 1rem;
+  line-height: 2;
+}
+
+
+.aboutus-points li{
+  list-style:disc;
+  list-style-position: inside;
+}
