@@ -21,6 +21,7 @@ const Home = () => {
                 <div className='home-section about-section'> <About /></div>
                 <div className='home-section why-section'><Whyanupaat /></div>
                 <div className='home-section testimonials-section'><Testimonials /></div>
+                <offering/>
                 <div className='home-section offerings-section'>   <offerings /></div>
                 <div className='home-section contact-section'><Contact /></div>
                 <div className='home-section our-app-section'><OurApp /></div>

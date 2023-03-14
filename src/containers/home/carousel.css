@@ -59,15 +59,15 @@ padding,margin,gap: 1rem, 4rem
 }
 
 .carousel-item-subDes {
-    font-size: 1.1rem;
+    font-size: 2rem;
     margin-top: 1rem;
     font-weight: 500;
-    color: rgb(43, 17, 17);
+    color: rgba(221, 16, 16, 0.767);
     font-style: italic;
 }
 
 .carousel-item-subtext {
-    font-size: 1.8rem;
+    font-size: 2.5rem;
     font-weight: 500;
 }
 
