@@ -1,6 +1,7 @@
 .anupaat__whyanupaat {
     display: flex;
     flex-direction: column;
+    font-weight: 450;
 }
 
 .why-heading-section {

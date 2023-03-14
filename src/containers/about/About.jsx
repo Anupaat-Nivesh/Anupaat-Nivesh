@@ -1,8 +1,8 @@
 import React from 'react'
 import { ListGroupItem } from 'react-bootstrap';
-import tech from "../../assets/tech.png";
-import team from "../../assets/team.png";
-import transparency from "../../assets/transparency.png";
+import tech from "../../assets/tech.svg";
+import team from "../../assets/team.svg";
+import transparency from "../../assets/transparency.svg";
 import './about.css';
 const About = () => {
     return (

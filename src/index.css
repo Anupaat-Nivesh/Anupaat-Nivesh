@@ -25,11 +25,17 @@ html{
 
 :root {
   --font-family: 'Poppins', sans-serif;
-  --color-bg: #fff;
-  --color-footer: #f1f6fa;
-  --color-blog: #FE0101;
-  --color-primary-light: #f1f3f5;
-  --color-focus: #ffb3b3;
+  --color-bg:#fff;
+
+  --color-primary: #FE0101;
+  --color-primary-dark: #dd1010;
+  --color-primary-light: #ffb3b3;
+
+  --color-secondary:#fcf8d4;
+
+
+
+  --color-grey-light: #f1f3f5;
   --color-text: #1b1b1b;
   --color-subtext: #323232;
   --color-subtext-light: #5b5b5b;
