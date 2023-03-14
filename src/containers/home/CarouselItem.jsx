@@ -17,9 +17,7 @@ export const CarouselItem = ({ item, width, itemIndex }) => {
 
             </div>
             <div className="img-container">
-
-                <img src={carouselImg[itemIndex]} alt="Carouselimage" className="carouselImage1" />
-                <img className="carousel-img" alt="carasoulimage" src={item.icon.default} />
+                <img className="carousel-img" alt="carasoulimage" src={item.img} />
             </div>
         </div>
     );

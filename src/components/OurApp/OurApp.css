@@ -10,33 +10,33 @@
 
 .app-description-box {
   padding: 2rem;
+  font-size: 1.6rem;
+  justify-self: center;
+  align-self: center;
+  color: var(--color-subtext);
 }
 
 .appScreenShot-box {
+  width: 30rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.description {
-  color: var(--color-text);
-  font-weight: 600;
-  font-size: 1.2rem;
+.appScreenShot-box img{
+  width: 100%;
+}
+
+.description{
+  margin-top: 4rem;
 }
 
 .app-description-list {
   list-style: disc;
+  margin-top: 2rem;
 }
 
-.app-heading-box {
-  margin: 2rem 0;
-  font-size: 2rem;
-  font-weight: 600;
-}
 
-.app-description-list {
-  margin: 2rem 0;
-}
 
 .android-app {
   margin: 2rem 0;
@@ -45,9 +45,9 @@
   border-radius: 10px;
   transition: all 0.3s;
   overflow: hidden;
-
 }
 
 .android-app:hover {
   box-shadow: 0 0 10px 6px rgba(0, 0, 0.5, 0.1);
 }
+

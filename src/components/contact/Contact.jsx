@@ -55,8 +55,8 @@ const Contact = (props) => {
             <div className='cta'>
                 <div className='cta-text-box'>
                     <div className='cta-description'>
-                        <h2 className='heading-secondary'>Contact Information</h2>
-                        <p className='cta-text'>Fill up the form and our team will get back to you within <b>24 hours.</b></p>
+                        <h2 className='primary-heading'>Contact Information</h2>
+                        <p className='section-description cta-text'>Fill up the form and our team will get back to you within <b>24 hours.</b></p>
                     </div>
                     <form action="" className='cta-form'>
                         <div>

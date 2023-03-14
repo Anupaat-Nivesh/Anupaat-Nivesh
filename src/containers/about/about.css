@@ -1,0 +1,60 @@
+/* Margin/padding: 4rem, 1rem */
+
+
+.aboutus-description-section {
+  margin-top: 4rem;
+}
+
+
+.aboutus-description {
+  line-height: 2;
+}
+
+.aboutus-description-section2 {
+  margin-top: 6rem;
+  display: flex;
+  gap: 6rem;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.aboutus-description-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* background-color: aqua; */
+  box-shadow: 0px 0px 10px 2px rgb(91, 91, 91,0.2);
+  padding: 2rem; 
+  gap: 1rem;
+  border-radius: 1rem;
+  width: 30rem;
+  text-align: center;
+  
+}
+
+.description-block-img {
+  width: 65px;
+}
+
+.block-heading {
+  font-size: 1.6rem;
+}
+.block-description{
+  font-size: 1.4rem;
+  margin-top: 1rem;
+}
+
+.aboutus-description-points {
+  margin-top: 4rem;
+  padding: 1rem;
+  line-height: 2;
+}
+
+
+.aboutus-points li {
+  list-style: disc;
+  list-style-position: inside;
+}
