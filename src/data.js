@@ -76,9 +76,9 @@ export const whyanupaatData = [
 export const testimonials = [
     {
         id: 1,
-        name: "A",
-        quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium ipsam facere ea a laboriosam sed? Quod vel voluptates a! Maxime minima cumque aut? In expedita numquam consectetur non officia iusto.",
-        job: "Student",
+        name: "Swati Vashisth",
+        quote: 'I went on a saving spree with Anupaat Nivesh with the exact emotion as my Nani had whilst keeping bucks in kitchen containers. I have been a part of Anupaat Nivesh for more than a year now, and I had always found them taking my calls on high priority no matter how naive my context has been. So appreciative and grateful for the service AN provided!',
+        job: "Lecturer",
         avatar: Avatar1,
     },
     {

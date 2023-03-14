@@ -5,6 +5,7 @@ import { Carousel } from './Carousel';
 import {Testimonials} from '../testimonials/Testimonials';
 import Whyanupaat from '../whyanupaat/Whyanupaat';
 import About from '../about/About';
+/*import offerings from '../offerings/offerings';*/
 import Contact from '../../components/contact/Contact';
 import { OurApp } from '../../components';
 

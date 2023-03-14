@@ -3,6 +3,7 @@
 
 .aboutus-description-section {
   margin-top: 4rem;
+  font-weight: 500;
 }
 
 
@@ -13,7 +14,7 @@
 .aboutus-description-section2 {
   margin-top: 6rem;
   display: flex;
-  gap: 6rem;
+  gap: 8rem;
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -30,17 +31,19 @@
   padding: 2rem; 
   gap: 1rem;
   border-radius: 1rem;
-  width: 30rem;
+  width: 50rem;
   text-align: center;
   
 }
 
 .description-block-img {
   width: 65px;
+  color: #FE0101;
 }
 
 .block-heading {
   font-size: 1.6rem;
+  color: #FE0101;
 }
 .block-description{
   font-size: 1.4rem;
