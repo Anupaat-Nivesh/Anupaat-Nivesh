@@ -54,13 +54,15 @@ export const Testimonials = () => {
                                 return (
                                     <SwiperSlide key={id}>
                                         <div className="testimonial-content">
-                                            <div className="testimonial_avatar">  <img src={avatar} alt={name} /></div>
-                                            <h2 className="name">{name}</h2>
+                                        
+                                        <div className="testimonial_avatar">  <img src={avatar} alt={name} /></div>
+                                        <h2 className="name">{name} <small className="job">{job}</small></h2>
+                                            
                                             <div className="testimonial__text">
 
 
                                                 <p><q>{quote}</q></p>
-                                                <small className="job">{job}</small>
+                                                
 
                                             </div>
                                         </div>

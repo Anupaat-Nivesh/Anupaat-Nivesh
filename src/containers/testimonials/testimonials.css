@@ -19,7 +19,8 @@
 .name {
     margin-left: 2rem;
     margin-top: 5px;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
+    color: red;
 }
 
 .quotes {
@@ -28,7 +29,12 @@
     color: var(--color-blog);
     font-size: 25px;
 }
-
+.job {
+    
+    margin-right: 1rem;
+    color: red;
+    font-size: 15px;
+}
 .testimonial__text {
     margin: 1rem 1rem;
     text-align: left;
@@ -38,14 +44,14 @@
 }
 
 .testimonial_avatar {
-    width: 15rem;
-    height: 15rem;
+    width: 18rem;
+    height: 18rem;
     overflow: hidden;
     position: relative;
     margin-top: -1.5rem;
-    margin-left: 2.5rem;
+    margin-left: 1.5rem;
     z-index: 99;
-    left: 1.5rem;
+    left: 20rem;
 
 }
 
@@ -72,7 +78,7 @@
 .swiper-slide {
     background-position: center;
     background-size: cover;
-    width: 400px;
+    width: 500px;
     height: 400px;
     border-radius: 2rem;
     object-fit: cover;
