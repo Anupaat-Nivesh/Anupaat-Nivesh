@@ -12,7 +12,7 @@ font-weight: 450
     font-size: 1.8rem;
     position: sticky;
     top: 0;
-    color: var(--color-text);
+    color: var(--color-secondary);
     font-family: var(--font-family);
     background: #ffffff;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -20,7 +20,7 @@ font-weight: 450
 }
 
 .anupaat__navbar.active {
-    background: rgb(252, 248, 212);
+    background: var(--color-grey-light)
 }
 
 .anupaat__navbar-links {
@@ -77,7 +77,7 @@ font-weight: 450
     content: "";
     width: 100%;
     height: 0px;
-    background-color: #FE0101;
+    background-color: var(--color-primary);
     position: absolute;
     z-index: -1;
     left: 0;
@@ -93,14 +93,14 @@ font-weight: 450
 
 .nav-link:hover,
 .nav-link:active {
-    color: #FE0101;
+    color: var(--color-primary);
 }
 
 
 .anupaat__navbar-sign button{
     padding: 0.8rem 2rem;
-    color: #fff;
-    background: #FE0101;
+    color: var(--color-text);
+    background: var(--color-grey-light);
     font-family: var(--font-family);
     font-weight: 450;
     font-size: 1.8rem;
@@ -108,13 +108,14 @@ font-weight: 450
     cursor: pointer;
     border-radius: 1rem;
     transition: all 0.3s;
+    box-shadow: inset 0 0 0 2px var(--color-primary);
 }
 
 .anupaat__navbar-sign button:hover,
 anupaat__navbar-sign button:focus {
-    background-color: #fff;
-    color: #FE0101;
-    box-shadow: inset 0 0 0 2px var(--color-blog);
+    background-color: var(--color-primary); 
+    color: #fff; 
+    /* box-shadow: inset 0 0 0 2px var(--color-blog); */
 }
 
 /* ****************************************** */

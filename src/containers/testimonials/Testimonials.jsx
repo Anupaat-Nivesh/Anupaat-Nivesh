@@ -24,7 +24,7 @@ export const Testimonials = () => {
         <section className="testimonials section__padding" id="testimonials">
             <div className="testimonials__container section__padding">
                 <div className="testimonial_title ">
-                    <ImQuotesLeft className='quotes' />
+                    {/* <ImQuotesLeft className='quotes' /> */}
                     <h1 className="primary-heading">Testimonials</h1>
 
                 </div>

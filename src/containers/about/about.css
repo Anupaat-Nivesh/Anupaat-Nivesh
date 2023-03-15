@@ -6,7 +6,9 @@
   font-weight: 450;
 }
 
-
+/* .aboutus-heading{
+color: var(--color-secondary);
+} */
 .aboutus-description {
   line-height: 2;
 }
@@ -27,23 +29,27 @@
   align-items: center;
   justify-content: center;
   /* background-color: aqua; */
-  box-shadow: 0px 0px 10px 2px rgb(91, 91, 91,0.2);
+  box-shadow: 0px 0px 10px 2px rgba(91, 91, 91,0.2);
   padding: 2rem; 
   gap: 1rem;
   border-radius: 1rem;
   /* width: 50rem; */
   text-align: center;
-  
+  transition: all 0.3s;
+}
+
+.aboutus-description-block:hover{
+  background-color: var(--color-grey-light);
 }
 
 .description-block-img {
   width: 65px;
-  color: #FE0101;
+  /* color: var(--color-primary); */
 }
 
 .block-heading {
   font-size: 1.6rem;
-  color: #FE0101;
+  color: var(--color-primary);
 }
 .block-description{
   font-size: 1.4rem;
@@ -62,3 +68,4 @@
   list-style: disc;
   list-style-position: inside;
 }
+

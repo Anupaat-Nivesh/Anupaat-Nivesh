@@ -77,7 +77,7 @@ const Navbar = () => {
             <div className="anupaat__navbar-sign">
 
                 <a href="#ourapp">
-                    <button type="button app-btn">Download</button>
+                    <button type="button app-btn">GET THE APP</button>
 
                 </a>
             </div>

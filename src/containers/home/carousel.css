@@ -53,7 +53,7 @@ padding,margin,gap: 1rem, 4rem
 }
 
 .bold-text{
-    color: #FE0101;
+    color: var(--color-primary);
     font-weight: 600;
     
 }
@@ -62,7 +62,7 @@ padding,margin,gap: 1rem, 4rem
     font-size: 2rem;
     margin-top: 4rem;
     font-weight: 500;
-    color: rgba(221, 16, 16, 0.767);
+    color: var(--color-subtext-light);
     font-style: italic;
 }
 
@@ -137,7 +137,7 @@ padding,margin,gap: 1rem, 4rem
 }
 
 .indicator-symbol {
-    color: var(--color-focus);
+    color: var(--color-subtext-light);
 }
 
 .indicator-symbol-active {

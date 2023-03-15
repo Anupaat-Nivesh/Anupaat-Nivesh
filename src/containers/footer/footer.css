@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     font-size: 1.6rem;
-    background: var(--color-footer);
+    background: var(--color-grey-light);
     gap: 3rem;
     padding: 4rem 6rem 1rem 6rem;
     font-family: var(--font-family);

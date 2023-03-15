@@ -37,8 +37,8 @@ const Whyanupaat = () => {
                     whyanupaatData.map(({ icon, id, title, text }) => {
                         return (
                             <Card className="whyanupaat_data" key={id}>
-                                <span>{icon}</span>
-                                <h4>{title}</h4>
+                                <span className='icon'>{icon}</span>
+                                <h4 className='why-block-heading'>{title}</h4>
                                 <small>{text}</small>
                             </Card>
                         )

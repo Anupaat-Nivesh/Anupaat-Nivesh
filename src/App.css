@@ -24,6 +24,16 @@ a {
   padding: 0 2rem;
 }
 
+.home-section{
+  margin-top: 9.6rem;
+  
+}
+
+
+.hero-section {
+  margin-top: 6rem;
+}
+
 .aboutus-title{
   display: flex;
   justify-content: center;
