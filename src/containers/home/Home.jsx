@@ -2,10 +2,11 @@ import React from 'react'
 import './home.css';
 import { Carousel } from './Carousel';
 
-import {Testimonials} from '../testimonials/Testimonials';
+import { Testimonials } from '../testimonials/Testimonials';
+import { SkillCounter } from '../skillCounter/SkillCounter';
 import Whyanupaat from '../whyanupaat/Whyanupaat';
 import About from '../about/About';
-/*import offerings from '../offerings/offerings';*/
+
 import Contact from '../../components/contact/Contact';
 import { OurApp } from '../../components';
 
@@ -21,12 +22,13 @@ const Home = () => {
 
                 <div className='home-section about-section'> <About /></div>
                 <div className='home-section why-section'><Whyanupaat /></div>
+                <SkillCounter />
                 <div className='home-section testimonials-section'><Testimonials /></div>
-                <offering/>
+
                 <div className='home-section offerings-section'>   <offerings /></div>
                 <div className='home-section contact-section'><Contact /></div>
                 <div className='home-section our-app-section'><OurApp /></div>
-                
+
 
 
 

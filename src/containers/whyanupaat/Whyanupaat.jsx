@@ -9,7 +9,7 @@ const Whyanupaat = () => {
     return (
         <div className="anupaat__whyanupaat section__padding" id="whyanupaat">
             <div className='why-heading-section'>
-            <h1 className='primary-heading why-heading'> Why Anupaat Nivesh?</h1>
+                <h1 className='primary-heading why-heading'> Why Anupaat Nivesh?</h1>
             </div>
             <div className='anupaat__whyanupaat-main'>
 

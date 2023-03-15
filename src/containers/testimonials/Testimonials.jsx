@@ -4,16 +4,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-coverflow";
+import "swiper/css/autoplay";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import "./testimonials.css";
-import { ImQuotesLeft } from "react-icons/im";
+
 
 // import required modules
 
-import { EffectCoverflow, Pagination, Navigation } from "swiper";
+import { Autoplay, EffectCoverflow, Pagination, Navigation } from "swiper";
 import { testimonials } from '../../data';
+
 
 
 
@@ -21,32 +23,40 @@ export const Testimonials = () => {
 
 
     return (
-        <section className="testimonials section__padding" id="testimonials">
-            <div className="testimonials__container section__padding">
+        <section className="testimonials" id="testimonials">
+            <div className="testimonials__container">
                 <div className="testimonial_title ">
-                    {/* <ImQuotesLeft className='quotes' /> */}
+
                     <h1 className="primary-heading">Testimonials</h1>
 
                 </div>
                 <div className=" testimonial-card ">
                     <Swiper
                         effect={"coverflow"}
+                        loop={true}
+
+                        autoplay={{
+                            delay: 2500,
+                            disableOnInteraction: false,
+                            pauseOnMouseEnter: true,
+                        }}
 
                         centeredSlides={true}
-                        rewind={true}
+
+
                         slidesPerView={"auto"}
                         coverflowEffect={{
                             rotate: 0,
                             stretch: 0,
                             depth: 150,
                             modifier: 2.5,
-                            slideShadows: true,
+                            slideShadows: false,
                         }}
                         pagination={{
                             clickable: true,
                         }}
                         navigation={true}
-                        modules={[EffectCoverflow, Pagination, Navigation]}
+                        modules={[Autoplay, EffectCoverflow, Pagination, Navigation]}
                         className="mySwiper"
                     >
                         {
@@ -54,15 +64,22 @@ export const Testimonials = () => {
                                 return (
                                     <SwiperSlide key={id}>
                                         <div className="testimonial-content">
-                                        
-                                        <div className="testimonial_avatar">  <img src={avatar} alt={name} /></div>
-                                        <h2 className="name">{name} <small className="job">{job}</small></h2>
-                                            
+                                            <div className="testimonial-heading">
+                                                <h2 className="name">{name} </h2>
+                                                <small className="job">{job}</small>
+                                            </div>
+
+                                            <div className="testimonial_avatar">
+                                                <img src={avatar} alt={name} />
+                                            </div>
+
+
+
                                             <div className="testimonial__text">
 
 
                                                 <p><q>{quote}</q></p>
-                                                
+
 
                                             </div>
                                         </div>
