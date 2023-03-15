@@ -83,9 +83,9 @@ export const testimonials = [
     },
     {
         id: 2,
-        name: "B",
+        name: "Aditya Sethi",
         quote: "Harum quaerat hic consequuntur molestias repellat ad quo tenetur vitae rem, labore quisquam? Atque, assumenda rerum this and that odit harum quaerat hic praesentium quisquam quae, enim iste ipsam id repellat.",
-        job: "Software Egineer",
+        job: "Pharmacist",
         avatar:Avatar2,
         socials: ['https://instagram.com/', 'https://twitter.com/', 'https://facebook.com/', 'https://linkedin.com/']
     },
