@@ -20,19 +20,15 @@ export const SkillCounter = () => {
                     <p>TEAM</p>
                 </div>
                 <div className='skill-items'>
-                    <h2 className='counter-numbers'><CountUp start={0} end={145} duration={2} delay={0} suffix="+" /> </h2>
+                    <h2 className='counter-numbers'><CountUp start={0} end={150} duration={2} delay={0} suffix="+" /> </h2>
                     <p>HAPPY CLIENTS</p>
                 </div>
                 <div className='skill-items'>
-                    <h2 className='counter-numbers'><CountUp start={0} end={1145} duration={2} delay={0} suffix="+" /></h2>
-                    <p>SIPS</p>
+                    <h2 className='counter-numbers'><CountUp start={0} end={1145000} duration={2} delay={0} suffix="+" /></h2>
+                    <p>Monthly SIP</p>
                 </div>
                 <div className='skill-items'>
-                    <h2 className='counter-numbers'><CountUp start={0} end={285} duration={2} delay={0} suffix="+" />  </h2>
-                    <p>AUM</p>
-                </div>
-                <div className='skill-items'>
-                    <h2 className='counter-numbers'><CountUp start={0} end={285} duration={2} delay={0} suffix="+" />  </h2>
+                    <h2 className='counter-numbers'><CountUp start={0} end={285} duration={2} delay={0} suffix=" Lac+" />  </h2>
                     <p>AUM</p>
                 </div>
             </div>

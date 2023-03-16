@@ -51,7 +51,7 @@ const Contact = (props) => {
     };
 
     return (
-        <div className='contact-section  section__margin' id='contact'>
+        <div className='contact-section section__margin' id='contact'>
             <div className='cta'>
                 <div className='cta-text-box'>
                     <div className='cta-description'>
@@ -89,7 +89,7 @@ const Contact = (props) => {
                             <textarea type="text" id='messsage' name='message' rows="8" cols="80" placeholder='Write your message...' ></textarea>
                         </div>
 
-                        <button className='btn btn--form'>Send Message</button>
+                        <button className='btn btn--form'>SUBMIT</button>
                     </form>
                 </div>
                 <div className='connect-info'>

@@ -83,7 +83,8 @@
   padding: 1.2rem 2rem;
   border-radius: 1rem;
   font-size: 1.8rem;
-  font-weight: 450;
+  font-weight: 600;
+  
   color: var(--color-text);
   background-color: var(--color-grey-light);
   transition: all 0.3s;
