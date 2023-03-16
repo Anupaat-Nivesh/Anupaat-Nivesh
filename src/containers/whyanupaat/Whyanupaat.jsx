@@ -9,7 +9,7 @@ const Whyanupaat = () => {
     return (
         <div className="anupaat__whyanupaat section__padding" id="whyanupaat">
             <div className='why-heading-section'>
-            <h1 className='primary-heading why-heading'> Why Anupaat Nivesh?</h1>
+                <h1 className='primary-heading why-heading'> Why Anupaat Nivesh?</h1>
             </div>
             <div className='anupaat__whyanupaat-main'>
 
@@ -37,8 +37,8 @@ const Whyanupaat = () => {
                     whyanupaatData.map(({ icon, id, title, text }) => {
                         return (
                             <Card className="whyanupaat_data" key={id}>
-                                <span>{icon}</span>
-                                <h4>{title}</h4>
+                                <span className='icon'>{icon}</span>
+                                <h4 className='why-block-heading'>{title}</h4>
                                 <small>{text}</small>
                             </Card>
                         )

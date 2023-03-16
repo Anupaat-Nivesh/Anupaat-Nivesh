@@ -19,7 +19,7 @@ const About = () => {
                 <p className='section-description aboutus-description'>We at Anupaat Nivesh help our customers with true and quality advise about investment options which can be huge wealth creator to middle class.</p>
                 
                 <div className='aboutus-description-points'>
-                    <h2 className='secondary-heading'>How we help our customers:</h2><br></br>
+                    <h2 className='secondary-heading secondary-about-heading'>How we help our customers:</h2><br></br>
                     <ul className='section-description aboutus-points'>
                         <li>By Assessing individual's requirements and goals</li>
                         <li>By Creating awareness about financial freedom</li>
