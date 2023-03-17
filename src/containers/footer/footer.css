@@ -113,8 +113,8 @@
     margin-bottom: 1rem;
 }
 
-.anupaat__footer-socialicons a {
-    font-size: 2.4rem;
+.anupaat__footer-socialicons a img{
+    width: 4rem;
     transition: all 0.1s;
 }
 
@@ -140,7 +140,7 @@
 }
 
 .footer-links a:hover {
-    color: var(--color-blog);
+    color: var(--color-primary);
 }
 
 

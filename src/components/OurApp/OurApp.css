@@ -1,9 +1,10 @@
 .app-section {
   /* background-color: var(--color-primary-light); */
 
-  width: 1300px;
+  /* width: 1300px; */
   display: grid;
   grid-template-columns: 1fr 2fr;
+  column-gap: 2rem;
 }
 
 
@@ -48,7 +49,125 @@
   overflow: hidden;
 }
 
+.android-app img{
+  width: 100%;
+}
+
 .android-app:hover {
   box-shadow: 0 0 10px 6px rgba(0, 0, 0.5, 0.1);
 }
 
+
+
+/* ******************************** */
+/* BELOW 1200px (landscape tablets) */
+/* ******************************** */
+
+
+@media(max-width: 75em) {
+
+  .app-description-box{
+    padding: 0;
+  }
+
+
+
+
+}
+
+/* ******************************** */
+/* BELOW 1008px (Tablets) */
+/* ******************************** */
+
+@media(max-width: 63em){
+  .app-heading {
+    font-size: 3rem;
+  }
+  
+  .description{
+    margin-top: 1rem;
+    font-size: 1.8rem;
+  }
+
+  
+
+  
+  .appScreenShot-box{
+    width: 25rem;
+  }
+  
+  .app-description-list{
+    margin-top: 1rem;
+  }
+  
+  .android-app{
+    margin: 1rem 0;
+  }
+
+  .app-section {
+gap: 0;
+  }
+
+  }
+
+
+  /* ******************************** */
+/* BELOW 960px (Tablets) */
+/* ******************************** */
+
+@media(max-width: 60em){
+  .app-section {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+      }
+
+      .appScreenShot-box{
+        justify-self: center;
+      }
+
+      .app-description-box{
+        align-self: flex-start;
+      }
+
+      .android-app{
+        margin: 2rem 0;
+      }
+}
+
+/* ******************************** */
+/* BELOW 704px (Smaller Tablets) */
+/* ******************************** */
+
+@media(max-width: 44em){
+  .app-description-box{
+    font-size: 1.4rem;
+  }
+}
+
+
+/* ******************************** */
+/* BELOW 544px (Phones) */
+/* ******************************** */
+
+@media(max-width: 34em){
+  .appScreenShot-box{
+    width: 20rem;
+  }
+  .app-heading {
+    font-size: 2rem;
+  }
+
+  .app-description-box{
+    font-size: 1.2rem;
+  }
+
+  .description {
+    font-size: 1.6rem;
+  }
+
+  .android-app{
+    width: 15rem;
+  }
+
+
+}
