@@ -59,19 +59,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color:white;
+    color: rgb(0, 0, 0);
     justify-content: center;
-<<<<<<< HEAD
-    background: red;
-=======
     background: #fff;
->>>>>>> 4e5143656dd082c3702652a3ca27d555e3c65216
     border: 2px solid transparent;
     padding: 3rem 2rem;
     border-radius: 0 3rem 0 3rem;
     transition: var(--transition);
     gap: 2rem;
-    box-shadow: 0px 0px 10px 2px rgba(91, 91, 91,0.2);
+    box-shadow: 0px 0px 10px 2px rgba(91, 91, 91, 0.2);
 }
 
 
@@ -85,8 +81,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
-    color:black;
+
+    color: black;
     font-size: 4rem;
     /* font-weight: 5000; */
     padding: 1rem;

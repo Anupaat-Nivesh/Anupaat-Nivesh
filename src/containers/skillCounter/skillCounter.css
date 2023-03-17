@@ -1,6 +1,6 @@
 .skills-data {
     width: 100%;
-    background: #191b20;
+    background: var(--color-bg-dark);
 
     justify-content: space-between;
 
@@ -30,7 +30,7 @@
     font-weight: 800;
     font-size: 2.8rem;
     align-items: center;
-    background: #21242b;
+    background: var(--color-secondary-dark);
     border-radius: 1.5rem;
     position: relative;
     border-bottom: 1rem solid #FE0101;
@@ -39,7 +39,8 @@
 }
 
 .skill-items:hover {
-    background: #000;
+    background: var(--color-secondary-light);
+    color: #000;
     cursor: pointer;
     transition: all 0.5s ease-in-out;
 }

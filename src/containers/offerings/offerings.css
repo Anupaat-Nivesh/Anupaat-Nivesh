@@ -1,0 +1,38 @@
+.offerings-title {
+    text-align: center;
+    margin-bottom: 5rem;
+    color: #000;
+
+}
+
+.offerings__article {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    margin-top: 5rem;
+}
+
+.offering_article-title {
+    color: #000;
+    margin-bottom: 2.5rem;
+
+}
+
+.offering_article-title p {
+    font-size: 10rem;
+}
+
+.offering-btn {
+    margin-top: 2.4rem;
+}
+
+
+.offerings-img img {
+    width: 50rem;
+    height: 30rem;
+}
+
+.offerings__content p {
+    color: grey;
+}
