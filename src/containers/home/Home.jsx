@@ -6,7 +6,7 @@ import { Testimonials } from '../testimonials/Testimonials';
 import { SkillCounter } from '../skillCounter/SkillCounter';
 import Whyanupaat from '../whyanupaat/Whyanupaat';
 import About from '../about/About';
-
+import Offerings from '../offerings/Offerings';
 import Contact from '../../components/contact/Contact';
 import { OurApp } from '../../components';
 
@@ -25,7 +25,7 @@ const Home = () => {
                 <SkillCounter />
                 <div className='home-section testimonials-section'><Testimonials /></div>
 
-                <div className='home-section offerings-section'>   <offerings /></div>
+                <div className='home-section offerings-section'>   <Offerings /></div>
                 <div className='home-section contact-section'><Contact /></div>
                 <div className='home-section our-app-section'><OurApp /></div>
 

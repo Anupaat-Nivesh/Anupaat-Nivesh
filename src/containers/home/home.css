@@ -4,18 +4,11 @@ font-size: 1.6rem
 
 
 
-.section-description{
+.section-description {
     font-size: 1.6rem;
     color: var(--color-text);
 }
-.primary-heading{
-    font-size: 4rem;
-  }
-.secondary-heading{
-    font-size: 2.5rem;
-    font-weight: 500;
-    color: var(--color-secondary);
-}
+
 
 
 

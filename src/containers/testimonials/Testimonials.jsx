@@ -27,30 +27,26 @@ export const Testimonials = () => {
             <div className="testimonials__container">
                 <div className="testimonial_title ">
 
-                    <h1 className="primary-heading">Testimonials</h1>
+                    <h1>Testimonials</h1>
+
 
                 </div>
                 <div className=" testimonial-card ">
                     <Swiper
                         effect={"coverflow"}
-                        loop={true}
-
+                        slidesPerView={"auto"}
                         autoplay={{
                             delay: 2500,
                             disableOnInteraction: false,
                             pauseOnMouseEnter: true,
                         }}
-
                         centeredSlides={true}
-
-
-                        slidesPerView={"auto"}
                         coverflowEffect={{
                             rotate: 0,
                             stretch: 0,
                             depth: 150,
                             modifier: 2.5,
-                            slideShadows: false,
+                            slideShadows: true,
                         }}
                         pagination={{
                             clickable: true,
