@@ -51,14 +51,14 @@ const Contact = (props) => {
     };
 
     return (
-        <div className='contact-section section__margin' id='contact'>
+        <div className='contact-section section__padding section__margin' id='contact'>
             <div className='cta'>
                 <div className='cta-text-box'>
                     <div className='cta-description'>
                         <h2 className='primary-heading'>Contact Information</h2>
                         <p className='section-description cta-text'>Fill up the form and our team will get back to you within <b>24 hours.</b></p>
                     </div>
-                    <form action="" className='cta-form'>
+                    <form className='cta-form'>
                         <div>
                             <label htmlFor="first-name">First Name</label>
                             <input id='first-name' type="text" placeholder='Lokesh' required />
@@ -89,7 +89,7 @@ const Contact = (props) => {
                             <textarea type="text" id='messsage' name='message' rows="8" cols="80" placeholder='Write your message...' ></textarea>
                         </div>
 
-                        <button className='btn btn--form'>SUBMIT</button>
+                        <button type='submit' className='btn btn--form'>SUBMIT</button>
                     </form>
                 </div>
                 <div className='connect-info'>

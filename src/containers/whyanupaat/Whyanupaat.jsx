@@ -7,7 +7,7 @@ import { whyanupaatData } from '../../data';
 
 const Whyanupaat = () => {
     return (
-        <div className="anupaat__whyanupaat section__padding" id="whyanupaat">
+        <div className="anupaat__whyanupaat section__padding section__margin" id="whyanupaat">
             <div className='why-heading-section'>
                 <h1 className='primary-heading why-heading'> Why Anupaat Nivesh?</h1>
             </div>

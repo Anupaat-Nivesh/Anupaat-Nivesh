@@ -7,7 +7,7 @@ import './about.css';
 import OurTeam from './OurTeam';
 const About = () => {
     return (
-        <div id='about' className='section__padding'>
+        <div id='about' className='section__padding section__margin'>
             <div className='aboutus-title'>
                 <h1 className='primary-heading aboutus-heading'> About Us</h1>
             </div>

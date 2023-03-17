@@ -24,11 +24,12 @@ a {
   padding: 0 4rem;
 }*/
 .section__padding {
+  max-width: 100%;
   padding: 4rem 5rem;
 }
 
 .section__margin {
-  margin: 4rem 3rem;
+  margin: 4rem auto;
 }
 
 .home-section {
@@ -39,6 +40,7 @@ a {
 
 .hero-section {
   margin-top: 6rem;
+  /* height: 100vh; */
 }
 
 .aboutus-title {
@@ -49,10 +51,10 @@ a {
 
 
 
-.scale-up-center {
+/* .scale-up-center {
   -webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
   animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-}
+} */
 
 @-webkit-keyframes scale-up-center {
   0% {
@@ -78,23 +80,27 @@ a {
   }
 }
 
-@media screen and (max-width:700px) {
-  .section__padding {
-    padding: 4rem;
-  }
 
-  .section__margin {
-    margin: 4rem;
-  }
-}
 
-/*mobile devices */
-@media screen and (max-width:550px) {
-  .section__padding {
+/* ******************************** */
+/* BELOW 1200px (landscape tablets) */
+/* ******************************** */
+
+
+@media(max-width: 75em) {
+  .section__padding {   
     padding: 4rem 2rem;
   }
-
-  .section__margin {
-    margin: 4rem 2rem;
-  }
 }
+
+
+/* ******************************** */
+/* BELOW 544px (Phones) */
+/* ******************************** */
+
+@media(max-width: 34em){
+
+  
+
+}
+

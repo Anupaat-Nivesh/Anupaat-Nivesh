@@ -19,7 +19,7 @@ const links = [
         id: 'about'
     },
     {
-        name: "WhyAnupaat",
+        name: "Why Anupaat Nivesh",
         path: '/whyanupaat',
         id: 'whyanupaat'
     },
@@ -84,8 +84,11 @@ const Navbar = () => {
 
             <div className="anupaat__navbar-menu">
                 {toggleMenu
-                    ? <RiCloseLine color="#000" size={27} onClick={() => setToggleMenu(prev => !prev)} />
-                    : <RiMenu3Line color="#000" size={27} onClick={() => setToggleMenu(true)} />}
+                    ? <RiCloseLine color="#000" size={32} onClick={(event) => {setToggleMenu(prev=>!prev);}} />
+                    : <RiMenu3Line color="#000" size={27} onClick={(event) => {setToggleMenu(true);
+                    }} />}
+
+
                 {toggleMenu && (
                     <div className="anupaat__navbar-menu_container scale-up-center">
                         <ul className="anupaat__navbar-menu_container-links">
@@ -101,8 +104,9 @@ const Navbar = () => {
 
                         </ul>
                         <div className="anupaat__navbar-menu_container-links-sign">
-
-                            <button type="button">Download</button>
+                        <a href="#ourapp">
+                            <button type="button">GET THE APP</button>
+                            </a>
                         </div>
                     </div>
                 )}

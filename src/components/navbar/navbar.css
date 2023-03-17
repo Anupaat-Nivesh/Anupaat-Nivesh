@@ -11,6 +11,7 @@ font-weight: 450
     padding: 1rem 4rem;
     font-size: 1.8rem;
     position: sticky;
+    /* position: relative; */
     top: 0;
     color: var(--color-secondary);
     font-family: var(--font-family);
@@ -20,7 +21,9 @@ font-weight: 450
 }
 
 .anupaat__navbar.active {
-    background: var(--color-grey-light)
+    background: var(--color-grey-light);
+    position: sticky;
+    
 }
 
 .anupaat__navbar-links {
@@ -35,7 +38,8 @@ font-weight: 450
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 25rem;   
+    width: 25rem; 
+    /* margin-left: 2rem;   */
 }
 
 .anupaat__navbar-links_logo img {
@@ -124,10 +128,10 @@ anupaat__navbar-sign button:focus {
 
 
 .anupaat__navbar-menu {
-    margin-left: 1rem;
+    margin-left: 4rem;
 
     display: none;
-    position: relative;
+    /* position: relative; */
 }
 
 .anupaat__navbar-menu svg {
@@ -136,42 +140,68 @@ anupaat__navbar-sign button:focus {
 
 .anupaat__navbar-menu_container {
     display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    text-align: end;
-    background: #eb0f0f;
+    background: rgba(241, 243, 245,1);  
     padding: 2rem;
     position: absolute;
     right: 0;
-    top: 40px;
-    margin-top: 1rem;
-    min-width: 250px;
+    top:100px;
+    gap: 2rem;
+    min-width: 30vw;
     border-radius: 5px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+   
+
+    animation-name: slidingOn;
+    animation-duration: 0.5s;
 }
 
+.anupaat__navbar-menu_container-links{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+}
 .anupaat__navbar-menu_container-links li {
-    color: #fff;
+    color: var(--color-text);
+    width: 100%;
+    font-size: 2rem;
+    font-weight: 600;
+    padding: 1rem 0;
+    border-radius: 10px;
 
 }
 
 .anupaat__navbar-menu_container-links li:hover,
 .anupaat__navbar-menu_container-links:focus {
-    color: #000000;
+    color: var(--color-primary);
 }
 
 
 
 /*only shows on medium and small screens*/
-.anupaat__navbar-menu_container-links-sign {
+.anupaat__navbar-menu_container-links-sign a button {
     display: none;
+    padding: 1rem 2rem;
+    color: #fff;
+    background: var(--color-primary);
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 1.8rem;
+    outline: none;
+    cursor: pointer;
+    border-radius: 1rem;
+    transition: all 0.3s;
+
 
 }
 
 
 
-/*MEDIA QUERIES*/
+/* MEDIA QUERIES
 @media screen and (max-width: 1050px) {
     .anupaat__navbar-links_container {
         display: none;
@@ -218,4 +248,78 @@ anupaat__navbar-sign button:focus {
     .anupaat__navbar-links_logo img {
         margin-left: 1px;
     }
+} */
+
+
+/* ****************************************** */
+/* Media Queries (Responsiveness) */
+/* ****************************************** */
+
+
+/* ******************************** */
+/* BELOW 1344px (Smaller desktops) */
+/* ******************************** */
+
+@media(max-width: 84em) {
+
+    .anupaat__navbar-links_container{
+        gap: 1rem;
+    }
+
+}
+
+/* ********************************
+/* BELOW 1200px (landscape tablets) */
+/* ******************************** */
+
+@media(max-width:75em){
+    .anupaat__navbar-links_container {
+        display: none;
+    } 
+    .anupaat__navbar-menu {
+        display: flex;
+    }
+}
+
+
+
+/* ******************************** */
+/* BELOW 704px (Smaller Tablets) */
+/* ******************************** */
+
+@media(max-width: 44em){
+    .anupaat__navbar-sign {
+        display: none;
+    }
+
+
+    .anupaat__navbar-menu_container-links-sign a button {
+        display: block;
+
+    }
+
+    .anupaat__navbar-links_logo {
+        
+        width: 20rem;   
+    }
+
+
+}
+
+
+/* ******************************** */
+/* BELOW 544px (Phones) */
+/* ******************************** */
+
+@media(max-width: 34em){
+.anupaat__navbar{
+    padding: 1rem 2rem;
+}
+}
+
+
+
+@keyframes slidingOn{
+    from {transform: translate(100%,0);}
+    to {transform: translate(0,0);}
 }
