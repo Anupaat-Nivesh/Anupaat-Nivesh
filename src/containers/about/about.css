@@ -22,6 +22,11 @@ color: var(--color-secondary);
   justify-content: center;
 }
 
+.aboutus-description-section3{
+  margin-top: 6rem;
+  text-align: center;
+}
+
 
 .aboutus-description-block {
   display: flex;
@@ -67,5 +72,12 @@ color: var(--color-secondary);
   /* font-weight: 400; */
   list-style: disc;
   list-style-position: inside;
+}
+
+.social-icon{
+  color: var(--color-primary);
+  width: 2rem;
+  height: 2rem;
+ 
 }
 

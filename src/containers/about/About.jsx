@@ -4,6 +4,7 @@ import tech from "../../assets/tech.svg";
 import team from "../../assets/team.svg";
 import transparency from "../../assets/transparency.svg";
 import './about.css';
+import OurTeam from './OurTeam';
 const About = () => {
     return (
         <div id='about' className='section__padding'>
@@ -46,6 +47,10 @@ const About = () => {
                         <p className='block-description'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum sit in nihil quae temporibus quos! Accusamus animi facilis rem similique quas iste dignissimos, odio voluptates blanditiis quo aliquid veritatis quisquam.</p>
                     </div>
 
+                </div>
+
+                <div className='aboutus-description-section3'>
+                    <OurTeam />
                 </div>
             </div>
 
