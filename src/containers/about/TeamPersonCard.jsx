@@ -40,7 +40,7 @@ const mouseLeaveHandler = (event)=>{
     <div className="image-container" onMouseEnter={mouseEnterHandler} onMouseLeave={mouseLeaveHandler}>
       <img src={props.image} alt="" className="person-image"/>
     </div>
-    <div className="person-info" onMouseEnter={mouseEnterHandler}>
+    <div className="person-info" onMouseEnter={mouseEnterHandler} onMouseLeave={mouseLeaveHandler}>
       <p className="person-name">{props.name}</p>
       <p className="person-designation">{props.designation}</p>
     </div>

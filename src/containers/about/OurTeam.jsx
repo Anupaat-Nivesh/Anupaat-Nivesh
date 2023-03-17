@@ -12,37 +12,37 @@ const OurTeam = () => {
       img:require("../../assets/person.jpg")
     },
     {
-      name: "Lokesh Singh",
+      name: "a",
       designation: "Web Developer",
       img:require("../../assets/person.jpg")
     },
     {
-      name: "Lokesh Singh",
+      name: "b",
       designation: "Web Developer",
       img:require("../../assets/person.jpg")
     },
     {
-      name: "Lokesh Singh",
+      name: "c",
       designation: "Web Developer",
       img:require("../../assets/person.jpg")
     },
     {
-      name: "Lokesh Singh",
+      name: "d",
       designation: "Web Developer",
       img:require("../../assets/person.jpg")
     },
     {
-      name: "Lokesh Singh",
+      name: "e",
       designation: "Web Developer",
       img:require("../../assets/person.jpg")
     },
     {
-      name: "Lokesh Singh",
+      name: "f",
       designation: "Web Developer",
       img:require("../../assets/person.jpg")
     },
     {
-      name: "Lokesh Singh",
+      name: "g",
       designation: "Web Developer",
       img:require("../../assets/person.jpg")
     }
@@ -50,7 +50,7 @@ const OurTeam = () => {
 
   return (
     <div>
-      <h3 className="secondary-heading">Our Team</h3>
+      <h3 className="primary-heading">Our Team</h3>
     <div className="ourteam-section">
       
            {ourTeamDescription.map(person => {

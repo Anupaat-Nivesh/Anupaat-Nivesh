@@ -16,15 +16,19 @@ padding,margin,gap: 1rem, 4rem
 .inner-carousel-section {
     white-space: nowrap;
     transition: transform 1s;
+    display: grid;
+    grid-template-columns: repeat(3,100vw);
 }
 
 .carousel-item {
-    display: inline-flex;
+    display: grid;
+    grid-template-columns: 2fr 2fr;   
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;    
     background-color: #fff;
     position: relative;
     gap: 1rem;
+    padding: 0 4rem;
 }
 
 
@@ -33,15 +37,11 @@ padding,margin,gap: 1rem, 4rem
     text-align: left;
     display: flex;
     flex-direction: column;
-    margin-left: 4rem;
+    /* margin-left: 4rem; */
     gap: 2rem;
-
-
 }
 
 .carousel-item-text {
-    /* display: inline; */
-    /* text-align: left; */
     white-space: normal;
     font-family: var(--font-family);
     font-weight: 500;
@@ -81,6 +81,9 @@ padding,margin,gap: 1rem, 4rem
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
     position: relative;
+    height: fit-content;
+    /* width: ; */
+    /* width: 52rem; */ 
 }
 
 
