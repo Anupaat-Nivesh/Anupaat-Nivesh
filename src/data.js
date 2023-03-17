@@ -70,6 +70,8 @@ export const whyanupaatData = [
  const Avatar1 = require('../src/assets/avatar1.jpg')
  const Avatar2 = require('../src/assets/avatar2.jpg')
  const Avatar3 = require('../src/assets/avatar3.jpg')
+ const Avatar4 = require('../src/assets/avatar1.jpg')
+ const Avatar5 = require('../src/assets/avatar2.jpg')
 
 
 
@@ -102,7 +104,7 @@ export const testimonials = [
         name: "D",
         quote: "Cupiditate deleniti sint consequuntur molestias repellat ad quo tenetur vitae rem, labore quisquam? Atque, assumenda rerum odit harum quaerat hic praesentium quisquam quae, enim iste ipsam id repellat.",
         job: "Talking Parrot",
-        avatar: Avatar1,
+        avatar: Avatar4,
         socials: ['https://instagram.com/', 'https://twitter.com/', 'https://facebook.com/', 'https://linkedin.com/']
     },
     {
@@ -110,7 +112,7 @@ export const testimonials = [
         name: "E",
         quote: "Maxime minima cumque sit amet consectetur adipisicing elit. Praesentium ipsam facere ea a laboriosam sed? Quod vel voluptates a! Maxime minima cumque aut? In expedita numquam consectetur non officia iusto.",
         job: "Pharmacist",
-        avatar: Avatar2,
+        avatar: Avatar5,
         socials: ['https://instagram.com/', 'https://twitter.com/', 'https://facebook.com/', 'https://linkedin.com/']
     }
 ]
