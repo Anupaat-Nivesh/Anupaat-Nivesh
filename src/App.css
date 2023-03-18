@@ -155,6 +155,7 @@ a {
 /* BELOW 752px (Smaller Tablets) */
 /* ******************************** */
 
+
 @media(max-width:47em) {
 .btn{
   font-size: 1.6rem;
@@ -173,6 +174,5 @@ h2{
 
 
 }
-
 
 
