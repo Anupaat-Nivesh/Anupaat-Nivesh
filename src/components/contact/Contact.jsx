@@ -2,6 +2,7 @@ import React from 'react'
 import './contact.css';
 /*import { SiFacebook, SiTwitter, SiYoutube, SiWhatsapp } from "react-icons/si";*/
 
+import '../../App.css';
 import FacebookLogo from "../../assets/facebook-logo.png";
 import TwitterLogo from "../../assets/twitter-logo.png";
 import WhatsappLogo from "../../assets/whatsapp.png";

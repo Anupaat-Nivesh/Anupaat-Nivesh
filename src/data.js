@@ -78,14 +78,14 @@ export const whyanupaatData = [
 export const testimonials = [
     {
         id: 1,
-        name: "Swati Vashisth",
+        name: " 1Swati Vashisth",
         quote: 'I went on a saving spree with Anupaat Nivesh with the exact emotion as my Nani had whilst keeping bucks in kitchen containers. I have been a part of Anupaat Nivesh for more than a year now, and I had always found them taking my calls on high priority no matter how naive my context has been. So appreciative and grateful for the service AN provided!',
         job: "Lecturer",
         avatar: Avatar1,
     },
     {
         id: 2,
-        name: "Aditya Sethi",
+        name: "2Aditya Sethi",
         quote: "Harum quaerat hic consequuntur molestias repellat ad quo tenetur vitae rem, labore quisquam? Atque, assumenda rerum this and that odit harum quaerat hic praesentium quisquam quae, enim iste ipsam id repellat.",
         job: "Pharmacist",
         avatar:Avatar2,
@@ -93,7 +93,7 @@ export const testimonials = [
     },
     {
         id: 3,
-        name: "C",
+        name: "3C",
         quote: "Quaerat hic praesentium consequuntur molestias repellat ad quo tenetur vitae rem, labore quisquam? Atque, assumenda rerum odit harum quaerat hic praesentium quisquam quae, enim iste ipsam id repellat.",
         job: "University Lecturer",
         avatar: Avatar3,
@@ -101,7 +101,7 @@ export const testimonials = [
     },
     {
         id: 4,
-        name: "D",
+        name: "4D",
         quote: "Cupiditate deleniti sint consequuntur molestias repellat ad quo tenetur vitae rem, labore quisquam? Atque, assumenda rerum odit harum quaerat hic praesentium quisquam quae, enim iste ipsam id repellat.",
         job: "Talking Parrot",
         avatar: Avatar4,
@@ -109,12 +109,49 @@ export const testimonials = [
     },
     {
         id: 5,
-        name: "E",
+        name: "5E",
         quote: "Maxime minima cumque sit amet consectetur adipisicing elit. Praesentium ipsam facere ea a laboriosam sed? Quod vel voluptates a! Maxime minima cumque aut? In expedita numquam consectetur non officia iusto.",
         job: "Pharmacist",
         avatar: Avatar5,
         socials: ['https://instagram.com/', 'https://twitter.com/', 'https://facebook.com/', 'https://linkedin.com/']
     }
+]
+
+const MutualFund = require('../src/assets/illustrations/finance-01.png')
+const EquityFund = require('../src/assets/illustrations/happy-01.png')
+const LoanFund = require('../src/assets/illustrations/investment-01.png')
+
+
+
+
+
+
+
+
+export const offeringsData=[
+    {
+        id:1,
+        title:"Mutual Fund Basket",
+        img:MutualFund,
+        description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+       
+    },
+    {
+        id:2,
+        title:"Equity Fund Basket",
+        img:EquityFund,
+        description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+       
+    },
+    {
+        id:3,
+        title:"Loan Against Security",
+        img:LoanFund,
+        description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+        
+            
+    }
+   
 ]
 
 
