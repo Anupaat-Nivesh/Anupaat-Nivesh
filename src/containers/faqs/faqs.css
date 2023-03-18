@@ -1,0 +1,48 @@
+/*================FAQS CSS==============*/
+
+
+.faqs h1 {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.faqs__container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: auto;
+
+}
+
+.faq {
+    background: var(--color-secondary-light);
+    padding: 2rem;
+    display: flex;
+    gap: 1rem;
+    border: 1px solid #ddd;
+    cursor: pointer;
+
+}
+
+.faq:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background: #fff;
+}
+
+.faqs__icon {
+    font-size: 2.4rem;
+    font-weight: 200;
+}
+
+.faq_question {
+    font-size: 2.2rem;
+    font-weight: 500;
+}
+
+.faq_answer {
+    margin-top: 2rem;
+
+
+}
