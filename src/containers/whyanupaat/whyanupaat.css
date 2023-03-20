@@ -59,13 +59,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color:white;
     justify-content: center;
-<<<<<<< HEAD
-    background: red;
-=======
-    background: #fff;
->>>>>>> 4e5143656dd082c3702652a3ca27d555e3c65216
+    background: var(--color-grey-light);
     border: 2px solid transparent;
     padding: 3rem 2rem;
     border-radius: 0 3rem 0 3rem;
@@ -76,8 +71,7 @@
 
 
 .whyanupaat_data:hover {
-    /* border-color: var(--color-primary); */
-    background: var(--color-grey-light);
+    border-color: var(--color-primary);
 
 }
 
@@ -85,8 +79,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
-    color:black;
+    color: var(--color-text);
     font-size: 4rem;
     /* font-weight: 5000; */
     padding: 1rem;
