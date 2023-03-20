@@ -15,9 +15,6 @@ const Faqs = () => {
                     })
                 }
 
-
-
-
             </div>
         </section>
 
