@@ -7,18 +7,18 @@ import './about.css';
 import OurTeam from './OurTeam';
 const About = () => {
     return (
-        <div id='about' className='section__padding'>
+        <div id='about' className='aboutUs-container section__padding'>
             <div className='aboutus-title'>
-                <h1 className='primary-heading aboutus-heading'> About Us</h1>
+                <h1>About Us</h1>
             </div>
 
             <div className='aboutus-description-section '>
-                <p className='section-description aboutus-description'> Started in 2018, Anupaat Nivesh is providing one2one consulting to start with your investment journey. Anupaat Nivesh aim to reach out to the common man and extend the opportunity to create wealth by providing them valuable and ethical financial advice. Equity investing has always been an grey area for most of people. However, historically there has been no better way to grow your money exponentially. 
+                <p className='section-description aboutus-description'> Started in 2018, Anupaat Nivesh is providing one2one consulting to start with your investment journey. Anupaat Nivesh aim to reach out to the common man and extend the opportunity to create wealth by providing them valuable and ethical financial advice. Equity investing has always been an grey area for most of people. However, historically there has been no better way to grow your money exponentially.
                 </p>
                 <br></br>
                 <p className='section-description aboutus-description'>Investing in the stock market is risky. But if managed and predicted correctly, it will have a high growth rate.</p>
                 <p className='section-description aboutus-description'>We at Anupaat Nivesh help our customers with true and quality advise about investment options which can be huge wealth creator to middle class.</p>
-                
+
                 <div className='aboutus-description-points'>
                     <h2 className='secondary-heading secondary-about-heading'>How we help our customers:</h2><br></br>
                     <ul className='section-description aboutus-points'>

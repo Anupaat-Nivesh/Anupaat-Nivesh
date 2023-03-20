@@ -12,6 +12,37 @@ body {
   overflow-x: hidden;
 }
 
+h1 {
+  font-size: 5.6rem;
+  line-height: 1;
+
+}
+
+h2 {
+  font-size: 3rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.lead {
+  width: 63%;
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 2rem auto 3rem;
+
+
+}
+
+p {
+  font-size: 1.5rem;
+}
+
 a {
   color: unset;
   text-decoration: none;
@@ -24,11 +55,37 @@ a {
   padding: 0 4rem;
 }*/
 .section__padding {
+  max-width: 100%;
   padding: 4rem 5rem;
 }
 
 .section__margin {
-  margin: 4rem 3rem;
+  margin: 0 auto;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  display: inline;
+  font-size: 2rem;
+  font-family: var(--font-family);
+  font-weight: 450;
+  border: 1px solid transparent;
+  outline: none;
+  cursor: pointer;
+  border-radius: 1rem;
+  transition: all 0.3s;
+  box-shadow: inset 0 0 0 1px var(--color-primary);
+}
+
+.btn-primary {
+  color: var(--color-text);
+  background: var(--color-grey-light);
+}
+
+
+.btn:hover {
+  background-color: var(--color-primary);
+  color: #fff;
 }
 
 .home-section {
@@ -39,6 +96,7 @@ a {
 
 .hero-section {
   margin-top: 6rem;
+  /* height: 100vh; */
 }
 
 .aboutus-title {
@@ -49,10 +107,10 @@ a {
 
 
 
-.scale-up-center {
+/* .scale-up-center {
   -webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
   animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-}
+} */
 
 @-webkit-keyframes scale-up-center {
   0% {
@@ -78,23 +136,43 @@ a {
   }
 }
 
-@media screen and (max-width:700px) {
-  .section__padding {
-    padding: 4rem;
-  }
 
-  .section__margin {
-    margin: 4rem;
-  }
-}
 
-/*mobile devices */
-@media screen and (max-width:550px) {
+/* ******************************** */
+/* BELOW 1200px (landscape tablets) */
+/* ******************************** */
+
+
+@media(max-width: 75em) {
   .section__padding {
     padding: 4rem 2rem;
   }
-
-  .section__margin {
-    margin: 4rem 2rem;
-  }
 }
+
+
+
+/* ******************************** */
+/* BELOW 752px (Smaller Tablets) */
+/* ******************************** */
+
+
+@media(max-width:47em) {
+.btn{
+  font-size: 1.6rem;
+  padding: 0.6rem 1.8rem;
+}
+}
+
+
+/* ******************************** */
+/* BELOW 640px (Phones) */
+/* ******************************** */
+@media(max-width:40em) {
+h2{
+  font-size: 2.5rem;
+}
+
+
+}
+
+

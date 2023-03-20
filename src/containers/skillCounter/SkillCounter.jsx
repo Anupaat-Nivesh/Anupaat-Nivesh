@@ -6,7 +6,7 @@ import CountUp from 'react-countup';
 export const SkillCounter = () => {
 
     return (
-        <section className='skills-data section__padding'>
+        <section className='skills-data'>
             <div className='skill-container'>
                 <div className='skill-items'>
 

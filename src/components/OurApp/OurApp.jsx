@@ -29,9 +29,10 @@ const OurApp = (props) => {
       </div>
 
       <div className="app-description-box">
-        
+
         <div className="app-heading-box">
-          <h2 className="app-heading primary-heading">Be Available Everywhere With
+          <h1>Download App</h1>
+          <h2 className="app-heading">Be Available Everywhere With
             our Mobile App</h2>
         </div>
 

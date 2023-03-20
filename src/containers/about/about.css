@@ -1,5 +1,8 @@
 /* Margin/padding: 4rem, 1rem */
 
+/*.aboutUs-container {
+  background: var(--color-primary-light);
+}*/
 
 .aboutus-description-section {
   margin-top: 4rem;
@@ -22,8 +25,8 @@ color: var(--color-secondary);
   justify-content: center;
 }
 
-.aboutus-description-section3{
-  margin-top: 6rem;
+.aboutus-description-section3 {
+  margin-top: 9.6rem;
   text-align: center;
 }
 
@@ -33,9 +36,9 @@ color: var(--color-secondary);
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* background-color: aqua; */
-  box-shadow: 0px 0px 10px 2px rgba(91, 91, 91,0.2);
-  padding: 2rem; 
+
+  box-shadow: 0px 0px 10px 2px rgba(91, 91, 91, 0.2);
+  padding: 2rem;
   gap: 1rem;
   border-radius: 1rem;
   /* width: 50rem; */
@@ -43,7 +46,7 @@ color: var(--color-secondary);
   transition: all 0.3s;
 }
 
-.aboutus-description-block:hover{
+.aboutus-description-block:hover {
   background-color: var(--color-grey-light);
 }
 
@@ -56,7 +59,8 @@ color: var(--color-secondary);
   font-size: 1.6rem;
   color: var(--color-primary);
 }
-.block-description{
+
+.block-description {
   font-size: 1.4rem;
   margin-top: 1rem;
 }
@@ -74,10 +78,9 @@ color: var(--color-secondary);
   list-style-position: inside;
 }
 
-.social-icon{
+.social-icon {
   color: var(--color-primary);
   width: 2rem;
   height: 2rem;
- 
-}
 
+}

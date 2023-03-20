@@ -12,8 +12,8 @@
   box-sizing: border-box;
 }
 
-html{
-  
+html {
+
   /* 10px / 16px = 0.625 = 62.5% */
   /* font-size setting */
 
@@ -21,17 +21,28 @@ html{
   font-size: 62.5%;
 }
 
+body {
+  font-family: var(--font-family);
+}
+
 
 
 :root {
   --font-family: 'Poppins', sans-serif;
-  --color-bg:#fff;
-
+  --color-bg: #fff;
+  /*whitish*/
+  --color-bg-dark: #000;
   --color-primary: #FE0101;
-  --color-primary-dark: #dd1010;
-  --color-primary-light: #ffb3b3;
+  /*offred*/
+  --color-primary-light: #f9f9f9;
+  /*seasalt*/
+  --color-secondary-light: #e5e5e5;
+  --color-secondary-dark: #161a1d;
+  /*erieblack*/
 
- 
+
+
+
 
 
 
