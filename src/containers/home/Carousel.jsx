@@ -6,6 +6,14 @@ export const Carousel = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const items = [
         {
+            title: "KAIZEN",
+            description: "Start with",
+            bold: " KAIZEN SIP",
+            subDescription: "Sometime just a small step is required to start of the journey",
+            subText: "Because we know, slow and steady wins the race",
+
+            img:require("../../assets/illustrations/carousel2-illustration.png"),
+        },{
             title: "Investment",
             description: "Let's get you started with",
             bold: " INVESTING!",
