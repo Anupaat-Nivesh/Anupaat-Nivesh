@@ -21,7 +21,7 @@ export const Carousel = () => {
             subDescription: "When it comes to long-term investing, doing 'LESS' is often 'MORE'.",
             subText: "Start SIP to meet your long-term financial goals",
 
-            img:require("../../assets/illustrations/carousel2-illustration.png"),
+            img: require("../../assets/illustrations/carousel2-illustration.png"),
         },
         {
             title: "Stocks",

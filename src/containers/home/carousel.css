@@ -17,14 +17,14 @@ padding,margin,gap: 1rem, 4rem
     white-space: nowrap;
     transition: transform 1s;
     display: grid;
-    grid-template-columns: repeat(3,100vw);
+    grid-template-columns: repeat(3, 100vw);
 }
 
 .carousel-item {
     display: grid;
-    grid-template-columns: 2fr 2fr;   
+    grid-template-columns: 1fr 1fr;
     align-items: center;
-    justify-content: center;    
+    justify-content: center;
     background-color: #fff;
     position: relative;
     gap: 1rem;
@@ -37,6 +37,7 @@ padding,margin,gap: 1rem, 4rem
     text-align: left;
     display: flex;
     flex-direction: column;
+
     /* margin-left: 4rem; */
     gap: 2rem;
 }
@@ -52,14 +53,14 @@ padding,margin,gap: 1rem, 4rem
 
 }
 
-.bold-text{
+.bold-text {
     color: var(--color-primary);
     font-weight: 600;
-    
+
 }
 
 .carousel-item-subDes {
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-top: 4rem;
     font-weight: 500;
     color: var(--color-subtext-light);
@@ -67,7 +68,7 @@ padding,margin,gap: 1rem, 4rem
 }
 
 .carousel-item-subtext {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     font-weight: 500;
 }
 
@@ -83,7 +84,7 @@ padding,margin,gap: 1rem, 4rem
     position: relative;
     height: fit-content;
     /* width: ; */
-    /* width: 52rem; */ 
+    /* width: 52rem; */
 }
 
 

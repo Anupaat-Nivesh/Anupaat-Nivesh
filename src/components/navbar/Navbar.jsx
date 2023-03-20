@@ -84,8 +84,9 @@ const Navbar = () => {
 
             <div className="anupaat__navbar-menu">
                 {toggleMenu
-                    ? <RiCloseLine color="#000" size={32} onClick={(event) => {setToggleMenu(prev=>!prev);}} />
-                    : <RiMenu3Line color="#000" size={27} onClick={(event) => {setToggleMenu(true);
+                    ? <RiCloseLine color="#000" size={32} onClick={(event) => { setToggleMenu(prev => !prev); }} />
+                    : <RiMenu3Line color="#000" size={27} onClick={(event) => {
+                        setToggleMenu(true);
                     }} />}
 
 
@@ -104,8 +105,8 @@ const Navbar = () => {
 
                         </ul>
                         <div className="anupaat__navbar-menu_container-links-sign">
-                        <a href="#ourapp">
-                            <button type="button">GET THE APP</button>
+                            <a href="#ourapp">
+                                <button type="button">GET THE APP</button>
                             </a>
                         </div>
                     </div>
