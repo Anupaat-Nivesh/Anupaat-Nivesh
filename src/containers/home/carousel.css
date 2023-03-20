@@ -17,12 +17,12 @@ padding,margin,gap: 1rem, 4rem
     white-space: nowrap;
     transition: transform 1s;
     display: grid;
-    grid-template-columns: repeat(3,100vw);
+    grid-template-columns: repeat(4,100vw);
 }
 
 .carousel-item {
     display: grid;
-    grid-template-columns: 2fr 2fr;   
+    grid-template-columns: 55% 45%;   
     align-items: center;
     justify-content: center;    
     background-color: #fff;
@@ -39,6 +39,8 @@ padding,margin,gap: 1rem, 4rem
     flex-direction: column;
     /* margin-left: 4rem; */
     gap: 2rem;
+    overflow-wrap: break-word;
+    
 }
 
 .carousel-item-text {
@@ -55,7 +57,6 @@ padding,margin,gap: 1rem, 4rem
 .bold-text{
     color: var(--color-primary);
     font-weight: 600;
-    
 }
 
 .carousel-item-subDes {
@@ -64,11 +65,13 @@ padding,margin,gap: 1rem, 4rem
     font-weight: 500;
     color: var(--color-subtext-light);
     font-style: italic;
+    overflow-wrap: break-word;
 }
 
 .carousel-item-subtext {
     font-size: 2.5rem;
     font-weight: 500;
+    white-space:initial;
 }
 
 
@@ -81,9 +84,7 @@ padding,margin,gap: 1rem, 4rem
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
     position: relative;
-    height: fit-content;
-    /* width: ; */
-    /* width: 52rem; */ 
+   
 }
 
 
