@@ -1,11 +1,8 @@
 import React from "react";
-import carouselImage1 from "../../assets/carouselComponentimg1.svg";
-import carouselImage2 from "../../assets/hands.svg";
 
-const carouselImg = [carouselImage1, carouselImage2, carouselImage1];
 export const CarouselItem = ({ item, width, itemIndex }) => {
     return (
-        <div className="carousel-item" style={{ width: width }}>
+        <div className="carousel-item">
 
             <div className="carousel-item-text-section">
                 <div className="carousel-item-text">{item.description}
