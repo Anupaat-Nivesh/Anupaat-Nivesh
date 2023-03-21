@@ -34,17 +34,29 @@ const About = () => {
                     <div className='aboutus-description-block'>
                         <img src={tech} alt="tech-icon" className='description-block-img' />
                         <h3 className='block-heading'>Cutting-Edge Tech</h3>
-                        <p className='block-description'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum sit in nihil quae temporibus quos! Accusamus animi facilis rem similique quas iste dignissimos, odio voluptates blanditiis quo aliquid veritatis quisquam.</p>
+                        <p className='block-description'>
+                            We use our technical expertise to deliver the core of financial investment 
+                            with use of digital technology.
+                            Technology helps us to deliver the best for our customers and to keep us ahead of time.
+                        </p>
                     </div>
                     <div className='aboutus-description-block'>
                         <img src={team} alt="team-icon" className='description-block-img' />
                         <h3 className='block-heading'>Outstanding Team</h3>
-                        <p className='block-description'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum sit in nihil quae temporibus quos! Accusamus animi facilis rem similique quas iste dignissimos, odio voluptates blanditiis quo aliquid veritatis quisquam.</p>
+                        <p className='block-description'>
+                        We are team of Young, Energetic and skillfull executives 
+                        doing continous research on market trends to generate alpha returns for our customers by leveraging our
+                        techno-functional expertise.
+
+                        </p>
                     </div>
                     <div className='aboutus-description-block'>
                         <img src={transparency} alt="transparency-icon" className='description-block-img' />
                         <h3 className='block-heading'>Real Transparency</h3>
-                        <p className='block-description'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum sit in nihil quae temporibus quos! Accusamus animi facilis rem similique quas iste dignissimos, odio voluptates blanditiis quo aliquid veritatis quisquam.</p>
+                        <p className='block-description'>
+                        We are independent advisory company and provide unbiased, transparent and best customized recommendation
+                        to our customers. Customer's interest is all that matters to us.
+                        </p>
                     </div>
 
                 </div>

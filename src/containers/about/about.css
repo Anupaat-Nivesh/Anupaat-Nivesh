@@ -19,7 +19,7 @@ color: var(--color-secondary);
 .aboutus-description-section2 {
   margin-top: 6rem;
   display: flex;
-  gap: 8rem;
+  gap: 6rem;
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -41,7 +41,7 @@ color: var(--color-secondary);
   padding: 2rem;
   gap: 1rem;
   border-radius: 1rem;
-  /* width: 50rem; */
+  width: 33%;
   text-align: center;
   transition: all 0.3s;
 }
