@@ -18,12 +18,12 @@ const Whyanupaat = () => {
 
                     <div className='anupaat_whyanupaat-heading-explanation'>
                         <div className='whyanupaat-subheading '>
-                            <h3 className='secondary-heading'>Experience An Enhanced Online Investment Platform</h3>
+                            <h2 className='secondary-heading'>Experience An Enhanced Online Investment Platform</h2>
                         </div>
 
-                        <p className='section-description why-description'>Welcome to the town of investment! From Mutual Funds to Corporate Deposits,
-
-                            we hold a lot in store, to suit the goals and needs of every investor and every
+                        <p className='section-description why-description'>Welcome to the town of investment! </p>
+                        <p>From Mutual Funds to Direct Equity,
+                            we have a lot in store, to suit the goals and needs of every individual investor and every
                             risk appetite.
                         </p>
                     </div>
