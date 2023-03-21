@@ -5,15 +5,7 @@ import { CarouselItem } from "./CarouselItem";
 export const Carousel = () => {
     const [activeIndex, setActiveIndex] = useState(0);
     const items = [
-        {
-            title: "KAIZEN",
-            description: "Start with",
-            bold: " KAIZEN SIP",
-            subDescription: "Sometime just a small step is required to start of the journey",
-            subText: "Because we know, slow and steady wins the race",
-
-            img:require("../../assets/illustrations/carousel2-illustration.png"),
-        },{
+       {
             title: "Investment",
             description: "Let's get you started with",
             bold: " INVESTING!",
@@ -39,6 +31,15 @@ export const Carousel = () => {
             subText: "Subscribe to our curated Equity Baskets & be ahead in your investment journey",
             img: require("../../assets/illustrations/carousel3-illustration.png"),
         },
+        {
+            title: "KAIZEN",
+            description: "Start with",
+            bold: " KAIZEN SIP",
+            subDescription: "Sometime just a small step is required to start of the journey",
+            subText: "Because we know, slow and steady wins the race",
+            img: require("../../assets/illustrations/carousel3-illustration.png")
+            
+        }
     ];
     function updateIndex(newIndex) {
         if (newIndex < 0) {

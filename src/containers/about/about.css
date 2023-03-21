@@ -7,6 +7,7 @@
 .aboutus-description-section {
   margin-top: 4rem;
   font-weight: 450;
+ 
 }
 
 /* .aboutus-heading{
@@ -69,13 +70,24 @@ color: var(--color-secondary);
   margin-top: 4rem;
   padding: 1rem;
   line-height: 2;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  column-gap: 2rem;
+  align-items: center;
+}
+
+.aboutus-description-points div{
+  justify-self: self-end;
 }
 
 
 .aboutus-points li {
   /* font-weight: 400; */
+  color: var(--color-subtext);
+  font-size: 1.6rem;
+  margin-top: 1rem;
   list-style: disc;
-  list-style-position: inside;
+  list-style-position:outside;
 }
 
 .social-icon {
@@ -84,3 +96,112 @@ color: var(--color-secondary);
   height: 2rem;
 
 }
+
+
+.aboutus-illustration{
+  width: 60rem
+ 
+}
+
+
+
+
+/* ******************************** */
+/* BELOW 1200px (landscape tablets) */
+/* ******************************** */
+
+
+@media(max-width: 75em) {
+  .aboutus-illustration{
+    width: 50rem
+   
+  }
+
+  .aboutus-description-section2 {
+    display: flex;
+    gap: 6rem;
+    
+  }
+}
+
+
+  /* ******************************** */
+/* BELOW 960px (Tablets) */
+/* ******************************** */
+
+@media(max-width: 60em){
+  .aboutus-description-points {
+    
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    
+    
+  }
+  .aboutus-illustration{
+   justify-self: center;
+   
+  }
+  .aboutus-description-points div{
+    justify-self: center;
+  }
+
+  .aboutus-description-section2 {
+    display: flex;
+    gap: 4rem;
+    
+  }
+
+  .aboutus-description-block{
+    padding: 1rem;
+  }
+
+  .aboutus-points li {
+  
+    list-style-position:outside;
+    margin-top: 0.2rem;
+  }
+}
+
+
+/* ******************************** */
+/* BELOW 704px (Smaller Tablets) */
+/* ******************************** */
+
+@media(max-width: 44em){
+
+  .aboutus-points li{
+    font-size: 1.4rem;
+  }
+
+  .aboutus-description-section2{
+    flex-direction: column;
+  }
+}
+
+
+/* ******************************** */
+/* BELOW 544px (Phones) */
+/* ******************************** */
+
+@media(max-width: 34em){
+  .aboutus-illustration{
+    width: 30rem
+   
+  }
+
+  .aboutus-description-points {
+   
+    line-height: 1.6;
+    
+  }
+
+  .aboutus-points li{
+    font-size: 1.2rem;
+    margin-top: 1rem;
+  }
+
+  .block-description{
+    font-size: 1.2rem;
+  }
+}
+
