@@ -58,7 +58,7 @@ export const Testimonials = () => {
                         {
                             testimonials.map(({ name, id, avatar, quote, job }) => {
                                 return (
-                                    <SwiperSlide key={id}>
+                                    <SwiperSlide className="myswiper-slide" key={id}>
                                         <div className="testimonial-content">
                                             <div className="testimonial-heading">
                                                 <h2 className="name">{name} </h2>
@@ -94,7 +94,6 @@ export const Testimonials = () => {
     )
 }
 export default Testimonials
-
 
 
 
