@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import './carousel.css';
 import { CarouselItem } from "./CarouselItem";
 
 export const Carousel = () => {
     const [activeIndex, setActiveIndex] = useState(0);
+    
     const items = [
        {
             title: "Investment",
@@ -43,13 +44,17 @@ export const Carousel = () => {
     ];
     function updateIndex(newIndex) {
         if (newIndex < 0) {
-            newIndex = 0;
+            newIndex = items.length-1;
         } else if (newIndex >= items.length) {
-            newIndex = items.length - 1;
+            newIndex =0;       
         }
 
         setActiveIndex(newIndex);
     }
+
+
+   
+     
 
 
 
@@ -65,6 +70,9 @@ export const Carousel = () => {
                     return <CarouselItem item={item} width={"100%"} itemIndex={activeIndex} />;
                 })}
             </div>
+
+
+
 
             <div className="carousel-buttons">
 

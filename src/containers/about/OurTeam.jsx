@@ -1,7 +1,10 @@
 import React from "react";
 
+
 import TeamPersonCard from "./TeamPersonCard";
 import './OurTeam.css';
+
+
 
 const OurTeam = () => {
 
@@ -63,6 +66,8 @@ const OurTeam = () => {
 
       </div>
     </div>
+
+    
   );
 }
 
