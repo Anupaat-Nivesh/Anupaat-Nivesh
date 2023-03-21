@@ -35,6 +35,7 @@ export const Testimonials = () => {
                     <Swiper
                         effect={"coverflow"}
                         slidesPerView={"auto"}
+                        loop={false}
                         autoplay={{
                             delay: 2500,
                             disableOnInteraction: false,
@@ -44,8 +45,8 @@ export const Testimonials = () => {
                         coverflowEffect={{
                             rotate: 0,
                             stretch: 0,
-                            depth: 150,
-                            modifier: 2.5,
+                            depth: 100,
+                            modifier: 2,
                             slideShadows: true,
                         }}
                         pagination={{

@@ -28,7 +28,10 @@ padding,margin,gap: 1rem, 4rem
     background-color: #fff;
     position: relative;
     gap: 1rem;
-    padding: 0 4rem;
+    padding: 2rem 4rem;
+
+   
+
 }
 
 
@@ -162,6 +165,18 @@ padding,margin,gap: 1rem, 4rem
         transform: translate(0%, 0);
     }
 }
+
+
+.carousel-swiper{
+    width: 100%;
+}
+
+.carousel-swiper-slide{
+    width: 100vw !important;
+}
+
+
+
 
 
 
