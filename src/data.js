@@ -68,7 +68,7 @@ export const whyanupaatData = [
     },
 ]
  /*------TESTIMONIALS------*/ 
- const Avatar1 = require('../src/assets/TestimonialImages/swati.jpg')
+ const Avatar1 = require('../src/assets/TestimonialImages/swati.png')
  const Avatar2 = require('../src/assets/TestimonialImages/priya.png')
  const Avatar3 = require('../src/assets/TestimonialImages/aditya.png')
  const Avatar4 = require('../src/assets/TestimonialImages/rupinder.png')

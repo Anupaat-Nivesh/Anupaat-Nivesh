@@ -81,6 +81,7 @@ padding,margin,gap: 1rem, 4rem
 
 .img-container {
     padding: 2rem;
+   
     display: flex;
     align-items: center;
     justify-content: center;
@@ -95,7 +96,7 @@ padding,margin,gap: 1rem, 4rem
 .carousel-img {
     z-index: 99;
     position: relative;
-    width: 100%;
+    width: 90%;
     padding: 0;
 }
 
@@ -299,5 +300,9 @@ padding,margin,gap: 1rem, 4rem
     .carousel-item-subtext{
         font-size: 1.4rem;
         line-height: 1.4;
+    }
+
+    .img-container{
+        padding: 0 0 2rem 0;
     }
 }
