@@ -1,13 +1,13 @@
 .testimonials {
     width: 100%;
     margin-inline: auto;
-    padding: 4rem 2.5rem;
+    padding: 4rem 0;
     font-family: var(--font-family);
 
 }
 
 .testimonials__container {
-    padding: 0rem 3.5rem;
+   
 }
 
 .testimonial_title {
@@ -23,78 +23,66 @@
 }
 
 .testimonial-heading {
-    float: right;
+    float:right;
     margin-top: 3rem;
     padding: 2rem 4rem;
-
-
 }
 
 .name {
-
-
     font-size: 2.5rem;
-    color: red;
+    color: var(--color-primary);
+    line-height: 2;
 }
 
 .job {
 
-    color: red;
-    font-size: 15px;
+    color: var(--color-primary);
+    font-size: 1.5rem;
 }
 
 
 
 
-.testimonial__text {
-    margin: 1.5rem 1rem;
-    text-align: left;
-    font-size: 14px;
-    font-weight: 500;
+.testimonial_text-section {
+    padding: 2rem;
+    letter-spacing: 0.5px;
+    line-height: 1.7;
 
 }
 
 .testimonial_avatar {
-    width: 18rem;
-    height: 18rem;
+    width: 15rem;
+    height: 15rem;
     overflow: hidden;
     position: relative;
-    margin-top: -1.5rem;
+    margin-top: -2rem;
     margin-left: 1.5rem;
     z-index: 99;
-
-
+    border-radius: 50%;
 
 }
-
-
-
-
-
-
-
-
-
-
+.testimonial-text{
+    font-size: 1.4rem;
+}
 
 
 
 
 /* -------SWIPER---------*/
 
-.swiper {
+.mySwiper {
     width: 100%;
-
+padding: 5rem 0;
 }
 
-.swiper-slide {
+.myswiper-slide {
     background-position: center;
     background-size: cover;
     width: 500px;
-    height: 400px;
+    height: 350px;
     border-radius: 2rem;
     object-fit: cover;
-    box-shadow: 5px 3px 5px 5px grey;
+    box-shadow: 0px 0px 5px 0.5px grey;
     text-align: left;
     margin-top: 1.8rem;
     margin-bottom: 0.5rem;
@@ -102,11 +90,91 @@
     background: white;
 }
 
-.swiper-slide img {
+.myswiper-slide img {
     display: block;
     width: 100%;
     height: 100%;
-    border-radius: 10rem;
+    /* border-radius: 10rem; */
     object-fit: cover;
 
+}
+
+
+
+/* ******************************** */
+/* BELOW 1200px (landscape tablets) */
+/* ******************************** */
+
+
+@media(max-width: 75em) {
+    .myswiper-slide{
+        width: 400px;
+        height: 300px;
+    }
+
+    .testimonial_avatar{
+        width: 12rem;
+        height: 12rem;
+    }
+
+
+    .testimonial-heading{
+        padding: 2rem 2rem;
+    }
+    .testimonial-text{
+        font-size: 1.2rem;
+    }
+
+    .name {
+        font-size: 2rem;
+        color: var(--color-primary);
+        line-height: 2;
+    }
+    
+    .job {
+    
+        color: var(--color-primary);
+        font-size: 1.2rem;
+    }
+}
+
+
+/* ******************************** */
+/* BELOW 544px (Phones) */
+/* ******************************** */
+
+@media(max-width: 34em){
+    .myswiper-slide{
+        width: 300px;
+        height: 260px;
+    }
+
+    .testimonial_avatar{
+        width: 8rem;
+        height: 8rem;
+    }
+
+
+    .testimonial-heading{
+        padding: 1rem;
+    }
+    .testimonial-text{
+        font-size: 1.1rem;
+    }
+
+    .name {
+        font-size: 1.6rem;
+        color: var(--color-primary);
+        line-height: 2;
+    }
+    
+    .job {
+    
+        color: var(--color-primary);
+        font-size: 1rem;
+    }
+
+    .testimonial_text-section{
+        padding: 2rem;
+    }
 }
