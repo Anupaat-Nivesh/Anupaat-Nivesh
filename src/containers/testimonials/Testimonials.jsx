@@ -37,7 +37,7 @@ export const Testimonials = () => {
                         slidesPerView={"auto"}
                         loop={false}
                         autoplay={{
-                            delay: 2500,
+                            delay: 3000,
                             disableOnInteraction: false,
                             pauseOnMouseEnter: true,
                         }}
@@ -52,8 +52,9 @@ export const Testimonials = () => {
                         pagination={{
                             clickable: true,
                         }}
-                        navigation={true}
-                        modules={[Autoplay, EffectCoverflow, Pagination, Navigation]}
+                        navigation={false}
+                        grabCursor={true}
+                        modules={[ EffectCoverflow, Pagination, Navigation,Autoplay]}
                         className="mySwiper"
                     >
                         {
@@ -72,10 +73,10 @@ export const Testimonials = () => {
 
 
 
-                                            <div className="testimonial__text">
+                                            <div className="testimonial_text-section">
 
 
-                                                <p><q>{quote}</q></p>
+                                                <p className="testimonial-text"><q>{quote}</q></p>
 
 
                                             </div>
