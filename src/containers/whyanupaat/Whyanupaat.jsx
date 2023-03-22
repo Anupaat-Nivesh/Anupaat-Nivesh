@@ -1,5 +1,5 @@
 import React from 'react';
-import titleimg from '../../assets/whyanupaat-titleimage.jpg';
+import titleimg from '../../assets/investment-01.png';
 import './whyanupaat.css';
 import Card from 'react-bootstrap/Card';
 
