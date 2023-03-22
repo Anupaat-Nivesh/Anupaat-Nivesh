@@ -40,7 +40,7 @@ h3 {
 }
 
 p {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
 }
 
 a {
@@ -150,8 +150,35 @@ a {
 }
 
 
+
 /* ******************************** */
-/* BELOW 544px (Phones) */
+/* BELOW 752px (Smaller Tablets) */
 /* ******************************** */
 
-@media(max-width: 34em) {}
+
+@media(max-width:47em) {
+  .btn {
+    font-size: 1.6rem;
+    padding: 0.6rem 1.8rem;
+  }
+
+  p {
+    font-size: 1.4rem;
+  }
+}
+
+
+/* ******************************** */
+/* BELOW 640px (Phones) */
+/* ******************************** */
+@media(max-width:40em) {
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+  }
+
+
+}

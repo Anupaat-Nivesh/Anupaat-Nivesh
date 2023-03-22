@@ -58,7 +58,6 @@ const Home = () => {
                         </div>
                     </div>
                 </section>
-                <Faqs />
 
 
 
