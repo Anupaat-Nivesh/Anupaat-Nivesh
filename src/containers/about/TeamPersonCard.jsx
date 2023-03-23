@@ -46,8 +46,8 @@ const mouseLeaveHandler = (event)=>{
     </div>
     <div className="person-profiles" onMouseEnter={mouseEnterHandler}>
       <div className="profile"><a href='#'><SiLinkedin className="person-social-icon"/></a></div>
-      <div className="profile"><a href='https://www.facebook.com/anupaatnivesh'><SiFacebook className="person-social-icon"/></a></div>
-      <div className="profile"><a href='https://twitter.com/Anupaatnivesh'><SiTwitter className="person-social-icon"/></a></div>
+      {/*<div className="profile"><a href='https://www.facebook.com/anupaatnivesh'><SiFacebook className="person-social-icon"/></a></div>}
+      {<div className="profile"><a href='https://twitter.com/Anupaatnivesh'><SiTwitter className="person-social-icon"/></a></div>*/}
     </div>
   </div>
 };

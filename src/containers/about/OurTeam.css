@@ -65,13 +65,15 @@
 }
 
 .person-name {
-  font-size: 2.2rem;
-  /* font-weight: 00; */
+  font-size: 2.3rem;
+  font-weight: 500;
   /* box-shadow: 0 0 0 1px #000; */
 }
 
 .person-designation {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: red;
 }
 
 .person-image {
