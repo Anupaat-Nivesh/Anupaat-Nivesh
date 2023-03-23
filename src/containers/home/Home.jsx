@@ -8,7 +8,7 @@ import About from '../about/About';
 import Offerings from '../offerings/Offerings';
 import Contact from '../../components/contact/Contact';
 import { OurApp } from '../../components';
-import Faqs from '../faqs/Faqs';
+
 
 
 
@@ -42,10 +42,11 @@ const Home = () => {
                 <section className='home-section our-app-section'><OurApp /></section>
 
                 <section className="empanelment section__padding section__margin">
-                    <h1>Our Empanelments</h1>
-                    <p className="lead">subheading</p>
+                    <div >
+                        <h1>Our Empanelments</h1>
+                        <p className="lead">subheading</p></div>
                     <div className="empanelment_container">
-                        <div>
+                        <div data-aos="fade-up">
 
                             <img src={img1} alt='empanels' />
                             <img src={img2} alt='empanels' />

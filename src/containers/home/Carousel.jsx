@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import './carousel.css';
 import { CarouselItem } from "./CarouselItem";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 export const Carousel = () => {
     const [activeIndex, setActiveIndex] = useState(0);
+
     const items = [
-       {
+        {
             title: "Investment",
             description: "Let's get you started with",
             bold: " INVESTING!",
@@ -38,59 +45,41 @@ export const Carousel = () => {
             subDescription: "Sometime just a small step is required to start of the journey",
             subText: "Because we know, slow and steady wins the race",
             img: require("../../assets/illustrations/carousel3-illustration.png")
-            
+
         }
     ];
     function updateIndex(newIndex) {
         if (newIndex < 0) {
-            newIndex = 0;
-        } else if (newIndex >= items.length) {
             newIndex = items.length - 1;
+        } else if (newIndex >= items.length) {
+            newIndex = 0;
         }
 
         setActiveIndex(newIndex);
     }
 
 
-
     return (
-        <div className="carousel">
-            <div
-                className="inner-carousel-section"
-                style={{
-                    transform: `translate(-${activeIndex * 100}%)`
-                }}
-            >
-                {items.map((item) => {
-                    return <CarouselItem item={item} width={"100%"} itemIndex={activeIndex} />;
-                })}
-            </div>
+        <Swiper
+            spaceBetween={50}
+            slidesPerView={1}
+            loop={true}
+            autoplay={{
+                delay: 5000,
+                disableOnInteraction: false,
+            }}
+            navigation={false} grabCursor={true} pagination={{
+                clickable: true,
+            }} modules={[Navigation, Pagination, Autoplay]}
+            className="carousel-swiper"
+        >
 
-            <div className="carousel-buttons">
+            {items.map((item) => {
+                return <SwiperSlide className="carousel-swiper-slide">
+                    <CarouselItem item={item} width={"100%"} itemIndex={activeIndex} />
+                </SwiperSlide>
+            })}
 
-                <div className="indicators">
-                    {items.map((item, index) => {
-                        return (
-                            <button
-                                className="indicator-buttons"
-                                onClick={() => {
-                                    updateIndex(index);
-                                }}
-                            >
-                                <span
-                                    className={`material-symbols-outlined ${index === activeIndex
-                                        ? "indicator-symbol-active"
-                                        : "indicator-symbol"
-                                        }`}
-                                >
-                                    radio_button_checked
-                                </span>
-                            </button>
-                        );
-                    })}
-                </div>
-
-            </div>
-        </div>
+        </Swiper>
     );
 };

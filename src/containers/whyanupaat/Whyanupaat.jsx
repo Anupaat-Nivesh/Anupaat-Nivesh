@@ -1,9 +1,9 @@
 import React from 'react';
-import titleimg from '../../assets/whyanupaat-titleimage.jpg';
 import './whyanupaat.css';
 import Card from 'react-bootstrap/Card';
 
 import { whyanupaatData } from '../../data';
+import whyAnupaatImg from '../../assets/illustrations/whyAnupaatIllustration.png';
 
 const Whyanupaat = () => {
     return (
@@ -16,29 +16,31 @@ const Whyanupaat = () => {
                 <div className="anupaat__whyanupaat-heading">
 
 
-                    <div className='anupaat_whyanupaat-heading-explanation'>
+                    <div className='anupaat_whyanupaat-heading-explanation' data-aos="zoom-in-right" data-aos-duration="3000">
                         <div className='whyanupaat-subheading '>
-                            <h3 className='secondary-heading'>Experience An Enhanced Online Investment Platform</h3>
+                            <h2 className='secondary-heading'>Experience An Enhanced Online Investment Platform</h2>
                         </div>
 
-                        <p className='section-description why-description'>Welcome to the town of investment! From Mutual Funds to Corporate Deposits,
+                        <div><p className='why-description'>Welcome to the town of investment! </p></div>
 
-                            we hold a lot in store, to suit the goals and needs of every investor and every
+                        <div className='why-description2'><p>From Mutual Funds to Direct Equity,
+                            we have a lot in store, to suit the goals and needs of every individual investor and every
                             risk appetite.
-                        </p>
+                        </p></div>
                     </div>
                 </div>
-                <div className='whyanupaat-title-image'>
-                    <img src={titleimg} alt="questionimage" />
+                <div className='whyanupaat-title-image' data-aos="zoom-in-left" data-aos-duration="3000">
+                    <img src={whyAnupaatImg} alt="questionimage" />
                 </div>
             </div>
             <div className="anupaat__card-container">
                 {
-                    whyanupaatData.map(({ icon, id, title, text }) => {
+                    whyanupaatData.map(({ icon, title, text }, id) => {
                         return (
-                            <Card className="whyanupaat_data" key={id}>
+                            <Card className="whyanupaat_data" key={id} data-aos="fade-up"
+                                data-aos-anchor-placement="top-bottom" data-aos-duration="2000">
                                 <span className='icon'>{icon}</span>
-                                <h4 className='why-block-heading'>{title}</h4>
+                                <h3 className='why-block-heading'>{title}</h3>
                                 <small>{text}</small>
                             </Card>
                         )

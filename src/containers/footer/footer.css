@@ -6,7 +6,7 @@
     align-items: center;
     font-size: 1.6rem;
 
-    background: #f7f7f8;
+    background: var(--color-secondary-dark);
     gap: 3rem;
     padding: 6rem 6rem 1rem 6rem;
     font-family: var(--font-family);
@@ -38,6 +38,7 @@
 
 .footer-heading {
     font-size: 12rem;
+
 }
 
 
@@ -93,7 +94,7 @@
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    color: #fff;
+
 }
 
 .anupaat__footer-links_div h3 {
@@ -113,7 +114,7 @@
     margin-bottom: 1rem;
 }
 
-.anupaat__footer-socialicons a img{
+.anupaat__footer-socialicons a img {
     width: 4rem;
     transition: all 0.1s;
 }
@@ -129,14 +130,14 @@
     text-align: center;
     border-top: 1px solid #767676;
     font-size: 1.2rem;
-    color: #767676;
+    color: var(--color-secondary-light);
 }
 
 .footer-links {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    color: var(--color-subtext);
+    color: var(--color-grey-light);
 }
 
 .footer-links a:hover {

@@ -35,8 +35,9 @@ export const Testimonials = () => {
                     <Swiper
                         effect={"coverflow"}
                         slidesPerView={"auto"}
+                        loop={false}
                         autoplay={{
-                            delay: 2500,
+                            delay: 3000,
                             disableOnInteraction: false,
                             pauseOnMouseEnter: true,
                         }}
@@ -44,21 +45,22 @@ export const Testimonials = () => {
                         coverflowEffect={{
                             rotate: 0,
                             stretch: 0,
-                            depth: 150,
-                            modifier: 2.5,
+                            depth: 100,
+                            modifier: 2,
                             slideShadows: true,
                         }}
                         pagination={{
                             clickable: true,
                         }}
-                        navigation={true}
-                        modules={[Autoplay, EffectCoverflow, Pagination, Navigation]}
+                        navigation={false}
+                        grabCursor={true}
+                        modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
                         className="mySwiper"
                     >
                         {
                             testimonials.map(({ name, id, avatar, quote, job }) => {
                                 return (
-                                    <SwiperSlide key={id}>
+                                    <SwiperSlide className="myswiper-slide" key={id}>
                                         <div className="testimonial-content">
                                             <div className="testimonial-heading">
                                                 <h2 className="name">{name} </h2>
@@ -71,10 +73,10 @@ export const Testimonials = () => {
 
 
 
-                                            <div className="testimonial__text">
+                                            <div className="testimonial_text-section">
 
 
-                                                <p><q>{quote}</q></p>
+                                                <p className="testimonial-text"><q>{quote}</q></p>
 
 
                                             </div>
@@ -94,7 +96,6 @@ export const Testimonials = () => {
     )
 }
 export default Testimonials
-
 
 
 

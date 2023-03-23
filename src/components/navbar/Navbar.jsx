@@ -66,8 +66,9 @@ const Navbar = () => {
                     {
                         links.map(({ name, id }) => {
                             return (
-                                <li>
-                                    <LinkS className="nav-link" to={id} smooth={true} exact='true' offset={-80} spy={true}>{name}  </LinkS></li>
+                                <li key={id}>
+                                    <LinkS className="nav-link" to={id} smooth={true} exact='true' offset={-80} spy={true}>{name} </LinkS>
+                                </li>
                             )
                         })
                     }
@@ -105,7 +106,7 @@ const Navbar = () => {
 
                         </ul>
                         <div className="anupaat__navbar-menu_container-links-sign">
-                            <a href="#ourapp">
+                            <a href="#ourapp" aria-label='download the app'>
                                 <button type="button">GET THE APP</button>
                             </a>
                         </div>
