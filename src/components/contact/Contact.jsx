@@ -1,6 +1,6 @@
 import React from 'react'
 import './contact.css';
-/*import { SiFacebook, SiTwitter, SiYoutube, SiWhatsapp } from "react-icons/si";*/
+
 
 import '../../App.css';
 import FacebookLogo from "../../assets/facebook-logo.png";
@@ -53,10 +53,12 @@ const Contact = (props) => {
 
     return (
         <div className='contact-section section__padding section__margin' id='contact'>
+            <h1>Contact Us</h1>
             <div className='cta'>
+
                 <div className='cta-text-box'>
                     <div className='cta-description'>
-                        <h2 className='primary-heading'>Contact Information</h2>
+
                         <p className='section-description cta-text'>Fill up the form and our team will get back to you within <b>24 hours.</b></p>
                     </div>
                     <form className='cta-form'>
@@ -94,14 +96,17 @@ const Contact = (props) => {
                     </form>
                 </div>
                 <div className='connect-info'>
-                    <div className='cta-social'>
+                    <div className='cta-social' data-aos="fade-left"
 
-                        <a href='https://www.facebook.com/anupaatnivesh'><img src={FacebookLogo} className='cta-social-icon' /></a>
-                        <a href='https://twitter.com/Anupaatnivesh'><img src={TwitterLogo} className='cta-social-icon' /></a>
+                        data-aos-offset="500"
+                    >
 
-                        <a href='https://www.youtube.com/@anupaatnivesh'><img src={YoutubeLogo} className='cta-social-icon' /></a>
-                        <a href="#"><img src={WhatsappLogo} className='cta-social-icon' /></a>
-                        <a href="#"><img src={LinkedInLogo} className='cta-social-icon' /></a>
+                        <a href='https://www.facebook.com/anupaatnivesh'><img src={FacebookLogo} className='cta-social-icon' alt='facebook' /></a>
+                        <a href='https://twitter.com/Anupaatnivesh'><img src={TwitterLogo} className='cta-social-icon' alt='twitter' /></a>
+
+                        <a href='https://www.youtube.com/@anupaatnivesh'><img src={YoutubeLogo} className='cta-social-icon' alt='youtube' /></a>
+                        <a href="#"><img src={WhatsappLogo} className='cta-social-icon' alt='whatsaap' /></a>
+                        <a href="#"><img src={LinkedInLogo} className='cta-social-icon' alt='linkedin' /></a>
 
                     </div>
                 </div>

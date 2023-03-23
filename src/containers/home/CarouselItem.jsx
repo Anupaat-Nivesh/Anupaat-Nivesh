@@ -4,11 +4,13 @@ export const CarouselItem = ({ item, width, itemIndex }) => {
     return (
         <div className="carousel-item">
 
-            <div className="carousel-item-text-section">
-                <div className="carousel-item-text">{item.description}
-                <span className="bold-text">{item.bold}</span>
+            <div className="carousel-item-text-section " data-aos="fade-right"
+                data-aos-offset="300"
+                data-aos-easing="ease-in-sine">
+                <div className="carousel-item-text">{item.description}<br />
+                    <span className="bold-text">{item.bold}</span>
                 </div>
-                
+
                 <div className="carousel-item-subDes"><q>{item.subDescription}</q></div>
                 <div className="carousel-item-subtext">{item.subText}</div>
 

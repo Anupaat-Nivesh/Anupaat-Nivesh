@@ -24,11 +24,12 @@ const OurApp = (props) => {
 
   return (
     <div className="app-section section__padding section__margin" id="ourapp">
-      <div className="appScreenShot-box">
-        <img src={appScreenShot} alt="appScreenShot" />
+      <div className="appScreenShot-box" >
+        <img src={appScreenShot} alt="appScreenShot" data-aos="fade-right" data-aos-offset="300"
+          data-aos-easing="ease-in-sine" />
       </div>
 
-      <div className="app-description-box">
+      <div className="app-description-box" data-aos="fade-left">
 
         <div className="app-heading-box">
           <h1>Download App</h1>

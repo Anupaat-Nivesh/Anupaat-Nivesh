@@ -6,10 +6,6 @@
 
 }
 
-.testimonials__container {
-   
-}
-
 .testimonial_title {
     display: flex;
     align-items: center;
@@ -23,21 +19,22 @@
 }
 
 .testimonial-heading {
-    float:right;
+    float: right;
     margin-top: 3rem;
     padding: 2rem 4rem;
 }
 
 .name {
-    font-size: 2.5rem;
-    color: var(--color-primary);
+    font-size: 2.8rem;
+    color: var(--color-secondary-dark);
+    font-weight: 600;
     line-height: 2;
 }
 
 .job {
 
-    color: var(--color-primary);
-    font-size: 1.5rem;
+    color: var(--color-secondary-dark);
+    font-size: 2rem;
 }
 
 
@@ -61,7 +58,8 @@
     border-radius: 50%;
 
 }
-.testimonial-text{
+
+.testimonial-text {
     font-size: 1.4rem;
 }
 
@@ -72,7 +70,7 @@
 
 .mySwiper {
     width: 100%;
-padding: 5rem 0;
+    padding: 5rem 0;
 }
 
 .myswiper-slide {
@@ -107,21 +105,22 @@ padding: 5rem 0;
 
 
 @media(max-width: 75em) {
-    .myswiper-slide{
+    .myswiper-slide {
         width: 400px;
         height: 300px;
     }
 
-    .testimonial_avatar{
+    .testimonial_avatar {
         width: 12rem;
         height: 12rem;
     }
 
 
-    .testimonial-heading{
+    .testimonial-heading {
         padding: 2rem 2rem;
     }
-    .testimonial-text{
+
+    .testimonial-text {
         font-size: 1.2rem;
     }
 
@@ -130,9 +129,9 @@ padding: 5rem 0;
         color: var(--color-primary);
         line-height: 2;
     }
-    
+
     .job {
-    
+
         color: var(--color-primary);
         font-size: 1.2rem;
     }
@@ -143,22 +142,23 @@ padding: 5rem 0;
 /* BELOW 544px (Phones) */
 /* ******************************** */
 
-@media(max-width: 34em){
-    .myswiper-slide{
+@media(max-width: 34em) {
+    .myswiper-slide {
         width: 300px;
         height: 260px;
     }
 
-    .testimonial_avatar{
+    .testimonial_avatar {
         width: 8rem;
         height: 8rem;
     }
 
 
-    .testimonial-heading{
+    .testimonial-heading {
         padding: 1rem;
     }
-    .testimonial-text{
+
+    .testimonial-text {
         font-size: 1.1rem;
     }
 
@@ -167,14 +167,14 @@ padding: 5rem 0;
         color: var(--color-primary);
         line-height: 2;
     }
-    
+
     .job {
-    
+
         color: var(--color-primary);
         font-size: 1rem;
     }
 
-    .testimonial_text-section{
+    .testimonial_text-section {
         padding: 2rem;
     }
 }
