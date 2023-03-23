@@ -7,7 +7,8 @@ export const Offerings = () => {
         <div id='offerings' className='offerings-container section__padding'>
             <div className='offerings-title'>
                 <h1>Offerings</h1>
-                <p className='lead'>sub heading</p>
+                <p className='lead'>Confused, where you should start with your investment..?? </p>
+                <p>We have wider range of products selection to start your investment journey.  </p>
             </div>
 
             <article className='offerings__article'>
@@ -16,7 +17,10 @@ export const Offerings = () => {
                 </div>
                 <div className='offerings__content'>
                     <h2 className='offering_article-title'>Mutual Fund Basket</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                    <p>
+                    Choose & invest from a range of expert curated baskets of quality mutual funds to achieve your financial goals in a stipulated time period and based on your risk taking ability.
+                    Child’s education, retirement, saving tax or creating wealth, there is a basket of quality mutual funds for all your financial goal planning needs and requirements.
+                    </p>
                     <div className='offering-btn'>
                         <a href='#' className='btn '>Learn More</a>
                     </div>
@@ -27,7 +31,10 @@ export const Offerings = () => {
             <article className='offerings__article'>
                 <div className='offerings__content'>
                     <h2 className='offering_article-title'>Equity Basket</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                    <p>
+                    Invest in iBaskets to achieve your financial goals.
+                    Equity Baskets are created and managed by Registered Investment Advisors (RIAs) who are SEBI-registered professionals.
+                    </p>
                     <div className='offering-btn'>
                         <a href='#' className='btn '>Learn More</a>
                     </div>
@@ -44,7 +51,10 @@ export const Offerings = () => {
                 <div className='offerings__content'>
 
                     <h2 className='offering_article-title'>Loan Against Securities</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                    <p>
+                    Safeguard your investment by opting for quick capital against securities. Your units will remain yours, 
+                    and you’ll keep on earning from them during your tenure for an instant loan for low credit score.
+                    </p>
                     <div className='offering-btn'>
                         <a href='#' className='btn '>Learn More</a>
                     </div>
