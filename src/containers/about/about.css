@@ -98,13 +98,14 @@ color: var(--color-secondary);
 .points-text {
   display: block;
   color: var(--color-subtext);
-  font-size: 1.4rem;
-  font-weight: 500;
+  font-size: 1.6rem;
+  font-weight: 600;
 }
 
 .check-pointer {
   padding: 1.5rem;
   margin: 1rem;
+  color: red;
 }
 
 
@@ -114,7 +115,7 @@ color: var(--color-secondary);
   height: 3rem;
 
   vertical-align: middle;
-  color: green;
+  color: red;
   display: inline-block;
 }
 
@@ -129,7 +130,8 @@ color: var(--color-secondary);
 
 
 .aboutus-illustration {
-  width: 60rem
+  width: 75rem;
+  height: relative;
 }
 
 

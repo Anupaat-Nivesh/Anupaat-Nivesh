@@ -26,14 +26,14 @@
 
 .name {
     font-size: 2.8rem;
-    color: var(--color-secondary-dark);
+    color: red;
     font-weight: 600;
     line-height: 2;
 }
 
 .job {
 
-    color: var(--color-secondary-dark);
+    color: red;
     font-size: 2rem;
 }
 
@@ -61,6 +61,7 @@
 
 .testimonial-text {
     font-size: 1.4rem;
+    font-weight:500;
 }
 
 
