@@ -51,7 +51,7 @@ export const Navbar = () => {
         <div className={anupaat__navbar ? 'anupaat__navbar active' : 'anupaat__navbar'}>
             <div className="anupaat__navbar-links">
                 <div className="anupaat__navbar-links_logo">
-                    <Link to="/home" className='logo' onClick={toggleHome}>
+                    <Link to="/" className='logo' onClick={toggleHome}>
                         <img src={logo} alt="Anupaat Nivesh Logo" />
                     </Link>
                 </div>
