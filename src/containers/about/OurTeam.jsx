@@ -47,7 +47,7 @@ const OurTeam = () => {
     {
       name: "Vimple Chugh",
       designation: "Business Executive",
-      img: require("../../assets/person.jpg")
+      img: require("../../assets/Vimple_Chugh.jpg")
     }
   ];
 
