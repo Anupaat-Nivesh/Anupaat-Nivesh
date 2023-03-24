@@ -10,7 +10,7 @@ const About = () => {
     return (
         <div id='about' className='aboutUs-container section__padding'>
             <div className='aboutus-title'>
-                <h1>About Us</h1>
+                <h1><span className='section-heading-focus'>About</span> Us</h1>
             </div>
 
             <div className='aboutus-description-section '>

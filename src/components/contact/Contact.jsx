@@ -23,7 +23,6 @@ const Contact = (props) => {
         const inputPhoneNumber = e.target.value;
 
         const indianPhoneNumberRegex = /^[6-9]\d{9}$/;
-        const validEmailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
         if (indianPhoneNumberRegex.test(inputPhoneNumber) || inputPhoneNumber === '') {
             setPhoneNumber(inputPhoneNumber);
@@ -96,12 +95,12 @@ const Contact = (props) => {
                 <div className='connect-info'>
                     <div className='cta-social'>
 
-                        <a href='https://www.facebook.com/anupaatnivesh'><img src={FacebookLogo} className='cta-social-icon' /></a>
-                        <a href='https://twitter.com/Anupaatnivesh'><img src={TwitterLogo} className='cta-social-icon' /></a>
+                        <a href='https://www.facebook.com/anupaatnivesh' target="_blank" rel='noreferrer'><img src={FacebookLogo} className='cta-social-icon' alt='socialIconImage'/></a>
+                        <a href='https://twitter.com/Anupaatnivesh' target="_blank" rel='noreferrer'><img src={TwitterLogo} className='cta-social-icon' alt='socialIconImage' /></a>
 
-                        <a href='https://www.youtube.com/@anupaatnivesh'><img src={YoutubeLogo} className='cta-social-icon' /></a>
-                        <a href="#"><img src={WhatsappLogo} className='cta-social-icon' /></a>
-                        <a href="#"><img src={LinkedInLogo} className='cta-social-icon' /></a>
+                        <a href='https://www.youtube.com/@anupaatnivesh' target="_blank" rel='noreferrer'><img src={YoutubeLogo} className='cta-social-icon' alt='socialIconImage' /></a>
+                        <a href='https://wa.me/919501195200' target="_blank" rel='noreferrer'><img src={WhatsappLogo} className='cta-social-icon' alt='socialIconImage'/></a>
+                        <a href="#" target="_blank" rel='noreferrer'><img src={LinkedInLogo} className='cta-social-icon' alt='socialIconImage' /></a>
 
                     </div>
                 </div>

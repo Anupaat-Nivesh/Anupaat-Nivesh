@@ -99,6 +99,13 @@ a {
   /* height: 100vh; */
 }
 
+.section-heading-focus{
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 2rem;
+  padding: 0 1rem;
+}
+
 .aboutus-title {
   display: flex;
   justify-content: center;

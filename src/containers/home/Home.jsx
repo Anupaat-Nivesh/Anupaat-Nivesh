@@ -42,7 +42,7 @@ const Home = () => {
                 <section className='home-section our-app-section'><OurApp /></section>
 
                 <section className="empanelment section__padding section__margin">
-                    <h1>Our Empanelments</h1>
+                    <h1>Our <span className='section-heading-focus'>Empanelments</span></h1>
                     <p className="lead">subheading</p>
                     <div className="empanelment_container">
                         <div>

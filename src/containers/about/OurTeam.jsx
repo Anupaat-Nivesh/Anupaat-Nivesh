@@ -54,7 +54,7 @@ const OurTeam = () => {
   return (
     <div>
       <div className="team-title section__padding">
-        <h2>Our SuperHeroes</h2>
+        <h2>Our <span className='section-heading-focus'>SuperHeroes</span></h2>
         <p className="lead">Meet our Young, Energetic and skillfull team</p>
       </div>
 

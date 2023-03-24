@@ -101,6 +101,10 @@
     line-height: 17px;
     font-weight: 500;
     color: var(--color-subtext-light);
+    margin-bottom: 0.5rem;
+}
+
+.anupaat__footer-links_div h3.footer-heading{
     margin-bottom: 2rem;
 }
 
