@@ -18,41 +18,45 @@ const Footer = () => (
 
             <div className='anupaat__footer-links_logo'>
                 <img src={logo} alt="anupaat_logo" />
-            </div>
+                <div className='AboutUs-Content'>
+                <p> Anupaat Nivesh is an independent financial investment advisory firm, providing guidance to customer for investment in 
+                    Equity Asset class. We are BSE certified mutual fund distributor. </p>
+                <p>Equity Investment are subjected to market risk. Read all scheme-related documents carefully before Investing</p>
+            
+                </div>
+                </div>
             <div className="anupaat__footer-links_div">
                 <h3 className='footer-heading'> Quick Links</h3>
                 <div className='footer-links'>
-                    <p><a href='#faqs'>FAQs</a></p>
-                    <p><a href='#knowledge-center'>Knowledge Center</a></p>
-                    <p><a href='#newsroom'>Newsroom</a></p>
-                    <p><a href='#documents-and-forms'>Documents & Forms</a></p>
-                    <p><a href='#investor-charter'>Investor Charter</a></p>
-                    <p><a href='#investor-grievances-data'>Investor Grievances Data</a></p>
-                    <p><a href='#shareholder-eVoting'>Shareholder eVoting</a></p>
+                    <p><a href='#faqs'>Home</a></p>
+                    <p><a href='#knowledge-center'>About Us</a></p>
+                    <p><a href='#newsroom'>Why Anupaat Nivesh</a></p>
+                    <p><a href='#documents-and-forms'>Offerings</a></p>
+                    <p><a href='#investor-charter'>Contact Us</a></p>
+                    <p><a href='#investor-grievances-data'>Download our App</a></p>
                 </div>
 
             </div>
             <div className="anupaat__footer-links_div">
                 <h3 className='footer-heading'>Company</h3>
                 <div className='footer-links'>
-                    <p><a href='#terms-and-conditions'>Terms & Conditions</a></p>
                     <p><a href='#privacy-policy'>Privacy Policy</a></p>
-                    <p><a href='#contact-us'>Reach Us</a></p>
+                    <p><a href='#contact-us'>Contact Us</a></p>
                 </div>
             </div>
             <div className="anupaat__footer-links_div">
                 <h3 className='footer-heading'>Connect with us</h3>
                 <div className='contact-info footer-links'>
                     <div className='anupaat__footer-socialicons'>
-                        <a href='#'><img src={WhatsappLogo} alt="logo" /></a>
+                        <a href='https://wa.me/919501195200'><img src={WhatsappLogo} alt="logo" /></a>
                         <a href='https://www.facebook.com/anupaatnivesh'><img src={FacebookLogo} alt="logo" /></a>
                         <a href='https://twitter.com/Anupaatnivesh'><img src={TwitterLogo} alt="logo" /></a>
                         <a href='https://www.youtube.com/@anupaatnivesh'><img src={YoutubeLogo} alt="logo" /></a>
 
-                        <a href='#'><img src={LinkedInLogo} alt="logo" /></a>
+                        <a href='https://www.linkedin.com/company/anupaatnivesh/'><img src={LinkedInLogo} alt="logo" /></a>
                     </div>
-                    <a className='contact-number' href='tel:95011 95200' ><FaPhoneAlt /> +91-95011 95200</a>
-                    <a className='contact-mail' href="mailto:anupaatnivesh@gmail.com">< SiGmail /> anupaatnivesh@gmail.com</a>
+                    <a className='contact-number' href='tel:95011 95200' ><FaPhoneAlt /> +91 95011 95200</a>
+                    <a className='contact-mail' href="mailto:contact@anupaatnivesh.com">< SiGmail /> contact@anupaatnivesh.com</a>
                 </div>
             </div>
         </div>
