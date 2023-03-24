@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import './carousel.css';
 import { CarouselItem } from "./CarouselItem";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation,Pagination,Autoplay } from "swiper";
+import { Navigation, Pagination, Autoplay } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -67,19 +67,19 @@ export const Carousel = () => {
             autoplay={{
                 delay: 5000,
                 disableOnInteraction: false,
-              }}
+            }}
             navigation={false} grabCursor={true} pagination={{
                 clickable: true,
-              }} modules={[Navigation,Pagination,Autoplay]}
+            }} modules={[Navigation, Pagination, Autoplay]}
             className="carousel-swiper"
         >
 
-            {items.map((item)=>{
-               return <SwiperSlide className="carousel-swiper-slide"> 
-                <CarouselItem  item={item} width={"100%"} itemIndex={activeIndex} />
-                 </SwiperSlide>
+            {items.map((item) => {
+                return <SwiperSlide className="carousel-swiper-slide">
+                    <CarouselItem item={item} width={"100%"} itemIndex={activeIndex} />
+                </SwiperSlide>
             })}
-            
+
         </Swiper>
     );
 };

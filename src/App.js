@@ -2,12 +2,17 @@ import React from 'react';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import {Footer,About,Offerings, Whyanupaat,Home} from './containers';
 import {Navbar,NotFound,Contact} from './components' ;
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 import './App.css' ;
+AOS.init();
+
 function App() {
-  return (
+ return (
+  
     <BrowserRouter>
-      <Navbar/>
+   <Navbar/>
       <Routes>
         <Route index element ={<Home/>}/>
         <Route path='home' element={<Home/>} />

@@ -66,8 +66,9 @@ const Navbar = () => {
                     {
                         links.map(({ name, id }) => {
                             return (
-                                <li>
-                                    <LinkS className="nav-link" to={id} smooth={true} exact='true' offset={-80} spy={true}>{name}  </LinkS></li>
+                                <li key={id}>
+                                    <LinkS className="nav-link" to={id} smooth={true} exact='true' offset={-80} spy={true}>{name} </LinkS>
+                                </li>
                             )
                         })
                     }
@@ -84,8 +85,9 @@ const Navbar = () => {
 
             <div className="anupaat__navbar-menu">
                 {toggleMenu
-                    ? <RiCloseLine color="#000" size={32} onClick={(event) => {setToggleMenu(prev=>!prev);}} />
-                    : <RiMenu3Line color="#000" size={27} onClick={(event) => {setToggleMenu(true);
+                    ? <RiCloseLine color="#000" size={32} onClick={(event) => { setToggleMenu(prev => !prev); }} />
+                    : <RiMenu3Line color="#000" size={27} onClick={(event) => {
+                        setToggleMenu(true);
                     }} />}
 
 
@@ -104,8 +106,8 @@ const Navbar = () => {
 
                         </ul>
                         <div className="anupaat__navbar-menu_container-links-sign">
-                        <a href="#ourapp">
-                            <button type="button">GET THE APP</button>
+                            <a href="#ourapp" aria-label='download the app'>
+                                <button type="button">GET THE APP</button>
                             </a>
                         </div>
                     </div>
