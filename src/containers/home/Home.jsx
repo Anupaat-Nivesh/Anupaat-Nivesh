@@ -3,6 +3,7 @@ import './home.css';
 import { Carousel } from './Carousel';
 import { Testimonials } from '../testimonials/Testimonials';
 import { SkillCounter } from '../skillCounter/SkillCounter';
+
 import Whyanupaat from '../whyanupaat/Whyanupaat';
 import About from '../about/About';
 import Offerings from '../offerings/Offerings';
@@ -27,8 +28,9 @@ const Home = () => {
     const img6 = require('../../assets/ImpanelmentsImages/empanelment6.png')
     return (
         <>
-            <div className='anupaat_home'>
-                <div className="home-section hero-section" id="home">
+
+            <div className='anupaat_home' id="home">
+                <div className="home-section hero-section" >
                     <Carousel />
                 </div>
 

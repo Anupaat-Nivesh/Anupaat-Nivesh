@@ -7,13 +7,6 @@ import logo from '../../assets/logo.png';
 
 const links = [
     {
-        name: "Home",
-        path: '/home',
-        id: 'home'
-
-    },
-
-    {
         name: "About",
         path: '/about',
         id: 'about'
@@ -36,7 +29,7 @@ const links = [
     },
 ]
 
-const Navbar = () => {
+export const Navbar = () => {
     const [toggleMenu, setToggleMenu] = useState(false);
     const [anupaat__navbar, setNavbar] = useState(false);
     const changeNav = () => {
@@ -58,16 +51,18 @@ const Navbar = () => {
         <div className={anupaat__navbar ? 'anupaat__navbar active' : 'anupaat__navbar'}>
             <div className="anupaat__navbar-links">
                 <div className="anupaat__navbar-links_logo">
-                    <Link to="/" className='logo' onClick={toggleHome}>
+                    <Link to="/home" className='logo' onClick={toggleHome}>
                         <img src={logo} alt="Anupaat Nivesh Logo" />
                     </Link>
                 </div>
                 <ul className="anupaat__navbar-links_container">
                     {
-                        links.map(({ name, id }) => {
+                        links.map(({ name, id, }) => {
                             return (
                                 <li key={id}>
+
                                     <LinkS className="nav-link" to={id} smooth={true} exact='true' offset={-80} spy={true}>{name} </LinkS>
+
                                 </li>
                             )
                         })
