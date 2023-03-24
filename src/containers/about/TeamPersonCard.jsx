@@ -1,5 +1,5 @@
 import React from "react";
-import { SiFacebook, SiTwitter, SiLinkedin, SiYoutube, SiGmail, SiWhatsapp } from "react-icons/si";
+import LinkedInLogo from "../../assets/linkedin.png";
 
 const TeamPersonCard = (props) => {
 
@@ -46,9 +46,9 @@ const TeamPersonCard = (props) => {
       <p className="person-designation">{props.designation}</p>
     </div>
     <div className="person-profiles" onMouseEnter={mouseEnterHandler}>
-      <div className="profile"><a href='#'><SiLinkedin className="person-social-icon" /></a></div>
-      {/*<div className="profile"><a href='https://www.facebook.com/anupaatnivesh'><SiFacebook className="person-social-icon" /></a></div>
-      <div className="profile"><a href='https://twitter.com/Anupaatnivesh'><SiTwitter className="person-social-icon" /></a></div>*/}
+
+      <div className="profile"><a href='#'><img src={LinkedInLogo} alt="logo" /></a></div>
+
     </div>
   </div>
 };

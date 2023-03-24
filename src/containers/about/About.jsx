@@ -1,5 +1,4 @@
 import React from 'react'
-import { ListGroupItem } from 'react-bootstrap';
 import tech from "../../assets/tech.svg";
 import team from "../../assets/team.svg";
 import transparency from "../../assets/transparency.svg";
@@ -14,7 +13,7 @@ const About = () => {
     return (
         <div id='about' className='aboutUs-container section__padding'>
             <div className='aboutus-title' data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-                <h1>About Us</h1>
+                <h1><span className='section-heading-focus'>About</span> Us</h1>
             </div>
 
             <div className='aboutus-description-section '>

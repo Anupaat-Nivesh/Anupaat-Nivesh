@@ -10,7 +10,7 @@ const Whyanupaat = () => {
     return (
         <div className="anupaat__whyanupaat section__padding section__margin" id="whyanupaat">
             <div className='why-heading-section'>
-                <h1 className='primary-heading why-heading'> Why Anupaat Nivesh?</h1>
+                <h1 className='primary-heading why-heading'>Why <span className='section-heading-focus'>Anupaat Nivesh?</span></h1>
             </div>
             <div className='anupaat__whyanupaat-main'>
 

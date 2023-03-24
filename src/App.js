@@ -14,7 +14,7 @@ function App() {
     <BrowserRouter>
    <Navbar/>
       <Routes>
-        <Route index element ={<Home/>}/>
+        <Route  index element ={<Home/>}/>
         <Route path='home' element={<Home/>} />
         <Route path='about' element={<About/>}/>
         <Route path='whyanupaat' element={<Whyanupaat/>}/>
@@ -24,12 +24,6 @@ function App() {
       
         <Route path='*' element={<NotFound/>}/>
       </Routes>
-      
-
-       
-
-      
-       
        
       <Footer/>
     

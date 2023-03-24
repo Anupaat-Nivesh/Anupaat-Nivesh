@@ -10,8 +10,6 @@
 .team-person-card {
   display: flex;
   justify-content: center;
-  /* background-color: aqua; */
-  /* box-shadow: 0px 0px 10px 1px rgba(91, 91, 91,0.1); */
   overflow: hidden;
   width: 100%;
   height: 100%;
@@ -56,39 +54,35 @@
 }
 
 .person-info {
+  margin-top: 2rem;
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translate(-50%, 0);
-  /* text-shadow: 0 0 0.5px #000; */
+  width: 100%;
 
 }
 
 .person-name {
-  font-size: 2.3rem;
+
+  font-size: 1.8rem;
   font-weight: 500;
-  /* box-shadow: 0 0 0 1px #000; */
+ 
 }
 
 .person-designation {
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: red;
+  font-size: 1.4rem;
+  font-weight: 400;
+
 }
 
 .person-image {
   width: 100%;
 }
 
-.profile {
-  /* padding: 1rem; */
-  height: 4rem;
-  width: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: #fff;
+.profile a img{
+    width: 4rem;
+    transition: all 0.1s;
 }
 
 
@@ -100,6 +94,8 @@
   right: 20px;
   bottom: -100%;
   opacity: 1;
+
+  transition: all 0.5s;
 }
 
 .person-social-icon {
@@ -110,10 +106,9 @@
 
 
 .show-person-profiles {
-  /* opacity: 1; */
   bottom: 20px;
-  animation-name: animate;
-  animation-duration: 0.5s;
+  /* animation-name: animate;
+  animation-duration: 0.5s; */
 
 }
 
@@ -129,3 +124,153 @@
     bottom: 20px;
   }
 }
+
+
+
+/* Responiveness CSS */
+
+
+/* ******************************** */
+/* BELOW 1200px (landscape tablets) */
+/* ******************************** */
+
+
+@media(max-width: 75em) {
+  .image-container { 
+    width: 160px;
+    height: 160px;
+  }
+
+  .profile a img{
+    width: 3rem;
+}
+}
+
+
+/* ******************************** */
+/* BELOW 960px (Tablets) */
+/* ******************************** */
+
+@media(max-width: 60em){
+  .ourteam-section {
+    gap: 1rem;
+    row-gap: 2rem;
+  }
+
+  .person-info {
+    margin-top: 0rem;    
+  }
+
+  .person-profiles {
+    right: 5px; 
+  }
+
+  .show-person-profiles {
+    bottom: 50px;  
+  }
+
+  .ourteam-section {
+    grid-template-rows: 25rem 25rem;
+  }
+
+}
+
+/* ******************************** */
+/* BELOW 960px (Tablets) */
+/* ******************************** */
+
+@media(max-width: 56em){
+  .image-container { 
+    width: 120px;
+    height: 120px;
+  }
+
+  .ourteam-section {
+    grid-template-rows: 20rem 20rem;
+  }
+
+  .person-name {
+    font-size: 1.6rem; 
+  }
+
+  .person-designation {
+    font-size: 1rem;
+  }
+}
+
+/* ******************************** */
+  /* BELOW 704px (Smaller Tablets) */
+  /* ******************************** */
+
+  @media(max-width: 44em){
+    .ourteam-section {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(4,25rem);
+      gap: 4rem;
+      row-gap: 2rem;
+    }
+
+    .image-container { 
+      width: 160px;
+      height: 160px;
+    }
+  
+   
+  
+    .person-profiles {
+      right: 20px; 
+    }
+  
+    .show-person-profiles {
+      bottom: 20px;  
+    }
+
+    .person-name {
+      font-size: 1.8rem; 
+    }
+  
+    .person-designation {
+      font-size: 1.4rem;
+    }
+  
+  
+    
+  }
+
+
+  /* ******************************** */
+/* BELOW 544px (Phones) */
+/* ******************************** */
+
+@media(max-width: 34em){
+
+  .ourteam-section {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4,20rem);
+    gap: 0.5rem;
+    row-gap: 4rem;
+  }
+
+  .image-container { 
+    width: 120px;
+    height: 120px;
+  }
+  .person-profiles {
+    right: 10px; 
+  }
+  .show-person-profiles {
+    bottom: 50px;  
+  }
+
+  .person-name {
+    font-size: 1.6rem; 
+  }
+
+  .person-designation {
+    font-size: 1rem;
+  }
+  .profile a img{
+    width: 2.5rem;
+}
+}
+

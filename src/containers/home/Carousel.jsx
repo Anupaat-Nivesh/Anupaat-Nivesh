@@ -13,6 +13,7 @@ export const Carousel = () => {
 
     const items = [
         {
+            id:1,   
             title: "Investment",
             description: "Let's get you started with",
             bold: " INVESTING!",
@@ -22,6 +23,7 @@ export const Carousel = () => {
             img: require("../../assets/illustrations/carousel1-illustration.png"),
         },
         {
+            id:2,
             title: "Savings",
             description: "Looking for ",
             bold: 'Financial Freedom',
@@ -31,6 +33,7 @@ export const Carousel = () => {
             img: require("../../assets/illustrations/carousel2-illustration.png"),
         },
         {
+            id:3,
             title: "Stocks",
             description: "Be a part of the next ",
             bold: 'Investment Wave',
@@ -39,25 +42,17 @@ export const Carousel = () => {
             img: require("../../assets/illustrations/carousel3-illustration.png"),
         },
         {
+            id:4,
             title: "KAIZEN",
             description: "Start with",
-            bold: " KAIZEN SIP",
+            bold: "KAIZEN SIP",
             subDescription: "Sometime just a small step is required to start of the journey",
             subText: "Because we know, slow and steady wins the race",
             img: require("../../assets/illustrations/carousel3-illustration.png")
 
         }
     ];
-    function updateIndex(newIndex) {
-        if (newIndex < 0) {
-            newIndex = items.length - 1;
-        } else if (newIndex >= items.length) {
-            newIndex = 0;
-        }
-
-        setActiveIndex(newIndex);
-    }
-
+  
 
     return (
         <Swiper
@@ -75,7 +70,7 @@ export const Carousel = () => {
         >
 
             {items.map((item) => {
-                return <SwiperSlide className="carousel-swiper-slide">
+                return <SwiperSlide className="carousel-swiper-slide" key={item.id}>
                     <CarouselItem item={item} width={"100%"} itemIndex={activeIndex} />
                 </SwiperSlide>
             })}

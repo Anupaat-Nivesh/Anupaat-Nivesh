@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../assets/logo.png';
 import { FaRegCopyright, FaPhoneAlt } from 'react-icons/fa';
-import { SiFacebook, SiTwitter, SiLinkedin, SiYoutube, SiGmail, SiWhatsapp } from "react-icons/si";
+import {SiGmail} from "react-icons/si";
 import FacebookLogo from "../../assets/facebook-logo.png";
 import TwitterLogo from "../../assets/twitter-logo.png";
 import WhatsappLogo from "../../assets/whatsapp.png";
@@ -44,15 +44,21 @@ const Footer = () => (
                 <h3 className='footer-heading'>Connect with us</h3>
                 <div className='contact-info footer-links'>
                     <div className='anupaat__footer-socialicons'>
-                        <a href='#'><img src={WhatsappLogo} alt="logo" /></a>
-                        <a href='https://www.facebook.com/anupaatnivesh'><img src={FacebookLogo} alt="logo" /></a>
-                        <a href='https://twitter.com/Anupaatnivesh'><img src={TwitterLogo} alt="logo" /></a>
-                        <a href='https://www.youtube.com/@anupaatnivesh'><img src={YoutubeLogo} alt="logo" /></a>
+                        <a href='https://wa.me/919501195200' target="_blank" rel='noreferrer'><img src={WhatsappLogo} alt="logo" /></a>
+                        <a href='https://www.facebook.com/anupaatnivesh' target="_blank" rel='noreferrer'><img src={FacebookLogo} alt="logo" /></a>
+                        <a href='https://twitter.com/Anupaatnivesh' target="_blank" rel='noreferrer'><img src={TwitterLogo} alt="logo" /></a>
+                        <a href='https://www.youtube.com/@anupaatnivesh' target="_blank" rel='noreferrer'><img src={YoutubeLogo} alt="logo" /></a>
 
                         <a href='#'><img src={LinkedInLogo} alt="logo" /></a>
                     </div>
+                    <div className='contact-info'>
+                   <h3>Contact Us:</h3>
                     <a className='contact-number' href='tel:95011 95200' ><FaPhoneAlt /> +91-95011 95200</a>
+                    </div>
+                    <div className='contact-info'>
+                        <h3>Mail Us:</h3>
                     <a className='contact-mail' href="mailto:anupaatnivesh@gmail.com">< SiGmail /> anupaatnivesh@gmail.com</a>
+                    </div>
                 </div>
             </div>
         </div>
