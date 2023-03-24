@@ -27,43 +27,43 @@ export const whyanupaatData = [
     {
         id: 1,
         icon:<SiOpenaigym/>,
-        title: "GOAL BASED INVESTMENT",
-        text: "Investment plans for Goals like Children education, Children Marriage, retirement, Vacation",
+        title: "Techno-Functional Recommendation",
+        text: "Our Investing models are periodically reviewed and rule based, built with combination of Science and Math.",
 
     },
     {
         id: 2,
-        icon:<SiOpenaigym/>,
-        title: "EXPERT ADVISORS",
-        text: "Investments are managed by experienced, qualified, certified and professional advisors",
-
-    },
-    {
-        id: 3,
         icon:<SiOpenaigym/>,
         title: "SKIN IN THE GAME",
         text: "Having our own skin in the game demonstrates the willingness to link our financial well-being with yours.",
 
     },
     {
+        id: 3,
+        icon:<SiOpenaigym/>,
+        title: "Personalized Advisory",
+        text: "We provide you the service of Dedicated relationship manager to handle your investment related queries.",
+
+    },
+    {
         id: 4,
         icon:<SiOpenaigym/>,
-        title: "MONITORING",
-        text: "Continuous monitoring of Market, Economy. Quarterly review of Investments.",
+        title: "पंचम: FRAMEWORK PORTFOLIO",
+        text: "Our portfolio building involve five different style of investing which are Value, Growth, Emerging, Global & Quality.",
 
     },
     {
         id: 5,
         icon:<SiOpenaigym/>,
-        title: "100% DIGITAL",
-        text: "Digital process for onboarding and transactions. No hassle of paper-work",
+        title: "Right Propotional Investment",
+        text: "We match your objectives to the have right allocation to suit your investment needs and boost your portfolio retunrs.",
 
     },
     {
         id: 6,
         icon:<SiOpenaigym/>,
-        title: "पंचम: FRAMEWORK PORTFOLIO",
-        text: "GPortfolio construction using five different style of investing for ex Value, Growth, Emerging etc",
+        title: "Made with Love in INDIA",
+        text: "Our aim is to introduce Value Investing to all Indians with long term wealth creation.",
 
     },
 ]

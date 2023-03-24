@@ -7,7 +7,7 @@
 .aboutus-description-section {
   margin-top: 4rem;
   font-weight: 450;
- 
+
 }
 
 /* .aboutus-heading{
@@ -18,7 +18,7 @@ color: var(--color-secondary);
 }
 
 .aboutus-description-section2 {
-  margin-top: 6rem;
+  margin-top: 8rem;
   display: flex;
   gap: 6rem;
   width: 100%;
@@ -76,19 +76,49 @@ color: var(--color-secondary);
   align-items: center;
 }
 
-.aboutus-description-points div{
+.aboutus-description-points div {
   justify-self: self-end;
 }
 
+.aboutus-points {
 
-.aboutus-points li {
-  /* font-weight: 400; */
-  color: var(--color-subtext);
-  font-size: 1.6rem;
-  margin-top: 1rem;
-  list-style: disc;
-  list-style-position:outside;
+  display: flex;
+  flex-direction: column;
 }
+
+.aboutus-wrapper {
+  display: flex;
+  align-items: center;
+
+  background: rgb(167, 244, 167);
+  border-radius: 3rem;
+  margin-bottom: 1rem;
+}
+
+.points-text {
+  display: block;
+  color: var(--color-subtext);
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.check-pointer {
+  padding: 1.5rem;
+  margin: 1rem;
+}
+
+
+
+.check-icon {
+  width: 3rem;
+  height: 3rem;
+
+  vertical-align: middle;
+  color: green;
+  display: inline-block;
+}
+
+
 
 .social-icon {
   color: var(--color-primary);
@@ -98,9 +128,8 @@ color: var(--color-secondary);
 }
 
 
-.aboutus-illustration{
+.aboutus-illustration {
   width: 60rem
- 
 }
 
 
@@ -112,52 +141,53 @@ color: var(--color-secondary);
 
 
 @media(max-width: 75em) {
-  .aboutus-illustration{
+  .aboutus-illustration {
     width: 50rem
-   
   }
 
   .aboutus-description-section2 {
     display: flex;
     gap: 6rem;
-    
+
   }
 }
 
 
-  /* ******************************** */
+/* ******************************** */
 /* BELOW 960px (Tablets) */
 /* ******************************** */
 
-@media(max-width: 60em){
+@media(max-width: 60em) {
   .aboutus-description-points {
-    
+
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
-    
-    
+
+
   }
-  .aboutus-illustration{
-   justify-self: center;
-   
+
+  .aboutus-illustration {
+    justify-self: center;
+
   }
-  .aboutus-description-points div{
+
+  .aboutus-description-points div {
     justify-self: center;
   }
 
   .aboutus-description-section2 {
     display: flex;
     gap: 4rem;
-    
+
   }
 
-  .aboutus-description-block{
+  .aboutus-description-block {
     padding: 1rem;
   }
 
   .aboutus-points li {
-  
-    list-style-position:outside;
+
+    list-style-position: outside;
     margin-top: 0.2rem;
   }
 }
@@ -167,13 +197,13 @@ color: var(--color-secondary);
 /* BELOW 704px (Smaller Tablets) */
 /* ******************************** */
 
-@media(max-width: 44em){
+@media(max-width: 44em) {
 
-  .aboutus-points li{
+  .aboutus-points li {
     font-size: 1.4rem;
   }
 
-  .aboutus-description-section2{
+  .aboutus-description-section2 {
     flex-direction: column;
   }
 }
@@ -183,25 +213,23 @@ color: var(--color-secondary);
 /* BELOW 544px (Phones) */
 /* ******************************** */
 
-@media(max-width: 34em){
-  .aboutus-illustration{
-    width: 30rem
-   
+@media(max-width: 34em) {
+  .aboutus-illustration {
+    width: 40rem
   }
 
   .aboutus-description-points {
-   
+
     line-height: 1.6;
-    
+
   }
 
-  .aboutus-points li{
+  .aboutus-points li {
     font-size: 1.2rem;
     margin-top: 1rem;
   }
 
-  .block-description{
+  .block-description {
     font-size: 1.2rem;
   }
 }
-

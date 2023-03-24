@@ -54,7 +54,7 @@ export const Testimonials = () => {
                         }}
                         navigation={false}
                         grabCursor={true}
-                        modules={[ EffectCoverflow, Pagination, Navigation,Autoplay]}
+                        modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
                         className="mySwiper"
                     >
                         {

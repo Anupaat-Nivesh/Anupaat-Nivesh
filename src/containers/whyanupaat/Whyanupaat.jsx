@@ -1,4 +1,5 @@
 import React from 'react';
+import titleimg from '../../assets/investment-01.png';
 import './whyanupaat.css';
 import Card from 'react-bootstrap/Card';
 
@@ -16,7 +17,7 @@ const Whyanupaat = () => {
                 <div className="anupaat__whyanupaat-heading">
 
 
-                    <div className='anupaat_whyanupaat-heading-explanation'>
+                    <div className='anupaat_whyanupaat-heading-explanation' data-aos="zoom-in-right" data-aos-duration="3000">
                         <div className='whyanupaat-subheading '>
                             <h2 className='secondary-heading'>Experience An Enhanced Online Investment Platform</h2>
                         </div>
@@ -29,17 +30,18 @@ const Whyanupaat = () => {
                         </p></div>
                     </div>
                 </div>
-                <div className='whyanupaat-title-image'>
+                <div className='whyanupaat-title-image' data-aos="zoom-in-left" data-aos-duration="3000">
                     <img src={whyAnupaatImg} alt="questionimage" />
                 </div>
             </div>
             <div className="anupaat__card-container">
                 {
-                    whyanupaatData.map(({ icon, id, title, text }) => {
+                    whyanupaatData.map(({ icon, title, text }, id) => {
                         return (
-                            <Card className="whyanupaat_data" key={id}>
+                            <Card className="whyanupaat_data" key={id} data-aos="fade-up"
+                                data-aos-anchor-placement="top-bottom" data-aos-duration="2000">
                                 <span className='icon'>{icon}</span>
-                                <h4 className='why-block-heading'>{title}</h4>
+                                <h3 className='why-block-heading'>{title}</h3>
                                 <small>{text}</small>
                             </Card>
                         )

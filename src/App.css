@@ -114,6 +114,7 @@ a {
 
 
 
+
 /* .scale-up-center {
   -webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
   animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
@@ -160,10 +161,10 @@ a {
 /* BELOW 960px (Tablets) */
 /* ******************************** */
 
-@media(max-width: 60em){
-h2{
-  font-size: 3rem;
-}
+@media(max-width: 60em) {
+  h2 {
+    font-size: 3rem;
+  }
 }
 
 
@@ -174,13 +175,14 @@ h2{
 
 
 @media(max-width:47em) {
-.btn{
-  font-size: 1.6rem;
-  padding: 0.6rem 1.8rem;
-}
-p{
-  font-size: 1.4rem;
-}
+  .btn {
+    font-size: 1.6rem;
+    padding: 0.6rem 1.8rem;
+  }
+
+  p {
+    font-size: 1.4rem;
+  }
 }
 
 
@@ -189,9 +191,9 @@ p{
 /* ******************************** */
 @media(max-width:40em) {
 
-p{
-  font-size: 1.2rem;
-}
+  p {
+    font-size: 1.2rem;
+  }
 
 
 }
@@ -201,8 +203,8 @@ p{
 /* BELOW 544px (Phones) */
 /* ******************************** */
 
-@media(max-width: 34em){
-  h2{
+@media(max-width: 34em) {
+  h2 {
     font-size: 2.2rem;
   }
 

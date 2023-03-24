@@ -3,6 +3,12 @@
   font-family: var(--font-family);
 }
 
+.contact-section h1 {
+
+
+  margin-bottom: 2rem;
+}
+
 
 .cta {
   background-color: var(--color-grey-light);
@@ -80,7 +86,16 @@
 
 .btn--form {
   grid-column: 1/-1;
-  justify-self: center;  
+  justify-self: center;
+  padding: 1.2rem 2rem;
+  border-radius: 1rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+
+  color: var(--color-text);
+  background-color: var(--color-grey-light);
+  transition: all 0.3s;
+  box-shadow: inset 0 0 0 2px var(--color-primary);
 }
 
 
@@ -127,7 +142,7 @@
 /* ******************************** */
 
 @media(max-width:71em) {
-  
+
 
   .cta-social-icon {
     font-size: 7rem;
@@ -162,7 +177,7 @@
     width: 6rem;
   }
 
-  
+
 }
 
 /* ******************************** */
@@ -173,6 +188,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
   }
+
   .cta-text-box {
     grid-row: 2/3;
     z-index: 1;
@@ -183,7 +199,7 @@
     gap: 4rem;
   }
 
-  .section-description{
+  .section-description {
     font-size: 1.2rem;
   }
 
@@ -193,7 +209,7 @@
 /* BELOW 544px (Phones) */
 /* ******************************** */
 @media(max-width:34em) {
-  
+
   .cta-form {
     grid-template-columns: 1fr;
     row-gap: 2rem;
@@ -213,7 +229,7 @@
   }
 
   .cta-social {
-    
+
     gap: 2rem;
   }
 
@@ -222,4 +238,3 @@
   }
 
 }
-
