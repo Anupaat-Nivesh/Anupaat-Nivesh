@@ -19,12 +19,12 @@ const Home = () => {
 
 
 
-    const img1 = require('../../assets/empanelment1.png')
-    const img2 = require('../../assets/empanelment2.png')
-    const img3 = require('../../assets/empanelment3.png')
-    const img4 = require('../../assets/empanelment4.png')
-    const img5 = require('../../assets/empanelment5.png')
-    const img6 = require('../../assets/empanelment6.png')
+    const img1 = require('../../assets/ImpanelmentsImages/empanelment1.png')
+    const img2 = require('../../assets/ImpanelmentsImages/empanelment2.png')
+    const img3 = require('../../assets/ImpanelmentsImages/empanelment3.png')
+    const img4 = require('../../assets/ImpanelmentsImages/empanelment4.png')
+    const img5 = require('../../assets/ImpanelmentsImages/empanelment5.png')
+    const img6 = require('../../assets/ImpanelmentsImages/empanelment6.png')
     return (
         <>
             <div className='anupaat_home'>
@@ -43,7 +43,7 @@ const Home = () => {
 
                 <section className="empanelment section__padding section__margin">
                     <div >
-                        <h1>Our Empanelments</h1>
+                        <h1>Our <span className='section-heading-focus'>Empanelments</span></h1>
                         <p className="lead">subheading</p></div>
                     <div className="empanelment_container">
                         <div data-aos="fade-up">

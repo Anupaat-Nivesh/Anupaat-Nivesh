@@ -52,7 +52,7 @@ const Contact = (props) => {
 
     return (
         <div className='contact-section section__padding section__margin' id='contact'>
-            <h1>Contact Us</h1>
+            <h1>Contact <span className='section-heading-focus'>Us</span></h1>
             <div className='cta'>
 
                 <div className='cta-text-box'>
