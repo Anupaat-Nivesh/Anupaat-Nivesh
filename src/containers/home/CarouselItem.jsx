@@ -7,7 +7,7 @@ export const CarouselItem = ({ item, width, itemIndex }) => {
             <div className="carousel-item-text-section " data-aos="fade-right"
                 data-aos-offset="300"
                 data-aos-easing="ease-in-sine">
-                <div className="carousel-item-text">{item.description}<br />
+                <div className="carousel-item-text">{item.description}
                     <span className="bold-text">{item.bold}</span>
                 </div>
 
