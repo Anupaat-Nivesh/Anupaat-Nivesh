@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import img1 from '../../assets/illustrations/finance-01.png';
 import './offerings.css';
 
@@ -13,7 +14,7 @@ export const Offerings = () => {
 
             <article className='offerings__article'>
                 <div className='offerings-img' data-aos="fade-right"
-                    data-aos-offset="300"
+
                     data-aos-easing="ease-in-sine">
                     <img src={img1} alt="Mutual Fund Basket" />
                 </div>
@@ -24,7 +25,8 @@ export const Offerings = () => {
                         Child’s education, retirement, saving tax or creating wealth, there is a basket of quality mutual funds for all your financial goal planning needs and requirements.
                     </p>
                     <div className='offering-btn'>
-                        <a href='#' className='btn '>Learn More</a>
+                        <Link to="/mutual-funds" className='btn '>Learn More</Link>
+
                     </div>
                 </div>
 
@@ -32,7 +34,7 @@ export const Offerings = () => {
 
             <article className='offerings__article'>
                 <div className='offerings__content' data-aos="fade-right"
-                    data-aos-offset="300"
+
                     data-aos-easing="ease-in-sine">
                     <h2 className='offering_article-title'>Equity Basket</h2>
                     <p>
@@ -40,7 +42,7 @@ export const Offerings = () => {
                         Equity Baskets are created and managed by Registered Investment Advisors (RIAs) who are SEBI-registered professionals.
                     </p>
                     <div className='offering-btn'>
-                        <a href='#' className='btn '>Learn More</a>
+                        <Link to="/equity-basket" className='btn '>Learn More</Link>
                     </div>
                 </div>
                 <div className='offerings-img' data-aos="fade-left">
@@ -50,7 +52,7 @@ export const Offerings = () => {
 
             <article className='offerings__article'>
                 <div className='offerings-img' data-aos="fade-right"
-                    data-aos-offset="300"
+
                     data-aos-easing="ease-in-sine">
                     <img src={img1} alt="Mutual Fund Basket" />
                 </div>
@@ -62,7 +64,7 @@ export const Offerings = () => {
                         and you’ll keep on earning from them during your tenure for an instant loan for low credit score.
                     </p>
                     <div className='offering-btn'>
-                        <a href='#' className='btn '>Learn More</a>
+                        <Link to="/loan-against-securities" className='btn '>Learn More</Link>
                     </div>
                 </div>
 

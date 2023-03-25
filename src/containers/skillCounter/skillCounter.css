@@ -50,6 +50,13 @@
     font-size: 1.5rem;
 }
 
+.skill-counter-icon {
+    width: 6.5rem;
+    height: 6.6rem;
+    padding: 0.5rem;
+    border-radius: 1rem;
+}
+
 @media screen and (max-width:1044px) {
     .skills-data {
         width: 100%;

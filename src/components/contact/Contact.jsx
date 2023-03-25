@@ -23,7 +23,6 @@ const Contact = (props) => {
         const inputPhoneNumber = e.target.value;
 
         const indianPhoneNumberRegex = /^[6-9]\d{9}$/;
-        const validEmailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
         if (indianPhoneNumberRegex.test(inputPhoneNumber) || inputPhoneNumber === '') {
             setPhoneNumber(inputPhoneNumber);
@@ -53,7 +52,7 @@ const Contact = (props) => {
 
     return (
         <div className='contact-section section__padding section__margin' id='contact'>
-            <h1>Contact Us</h1>
+            <h1>Contact <span className='section-heading-focus'>Us</span></h1>
             <div className='cta'>
 
                 <div className='cta-text-box'>
@@ -101,12 +100,12 @@ const Contact = (props) => {
                         data-aos-offset="500"
                     >
 
-                        <a href='https://www.facebook.com/anupaatnivesh'><img src={FacebookLogo} className='cta-social-icon' alt='facebook' /></a>
-                        <a href='https://twitter.com/Anupaatnivesh'><img src={TwitterLogo} className='cta-social-icon' alt='twitter' /></a>
+                        <a href='https://www.facebook.com/anupaatnivesh' target="_blank" rel='noreferrer'><img src={FacebookLogo} className='cta-social-icon' alt='socialIconImage'/></a>
+                        <a href='https://twitter.com/Anupaatnivesh' target="_blank" rel='noreferrer'><img src={TwitterLogo} className='cta-social-icon' alt='socialIconImage' /></a>
 
-                        <a href='https://www.youtube.com/@anupaatnivesh'><img src={YoutubeLogo} className='cta-social-icon' alt='youtube' /></a>
-                        <a href="#"><img src={WhatsappLogo} className='cta-social-icon' alt='whatsaap' /></a>
-                        <a href="#"><img src={LinkedInLogo} className='cta-social-icon' alt='linkedin' /></a>
+                        <a href='https://www.youtube.com/@anupaatnivesh'><img src={YoutubeLogo} className='cta-social-icon' /></a>
+                        <a href="#"><img src={WhatsappLogo} className='cta-social-icon' /></a>
+                        <a href="#"><img src={LinkedInLogo} className='cta-social-icon' /></a>
 
                     </div>
                 </div>

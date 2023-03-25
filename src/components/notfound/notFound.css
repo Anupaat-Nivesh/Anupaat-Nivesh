@@ -1,0 +1,31 @@
+.notFound__container {
+    text-align: center;
+    padding-top: 8rem;
+}
+
+.notFound__container button {
+    margin-top: 3rem;
+    height: 40px;
+    width: 200px;
+    color: #fff;
+    background: #FE0101;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 25px;
+    border: #FE0101;
+    outline: none;
+    cursor: pointer;
+    border-radius: 60px;
+}
+
+.notFound__container button:hover {
+    background-color: #0404048f;
+    color: #fff;
+}
+
+.notFound__container h2 {
+    font-family: var(--font-family);
+    font-weight: 800;
+    font-size: 40px;
+}
