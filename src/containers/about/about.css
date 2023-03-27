@@ -316,7 +316,16 @@ text-align: center;
   }
   .aboutus-description2{
   
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    align-items: center;
+    font-weight: 600;
+    color: red;
+  }
+
+  .aboutus-description3{
+  
+    font-size: 1.5rem;
+
   }
   .aboutus-decription-content2{ 
     width: 90%;
