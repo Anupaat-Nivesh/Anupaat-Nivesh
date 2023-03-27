@@ -48,7 +48,7 @@ export const Carousel = () => {
             bold: "KAIZEN SIP",
             subDescription: "Sometime just a small step is required to start of the journey",
             subText: "Because we know, slow and steady wins the race",
-            img: require("../../assets/illustrations/carousel3-illustration.png")
+            img: require("../../assets/illustrations/carousel4-illustration.png")
 
         }
     ];
@@ -65,7 +65,7 @@ export const Carousel = () => {
             }}
             navigation={false} grabCursor={true} pagination={{
                 clickable: true,
-            }} modules={[Navigation, Pagination, Autoplay]}
+            }} modules={[Navigation, Pagination,Autoplay]}
             className="carousel-swiper"
         >
 

@@ -12,22 +12,22 @@ const OurTeam = () => {
     {
       name: "Akash Garg",
       designation: "Financial Consultant",
-      img: require("../../assets/person.jpg")
+      img: require("../../assets/teamProfiles/akash.png")
     },
     {
       name: "Gourav Chugh",
       designation: "Technology Consultant",
-      img: require("../../assets/person.jpg")
+      img: require("../../assets/teamProfiles/gaurav.png")
     },
     {
       name: "Beant Singh",
       designation: "Business Consultant",
-      img: require("../../assets/person.jpg")
+      img: require("../../assets/teamProfiles/beant.png")
     },
     {
       name: "Kanishk Jhorar",
       designation: "Marketing Officer",
-      img: require("../../assets/person.jpg")
+      img: require("../../assets/teamProfiles/kanishk.png")
     },
     {
       name: "Mohit Rai",
@@ -37,17 +37,17 @@ const OurTeam = () => {
     {
       name: "Harshita Singh",
       designation: "Technical Executive",
-      img: require("../../assets/person.jpg")
+      img: require("../../assets/teamProfiles/harshita.png")
     },
     {
       name: "Lokesh Singh",
       designation: "Technical Executive",
-      img: require("../../assets/person.jpg")
+      img: require("../../assets/teamProfiles/lokesh.png")
     },
     {
       name: "Vimple Chugh",
       designation: "Business Executive",
-      img: require("../../assets/Vimple_Chugh.jpg")
+      img: require("../../assets/teamProfiles/vimple.png")
     }
   ];
 

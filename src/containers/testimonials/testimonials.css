@@ -1,7 +1,7 @@
 .testimonials {
     width: 100%;
     margin-inline: auto;
-    padding: 4rem 0;
+    padding: 1rem 0;
     font-family: var(--font-family);
 
 }
@@ -14,9 +14,7 @@
 
 }
 
-.testimonial-card {
-    margin-top: 4rem;
-}
+
 
 .testimonial-heading {
     float: right;
@@ -70,7 +68,7 @@
 
 .mySwiper {
     width: 100%;
-    padding: 5rem 0;
+    padding: 2rem  0 4rem 0;
 }
 
 .myswiper-slide {

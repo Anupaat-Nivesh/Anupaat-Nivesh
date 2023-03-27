@@ -30,13 +30,12 @@ h3 {
 }
 
 .lead {
-  width: 63%;
+  width: 80%;
   font-size: 2rem;
   font-weight: 400;
   line-height: 1.5;
-  margin: 2rem auto 3rem;
-
-
+  margin: 4rem auto 1rem auto;
+  color: var(--color-subtext-light);
 }
 
 p {
@@ -49,11 +48,7 @@ a {
   transition: all 0.3s;
 }
 
-/*.section__padding {
-  width: 1400px;
-  margin: 0 auto;
-  padding: 0 4rem;
-}*/
+
 .section__padding {
   max-width: 100%;
   padding: 4rem 5rem;
@@ -115,11 +110,6 @@ a {
 
 
 
-/* .scale-up-center {
-  -webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-  animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-} */
-
 @-webkit-keyframes scale-up-center {
   0% {
     -webkit-transform: scale(0.5);
@@ -164,10 +154,17 @@ a {
 @media(max-width: 60em) {
   h2 {
     font-size: 3rem;
+  }  
+
+  .home-section {
+    margin-top: 8rem;
+  
+  }
+  h1 {
+    font-size: 5rem;
+  
   }
 }
-
-
 
 /* ******************************** */
 /* BELOW 752px (Smaller Tablets) */
@@ -177,11 +174,23 @@ a {
 @media(max-width:47em) {
   .btn {
     font-size: 1.6rem;
-    padding: 0.6rem 1.8rem;
+    padding: 0.8rem 1.8rem;
   }
 
   p {
     font-size: 1.4rem;
+  }
+
+  .lead {
+    width: 100%;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 3rem auto 1rem auto;
+  }
+  h1 {
+    font-size: 4.4rem;
+  
   }
 }
 
@@ -195,6 +204,14 @@ a {
     font-size: 1.2rem;
   }
 
+  .lead {
+    width: 100%;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 3rem auto 1rem auto;
+  }
+
 
 }
 
@@ -205,7 +222,38 @@ a {
 
 @media(max-width: 34em) {
   h2 {
-    font-size: 2.2rem;
+    font-size: 2rem;
+  }
+
+  .btn {
+    font-size: 1.4rem;
+    padding: 0.6rem 1.4rem;
+  }
+
+  .offerings__article{
+    margin-top: 2rem;
+  }
+
+  .lead {
+    width: 100%;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 4rem auto 1rem auto;
+  }
+
+  .home-section {
+    margin-top: 6rem;
+  
+  }
+
+  h1 {
+    font-size: 2.4rem;
+  
+  }
+
+  .section__padding{
+    padding: 2rem 1rem;
   }
 
 }

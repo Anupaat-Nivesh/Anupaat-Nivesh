@@ -37,7 +37,7 @@
 
 
 .whyanupaat-title-image img {
-    width: 100%;
+    width: 90%;
     justify-content: center;
     z-index: 10;
 }
@@ -99,6 +99,10 @@
     width: fit-content;
     border-radius: 1rem;
     transition: var(--transition);
+}
+
+.card-icon{
+    width: 6rem;
 }
 
 .whyanupaat_data small {

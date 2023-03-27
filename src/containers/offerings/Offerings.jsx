@@ -2,13 +2,16 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import img1 from '../../assets/illustrations/finance-01.png';
 import './offerings.css';
+import equity from '../../assets/illustrations/equity.png';
+import mutualFund from '../../assets/illustrations/mf.png';
 
 export const Offerings = () => {
     return (
         <div id='offerings' className='offerings-container section__padding'>
             <div className='offerings-title'>
                 <h1>Offerings</h1>
-                <p className='lead'>Confused, Where you should start with your investment.?<br /> We have a wide range of products to start your investment journey. </p>
+                <div className='lead'>Confused, Where you should start with your investment ?  </div>
+                <div className='offerings-description'>We have a wide range of products to start your investment journey.</div>
 
             </div>
 
@@ -16,7 +19,7 @@ export const Offerings = () => {
                 <div className='offerings-img' data-aos="fade-right"
 
                     data-aos-easing="ease-in-sine">
-                    <img src={img1} alt="Mutual Fund Basket" />
+                    <img src={mutualFund} alt="Mutual Fund Basket" />
                 </div>
                 <div className='offerings__content' data-aos="fade-left">
                     <h2 className='offering_article-title'>Mutual Fund Basket</h2>
@@ -45,8 +48,8 @@ export const Offerings = () => {
                         <Link to="/equity-basket" className='btn '>Learn More</Link>
                     </div>
                 </div>
-                <div className='offerings-img' data-aos="fade-left">
-                    <img src={img1} alt="Mutual Fund Basket" />
+                <div className='offerings-img offerings-img2' data-aos="fade-left">
+                    <img src={equity} alt="Mutual Fund Basket" />
                 </div>
             </article>
 
