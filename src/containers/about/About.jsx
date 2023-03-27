@@ -2,7 +2,7 @@ import React from 'react'
 import tech from "../../assets/tech.svg";
 import team from "../../assets/team.svg";
 import transparency from "../../assets/transparency.svg";
-import aboutUsIllustration from "../../assets/illustrations/team-01.png";
+import aboutUsIllustration from "../../assets/illustrations/customer-support.png";
 import './about.css';
 import OurTeam from './OurTeam';
 import { BsFillCheckCircleFill } from "react-icons/bs";
@@ -17,19 +17,23 @@ const About = () => {
             </div>
 
             <div className='aboutus-description-section '>
-                <p className='aboutus-description'> Started in 2018, Anupaat Nivesh is providing one2one consulting to start with your investment journey. Anupaat Nivesh aim to reach out to the common man and extend the opportunity to create wealth by providing them valuable and ethical financial advice. Equity investing has always been an grey area for most of people. However, historically there has been no better way to grow your money exponentially.
+                <div className='aboutus-decription-content1'>
+                <p className='aboutus-description1'> Started in 2018, Anupaat Nivesh is providing one2one consulting to start with your investment journey. Anupaat Nivesh aim to reach out to the common man and extend the opportunity to create wealth by providing them valuable and ethical financial advice. Equity investing has always been an grey area for most of people. However, historically there has been no better way to grow your money exponentially.
                 </p>
-                <br></br>
-                <p className=' aboutus-description'>Investing in the stock market is risky. But if managed and predicted correctly, it will have a high growth rate.</p>
-                <p className='aboutus-description'>We at Anupaat Nivesh help our customers with true and quality advise about investment options which can be huge wealth creator to middle class.</p>
+                </div>
+                
+                <div className='aboutus-decription-content2'>
+                <p className='aboutus-description2'>Investing in the stock market is risky. But if managed and predicted correctly, it will have a high growth rate.
+                We at Anupaat Nivesh help our customers with true and quality advise about investment options which can be huge wealth creator to middle class.</p>
+                </div>
 
                 <div className='aboutus-description-points'>
 
                     <img src={aboutUsIllustration} className="aboutus-illustration" alt='illustration' data-aos="fade-right"
                         data-aos-offset="300"
-                        data-aos-easing="ease-in-sine" data-aos-duration="1000" />
+                        data-aos-easing="ease-in-sine" data-aos-duration="500" />
 
-                    <div data-aos="fade-left" data-aos-duration="1000">
+                    <div data-aos="fade-left" data-aos-duration="500">
                         <h2 className='secondary-heading secondary-about-heading' >How we help our customers:</h2><br></br>
                         <div className=' aboutus-points'>
                             <div className='aboutus-wrapper'>
@@ -56,6 +60,7 @@ const About = () => {
 
                         </div>
                     </div>
+                </div>
                 </div>
 
                 <div className='aboutus-description-section2' >
@@ -87,12 +92,12 @@ const About = () => {
                         </p>
                     </div>
 
+                
                 </div>
-
                 <div className='aboutus-description-section3'>
                     <OurTeam />
                 </div>
-            </div>
+            
 
         </div>
     )

@@ -26,6 +26,30 @@ font-size: 1.6rem
 }
 
 
+/* Responsiveness CSS */
+
+/* ******************************** */
+  /* BELOW 704px (Smaller Tablets) */
+  /* ******************************** */
+
+  @media(max-width: 44em){
+    .empanelment_container div{
+        grid-template-columns: repeat(2,1fr);
+    }
+  }
+
+
+  /* ******************************** */
+/* BELOW 544px (Phones) */
+/* ******************************** */
+
+@media(max-width: 34em){
+    .empanelment_container div img {
+        width: 16rem;
+    }
+}
+
+
 
 
 

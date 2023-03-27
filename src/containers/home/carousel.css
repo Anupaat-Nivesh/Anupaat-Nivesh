@@ -95,7 +95,7 @@ padding,margin,gap: 1rem, 4rem
     position: relative;
     height: fit-content;
     /* width: ; */
-    /* width: 52rem; */
+    width: 65rem;
 
 }
 
@@ -103,7 +103,7 @@ padding,margin,gap: 1rem, 4rem
 .carousel-img {
     z-index: 99;
     position: relative;
-    width: 90%;
+    width: 100%;
     padding: 0;
 }
 
@@ -184,8 +184,30 @@ padding,margin,gap: 1rem, 4rem
 }
 
 
+/* ******************************** */
+/* BELOW 1408px (landscape tablets) */
+/* ******************************** */
 
 
+@media(max-width: 88em) {
+    .img-container {
+
+        width: 60rem;
+    
+    }
+}
+/* ******************************** */
+/* BELOW 1312px (landscape tablets) */
+/* ******************************** */
+
+
+@media(max-width: 82em) {
+    .img-container {
+
+        width: 55rem;
+    
+    }
+}
 
 
 /* ******************************** */
@@ -209,6 +231,13 @@ padding,margin,gap: 1rem, 4rem
 
     .carousel-item-text-section {
         gap: 0;
+    }
+    .img-container {
+
+        width: 100%;
+        padding: 1rem;
+        
+    
     }
 }
 
