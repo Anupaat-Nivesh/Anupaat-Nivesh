@@ -1,5 +1,4 @@
 import React from 'react';
-import titleimg from '../../assets/investment-01.png';
 import './whyanupaat.css';
 import Card from 'react-bootstrap/Card';
 
@@ -40,7 +39,7 @@ const Whyanupaat = () => {
                         return (
                             <Card className="whyanupaat_data" key={id} data-aos="fade-up"
                                 data-aos-anchor-placement="top-bottom" data-aos-duration="2000">
-                                <span className='icon'>{icon}</span>
+                                <img src={icon} alt="icon" className='card-icon' />
                                 <h3 className='why-block-heading'>{title}</h3>
                                 <small>{text}</small>
                             </Card>

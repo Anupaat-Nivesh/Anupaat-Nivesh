@@ -11,7 +11,7 @@ import icon5 from '../../assets/SkillCounter icons/icon5.jpg';
 export const SkillCounter = () => {
 
     return (
-        <section className='skills-data'>
+        <section className='skills-data home-section'>
             <div className='skill-container'>
                 <div className='skill-items'>
                     <img src={icon2} className="skill-counter-icon" />

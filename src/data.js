@@ -1,4 +1,10 @@
 import {SiOpenaigym} from 'react-icons/si'
+import team from "../src/assets/Icons/team.png";
+import consultation from "../src/assets/Icons/consultation.png";
+import ratio from "../src/assets/Icons/ratio.png";
+import india from "../src/assets/Icons/india.png";
+import tech from "../src/assets/Icons/tech.png";
+import framework from "../src/assets/Icons/framework.png";
 
 
 export const featuresData = [
@@ -26,42 +32,42 @@ export const featuresData = [
 export const whyanupaatData = [
     {
         id: 1,
-        icon:<SiOpenaigym/>,
+        icon:tech,
         title: "Techno-Functional Recommendation",
         text: "Our Investing models are periodically reviewed and rule based, built with combination of Science and Math.",
 
     },
     {
         id: 2,
-        icon:<SiOpenaigym/>,
+        icon: team,
         title: "SKIN IN THE GAME",
         text: "Having our own skin in the game demonstrates the willingness to link our financial well-being with yours.",
 
     },
     {
         id: 3,
-        icon:<SiOpenaigym/>,
+        icon: consultation,
         title: "Personalized Advisory",
         text: "We provide you the service of Dedicated relationship manager to handle your investment related queries.",
 
     },
     {
         id: 4,
-        icon:<SiOpenaigym/>,
+        icon:framework,
         title: "पंचम: FRAMEWORK PORTFOLIO",
         text: "Our portfolio building involve five different style of investing which are Value, Growth, Emerging, Global & Quality.",
 
     },
     {
         id: 5,
-        icon:<SiOpenaigym/>,
+        icon:ratio,
         title: "Right Propotional Investment",
         text: "We match your objectives to the have right allocation to suit your investment needs and boost your portfolio retunrs.",
 
     },
     {
         id: 6,
-        icon:<SiOpenaigym/>,
+        icon:india,
         title: "Made with Love in INDIA",
         text: "Our aim is to introduce Value Investing to all Indians with long term wealth creation.",
 
