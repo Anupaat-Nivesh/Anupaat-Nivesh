@@ -27,10 +27,10 @@ export const Offerings = () => {
                         Choose & invest from a range of expert curated baskets of quality mutual funds to achieve your financial goals in a stipulated time period and based on your risk taking ability.
                         Child’s education, retirement, saving tax or creating wealth, there is a basket of quality mutual funds for all your financial goal planning needs and requirements.
                     </p>
-                    <div className='offering-btn'>
+                    {/* <div className='offering-btn'>
                         <Link to="/mutual-funds" className='btn '>Learn More</Link>
 
-                    </div>
+                    </div> */}
                 </div>
 
             </article>
@@ -44,9 +44,9 @@ export const Offerings = () => {
                         Invest in iBaskets to achieve your financial goals.
                         Equity Baskets are created and managed by Registered Investment Advisors (RIAs) who are SEBI-registered professionals.
                     </p>
-                    <div className='offering-btn'>
+                    {/* <div className='offering-btn'>
                         <Link to="/equity-basket" className='btn '>Learn More</Link>
-                    </div>
+                    </div> */}
                 </div>
                 <div className='offerings-img offerings-img2' data-aos="fade-left">
                     <img src={equity} alt="Mutual Fund Basket" />
@@ -66,9 +66,9 @@ export const Offerings = () => {
                         Safeguard your investment by opting for quick capital against securities. Your units will remain yours,
                         and you’ll keep on earning from them during your tenure for an instant loan for low credit score.
                     </p>
-                    <div className='offering-btn'>
+                    {/* <div className='offering-btn'>
                         <Link to="/loan-against-securities" className='btn '>Learn More</Link>
-                    </div>
+                    </div> */}
                 </div>
 
 
