@@ -9,7 +9,7 @@ export const Offerings = () => {
     return (
         <div id='offerings' className='offerings-container section__padding'>
             <div className='offerings-title'>
-                <h1>Offerings</h1>
+                <h1 ><span className='section-heading-focus'>Offerings</span></h1>
                 <div className='lead'>Confused, Where you should start with your investment ?  </div>
                 <div className='offerings-description'>We have a wide range of products to start your investment journey.</div>
 
