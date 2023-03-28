@@ -23,6 +23,14 @@
     align-items: stretch;
 }
 
+.AboutUs-Content p{
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var( --color-grey-light);
+}
+
+
 .anupaat__footer-btn {
     display: flex;
     justify-content: center;
@@ -85,13 +93,7 @@ color:#fff;
     cursor: pointer;
 }
 
-.anupaat__footer-links_logo p {
-    margin-top: 2px;
-    font-family: var(--font-family);
-    font-size: 0.8rem;
-    line-height: 15px;
-    color: #000000;
-}
+
 
 .anupaat__footer-links_div {
     display: flex;

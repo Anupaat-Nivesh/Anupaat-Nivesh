@@ -27,7 +27,7 @@ export const Testimonials = () => {
             <div className="testimonials__container">
                 <div className="testimonial_title ">
 
-                    <h1>Testimonials</h1>
+                    <h1><span className='section-heading-focus'>Testimonials</span> </h1>
 
 
                 </div>
