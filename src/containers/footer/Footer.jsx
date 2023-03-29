@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/footer-logo.png';
 import { FaRegCopyright, FaPhoneAlt } from 'react-icons/fa';
 import { SiGmail } from "react-icons/si";
 import FacebookLogo from "../../assets/facebook-logo.png";

@@ -32,7 +32,7 @@ const OurTeam = () => {
     {
       name: "Mohit Rai",
       designation: "Operation Executive",
-      img: require("../../assets/person.jpg")
+      img: require("../../assets/teamProfiles/mohit.png")
     },
     {
       name: "Harshita Singh",
