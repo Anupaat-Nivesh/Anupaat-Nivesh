@@ -17,7 +17,7 @@
 }
 
 .aboutus-decription-content2{ 
-width: 80%;
+width: 100%;
 margin: 4rem auto;
 text-align: center;
 }
@@ -33,9 +33,12 @@ text-align: center;
 .aboutus-description2{
   
   color: var(--color-primary);;
-  font-weight: 500;
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin-bottom: 4rem;
+  width: 100%;
+  align-items: center;
+  font-weight: 900;
+  color: red;
 }
 
 .aboutus-description3{
@@ -209,10 +212,7 @@ text-align: center;
 
   }
 
-  .aboutus-description2{
-  
-    font-size: 1.6rem;
-  }
+
 
   .aboutus-description-points div {
     justify-self: center;
@@ -272,13 +272,9 @@ text-align: center;
     color: var(--color-primary);
     display: inline-block;
   }
-  .aboutus-description2{
-  
-    font-size: 1.4rem;
-    width: 100%;
-  }
+
   .aboutus-decription-content2{ 
-    width: 90%;
+    width: 50%;
     }
 }
 
@@ -328,21 +324,12 @@ text-align: center;
   .check-pointer{
     padding: 0.5rem 0.5rem;
   }
-  .aboutus-description2{
-  
-    font-size: 1.5rem;
-    align-items: center;
-    font-weight: 600;
-    color: red;
-  }
+
 
   .aboutus-description3{
   
     font-size: 1.5rem;
 
   }
-  .aboutus-decription-content2{ 
-    width: 90%;
-    margin: 4rem auto;
-    }
+ 
 }
