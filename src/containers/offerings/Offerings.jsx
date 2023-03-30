@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import img1 from '../../assets/illustrations/finance-01.png';
+
 import './offerings.css';
 import equity from '../../assets/illustrations/equity.png';
 import mutualFund from '../../assets/illustrations/mf.png';
+import loan from '../../assets/illustrations/loan.png';
 
 export const Offerings = () => {
     return (
@@ -57,7 +58,7 @@ export const Offerings = () => {
                 <div className='offerings-img' data-aos="fade-right"
 
                     data-aos-easing="ease-in-sine">
-                    <img src={img1} alt="Mutual Fund Basket" />
+                    <img src={loan} alt="Mutual Fund Basket" />
                 </div>
                 <div className='offerings__content' data-aos="fade-left">
 
