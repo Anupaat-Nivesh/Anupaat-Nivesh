@@ -20,12 +20,12 @@ const Footer = () => (
             <div className='anupaat__footer-links_logo'>
                 <img src={logo} alt="anupaat_logo" />
                 <div className='AboutUs-Content'>
-                <p> Anupaat Nivesh is an independent financial investment advisory firm, providing guidance to customer for investment in 
-                    Equity Asset class. We are BSE certified mutual fund distributor. </p>
-                <p>Equity Investment are subjected to market risk. Read all scheme-related documents carefully before Investing</p>
-            
+                    <p> Anupaat Nivesh is an independent financial investment advisory firm, providing guidance to customer for investment in
+                        Equity Asset class. We are BSE certified mutual fund distributor. </p>
+                    <p>Equity Investment are subjected to market risk. Read all scheme-related documents carefully before Investing</p>
+
                 </div>
-                </div>
+            </div>
             <div className="anupaat__footer-links_div">
                 <h3 className='footer-heading'> Quick Links</h3>
                 <div className='footer-links'>
@@ -41,7 +41,7 @@ const Footer = () => (
             <div className="anupaat__footer-links_div">
                 <h3 className='footer-heading'>Company</h3>
                 <div className='footer-links'>
-                    <p><a href='#privacy-policy'>Privacy Policy</a></p>
+                    <Link to='privacy-policy'>Privacy Policy</Link>
                     <p><a href='#contact-us'>Contact Us</a></p>
                 </div>
             </div>

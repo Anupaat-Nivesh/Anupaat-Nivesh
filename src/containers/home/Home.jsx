@@ -46,7 +46,7 @@ const Home = () => {
                 <section className="empanelment section__padding section__margin">
                     <div >
                         <h1>Our <span className='section-heading-focus'>Empanelments</span></h1>
-                        <p className="lead">subheading</p></div>
+                        <p className="lead"> </p></div>
                     <div className="empanelment_container">
                         <div data-aos="fade-up">
 
