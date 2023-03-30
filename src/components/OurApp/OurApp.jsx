@@ -32,8 +32,8 @@ const OurApp = (props) => {
       <div className="app-description-box" data-aos="fade-left">
 
         <div className="app-heading-box">
-          <h2 className="app-heading"><span className="section-heading-focus">Be Available</span> Everywhere With
-            our Mobile App</h2>
+          <h2 className="app-heading">Be Available Everywhere With
+            our <br></br><span className="section-heading-focus">Mobile App</span></h2>
         </div>
 
         <ul className="app-description-list">
