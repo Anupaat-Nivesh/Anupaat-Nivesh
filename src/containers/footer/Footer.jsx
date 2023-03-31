@@ -20,29 +20,28 @@ const Footer = () => (
             <div className='anupaat__footer-links_logo'>
                 <img src={logo} alt="anupaat_logo" />
                 <div className='AboutUs-Content'>
-                <p> Anupaat Nivesh is an independent financial investment advisory firm, providing guidance to customer for investment in 
-                    Equity Asset class. We are BSE certified mutual fund distributor. </p>
-                <p className='focused-text'>Equity Investment are subjected to market risk. Read all scheme-related documents carefully before Investing</p>
-            
+                    <p> Anupaat Nivesh is an independent financial investment advisory firm, providing guidance to customer for investment in
+                        Equity Asset class. We are BSE certified mutual fund distributor. </p>
+                    <p className='focused-text'>Equity Investment are subjected to market risk. Read all scheme-related documents carefully before Investing</p>
+
+
                 </div>
-                </div>
+            </div>
             <div className="anupaat__footer-links_div">
                 <h3 className='footer-heading'> Quick Links</h3>
                 <div className='footer-links'>
-                    <p><a href='#faqs'>Home</a></p>
-                    <p><a href='#knowledge-center'>About Us</a></p>
-                    <p><a href='#newsroom'>Why Anupaat Nivesh</a></p>
-                    <p><a href='#documents-and-forms'>Offerings</a></p>
-                    <p><a href='#investor-charter'>Contact Us</a></p>
-                    <p><a href='#investor-grievances-data'>Download our App</a></p>
+                    <Link to='/'>Home</Link>
+                    <Link to='about'>About Us</Link>
+
+
                 </div>
 
             </div>
             <div className="anupaat__footer-links_div">
                 <h3 className='footer-heading'>Company</h3>
                 <div className='footer-links'>
-                    <p><a href='#privacy-policy'>Privacy Policy</a></p>
-                    <p><a href='#contact-us'>Contact Us</a></p>
+                    <Link to='privacy-policy'>Privacy Policy</Link>
+                    <Link to='contact'>Contact Us</Link>
                 </div>
             </div>
             <div className="anupaat__footer-links_div">

@@ -26,10 +26,18 @@ const Home = () => {
     const img4 = require('../../assets/ImpanelmentsImages/empanelment4.png')
     const img5 = require('../../assets/ImpanelmentsImages/empanelment5.png')
     const img6 = require('../../assets/ImpanelmentsImages/empanelment6.png')
+    const img7 = require('../../assets/ImpanelmentsImages/empanelment7.png')
+    const img8 = require('../../assets/ImpanelmentsImages/empanelment8.png')
+    const img9 = require('../../assets/ImpanelmentsImages/empanelment9.png')
+    const img10 = require('../../assets/ImpanelmentsImages/empanelment10.png')
+    const img11 = require('../../assets/ImpanelmentsImages/empanelment11.png')
+    const img12 = require('../../assets/ImpanelmentsImages/empanelment12.png')
+
     return (
         <>
 
             <div className='anupaat_home' id="home">
+
                 <div className="home-section hero-section" >
                     <Carousel />
                 </div>
@@ -46,7 +54,7 @@ const Home = () => {
                 <section className="empanelment section__padding section__margin">
                     <div >
                         <h1>Our <span className='section-heading-focus'>Empanelments</span></h1>
-                        <p className="lead">subheading</p></div>
+                        <p className="lead"> </p></div>
                     <div className="empanelment_container">
                         <div data-aos="fade-up">
 
@@ -56,6 +64,14 @@ const Home = () => {
                             <img src={img4} alt='empanels' />
                             <img src={img5} alt='empanels' />
                             <img src={img6} alt='empanels' />
+                            <img src={img7} alt='empanels' />
+                            <img src={img8} alt='empanels' />
+                            <img src={img9} alt='empanels' />
+                            <img src={img10} alt='empanels' />
+                            <img src={img11} alt='empanels' />
+                            <img src={img12} alt='empanels' />
+
+
 
 
                         </div>

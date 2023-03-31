@@ -23,11 +23,11 @@
     align-items: stretch;
 }
 
-.AboutUs-Content p{
+.AboutUs-Content p {
     font-size: 1.3rem;
     margin-bottom: 1rem;
     text-align: center;
-    color: var( --color-grey-light);
+    color: var(--color-grey-light);
 }
 
 
@@ -50,8 +50,8 @@
 }
 
 .AboutUs {
-font-size: 12rem;
-color:#fff;
+    font-size: 12rem;
+    color: #fff;
 
 }
 
@@ -110,14 +110,14 @@ color:#fff;
     margin-bottom: 0.5rem;
 }
 
-.anupaat__footer-links_div h3.footer-heading{
+.anupaat__footer-links_div h3.footer-heading {
     margin-bottom: 2rem;
 }
 
 
 
 .anupaat__footer-socialicons {
-    justify-content: start;
+    justify-content: flex-start;
     gap: 2rem;
     display: flex;
     margin-bottom: 1rem;

@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useRef } from 'react';
+import emailjs from '@emailjs/browser';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './contact.css';
 
 
@@ -12,6 +15,31 @@ import LinkedInLogo from "../../assets/linkedin.png";
 
 
 const Contact = (props) => {
+    const notify = () => toast.success("Message sent successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+    });
+
+    const form = useRef();
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+
+        emailjs.sendForm('service_f3brm8k', 'template_agep8yl', form.current, 'JtCyATfWMRTUTtcft')
+            .then((result) => {
+                console.log(result.text);
+                console.log("message sent");
+            }, (error) => {
+                console.log(error.text);
+            });
+        e.target.reset();
+    };
 
 
     const [phoneNumber, setPhoneNumber] = React.useState('');
@@ -60,27 +88,27 @@ const Contact = (props) => {
 
                         <p className='section-description cta-text'>Fill up the form and our team will get back to you within <b>24 hours.</b></p>
                     </div>
-                    <form className='cta-form'>
+                    <form className='cta-form' ref={form} onSubmit={sendEmail}>
                         <div>
                             <label htmlFor="first-name">First Name</label>
-                            <input id='first-name' type="text" placeholder='Lokesh' required />
+                            <input id='first-name' type="text" name="first_name" placeholder='Lokesh' required />
                         </div>
                         <div>
                             <label htmlFor="last-name">Last Name</label>
-                            <input id='last-name' type="text" placeholder='Singh' required />
+                            <input id='last-name' type="text" name="last_name" placeholder='Singh' required />
                         </div>
 
 
                         <div>
                             <label htmlFor="email">Email Address</label>
-                            <input type="email" id='email' placeholder='abc@example.com' required onChange={handleMailChange} />
+                            <input type="email" id='email' name="user_email" placeholder='abc@example.com' required onChange={handleMailChange} />
                             <div className='error mail-error'> </div>
                         </div>
 
                         <div>
                             <label htmlFor="contact-number">Phone</label>
                             <div>
-                                <input id='contact-number' placeholder='+91 9499424123' type="tel" onChange={handlePhoneNumberChange} />
+                                <input id='contact-number' name="user_number" placeholder=' 9499424123' type="tel" onChange={handlePhoneNumberChange} />
                                 <div className='error phone-error'> </div>
                             </div>
                         </div>
@@ -91,7 +119,8 @@ const Contact = (props) => {
                             <textarea type="text" id='messsage' name='message' rows="8" cols="80" placeholder='Write your message...' ></textarea>
                         </div>
 
-                        <button type='submit' className='btn btn--form'>SUBMIT</button>
+                        <button type='submit' value="Send" className='btn btn--form' onClick={notify}>SUBMIT</button>
+                        <ToastContainer position="top-right" />
                     </form>
                 </div>
                 <div className='connect-info'>
@@ -100,7 +129,7 @@ const Contact = (props) => {
                         data-aos-offset="500"
                     >
 
-                        <a href='https://www.facebook.com/anupaatnivesh' target="_blank" rel='noreferrer'><img src={FacebookLogo} className='cta-social-icon' alt='socialIconImage'/></a>
+                        <a href='https://www.facebook.com/anupaatnivesh' target="_blank" rel='noreferrer'><img src={FacebookLogo} className='cta-social-icon' alt='socialIconImage' /></a>
                         <a href='https://twitter.com/Anupaatnivesh' target="_blank" rel='noreferrer'><img src={TwitterLogo} className='cta-social-icon' alt='socialIconImage' /></a>
 
                         <a href='https://www.youtube.com/@anupaatnivesh'><img src={YoutubeLogo} className='cta-social-icon' /></a>
