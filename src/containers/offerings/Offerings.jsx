@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+
 
 import './offerings.css';
 import equity from '../../assets/illustrations/equity.png';

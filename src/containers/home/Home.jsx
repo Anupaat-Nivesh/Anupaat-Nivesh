@@ -3,6 +3,7 @@ import './home.css';
 import { Carousel } from './Carousel';
 import { Testimonials } from '../testimonials/Testimonials';
 import { SkillCounter } from '../skillCounter/SkillCounter';
+
 import Whyanupaat from '../whyanupaat/Whyanupaat';
 import About from '../about/About';
 import Offerings from '../offerings/Offerings';

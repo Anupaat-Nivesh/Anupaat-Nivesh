@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 import './navbar.css';
 import { Link, NavLink } from 'react-router-dom';
-import { Link as LinkS, animateScroll as scroll } from 'react-scroll';
+import { animateScroll as scroll } from 'react-scroll';
 import logo from '../../assets/logo.png';
 
 const links = [
@@ -61,7 +61,7 @@ export const Navbar = () => {
                             return (
                                 <li key={id}>
 
-                                    <LinkS className="nav-link" to={id} smooth={true} exact='true' offset={-80} spy={true}>{name} </LinkS>
+                                    <Link className="nav-link" to={id} smooth={true} exact='true' offset={-80} spy={true}>{name} </Link>
 
                                 </li>
                             )
@@ -72,10 +72,9 @@ export const Navbar = () => {
             </div>
             <div className="anupaat__navbar-sign">
 
-                <a href="#ourapp">
-                    <button type="button app-btn">GET THE APP</button>
+                <Link to='ourApp'>
+                    <button type="button">GET THE APP</button></Link>
 
-                </a>
             </div>
 
             <div className="anupaat__navbar-menu">
@@ -101,9 +100,10 @@ export const Navbar = () => {
 
                         </ul>
                         <div className="anupaat__navbar-menu_container-links-sign">
-                            <a href="#ourapp" aria-label='download the app'>
-                                <button type="button">GET THE APP</button>
-                            </a>
+                            <Link to='ourApp'>
+                                <button type="button">GET THE APP</button></Link>
+
+
                         </div>
                     </div>
                 )}

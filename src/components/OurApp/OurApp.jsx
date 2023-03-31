@@ -1,5 +1,4 @@
 import React from "react";
-
 import AppDecription from "./AppDescription";
 import playStore from "../../assets/play-store.png";
 import appScreenShot from "../../assets/appScreenShot.png";
@@ -23,7 +22,7 @@ const OurApp = (props) => {
 
 
   return (
-    <div className="app-section section__padding section__margin" id="ourapp">
+    <div className="app-section section__padding section__margin" id="ourApp">
       <div className="appScreenShot-box" >
         <img src={appScreenShot} alt="appScreenShot" data-aos="fade-right" data-aos-offset="300"
           data-aos-easing="ease-in-sine" />

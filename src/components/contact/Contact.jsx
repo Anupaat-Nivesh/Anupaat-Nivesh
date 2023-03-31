@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './contact.css';
 
 
@@ -13,19 +15,30 @@ import LinkedInLogo from "../../assets/linkedin.png";
 
 
 const Contact = (props) => {
+    const notify = () => toast.success("Message sent successfully!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+    });
 
     const form = useRef();
 
     const sendEmail = (e) => {
         e.preventDefault();
 
-        emailjs.sendForm('service_zqc5voa', 'template_wis52zv', form.current, 'ivC3e8LM8u8MBYAmx')
+        emailjs.sendForm('service_f3brm8k', 'template_agep8yl', form.current, 'JtCyATfWMRTUTtcft')
             .then((result) => {
                 console.log(result.text);
                 console.log("message sent");
             }, (error) => {
                 console.log(error.text);
             });
+        e.target.reset();
     };
 
 
@@ -95,7 +108,7 @@ const Contact = (props) => {
                         <div>
                             <label htmlFor="contact-number">Phone</label>
                             <div>
-                                <input id='contact-number' placeholder='+91 9499424123' type="tel" onChange={handlePhoneNumberChange} />
+                                <input id='contact-number' name="user_number" placeholder=' 9499424123' type="tel" onChange={handlePhoneNumberChange} />
                                 <div className='error phone-error'> </div>
                             </div>
                         </div>
@@ -106,7 +119,8 @@ const Contact = (props) => {
                             <textarea type="text" id='messsage' name='message' rows="8" cols="80" placeholder='Write your message...' ></textarea>
                         </div>
 
-                        <button type='submit' className='btn btn--form'>SUBMIT</button>
+                        <button type='submit' value="Send" className='btn btn--form' onClick={notify}>SUBMIT</button>
+                        <ToastContainer position="top-right" />
                     </form>
                 </div>
                 <div className='connect-info'>
