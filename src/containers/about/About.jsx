@@ -16,15 +16,16 @@ const About = () => {
                 <h1><span className='section-heading-focus'>About</span> Us</h1>
             </div>
 
-            <div className='aboutus-description-section '>
+            <div className='aboutus-description-section'>
                 <div className='aboutus-decription-content1'>
                 <p className='aboutus-description1'> Started in 2018, Anupaat Nivesh is providing one2one consulting to start with your investment journey. Anupaat Nivesh aim to reach out to the common man and extend the opportunity to create wealth by providing them valuable and ethical financial advice. Equity investing has always been an grey area for most of people. However, historically there has been no better way to grow your money exponentially.
-                </p>
+                </p><br></br>
+                <p>We at Anupaat Nivesh help our customers with true and quality advise about investment options which can be huge wealth creator to middle class.</p>
                 </div>
                 
                 <div className='aboutus-decription-content2'>
-                <p className='aboutus-description2'>Investing in the stock market is risky. But if managed and predicted correctly, it will have a high growth rate.
-                We at Anupaat Nivesh help our customers with true and quality advise about investment options which can be huge wealth creator to middle class.</p>
+                <div className='aboutus-description2'>Investing in the stock market is risky. But if managed and predicted correctly, it will have a high growth rate.</div>
+                
                 </div>
 
                 <div className='aboutus-description-points'>

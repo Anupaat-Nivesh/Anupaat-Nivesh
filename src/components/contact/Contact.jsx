@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import './contact.css';
 
 
@@ -12,6 +13,20 @@ import LinkedInLogo from "../../assets/linkedin.png";
 
 
 const Contact = (props) => {
+
+    const form = useRef();
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+
+        emailjs.sendForm('service_zqc5voa', 'template_wis52zv', form.current, 'ivC3e8LM8u8MBYAmx')
+            .then((result) => {
+                console.log(result.text);
+                console.log("message sent");
+            }, (error) => {
+                console.log(error.text);
+            });
+    };
 
 
     const [phoneNumber, setPhoneNumber] = React.useState('');
@@ -60,20 +75,20 @@ const Contact = (props) => {
 
                         <p className='section-description cta-text'>Fill up the form and our team will get back to you within <b>24 hours.</b></p>
                     </div>
-                    <form className='cta-form'>
+                    <form className='cta-form' ref={form} onSubmit={sendEmail}>
                         <div>
                             <label htmlFor="first-name">First Name</label>
-                            <input id='first-name' type="text" placeholder='Lokesh' required />
+                            <input id='first-name' type="text" name="first_name" placeholder='Lokesh' required />
                         </div>
                         <div>
                             <label htmlFor="last-name">Last Name</label>
-                            <input id='last-name' type="text" placeholder='Singh' required />
+                            <input id='last-name' type="text" name="last_name" placeholder='Singh' required />
                         </div>
 
 
                         <div>
                             <label htmlFor="email">Email Address</label>
-                            <input type="email" id='email' placeholder='abc@example.com' required onChange={handleMailChange} />
+                            <input type="email" id='email' name="user_email" placeholder='abc@example.com' required onChange={handleMailChange} />
                             <div className='error mail-error'> </div>
                         </div>
 
@@ -100,7 +115,7 @@ const Contact = (props) => {
                         data-aos-offset="500"
                     >
 
-                        <a href='https://www.facebook.com/anupaatnivesh' target="_blank" rel='noreferrer'><img src={FacebookLogo} className='cta-social-icon' alt='socialIconImage'/></a>
+                        <a href='https://www.facebook.com/anupaatnivesh' target="_blank" rel='noreferrer'><img src={FacebookLogo} className='cta-social-icon' alt='socialIconImage' /></a>
                         <a href='https://twitter.com/Anupaatnivesh' target="_blank" rel='noreferrer'><img src={TwitterLogo} className='cta-social-icon' alt='socialIconImage' /></a>
 
                         <a href='https://www.youtube.com/@anupaatnivesh'><img src={YoutubeLogo} className='cta-social-icon' /></a>

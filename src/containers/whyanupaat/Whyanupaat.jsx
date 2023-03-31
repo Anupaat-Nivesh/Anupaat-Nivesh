@@ -40,8 +40,11 @@ const Whyanupaat = () => {
                             <Card className="whyanupaat_data" key={id} data-aos="fade-up"
                                 data-aos-anchor-placement="top-bottom" data-aos-duration="2000">
                                 <img src={icon} alt="icon" className='card-icon' />
+
+                                <div className='card-content'>
                                 <h3 className='why-block-heading'>{title}</h3>
                                 <small>{text}</small>
+                                </div>
                             </Card>
                         )
                     })

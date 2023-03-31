@@ -17,13 +17,13 @@
 }
 
 .aboutus-decription-content2{ 
-width: 80%;
-margin: 8rem auto;
+width: 100%;
+margin: 4rem auto;
 text-align: center;
 }
 
 
-.aboutus-description1,.aboutus-description2 {
+.aboutus-description1,.aboutus-description2,.aboutus-description3 {
   line-height: 2;
   letter-spacing: 0.09px
 }
@@ -31,13 +31,24 @@ text-align: center;
 
 
 .aboutus-description2{
-  color: var( --color-subtext);
-  font-weight: 400;
-  font-size: 1.8rem;
+  
+  color: var(--color-primary);;
+  font-size: 2rem;
+  margin-bottom: 4rem;
+  width: 100%;
+  align-items: center;
+  font-weight: 900;
+  color: red;
+}
+
+.aboutus-description3{
+  background: var(--color-grey-light);
+  border-radius: 1rem;
 }
 
 
 .aboutus-description-section2 {
+  
   margin-top: 8rem;
   display: flex;
   gap: 6rem;
@@ -115,6 +126,12 @@ text-align: center;
   background: var(--color-grey-light);
   margin-bottom: 2rem;
   padding: 0 1rem;
+  transition: all 0.3s;
+}
+
+.aboutus-wrapper:hover{
+  box-shadow: 0px 0px 10px 2px rgba(91, 91, 91, 0.2);
+  transform: scale(1.02);
 }
 
 .points-text {
@@ -126,7 +143,7 @@ text-align: center;
 
 .check-pointer {
   padding: 1rem 2rem;
-  color: red;
+  color: var(--color-primary);
 
 }
 
@@ -195,10 +212,7 @@ text-align: center;
 
   }
 
-  .aboutus-description2{
-  
-    font-size: 1.6rem;
-  }
+
 
   .aboutus-description-points div {
     justify-self: center;
@@ -258,13 +272,9 @@ text-align: center;
     color: var(--color-primary);
     display: inline-block;
   }
-  .aboutus-description2{
-  
-    font-size: 1.4rem;
-    width: 100%;
-  }
+
   .aboutus-decription-content2{ 
-    width: 90%;
+    width: 50%;
     }
 }
 
@@ -314,12 +324,12 @@ text-align: center;
   .check-pointer{
     padding: 0.5rem 0.5rem;
   }
-  .aboutus-description2{
+
+
+  .aboutus-description3{
   
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+
   }
-  .aboutus-decription-content2{ 
-    width: 90%;
-    margin: 4rem auto;
-    }
+ 
 }

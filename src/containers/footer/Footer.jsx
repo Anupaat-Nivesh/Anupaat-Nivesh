@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/footer-logo.png';
 import { FaRegCopyright, FaPhoneAlt } from 'react-icons/fa';
 import { SiGmail } from "react-icons/si";
 import FacebookLogo from "../../assets/facebook-logo.png";
@@ -22,7 +22,8 @@ const Footer = () => (
                 <div className='AboutUs-Content'>
                     <p> Anupaat Nivesh is an independent financial investment advisory firm, providing guidance to customer for investment in
                         Equity Asset class. We are BSE certified mutual fund distributor. </p>
-                    <p>Equity Investment are subjected to market risk. Read all scheme-related documents carefully before Investing</p>
+                    <p className='focused-text'>Equity Investment are subjected to market risk. Read all scheme-related documents carefully before Investing</p>
+
 
                 </div>
             </div>

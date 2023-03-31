@@ -44,8 +44,8 @@ export const Carousel = () => {
         {
             id:4,
             title: "KAIZEN",
-            description: "Start with",
-            bold: "KAIZEN SIP",
+            description: "Start with ",
+            bold: 'KAIZEN SIP',
             subDescription: "Sometime just a small step is required to start of the journey",
             subText: "Because we know, slow and steady wins the race",
             img: require("../../assets/illustrations/carousel4-illustration.png")
