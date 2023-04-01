@@ -3,7 +3,7 @@ import './whyanupaat.css';
 import Card from 'react-bootstrap/Card';
 
 import { whyanupaatData } from '../../data';
-import whyAnupaatImg from '../../assets/illustrations/whyAnupaatIllustration.png';
+import whyAnupaatImg from '../../assets/illustrations/whyAnupaatIllustration.webp';
 
 const Whyanupaat = () => {
     return (
