@@ -74,11 +74,11 @@ export const whyanupaatData = [
     },
 ]
  /*------TESTIMONIALS------*/ 
- const Avatar1 = require('../src/assets/TestimonialImages/swati.png')
- const Avatar2 = require('../src/assets/TestimonialImages/priya.png')
- const Avatar3 = require('../src/assets/TestimonialImages/aditya.png')
- const Avatar4 = require('../src/assets/TestimonialImages/rupinder.png')
- const Avatar5 = require('../src/assets/TestimonialImages/naveen.png')
+ const Avatar1 = require('../src/assets/TestimonialImages/swati.webp')
+ const Avatar2 = require('../src/assets/TestimonialImages/priya.webp')
+ const Avatar3 = require('../src/assets/TestimonialImages/aditya.webp')
+ const Avatar4 = require('../src/assets/TestimonialImages/rupinder.webp')
+ const Avatar5 = require('../src/assets/TestimonialImages/naveen.webp')
 
 
 

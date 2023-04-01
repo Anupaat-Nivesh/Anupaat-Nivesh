@@ -1,7 +1,7 @@
 import React from "react";
 import AppDecription from "./AppDescription";
 import playStore from "../../assets/play-store.png";
-import appScreenShot from "../../assets/appScreenShot.png";
+import appScreenShot from "../../assets/appScreenShot.webp";
 import "./OurApp.css";
 
 

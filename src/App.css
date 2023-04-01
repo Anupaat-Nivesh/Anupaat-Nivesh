@@ -192,6 +192,10 @@ a {
     font-size: 4.4rem;
   
   }
+  h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
 }
 
 
@@ -254,6 +258,10 @@ a {
 
   .section__padding{
     padding: 2rem 1rem;
+  }
+  h3 {
+    font-size: 1.6rem;
+    font-weight: 600;
   }
 
 }

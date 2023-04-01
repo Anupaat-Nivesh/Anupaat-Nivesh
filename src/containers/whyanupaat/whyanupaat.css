@@ -25,7 +25,7 @@
 }
 
 .why-description {
-    font-size: 1.8rem;
+    font-size: 2rem;
     margin-top: 4rem;
     color: var(--color-primary);
 }
@@ -112,7 +112,6 @@
 
 .card-icon{
     width: 10rem;
-    color:red;
 }
 
 .whyanupaat_data small {
@@ -158,6 +157,10 @@
     .whyanupaat_data {
         gap: 1rem;
     }
+
+    .card-icon{
+        width: 8rem;
+    }
 }
 
 
@@ -186,6 +189,10 @@
         column-gap: 2rem;
         row-gap: 2rem;
         font-size: 1.2rem;
+    }
+
+    .card-icon{
+        width: 6rem;
     }
 }
 
