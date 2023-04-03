@@ -91,11 +91,11 @@ const Contact = (props) => {
                     <form className='cta-form' ref={form} onSubmit={sendEmail}>
                         <div>
                             <label htmlFor="first-name">First Name</label>
-                            <input id='first-name' type="text" name="first_name" placeholder='Lokesh' required />
+                            <input id='first-name' type="text" name="first_name" placeholder='Anuj' required />
                         </div>
                         <div>
                             <label htmlFor="last-name">Last Name</label>
-                            <input id='last-name' type="text" name="last_name" placeholder='Singh' required />
+                            <input id='last-name' type="text" name="last_name" placeholder='Sharma' required />
                         </div>
 
 
@@ -108,7 +108,7 @@ const Contact = (props) => {
                         <div>
                             <label htmlFor="contact-number">Phone</label>
                             <div>
-                                <input id='contact-number' name="user_number" placeholder=' 9499424123' type="tel" onChange={handlePhoneNumberChange} />
+                                <input id='contact-number' name="user_number" placeholder='9243432167' type="tel" onChange={handlePhoneNumberChange} />
                                 <div className='error phone-error'> </div>
                             </div>
                         </div>
@@ -132,9 +132,9 @@ const Contact = (props) => {
                         <a href='https://www.facebook.com/anupaatnivesh' target="_blank" rel='noreferrer'><img src={FacebookLogo} className='cta-social-icon' alt='socialIconImage' /></a>
                         <a href='https://twitter.com/Anupaatnivesh' target="_blank" rel='noreferrer'><img src={TwitterLogo} className='cta-social-icon' alt='socialIconImage' /></a>
 
-                        <a href='https://www.youtube.com/@anupaatnivesh'><img src={YoutubeLogo} className='cta-social-icon' /></a>
-                        <a href="#"><img src={WhatsappLogo} className='cta-social-icon' /></a>
-                        <a href="#"><img src={LinkedInLogo} className='cta-social-icon' /></a>
+                        <a href='https://www.youtube.com/@anupaatnivesh' target="_blank" rel='noreferrer'><img alt='logo' src={YoutubeLogo} className='cta-social-icon' /></a>
+                        <a href='https://wa.me/919501195200' target="_blank" rel='noreferrer'><img alt='logo' src={WhatsappLogo} className='cta-social-icon' /></a>
+                        <a href='https://www.linkedin.com/company/anupaatnivesh/' target="_blank" rel='noreferrer'><img alt='logo' src={LinkedInLogo} className='cta-social-icon' /></a>
 
                     </div>
                 </div>
