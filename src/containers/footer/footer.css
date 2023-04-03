@@ -26,7 +26,7 @@
 .AboutUs-Content p {
     font-size: 1.3rem;
     margin-bottom: 1rem;
-    text-align: center;
+    text-align: left;
     color: var(--color-grey-light);
 }
 
@@ -72,6 +72,7 @@
 
 .anupaat__footer-links_logo img {
     width: 20rem;
+    margin-bottom: 2rem;
 }
 
 .anupaat__footer-links_about h3 {

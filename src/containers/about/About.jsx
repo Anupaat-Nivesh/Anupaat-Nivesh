@@ -2,7 +2,7 @@ import React from 'react'
 import tech from "../../assets/tech.svg";
 import team from "../../assets/team.svg";
 import transparency from "../../assets/transparency.svg";
-import aboutUsIllustration from "../../assets/illustrations/customer-support.png";
+import aboutUsIllustration from "../../assets/illustrations/customer-support.webp";
 import './about.css';
 import OurTeam from './OurTeam';
 import { BsFillCheckCircleFill } from "react-icons/bs";

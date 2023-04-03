@@ -10,6 +10,7 @@ const TeamPersonCard = (props) => {
   const mouseEnterHandler = (event) => {
     event.target.closest('.team-person-card').querySelector('.person-profiles').classList.add('show-person-profiles');
     event.target.closest('.team-person-card').querySelector('.person-info').style.color = "#fff";
+    event.target.closest('.team-person-card').querySelector('.person-designation').style.color = "#fff";
     event.target.closest('.team-person-card').querySelector('.image-container').classList.add('enlarge');
 
 
@@ -25,6 +26,7 @@ const TeamPersonCard = (props) => {
   const mouseLeaveHandler = (event) => {
     event.target.closest('.team-person-card').querySelector('.person-profiles').classList.remove('show-person-profiles');
     event.target.closest('.team-person-card').querySelector('.person-info').style.color = "#000";
+    event.target.closest('.team-person-card').querySelector('.person-designation').style.color = "#FE0101";
 
     event.target.closest('.team-person-card').querySelector('.image-container').classList.remove('enlarge');
 

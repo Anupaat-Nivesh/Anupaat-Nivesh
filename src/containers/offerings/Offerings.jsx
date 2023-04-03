@@ -2,8 +2,8 @@ import React from 'react'
 
 
 import './offerings.css';
-import equity from '../../assets/illustrations/equity.png';
-import mutualFund from '../../assets/illustrations/mf.png';
+import equity from '../../assets/illustrations/equity.webp';
+import mutualFund from '../../assets/illustrations/mf.webp';
 import loan from '../../assets/illustrations/loan.webp';
 
 export const Offerings = () => {
