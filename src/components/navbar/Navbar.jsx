@@ -66,7 +66,7 @@ export const Navbar = () => {
                             return (
                                 <li key={id}>
 
-                                    <Link className="nav-link" to={id} smooth={true} exact='true' spy={true}>{name} </Link>
+                                    <Link className="nav-link" to={id} exact='true' spy={true}>{name} </Link>
 
                                 </li>
                             )
