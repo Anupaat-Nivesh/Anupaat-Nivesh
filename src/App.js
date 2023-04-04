@@ -6,6 +6,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 import './App.css' ;
+import ScrollToTop from './components/ScrollToTop';
 
 
 AOS.init();
@@ -14,6 +15,7 @@ function App() {
  return (
   
     <BrowserRouter>
+    <ScrollToTop/>
     <Navbar/>
   
       <Routes>

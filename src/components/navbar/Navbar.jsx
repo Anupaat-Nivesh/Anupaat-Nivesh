@@ -8,8 +8,8 @@ import logo from '../../assets/logo.png';
 const links = [
     {
         name: "Home",
-        path: '/home',
-        id: 'home'
+        path: '/',
+        id: ''
     },
     {
         name: "About",
@@ -66,7 +66,7 @@ export const Navbar = () => {
                             return (
                                 <li key={id}>
 
-                                    <Link className="nav-link" to={id} smooth={true} exact='true' offset={-80} spy={true}>{name} </Link>
+                                    <Link className="nav-link" to={id} smooth={true} exact='true' spy={true}>{name} </Link>
 
                                 </li>
                             )
