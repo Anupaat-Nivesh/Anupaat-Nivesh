@@ -51,7 +51,7 @@ const Home = () => {
                 <section className='home-section contact-section'><Contact /></section>
                 <section className='home-section our-app-section'><OurApp /></section>
 
-                <section className="empanelment section__padding section__margin">
+                <section className="empanelment section__padding section__margin home-section">
                     <div >
                         <h1>Our <span className='section-heading-focus'>Empanelments</span></h1>
                         <p className="lead"> </p></div>

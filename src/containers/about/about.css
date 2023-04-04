@@ -170,11 +170,16 @@ text-align: center;
 
 
 .aboutus-illustration {
-  width: 75rem;
-  height: relative;
+  width: 100%;
 }
 
+/* ******************************** */
+/* BELOW 1344px (Smaller desktops) */
+/* ******************************** */
 
+@media(max-width: 84em) {
+  
+}
 
 
 /* ******************************** */
@@ -183,9 +188,7 @@ text-align: center;
 
 
 @media(max-width: 75em) {
-  .aboutus-illustration {
-    width: 80%
-  }
+  
 
   .aboutus-description-section2 {
     display: flex;
@@ -211,7 +214,7 @@ text-align: center;
 
   .aboutus-illustration {
     justify-self: center;
-
+width: 80%;
   }
 
 

@@ -117,8 +117,9 @@
 
     .skill-items {
         width: 100%;
-        height: 31vmin;
+        height: 32vmin;
         font-size: 1.4rem;
+        padding: 1rem;
     }
 
     .skill-counter-icon {
