@@ -186,4 +186,8 @@
         font-size: 27px;
         line-height: 38px;
     }
+
+    .anupaat__footer{
+        padding: 2rem 2rem 1rem 2rem;
+    }
 }

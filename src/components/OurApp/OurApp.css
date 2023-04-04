@@ -97,7 +97,10 @@ transform: translateY(-2px);
     margin-top: 1rem;
     font-size: 1.8rem;
   }
-
+  .store-img{
+    width: 15rem;
+    
+  }
 
 
 
@@ -175,7 +178,10 @@ transform: translateY(-2px);
   .description {
     font-size: 1.6rem;
   }
-
+  .store-img{
+    width: 12rem;
+   
+  }
 
   .android-app {
     width: 15rem;
