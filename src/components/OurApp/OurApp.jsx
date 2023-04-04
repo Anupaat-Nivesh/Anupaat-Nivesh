@@ -33,7 +33,7 @@ const OurApp = (props) => {
 
         <div className="app-heading-box">
           <h2 className="app-heading">Be Available Everywhere With
-            our <span className="section-heading-focus">Mobile App</span></h2>
+            our <br /> <span className="section-heading-focus">Mobile App</span></h2>
         </div>
 
         <ul className="app-description-list">
@@ -48,7 +48,7 @@ const OurApp = (props) => {
   <img src={playStore} alt="AppStoreLogo" className="store-img android-store__img"/>
 </a>
 
-<a href="https://play.google.com/store/apps/details?id=com.dwt.AnupaatNivesh" target="_blank" rel='noreferrer'>
+<a href="https://apps.apple.com/app/id6446801290" target="_blank" rel='noreferrer'>
 
   <img src={appStore} alt="AppStoreLogo" className="store-img apple-store__img"/>
 </a>
