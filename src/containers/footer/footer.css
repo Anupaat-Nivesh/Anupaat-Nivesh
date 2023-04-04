@@ -44,10 +44,7 @@
     cursor: pointer;
 }
 
-.footer-heading {
-    font-size: 12rem;
 
-}
 
 .AboutUs {
     font-size: 12rem;
@@ -79,7 +76,7 @@
     font-size: 16px;
     line-height: 17px;
     font-family: var(--font-family);
-    color: var(--color-subtext-light);
+
 
     margin-bottom: 0.9rem;
 }
@@ -104,10 +101,10 @@
 }
 
 .anupaat__footer-links_div h3 {
-    font-size: 1.8rem;
+    font-size: 1.9rem;
     line-height: 17px;
     font-weight: 500;
-    color: var(--color-subtext-light);
+    color: #fff;
     margin-bottom: 0.5rem;
 }
 
@@ -187,7 +184,7 @@
         line-height: 38px;
     }
 
-    .anupaat__footer{
+    .anupaat__footer {
         padding: 2rem 2rem 1rem 2rem;
     }
 }

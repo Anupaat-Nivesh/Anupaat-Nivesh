@@ -7,6 +7,11 @@ import logo from '../../assets/logo.png';
 
 const links = [
     {
+        name: "Home",
+        path: '/home',
+        id: 'home'
+    },
+    {
         name: "About",
         path: '/about',
         id: 'about'
