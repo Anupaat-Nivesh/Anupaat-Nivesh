@@ -49,7 +49,7 @@ const TeamPersonCard = (props) => {
     </div>
     <div className="person-profiles" onMouseEnter={mouseEnterHandler}>
 
-      <div className="profile"><a href='#'><img src={LinkedInLogo} alt="logo" /></a></div>
+      {/* <div className="profile"><a href='#'><img src={LinkedInLogo} alt="logo" /></a></div> */}
 
     </div>
   </div>
