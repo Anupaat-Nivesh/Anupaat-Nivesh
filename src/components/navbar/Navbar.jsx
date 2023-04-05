@@ -105,8 +105,8 @@ export const Navbar = () => {
 
                         </ul>
                         <div className="anupaat__navbar-menu_container-links-sign">
-                            <Link to='ourApp'>
-                                <button type="button">GET THE APP</button></Link>
+                            <NavLink to='ourApp' onClick={() => setToggleMenu(prev => !prev)}>
+                                <button type="button">GET THE APP</button></NavLink>
 
 
                         </div>
