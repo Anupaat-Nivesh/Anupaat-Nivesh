@@ -86,7 +86,7 @@ const Contact = (props) => {
             firstNameError.textContent = '';
             setIsFirstNameValid(true);
         } else {
-            firstNameError.textContent = '*Invalid Number';
+            firstNameError.textContent = '*Invalid Input';
             setIsFirstNameValid(true);
         }
     };
@@ -104,7 +104,7 @@ const Contact = (props) => {
             lastNameError.textContent = '';
             setIsLastNameValid(true);
         } else {
-            lastNameError.textContent = '*Invalid Number';
+            lastNameError.textContent = '*Invalid Input';
             setIsLastNameValid(true);
         }
     };
