@@ -1,5 +1,6 @@
 {
   "files": {
+<<<<<<< HEAD
     "main.css": "./static/css/main.e116a659.css",
     "main.js": "./static/js/main.71c2181a.js",
     "static/js/787.ad98b615.chunk.js": "./static/js/787.ad98b615.chunk.js",
@@ -62,5 +63,66 @@
   "entrypoints": [
     "static/css/main.e116a659.css",
     "static/js/main.71c2181a.js"
+=======
+    "main.css": "/static/css/main.5e496eec.css",
+    "main.js": "/static/js/main.fdf70924.js",
+    "static/js/27.4df1013c.chunk.js": "/static/js/27.4df1013c.chunk.js",
+    "static/media/carousel4-illustration.webp": "/static/media/carousel4-illustration.47398d72cf080659ef1b.webp",
+    "static/media/mf.webp": "/static/media/mf.ea767559547954427c67.webp",
+    "static/media/equity.webp": "/static/media/equity.aef8280a43ea076620ee.webp",
+    "static/media/carousel3-illustration.webp": "/static/media/carousel3-illustration.b7eba6a34356da6cf5a8.webp",
+    "static/media/carousel2-illustration.webp": "/static/media/carousel2-illustration.d25d73a23c3e0d024f56.webp",
+    "static/media/loan.webp": "/static/media/loan.cb9eda1859f3f08ab909.webp",
+    "static/media/empanelment1.png": "/static/media/empanelment1.937a0fcc1717ec8da84d.png",
+    "static/media/customer-support.webp": "/static/media/customer-support.042e7b8a13ec5a7360d5.webp",
+    "static/media/empanelment2.png": "/static/media/empanelment2.e62d78d5ef74d015d572.png",
+    "static/media/empanelment4.png": "/static/media/empanelment4.794e99c0d7c60da9b700.png",
+    "static/media/empanelment3.png": "/static/media/empanelment3.dcafb9f2bc359a918692.png",
+    "static/media/empanelment5.png": "/static/media/empanelment5.fb6baf5e4236a44b022c.png",
+    "static/media/appScreenShot.webp": "/static/media/appScreenShot.c2d73d7efdd35277615b.webp",
+    "static/media/logo.png": "/static/media/logo.e653e167e91f9df6251e.png",
+    "static/media/whyAnupaatIllustration.webp": "/static/media/whyAnupaatIllustration.70ac54597e1cf8b0a045.webp",
+    "static/media/naveen.webp": "/static/media/naveen.c0a85fb8699cb2f0c516.webp",
+    "static/media/empanelment6.png": "/static/media/empanelment6.1e3caf6524fa0f996b3c.png",
+    "static/media/icon3.jpg": "/static/media/icon3.1e7049370a1228758713.jpg",
+    "static/media/icon1.jpg": "/static/media/icon1.3d1856bf011f96499660.jpg",
+    "static/media/empanelment12.png": "/static/media/empanelment12.69f6bb8ab3c997a19c2a.png",
+    "static/media/carousel1-illustration.webp": "/static/media/carousel1-illustration.9bf7e0f0f960d0b8ab54.webp",
+    "static/media/empanelment10.png": "/static/media/empanelment10.bfc77378a0a816e71e2a.png",
+    "static/media/framework.png": "/static/media/framework.b12d0dd007e20431bf63.png",
+    "static/media/icon2.jpg": "/static/media/icon2.2396c351481550f1f8a7.jpg",
+    "static/media/icon4.jpg": "/static/media/icon4.63d0da941c9dd27d164d.jpg",
+    "static/media/empanelment11.png": "/static/media/empanelment11.cfa7ddf8e840b4f8ca4e.png",
+    "static/media/empanelment9.png": "/static/media/empanelment9.2e3fa8ab6b49a8e54a64.png",
+    "static/media/icon5.jpg": "/static/media/icon5.1a971fa0a96bb5e8971d.jpg",
+    "static/media/rupinder.webp": "/static/media/rupinder.72b4220709e0de031b79.webp",
+    "static/media/swati.webp": "/static/media/swati.17666019c236a1948a6c.webp",
+    "static/media/aditya.webp": "/static/media/aditya.b161c4fead0099350f99.webp",
+    "static/media/play-store.png": "/static/media/play-store.ed9a87f39e3636a0b548.png",
+    "static/media/empanelment7.png": "/static/media/empanelment7.e9db596fde5416621f18.png",
+    "static/media/empanelment8.png": "/static/media/empanelment8.da2707e3b913d4be4445.png",
+    "static/media/akash.webp": "/static/media/akash.b1d3b6edb1fbff2b39e0.webp",
+    "static/media/tech.png": "/static/media/tech.dc17bf303fa283a0f6a4.png",
+    "static/media/apple-store.png": "/static/media/apple-store.4dd6be5f314b0b5def63.png",
+    "static/media/team.png": "/static/media/team.3ed86b21d2dd95d7a9ce.png",
+    "static/media/gaurav.webp": "/static/media/gaurav.5cd7da093ae2934a8d69.webp",
+    "static/media/kanishk.webp": "/static/media/kanishk.3e876970635921b4d00f.webp",
+    "static/media/beant.webp": "/static/media/beant.1a6ce4e4179138f2b970.webp",
+    "static/media/ratio.png": "/static/media/ratio.b6acadc48162faacd053.png",
+    "static/media/india.png": "/static/media/india.5b3166b26b75b13cd582.png",
+    "static/media/lokesh.webp": "/static/media/lokesh.0e0e254e5ce418d98401.webp",
+    "static/media/vimple.webp": "/static/media/vimple.2c1ee30b47c190692ef2.webp",
+    "static/media/harshita.webp": "/static/media/harshita.75c9ec81c97cc0e1dac0.webp",
+    "static/media/priya.webp": "/static/media/priya.9f1c8ed3b74d22331168.webp",
+    "static/media/mohit.webp": "/static/media/mohit.2c14ad2b16577ed8ecaf.webp",
+    "static/media/tech.svg": "/static/media/tech.869da6f33b0ef240a16e1da9f1f0d306.svg",
+    "static/media/transparency.svg": "/static/media/transparency.9acb7a36c51f52d91da502f3199714a1.svg",
+    "index.html": "/index.html",
+    "static/media/team.svg": "/static/media/team.abfd084f1d827950a933c759b00a0f1e.svg"
+  },
+  "entrypoints": [
+    "static/css/main.5e496eec.css",
+    "static/js/main.fdf70924.js"
+>>>>>>> acd5ce73a4971ac9bdc60884e7e31fe65c8c3a58
   ]
 }

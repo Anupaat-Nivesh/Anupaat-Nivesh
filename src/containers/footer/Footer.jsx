@@ -50,12 +50,12 @@ const Footer = () => (
                 <h3 className='footer-heading'>Connect with us</h3>
                 <div className='contact-info footer-links'>
                     <div className='anupaat__footer-socialicons'>
-                        <a href='https://wa.me/919501195200'><img src={WhatsappLogo} alt="logo" /></a>
-                        <a href='https://www.facebook.com/anupaatnivesh'><img src={FacebookLogo} alt="logo" /></a>
-                        <a href='https://twitter.com/Anupaatnivesh'><img src={TwitterLogo} alt="logo" /></a>
-                        <a href='https://www.youtube.com/@anupaatnivesh'><img src={YoutubeLogo} alt="logo" /></a>
+                        <a href='https://wa.me/919501195200' target="_blank" rel='noreferrer'><img src={WhatsappLogo} alt="logo" /></a>
+                        <a href='https://www.facebook.com/anupaatnivesh' target="_blank" rel='noreferrer'><img src={FacebookLogo} alt="logo" /></a>
+                        <a href='https://twitter.com/Anupaatnivesh' target="_blank" rel='noreferrer'><img src={TwitterLogo} alt="logo" /></a>
+                        <a href='https://www.youtube.com/@anupaatnivesh' target="_blank" rel='noreferrer'><img src={YoutubeLogo} alt="logo" /></a>
 
-                        <a href='https://www.linkedin.com/company/anupaatnivesh/'><img src={LinkedInLogo} alt="logo" /></a>
+                        <a href='https://www.linkedin.com/company/anupaatnivesh/' target="_blank" rel='noreferrer'><img src={LinkedInLogo} alt="logo" /></a>
                     </div>
                     <a className='contact-number' href='tel:95011 95200' ><FaPhoneAlt /> +91 95011 95200</a>
                     <a className='contact-mail' href="mailto:contact@anupaatnivesh.com">< SiGmail /> contact@anupaatnivesh.com</a>
