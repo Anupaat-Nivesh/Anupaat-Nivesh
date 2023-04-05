@@ -45,7 +45,7 @@ const OurTeam = () => {
       img: require("../../assets/teamProfiles/lokesh.webp")
     },
     {
-      name: "Vimple Chugh",
+      name: "Vimple",
       designation: "Business Executive",
       img: require("../../assets/teamProfiles/vimple.webp")
     }
