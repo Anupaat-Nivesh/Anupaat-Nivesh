@@ -61,7 +61,7 @@ export const whyanupaatData = [
     {
         id: 5,
         icon:ratio,
-        title: "Right Propotional Investment",
+        title: "Right Proportional Investment",
         text: "We match your objectives to the have right allocation to suit your investment needs and boost your portfolio retunrs.",
 
     },
