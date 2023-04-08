@@ -15,7 +15,7 @@ const OurTeam = () => {
       img: require("../../assets/teamProfiles/akash.webp")
     },
     {
-      name: "Gourav Chugh",
+      name: "Gaurav Chugh",
       designation: "Technology Consultant",
       img: require("../../assets/teamProfiles/gaurav.webp")
     },
