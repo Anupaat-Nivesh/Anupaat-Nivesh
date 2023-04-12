@@ -54,7 +54,7 @@ const OurTeam = () => {
   return (
     <div>
       <div className="team-title section__padding" data-aos="fade-up"
-        data-aos-duration="3000">
+        data-aos-duration="1000">
         <h2>Our <span className='section-heading-focus'>Super Heroes</span></h2>
         <p className="lead">Meet our Young, Energetic and Skillfull Team</p>
       </div>
