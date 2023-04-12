@@ -28,20 +28,16 @@ const OurApp = (props) => {
         <img src={appScreenShot} alt="appScreenShot" data-aos="fade-right" data-aos-offset="300"
           data-aos-easing="ease-in-sine" />
       </div>
-
+    
       <div className="app-description-box" data-aos="fade-left">
 
+      
         <div className="app-heading-box">
           <h2 className="app-heading">Be Available Everywhere With
             our <br /> <span className="section-heading-focus">Mobile App</span></h2>
         </div>
-
-        <ul className="app-description-list">
-          <AppDecription appDescription={appDescription} />
-        </ul>
-
-        <h3 className="description secondary-heading">Explore Our Apps</h3>
-        {/* https://play.google.com/store/apps/details?id=com.dwt.AnupaatNivesh */}
+        {/*<h3 className="description secondary-heading">Explore Our Apps</h3>
+         https://play.google.com/store/apps/details?id=com.dwt.AnupaatNivesh */}
         <div className="app-store_box">
 <a href="https://play.google.com/store/apps/details?id=com.dwt.AnupaatNivesh" target="_blank" rel='noreferrer'>
 
@@ -53,6 +49,11 @@ const OurApp = (props) => {
   <img src={appStore} alt="AppStoreLogo" className="store-img apple-store__img"/>
 </a>
         </div>
+        <ul className="app-description-list">
+          <AppDecription appDescription={appDescription} />
+        </ul>
+
+        
 
       </div>
     </div>

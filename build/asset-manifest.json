@@ -1,9 +1,10 @@
 {
   "files": {
-    "main.css": "./static/css/main.0bfaf100.css",
-    "main.js": "./static/js/main.92a1aabd.js",
+    "main.css": "./static/css/main.dbb6e92e.css",
+    "main.js": "./static/js/main.0521a65c.js",
     "static/js/27.4df1013c.chunk.js": "./static/js/27.4df1013c.chunk.js",
     "static/media/carousel4-illustration.webp": "./static/media/carousel4-illustration.47398d72cf080659ef1b.webp",
+    "static/media/pre-carousel4-illustration.webp": "./static/media/pre-carousel4-illustration.9584d56b4f9aee5552be.webp",
     "static/media/mf.webp": "./static/media/mf.ea767559547954427c67.webp",
     "static/media/equity.webp": "./static/media/equity.aef8280a43ea076620ee.webp",
     "static/media/carousel3-illustration.webp": "./static/media/carousel3-illustration.b7eba6a34356da6cf5a8.webp",
@@ -33,6 +34,7 @@
     "static/media/icon5.jpg": "./static/media/icon5.1a971fa0a96bb5e8971d.jpg",
     "static/media/rupinder.webp": "./static/media/rupinder.72b4220709e0de031b79.webp",
     "static/media/swati.webp": "./static/media/swati.17666019c236a1948a6c.webp",
+    "static/media/pre-carousel1-illustration.webp": "./static/media/pre-carousel1-illustration.801e68419fee07ef0a7b.webp",
     "static/media/aditya.webp": "./static/media/aditya.b161c4fead0099350f99.webp",
     "static/media/play-store.png": "./static/media/play-store.ed9a87f39e3636a0b548.png",
     "static/media/empanelment7.png": "./static/media/empanelment7.e9db596fde5416621f18.png",
@@ -41,14 +43,18 @@
     "static/media/tech.png": "./static/media/tech.dc17bf303fa283a0f6a4.png",
     "static/media/apple-store.png": "./static/media/apple-store.4dd6be5f314b0b5def63.png",
     "static/media/team.png": "./static/media/team.3ed86b21d2dd95d7a9ce.png",
+    "static/media/pre-whyAnupaatIllustration.webp": "./static/media/pre-whyAnupaatIllustration.2fd2a3d354a6b46a234c.webp",
     "static/media/gaurav.webp": "./static/media/gaurav.5cd7da093ae2934a8d69.webp",
     "static/media/kanishk.webp": "./static/media/kanishk.3e876970635921b4d00f.webp",
     "static/media/beant.webp": "./static/media/beant.1a6ce4e4179138f2b970.webp",
     "static/media/ratio.png": "./static/media/ratio.b6acadc48162faacd053.png",
+    "static/media/pre-carousel2-illustration.webp": "./static/media/pre-carousel2-illustration.0bfaf656909d6f218e54.webp",
     "static/media/india.png": "./static/media/india.5b3166b26b75b13cd582.png",
     "static/media/lokesh.webp": "./static/media/lokesh.0e0e254e5ce418d98401.webp",
+    "static/media/pre-customer-support.webp": "./static/media/pre-customer-support.3e1bb8ff61233e95a002.webp",
     "static/media/vimple.webp": "./static/media/vimple.2c1ee30b47c190692ef2.webp",
     "static/media/harshita.webp": "./static/media/harshita.75c9ec81c97cc0e1dac0.webp",
+    "static/media/pre-carousel3-illustration.webp": "./static/media/pre-carousel3-illustration.c551a488e612fb641964.webp",
     "static/media/priya.webp": "./static/media/priya.9f1c8ed3b74d22331168.webp",
     "static/media/mohit.webp": "./static/media/mohit.2c14ad2b16577ed8ecaf.webp",
     "static/media/tech.svg": "./static/media/tech.869da6f33b0ef240a16e1da9f1f0d306.svg",
@@ -57,7 +63,7 @@
     "static/media/team.svg": "./static/media/team.abfd084f1d827950a933c759b00a0f1e.svg"
   },
   "entrypoints": [
-    "static/css/main.0bfaf100.css",
-    "static/js/main.92a1aabd.js"
+    "static/css/main.dbb6e92e.css",
+    "static/js/main.0521a65c.js"
   ]
 }
