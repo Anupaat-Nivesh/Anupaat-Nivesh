@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import './carousel.css';
 import { CarouselItem } from "./CarouselItem";
 
@@ -9,7 +9,11 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 export const Carousel = () => {
-    const [activeIndex, setActiveIndex] = useState(0);
+   
+    
+
+    
+    
 
     const items = [
         {
@@ -19,7 +23,7 @@ export const Carousel = () => {
             bold: " INVESTING!",
             subDescription: "High income does not lead to wealth. It is high savings with right Investment.",
             subText: "Stack up with your financial foundation and get personalized advisory",
-
+            preimg:require("../../assets/illustrations/pre-carousel1-illustration.webp"),
             img: require("../../assets/illustrations/carousel1-illustration.webp"),
         },
         {
@@ -29,7 +33,7 @@ export const Carousel = () => {
             bold: 'Financial Freedom',
             subDescription: "When it comes to long-term investing, doing 'LESS' is often 'MORE'.",
             subText: "Start SIP to meet your long-term financial goals",
-
+            preimg:require("../../assets/illustrations/pre-carousel2-illustration.webp"),
             img: require("../../assets/illustrations/carousel2-illustration.webp"),
         },
         {
@@ -39,6 +43,7 @@ export const Carousel = () => {
             bold: 'Investment Wave',
             subDescription: "You will make big money if you don't go behind quick money.",
             subText: "Subscribe to our curated Equity Baskets & be ahead in your investment journey",
+            preimg:require("../../assets/illustrations/pre-carousel3-illustration.webp"),
             img: require("../../assets/illustrations/carousel3-illustration.webp"),
         },
         {
@@ -48,6 +53,7 @@ export const Carousel = () => {
             bold: 'KAIZEN SIP',
             subDescription: "Sometime just a small step is required to start of the journey",
             subText: "Because we know, slow and steady wins the race",
+            preimg:require("../../assets/illustrations/pre-carousel4-illustration.webp"),
             img: require("../../assets/illustrations/carousel4-illustration.webp")
 
         }
@@ -56,22 +62,25 @@ export const Carousel = () => {
 
     return (
         <Swiper
+        
             spaceBetween={50}
             slidesPerView={1}
             loop={true}
-            autoplay={{
-                delay: 5000,
-                disableOnInteraction: false,
-            }}
+            // autoplay={{
+            //     delay: 5000,
+            //    disableOnInteraction:true,
+            //    pauseOnMouseEnter:true
+            // }}
+  
             navigation={false} grabCursor={true} pagination={{
                 clickable: true,
-            }} modules={[Navigation, Pagination,Autoplay]}
+            }} modules={[Navigation, Pagination]}
             className="carousel-swiper"
         >
 
             {items.map((item) => {
                 return <SwiperSlide className="carousel-swiper-slide" key={item.id}>
-                    <CarouselItem item={item} width={"100%"} itemIndex={activeIndex} />
+                    <CarouselItem item={item} width={"100%"} />
                 </SwiperSlide>
             })}
 
