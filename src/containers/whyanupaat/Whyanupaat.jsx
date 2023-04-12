@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 
 import { whyanupaatData } from '../../data';
 import whyAnupaatImg from '../../assets/illustrations/whyAnupaatIllustration.webp';
+import preWhyAnupaatImg from '../../assets/illustrations/pre-whyAnupaatIllustration.webp';
 
 const Whyanupaat = () => {
     return (
@@ -16,7 +17,7 @@ const Whyanupaat = () => {
                 <div className="anupaat__whyanupaat-heading">
 
 
-                    <div className='anupaat_whyanupaat-heading-explanation' data-aos="zoom-in-right" data-aos-duration="3000">
+                    <div className='anupaat_whyanupaat-heading-explanation' data-aos="zoom-in-right" data-aos-duration="1000">
                         <div className='whyanupaat-subheading '>
                             <h2 className='secondary-heading'>Experience An Enhanced Online Investment Platform</h2>
                         </div>
@@ -29,8 +30,12 @@ const Whyanupaat = () => {
                         </p></div>
                     </div>
                 </div>
-                <div className='whyanupaat-title-image' data-aos="zoom-in-left" data-aos-duration="3000">
-                    <img src={whyAnupaatImg} alt="questionimage" />
+                <div className='whyanupaat-title-image' data-aos="zoom-in-left" data-aos-duration="1000">
+                    <picture>
+                        <source srcSet={whyAnupaatImg} type='image/webp' />
+                        <source srcSet={preWhyAnupaatImg} type='image/webp' />
+                        <img src={whyAnupaatImg} alt="questionimage" />
+                    </picture>
                 </div>
             </div>
             <div className="anupaat__card-container">
@@ -38,12 +43,12 @@ const Whyanupaat = () => {
                     whyanupaatData.map(({ icon, title, text }, id) => {
                         return (
                             <Card className="whyanupaat_data" key={id} data-aos="fade-up"
-                                data-aos-anchor-placement="top-bottom" data-aos-duration="2000">
+                                data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
                                 <img src={icon} alt="icon" className='card-icon' />
 
                                 <div className='card-content'>
-                                <h3 className='why-block-heading'>{title}</h3>
-                                <small>{text}</small>
+                                    <h3 className='why-block-heading'>{title}</h3>
+                                    <small>{text}</small>
                                 </div>
                             </Card>
                         )
