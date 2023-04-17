@@ -5,6 +5,7 @@
   display: grid;
   grid-template-columns: 1fr 2fr;
   column-gap: 2rem;
+  margin-top: 8rem;
 }
 
 
@@ -16,7 +17,7 @@
   justify-self: center;
   align-self: center;
   color: var(--color-subtext);
-  
+
 }
 
 .appScreenShot-box {
@@ -26,7 +27,7 @@
   justify-self: start;
 }
 
-.app-screenshot-img{
+.app-screenshot-img {
   width: 30rem;
 }
 
@@ -44,19 +45,20 @@
   line-height: 1.5;
 }
 
-.app-store_box{
+.app-store_box {
   display: flex;
   gap: 4rem;
   flex-direction: column;
 }
 
-.store-img{
+.store-img {
   width: 20rem;
   border-radius: 1rem;
   transition: all 0.3s;
 }
-.store-img:hover{
-transform: translateY(-2px);
+
+.store-img:hover {
+  transform: translateY(-2px);
 }
 
 
@@ -65,7 +67,7 @@ transform: translateY(-2px);
   box-shadow: 0 0 10px 6px rgba(0, 0, 0.5, 0.1);
 }
 
-.section-heading-focus{
+.section-heading-focus {
   display: inline-block;
 }
 
@@ -99,9 +101,10 @@ transform: translateY(-2px);
     margin-top: 1rem;
     font-size: 1.8rem;
   }
-  .store-img{
+
+  .store-img {
     width: 15rem;
-    
+
   }
 
 
@@ -180,9 +183,10 @@ transform: translateY(-2px);
   .description {
     font-size: 1.6rem;
   }
-  .store-img{
+
+  .store-img {
     width: 12rem;
-   
+
   }
 
   .android-app {
