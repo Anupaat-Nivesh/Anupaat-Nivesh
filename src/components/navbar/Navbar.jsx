@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 import './navbar.css';
 import { Link, NavLink } from 'react-router-dom';
-import { animateScroll as scroll } from 'react-scroll';
+import { animateScroll } from 'react-scroll';
+
 import logo from '../../assets/logo.png';
 
 const links = [
@@ -34,7 +35,7 @@ const links = [
     },
 ]
 
-export const Navbar = () => {
+const Navbar = () => {
     const [toggleMenu, setToggleMenu] = useState(false);
     const [anupaat__navbar, setNavbar] = useState(false);
     const changeNav = () => {
@@ -48,9 +49,11 @@ export const Navbar = () => {
     useEffect(() => {
         window.addEventListener('scroll', changeNav)
     }, []);
+
+
     /*On clicking the logo it will scroll to top*/
     const toggleHome = () => {
-        scroll.scrollToTop();
+        animateScroll.scrollToTop();
     }
     return (
         <div className={anupaat__navbar ? 'anupaat__navbar active' : 'anupaat__navbar'}>
@@ -113,7 +116,7 @@ export const Navbar = () => {
                     </div>
                 )}
             </div>
-        </div>
+        </div >
 
     );
 };

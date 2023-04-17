@@ -1,5 +1,5 @@
 import React from "react";
-import LinkedInLogo from "../../assets/linkedin.png";
+
 
 const TeamPersonCard = (props) => {
 

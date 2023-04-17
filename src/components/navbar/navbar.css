@@ -11,7 +11,6 @@ font-weight: 450
     padding: 1rem 4rem;
     font-size: 1.8rem;
     position: sticky;
-    /* position: relative; */
     top: 0;
     color: var(--color-secondary);
     font-family: var(--font-family);
@@ -22,6 +21,7 @@ font-weight: 450
 
 .anupaat__navbar.active {
     background: var(--color-primary-light);
+
 }
 
 .anupaat__navbar-links {
