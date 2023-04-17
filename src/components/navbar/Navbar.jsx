@@ -49,8 +49,6 @@ const Navbar = () => {
     useEffect(() => {
         window.addEventListener('scroll', changeNav)
     }, []);
-
-
     /*On clicking the logo it will scroll to top*/
     const toggleHome = () => {
         animateScroll.scrollToTop();

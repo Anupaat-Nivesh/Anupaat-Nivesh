@@ -7,11 +7,16 @@ font-weight: 450
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 10;
+
     padding: 1rem 4rem;
     font-size: 1.8rem;
-    position: sticky;
+    position: fixed;
+    /*for sticky navbar on top, Don't change*/
     top: 0;
+    /*for sticky navbar on top, Don't change*/
+    width: 100%;
+    /*for full size navbar Don't change*/
+    z-index: 99;
     color: var(--color-secondary);
     font-family: var(--font-family);
     background: #ffffff;
