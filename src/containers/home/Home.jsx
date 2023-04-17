@@ -39,15 +39,17 @@ const Home = () => {
             <div className='anupaat_home' id="home">
 
                 <div className="home-section hero-section" >
-                    <Carousel />
+                    <Carousel/>
                 </div>
 
+                <section className='home-section offerings-section'>   <Offerings /></section>
                 <section className='home-section about-section'> <About /></section>
+                
                 <section className='home-section why-section'><Whyanupaat /></section>
                 <SkillCounter />
                 <section className='home-section testimonials-section'><Testimonials /></section>
 
-                <section className='home-section offerings-section'>   <Offerings /></section>
+                
                 <section className='home-section contact-section'><Contact /></section>
                 <section className='home-section our-app-section'><OurApp /></section>
 

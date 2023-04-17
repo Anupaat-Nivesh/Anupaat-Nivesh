@@ -69,7 +69,7 @@ const Navbar = () => {
                             return (
                                 <li key={id}>
 
-                                    <Link className="nav-link" to={id} offset={-80} exact='true' spy={true}>{name} </Link>
+                                    <Link className="nav-link" to={id} exact='true'>{name} </Link>
 
                                 </li>
                             )

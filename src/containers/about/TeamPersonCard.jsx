@@ -39,7 +39,7 @@ const TeamPersonCard = (props) => {
 
 
   return <div className="team-person-card" data-aos="fade-up"
-    data-aos-duration="3000">
+    data-aos-duration="1000">
     <div className="image-container" onMouseEnter={mouseEnterHandler} onMouseLeave={mouseLeaveHandler}>
       <img src={props.image} alt="" className="person-image" />
     </div>

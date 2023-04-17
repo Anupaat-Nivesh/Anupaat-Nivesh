@@ -73,7 +73,7 @@ export const whyanupaatData = [
     {
         id: 5,
         icon:ratio,
-        title: "Right Propotional Investment",
+        title: "Right Proportional Investment",
         text: "We match your objectives to the have right allocation to suit your investment needs and boost your portfolio retunrs.",
 
     },
@@ -91,6 +91,7 @@ export const whyanupaatData = [
  const Avatar3 = require('../src/assets/TestimonialImages/aditya.webp')
  const Avatar4 = require('../src/assets/TestimonialImages/rupinder.webp')
  const Avatar5 = require('../src/assets/TestimonialImages/naveen.webp')
+ const Avatar6 = require('../src/assets/TestimonialImages/jaspal.webp')
 
 
 
@@ -133,6 +134,14 @@ export const testimonials = [
         job: "Software Engineer",
         avatar: Avatar5,
         socials: ['https://instagram.com/', 'https://twitter.com/', 'https://facebook.com/', 'https://linkedin.com/']
+    },
+    {
+        id: 6,
+        name: "Jaspal Singh",
+        quote: "I started investing in 2018 with the guidance of Akash (founder). I have two instances to share. One, I needed money to pay-off debt in 2019 and he strategised redemption to maximise gain and lower tax-outgo.Second, during covid he convinced me continue SIPs and invest more when I was skeptical for the future of Equity market. But I was proven wrong happily and I made handsome returns after one year of covid-lockdown.",
+        job: "Civil Engineer",
+        avatar: Avatar6,
+        socials: ['https://instagram.com/', 'https://twitter.com/', 'https://facebook.com/', 'https://linkedin.com/']  
     }
 ]
 
