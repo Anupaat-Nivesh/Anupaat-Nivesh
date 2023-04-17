@@ -20,15 +20,14 @@
 }
 
 .appScreenShot-box {
-  width: 30rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  justify-self: center;
+  justify-self: start;
 }
 
-.appScreenShot-box img {
-  width: 100%;
+.app-screenshot-img{
+  width: 30rem;
 }
 
 .description {
@@ -46,9 +45,9 @@
 }
 
 .app-store_box{
-  margin-top: 2rem;
   display: flex;
   gap: 4rem;
+  flex-direction: column;
 }
 
 .store-img{
@@ -66,6 +65,9 @@ transform: translateY(-2px);
   box-shadow: 0 0 10px 6px rgba(0, 0, 0.5, 0.1);
 }
 
+.section-heading-focus{
+  display: inline-block;
+}
 
 
 /* ******************************** */
@@ -104,7 +106,7 @@ transform: translateY(-2px);
 
 
 
-  .appScreenShot-box {
+  .app-screenshot-img {
     width: 25rem;
   }
 
@@ -162,7 +164,7 @@ transform: translateY(-2px);
 /* ******************************** */
 
 @media(max-width: 34em) {
-  .appScreenShot-box {
+  .app-screenshot-img {
     width: 20rem;
   }
 
