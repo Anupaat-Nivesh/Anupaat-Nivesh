@@ -1,14 +1,13 @@
 import React from 'react';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
-import {Footer,About,Offerings, Whyanupaat,Home,FAQs,Privacypolicy,} from './containers';
+import {Footer,About,Offerings, Whyanupaat,Home,FAQs,Privacypolicy,
+  MutualFund,EquityBasket,LoanAgainstSecurities} from './containers';
 import {NotFound,Contact,Navbar,OurApp} from './components' ;
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 import './App.css' ;
 import ScrollToTop from './components/ScrollToTop';
-
-
 AOS.init();
 
 function App() {
@@ -33,6 +32,14 @@ function App() {
       <Route path='faqs' element={<FAQs/>}/>
       
       <Route path='privacy-policy' element={<Privacypolicy/>}/>
+      {/* Offering pages  */}
+      <Route path='mutual-funds' element={<MutualFund/>}/>
+      <Route path='equity-basket' element={<EquityBasket/>}/>
+      <Route path='loan-against-securities' element={<LoanAgainstSecurities/>}/>
+
+
+
+
      
       
 

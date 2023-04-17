@@ -1,10 +1,22 @@
-import {SiOpenaigym} from 'react-icons/si'
+
 import team from "../src/assets/Icons/team.png";
 import consultation from "../src/assets/Icons/consultation.png";
 import ratio from "../src/assets/Icons/ratio.png";
 import india from "../src/assets/Icons/india.png";
 import tech from "../src/assets/Icons/tech.png";
 import framework from "../src/assets/Icons/framework.png";
+
+import  money from '../src/assets/Icons/money.png';
+import  diamond from '../src/assets/Icons/diamond.png';
+import  dream from '../src/assets/Icons/dream.png';
+import  earning from '../src/assets/Icons/earning.png';
+import  piggybank from '../src/assets/Icons/piggy-bank.png';
+import  scholarship from '../src/assets/Icons/scholarship.png';
+import  tax from '../src/assets/Icons/tax.png';
+import  shortterm from '../src/assets/Icons/short-term.png';
+import  retirement from '../src/assets/Icons/retirement.png';
+import  rupee from '../src/assets/Icons/rupee-symbol.png';
+import  donut from '../src/assets/Icons/graph.png';
 
 
 export const featuresData = [
@@ -161,6 +173,90 @@ export const faqsData=[
     }
    
 ]
+
+export const mutualFundData = [
+    {
+        id:1,
+        icon:earning,
+        title: "Long Term Portfolio",
+        chart:donut,
+        description: "Inflation beating growth while managing risk",
+     
+    },
+    {
+        id:2,
+        icon:shortterm,
+        title: "Short Term Portfolio",
+        chart:donut,
+        description: "Achieve short term goals and get better taxation than FDs",
+
+    },
+    {
+        id:3,
+        icon:tax,
+        title: "Tax Saver",
+        chart:donut,
+        description: "Save taxes AND grow your wealth with LESS funds",
+
+    },
+    {
+        id:4,
+        icon:retirement,
+        title: "Retire Confident",
+        chart:donut,
+        description: "Plan and invest for hassle-free sunset years",
+
+    },
+    {
+        id:5,
+        icon:diamond,
+        title: "My First Crore",
+        chart:donut,
+        description: "Build your 1st Crore with SIPs as small as Rs 5,000",
+
+    },
+    {
+        id:6,
+        icon:piggybank,
+        title: "Scripbox Emergency Fund",
+        chart:donut,
+        description: "Stay prepared with liquid funds; better growth than savings accounts",
+
+    },
+    {
+        id:7,
+        icon:money,
+        title: "Cash Management",
+        chart:donut,
+        description: "Grow your extra cash with Liquid funds",
+
+    },
+    {
+        id:8,
+        icon:rupee,
+        title: "Principal Protection & Growth",
+        chart:donut,
+        description: "Growth and safety of your large one-time investments",
+
+    },
+    {
+        id:9,
+        icon:dream,
+        title: "Dream Planner",
+        chart:donut,
+        description: "Vacation, car, wedding — invest for all that you dream of",
+
+    },
+    {
+        id:10,
+        icon:scholarship,
+        title: "Child Education",
+        chart:donut,
+        description: "Give your child the best education, with appropriate asset allocation and inflation-adjusted costs",
+
+    }
+];
+
 
 
 
