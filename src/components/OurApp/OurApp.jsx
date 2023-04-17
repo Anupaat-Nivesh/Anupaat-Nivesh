@@ -1,7 +1,7 @@
 import React from "react";
 import AppDecription from "./AppDescription";
-import playStore from "../../assets/play-store.png";
-import appStore from "../../assets/apple-store.png";
+import playStore from "../../assets/google-play-badge.png";
+import appStore from "../../assets/apple-store-badge.svg";
 import appScreenShot from "../../assets/appScreenShot.webp";
 import "./OurApp.css";
 
@@ -26,34 +26,33 @@ const OurApp = (props) => {
     <div className="app-section section__padding section__margin" id="ourApp">
       <div className="appScreenShot-box" >
         <img src={appScreenShot} alt="appScreenShot" data-aos="fade-right" data-aos-offset="300"
-          data-aos-easing="ease-in-sine" />
+          data-aos-easing="ease-in-sine" className="app-screenshot-img" />
+
+        <div className="app-store_box">
+          <a href="https://play.google.com/store/apps/details?id=com.dwt.AnupaatNivesh" target="_blank" rel='noreferrer'>
+            <img src={playStore} alt="AppStoreLogo" className="store-img android-store__img" />
+          </a>
+
+          <a href="https://apps.apple.com/app/id6446801290" target="_blank" rel='noreferrer'>
+
+            <img src={appStore} alt="AppStoreLogo" className="store-img apple-store__img" />
+          </a>
+        </div>
       </div>
-    
+
       <div className="app-description-box" data-aos="fade-left">
 
-      
+
         <div className="app-heading-box">
           <h2 className="app-heading">Be Available Everywhere With
-            our <br /> <span className="section-heading-focus">Mobile App</span></h2>
+            our <span className="section-heading-focus">Mobile App</span></h2>
         </div>
-        {/*<h3 className="description secondary-heading">Explore Our Apps</h3>
-         https://play.google.com/store/apps/details?id=com.dwt.AnupaatNivesh */}
-        <div className="app-store_box">
-<a href="https://play.google.com/store/apps/details?id=com.dwt.AnupaatNivesh" target="_blank" rel='noreferrer'>
 
-  <img src={playStore} alt="AppStoreLogo" className="store-img android-store__img"/>
-</a>
-
-<a href="https://apps.apple.com/app/id6446801290" target="_blank" rel='noreferrer'>
-
-  <img src={appStore} alt="AppStoreLogo" className="store-img apple-store__img"/>
-</a>
-        </div>
         <ul className="app-description-list">
           <AppDecription appDescription={appDescription} />
         </ul>
 
-        
+
 
       </div>
     </div>
