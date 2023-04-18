@@ -45,6 +45,7 @@
 }
 
 .app-store_box {
+  height: 40px;
   display: flex;
   gap: 4rem;
   flex-direction: column;
@@ -186,6 +187,7 @@
 
   .store-img {
     width: 12rem;
+    height: relative;
 
   }
 
