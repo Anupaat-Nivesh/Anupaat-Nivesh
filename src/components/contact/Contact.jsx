@@ -1,9 +1,13 @@
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
-import { ToastContainer, toast } from "react-toastify";
-import OtpInput from "react-otp-input";
+import { ToastContainer } from "react-toastify";
+import { notifyFailure, notifySuccessfull } from "./ToastConfig.js";
+import OtpInput from "react18-input-otp";
+import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import * as config from "./Config.js";
 import "react-toastify/dist/ReactToastify.css";
 import "./contact.css";
+import app from "./Firebase.js"
 
 import "../../App.css";
 import FacebookLogo from "../../assets/facebook-logo.png";
@@ -12,7 +16,7 @@ import WhatsappLogo from "../../assets/whatsapp.png";
 import YoutubeLogo from "../../assets/youtube.png";
 import LinkedInLogo from "../../assets/linkedin.png";
 
-const Contact = (props) => {
+const Contact = () => {
     const form = useRef();
     const [phoneNumber, setPhoneNumber] = React.useState("");
     const [_, setMail] = React.useState("");
@@ -23,60 +27,96 @@ const Contact = (props) => {
     const [isFirstNameValid, setIsFirstNameValid] = React.useState(false);
     const [isLastNameValid, setIsLastNameValid] = React.useState(false);
     const [otp, setOtp] = React.useState("");
+    const [confirmObj, setConfirmObj] = React.useState({});
+    const [flagRecaptcha, setFlagRecaptcha] = React.useState(true);
+    const [flagOtp, setFlagOtp] = React.useState(false);
+    const [time, setTime] = React.useState();
+    const [countDown, setCountDown] = React.useState();
 
-    const toastOptions = {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
+
+    const reCaptchaVerfication = (number) => {
+        number = "+91" + number;
+        const auth = getAuth();
+        const reCaptchaVerfier = new RecaptchaVerifier("recaptch-container", {}, auth);
+        reCaptchaVerfier.render();
+        setFlagRecaptcha(true);
+        return signInWithPhoneNumber(auth, number, reCaptchaVerfier);
     };
 
-    const notifySuccessfull = () =>
-        toast.success("Message sent successfully! 😀", toastOptions);
-
-    const notifyFailure = (message) =>
-        toast.error(
-            `Message failed to send 🥲: ${message}.Try again in some time!`,
-            toastOptions
-        );
-
-    const sendEmail = (e) => {
+    const verifyOtp = async function (e) {
         e.preventDefault();
 
-        emailjs
-            .sendForm(
-                "service_f3brm8k",
-                "template_agep8yl",
-                form.current,
-                "JtCyATfWMRTUTtcft"
-            )
-            .then((result) => {
+        try {
+            if (otp.length !== 6) throw new Error('Invalid OTP');
+            await confirmObj.confirm(otp);
+            clearInterval(countDown);
+            setFlagOtp(false);
 
-                if (!isEmailValid || !isNumberValid || !isFirstNameValid || !isLastNameValid) throw new Error("Invalid Inputs");
+            emailjs
+                .sendForm(
+                    config.emailJSserviceID,
+                    config.emailJStemplateID,
+                    form.current,
+                    config.emailJSKey
+                ).then((result) => {
+                    if (result.status !== 200) throw new Error(`Something went wrong, Status: ${result.status}`);
+                    notifySuccessfull();
+                    // console.log("Message sent");
+                    e.target.reset();
+                })
+                .catch((err) => {
+                    notifyFailure(err.message);
+                    // console.log("Message failed");
+                });
+        } catch (err) {
+            notifyFailure(err.message);
+        }
 
-                notifySuccessfull();
-                console.log("Message sent");
-                e.target.reset();
-
-            })
-            .catch((err) => {
-                notifyFailure(err.message);
-                console.log("Message failed");
-            });
     };
+
+    const sendEmail = async function (e) {
+        e.preventDefault();
+        if (!isEmailValid || !isNumberValid || !isFirstNameValid || !isLastNameValid) return notifyFailure('Invalid input');
+
+        try {
+            const response = await reCaptchaVerfication(phoneNumber);
+            // console.log(response);
+            setConfirmObj(response);
+            setFlagOtp(true); 
+            setFlagRecaptcha(false);
+            setTime(config.otpTimeout);
+            const timer = setInterval(() => {
+                
+                setTime((prevTime) => { 
+                    if (prevTime === 0) {
+                        alert('Timeout try again!');
+                        clearInterval(timer);
+                        setFlagOtp(false);
+                        window.location.reload();    
+                    }
+                    return (prevTime - 1)});
+
+            }, 1000);
+            setCountDown(timer);
+
+
+        } catch (err) {
+            alert(`${err.message} Please Try Again!`);
+            window.location.reload();
+        }
+    };
+
+
+
+
 
     const handleFirstNameChange = (e) => {
         const firstNameError = document.querySelector(".first-name-error");
 
         const inputFirstName = e.target.value;
 
-        const nameRegex = /^[A-Za-z]+$/;
 
-        if (nameRegex.test(inputFirstName)) {
+        if (config.nameRegex.test(inputFirstName)) {
             setFirstName(inputFirstName);
             firstNameError.textContent = "";
             setIsFirstNameValid(true);
@@ -91,9 +131,9 @@ const Contact = (props) => {
 
         const inputLastName = e.target.value;
 
-        const nameRegex = /^[A-Za-z]+$/;
 
-        if (nameRegex.test(inputLastName)) {
+
+        if (config.nameRegex.test(inputLastName)) {
             setLastName(inputLastName);
             // console.log(inputLastName);
             lastNameError.textContent = "";
@@ -109,9 +149,8 @@ const Contact = (props) => {
 
         const inputPhoneNumber = e.target.value;
 
-        const indianPhoneNumberRegex = /^[6-9]\d{9}$/;
 
-        if (indianPhoneNumberRegex.test(inputPhoneNumber)) {
+        if (config.indianPhoneNumberRegex.test(inputPhoneNumber)) {
             setPhoneNumber(inputPhoneNumber);
             // console.log(inputPhoneNumber);
             phoneError.textContent = "";
@@ -127,10 +166,9 @@ const Contact = (props) => {
 
         const inputMail = e.target.value;
 
-        const validEmailRegex =
-            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[cC][oO][mM]))$/;
 
-        if (validEmailRegex.test(inputMail)) {
+
+        if (config.validEmailRegex.test(inputMail)) {
             setMail(inputMail);
             // console.log(inputMail);
             mailError.textContent = "";
@@ -140,6 +178,8 @@ const Contact = (props) => {
             setIsEmaliValid(false);
         }
     };
+
+
 
     return (
         <div
@@ -229,30 +269,39 @@ const Contact = (props) => {
                             ></textarea>
                         </div>
 
-                        <button type="submit" value="Send" className="btn btn--form">
+                        <button type="submit" value="Send" className="btn btn--form" id="sign-in-button">
                             SUBMIT
                         </button>
 
-                        <div className="otp-verification-container">
+
+                    </form>
+
+                    <div id="recaptch-container" style={{ display: `${flagRecaptcha ? 'flex' : 'none'}` }}></div>
+
+                    <div className="otp-verification-container" style={{ display: `${flagOtp ? 'flex' : 'none'}`, marginTop: '4rem' }}>
+                        <span>Enter OTP</span>
+                        <span>{time}</span>
+                        
+                        <form onSubmit={verifyOtp}>
                             <OtpInput
-                                containerStyle="otp-input"
-                                inputStyle={{
-                                    color: "red",
-                                    padding: "0",
-                                    width: "5rem",
-                                    height: "5rem",
-                                    fontSize: "2rem",
-                                }}
                                 value={otp}
+                                separator={<span>-</span>}
                                 onChange={setOtp}
                                 numInputs={6}
-                                renderSeparator={<span> - </span>}
-                                renderInput={(props) => <input {...props} />}
+                                isSuccessed={true}
+                                successStyle="success"
+
+                                containerStyle={{ color: "red" }}
+
+                                inputStyle={{ color: "red", width: '5rem', height: '5rem', borderRadius: '10px', boxShadow: '0 0 0.3rem var(--color-subtext-light)', fontSize: '2rem' }}
+                                onSubmit={verifyOtp}
                             />
-                            OTP not received? Send Again!
-                        </div>
-                        <ToastContainer position="top-right" />
-                    </form>
+                            <button type="submit" className="btn--form">verify</button>
+                        </form>
+
+                        <form action="" className="control"></form>
+                    </div>
+                    <ToastContainer className="toastContainer" position="top-right" />
                 </div>
                 <div className="connect-info">
                     <div
@@ -260,6 +309,7 @@ const Contact = (props) => {
                         data-aos="fade-left"
                         data-aos-offset="500"
                     >
+                        {}
                         <a
                             href="https://www.facebook.com/anupaatnivesh"
                             target="_blank"
