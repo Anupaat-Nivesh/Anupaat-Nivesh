@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import './carousel.css';
 import { CarouselItem } from "./CarouselItem";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper";
 import "swiper/css";
@@ -9,11 +8,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 export const Carousel = () => {
-
-
-
-
-
 
     const items = [
         {
@@ -66,15 +60,15 @@ export const Carousel = () => {
             spaceBetween={50}
             slidesPerView={1}
             loop={true}
-            autoplay={{
-                delay: 5000,
-                disableOnInteraction: true,
-                pauseOnMouseEnter: true
-            }}
+            // autoplay={{
+            //     delay: 5000,
+            //    disableOnInteraction:true,
+            //    pauseOnMouseEnter:true
+            // }}
 
             navigation={false} grabCursor={true} pagination={{
                 clickable: true,
-            }} modules={[Navigation, Pagination, Autoplay]}
+            }} modules={[Navigation, Pagination]}
             className="carousel-swiper"
         >
 

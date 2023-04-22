@@ -1,0 +1,134 @@
+.loan_against_securities-container {
+    display: flex;
+    flex-direction: column;
+    font-weight: 450;
+}
+
+.loan-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8rem;
+}
+
+.loan-btn {
+    margin-top: 2.4rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loan-hero-section {
+    margin-bottom: 3rem;
+
+}
+
+/*============================CARD CONTAINER======================================*/
+.loan_against_securities__card-container {
+    background-color: var(--color-secondary-dark);
+    padding: 5rem 3rem;
+}
+
+
+.loan_against_securities-Card-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4rem;
+    row-gap: 4rem;
+
+}
+
+.loan-card-title h1 {
+    font-size: 5rem;
+    text-align: center;
+    color: var(--color-subtext-light);
+
+}
+
+.loan-card-title p {
+    text-align: center;
+    margin-bottom: 4rem;
+
+}
+
+.medical-card {
+
+    border: 2px solid transparent;
+    padding: 3rem 2rem;
+    transition: var(--transition);
+    border-radius: 2rem;
+    background-color: #EEF8F9;
+}
+
+.travel-card {
+
+    border: 2px solid transparent;
+    padding: 3rem 2rem;
+    transition: var(--transition);
+    border-radius: 2rem;
+    background-color: #fcf2f2;
+
+}
+
+.renovation-card {
+
+    border: 2px solid transparent;
+    padding: 3rem 2rem;
+    transition: var(--transition);
+    border-radius: 2rem;
+    background-color: #f2f2ff;
+}
+
+.education-card {
+
+    border: 2px solid transparent;
+    padding: 3rem 2rem;
+    transition: var(--transition);
+    border-radius: 2rem;
+    background-color: #fefbec;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.card-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-img img {
+    height: 18rem;
+    width: 22rem;
+
+    filter: drop-shadow(5px 5px 5px rgba(145, 145, 145, 0.3));
+}
+
+.medical-card:hover {
+    transform: translateY(-3rem);
+    box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.5);
+
+}
+
+.travel-card:hover {
+    transform: translateY(-3rem);
+    box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.5);
+
+}
+
+.renovation-card:hover {
+    transform: translateY(-3rem);
+    box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.5);
+
+}
+
+.education-card:hover {
+    transform: translateY(-3rem);
+    box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.5);
+
+}

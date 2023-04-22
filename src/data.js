@@ -16,6 +16,11 @@ import shortterm from "../src/assets/Icons/short-term.png";
 import retirement from "../src/assets/Icons/retirement.png";
 import rupee from "../src/assets/Icons/rupee-symbol.png";
 import donut from "../src/assets/Icons/graph.png";
+import equity2 from '../src/assets/equity2.png';
+import equity3 from '../src/assets/equity3.png';
+
+
+
 
 export const featuresData = [
   {
@@ -277,6 +282,37 @@ export const mutualFundData = [
   },
 ];
 
+
+export const equityBasketData = [
+  {
+    id: 1,
+    icon: equity2,
+    title: "Provide Unique oppurtunities to your clients",
+   
+    description: "Inflation beating growth while managing risk",
+  },
+  {
+    id: 2,
+    icon:equity3,
+    title: "Increase your share of client wallet",
+  
+    description: "Achieve short term goals and get better taxation than FDs",
+  },
+  {
+    id: 3,
+    icon:equity3,
+    title: "Make every part of your client's portfolio productive",
+   
+    description: "Save taxes AND grow your wealth with LESS funds",
+  }
+  ];
+
+
+
+
+
+
+
 export const socialLogos = [
   {
     name: "facebook",
@@ -304,3 +340,5 @@ export const socialLogos = [
     logo: require("../src/assets/linkedin.png"),
   },
 ];
+
+

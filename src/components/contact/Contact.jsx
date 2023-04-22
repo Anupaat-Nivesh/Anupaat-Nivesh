@@ -7,7 +7,7 @@ import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth
 import * as config from "./Config.js";
 import "react-toastify/dist/ReactToastify.css";
 import "./contact.css";
-import app from "./Firebase.js"
+import app from "./Firebase.js";
 
 import "../../App.css";
 import FacebookLogo from "../../assets/facebook-logo.png";
@@ -82,19 +82,20 @@ const Contact = () => {
             const response = await reCaptchaVerfication(phoneNumber);
             // console.log(response);
             setConfirmObj(response);
-            setFlagOtp(true); 
+            setFlagOtp(true);
             setFlagRecaptcha(false);
             setTime(config.otpTimeout);
             const timer = setInterval(() => {
-                
-                setTime((prevTime) => { 
+
+                setTime((prevTime) => {
                     if (prevTime === 0) {
                         alert('Timeout try again!');
                         clearInterval(timer);
                         setFlagOtp(false);
-                        window.location.reload();    
+                        window.location.reload();
                     }
-                    return (prevTime - 1)});
+                    return (prevTime - 1)
+                });
 
             }, 1000);
             setCountDown(timer);
@@ -281,7 +282,7 @@ const Contact = () => {
                     <div className="otp-verification-container" style={{ display: `${flagOtp ? 'flex' : 'none'}`, marginTop: '4rem' }}>
                         <span>Enter OTP</span>
                         <span>{time}</span>
-                        
+
                         <form onSubmit={verifyOtp}>
                             <OtpInput
                                 value={otp}
@@ -309,7 +310,7 @@ const Contact = () => {
                         data-aos="fade-left"
                         data-aos-offset="500"
                     >
-                        {}
+                        { }
                         <a
                             href="https://www.facebook.com/anupaatnivesh"
                             target="_blank"
