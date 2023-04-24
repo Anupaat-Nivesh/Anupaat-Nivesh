@@ -1,13 +1,19 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { ToastContainer } from "react-toastify";
 import { notifyFailure, notifySuccessfull } from "./ToastConfig.js";
-import OtpInput from "react18-input-otp";
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut } from "firebase/auth";
 import * as config from "./Config.js";
+import 'animate.css';
+import { animateCSS } from "./Animate.js";
+
 import "react-toastify/dist/ReactToastify.css";
 import "./contact.css";
-import app from "./Firebase.js";
+
+import app from "./Firebase.js"
+import 'react-phone-number-input/style.css'
+import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input'
+
 
 import "../../App.css";
 import FacebookLogo from "../../assets/facebook-logo.png";
@@ -18,165 +24,191 @@ import LinkedInLogo from "../../assets/linkedin.png";
 
 const Contact = () => {
     const form = useRef();
-    const [phoneNumber, setPhoneNumber] = React.useState("");
-    const [_, setMail] = React.useState("");
-    const [firstName, setFirstName] = React.useState("");
-    const [lastName, setLastName] = React.useState("");
-    const [isEmailValid, setIsEmaliValid] = React.useState(false);
-    const [isNumberValid, setIsNumberValid] = React.useState(false);
-    const [isFirstNameValid, setIsFirstNameValid] = React.useState(false);
-    const [isLastNameValid, setIsLastNameValid] = React.useState(false);
-    const [otp, setOtp] = React.useState("");
-    const [confirmObj, setConfirmObj] = React.useState({});
-    const [flagRecaptcha, setFlagRecaptcha] = React.useState(true);
-    const [flagOtp, setFlagOtp] = React.useState(false);
-    const [time, setTime] = React.useState();
-    const [countDown, setCountDown] = React.useState();
+    const otpInputElement = useRef();
+    const firstNameErrorElement = useRef();
+    const lastNameErrorElement = useRef();
+    const mailErrorElement = useRef();
+    const [_, setMail] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [isEmailValid, setIsEmaliValid] = useState(false);
+    const [isFirstNameValid, setIsFirstNameValid] = useState(false);
+    const [isLastNameValid, setIsLastNameValid] = useState(false);
+    const [confirmObj, setConfirmObj] = useState({});
+    const [time, setTime] = useState();
+    const [countDown, setCountDown] = useState();
+    const [value, setValue] = useState();
+    const [otpSendStatus, setOtpSendStatus] = useState(false);
+    const [numberVerified, setNumberVerified] = useState(false);
 
 
+    // Verifies and render the Captcha
     const reCaptchaVerfication = (number) => {
-        number = "+91" + number;
         const auth = getAuth();
-        const reCaptchaVerfier = new RecaptchaVerifier("recaptch-container", {}, auth);
-        reCaptchaVerfier.render();
-        setFlagRecaptcha(true);
-        return signInWithPhoneNumber(auth, number, reCaptchaVerfier);
+        window.reCaptchaVerfier = new RecaptchaVerifier("recaptch-container", {}, auth);
+        window.reCaptchaVerfier.render();
+
+        return signInWithPhoneNumber(auth, number, window.reCaptchaVerfier);
+
     };
 
-    const verifyOtp = async function (e) {
-        e.preventDefault();
+    // Verifies the OTP sent
+    const verifyOTP = async function (e) {
 
         try {
-            if (otp.length !== 6) throw new Error('Invalid OTP');
-            await confirmObj.confirm(otp);
+            e.preventDefault();
+            const otpElement = otpInputElement.current;
+            const otpValue = otpElement.value;
+            if (otpValue.length !== 6) throw new Error('Invalid OTP');
+            await confirmObj.confirm(otpValue);
+            setNumberVerified(true);
+            setOtpSendStatus(false);
             clearInterval(countDown);
-            setFlagOtp(false);
-
-            emailjs
-                .sendForm(
-                    config.emailJSserviceID,
-                    config.emailJStemplateID,
-                    form.current,
-                    config.emailJSKey
-                ).then((result) => {
-                    if (result.status !== 200) throw new Error(`Something went wrong, Status: ${result.status}`);
-                    notifySuccessfull();
-                    // console.log("Message sent");
-                    e.target.reset();
-                })
-                .catch((err) => {
-                    notifyFailure(err.message);
-                    // console.log("Message failed");
-                });
         } catch (err) {
             notifyFailure(err.message);
         }
 
     };
 
-    const sendEmail = async function (e) {
+    // To send the OTP
+    const sendOTP = async function (e) {
         e.preventDefault();
-        if (!isEmailValid || !isNumberValid || !isFirstNameValid || !isLastNameValid) return notifyFailure('Invalid input');
 
         try {
-            const response = await reCaptchaVerfication(phoneNumber);
-            // console.log(response);
+            // Checking if number is valid
+            if (!(value && isPossiblePhoneNumber(value))) {
+                throw new Error('Not a valid number');
+            }
+            // awaiting the response for OTP send status
+            const response = await reCaptchaVerfication(value, getAuth());
+
+            // Set the otp send status
+            setOtpSendStatus(true);
+
+            // set the key from response of recaptcha verification
             setConfirmObj(response);
-            setFlagOtp(true);
-            setFlagRecaptcha(false);
-            setTime(config.otpTimeout);
-            const timer = setInterval(() => {
 
-                setTime((prevTime) => {
-                    if (prevTime === 0) {
-                        alert('Timeout try again!');
-                        clearInterval(timer);
-                        setFlagOtp(false);
-                        window.location.reload();
-                    }
-                    return (prevTime - 1)
-                });
 
-            }, 1000);
-            setCountDown(timer);
-
+            // Clear the recaptcha
+            window.reCaptchaVerfier.clear();
+            OTPTimeout();
 
         } catch (err) {
-            alert(`${err.message} Please Try Again!`);
-            window.location.reload();
+            console.log(err);
+            notifyFailure();
+            window.reCaptchaVerfier.clear();
         }
     };
 
+    // OTP timeout function
+    const OTPTimeout = function () {
+        // Start the OTP timeout
+        setTime(config.otpTimeout);
+        const timer = setInterval(() => {
 
+            setTime((prevTime) => {
+                if (prevTime === 0) {
+                    // window.reCaptchaVerfier.clear();
+                    clearInterval(timer);
+                    setOtpSendStatus(false);
+                    setNumberVerified(false);
+                }
+                return (prevTime - 1)
+            });
 
+        }, 1000);
+        setCountDown(timer);
+    };
 
-
+// Checks if the First name is correct 
     const handleFirstNameChange = (e) => {
-        const firstNameError = document.querySelector(".first-name-error");
 
         const inputFirstName = e.target.value;
 
 
         if (config.nameRegex.test(inputFirstName)) {
             setFirstName(inputFirstName);
-            firstNameError.textContent = "";
+            firstNameErrorElement.current.textContent = "";
             setIsFirstNameValid(true);
         } else {
-            firstNameError.textContent = "*Invalid Input";
+            firstNameErrorElement.current.textContent = "*Invalid Input";
             setIsFirstNameValid(false);
         }
     };
 
+    // Checks if the last name is correct
     const handleLastNameChange = (e) => {
-        const lastNameError = document.querySelector(".last-name-error");
-
         const inputLastName = e.target.value;
-
-
 
         if (config.nameRegex.test(inputLastName)) {
             setLastName(inputLastName);
             // console.log(inputLastName);
-            lastNameError.textContent = "";
+            lastNameErrorElement.textContent = "";
             setIsLastNameValid(true);
         } else {
-            lastNameError.textContent = "*Invalid Input";
+            lastNameErrorElement.current.textContent = "*Invalid Input";
             setIsLastNameValid(false);
         }
     };
 
-    const handlePhoneNumberChange = (e) => {
-        const phoneError = document.querySelector(".phone-error");
+    
+// Checks if the mail entered is correct?
 
-        const inputPhoneNumber = e.target.value;
-
-
-        if (config.indianPhoneNumberRegex.test(inputPhoneNumber)) {
-            setPhoneNumber(inputPhoneNumber);
-            // console.log(inputPhoneNumber);
-            phoneError.textContent = "";
-            setIsNumberValid(true);
-        } else {
-            phoneError.textContent = "*Invalid Number";
-            setIsNumberValid(false);
-        }
-    };
 
     const handleMailChange = (e) => {
-        const mailError = document.querySelector(".mail-error");
 
         const inputMail = e.target.value;
-
-
 
         if (config.validEmailRegex.test(inputMail)) {
             setMail(inputMail);
             // console.log(inputMail);
-            mailError.textContent = "";
+            mailErrorElement.textContent = "";
             setIsEmaliValid(true);
         } else {
-            mailError.textContent = "*Invalid E-mail";
+            mailErrorElement.current.textContent = "*Invalid E-mail";
             setIsEmaliValid(false);
+        }
+    };
+
+    // To submit the form and send the mail to contact support team.
+
+    const submitForm = async function (e) {
+        try {
+            e.preventDefault();
+            if (!numberVerified) {
+                animateCSS('.btn--form', 'shakeX');
+ 
+                return;
+
+            }
+            if (!isEmailValid || !isFirstNameValid || !isLastNameValid) throw new Error('Invalid Input, Kindly check and try again!');
+console.log(form.current);
+
+
+
+        //   const res =  await emailjs.sendForm(
+        //             config.emailJSserviceID,
+        //             config.emailJStemplateID,
+        //             form.current,
+        //             config.emailJSKey
+        //         );
+
+        //         console.log(res);
+           
+            // if (res.status !== 200) throw new Error(`Something went wrong, Status: ${res.status}`);
+            notifySuccessfull();
+            setNumberVerified(false);
+            setOtpSendStatus(false);
+            e.target.reset();
+           setValue('');
+
+            // Signout a user
+            const auth = getAuth();
+            await signOut(auth);
+            console.log('User is signed out');
+
+        } catch (err) {
+            notifyFailure(err.message);
         }
     };
 
@@ -190,7 +222,7 @@ const Contact = () => {
             <h1>
                 Contact <span className="section-heading-focus">Us</span>
             </h1>
-            <div className="cta">
+            <div className="cta" >
                 <div className="cta-text-box">
                     <div className="cta-description">
                         <p className="section-description cta-text">
@@ -198,10 +230,11 @@ const Contact = () => {
                             <b>24 hours.</b>
                         </p>
                     </div>
-                    <form className="cta-form" ref={form} onSubmit={sendEmail}>
+                    <form className="cta-form" ref={form} onSubmit={submitForm} >
                         <div>
                             <label htmlFor="first-name">First Name</label>
                             <input
+
                                 id="first-name"
                                 type="text"
                                 name="first_name"
@@ -209,13 +242,14 @@ const Contact = () => {
                                 required
                                 onChange={handleFirstNameChange}
                             />
-                            <div className="error first-name-error" required>
+                            <div ref={firstNameErrorElement} className="error first-name-error" required>
                                 {" "}
                             </div>
                         </div>
                         <div>
                             <label htmlFor="last-name">Last Name</label>
                             <input
+
                                 id="last-name"
                                 type="text"
                                 name="last_name"
@@ -223,7 +257,7 @@ const Contact = () => {
                                 required
                                 onChange={handleLastNameChange}
                             />
-                            <div className="error last-name-error" required>
+                            <div ref={lastNameErrorElement} className="error last-name-error" required>
                                 {" "}
                             </div>
                         </div>
@@ -231,6 +265,7 @@ const Contact = () => {
                         <div>
                             <label htmlFor="email">Email Address</label>
                             <input
+
                                 type="email"
                                 id="email"
                                 name="user_email"
@@ -238,23 +273,43 @@ const Contact = () => {
                                 required
                                 onChange={handleMailChange}
                             />
-                            <div className="error mail-error"> </div>
+                            <div ref={mailErrorElement} className="error mail-error"> </div>
                         </div>
 
                         <div>
                             <label htmlFor="contact-number">Phone</label>
-                            <div>
-                                <input
-                                    id="contact-number"
-                                    name="user_number"
-                                    placeholder="9243432167"
-                                    type="tel"
-                                    onChange={handlePhoneNumberChange}
+                            <div className="mobile-number__input-container">
+                                <PhoneInput
+                                    className="phoneInput"
+                                    placeholder="Enter phone number"
+                                    value={value}
+                                    onChange={(input) => {
+                                        setValue(input);
+                                        setOtpSendStatus(false);
+                                        setNumberVerified(false);
+                                    }}
+                                    defaultCountry="IN"
+                                    international
+                                    countryCallingCodeEditable={false}
+                                    error={value ? (isPossiblePhoneNumber(value) ? undefined : 'Invalid phone number') : 'Phone number required'}
                                 />
-                                <div className="error phone-error" required>
-                                    {" "}
-                                </div>
+                                {numberVerified ? <span className="verifiedText animate__animated animate__bounceIn animate__delay-1s" style={{ color: 'green' }}>Verified! ✅</span> : <div className="otp-input__container">
+                                    <input ref={otpInputElement} type="text" id="otp-input" placeholder="Enter OTP" style={{ display: `${otpSendStatus ? 'block' : 'none'}` }} />
+
+                                    <button type="click" className="btn otp-btn " onClick={otpSendStatus ? verifyOTP : sendOTP}>{otpSendStatus ? "Verify" : "Send OTP"}</button>
+
+
+                                </div>}
+
                             </div>
+                            <div className="error phone-error">
+                                {value && isPossiblePhoneNumber(value) ? '' : 'Enter a valid Number'}
+                            </div>
+                            <div className="countdown" style={{ display: `${otpSendStatus ? 'block' : 'none'}` }}>
+                                {`${String(Math.floor(time / 60)).padStart(2, '0')}:${String(Math.floor(time % 60)).padStart(2, '0')}`}
+                            </div>
+                            <div id="recaptch-container"></div>
+
                         </div>
 
                         <div className="cta-meassage-section">
@@ -270,38 +325,15 @@ const Contact = () => {
                             ></textarea>
                         </div>
 
-                        <button type="submit" value="Send" className="btn btn--form" id="sign-in-button">
+                        <button type="submit" value="Send" className="btn btn--form " id="sign-in-button" style={{ backgroundColor: `${numberVerified ? 'var(--color-primary)' : 'var(--color-subtext-light)'}`, opacity: `${numberVerified ? '100%' : '50%'}` }}>
                             SUBMIT
                         </button>
 
 
                     </form>
 
-                    <div id="recaptch-container" style={{ display: `${flagRecaptcha ? 'flex' : 'none'}` }}></div>
 
-                    <div className="otp-verification-container" style={{ display: `${flagOtp ? 'flex' : 'none'}`, marginTop: '4rem' }}>
-                        <span>Enter OTP</span>
-                        <span>{time}</span>
 
-                        <form onSubmit={verifyOtp}>
-                            <OtpInput
-                                value={otp}
-                                separator={<span>-</span>}
-                                onChange={setOtp}
-                                numInputs={6}
-                                isSuccessed={true}
-                                successStyle="success"
-
-                                containerStyle={{ color: "red" }}
-
-                                inputStyle={{ color: "red", width: '5rem', height: '5rem', borderRadius: '10px', boxShadow: '0 0 0.3rem var(--color-subtext-light)', fontSize: '2rem' }}
-                                onSubmit={verifyOtp}
-                            />
-                            <button type="submit" className="btn--form">verify</button>
-                        </form>
-
-                        <form action="" className="control"></form>
-                    </div>
                     <ToastContainer className="toastContainer" position="top-right" />
                 </div>
                 <div className="connect-info">

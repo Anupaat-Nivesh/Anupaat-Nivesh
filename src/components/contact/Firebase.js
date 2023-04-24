@@ -10,7 +10,7 @@ const firebaseConfig = {
   projectId: "an-otp",
   storageBucket: "an-otp.appspot.com",
   messagingSenderId: "329283418937",
-  appId: "1:329283418937:web:cd8ccc9839698dba6dc6e8"
+  appId: "1:329283418937:web:67afba1d6f7f17fc6dc6e8"
 };
 
 // Initialize Firebase
