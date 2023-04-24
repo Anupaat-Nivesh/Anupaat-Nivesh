@@ -1,12 +1,13 @@
 .mutualfund-Card-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 55rem 55rem 55rem 55rem;
+    grid-template-rows: 50rem 50rem 50rem 50rem;
     gap: 2rem;
     row-gap: 4rem;
-    margin-top: 2rem;
+}
 
-
+.mutualFund-title {
+    margin-top: 8rem;
 }
 
 .mutualfund_data {

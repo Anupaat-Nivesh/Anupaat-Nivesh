@@ -14,8 +14,12 @@ const appDescription = [
     item: "24x7 access to your wealth portfolio with our user friendly mobile app"
   },
   {
-    item: "View, analyse, manage, and invest your and your family's wealth"
+    item: "Start a SIP or Invest lumpsum, everything within the APP"
   },
+  {
+    item: "All your SIP calculators at your fingertip"
+  },
+
 
 ];
 

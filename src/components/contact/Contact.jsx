@@ -9,9 +9,11 @@ import { animateCSS } from "./Animate.js";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./contact.css";
+
 import app from "./Firebase.js"
 import 'react-phone-number-input/style.css'
 import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input'
+
 
 import "../../App.css";
 import FacebookLogo from "../../assets/facebook-logo.png";
@@ -85,6 +87,7 @@ const Contact = () => {
 
             // set the key from response of recaptcha verification
             setConfirmObj(response);
+
 
             // Clear the recaptcha
             window.reCaptchaVerfier.clear();
