@@ -7,5 +7,5 @@ export const nameRegex = /^[A-Za-z]+$/;
 export const emailJSserviceID = "service_f3brm8k";
 export const emailJStemplateID = "template_agep8yl";
 export const emailJSKey = "JtCyATfWMRTUTtcft";
-export const otpTimeout = 20;
+export const otpTimeout = 300;
 

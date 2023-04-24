@@ -1,4 +1,4 @@
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export const toastOptions = {
   position: "top-right",
@@ -9,16 +9,14 @@ export const toastOptions = {
   draggable: true,
   progress: undefined,
   theme: "colored",
-  
 };
 
-export const notifySuccessfull = () =>{
+export const notifySuccessfull = () => {
   toast.success("Message sent successfully! 😀", toastOptions);
-}
+};
 
-export const notifyFailure = (message) =>{
-  toast.error(
-      `${message}.Try again in some time!`,
-      toastOptions
-  );
-}
+export const notifyFailure = (
+  message = "We are facing an issue in processing the request. Please try again in some time!"
+) => {
+  toast.error(`${message}`, toastOptions);
+};
