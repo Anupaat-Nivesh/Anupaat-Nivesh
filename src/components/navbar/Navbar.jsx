@@ -3,6 +3,7 @@ import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 import './navbar.css';
 import { Link, NavLink } from 'react-router-dom';
 import { animateScroll } from 'react-scroll';
+import 'animate.css';
 
 import logo from '../../assets/logo.png';
 
@@ -63,11 +64,11 @@ const Navbar = () => {
                 </div>
                 <ul className="anupaat__navbar-links_container">
                     {
-                        links.map(({ name, id, }) => {
+                        links.map(({name, id, }) => {
                             return (
-                                <li key={id}>
+                                <li key={name} >
 
-                                    <Link className="nav-link" to={id} exact='true'>{name} </Link>
+                                    <Link  className="nav-link" to={id} exact='true'>{name} </Link>
 
                                 </li>
                             )
@@ -79,40 +80,41 @@ const Navbar = () => {
             <div className="anupaat__navbar-sign">
 
                 <Link to='ourApp'>
-                    <button type="button">GET THE APP</button></Link>
+                    <button type="button" >GET THE APP</button></Link>
 
             </div>
 
             <div className="anupaat__navbar-menu">
                 {toggleMenu
-                    ? <RiCloseLine color="#000" size={32} onClick={(event) => { setToggleMenu(prev => !prev); }} />
-                    : <RiMenu3Line color="#000" size={27} onClick={(event) => {
+                    ? <RiCloseLine className='animate__animated animate__fadeIn' color="#000" size={32} onClick={(event) => { setToggleMenu(prev => !prev); }} />
+                    : <RiMenu3Line className='animate__animated animate__fadeIn' color="#000" size={27} onClick={(event) => {
                         setToggleMenu(true);
                     }} />}
 
 
-                {toggleMenu && (
-                    <div className="anupaat__navbar-menu_container scale-up-center">
-                        <ul className="anupaat__navbar-menu_container-links">
-                            {
-                                links.map(({ name, path }) => {
-                                    return (
-                                        <li>
-                                            <NavLink to={path} onClick={() => setToggleMenu(prev => !prev)} >{name}</NavLink>
-                                        </li>
-                                    )
-                                })
-                            }
+                
+                <div className='backdrop-blur' style={{backdropFilter:`${toggleMenu?'blur(10px)':'blur(0)'}`,display:`${toggleMenu?'block':'none'}`}} onClick={(event) => { setToggleMenu(prev => !prev); }}></div>
+                <div className="anupaat__navbar-menu_container scale-up-center" style={{ transform: `${toggleMenu ? 'translate(0,0)' : 'translate(100%,0)'}` }}>
+                    <ul className="anupaat__navbar-menu_container-links">
+                        {
+                            links.map(({ name, path }) => {
+                                return (
+                                    <li key={name}>
+                                        <NavLink to={path} onClick={() => setToggleMenu(prev => !prev)} >{name}</NavLink>
+                                    </li>
+                                )
+                            })
+                        }
 
-                        </ul>
-                        <div className="anupaat__navbar-menu_container-links-sign">
-                            <NavLink to='ourApp' onClick={() => setToggleMenu(prev => !prev)}>
-                                <button type="button">GET THE APP</button></NavLink>
+                    </ul>
+                    <div className="anupaat__navbar-menu_container-links-sign">
+                        <NavLink to='ourApp' onClick={() => setToggleMenu(prev => !prev)}>
+                            <button type="button">GET THE APP</button></NavLink>
 
 
-                        </div>
                     </div>
-                )}
+                </div>
+               
             </div>
         </div >
 

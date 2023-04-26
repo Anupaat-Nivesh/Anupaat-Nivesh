@@ -60,15 +60,15 @@ export const Carousel = () => {
             spaceBetween={50}
             slidesPerView={1}
             loop={true}
-            // autoplay={{
-            //     delay: 5000,
-            //    disableOnInteraction:true,
-            //    pauseOnMouseEnter:true
-            // }}
+            autoplay={{
+                delay: 5000,
+               disableOnInteraction:true,
+               pauseOnMouseEnter:true
+            }}
 
             navigation={false} grabCursor={true} pagination={{
                 clickable: true,
-            }} modules={[Navigation, Pagination]}
+            }} modules={[Navigation, Pagination,Autoplay]}
             className="carousel-swiper"
         >
 

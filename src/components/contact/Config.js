@@ -8,4 +8,3 @@ export const emailJSserviceID = "service_f3brm8k";
 export const emailJStemplateID = "template_agep8yl";
 export const emailJSKey = "JtCyATfWMRTUTtcft";
 export const otpTimeout = 300;
-
