@@ -1,8 +1,8 @@
 .mutualfund-Card-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 50rem 50rem 50rem 50rem;
-    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 5rem;
     row-gap: 4rem;
 }
 
@@ -34,17 +34,17 @@
 }
 
 .mutualFund-donut-container {
-    display: flex;
+
     justify-content: center;
-    margin: auto;
-    padding: 5rem;
+    height: 30rem;
+    width: 100%;
+    padding: 2rem;
+
+
 
 }
 
-.mutualFund-donut-container img {
-    height: 10rem;
-    width: 10rem;
-}
+
 
 .mutualfund_data:hover {
     transform: translateY(-5px);

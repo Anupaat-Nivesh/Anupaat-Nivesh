@@ -5,19 +5,29 @@ import india from "../src/assets/Icons/india.png";
 import tech from "../src/assets/Icons/tech.png";
 import framework from "../src/assets/Icons/framework.png";
 
-import money from "../src/assets/Icons/money.png";
-import diamond from "../src/assets/Icons/diamond.png";
-import dream from "../src/assets/Icons/dream.png";
 import earning from "../src/assets/Icons/earning.png";
-import piggybank from "../src/assets/Icons/piggy-bank.png";
-import scholarship from "../src/assets/Icons/scholarship.png";
+
 import tax from "../src/assets/Icons/tax.png";
 import shortterm from "../src/assets/Icons/short-term.png";
 import retirement from "../src/assets/Icons/retirement.png";
-import rupee from "../src/assets/Icons/rupee-symbol.png";
+
 import donut from "../src/assets/Icons/graph.png";
 import equity2 from '../src/assets/equity2.png';
 import equity3 from '../src/assets/equity3.png';
+import {
+  Chart, ArcElement, Tooltip, Legend
+} from 'chart.js';
+
+
+
+
+Chart.register(ArcElement, Tooltip, Legend);
+
+
+
+
+
+
 
 
 
@@ -207,79 +217,131 @@ export const faqsData = [
   },
 ];
 
+
+/*=====================CHART DATA=======================*/ 
+const data1 = {
+
+  datasets: [{
+      label: 'Core Portfolio (5FF)',
+      data: [25, 20, 20, 20, 15],
+      backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 205, 86)',
+          'rgb(255, 25, 86)',
+          'rgb(25, 205, 86)',
+      ],
+      hoverOffset: 4
+  }],
+  labels: [
+      ' Parag Parikh Flexi Cap ',
+      'Canara Robeco Emerging Equity  ',
+      ' ICICI Prudential Value Fund',
+      'Kotak Emerging Equity Fund ',
+      'UTI Nifty 50 Index Fund '
+  ]
+};
+
+
+const data2 = {
+
+  datasets: [{
+      label: 'Tax-Saver',
+      data: [30,30,40],
+      backgroundColor: [
+         
+          'rgb(255, 205, 86)',
+          'rgb(255, 25, 86)',
+          'rgb(25, 205, 86)',
+          
+      ],
+      hoverOffset: 4
+  }],
+  labels: [
+      '  Parag Parikh Tax-saver plan   ',
+      'Mirae Asset Tax-saver       ',
+     
+      ' Kotak Tax-saver    '
+      
+  ]
+};
+const data3 = {
+
+  datasets: [{
+      label: 'Active-Passive Combo',
+      data: [35,25,20,20],
+      backgroundColor: [
+         
+          'rgb(255, 205, 86)',
+          'rgb(255, 25, 86)',
+          'rgb(25, 205, 86)',
+          'rgb(54, 162, 235)'
+      ],
+      hoverOffset: 4
+  }],
+  labels: [
+      ' UTI nifty 50 index fund    ',
+      'Kotak Nifty next 50 index fund  ',
+      ' Mirae Mid cap   ',
+      'ICICI Prudential Multi-asset  '
+     
+  ]
+};
+const data4 = {
+
+  datasets: [{
+      label: 'Income Generation',
+      data: [35,35,30],
+      backgroundColor: [
+         
+          'rgb(255, 205, 86)',
+          'rgb(255, 25, 86)',
+          'rgb(25, 205, 86)',
+      ],
+      hoverOffset: 4
+  }],
+  labels: [
+      'ICICI prudential Multi-asset ',
+      ' Canara Hybrid equity ',
+     
+      ' Parag parikh flexi cap '
+     
+  ]
+};
+/*========================CHART DATA ENDS HERE =====================*/
+
+
+
 export const mutualFundData = [
   {
     id: 1,
     icon: earning,
-    title: "Long Term Portfolio",
-    chart: donut,
+    title: "Core Portfolio (5FF)",
+    chart:data1,
     description: "Inflation beating growth while managing risk",
   },
   {
     id: 2,
-    icon: shortterm,
-    title: "Short Term Portfolio",
-    chart: donut,
+    icon: tax,
+    title: "Tax-Saver",
+    chart:data2,
     description: "Achieve short term goals and get better taxation than FDs",
   },
   {
     id: 3,
     icon: tax,
-    title: "Tax Saver",
-    chart: donut,
+    title: "Active-Passive Combo",
+    chart:data3,
     description: "Save taxes AND grow your wealth with LESS funds",
   },
   {
     id: 4,
     icon: retirement,
-    title: "Retire Confident",
-    chart: donut,
+    title: "Income Generation",
+    chart: data4,
     description: "Plan and invest for hassle-free sunset years",
-  },
-  {
-    id: 5,
-    icon: diamond,
-    title: "My First Crore",
-    chart: donut,
-    description: "Build your 1st Crore with SIPs as small as Rs 5,000",
-  },
-  {
-    id: 6,
-    icon: piggybank,
-    title: "Scripbox Emergency Fund",
-    chart: donut,
-    description:
-      "Stay prepared with liquid funds; better growth than savings accounts",
-  },
-  {
-    id: 7,
-    icon: money,
-    title: "Cash Management",
-    chart: donut,
-    description: "Grow your extra cash with Liquid funds",
-  },
-  {
-    id: 8,
-    icon: rupee,
-    title: "Principal Protection & Growth",
-    chart: donut,
-    description: "Growth and safety of your large one-time investments",
-  },
-  {
-    id: 9,
-    icon: dream,
-    title: "Dream Planner",
-    chart: donut,
-    description: "Vacation, car, wedding — invest for all that you dream of",
-  },
-  {
-    id: 10,
-    icon: scholarship,
-    title: "Child Education",
-    chart: donut,
-    description:
-      "Give your child the best education, with appropriate asset allocation and inflation-adjusted costs",
-  },
+  }
+  
 ];
 
 
@@ -340,5 +402,6 @@ export const socialLogos = [
     logo: require("../src/assets/linkedin.png"),
   },
 ];
+
 
 
