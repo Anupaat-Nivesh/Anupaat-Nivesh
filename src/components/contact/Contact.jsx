@@ -45,7 +45,7 @@ const Contact = () => {
     // Verifies and render the Captcha
     const reCaptchaVerfication = (number) => {
         const auth = getAuth();
-        window.reCaptchaVerfier = new RecaptchaVerifier("recaptch-container", {}, auth);
+        window.reCaptchaVerfier = new RecaptchaVerifier("recaptch-container",{}, auth);
         window.reCaptchaVerfier.render();
 
         return signInWithPhoneNumber(auth, number, window.reCaptchaVerfier);
@@ -94,8 +94,8 @@ const Contact = () => {
             OTPTimeout();
 
         } catch (err) {
-            console.log(err);
-            notifyFailure();
+            // console.log(err);
+            notifyFailure(err.message);
             window.reCaptchaVerfier.clear();
         }
     };
@@ -120,7 +120,7 @@ const Contact = () => {
         setCountDown(timer);
     };
 
-// Checks if the First name is correct 
+    // Checks if the First name is correct 
     const handleFirstNameChange = (e) => {
 
         const inputFirstName = e.target.value;
@@ -151,8 +151,8 @@ const Contact = () => {
         }
     };
 
-    
-// Checks if the mail entered is correct?
+
+    // Checks if the mail entered is correct?
 
 
     const handleMailChange = (e) => {
@@ -177,35 +177,35 @@ const Contact = () => {
             e.preventDefault();
             if (!numberVerified) {
                 animateCSS('.btn--form', 'shakeX');
- 
+
                 return;
 
             }
             if (!isEmailValid || !isFirstNameValid || !isLastNameValid) throw new Error('Invalid Input, Kindly check and try again!');
-console.log(form.current);
+            // console.log(form.current);
 
 
+            const res = await emailjs.sendForm(
+                config.emailJSserviceID,
+                config.emailJStemplateID,
+                form.current,
+                config.emailJSKey
+            );
 
-        //   const res =  await emailjs.sendForm(
-        //             config.emailJSserviceID,
-        //             config.emailJStemplateID,
-        //             form.current,
-        //             config.emailJSKey
-        //         );
+            // console.log(res);
 
-        //         console.log(res);
-           
-            // if (res.status !== 200) throw new Error(`Something went wrong, Status: ${res.status}`);
+            if (res.status !== 200) throw new Error(`Something went wrong, Status: ${res.status}`);
+
             notifySuccessfull();
             setNumberVerified(false);
             setOtpSendStatus(false);
             e.target.reset();
-           setValue('');
+            setValue('');
 
             // Signout a user
             const auth = getAuth();
             await signOut(auth);
-            console.log('User is signed out');
+            // console.log('User is signed out');
 
         } catch (err) {
             notifyFailure(err.message);

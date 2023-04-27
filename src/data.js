@@ -166,7 +166,7 @@ export const testimonials = [
     name: "Jaspal Singh",
     quote:
       "I started investing in 2018 with the guidance of Akash (founder). I have two instances to share. One, I needed money to pay-off debt in 2019 and he strategised redemption to maximise gain and lower tax-outgo.Second, during covid he convinced me continue SIPs and invest more when I was skeptical for the future of Equity market. But I was proven wrong happily and I made handsome returns after one year of covid-lockdown.",
-    job: "Civil Engineer",
+    job: "Educator & Influencer",
     avatar: Avatar6,
     socials: [
       "https://instagram.com/",
