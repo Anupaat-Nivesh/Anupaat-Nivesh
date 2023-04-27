@@ -2,9 +2,24 @@ import React from 'react'
 import './mutualfund.css';
 import Card from 'react-bootstrap/Card';
 import { mutualFundData } from '../../../data';
+import {
+    Chart, ArcElement, Tooltip, Legend
+} from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
+
+
+
+Chart.register(ArcElement, Tooltip, Legend);
+
+
 
 
 const MutualFund = () => {
+
+
+    const options = {
+        aspectRatio: 1,
+    }
 
     return (
         <div id='mutual-funds' className='mutualfund-container section__padding'>
@@ -22,7 +37,11 @@ const MutualFund = () => {
                                     <h3>{title}</h3>
                                     <p>{description}</p>
                                     <div className='mutualFund-donut-container'>
-                                        <img src={chart} alt="icon" />
+                                        <Doughnut
+                                            data={chart}
+                                            options={options}>
+
+                                        </Doughnut>
 
                                     </div>
 
