@@ -298,12 +298,13 @@ const data4 = {
           'rgb(255, 25, 86)',
           'rgb(25, 205, 86)',
       ],
+      
+     
       hoverOffset: 4
   }],
   labels: [
       'ICICI prudential Multi-asset ',
       ' Canara Hybrid equity ',
-     
       ' Parag parikh flexi cap '
      
   ]
@@ -316,14 +317,23 @@ export const mutualFundData = [
   {
     id: 1,
     icon: earning,
-    title: "Core Portfolio (5FF)",
+    title:"Core Portfolio (5FF)",
+    hreturn:"12-15%",
+    ihorizon:"54 P",
+    mode:"SIP/LUMP SUM",
+    lockin:"NO",
     chart:data1,
+    riskprofile:"Very High",
     description: "Inflation beating growth while managing risk",
   },
   {
     id: 2,
     icon: tax,
     title: "Tax-Saver",
+    hreturn:"12-15%",
+    ihorizon:"54 P",
+    mode:"SIP/LUMP SUM",
+    lockin:"NO",
     chart:data2,
     description: "Achieve short term goals and get better taxation than FDs",
   },
@@ -331,6 +341,10 @@ export const mutualFundData = [
     id: 3,
     icon: tax,
     title: "Active-Passive Combo",
+    hreturn:"12-15%",
+    ihorizon:"54 P",
+    mode:"SIP/LUMP SUM",
+    lockin:"NO",
     chart:data3,
     description: "Save taxes AND grow your wealth with LESS funds",
   },
@@ -338,6 +352,10 @@ export const mutualFundData = [
     id: 4,
     icon: retirement,
     title: "Income Generation",
+    hreturn:"12-15%",
+    ihorizon:"54 P",
+    mode:"SIP/LUMP SUM",
+    lockin:"NO",
     chart: data4,
     description: "Plan and invest for hassle-free sunset years",
   }
