@@ -23,8 +23,8 @@ const Footer = () => (
 
                     <p> Anupaat Nivesh is an independent financial investment advisory firm, providing guidance to customer for investment in
                         Equity Asset class. We are BSE certified mutual fund distributor. </p>
-                    <p className='focused-text'>Equity Investment are subjected to market risk. 
-                    Read all scheme-related documents carefully before Investing.</p>
+                    <p className='focused-text'>Equity Investment are subjected to market risk.
+                        Read all scheme-related documents carefully before Investing.</p>
 
 
                 </div>
@@ -34,6 +34,7 @@ const Footer = () => (
                 <div className='footer-links'>
                     <Link to='/'>Home</Link>
                     <Link to='about'>About Us</Link>
+                    <a href='' target="_blank" rel="noreferrer">Partner With Us</a>
 
 
                 </div>

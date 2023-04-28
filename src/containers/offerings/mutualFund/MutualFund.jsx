@@ -11,15 +11,23 @@ import { Doughnut } from 'react-chartjs-2';
 
 Chart.register(ArcElement, Tooltip, Legend);
 
-
-
-
 const MutualFund = () => {
 
 
     const options = {
-        aspectRatio: 1,
-    }
+        plugins: {
+            legend: {
+                display: true,
+                position: 'right',
+                fullSize: false,
+                labels: {
+                    boxWidth: 15,
+                }
+            },
+        }
+
+
+    };
 
     return (
         <div id='mutual-funds' className='mutualfund-container section__padding'>
@@ -30,21 +38,54 @@ const MutualFund = () => {
             <div className='mutualFund-wrapper section__padding section__margin'>
                 <div className='mutualfund-Card-container'>
                     {
-                        mutualFundData.map(({ icon, title, description, chart }, id) => {
+                        mutualFundData.map(({ icon, title, description, chart, hreturn, ihorizon, mode, lockin }, id) => {
                             return (
                                 <Card className="mutualfund_data" key={id}>
-                                    <img src={icon} alt="icon" />
-                                    <h3>{title}</h3>
-                                    <p>{description}</p>
-                                    <div className='mutualFund-donut-container'>
-                                        <Doughnut
-                                            data={chart}
-                                            options={options}>
+                                    <div className="card-info">
+                                        <div className='card-title'>
+                                            <img src={icon} alt="icon" />
+                                            <h3>{title}</h3>
+                                        </div>
+                                        <p>{description}</p>
+                                        <div className="mutualcard-body">
+                                            <div>
+                                                <h3>Historical Return</h3>
+                                                <p>{hreturn}</p>
+                                            </div>
+                                            <div>
+                                                <h3>Investment Horizon</h3>
+                                                <p>{ihorizon}</p>
+                                            </div>
+                                            <div>
+                                                <h3>Investment Mode</h3>
+                                                <p>{mode}</p>
+                                            </div>
+                                            <div>
+                                                <h3>LOCK-IN</h3>
+                                                <p>{lockin}</p>
+                                            </div>
 
-                                        </Doughnut>
 
+                                        </div>
+                                        <div className='mutualFund-donut-container'>
+                                            <Doughnut
+                                                data={chart}
+                                                options={options}>
+
+                                            </Doughnut>
+                                        </div>
+
+                                        <small>*Risk Profile for this basket is considered <span className='risk-profile'>Very High</span></small>
+                                        <div class="footer">
+
+                                            {/*  <p className="tag">Risk Profile for this basket is considered Very High</p>*/}
+
+
+                                            <p className='tag'>Excited to invest in this Basket</p>
+                                            <button type="button" className='btn'>Contact Us</button>
+
+                                        </div>
                                     </div>
-
 
                                 </Card>
                             )

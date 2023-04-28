@@ -29,7 +29,10 @@ export const Offerings = () => {
                         Child’s education, retirement, saving tax or creating wealth, there is a basket of quality mutual funds for all your financial goal planning needs and requirements.
                     </p>
                     <div className='offering-btn'>
-                        <Link to="/mutual-funds" className='btn '>Learn More</Link>
+                        <Link to="/mutual-funds" className='btn '>
+                            Learn More
+                        </Link>
+
 
                     </div>
                 </div>
