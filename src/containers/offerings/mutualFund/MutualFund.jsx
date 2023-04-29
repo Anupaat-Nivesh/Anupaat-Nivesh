@@ -38,7 +38,7 @@ const MutualFund = () => {
             <div className='mutualFund-wrapper section__padding section__margin'>
                 <div className='mutualfund-Card-container'>
                     {
-                        mutualFundData.map(({ icon, title, description, chart, hreturn, ihorizon, mode, lockin }, id) => {
+                        mutualFundData.map(({ icon, title, description, chart, hreturn, ihorizon, mode, lockin, riskprofile }, id) => {
                             return (
                                 <Card className="mutualfund_data" key={id}>
                                     <div className="card-info">
@@ -75,12 +75,8 @@ const MutualFund = () => {
                                             </Doughnut>
                                         </div>
 
-                                        <small>*Risk Profile for this basket is considered <span className='risk-profile'>Very High</span></small>
+                                        <small>*Risk Profile for this basket is considered <span className='risk-profile'>{riskprofile}</span></small>
                                         <div class="footer">
-
-                                            {/*  <p className="tag">Risk Profile for this basket is considered Very High</p>*/}
-
-
                                             <p className='tag'>Excited to invest in this Basket</p>
                                             <button type="button" className='btn'>Contact Us</button>
 

@@ -2,12 +2,13 @@ import React from 'react';
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import {Footer,About,Offerings, Whyanupaat,Home,FAQs,Privacypolicy,
   MutualFund,EquityBasket,LoanAgainstSecurities} from './containers';
-import {NotFound,Contact,Navbar,OurApp} from './components' ;
+import {NotFound,Contact,Navbar,OurApp,PartnerWithUs ,CorporateCorner} from './components' ;
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 import './App.css' ;
 import ScrollToTop from './components/ScrollToTop';
+
 AOS.init();
 
 function App() {
@@ -30,8 +31,12 @@ function App() {
       <Route path='*' element={<NotFound/>}/>
         {/* footer pages  */}
       <Route path='faqs' element={<FAQs/>}/>
+      <Route path='partner-with-us' element={<PartnerWithUs/>}/>
+      <Route path='corporate' element={<CorporateCorner/>}/>
       
       <Route path='privacy-policy' element={<Privacypolicy/>}/>
+
+      
       {/* Offering pages  */}
       <Route path='mutual-funds' element={<MutualFund/>}/>
       <Route path='equity-basket' element={<EquityBasket/>}/>

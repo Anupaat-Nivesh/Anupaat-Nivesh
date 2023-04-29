@@ -27,7 +27,7 @@
     overflow: visible;
     /*======3d transform===*/
     transform:
-        perspective(900px) rotateX(10deg) scale(0.8);
+        perspective(900px) scale(0.75);
 }
 
 
@@ -43,8 +43,8 @@
 }
 
 .mutualfund_data p {
-    font-weight: 200;
-    font-size: 1.5rem;
+    font-weight: 400;
+    font-size: 1.8rem;
     margin-left: 1rem;
 
 }
@@ -94,9 +94,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: #ea5358;
-    color: #fff;
-    font-weight: 500;
+    background-color: var(--color-secondary-light);
+    color: #000000;
+
 }
 
 

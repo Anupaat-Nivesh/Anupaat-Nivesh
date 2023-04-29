@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import { equityBasketData } from '../../../data';
 const EquityBasket = () => {
     return (
-        <div id='equity-basket' className='loan-container section__padding'>
+        <div id='equity-basket' className='equitybasket-container section__padding'>
             <div className='equity-title'>
                 <h1 className='primary-heading'>Equity <span className='section-heading-focus'>Baskets</span></h1>
             </div>
@@ -33,11 +33,12 @@ const EquityBasket = () => {
                 </div>
                 <div className='equity-title-image' data-aos="zoom-in-left" data-aos-duration="1000">
                     <picture>
-                        <img src={equityImg} alt="questionimage" />
+                        <img src={equityImg} alt="image" />
 
                     </picture>
                 </div>
             </div>
+
             <div className="equityBasket__card-container">
                 <div className='equitybasket-title'>
                     <h1>Unlock Value for your business and your client</h1>
