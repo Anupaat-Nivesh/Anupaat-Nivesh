@@ -1,42 +1,43 @@
-.privacy-policy-heading-section{
+.privacy-policy-heading-section {
   text-align: center;
+  margin-top: 8rem;
 }
 
-.privacy-statement{
+.privacy-statement {
   color: var(--color-subtext);
   font-size: 1.6rem;
   margin-top: 4rem;
 }
 
-.privacy-section{
+.privacy-section {
   margin-top: 6rem;
 }
 
-.focused{
+.focused {
   font-weight: 500;
   color: var(--color-primary);
 }
 
 
 
-.privacy-statement-heading{
+.privacy-statement-heading {
   font-size: 1.8rem;
   font-weight: 500;
   margin-top: 1rem;
 }
 
-.privacy-statement-points li{
+.privacy-statement-points li {
   font-size: 1.6rem;
-  list-style:disc;
+  list-style: disc;
   list-style-position: inside;
-  
+
 }
 
-.privacy-statement-points{
+.privacy-statement-points {
   margin-top: 2rem;
 }
 
-.privacy-section-text{
+.privacy-section-text {
   font-size: 1.6rem;
   margin-top: 2rem;
 }

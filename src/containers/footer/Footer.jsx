@@ -34,7 +34,8 @@ const Footer = () => (
                 <div className='footer-links'>
                     <Link to='/'>Home</Link>
                     <Link to='about'>About Us</Link>
-                    <a href='' target="_blank" rel="noreferrer">Partner With Us</a>
+                    <Link to='partner-with-us'>Partner With Us</Link>
+                    <Link to='corporate'>Corporate Corner</Link>
 
 
                 </div>

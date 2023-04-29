@@ -8,10 +8,10 @@ import framework from "../src/assets/Icons/framework.png";
 import earning from "../src/assets/Icons/earning.png";
 
 import tax from "../src/assets/Icons/tax.png";
-import shortterm from "../src/assets/Icons/short-term.png";
+
 import retirement from "../src/assets/Icons/retirement.png";
 
-import donut from "../src/assets/Icons/graph.png";
+
 import equity2 from '../src/assets/equity2.png';
 import equity3 from '../src/assets/equity3.png';
 import {
@@ -312,7 +312,7 @@ const data4 = {
 /*========================CHART DATA ENDS HERE =====================*/
 
 
-
+/*=====================MUTUAL FUND DATA BASKET PAGE DATA============================*/
 export const mutualFundData = [
   {
     id: 1,
@@ -335,6 +335,7 @@ export const mutualFundData = [
     mode:"SIP/LUMP SUM",
     lockin:"NO",
     chart:data2,
+    riskprofile:"Very High",
     description: "Achieve short term goals and get better taxation than FDs",
   },
   {
@@ -346,6 +347,7 @@ export const mutualFundData = [
     mode:"SIP/LUMP SUM",
     lockin:"NO",
     chart:data3,
+    riskprofile:"Very High",
     description: "Save taxes AND grow your wealth with LESS funds",
   },
   {
@@ -357,11 +359,13 @@ export const mutualFundData = [
     mode:"SIP/LUMP SUM",
     lockin:"NO",
     chart: data4,
+    riskprofile:"Very High",
     description: "Plan and invest for hassle-free sunset years",
   }
   
 ];
 
+/*=====================EQUITY BASKET PAGE DATA============================*/
 
 export const equityBasketData = [
   {
@@ -384,6 +388,30 @@ export const equityBasketData = [
     title: "Make every part of your client's portfolio productive",
    
     description: "Save taxes AND grow your wealth with LESS funds",
+  }
+  ];
+
+
+  /*=====================PARTNER WITH US  PAGE DATA============================*/
+
+export const partnerData = [
+  {
+    id: 1,
+    icon: equity2,
+    title: "Shift your Business to higher levels of Success and Value",
+    description: "Inflation beating growth while managing risk",
+  },
+  {
+    id: 2,
+    icon:equity3,
+    title: "Give your clients the online advantage",
+    description: "Achieve short term goals and get better taxation than FDs",
+  },
+  {
+    id: 3,
+    icon:equity3,
+    title: "Connect, Communicate and Collaborate",
+   description: "Save taxes AND grow your wealth with LESS funds",
   }
   ];
 
