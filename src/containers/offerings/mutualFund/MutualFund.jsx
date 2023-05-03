@@ -22,6 +22,7 @@ const MutualFund = () => {
                 fullSize: false,
                 labels: {
                     boxWidth: 15,
+                    align: 'start',
                 }
             },
         }
