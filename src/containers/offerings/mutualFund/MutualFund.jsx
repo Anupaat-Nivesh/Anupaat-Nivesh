@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './mutualfund.css';
+import ContactModal from '../../../components/contact/contactModal/ContactModal';
 import Card from 'react-bootstrap/Card';
 import { mutualFundData } from '../../../data';
 import {
@@ -12,6 +13,9 @@ import { Doughnut } from 'react-chartjs-2';
 Chart.register(ArcElement, Tooltip, Legend);
 
 const MutualFund = () => {
+
+    const [modal, setModal] = useState(false);
+    const [fundType,setFundType] = useState(false);
 
 
     const options = {
@@ -32,6 +36,7 @@ const MutualFund = () => {
 
     return (
         <div id='mutual-funds' className='mutualfund-container section__padding'>
+            {modal?<ContactModal setTheModalState={setModal} fundName={fundType}/>:''}
             <div className='mutualFund-title'>
                 <h1 >Mutual<span className='section-heading-focus'>Funds</span></h1>
                 <div className='lead'>Go after all that matters to you.</div>
@@ -77,9 +82,11 @@ const MutualFund = () => {
                                         </div>
 
                                         <small>*Risk Profile for this basket is considered <span className='risk-profile'>{riskprofile}</span></small>
-                                        <div class="footer">
+                                        <div className="footer">
                                             <p className='tag'>Excited to invest in this Basket</p>
-                                            <button type="button" className='btn'>Contact Us</button>
+                                            <button data-fund-type={title} type="button" className='btn' onClick={(e) => {setModal(true);
+                                            setFundType(e.target.dataset.fundType);
+                                    }}>Contact Us</button>
 
                                         </div>
                                     </div>

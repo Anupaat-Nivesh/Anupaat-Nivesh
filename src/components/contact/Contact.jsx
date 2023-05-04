@@ -45,7 +45,7 @@ const Contact = () => {
     // Verifies and render the Captcha
     const reCaptchaVerfication = (number) => {
         const auth = getAuth();
-        window.reCaptchaVerfier = new RecaptchaVerifier("recaptch-container",{}, auth);
+        window.reCaptchaVerfier = new RecaptchaVerifier("recaptch-container", {}, auth);
         window.reCaptchaVerfier.render();
 
         return signInWithPhoneNumber(auth, number, window.reCaptchaVerfier);
@@ -280,6 +280,7 @@ const Contact = () => {
                             <label htmlFor="contact-number">Phone</label>
                             <div className="mobile-number__input-container">
                                 <PhoneInput
+                                    name="number"
                                     className="phoneInput"
                                     placeholder="Enter phone number"
                                     value={value}
