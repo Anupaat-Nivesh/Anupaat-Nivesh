@@ -9,21 +9,22 @@
   align-items: center;
   justify-content: center;
 }
-.focus{
-  color: red;
-}
+
 
 .infotext-container{
   display: flex;
   justify-content: center;
   font-size: 1.6rem;
+  font-weight: 500;
+  text-align: center;
+
 }
 
 
 .contactForm-container{
   position: relative;
-  min-width: 50rem;
-  min-height: 40rem;
+  max-width: 70%;
+  /* max-height: 50%; */
   background-color:#28282B;
   border-radius: 2rem;
   color: #fff;
@@ -31,11 +32,12 @@
 }
 
 .close-icon{
-  position: absolute;
-  right: 2rem;
+  position: relative;
   font-size: 4rem;
   cursor: pointer;
   transition: all 0.3s;
+  text-align: right;
+  color: red;
 }
 
 .close-icon:hover{
@@ -161,78 +163,223 @@ button:active {
 
 /* SENDING ANIMATION */
 
-.loader-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
 .loader {
+  width: 48px;
+  height: 48px;
+  margin: auto;
   position: relative;
-  width: 120px;
-  height: 90px;
-  margin: 0 auto;
-  margin-top: 50%;
-  margin-left: 50%;
- transform: translate(-50%,-100%);
- color: #fff;
 }
 
 .loader:before {
-  content: "";
+  content: '';
+  width: 48px;
+  height: 5px;
+  background: #f0808050;
   position: absolute;
-  bottom: 30px;
-  left: 50px;
-  height: 30px;
-  width: 30px;
+  top: 60px;
+  left: 0;
   border-radius: 50%;
-  background: red;
-  animation: loading-bounce 0.5s ease-in-out infinite alternate;
+  animation: shadow324 0.5s linear infinite;
 }
 
 .loader:after {
-  content: "";
+  content: '';
+  width: 100%;
+  height: 100%;
+  background: #f08080;
   position: absolute;
-  right: 0;
   top: 0;
-  height: 7px;
-  width: 45px;
+  left: 0;
   border-radius: 4px;
-  box-shadow: 0 5px 0 #f2f2f2, -35px 50px 0 #f2f2f2, -70px 95px 0 #f2f2f2;
-  animation: loading-step 1s ease-in-out infinite;
+  animation: jump7456 0.5s linear infinite;
 }
 
-@keyframes loading-bounce {
-  0% {
-    transform: scale(1, 0.7);
+@keyframes jump7456 {
+  15% {
+    border-bottom-right-radius: 3px;
   }
 
-  40% {
-    transform: scale(0.8, 1.2);
+  25% {
+    transform: translateY(9px) rotate(22.5deg);
   }
 
-  60% {
+  50% {
+    transform: translateY(18px) scale(1, .9) rotate(45deg);
+    border-bottom-right-radius: 40px;
+  }
+
+  75% {
+    transform: translateY(9px) rotate(67.5deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(90deg);
+  }
+}
+
+@keyframes shadow324 {
+
+  0%,
+    100% {
     transform: scale(1, 1);
   }
 
-  100% {
-    bottom: 140px;
+  50% {
+    transform: scale(1.2, 1);
   }
 }
 
-@keyframes loading-step {
-  0% {
-    box-shadow: 0 10px 0 rgba(0, 0, 0, 0),
-            0 10px 0 #f2f2f2,
-            -35px 50px 0 #f2f2f2,
-            -70px 90px 0 #f2f2f2;
+
+/* RESPONSIVENESS CSS */
+
+/* ******************************** */
+/* BELOW 1200px (small desktops) */
+/* ******************************** */
+
+@media(max-width:75em) {
+  .contact-form div label {
+   
+    margin-left: 5rem;
+    
+   }
+   .info-input,.query_select{
+    margin-right: 5rem;
+   
+   }
+   
+   .ModalForm-PhoneInput{
+     margin-right: 5rem;
+    
+   }
+}
+
+
+/* ******************************** */
+/* BELOW 928px (Tablets) */
+/* ******************************** */
+
+@media(max-width:71em) {
+  .contact-form div label {
+   
+    margin-left: 2rem;
+    
+   }
+   .info-input,.query_select{
+    margin-right: 2rem;
+    width: 25rem;
+
+    font-size: 1.6rem;
+   }
+   
+   .ModalForm-PhoneInput{
+     margin-right: 2rem;
+     font-size: 1.6rem;
+
+     width: 25rem;
+   }
+
+   .ModalForm-PhoneInput input{
+    font-size: 1.6rem;
   }
 
-  100% {
-    box-shadow: 0 10px 0 #f2f2f2,
-            -35px 50px 0 #f2f2f2,
-            -70px 90px 0 #f2f2f2,
-            -70px 90px 0 rgba(0, 0, 0, 0);
+
+}
+
+/* ******************************** */
+/* BELOW 752px (Smaller Tablets) */
+/* ******************************** */
+
+@media(max-width:47em) {
+
+  .contact-form div label {
+   
+    margin-left: 1rem;
+    font-size: 1.4rem;
+   }
+   .info-input,.query_select{
+    margin-right: 1rem;
+    width: 20rem;
+
+    font-size: 1.4rem;
+   }
+   
+   .ModalForm-PhoneInput{
+     margin-right: 1rem;
+     font-size: 1.4rem;
+
+     width: 20rem;
+   }
+
+   .ModalForm-PhoneInput input{
+    font-size: 1.4rem;
   }
+  button {
+    font-size: 1.4rem;
+  }
+  
+
+}
+
+/* ******************************** */
+/* BELOW 544px (Phones) */
+/* ******************************** */
+@media(max-width:34em) {
+  .contactForm-container{
+    max-width: 90%;
+   
+  }
+  .contact-form div label {
+   
+    margin-left: 0rem;
+    font-size: 1.2rem;
+   }
+   .info-input,.query_select{
+    margin-right: 0rem;
+    width: 15rem;
+    font-size: 1.2rem;
+   }
+   
+   .ModalForm-PhoneInput{
+     margin-right: 0rem;
+     font-size: 1.2rem;
+
+     width: 15rem;
+   }
+
+   .ModalForm-PhoneInput input{
+    font-size: 1.2rem;
+  }
+  button {
+    font-size: 1.2rem;
+  }
+
+  .infotext-container{
+    font-size: 1.4rem;
+  
+  }
+  .input-container{
+
+    gap: 1rem;
+  }
+  .loader {
+    width: 18px;
+    height: 18px;
+    margin: auto;
+    position: relative;
+  }
+  
+  .loader:before {
+    content: '';
+    width: 18px;
+    height: 2px;
+    background: #f0808050;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    border-radius: 50%;
+    animation: shadow324 0.5s linear infinite;
+  }
+  
+  
 }
 
