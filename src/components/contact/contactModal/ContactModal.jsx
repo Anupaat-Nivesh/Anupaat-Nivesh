@@ -2,12 +2,12 @@ import React, { useState, useRef } from "react";
 import "./ContactModal.css";
 
 import { RiCloseLine } from 'react-icons/ri';
-import PhoneInput from 'react-phone-number-input'
+import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input'
 
-import { emailJSserviceID, emailJSKey,emailJSMFtemplteID} from "../Config";
+import { emailJSserviceID, emailJSKey, emailJSMFtemplteID } from "../Config";
 import emailjs from "@emailjs/browser";
 import { ToastContainer } from "react-toastify";
-import { notifyFailure} from "../ToastConfig";
+import { notifyFailure } from "../ToastConfig";
 
 const ContactModal = function (props) {
 
@@ -39,6 +39,12 @@ const ContactModal = function (props) {
   const submitModalForm = function (e) {
     e.preventDefault();
 
+    if (!isPossiblePhoneNumber(number + '')) {
+      notifyFailure('Incorrent Phone Number');
+
+      return;
+    }
+
     emailjs.sendForm(emailJSserviceID, emailJSMFtemplteID, form.current, emailJSKey).then(res => {
       setMsgStatus(true);
       setTimeout(() => {
@@ -67,10 +73,11 @@ const ContactModal = function (props) {
     }}>
 
       <div className="contactForm-container" ref={contactFormContainer}>
+        <div style={{ display: "flex", justifyContent: 'center' }}>
+          <RiCloseLine className="close-icon" onClick={closeModalWindow} />
+        </div>
 
-        <RiCloseLine className="close-icon" onClick={closeModalWindow} />
-
-        {msgStatus ? <div className="loader-container"><p>Sending your message</p><div className="loader"></div></div> : <> <div className="infotext-container">Send your query and our team will get back to you within <span className="focus">&nbsp;2 business days.</span></div>
+        {msgStatus ? <div className="loader-container"><p>Sending your message</p><div className="loader"></div></div> : <> <div className="infotext-container">Send your query and our team will get back to you within 2 business days</div>
 
           <form className="contact-form" onSubmit={submitModalForm} ref={form}>
             <div className="input-container">
@@ -83,17 +90,21 @@ const ContactModal = function (props) {
             </div>
             <div className="input-container">
               <label htmlFor="phone">Phone Number : </label>
-              <PhoneInput
-                name="number"
-                id="phone"
-                className="ModalForm-PhoneInput"
-                value={number}
-                onChange={setNumber}
-                defaultCountry="IN"
-                international
-                countryCallingCodeEditable={false}
-
-              />
+              <div>
+                <PhoneInput
+                  name="number"
+                  id="phone"
+                  className="ModalForm-PhoneInput"
+                  value={number}
+                  onChange={setNumber}
+                  defaultCountry="IN"
+                  international
+                  countryCallingCodeEditable={false}
+                />
+                <div className="error phone-error">
+                  {number && isPossiblePhoneNumber(number + '') ? '' : 'Enter a valid Number'}
+                </div>
+              </div>
 
             </div>
             <div className="input-container">
