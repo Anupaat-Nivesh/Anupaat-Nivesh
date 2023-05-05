@@ -3,10 +3,10 @@ import './corporate.css';
 
 const CorporateCorner = () => {
     return (
-        <div id='corporate'>CorporateCorner</div>
- )}
-       <div> Financial Wellness is the ideal employee benefit
-Upgrade your financial wellness programs with Banzai.
+        <div id='corporate'>CorporateCorner
+            
+            <div className='partner-withUS-description'> <h2>Financial Wellness is the ideal employee benefit
+Upgrade your financial wellness programs with Banzai.</h2>
    
 
 
@@ -27,5 +27,7 @@ Many people are struggling to save as a result of poor financial education. In f
 
 The Anupaat Nivesh Coach
 The Coach has no peer or precedent in financial education. It is a unique, virtual financial mentor that asks sophisticated questions and gives sophisticated answers. Your employees can create specific plans when they use the Coach to understand their own situation.
-</div>
+</div></div>
+ )}
+      
 export default CorporateCorner
