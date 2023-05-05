@@ -1,0 +1,83 @@
+/*===================HERO SECTION=======================*/
+
+.corporate-corner-main {
+    padding: 5rem 4rem 6rem 4rem;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    font-family: var(--font-family);
+    background: #333333;
+    /*fallback for old browsers */
+    /*background: -webkit-linear-gradient(to right, #dd1818, #333333);*/
+    /* Chrome 10-25, Safari 5.1-6 */
+    /*background: linear-gradient(to right, #dd1818, #333333);*/
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(90deg, #c6fccf 0%, #b1cbfd 100%);
+}
+
+.corporate-corner-heading {
+    margin-top: 9rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.corporate-corner-description {
+    margin-top: 2rem;
+    color: var(--color-subtext-light);
+
+}
+
+.corporate-corner-btn {
+    margin-top: 4rem;
+    margin-bottom: 10rem;
+}
+
+.corporate-corner-title-image img {
+    width: 90%;
+    justify-content: center;
+    z-index: 10;
+}
+
+/*=========================CONTAINER 2===========================*/
+.corporate-why-container {
+
+    box-sizing: border-box;
+    margin: 5rem auto 0;
+    max-width: 844px;
+    padding: 5rem 12px;
+    position: relative;
+    transition: var(--transition);
+}
+
+.why-title {
+    font-size: 2.7rem;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 2.4rem;
+}
+
+.why-line {
+    background: #000;
+    margin-bottom: 1.6rem;
+    height: 0.3rem;
+    width: auto;
+}
+
+.reason-section {
+    padding: 1.8rem 0;
+}
+
+.reason-title {
+    font-size: 3.6rem;
+    font-weight: 300;
+}
+
+.corporate-icon {
+    display: inline-block;
+    height: 3rem;
+    width: 3rem;
+    margin: 1rem 2rem 0rem 0rem;
+
+}
+
+/*==================MEDIA QUERIES===============*/

@@ -10,6 +10,8 @@ import earning from "../src/assets/Icons/earning.png";
 import tax from "../src/assets/Icons/tax.png";
 
 import retirement from "../src/assets/Icons/retirement.png";
+import {IoBulbSharp} from "react-icons/io5";
+import {GiHealthNormal,GiOpenBook, GiWallet, GiCharacter} from "react-icons/gi";
 
 
 import equity2 from '../src/assets/equity2.png';
@@ -22,14 +24,6 @@ import {
 
 
 Chart.register(ArcElement, Tooltip, Legend);
-
-
-
-
-
-
-
-
 
 
 export const featuresData = [
@@ -414,6 +408,41 @@ export const partnerData = [
    description: "Get Access to our curated Mutual Fund Basket & iBaskets for your customers",
   }
   ];
+/*=====================CORPORATE  PAGE DATA============================*/
+
+export const corporateData = [
+  {
+    id: 1,
+    icon:<IoBulbSharp/>,
+    title: "Productivity",
+    description: "Hands-on learning through simulated activities changes behavior. Banzai is for all ages and has limitless potential for implementation in schools, community groups, and employees at your organization.",
+  },
+  {
+    id: 2,
+    icon:<GiHealthNormal/>,
+    title: "Health",
+    description: "We’ve always known that stress is bad for our health—and it’s never been truer than with financial stress. Nearly one-third of Americans say their lack of money has created obstacles to living a healthy lifestyle.",
+  },
+  {
+    id: 3,
+    icon:<GiOpenBook/>,
+    title: "Attendance",
+    description: "Tardiness and absenteeism tends to increase when employees struggle financially, which can also negatively affect their ability to perform well at work.",
+  },
+  {
+    id: 4,
+    icon:<GiWallet/>,
+    title: "Well-Being",
+    description: "  Many people are struggling to save as a result of poor financial education. In fact, 37% of respondents in one large survey admitted to having no specific savings goal.",
+  },
+  {
+    id: 5,
+    icon:<GiCharacter/>,
+    title: "The Anupaat Nivesh Coach",
+    description: "The Coach has no peer or precedent in financial education. It is a unique, virtual financial mentor that asks sophisticated questions and gives sophisticated answers. Your employees can create specific plans when they use the Coach to understand their own situation.",
+  }
+  ];
+
 
 
 

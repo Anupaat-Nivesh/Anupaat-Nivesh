@@ -1,3 +1,5 @@
+/*===================HERO SECTION=======================*/
+
 .partner-withUS-container {
     display: flex;
     flex-direction: column;
@@ -6,29 +8,21 @@
 
 }
 
-.topLine {
-    font-size: 1.6rem;
-    line-height: 1.6rem;
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
-    margin-bottom: 1.6rem;
-}
-
 .partner-withUS-main {
     padding: 5rem 4rem 5rem 4rem;
-
+    color: #fff;
     display: grid;
     grid-template-columns: 60% 40%;
     font-family: var(--font-family);
-    background: #333333;
+    background: #242424;
     /* fallback for old browsers 
-    background: -webkit-linear-gradient(to right, #dd1818, #333333);
+    background: -webkit-linear-gradient(to right, #dd1818, #242424);
     /* Chrome 10-25, Safari 5.1-6 */
-    /*background: linear-gradient(to right, #dd1818, #333333);*/
+    background: linear-gradient(to right, #dd1818, #242424);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 
-    background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+    /*background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);*/
 }
 
 .partner-withUS-heading {
@@ -40,7 +34,7 @@
 
 .partner-withUS-description {
     margin-top: 2rem;
-    color: var(--color-subtext-light);
+    color: #fff;
 
 }
 

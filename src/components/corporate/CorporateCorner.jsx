@@ -1,33 +1,61 @@
 import React from 'react'
 import './corporate.css';
+import { corporateData } from '../../data';
+
 
 const CorporateCorner = () => {
     return (
-        <div id='corporate'>CorporateCorner
-            
-            <div className='partner-withUS-description'> <h2>Financial Wellness is the ideal employee benefit
-Upgrade your financial wellness programs with Banzai.</h2>
-   
+        <div id='corporate' className='corporate-corner-container '>
+            <div className='corporate-corner-main'>
 
+                <div className="corporate-corner-heading">
+                    <div className='anupaat_corporate-corner-heading-explanation' data-aos="zoom-in-right" data-aos-duration="1000">
+                        <div className="topLine">Corporate corner</div>
+                        <div className='corporate-corner-subheading '>
+                            <h2 className='secondary-heading'>Financial Wellness is the<br /> Ideal Employee Benefit</h2>
+                        </div>
+                        <div className='corporate-corner-description'>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto cupiditate culpa tempore! Provident ab voluptas asperiores, optio quam, quidem cumque dolorum iusto accusamus aliquid consequatur maxime odit perferendis in. Commodi.
+                            </p>
+                        </div>
+                        <div className='corporate-corner-btn'>
+                            <a href='/contact' className='btn'>Schedule a Demo</a>
 
-    Why Financial Literacy?
-Productivity
-Hands-on learning through simulated activities changes behavior. Banzai is for all ages and has limitless potential for implementation in schools, community groups, and employees at your organization.1
+                        </div>
+                    </div>
+                </div>
+                <div className='corporate-corner-title-image' data-aos="zoom-in-left" data-aos-duration="1000">
+                    <picture>
+                        <img src=" " alt="image" />
+                    </picture>
+                </div>
+            </div>
+            <div className="corporate-why-container">
+                <div className="why-section">
+                    <div className="why-title"><h2>Why Financial Literacy</h2></div>
+                    <div className="why-line"></div>
+                    <div className="why-reasons">
+                        {
+                            corporateData.map(({ icon, title, description }, id) => {
+                                return (
+                                    <div className="reason-section" key={id}>
+                                        <div className="reason-title">
+                                            <div className="corporate-icon"> {icon}</div>
+                                            {title}
+                                        </div>
+                                        <p>{description}</p>
+                                    </div>
 
-Health
-We’ve always known that stress is bad for our health—and it’s never been truer than with financial stress. Nearly one-third of Americans say their lack of money has created obstacles to living a healthy lifestyle.2
+                                )
+                            }
+                            )
+                        }
 
-Attendance
-Tardiness and absenteeism tends to increase when employees struggle financially, which can also negatively affect their ability to perform well at work.3
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
 
-Well-Being
-Many people are struggling to save as a result of poor financial education. In fact, 37% of respondents in one large survey admitted to having no specific savings goal.4
-
-
-
-The Anupaat Nivesh Coach
-The Coach has no peer or precedent in financial education. It is a unique, virtual financial mentor that asks sophisticated questions and gives sophisticated answers. Your employees can create specific plans when they use the Coach to understand their own situation.
-</div></div>
- )}
-      
 export default CorporateCorner

@@ -38,6 +38,14 @@ h3 {
   color: var(--color-subtext-light);
 }
 
+.topLine {
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  margin-bottom: 1.6rem;
+}
+
 p {
   font-size: 1.6rem;
 }
