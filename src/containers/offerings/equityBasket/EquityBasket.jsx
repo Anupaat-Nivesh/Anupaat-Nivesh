@@ -20,9 +20,8 @@ const EquityBasket = () => {
                         </div>
                         <div className='equity-description'>
                             <p>As our economy grows, participation in the stock markets is growing significantly.
-                                Indian investors opened a record 1.4 crore new demat accounts in FY21,
-                                compared to 0.5 crore in FY20. Address this growing need to access the stock market by
-                                offering unique baskets of Indian stocks managed by expert fund managers executed seamlessly.
+                                Anupaat Nivesh Address the growing need to access the stock market by
+                                offering unique baskets of Indian stocks managed by expert fund managers.
                                 Do more, be more.
                             </p></div>
                         <div className='equity-btn'>
@@ -41,7 +40,7 @@ const EquityBasket = () => {
 
             <div className="equityBasket__card-container">
                 <div className='equitybasket-title'>
-                    <h1>Unlock Value for your business and your client</h1>
+                    <h1>Unlock Value for your Portfolio</h1>
                 </div>
                 <div className='equityBasket-Card-container'>
                     {

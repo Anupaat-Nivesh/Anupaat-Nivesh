@@ -222,23 +222,23 @@ export const faqsData = [
 const data1 = {
 
   datasets: [{
-      label: 'Core Portfolio (5FF)',
+      label: 'Core Portfolio (पंचम: Framework Investment)',
       data: [25, 20, 20, 20, 15],
       backgroundColor: [
-          'rgb(255, 99, 132)',
-          'rgb(54, 162, 235)',
-          'rgb(255, 205, 86)',
-          'rgb(255, 25, 86)',
-          'rgb(25, 205, 86)',
+          'rgb(13,93,127)',
+          'rgb(49,148,183)',
+          'rgb(77,182,172)',
+          'rgb(129,199,132)',
+          'rgb(205,231,117)',
       ],
       hoverOffset: 4
   }],
   labels: [
-      ' Parag Parikh Flexi Cap ',
-      'Canara Robeco Emerging Equity  ',
-      ' ICICI Prudential Value Fund',
-      'Kotak Emerging Equity Fund ',
-      'UTI Nifty 50 Index Fund '
+      'Fund 1 : Flexi Cap',
+      'Fund 2 : Mid Cap',
+      'Fund 3 : Value Fund',
+      'Fund 4 : Mid Cap',
+      'Fund 4 : Large Cap'
   ]
 };
 
@@ -250,18 +250,17 @@ const data2 = {
       data: [30,30,40],
       backgroundColor: [
          
-          'rgb(255, 205, 86)',
-          'rgb(255, 25, 86)',
-          'rgb(25, 205, 86)',
+        'rgb(13,93,127)',
+        'rgb(49,148,183)',
+        'rgb(77,182,172)',
           
       ],
       hoverOffset: 4
   }],
   labels: [
-      '  Parag Parikh Tax-saver plan   ',
-      'Mirae Asset Tax-saver       ',
-     
-      ' Kotak Tax-saver    '
+      'Fund 1 : Tax-Saver',
+      'Fund 2 : Tax-Saver',
+      'Fund 3 : Tax-Saver'
       
   ]
 };
@@ -272,18 +271,18 @@ const data3 = {
       data: [35,25,20,20],
       backgroundColor: [
          
-          'rgb(255, 205, 86)',
-          'rgb(255, 25, 86)',
-          'rgb(25, 205, 86)',
-          'rgb(54, 162, 235)'
+        'rgb(49,148,183)',
+        'rgb(77,182,172)',
+        'rgb(129,199,132)',
+        'rgb(205,231,117)',
       ],
       hoverOffset: 4
   }],
   labels: [
-      ' UTI nifty 50 index fund    ',
-      'Kotak Nifty next 50 index fund  ',
-      ' Mirae Mid cap   ',
-      'ICICI Prudential Multi-asset  '
+    'Fund 1 : Large Cap',
+    'Fund 2 : Large Cap',
+    'Fund 3 : Mid Cap',
+    'Fund 4 : Multi Cap'
      
   ]
 };
@@ -294,18 +293,18 @@ const data4 = {
       data: [35,35,30],
       backgroundColor: [
          
-          'rgb(255, 205, 86)',
-          'rgb(255, 25, 86)',
-          'rgb(25, 205, 86)',
+        'rgb(49,148,183)',
+        'rgb(77,182,172)',
+        'rgb(129,199,132)',
       ],
       
      
       hoverOffset: 4
   }],
   labels: [
-      'ICICI prudential Multi-asset ',
-      ' Canara Hybrid equity ',
-      ' Parag parikh flexi cap '
+    'Fund 1 : Multi Cap',
+    'Fund 2 : Flexi Cap',
+    'Fund 3 : Flexi Cap'
      
   ]
 };
@@ -318,8 +317,8 @@ export const mutualFundData = [
     id: 1,
     icon: earning,
     title:"Core Portfolio (5FF)",
-    hreturn:"12-15%",
-    ihorizon:"54 P",
+    hreturn:"14-16%",
+    ihorizon:"5Y+",
     mode:"SIP/LUMP SUM",
     lockin:"NO",
     chart:data1,
@@ -330,36 +329,36 @@ export const mutualFundData = [
     id: 2,
     icon: tax,
     title: "Tax-Saver",
-    hreturn:"12-15%",
-    ihorizon:"54 P",
+    hreturn:"11-14%",
+    ihorizon:"3Y+",
     mode:"SIP/LUMP SUM",
     lockin:"NO",
     chart:data2,
-    riskprofile:"Very High",
+    riskprofile:"Moderate",
     description: "Achieve short term goals and get better taxation than FDs",
   },
   {
     id: 3,
     icon: tax,
     title: "Active-Passive Combo",
-    hreturn:"12-15%",
-    ihorizon:"54 P",
+    hreturn:"11-14%",
+    ihorizon:"3Y+",
     mode:"SIP/LUMP SUM",
     lockin:"NO",
     chart:data3,
-    riskprofile:"Very High",
+    riskprofile:"Moderate",
     description: "Save taxes AND grow your wealth with LESS funds",
   },
   {
     id: 4,
     icon: retirement,
     title: "Income Generation",
-    hreturn:"12-15%",
-    ihorizon:"54 P",
+    hreturn:"10-14%",
+    ihorizon:"5Y+",
     mode:"SIP/LUMP SUM",
     lockin:"NO",
     chart: data4,
-    riskprofile:"Very High",
+    riskprofile:"Low",
     description: "Plan and invest for hassle-free sunset years",
   }
   
@@ -371,23 +370,23 @@ export const equityBasketData = [
   {
     id: 1,
     icon: equity2,
-    title: "Provide Unique oppurtunities to your clients",
+    title: "Simple to Understand",
    
-    description: "Inflation beating growth while managing risk",
+    description: "iBaskets are modern investing products based on simple ideas you can understand",
   },
   {
     id: 2,
     icon:equity3,
-    title: "Increase your share of client wallet",
+    title: "Scientific Investment Models",
   
-    description: "Achieve short term goals and get better taxation than FDs",
+    description: "Models are rule based and systematic investing techniques. They are built and proved with Science and Math",
   },
   {
     id: 3,
     icon:equity3,
-    title: "Make every part of your client's portfolio productive",
+    title: "Make Productive Portfolio",
    
-    description: "Save taxes AND grow your wealth with LESS funds",
+    description: "Right proportional investment can generate alpha returns for your portfolio",
   }
   ];
 
