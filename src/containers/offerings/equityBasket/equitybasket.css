@@ -44,8 +44,9 @@
 
 /*================================= Card container===============================*/
 .equityBasket__card-container {
-
+    background-color: var(--color-secondary-dark);
     padding: 5rem 3rem;
+
 }
 
 .equitybasket-title {
@@ -55,7 +56,14 @@
 }
 
 .equitybasket-title h1 {
-    font-size: 4rem;
+    font-size: 4.5rem;
+    text-align: center;
+    color: #ffffff;
+    background: #fe0101;
+    border-radius: 2rem;
+    margin: 0rem 10rem;
+    padding: 1.5rem;
+
 }
 
 .equityBasket-Card-container {
@@ -69,12 +77,13 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: var(--color-text);
+    color: #fff;
     text-align: left;
     border: 2px solid transparent;
     padding: 3rem 2rem;
     transition: var(--transition);
     gap: 2rem;
+    border-radius: 5rem;
     box-shadow: 0px 0px 10px 2px rgba(91, 91, 91, 0.2);
 }
 
@@ -103,7 +112,7 @@
 }
 
 .equitybasket_data:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.5);
+    transform: translateY(-3rem) translateX(2rem);
+    box-shadow: 0px -5px 10px 0px rgba(247, 33, 25);
 
 }
