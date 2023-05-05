@@ -14,7 +14,7 @@ const PartnerWithUs = () => {
                     <div className='anupaat_partner-withUS-heading-explanation' data-aos="zoom-in-right" data-aos-duration="1000">
                         <div className="topLine">Partner With Us</div>
                         <div className='partner-withUS-subheading '>
-                            <h2 className='secondary-heading'>Go Digital: Join Anupaat Nivesh - An Online Digital Platform for Mutual Fund Distributors</h2>
+                            <h2 className='secondary-heading'>Go Digital: Join Anupaat Nivesh<br /> An Online Digital Platform for Mutual Fund Distributors</h2>
                         </div>
                         <div className='partner-withUS-description'>
                             <p>As our economy grows, participation in the stock markets is growing significantly.
@@ -61,7 +61,7 @@ const PartnerWithUs = () => {
                 </div>
 
             </div>
-           {/* <div className="subscribe-container">
+            {/* <div className="subscribe-container">
                 <h4>Request Early Access to Get Started</h4>
                 <h1 className="gradient-text">Subscribe to our Newsletter !<br /> Wealth Compass</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, reiciendis. Repudiandae minima, saepe atque ipsam nemo ex praesentium obcaecati officiis distinctio sapiente. Veritatis, dolore voluptas maxime est dolorum ea perspiciatis.</p>
