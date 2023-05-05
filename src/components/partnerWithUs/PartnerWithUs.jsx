@@ -14,12 +14,11 @@ const PartnerWithUs = () => {
                     <div className='anupaat_partner-withUS-heading-explanation' data-aos="zoom-in-right" data-aos-duration="1000">
                         <div className="topLine">Partner With Us</div>
                         <div className='partner-withUS-subheading '>
-                            <h2 className='secondary-heading'>Join Partnership with Anupaat Nivesh</h2>
+                            <h2 className='secondary-heading'>Go Digital: Join Anupaat Nivesh - An Online Digital Platform for Mutual Fund Distributors</h2>
                         </div>
                         <div className='partner-withUS-description'>
                             <p>As our economy grows, participation in the stock markets is growing significantly.
-                                Indian investors opened a record 1.4 crore new demat accounts in FY21,
-                                compared to 0.5 crore in FY20. Address this growing need to access the stock market by
+                                Address this growing need to access the stock market by
                                 offering unique baskets of Indian stocks managed by expert fund managers executed seamlessly.
                                 Do more, be more.
                             </p>
@@ -53,7 +52,7 @@ const PartnerWithUs = () => {
                                         <p>{description}</p>
                                     </div>
 
-                                    <button className="card-button">More info</button>
+                                    {/*<button className="card-button">More info</button>*/}
                                 </Card>
                             )
                         })
@@ -62,12 +61,12 @@ const PartnerWithUs = () => {
                 </div>
 
             </div>
-            <div className="subscribe-container">
+           {/* <div className="subscribe-container">
                 <h4>Request Early Access to Get Started</h4>
                 <h1 className="gradient-text">Subscribe to our Newsletter !<br /> Wealth Compass</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, reiciendis. Repudiandae minima, saepe atque ipsam nemo ex praesentium obcaecati officiis distinctio sapiente. Veritatis, dolore voluptas maxime est dolorum ea perspiciatis.</p>
                 <button className='card-button'>Subscribe</button>
-            </div>
+                </div>*/}
 
         </div>
 

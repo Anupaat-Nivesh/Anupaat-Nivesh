@@ -398,20 +398,20 @@ export const partnerData = [
   {
     id: 1,
     icon: equity2,
-    title: "Shift your Business to higher levels of Success and Value",
+    title: "A PARTNER YOU AND YOUR CLIENTS CAN TRUST",
     description: "Inflation beating growth while managing risk",
   },
   {
     id: 2,
     icon:equity3,
-    title: "Give your clients the online advantage",
-    description: "Achieve short term goals and get better taxation than FDs",
+    title: "EMPOWER YOURSELF WITH EMERGING TECHNOLOGY",
+    description: "We offer the Technology to help your business grows",
   },
   {
     id: 3,
     icon:equity3,
-    title: "Connect, Communicate and Collaborate",
-   description: "Save taxes AND grow your wealth with LESS funds",
+    title: "BE A PART OF CHANGE IN THE INVESTMENT INDUSTRY",
+   description: "Get Access to our curated Mutual Fund Basket & iBaskets for your customers",
   }
   ];
 
