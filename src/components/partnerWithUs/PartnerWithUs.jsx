@@ -29,12 +29,12 @@ const PartnerWithUs = () => {
                         </div>
                     </div>
                 </div>
-                <div className='partner-withUS-title-image' data-aos="zoom-in-left" data-aos-duration="1000">
+                {/* <div className='partner-withUS-title-image' data-aos="zoom-in-left" data-aos-duration="1000">
                     <picture>
                         <img src=" " alt="image" />
 
                     </picture>
-                </div>
+                </div> */}
             </div>
 
             <div className="partner-withUS__card-container">

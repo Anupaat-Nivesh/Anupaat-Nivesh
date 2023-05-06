@@ -14,8 +14,9 @@ import {IoBulbSharp} from "react-icons/io5";
 import {GiHealthNormal,GiOpenBook, GiWallet, GiCharacter} from "react-icons/gi";
 
 
-import equity2 from '../src/assets/equity2.png';
-import equity3 from '../src/assets/equity3.png';
+import equity1 from '../src/assets/illustrations/partnerTrust.svg';
+import equity2 from '../src/assets/illustrations/partnerTechnology.svg';
+import equity3 from '../src/assets/illustrations/partnerInvestment.svg';
 import {
   Chart, ArcElement, Tooltip, Legend
 } from 'chart.js';
@@ -390,13 +391,13 @@ export const equityBasketData = [
 export const partnerData = [
   {
     id: 1,
-    icon: equity2,
+    icon: equity1,
     title: "A PARTNER YOU AND YOUR CLIENTS CAN TRUST",
     description: "Inflation beating growth while managing risk",
   },
   {
     id: 2,
-    icon:equity3,
+    icon:equity2,
     title: "EMPOWER YOURSELF WITH EMERGING TECHNOLOGY",
     description: "We offer the Technology to help your business grows",
   },
