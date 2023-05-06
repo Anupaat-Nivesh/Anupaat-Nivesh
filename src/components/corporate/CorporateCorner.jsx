@@ -1,5 +1,6 @@
 import React from 'react'
 import './corporate.css';
+import corporate from "../../assets/illustrations/corporate.svg";
 import { corporateData } from '../../data';
 
 
@@ -25,9 +26,9 @@ const CorporateCorner = () => {
                     </div>
                 </div>
                 <div className='corporate-corner-title-image' data-aos="zoom-in-left" data-aos-duration="1000">
-                    <picture>
-                        <img src=" " alt="image" />
-                    </picture>
+                
+                <img src={corporate} alt="CorporateTrainingImage" className='CorporateTrainingImage' />
+                
                 </div>
             </div>
             <div className="corporate-why-container">

@@ -1,7 +1,7 @@
 /*===================HERO SECTION=======================*/
 
 .corporate-corner-main {
-    padding: 5rem 4rem 6rem 4rem;
+    padding: 10rem 4rem 6rem 4rem;
     display: grid;
     grid-template-columns: 60% 40%;
     font-family: var(--font-family);
@@ -20,7 +20,10 @@
     align-items: center;
     justify-content: flex-start;
 }
-
+.CorporateTrainingImage{
+    width: 100%;
+    
+}
 .corporate-corner-description {
     margin-top: 2rem;
     color: var(--color-subtext-light);
@@ -32,10 +35,10 @@
     margin-bottom: 10rem;
 }
 
-.corporate-corner-title-image img {
-    width: 90%;
+.corporate-corner-title-image {
+    display: flex;
+    align-items: center;
     justify-content: center;
-    z-index: 10;
 }
 
 /*=========================CONTAINER 2===========================*/
@@ -77,7 +80,67 @@
     height: 3rem;
     width: 3rem;
     margin: 1rem 2rem 0rem 0rem;
+    color: var(--color-subtext-light)
 
 }
 
 /*==================MEDIA QUERIES===============*/
+
+/* ******************************** */
+/* BELOW 960px (Tablets) */
+/* ******************************** */
+
+@media(max-width: 60em) {
+    .corporate-corner-btn{
+        font-size: 1.6rem;
+    }
+
+}
+
+/* ******************************** */
+/* BELOW 752px (Smaller Tablets) */
+/* ******************************** */
+
+
+@media(max-width:47em) {
+    .corporate-corner-main {
+        display: grid;
+        grid-template-columns: 1fr;
+   
+    }
+
+    .corporate-corner-title-image{
+        grid-row: 1/2;
+    }
+    .reason-title {
+        font-size: 3rem;
+        font-weight: 300;
+    }
+}
+
+/* ******************************** */
+/* BELOW 544px (Phones) */
+/* ******************************** */
+
+@media(max-width: 34em) {
+    .corporate-corner-main {
+        padding: 10rem 2rem 4rem 2rem;
+    }
+
+    .corporate-corner-btn {
+        margin-top: 4rem;
+        margin-bottom: 2rem;
+      }
+
+      .reason-title {
+        font-size: 2.2rem;
+        font-weight: 300;
+    }
+
+    .corporate-icon {
+        display: inline-block;
+        height: 3rem;
+        width: 3rem;
+        margin: 1rem 0.5rem 0rem 0rem;
+}
+}
