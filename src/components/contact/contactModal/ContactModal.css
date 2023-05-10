@@ -11,93 +11,150 @@
 }
 
 
-.infotext-container{
+.infotext-container {
   display: flex;
   justify-content: center;
   font-size: 1.6rem;
   font-weight: 500;
   text-align: center;
-
+  margin-bottom: 4rem;
 }
 
 
-.contactForm-container{
+.contactForm-container {
   position: relative;
   max-width: 70%;
   /* max-height: 50%; */
-  background-color:#28282B;
+  background-color: #28282B;
   border-radius: 2rem;
   color: #fff;
   padding: 2rem;
+  box-shadow: 0 0 2px 0 #000;
 }
 
-.close-icon{
+.contact-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.close-icon {
   position: relative;
   font-size: 4rem;
   cursor: pointer;
   transition: all 0.3s;
   text-align: right;
-  color: red;
+  color: var( --color-primary);
 }
 
-.close-icon:hover{
- transform: scale(1.2);
+.close-icon:hover {
+  transform: scale(1.2);
 }
 
 
-.input-container{
+.input-box {
+  position: relative;
+  width: 80%;
+}
+
+.fund-box {
   margin-top: 4rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  
-  gap: 2rem;
+  justify-content: center;
 }
 
-.info-input,.query_select{
- margin-right: 10rem;
- width: 30rem;
- height: 4rem;
- border-radius: 1rem;
- font-size: 1.8rem;
- padding: 1rem;
- background-color: #000;
- border: 2px solid #fff;
- color: #fff;
-}
-
-.ModalForm-PhoneInput{
-  margin-right: 10rem;
-  font-size: 1.8rem;
-  background-color: #000;
-  width: 30rem;
-  height: 4rem;
-  border: 2px solid #fff;
-  border-radius: 1rem;
-}
-
-.ModalForm-PhoneInput input{
-  font-size: 1.8rem;
-  background-color: #000;
+.input-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 1.6rem;
   color: #fff;
+  pointer-events: none;
+  transition: .5s;
 }
 
-.contact-form div label {
-  font-size: 1.8rem;
-  margin-left: 10rem;
-  letter-spacing: 1px;
- }
+.input-info {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 1.6rem;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
 
-.btn_container{
+.input-info::placeholder {
+ visibility: hidden;
+ color: #28282B;
+
+}
+
+.input__phonenumber {
+  margin-bottom: 0rem;
+}
+
+.input-label__phonenumber {
+  left: 8rem;
+}
+
+.input-label__fundname {
+  font-size: 1.6rem;
+  position: relative;
+}
+
+.input__fundname {
+  width: auto;
+  border: 2px solid var(--color-subtext-light);
+  color: var(--color-subtext-light);
+  padding: 1rem;
+  border-radius: 2rem;
+  text-align: center;
+}
+
+.fullname-box input:focus~label, .fullname-box input:not(:placeholder-shown)~label{
+  top: -20px;
+  left: 0;
+  color: #bdb8b8;
+  font-size: 12px;
+}
+
+.email-box input:focus~label, .email-box input:not(:placeholder-shown)~label {
+  top: -20px;
+  left: 0;
+  color: #bdb8b8;
+  font-size: 12px;
+}
+
+
+
+.input__phonenumber input {
+  font-size: 1.6rem;
+  background-color: transparent;
+  color: #fff;
+
+}
+
+.btn_container {
   margin-top: 4rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.toastContainer{
+.toastContainer {
   font-size: 1.8rem;
 }
+
+.error{
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+
 
 
 /* CUSTOM BUTTON */
@@ -220,7 +277,7 @@ button:active {
 @keyframes shadow324 {
 
   0%,
-    100% {
+  100% {
     transform: scale(1, 1);
   }
 
@@ -237,20 +294,16 @@ button:active {
 /* ******************************** */
 
 @media(max-width:75em) {
-  .contact-form div label {
-   
-    margin-left: 5rem;
-    
-   }
-   .info-input,.query_select{
+  .info-input,
+  .query_select {
     margin-right: 5rem;
-   
-   }
-   
-   .ModalForm-PhoneInput{
-     margin-right: 5rem;
-    
-   }
+
+  }
+
+  .ModalForm-PhoneInput {
+    margin-right: 5rem;
+
+  }
 }
 
 
@@ -259,26 +312,23 @@ button:active {
 /* ******************************** */
 
 @media(max-width:71em) {
-  .contact-form div label {
-   
-    margin-left: 2rem;
-    
-   }
-   .info-input,.query_select{
+
+  .info-input,
+  .query_select {
     margin-right: 2rem;
     width: 25rem;
 
     font-size: 1.6rem;
-   }
-   
-   .ModalForm-PhoneInput{
-     margin-right: 2rem;
-     font-size: 1.6rem;
+  }
 
-     width: 25rem;
-   }
+  .ModalForm-PhoneInput {
+    margin-right: 2rem;
+    font-size: 1.6rem;
 
-   .ModalForm-PhoneInput input{
+    width: 25rem;
+  }
+
+  .ModalForm-PhoneInput input {
     font-size: 1.6rem;
   }
 
@@ -292,31 +342,34 @@ button:active {
 @media(max-width:47em) {
 
   .contact-form div label {
-   
+
     margin-left: 1rem;
     font-size: 1.4rem;
-   }
-   .info-input,.query_select{
+  }
+
+  .info-input,
+  .query_select {
     margin-right: 1rem;
     width: 20rem;
 
     font-size: 1.4rem;
-   }
-   
-   .ModalForm-PhoneInput{
-     margin-right: 1rem;
-     font-size: 1.4rem;
+  }
 
-     width: 20rem;
-   }
+  .ModalForm-PhoneInput {
+    margin-right: 1rem;
+    font-size: 1.4rem;
 
-   .ModalForm-PhoneInput input{
+    width: 20rem;
+  }
+
+  .ModalForm-PhoneInput input {
     font-size: 1.4rem;
   }
+
   button {
     font-size: 1.4rem;
   }
-  
+
 
 }
 
@@ -324,50 +377,56 @@ button:active {
 /* BELOW 544px (Phones) */
 /* ******************************** */
 @media(max-width:34em) {
-  .contactForm-container{
+  .contactForm-container {
     max-width: 90%;
-   
+
   }
+
   .contact-form div label {
-   
+
     margin-left: 0rem;
     font-size: 1.2rem;
-   }
-   .info-input,.query_select{
+  }
+
+  .info-input,
+  .query_select {
     margin-right: 0rem;
     width: 15rem;
     font-size: 1.2rem;
-   }
-   
-   .ModalForm-PhoneInput{
-     margin-right: 0rem;
-     font-size: 1.2rem;
+  }
 
-     width: 15rem;
-   }
+  .ModalForm-PhoneInput {
+    margin-right: 0rem;
+    font-size: 1.2rem;
 
-   .ModalForm-PhoneInput input{
+    width: 15rem;
+  }
+
+  .ModalForm-PhoneInput input {
     font-size: 1.2rem;
   }
+
   button {
     font-size: 1.2rem;
   }
 
-  .infotext-container{
+  .infotext-container {
     font-size: 1.4rem;
-  
+
   }
-  .input-container{
+
+  .input-container {
 
     gap: 1rem;
   }
+
   .loader {
     width: 18px;
     height: 18px;
     margin: auto;
     position: relative;
   }
-  
+
   .loader:before {
     content: '';
     width: 18px;
@@ -379,7 +438,6 @@ button:active {
     border-radius: 50%;
     animation: shadow324 0.5s linear infinite;
   }
-  
-  
-}
 
+
+}
