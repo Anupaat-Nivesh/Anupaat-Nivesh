@@ -56,7 +56,6 @@ const ContactModal = function (props) {
     <div className="blur-overlay" style={{ display: `${modalState ? 'flex' : 'none'}` }} onClick={(e) => {
       if (e.target.className === 'blur-overlay') {
         closeModalWindow();
-
       }
     }}>
 
@@ -68,37 +67,38 @@ const ContactModal = function (props) {
         <div className="infotext-container">Send your query and our team will get back to you within 2 business days</div>
 
         <form className="contact-form" onSubmit={submitModalForm} ref={form}>
-          <div className="input-container">
-            <label htmlFor="fullname">Full Name : </label>
-            <input type="text" id="fullname" className="info-input" name="name" onChange={handleChange} value={formValues.name} required />
+          <div className="fullname-box input-box">
+            <input type="text" className="input__fullname input-info" name="name" onChange={handleChange} value={formValues.name} required placeholder="Full Name" pattern='^[A-Za-z]+\s[A-Za-z]+(?:\s[A-Za-z]+)*$' />
+            <label htmlFor="name" className="input-label__fullname input-label">Full Name</label>
           </div>
-          <div className="input-container">
-            <label htmlFor="mail">Mail id : </label>
-            <input type="email" id="mail" className="info-input" name="mail" onChange={handleChange} value={formValues.mail} required />
+          <div className="email-box input-box">
+            <input type="email" className="input__mail input-info" name="mail" onChange={handleChange} value={formValues.mail} required placeholder="Enter e-mail" pattern='^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[cC][oO][mM]))$' />
+            <label htmlFor="mail" className="input-label__mail input-label">Mail id</label>
           </div>
-          <div className="input-container">
-            <label htmlFor="phone">Phone Number : </label>
-            <div>
-              <PhoneInput
-                name="number"
-                id="phone"
-                className="ModalForm-PhoneInput"
-                value={number}
-                onChange={setNumber}
-                defaultCountry="IN"
-                international
-                countryCallingCodeEditable={false}
-              />
-              <div className="error phone-error">
-                {number && isPossiblePhoneNumber(number + '') ? '' : 'Enter a valid Number'}
-              </div>
+          <div className="phonenumber-box input-box">
+            <PhoneInput
+              name="number"
+              id="phone"
+              className="input__phonenumber input-info"
+              value={number}
+              onChange={setNumber}
+              defaultCountry="IN"
+              international
+              countryCallingCodeEditable={false}
+            />
+
+            <div className="error phone-error">
+              {number && isPossiblePhoneNumber(number + '') ? '' : 'Enter a valid Number'}
             </div>
+          </div>
+
+
+          <div className="fund-box input-box">
+            {/* <label htmlFor="fundname" className="input-label__fundname input-label">Fund Type Selected: </label> */}
+            <input className="input__fundname input-info" value={props.fundName} name="fundname" readOnly></input>
 
           </div>
-          <div className="input-container">
-            <label htmlFor="fund_name">Fund Type : </label>
-            <input className="info-input" id="fund_name" value={props.fundName} name="fundName" readOnly></input>
-          </div>
+
           <div className="btn_container">
             <button>
               <div className="svg-wrapper-1">

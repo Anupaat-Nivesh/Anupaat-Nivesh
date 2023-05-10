@@ -1,6 +1,6 @@
 import React from 'react'
 import './equitybasket.css'
-import equityImg from '../../../assets/equity.png';
+import equityImg from '../../../assets/illustrations/equityBasketImg.svg';
 import Card from 'react-bootstrap/Card';
 import { equityBasketData } from '../../../data';
 const EquityBasket = () => {
@@ -33,7 +33,7 @@ const EquityBasket = () => {
                     </div>
                     <div className='equity-title-image' data-aos="zoom-in-left" data-aos-duration="1000">
                         <picture>
-                            <img src={equityImg} alt="image" />
+                            <img src={equityImg} alt="EquityImageIllustration" />
 
                         </picture>
                     </div>
