@@ -13,10 +13,13 @@ import retirement from "../src/assets/Icons/retirement.png";
 import {IoBulbSharp} from "react-icons/io5";
 import {GiHealthNormal,GiOpenBook, GiWallet, GiCharacter} from "react-icons/gi";
 
+import equityImg1 from "../src/assets/illustrations/equityImg1.svg";
+import equityImg2 from "../src/assets/illustrations/equityImg2.svg";
+import equityImg3 from "../src/assets/illustrations/equityImg3.svg";
 
-import equity1 from '../src/assets/illustrations/partnerTrust.svg';
-import equity2 from '../src/assets/illustrations/partnerTechnology.svg';
-import equity3 from '../src/assets/illustrations/partnerInvestment.svg';
+import partnerDataImg1 from '../src/assets/illustrations/partnerTrust.svg';
+import partnerDataImg2 from '../src/assets/illustrations/partnerTechnology.svg';
+import partnerDataImg3 from '../src/assets/illustrations/partnerInvestment.svg';
 import {
   Chart, ArcElement, Tooltip, Legend
 } from 'chart.js';
@@ -364,21 +367,21 @@ export const mutualFundData = [
 export const equityBasketData = [
   {
     id: 1,
-    icon: equity2,
+    icon: equityImg1,
     title: "Simple to Understand",
    
     description: "iBaskets are modern investing products based on simple ideas you can understand",
   },
   {
     id: 2,
-    icon:equity3,
+    icon:equityImg2,
     title: "Scientific Investment Models",
   
     description: "Models are rule based and systematic investing techniques. They are built and proved with Science and Math",
   },
   {
     id: 3,
-    icon:equity3,
+    icon:equityImg3,
     title: "Make Productive Portfolio",
    
     description: "Right proportional investment can generate alpha returns for your portfolio",
@@ -391,19 +394,19 @@ export const equityBasketData = [
 export const partnerData = [
   {
     id: 1,
-    icon: equity1,
+    icon: partnerDataImg1,
     title: "A PARTNER YOU AND YOUR CLIENTS CAN TRUST",
     description: "Inflation beating growth while managing risk",
   },
   {
     id: 2,
-    icon:equity2,
+    icon:partnerDataImg2,
     title: "EMPOWER YOURSELF WITH EMERGING TECHNOLOGY",
     description: "We offer the Technology to help your business grows",
   },
   {
     id: 3,
-    icon:equity3,
+    icon:partnerDataImg3,
     title: "BE A PART OF CHANGE IN THE INVESTMENT INDUSTRY",
    description: "Get Access to our curated Mutual Fund Basket & iBaskets for your customers",
   }
