@@ -26,7 +26,7 @@ const EquityBasket = () => {
                                     Do more, be more.
                                 </p></div>
                             <div className='equity-btn'>
-                                <a href='/contact' className='btn'>Get in Touch</a>
+                                <a href='/contact' className='btn'>Contact Us</a>
 
                             </div>
                         </div>
