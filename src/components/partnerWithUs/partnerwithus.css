@@ -9,9 +9,9 @@
 }
 
 .partner-withUS-main {
-    background-image:linear-gradient(to right, rgba(221, 24, 24,0.95), rgb(36, 36, 36,0.8)) ,url(../../assets/illustrations/partner.png);
-    background-position:right;
-    background-size:contain;
+    background-image: linear-gradient(to right, rgba(221, 24, 24, 0.95), rgb(36, 36, 36, 0.8)), url(../../assets/illustrations/partner.png);
+    background-position: right;
+    background-size: contain;
     background-repeat: no-repeat;
     padding: 10rem 4rem 5rem 4rem;
     color: #fff;
@@ -38,14 +38,16 @@
     margin-top: 4rem;
     margin-bottom: 10rem;
 }
+
 .partner-withUS-btn a {
-   background-color: #030303;
-   border: none;
-   box-shadow: none;
+    background-color: #030303;
+    border: none;
+    box-shadow: none;
 }
+
 .partner-withUS-btn a:hover {
     background-color: #030303;
- }
+}
 
 
 
@@ -220,7 +222,5 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 30px;
-
-
     margin-bottom: 2rem;
 }

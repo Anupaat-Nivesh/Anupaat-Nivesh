@@ -11,19 +11,36 @@ const LoanAgainstSecurities = () => {
         <div id='loan-against-securities' className='loan_against_securities-container '>
             <div className="loan-hero-section section__padding">
                 <div className='loan-title'>
-                    <h1 >Loan Against <span className='section-heading-focus'>Securities</span></h1>
+                    <h1 className='primary-heading'>Equity <span className='section-heading-focus'>Baskets</span></h1>
                 </div>
-                <p className='lead'>Don't sacrifice your long-term goals for short-term needs. Finance a wedding event house
-                    renovation or any unplanned expense without selling your investments. With MAFS, get a limit
-                    against your investments the same day for all your short to medium-term financial needs.
-                </p>
-                <div className='loan-btn'>
-                    <a className='btn'>Know More</a>
-                </div>
-                <div>
+                <div className='loan_against_securities-main'>
 
-                </div>
+                    <div className="loan_against_securities-heading">
 
+
+                        <div className='anupaat_whyanupaat-heading-explanation' data-aos="zoom-in-right" data-aos-duration="1000">
+                            <div className='whyanupaat-subheading '>
+                                <h2 className='secondary-heading'>Be a part of the next investment wave</h2>
+                            </div>
+                            <div className='loan_against_securities-description'>
+                                <p>As our economy grows, participation in the stock markets is growing significantly.
+                                    Anupaat Nivesh Address the growing need to access the stock market by
+                                    offering unique baskets of Indian stocks managed by expert fund managers.
+                                    Do more, be more.
+                                </p></div>
+                            <div className='loan_against_securities-btn'>
+                                <a href='/contact' className='btn'>Contact Us</a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className='loan_against_securities-image' data-aos="zoom-in-left" data-aos-duration="1000">
+                        <picture>
+                            <img src="" alt=" " />
+
+                        </picture>
+                    </div>
+                </div>
             </div>
 
             <div className="loan_against_securities__card-container">

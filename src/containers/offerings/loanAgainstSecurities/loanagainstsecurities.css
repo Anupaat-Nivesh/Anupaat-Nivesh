@@ -11,18 +11,36 @@
     margin-top: 8rem;
 }
 
-.loan-btn {
-    margin-top: 2.4rem;
-    margin-bottom: 1rem;
+.loan_against_securities-main {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    font-family: var(--font-family);
+}
+
+.loan_against_securities-heading {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+}
+
+.loan_against_securities-description {
+    margin-top: 2rem;
+    color: var(--color-subtext-light);
+}
+
+.loan_against_securities-btn {
+    margin-top: 2.4rem;
+    margin-bottom: 1rem;
+}
+
+.loan_against_securities-image img {
+    width: 90%;
     justify-content: center;
+    z-index: 10;
 }
 
-.loan-hero-section {
-    margin-bottom: 3rem;
 
-}
 
 /*============================CARD CONTAINER======================================*/
 .loan_against_securities__card-container {
