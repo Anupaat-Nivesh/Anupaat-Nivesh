@@ -55,7 +55,7 @@ const LoanAgainstSecurities = () => {
                         <div className='card-body'>
 
                             <h3>Medical Expense</h3>
-                            <p>xyz</p>
+                            <p></p>
                             <div className='card-img'> <img src={equity2} alt="image" /></div>
                         </div>
 
@@ -64,21 +64,21 @@ const LoanAgainstSecurities = () => {
                         <div className="card-body">
 
                             <h3>Travel Expense</h3>
-                            <p>xyz</p></div>
+                            <p></p></div>
                         <div className='card-img'> <img src={equity2} alt="image" /></div>
                     </Card>
                     <Card className="renovation-card" >
                         <div className="card-body">
 
                             <h3>Renovation Expense</h3>
-                            <p>xyz</p>
+                            <p></p>
                             <div className='card-img'> <img src={equity3} alt="image" /></div>
                         </div>
                     </Card>
                     <Card className="education-card" >
                         <div className="card-body">
                             <h3>Education Expense</h3>
-                            <p>xyz</p>
+                            <p></p>
                             <div className='card-img'> <img src={equity3} alt="image" /></div>
                         </div>
                     </Card>

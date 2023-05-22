@@ -16,7 +16,9 @@ const CorporateCorner = () => {
                             <h2 className='secondary-heading'>Financial Wellness is the<br /> Ideal Employee Benefit</h2>
                         </div>
                         <div className='corporate-corner-description'>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto cupiditate culpa tempore! Provident ab voluptas asperiores, optio quam, quidem cumque dolorum iusto accusamus aliquid consequatur maxime odit perferendis in. Commodi.
+                            <p>Empower your employees with the knowledge they need to make informed financial decisions. 
+                                Our expert-led financial awareness session will equip them with essential literacy skills and a confident understanding of personal finance. 
+                                Invest in your team's future today!
                             </p>
                         </div>
                         <div className='corporate-corner-btn'>

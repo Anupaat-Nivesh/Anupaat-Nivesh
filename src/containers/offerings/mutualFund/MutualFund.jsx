@@ -46,10 +46,13 @@ const MutualFund = () => {
 
                     <div className='anupaat_whyanupaat-heading-explanation' data-aos="zoom-in-right" data-aos-duration="1000">
                         <div className='whyanupaat-subheading '>
-                            <h2 className='secondary-heading'>sub heading</h2>
+                            <h2 className='secondary-heading'>Unlock Your Investing Potential with Our Expertly Curated Mutual Fund Basket. Start Building Your Portfolio Today.</h2>
                         </div>
                         <div className='mutual-funds-description'>
-                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis fugit cum neque minima, incidunt omnis vel eius mollitia eligendi alias rem beatae molestias atque asperiores, sunt explicabo. Suscipit, quibusdam quaerat!
+                            <p>
+                            Invest in the power of diversification with our expertly crafted mutual fund baskets! With a combination of multiple funds in the Indian equity market, you can embark on your investment journey with confidence. 
+                            Perfect for first-time investors looking to maximize their gains and minimize their risks. 
+                            Don't miss out on this incredible opportunity - start investing now!
                             </p></div>
                         <div className='mutual-funds-btn'>
                             <a href='/contact' className='btn'>Contact Us</a>
