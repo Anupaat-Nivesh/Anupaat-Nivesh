@@ -120,11 +120,10 @@
     justify-content: center;
 }
 
-.card-img img {
-    height: 18rem;
-    width: 22rem;
+.card-body .card-img img {
+    height: 10rem;
 
-    filter: drop-shadow(5px 5px 5px rgba(145, 145, 145, 0.3));
+    
 }
 
 .medical-card:hover {

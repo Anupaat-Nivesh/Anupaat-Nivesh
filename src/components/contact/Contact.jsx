@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { ToastContainer } from "react-toastify";
 import { notifyFailure, notifySuccessfull } from "./ToastConfig.js";
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut } from "firebase/auth";
+import { RecaptchaVerifier, signInWithPhoneNumber, signOut } from "firebase/auth";
 import * as config from "./Config.js";
 import 'animate.css';
 import { animateCSS } from "./Animate.js";
@@ -10,7 +10,7 @@ import { animateCSS } from "./Animate.js";
 import "react-toastify/dist/ReactToastify.css";
 import "./contact.css";
 
-import app from "./Firebase.js"
+import { app, auth } from "./Firebase.js"
 import 'react-phone-number-input/style.css'
 import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input'
 
@@ -44,7 +44,6 @@ const Contact = () => {
 
     // Verifies and render the Captcha
     const reCaptchaVerfication = (number) => {
-        const auth = getAuth();
         window.reCaptchaVerfier = new RecaptchaVerifier("recaptch-container", {}, auth);
         window.reCaptchaVerfier.render();
 
@@ -80,7 +79,7 @@ const Contact = () => {
                 throw new Error('Not a valid number');
             }
             // awaiting the response for OTP send status
-            const response = await reCaptchaVerfication(value, getAuth());
+            const response = await reCaptchaVerfication(value, auth);
 
             // Set the otp send status
             setOtpSendStatus(true);
@@ -177,9 +176,8 @@ const Contact = () => {
             e.preventDefault();
             if (!numberVerified) {
                 animateCSS('.btn--form', 'shakeX');
-
+                notifyFailure('Please verify the OTP');
                 return;
-
             }
             if (!isEmailValid || !isFirstNameValid || !isLastNameValid) throw new Error('Invalid Input, Kindly check and try again!');
             // console.log(form.current);
@@ -203,7 +201,6 @@ const Contact = () => {
             setValue('');
 
             // Signout a user
-            const auth = getAuth();
             await signOut(auth);
             // console.log('User is signed out');
 

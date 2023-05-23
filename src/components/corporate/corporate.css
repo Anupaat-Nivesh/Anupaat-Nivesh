@@ -11,7 +11,7 @@
     /* Chrome 10-25, Safari 5.1-6 */
     /*background: linear-gradient(to right, #dd1818, #333333);*/
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(90deg, #c6fccf 0%, #b1cbfd 100%);
+    background-image: linear-gradient(to right, rgba(221, 24, 24, 0.95), rgb(36, 36, 36, 0.2));
 }
 
 .corporate-corner-heading {
@@ -19,6 +19,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    color: #fff;
 }
 .CorporateTrainingImage{
     width: 100%;
@@ -27,12 +28,23 @@
 .corporate-corner-description {
     margin-top: 2rem;
     color: var(--color-subtext-light);
+    color: #fff;
 
 }
 
 .corporate-corner-btn {
     margin-top: 4rem;
     margin-bottom: 10rem;
+}
+
+.corporate-corner-btn a {
+    background-color: #030303;
+    border: none;
+    box-shadow: none;
+}
+
+.corporate-corner-btn a:hover {
+    background-color: #030303;
 }
 
 .corporate-corner-title-image {

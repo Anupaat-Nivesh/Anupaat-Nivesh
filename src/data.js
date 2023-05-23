@@ -397,18 +397,21 @@ export const partnerData = [
     icon: partnerDataImg1,
     title: "A PARTNER YOU AND YOUR CLIENTS CAN TRUST",
     description: "Inflation beating growth while managing risk",
+    color: "#EEF8F9",
   },
   {
     id: 2,
     icon:partnerDataImg2,
     title: "EMPOWER YOURSELF WITH EMERGING TECHNOLOGY",
     description: "We offer the Technology to help your business grows",
+    color:"#fcf2f2",
   },
   {
     id: 3,
     icon:partnerDataImg3,
     title: "BE A PART OF CHANGE IN THE INVESTMENT INDUSTRY",
    description: "Get Access to our curated Mutual Fund Basket & iBaskets for your customers",
+   color:"#f2f2ff",
   }
   ];
 /*=====================CORPORATE  PAGE DATA============================*/
