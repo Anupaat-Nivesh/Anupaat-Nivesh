@@ -17,11 +17,8 @@ export const CarouselItem = ({ item }) => {
 
             </div>
             <div className="img-container">
-                <picture>
-                    <source srcSet={item.img} type="image/webp" />
-                    <source srcSet={item.preimg} type="image/webp" />
-                    <img className="carousel-img" alt="carasoulimage" src={item.img} />
-                </picture>
+                
+                    <img className="carousel-img" alt="carasoulimage" src={item.img} srcSet={`${item.img560w} 560w, ${item.img1120w} 1120w`} sizes="(min-width: 1380px) 1120px, (min-width: 1280px) calc(62.5vw - 290px), (min-width: 720px) calc(44.81vw - 55px), (min-width: 560px) calc(80vw - 80px), calc(100vw - 80px)" />
             </div>
         </div>
     );

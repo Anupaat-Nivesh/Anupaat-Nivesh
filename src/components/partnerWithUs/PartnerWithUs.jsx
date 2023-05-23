@@ -37,9 +37,9 @@ const PartnerWithUs = () => {
                 </div>
                 <div className='partner-withUS-Card-container'>
                     {
-                        partnerData.map(({ icon, title, description }, id) => {
+                        partnerData.map(({ icon, title, description,color }, id) => {
                             return (
-                                <Card className="partner-withUS_data" key={id}>
+                                <Card className="partner-withUS_data" key={id} style={{backgroundColor:`${color}`}}>
                                     <div className='card-img'> <img src={icon} alt="icon" /></div>
                                     <div className='card-text'>
                                         <h3>{title}</h3>
