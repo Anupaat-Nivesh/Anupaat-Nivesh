@@ -59,7 +59,8 @@ const LoanAgainstSecurities = () => {
                            
                             <div className='card-img'> <img src={medicalIcon} alt="MedicalBillIcon" /></div>
                             <h3>Medical Expense</h3>
-                            <p>xyz</p>
+                            <p></p>
+                            <div className='card-img'> <img src={equity2} alt="image" /></div>
                         </div>
 
                     </Card>
@@ -69,9 +70,8 @@ const LoanAgainstSecurities = () => {
                             <div className='card-img'> <img src={travelIcon} alt="TravelBillIcon" /></div>
                             
                             <h3>Travel Expense</h3>
-                            <p>xyz</p>
-                            </div>
-                        
+                            <p>xyz</p></div>
+                        <div className='card-img'> <img src={equity2} alt="image" /></div>
                     </Card>
                     <Card className="renovation-card" >
                         <div className="card-body">
@@ -80,6 +80,7 @@ const LoanAgainstSecurities = () => {
                             <div className='card-img'> <img src={renovationIcon} alt="RenovationBillIcon" /></div>
                             <h3>Renovation Expense</h3>
                             <p>xyz</p>
+                            <div className='card-img'> <img src={equity3} alt="image" /></div>
                         </div>
                     </Card>
                     <Card className="education-card" >
@@ -88,6 +89,7 @@ const LoanAgainstSecurities = () => {
                             <div className='card-img'> <img src={educationIcon} alt="EducationBillIcon" /></div>
                             <h3>Education Expense</h3>
                             <p>xyz</p>
+                            <div className='card-img'> <img src={equity3} alt="image" /></div>
                         </div>
                     </Card>
                 </div>
