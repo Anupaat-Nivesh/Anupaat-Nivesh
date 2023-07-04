@@ -26,10 +26,9 @@ const LoanAgainstSecurities = () => {
                                 <h2 className='secondary-heading'>Be a part of the next investment wave</h2>
                             </div>
                             <div className='loan_against_securities-description'>
-                                <p>As our economy grows, participation in the stock markets is growing significantly.
-                                    Anupaat Nivesh Address the growing need to access the stock market by
-                                    offering unique baskets of Indian stocks managed by expert fund managers.
-                                    Do more, be more.
+                                <p>Loan Against Securities is a secured loan that allows you to raise instant liquidity against your investment as collateral. You will continue to retain ownership of the equity and all the benefits with them.
+
+
                                 </p></div>
                             <div className='loan_against_securities-btn'>
                                 <a href='/contact' className='btn'>Contact Us</a>
@@ -48,7 +47,7 @@ const LoanAgainstSecurities = () => {
 
             <div className="loan_against_securities__card-container">
                 <div className='loan-card-title'>
-                    <h1>Unlock Value for your business</h1>
+                    <h1>Loan Against Securities</h1>
                     <p className="lead">Protect your investments from unplanned short-term expenses</p>
                 </div>
 

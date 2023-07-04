@@ -423,13 +423,13 @@ export const corporateData = [
     id: 1,
     icon:<IoBulbSharp/>,
     title: "Productivity",
-    description: "Hands-on learning through simulated activities changes behavior. Banzai is for all ages and has limitless potential for implementation in schools, community groups, and employees at your organization.",
+    description: "Hands-on learning through simulated activities changes behavior. Anupaat Nivesh Coach is for all ages and has limitless potential for implementation in schools, community groups, and employees at your organization.",
   },
   {
     id: 2,
     icon:<GiHealthNormal/>,
     title: "Health",
-    description: "We’ve always known that stress is bad for our health—and it’s never been truer than with financial stress. Nearly one-third of Americans say their lack of money has created obstacles to living a healthy lifestyle.",
+    description: "We’ve always known that stress is bad for our health—and it’s never been truer than with financial stress. Nearly half of Indians say their lack of money has created obstacles to living a healthy lifestyle.",
   },
   {
     id: 3,
