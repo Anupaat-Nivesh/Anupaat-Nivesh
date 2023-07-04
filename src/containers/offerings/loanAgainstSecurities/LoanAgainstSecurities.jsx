@@ -70,7 +70,7 @@ const LoanAgainstSecurities = () => {
                             <div className='card-img'> <img src={travelIcon} alt="TravelBillIcon" /></div>
                             
                             <h3>Travel Expense</h3>
-                            <p></p></div>
+                            </div>
                         
                     </Card>
                     <Card className="renovation-card" >
