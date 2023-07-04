@@ -11,12 +11,12 @@ const OurTeam = () => {
   const ourTeamDescription = [
     {
       name: "Akash Garg",
-      designation: "Financial Consultant",
+      designation: "Founder",
       img: require("../../assets/teamProfiles/akash.webp")
     },
     {
-      name: "Gaurav Chugh",
-      designation: "Technology Consultant",
+      name: "Gourav Chugh",
+      designation: "Advisory Partner",
       img: require("../../assets/teamProfiles/gaurav.webp")
     },
     {
