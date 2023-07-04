@@ -45,9 +45,9 @@ const EquityBasket = () => {
                 </div>
                 <div className='equityBasket-Card-container'>
                     {
-                        equityBasketData.map(({ icon, title, description }, id) => {
+                        equityBasketData.map(({ icon, title, description,color }, id) => {
                             return (
-                                <Card className="equitybasket_data" key={id}>
+                                <Card className="equitybasket_data" key={id} style={{backgroundColor:`${color}`}} data-name={title} >
                                     <div className='card-img'> <img src={icon} alt="icon" /></div>
                                     <h3>{title}</h3>
                                     <p>{description}</p>

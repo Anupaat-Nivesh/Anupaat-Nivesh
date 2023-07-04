@@ -369,8 +369,8 @@ export const equityBasketData = [
     id: 1,
     icon: equityImg1,
     title: "Simple to Understand",
-   
     description: "iBaskets are modern investing products based on simple ideas you can understand",
+    color: "#EEF8F9",
   },
   {
     id: 2,
@@ -378,6 +378,7 @@ export const equityBasketData = [
     title: "Scientific Investment Models",
   
     description: "Models are rule based and systematic investing techniques. They are built and proved with Science and Math",
+    color:"#fcf2f2",
   },
   {
     id: 3,
@@ -385,6 +386,7 @@ export const equityBasketData = [
     title: "Make Productive Portfolio",
    
     description: "Right proportional investment can generate alpha returns for your portfolio",
+    color:"#f2f2ff",
   }
   ];
 

@@ -5,6 +5,7 @@ import medicalIcon from "../../../assets/Icons/bill.png";
 import travelIcon  from "../../../assets/Icons/travel-location.png";
 import renovationIcon  from "../../../assets/Icons/home-renovation.png";
 import educationIcon  from "../../../assets/Icons/education.png";
+import loanImg from "../../../assets/illustrations/loanAgainstSecuritiesIllustration.svg";
 
 
 
@@ -38,7 +39,7 @@ const LoanAgainstSecurities = () => {
                     </div>
                     <div className='loan_against_securities-image' data-aos="zoom-in-left" data-aos-duration="1000">
                         <picture>
-                            <img src="" alt=" " />
+                            <img src={loanImg} alt=" " />
 
                         </picture>
                     </div>
@@ -70,7 +71,7 @@ const LoanAgainstSecurities = () => {
                             <div className='card-img'> <img src={travelIcon} alt="TravelBillIcon" /></div>
                             
                             <h3>Travel Expense</h3>
-                            <p></p></div>
+                            </div>
                         
                     </Card>
                     <Card className="renovation-card" >

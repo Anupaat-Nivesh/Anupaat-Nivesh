@@ -44,7 +44,6 @@
 
 /*================================= Card container===============================*/
 .equityBasket__card-container {
-    background-color: var(--color-secondary-dark);
     padding: 5rem 3rem;
     border-top-right-radius: 5rem;
     border-top-left-radius: 5rem;
@@ -58,35 +57,35 @@
 }
 
 .equitybasket-title h1 {
-    font-size: 5rem;
+    font-size: 3.6rem;
+    font-weight: 700;
     text-align: center;
-    color: #ffffff;
     /* background: #fe0101; */
     border-radius: 2rem;
-    margin: 0rem 10rem;
+    /* margin: 0rem 10rem; */
     padding: 1.5rem;
 
 }
 
 .equityBasket-Card-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
     gap: 4rem;
     row-gap: 4rem;
+    
 }
 
 .equitybasket_data {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: #fff;
     text-align: left;
     border: 2px solid transparent;
     padding: 3rem 2rem;
     transition: var(--transition);
     gap: 2rem;
-    border-radius: 5rem;
-    box-shadow: 0px 0px 10px 2px rgba(91, 91, 91, 0.2);
+    border-radius: 2rem;
+    /* box-shadow: 0px 0px 10px 2px rgba(91, 91, 91, 0.2); */
 }
 
 .equitybasket_data p {
@@ -95,14 +94,20 @@
 }
 
 .equitybasket_data img {
-    height: 20rem;
-    width: 20rem;
+    height: 25rem;
     filter: drop-shadow(5px 5px 5px rgba(145, 145, 145, 0.3));
 }
 
-.equitybasket_data h3,
+.equitybasket_data h3{
+    font-weight: 500;
+    font-size: 2.5rem;
+    text-align: center;
+}
 .equitybasket_data p {
     text-align: center;
+    font-weight: 400;
+    font-size: 1.6rem;
+    color: var(--color-subtext-light);
 }
 
 .card-img {
@@ -112,7 +117,108 @@
 }
 
 .equitybasket_data:hover {
-    transform: translateY(-0.2rem) translateX(0.2rem);
-    box-shadow: 0px 0px 10px 0px rgba(247, 33, 25);
+    transform: translateY(-3rem);
 
 }
+
+
+
+/* RESPONSIVENESS */
+
+@media (max-width: 84em) {
+  .equitybasket_data[data-name="Make Productive Portfolio"]{
+    grid-column: 1/3;
+    justify-self: center;
+  }  
+}
+
+
+/* ******************************** */
+/* BELOW 960px (Tablets) */
+/* ******************************** */
+
+@media(max-width: 60em) {
+
+    .equity-basket-main {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+    .equity-title-image{
+        grid-row: 1/2;
+        grid-column: 1/3;
+        width: 60%;
+        /* justify-self: center; */
+    }
+
+    .anupaat_whyanupaat-heading-explanation{
+        margin-top: 2rem;
+        text-align: center;
+    }
+
+    .equitybasket-title h1 {
+        font-size: 3rem;
+    
+    }
+
+    .equitybasket_data[data-name="Make Productive Portfolio"]{
+        grid-column: 1/2;
+        /* justify-self: center; */
+        justify-self: auto;
+      }
+    }
+
+    /* ******************************** */
+/* BELOW 704px (Smaller Tablets) */
+/* ******************************** */
+
+@media(max-width: 44em) {
+    .equitybasket-title h1 {
+        font-size: 2.6rem;
+        font-weight: 700;
+    
+    }
+
+    .equity-title-image{
+
+        width: 80%;
+        /* justify-self: center; */
+    }
+
+}
+
+/* ******************************** */
+/* BELOW 544px (Phones) */
+/* ******************************** */
+
+@media(max-width: 34em) {
+    .equitybasket-title h1 {
+        font-size: 2.4rem;
+        font-weight: 600;
+    
+    }
+
+    .equityBasket-Card-container {
+
+        grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+
+        
+    }
+
+    .equitybasket_data img {
+        height: 20rem;
+    }
+
+    .equitybasket_data p {
+
+        font-size: 1.2rem;
+ 
+    }
+
+    .equitybasket_data h3{
+        font-size: 2rem;
+    }
+
+
+}
+  
+  

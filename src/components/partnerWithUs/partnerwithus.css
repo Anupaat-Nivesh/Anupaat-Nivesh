@@ -64,8 +64,8 @@
 }
 
 .partner-withUS-title h1 {
-    font-size: 3.5rem;
-    font-weight: 800;
+    font-size: 3.6rem;
+    font-weight: 700;
 }
 
 .partner-withUS-Card-container {
@@ -87,6 +87,8 @@
 .partner-withUS_data p {
     font-weight: 400;
     font-size: 1.5rem;
+    color: var(--color-subtext-light);
+    margin-top: 1rem;
 }
 
 .partner-withUS_data h3 {
@@ -97,7 +99,6 @@
 .partner-withUS_data img {
 
     height: 25rem;
-
     filter: drop-shadow(5px 5px 5px rgba(145, 145, 145, 0.3));
 }
 
@@ -117,8 +118,6 @@
 
 .card-text {
     margin: 1rem;
-
-
 }
 
 .partner-withUS_data:hover {
