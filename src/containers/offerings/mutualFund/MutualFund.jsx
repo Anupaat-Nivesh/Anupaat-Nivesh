@@ -25,7 +25,7 @@ const MutualFund = () => {
                 position: 'right',
                 fullSize: false,
                 labels: {
-                    boxWidth: 15,
+                    boxWidth: 10,
                     align: 'start',
                 }
             },
@@ -50,9 +50,9 @@ const MutualFund = () => {
                         </div>
                         <div className='mutual-funds-description'>
                             <p>
-                            Invest in the power of diversification with our expertly crafted mutual fund baskets! With a combination of multiple funds in the Indian equity market, you can embark on your investment journey with confidence. 
-                            Perfect for first-time investors looking to maximize their gains and minimize their risks. 
-                            Don't miss out on this incredible opportunity - start investing now!
+                                Invest in the power of diversification with our expertly crafted mutual fund baskets! With a combination of multiple funds in the Indian equity market, you can embark on your investment journey with confidence.
+                                Perfect for first-time investors looking to maximize their gains and minimize their risks.
+                                Don't miss out on this incredible opportunity - start investing now!
                             </p></div>
                         <div className='mutual-funds-btn'>
                             <a href='/contact' className='btn'>Contact Us</a>
@@ -83,19 +83,19 @@ const MutualFund = () => {
                                         <p>{description}</p>
                                         <div className="mutualcard-body">
                                             <div>
-                                                <h3>Historical Return</h3>
+                                                <h3 id='sub-heading'>Historical Return</h3>
                                                 <p>{hreturn}</p>
                                             </div>
                                             <div>
-                                                <h3>Investment Horizon</h3>
+                                                <h3 id='sub-heading'>Investment Horizon</h3>
                                                 <p>{ihorizon}</p>
                                             </div>
                                             <div>
-                                                <h3>Investment Mode</h3>
+                                                <h3 id='sub-heading'>Investment Mode</h3>
                                                 <p>{mode}</p>
                                             </div>
                                             <div>
-                                                <h3>LOCK-IN</h3>
+                                                <h3 id='sub-heading'>LOCK-IN</h3>
                                                 <p>{lockin}</p>
                                             </div>
 
@@ -111,13 +111,15 @@ const MutualFund = () => {
 
                                         <small>*Risk Profile for this basket is considered <span className='risk-profile'>{riskprofile}</span></small>
                                         <div className="footer">
-                                            <p className='tag'>Excited to invest in this Basket</p>
+                                            <p className='tag'>Excited to invest in this Basket ?</p>
                                             <button data-fund-type={title} type="button" className='btn' onClick={(e) => {
                                                 setModal(true);
                                                 setFundType(e.target.dataset.fundType);
                                             }}>Contact Us</button>
 
+
                                         </div>
+
                                     </div>
 
                                 </Card>

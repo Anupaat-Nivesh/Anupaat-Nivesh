@@ -2,9 +2,9 @@ import React from 'react'
 import './loanagainstsecurities.css'
 import Card from 'react-bootstrap/Card';
 import medicalIcon from "../../../assets/Icons/bill.png";
-import travelIcon  from "../../../assets/Icons/travel-location.png";
-import renovationIcon  from "../../../assets/Icons/home-renovation.png";
-import educationIcon  from "../../../assets/Icons/education.png";
+import travelIcon from "../../../assets/Icons/travel-location.png";
+import renovationIcon from "../../../assets/Icons/home-renovation.png";
+import educationIcon from "../../../assets/Icons/education.png";
 import loanImg from "../../../assets/illustrations/loanAgainstSecuritiesIllustration.svg";
 
 
@@ -56,11 +56,11 @@ const LoanAgainstSecurities = () => {
                     <Card className="medical-card" >
                         <div className='card-body'>
 
-                           
+
                             <div className='card-img'> <img src={medicalIcon} alt="MedicalBillIcon" /></div>
                             <h3>Medical Expense</h3>
-                            <p></p>
-                            
+
+
                         </div>
 
                     </Card>
@@ -68,28 +68,28 @@ const LoanAgainstSecurities = () => {
                         <div className="card-body">
 
                             <div className='card-img'> <img src={travelIcon} alt="TravelBillIcon" /></div>
-                            
+
                             <h3>Travel Expense</h3>
-                            </div>
-                        
+                        </div>
+
                     </Card>
                     <Card className="renovation-card" >
                         <div className="card-body">
 
-                           
+
                             <div className='card-img'> <img src={renovationIcon} alt="RenovationBillIcon" /></div>
                             <h3>Renovation Expense</h3>
-                            <p></p>
-                            
+
+
                         </div>
                     </Card>
                     <Card className="education-card" >
                         <div className="card-body">
-                            
+
                             <div className='card-img'> <img src={educationIcon} alt="EducationBillIcon" /></div>
                             <h3>Education Expense</h3>
-                            <p></p>
-                            
+
+
                         </div>
                     </Card>
                 </div>
