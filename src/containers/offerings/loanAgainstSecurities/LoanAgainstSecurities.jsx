@@ -7,6 +7,8 @@ import renovationIcon  from "../../../assets/Icons/home-renovation.png";
 import educationIcon  from "../../../assets/Icons/education.png";
 import loanImg from "../../../assets/illustrations/loanAgainstSecuritiesIllustration.svg";
 
+import {cardsData} from "../../../data.js";
+
 
 
 const LoanAgainstSecurities = () => {
@@ -94,7 +96,29 @@ const LoanAgainstSecurities = () => {
                     </Card>
                 </div>
 
+               
+
             </div>
+
+            <div className="loanAgainstSecuritiesFeaturesCardContainer section__padding">
+
+                 
+                {
+                    cardsData.map(({ icon, title, description }, id) => {
+                        return (
+                            <Card className="loanAgainstSecuritiesFeaturesCard" key={id} data-aos="fade-up"
+                                data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
+                                <img src={icon} alt="icon" className='card-icon' />
+
+                                <div className='card-content'>
+                                    <h3 className='why-block-heading'>{title}</h3>
+                                    <small>{description}</small>
+                                </div>
+                            </Card>
+                        )
+                    })
+                }
+                </div>
 
         </div>
     )
