@@ -487,4 +487,82 @@ export const socialLogos = [
 ];
 
 
+/*=====================LOAN AGAINST SECURITIES PAGE DATA============================*/
+
+export const expenseTypeCardsData = [
+  {
+    name:'Medical Expense',
+    icon:require('./assets/Icons/bill.png'),
+    colorTheme:'#EEF8F9',
+  },
+  {
+    name:'Travel Expense',
+    icon:require('./assets/Icons/travel-location.png'),
+    colorTheme:'#fcf2f2',
+  },
+  {
+    name:'Renovation Expense',
+    icon:require('./assets/Icons/home-renovation.png'),
+    colorTheme:'#f2f2ff',
+  },
+  {
+    name:'Education Expense',
+    icon:require('./assets/Icons/education.png'),
+    colorTheme:'#fefbec',
+  },
+]
+
+export const cardsData = [
+  {
+    title:'Get LAS Limit the same day',
+    description:'No need to wait for days. Complete simple steps to get an overdraft limit against shares the same day using the MAFS mobile app. Your application will be processed instantly to provide you with a limit the same day.',
+    icon:require("./assets/Icons/loanAgainstSecurities/timer.png"),
+  },
+  {
+    title:'Zero Prepayment/ Foreclosure Charges',
+    description:"No lock-in, no prepayment & no foreclosure charges if you decide to repay your outstanding's early.",
+    icon:require("./assets/Icons/loanAgainstSecurities/zero.png"),
+  },
+  {
+    title:'Instant Disbursal',
+    description:'Get access to funds whenever you need them. Get the required amount credited directly to your provided bank account on the same day.',
+    icon:require("./assets/Icons/loanAgainstSecurities/money.png"),
+  },
+  {
+    title:'Large List of Approved Securities',
+    description:'Select from a list of approved shares held in the Demat account with NSDL only.',
+    icon:require("./assets/Icons/loanAgainstSecurities/approval.png"),
+  },
+  {
+    title:'100% Digital Process',
+    description:'No need of visiting branches or reaching out to relationship managers. With our mobile app, you can complete your entire journey online from your mobile device without any need of submitting physical documents.',
+    icon:require("./assets/Icons/loanAgainstSecurities/mobile.png"),
+  },
+  {
+    title:'Retain Ownership',
+    description:'Allow your investments in shares to continue to generate wealth. You continue to retain ownership of your shares and reap all the benefits that are associated with them.',
+    icon:require("./assets/Icons/loanAgainstSecurities/owner.png"),
+  },
+  {
+    title:'Attractive Interest Rate',
+    description:'Avail loan at an attractive Interest rate starting at 9% p.a with a Flexi payment option. Unlike term loans, interest on LAS is levied only on the amount you use and for the number of days you utilize.',
+    icon:require("./assets/Icons/loanAgainstSecurities/interestRate.png"),
+  },
+  {
+    title:'Loan Tenure',
+    description:'The overdraft limit provided against your shares has a tenure of 12 months and is renewed thereafter.',
+    icon:require("./assets/Icons/loanAgainstSecurities/hourglass.png"),
+  },
+  {
+    title:'Higher Loan Value',
+    description:'Avail LAS limit up to Rs 1Cr against approved shares.',
+    icon:require("./assets/Icons/loanAgainstSecurities/diagram.png"),
+  },
+  {
+    title:'Easy Repayment',
+    description:'Manage your funds with more flexibility. You are required to service the interest amount accrued as per utilization on a monthly basis.',
+    icon:require("./assets/Icons/loanAgainstSecurities/exchange.png"),
+  }
+];
+
 

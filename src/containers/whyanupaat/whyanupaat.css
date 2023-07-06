@@ -55,66 +55,14 @@
 .anupaat__card-container {
     margin-top: 5rem;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit,minmax(60rem,1fr));
     column-gap: 4rem;
     row-gap: 4rem;
     font-size: 1.8rem;
 }
 
-.whyanupaat_data {
-    display: flex;
-    align-items: center;
-    color: var(--color-text);
-    color: rgb(0, 0, 0);
-    justify-content: center;
-    background: white;
-    background: var(--color-primary-light);
-    border: 2px solid transparent;
-    padding: 4rem 2rem;
-    border-radius: 0 3rem 0 3rem;
-    transition: var(--transition);
-    gap: 2rem;
-    box-shadow: 0px 0px 10px 2px rgba(91, 91, 91, 0.2);
-}
-
-.card-content {
-    text-align: center;
-}
-
-.why-block-heading {
-    color: var(--color-primary);
-}
 
 
-.whyanupaat_data:hover {
-
-
-    background: var(--color-grey-light);
-
-}
-
-.whyanupaat_data span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: black;
-    color: var(--color-text);
-    font-size: 4rem;
-    /* font-weight: 5000; */
-    padding: 1rem;
-    width: fit-content;
-    border-radius: 1rem;
-    transition: var(--transition);
-}
-
-.card-icon {
-    width: 10rem;
-}
-
-.whyanupaat_data small {
-    text-align: center;
-}
 
 
 
@@ -124,15 +72,17 @@
 /* Responsiveness */
 /* ********************************************* */
 
-/* ******************************** */
-/* BELOW 960px (Tablets) */
-/* ******************************** */
 
-@media(max-width: 60em) {
-    .whyanupaat_data {
-        padding: 2rem 2rem;
-    }
+/* ******************************** */
+/* BELOW 1344px (Smaller desktops) */
+/* ******************************** */
+.anupaat__card-container {
+
+    grid-template-columns: repeat(auto-fit,minmax(50rem,1fr));
+
 }
+
+
 
 
 /* ******************************** */
@@ -152,13 +102,6 @@
         line-height: 1.2;
     }
 
-    .whyanupaat_data {
-        gap: 1rem;
-    }
-
-    .card-icon {
-        width: 8rem;
-    }
 }
 
 
@@ -189,9 +132,7 @@
         font-size: 1.2rem;
     }
 
-    .card-icon {
-        width: 6rem;
-    }
+
 }
 
 
@@ -206,13 +147,9 @@
 
     .anupaat__card-container {
         justify-content: center;
-        grid-template-columns: 90%;
         row-gap: 4rem;
-
+        grid-template-columns: repeat(auto-fit,minmax(30rem,1fr));
     }
 
-    .whyanupaat_data span {
-        font-size: 3rem;
-        padding: 0;
-    }
+
 }
