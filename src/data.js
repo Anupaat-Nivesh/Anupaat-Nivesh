@@ -489,6 +489,29 @@ export const socialLogos = [
 
 /*=====================LOAN AGAINST SECURITIES PAGE DATA============================*/
 
+export const expenseTypeCardsData = [
+  {
+    name:'Medical Expense',
+    icon:require('./assets/Icons/bill.png'),
+    colorTheme:'#EEF8F9',
+  },
+  {
+    name:'Travel Expense',
+    icon:require('./assets/Icons/travel-location.png'),
+    colorTheme:'#fcf2f2',
+  },
+  {
+    name:'Renovation Expense',
+    icon:require('./assets/Icons/home-renovation.png'),
+    colorTheme:'#f2f2ff',
+  },
+  {
+    name:'Education Expense',
+    icon:require('./assets/Icons/education.png'),
+    colorTheme:'#fefbec',
+  },
+]
+
 export const cardsData = [
   {
     title:'Get LAS Limit the same day',

@@ -1,13 +1,11 @@
 import React from 'react'
 import './loanagainstsecurities.css'
 import Card from 'react-bootstrap/Card';
-import medicalIcon from "../../../assets/Icons/bill.png";
-import travelIcon from "../../../assets/Icons/travel-location.png";
-import renovationIcon from "../../../assets/Icons/home-renovation.png";
-import educationIcon from "../../../assets/Icons/education.png";
 import loanImg from "../../../assets/illustrations/loanAgainstSecuritiesIllustration.svg";
+import FeatureCard from '../../../UiComponents/FeatureCard/FeatureCard';
 
-import {cardsData} from "../../../data.js";
+import { cardsData, expenseTypeCardsData } from "../../../data.js";
+
 
 
 
@@ -53,72 +51,48 @@ const LoanAgainstSecurities = () => {
                     <p className="lead">Protect your investments from unplanned short-term expenses</p>
                 </div>
 
-
                 <div className='loan_against_securities-Card-container'>
-                    <Card className="medical-card" >
-                        <div className='card-body'>
 
 
-                            <div className='card-img'> <img src={medicalIcon} alt="MedicalBillIcon" /></div>
-                            <h3>Medical Expense</h3>
+                    {
+                        expenseTypeCardsData.map((obj, id) => {
+                            return (
+                                <Card className="expense-type-card" style={{ backgroundColor: obj.colorTheme }} key={id} >
+                                    <div className='card-body'>
 
 
-                        </div>
-
-                    </Card>
-                    <Card className="travel-card" >
-                        <div className="card-body">
-
-                            <div className='card-img'> <img src={travelIcon} alt="TravelBillIcon" /></div>
-
-                            <h3>Travel Expense</h3>
-                        </div>
-
-                    </Card>
-                    <Card className="renovation-card" >
-                        <div className="card-body">
+                                        <div className='card-img'> <img src={obj.icon} alt="MedicalBillIcon" /></div>
+                                        <h3>{obj.name}</h3>
 
 
-                            <div className='card-img'> <img src={renovationIcon} alt="RenovationBillIcon" /></div>
-                            <h3>Renovation Expense</h3>
+                                    </div>
 
+                                </Card>
+                            )
+                        })
+                    }
 
-                        </div>
-                    </Card>
-                    <Card className="education-card" >
-                        <div className="card-body">
-
-                            <div className='card-img'> <img src={educationIcon} alt="EducationBillIcon" /></div>
-                            <h3>Education Expense</h3>
-
-
-                        </div>
-                    </Card>
                 </div>
 
-               
 
             </div>
 
-            <div className="loanAgainstSecuritiesFeaturesCardContainer section__padding">
+            <section className='loanAgainstSecuritiesFeatures section__padding'>
+                    <h1>Features & Benefits of LAS</h1>
+            
 
-                 
+            <div className="loanAgainstSecuritiesFeaturesCardContainer ">
+
+
                 {
                     cardsData.map(({ icon, title, description }, id) => {
                         return (
-                            <Card className="loanAgainstSecuritiesFeaturesCard" key={id} data-aos="fade-up"
-                                data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
-                                <img src={icon} alt="icon" className='card-icon' />
-
-                                <div className='card-content'>
-                                    <h3 className='why-block-heading'>{title}</h3>
-                                    <small>{description}</small>
-                                </div>
-                            </Card>
+                            <FeatureCard heading={title} description={description} icon={icon} id={id} />
                         )
                     })
                 }
-                </div>
+            </div>
+            </section>
 
         </div>
     )

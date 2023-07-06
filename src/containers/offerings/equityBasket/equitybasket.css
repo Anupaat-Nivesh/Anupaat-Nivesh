@@ -124,6 +124,9 @@
 
 
 /* RESPONSIVENESS */
+/* ******************************** */
+/* BELOW 1344px (Smaller desktops) */
+/* ******************************** */
 
 @media (max-width: 84em) {
   .equitybasket_data[data-name="Make Productive Portfolio"]{
