@@ -10,16 +10,27 @@
 
 .partner-withUS-main {
     background-image: linear-gradient(to right, rgba(221, 24, 24, 0.95), rgb(36, 36, 36, 0.8)), url(../../assets/illustrations/partner.png);
-    background-position: right;
     background-size: contain;
     background-repeat: no-repeat;
     padding: 10rem 4rem 5rem 4rem;
     color: #fff;
     display: grid;
-    grid-template-columns: 60% 40%;
+    grid-template-columns: 70% 1fr;
     font-family: var(--font-family);
     text-shadow: 0 0 1px #000;
+    background-position: right;
 }
+
+.partner-image img {
+    width: 100%;
+    visibility: hidden;
+}
+
+
+
+/* .partner-withUS-main{
+    background-image: linear-gradient(to right, rgba(221, 24, 24, 0.95), rgb(36, 36, 36, 0.8));
+} */
 
 .partner-withUS-heading {
     margin-top: 9rem;
@@ -64,16 +75,16 @@
 }
 
 .partner-withUS-title h1 {
-    font-size: 3.6rem;
-    font-weight: 700;
+    line-height: 1.2;
+    font-weight: 500;
 }
 
 .partner-withUS-Card-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit,minmax(40rem,1fr));
     /* height: 45rem; */
-    gap: 3rem;
-    row-gap: 1rem;
+    gap: 4rem;
+    row-gap: 4rem;
 }
 
 .partner-withUS_data {
@@ -211,4 +222,118 @@
     font-size: 16px;
     line-height: 30px;
     margin-bottom: 2rem;
+}
+/* BE A PART OF CHANGE IN THE INVESTMENT INDUSTRY */
+
+
+/*==================MEDIA QUERIES===============*/
+
+/* ******************************** */
+/* BELOW 1344px (Smaller desktops) */
+/* ******************************** */
+
+@media (max-width: 84em) {
+    .partner-withUS_data[data-name="BE A PART OF CHANGE IN THE INVESTMENT INDUSTRY"]{
+      grid-column: 1/3;
+      justify-self: center;
+    }  
+
+
+  }
+
+/* ******************************** */
+/* BELOW 1200px (landscape tablets) */
+/* ******************************** */
+
+
+@media(max-width: 75em) {
+
+
+    .partner-withUS-main {
+
+        grid-template-columns: 1fr;
+
+    }
+  }
+/* ******************************** */
+/* BELOW 960px (Tablets) */
+/* ******************************** */
+
+@media(max-width: 60em) {
+    .partner-withUS-btn {
+        font-size: 1.6rem;
+    }
+
+    .partner-withUS-heading {
+        margin-top: 5rem;
+
+    }
+    .partner-withUS-btn {
+        margin-bottom: 5rem;
+    }
+    .partner-withUS-main {
+
+        background-position:bottom;
+
+    }
+
+    .partner-withUS_data[data-name="BE A PART OF CHANGE IN THE INVESTMENT INDUSTRY"]{
+        grid-column: 1/2;
+        justify-self: auto;
+      } 
+
+
+}
+
+/* ******************************** */
+/* BELOW 752px (Smaller Tablets) */
+/* ******************************** */
+
+
+@media(max-width:47em) {
+    .partner-withUS-main {
+        display: grid;
+        grid-template-columns: 1fr;
+        background-size: 250%;
+        background-position:center;
+    }
+
+    .partner-image {
+        grid-row: 1/2;
+    }
+
+}
+
+/* ******************************** */
+/* BELOW 544px (Phones) */
+/* ******************************** */
+
+@media(max-width: 34em) {
+    .partner-withUS-main {
+        padding: 10rem 2rem 4rem 2rem;
+    }
+
+    .partner-withUS-btn {
+        margin-top: 4rem;
+        margin-bottom: 2rem;
+    }
+    .partner-withUS-Card-container {
+
+        grid-template-columns: repeat(auto-fit,minmax(30rem,1fr));
+
+    }
+
+    .partner-withUS_data img {
+        height: 20rem;
+    }
+
+    .partner-withUS_data p {
+
+        font-size: 1.2rem;
+ 
+    }
+
+    .partner-withUS_data h3{
+        font-size: 1.8rem;
+    }
 }
