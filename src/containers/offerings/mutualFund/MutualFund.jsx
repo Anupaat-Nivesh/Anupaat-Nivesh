@@ -71,7 +71,7 @@ const MutualFund = () => {
             <div className='mutualFund-wrapper section__padding section__margin'>
                 <div className='mutualfund-Card-container'>
                     {
-                        mutualFundData.map(({ icon, title, description, chart, hreturn, ihorizon, mode, lockin, riskprofile }, id) => {
+                        mutualFundData.map(({ icon, title, description, chart, hreturn, ihorizon, mode, lockin, riskprofile, color }, id) => {
                             return (
 
                                 <Card className="mutualfund_data" key={id}>
@@ -109,16 +109,8 @@ const MutualFund = () => {
                                             </Doughnut>
                                         </div>
 
-                                        <small>*Risk Profile for this basket is considered <span className='risk-profile'>{riskprofile}</span></small>
-                                        <div className="footer">
-                                            <p className='tag'>Excited to invest in this Basket ?</p>
-                                            <button data-fund-type={title} type="button" className='btn' onClick={(e) => {
-                                                setModal(true);
-                                                setFundType(e.target.dataset.fundType);
-                                            }}>Contact Us</button>
+                                        <small>*Risk Profile for this basket is considered <span className='risk-profile' style={{ color: `${color}` }} >{riskprofile}</span></small>
 
-
-                                        </div>
 
                                     </div>
 
@@ -128,6 +120,13 @@ const MutualFund = () => {
                     }
 
                 </div>
+            </div>
+            <div className="footer">
+                <h1>Excited to invest in this Basket ?</h1>
+                <button type="button" className='btn' onClick={(e) => {
+                    setModal(true);
+                    setFundType(e.target.dataset.fundType);
+                }}>Invest Now</button>
             </div>
 
 
