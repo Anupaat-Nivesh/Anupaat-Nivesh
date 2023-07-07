@@ -132,13 +132,16 @@
 .footer {
     padding: 0.75rem;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+
     border-radius: 1rem;
     color: #000000;
+    font-size: 5rem;
 
 }
+
+
 
 
 .details {
@@ -148,8 +151,8 @@
 
 .risk-profile {
     display: inline-block;
-    color: red;
-    font-size: 2rem;
+
+    font-size: 1rem;
 }
 
 .mutualfund_data:hover {

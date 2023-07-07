@@ -321,6 +321,7 @@ export const mutualFundData = [
     lockin:"NO",
     chart:data1,
     riskprofile:"Very High",
+    color: "#ff2300",
     description: "Inflation beating growth while managing risk",
   },
   {
@@ -330,9 +331,10 @@ export const mutualFundData = [
     hreturn:"11-14%",
     ihorizon:"3Y+",
     mode:"SIP/LUMP SUM",
-    lockin:"NO",
+    lockin:"YES",
     chart:data2,
     riskprofile:"Moderate",
+    color: "#ffbf00",
     description: "Achieve short term goals and get better taxation than FDs",
   },
   {
@@ -345,6 +347,7 @@ export const mutualFundData = [
     lockin:"NO",
     chart:data3,
     riskprofile:"Moderate",
+    color: "#ffbf00",
     description: "Save taxes AND grow your wealth with LESS funds",
   },
   {
@@ -357,6 +360,7 @@ export const mutualFundData = [
     lockin:"NO",
     chart: data4,
     riskprofile:"Low",
+    color: "#008000",
     description: "Plan and invest for hassle-free sunset years",
   }
   
