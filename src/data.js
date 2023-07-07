@@ -330,7 +330,7 @@ export const mutualFundData = [
     hreturn:"11-14%",
     ihorizon:"3Y+",
     mode:"SIP/LUMP SUM",
-    lockin:"NO",
+    lockin:"YES",
     chart:data2,
     riskprofile:"Moderate",
     description: "Achieve short term goals and get better taxation than FDs",
