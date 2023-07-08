@@ -263,6 +263,9 @@
 /* ******************************** */
 
 @media(max-width: 44em) {
+  .aboutus-title{
+    margin-top: 4rem;
+  }
 
   .aboutus-points li {
     font-size: 1.4rem;

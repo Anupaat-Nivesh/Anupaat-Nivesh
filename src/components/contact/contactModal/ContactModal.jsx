@@ -15,6 +15,7 @@ const ContactModal = function (props) {
   const contactFormContainer = useRef();
   const [modalState, setModalState] = useState(true);
   const [number, setNumber] = useState();
+  const [mutualFundType, setMutualFundType] = useState('');
   const [formValues, setFormValues] = useState({
     name: '', mail: '', fundName: props.fundName,
   });
@@ -27,6 +28,11 @@ const ContactModal = function (props) {
   }
 
 
+  const selectMutualChangeHandler = (event) => {
+
+    setMutualFundType(event.target.value);
+
+  };
 
   const closeModalWindow = function () {
     setModalState(false);
@@ -95,7 +101,15 @@ const ContactModal = function (props) {
 
           <div className="fund-box input-box">
             {/* <label htmlFor="fundname" className="input-label__fundname input-label">Fund Type Selected: </label> */}
-            <input className="input__fundname input-info" value={props.fundName} name="fundname" readOnly></input>
+
+            <label htmlFor="mutual-fund-type" className="select-mutual-fund__label">Select Mutual Fund</label>
+            <select class="form-control" id="mutual-fund-type" onChange={selectMutualChangeHandler} name="fundname">
+              <option>Core Portfolio (5FF)</option>
+              <option>Tax-Saver</option>
+              <option>Active-Passive Combo</option>
+              <option>Income Generation</option>
+            </select>
+
 
           </div>
 

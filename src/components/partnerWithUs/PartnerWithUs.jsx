@@ -3,7 +3,6 @@ import './partnerwithus.css';
 import Card from 'react-bootstrap/Card';
 
 import { partnerData } from '../../data';
-import partnerImg from "../../assets/illustrations/partner.png";
 
 const PartnerWithUs = () => {
     return (
