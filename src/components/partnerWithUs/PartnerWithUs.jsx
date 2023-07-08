@@ -14,7 +14,7 @@ const PartnerWithUs = () => {
                     <div className='anupaat_partner-withUS-heading-explanation' data-aos="zoom-in-right" data-aos-duration="1000">
                         <div className="topLine">Partner With Us</div>
                         <div className='partner-withUS-subheading '>
-                            <h2 className='secondary-heading'>Go Digital: Join Anupaat Nivesh<br /> An Online Digital Platform for Mutual Fund Distributors</h2>
+                            <h1 className='secondary-heading' >Go Digital: Join Anupaat Nivesh<br /> <span style={{display:'inline-block', marginTop:'2rem'}}>An Online Digital Platform for Mutual Fund Distributors</span></h1>
                         </div>
                         <div className='partner-withUS-description'>
                             <p>As our economy grows, participation in the stock markets is growing significantly.
@@ -33,13 +33,13 @@ const PartnerWithUs = () => {
 
             <div className="partner-withUS__card-container">
                 <div className='partner-withUS-title'>
-                    <h1>Explore Our Solutions And Opportunities To Partner</h1>
+                    <h2>Explore Our Solutions And Opportunities To Partner</h2>
                 </div>
                 <div className='partner-withUS-Card-container'>
                     {
                         partnerData.map(({ icon, title, description,color }, id) => {
                             return (
-                                <Card className="partner-withUS_data" key={id} style={{backgroundColor:`${color}`}}>
+                                <Card className="partner-withUS_data" key={id} style={{backgroundColor:`${color}`}} data-name={title}>
                                     <div className='card-img'> <img src={icon} alt="icon" /></div>
                                     <div className='card-text'>
                                         <h3>{title}</h3>

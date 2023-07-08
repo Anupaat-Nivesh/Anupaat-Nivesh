@@ -62,6 +62,7 @@
   margin-top: 4rem;
   display: flex;
   justify-content: center;
+  gap: 2rem;
 }
 
 .input-label {
@@ -155,6 +156,14 @@
 }
 
 
+.select-mutual-fund__label{
+  font-size: 1.4rem;
+}
+
+.form-control{
+  font-size: 1.6rem;
+  padding: 2px;
+}
 
 
 /* CUSTOM BUTTON */
@@ -369,6 +378,14 @@ button:active {
   button {
     font-size: 1.4rem;
   }
+  .fund-box {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
 
 
 }
@@ -438,6 +455,8 @@ button:active {
     border-radius: 50%;
     animation: shadow324 0.5s linear infinite;
   }
+
+
 
 
 }

@@ -3,7 +3,9 @@
 /*.aboutUs-container {
   background: var(--color-primary-light);
 }*/
-
+.aboutus-title{
+  margin-top: 8rem;
+}
 
 .aboutus-description-section {
   margin-top: 4rem;
@@ -261,6 +263,9 @@
 /* ******************************** */
 
 @media(max-width: 44em) {
+  .aboutus-title{
+    margin-top: 4rem;
+  }
 
   .aboutus-points li {
     font-size: 1.4rem;

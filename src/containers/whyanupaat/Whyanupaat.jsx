@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card';
 import { whyanupaatData } from '../../data';
 import whyAnupaatImg from '../../assets/illustrations/whyAnupaatIllustration.webp';
 import preWhyAnupaatImg from '../../assets/illustrations/pre-whyAnupaatIllustration.webp';
+import FeatureCard from '../../UiComponents/FeatureCard/FeatureCard';
 
 const Whyanupaat = () => {
     return (
@@ -42,15 +43,7 @@ const Whyanupaat = () => {
                 {
                     whyanupaatData.map(({ icon, title, text }, id) => {
                         return (
-                            <Card className="whyanupaat_data" key={id} data-aos="fade-up"
-                                data-aos-anchor-placement="top-bottom" data-aos-duration="1000">
-                                <img src={icon} alt="icon" className='card-icon' />
-
-                                <div className='card-content'>
-                                    <h3 className='why-block-heading'>{title}</h3>
-                                    <small>{text}</small>
-                                </div>
-                            </Card>
+                            <FeatureCard heading={title} icon={icon} description={text} id={id}/>
                         )
                     })
                 }
