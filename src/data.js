@@ -7,7 +7,8 @@ import framework from "../src/assets/Icons/framework.png";
 
 import earning from "../src/assets/Icons/earning.png";
 
-import tax from "../src/assets/Icons/tax.png";
+import activePassiveIcon from "../src/assets/Icons/active-passive.png";
+import taxSaveIcon from "./assets/Icons/tax.png"
 
 import retirement from "../src/assets/Icons/retirement.png";
 import {IoBulbSharp} from "react-icons/io5";
@@ -326,7 +327,7 @@ export const mutualFundData = [
   },
   {
     id: 2,
-    icon: tax,
+    icon: taxSaveIcon,
     title: "Tax-Saver",
     hreturn:"11-14%",
     ihorizon:"3Y+",
@@ -339,7 +340,7 @@ export const mutualFundData = [
   },
   {
     id: 3,
-    icon: tax,
+    icon: activePassiveIcon,
     title: "Active-Passive Combo",
     hreturn:"11-14%",
     ihorizon:"3Y+",

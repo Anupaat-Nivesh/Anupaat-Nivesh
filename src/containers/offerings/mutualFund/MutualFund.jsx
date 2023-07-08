@@ -7,6 +7,7 @@ import {
     Chart, ArcElement, Tooltip, Legend
 } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import mutualFundImg from "../../../assets/illustrations/mutual-fund.svg";
 
 
 
@@ -44,9 +45,9 @@ const MutualFund = () => {
 
                 <div className="mutual-funds-heading">
 
-                    <div className='anupaat_whyanupaat-heading-explanation' data-aos="zoom-in-right" data-aos-duration="1000">
+                    <div className='mutual-fund-heading-explanation' data-aos="zoom-in-right" data-aos-duration="1000">
                         <div className='whyanupaat-subheading '>
-                            <h2 className='secondary-heading'>Unlock Your Investing Potential with Our Expertly Curated Mutual Fund Basket. Start Building Your Portfolio Today.</h2>
+                            <h2 className='secondary-heading'>Unlock Your Investing Potential with Our Expertly Curated Mutual Fund Basket.  Start Building Your Portfolio Today.</h2>
                         </div>
                         <div className='mutual-funds-description'>
                             <p>
@@ -63,12 +64,12 @@ const MutualFund = () => {
                 </div>
                 <div className='mutual-funds-title-image' data-aos="zoom-in-left" data-aos-duration="1000">
                     <picture>
-                        <img src="" alt="" />
+                        <img src={mutualFundImg} alt="Mutual-Fund illustration" className='hero-illustration mutual-fund-illustration' />
 
                     </picture>
                 </div>
             </div>
-            <div className='mutualFund-wrapper section__padding section__margin'>
+            <div className='mutualFund-wrapper'>
                 <div className='mutualfund-Card-container'>
                     {
                         mutualFundData.map(({ icon, title, description, chart, hreturn, ihorizon, mode, lockin, riskprofile, color }, id) => {
@@ -80,23 +81,23 @@ const MutualFund = () => {
                                             <img src={icon} alt="icon" />
                                             <h3>{title}</h3>
                                         </div>
-                                        <p>{description}</p>
+                                        <p className='card-subtext'>{description}</p>
                                         <div className="mutualcard-body">
                                             <div>
                                                 <h3 id='sub-heading'>Historical Return</h3>
-                                                <p>{hreturn}</p>
+                                                <p className='data-value'>{hreturn}</p>
                                             </div>
                                             <div>
                                                 <h3 id='sub-heading'>Investment Horizon</h3>
-                                                <p>{ihorizon}</p>
+                                                <p className='data-value'>{ihorizon}</p>
                                             </div>
                                             <div>
                                                 <h3 id='sub-heading'>Investment Mode</h3>
-                                                <p>{mode}</p>
+                                                <p className='data-value'>{mode}</p>
                                             </div>
                                             <div>
                                                 <h3 id='sub-heading'>LOCK-IN</h3>
-                                                <p>{lockin}</p>
+                                                <p className='data-value'>{lockin}</p>
                                             </div>
 
 
@@ -109,7 +110,7 @@ const MutualFund = () => {
                                             </Doughnut>
                                         </div>
 
-                                        <small>*Risk Profile for this basket is considered <span className='risk-profile' style={{ color: `${color}` }} >{riskprofile}</span></small>
+                                        <small className='alert-message'>*Risk Profile for this basket is considered <span className='risk-profile' style={{ color: `${color}` }} >{riskprofile}</span></small>
 
 
                                     </div>
@@ -122,8 +123,8 @@ const MutualFund = () => {
                 </div>
             </div>
             <div className="footer">
-                <h1>Excited to invest in this Basket ?</h1>
-                <button type="button" className='btn' onClick={(e) => {
+                <h2>Ready to invest? Click <span style={{color:'#FE0101'}}>"Invest Now"</span> and let's get started!</h2>
+                <button type="button" className='btn-invest-now' onClick={(e) => {
                     setModal(true);
                     setFundType(e.target.dataset.fundType);
                 }}>Invest Now</button>
