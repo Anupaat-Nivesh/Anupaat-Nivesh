@@ -336,7 +336,7 @@ export const mutualFundData = [
     chart:data2,
     riskprofile:"Moderate",
     color: "#ffbf00",
-    description: "Achieve short term goals and get better taxation than FDs",
+    description: "Save taxes AND grow your wealth with ELSS funds",
   },
   {
     id: 3,
@@ -349,7 +349,7 @@ export const mutualFundData = [
     chart:data3,
     riskprofile:"Moderate",
     color: "#ffbf00",
-    description: "Save taxes AND grow your wealth with LESS funds",
+    description: "Achieve short term goals and get better taxation than FDs",
   },
   {
     id: 4,
