@@ -22,26 +22,31 @@ import WhatsappLogo from "../../assets/whatsapp.png";
 import YoutubeLogo from "../../assets/youtube.png";
 import LinkedInLogo from "../../assets/linkedin.png";
 
+import useInput from "../../Hooks/use-input.js";
+
 const Contact = () => {
     const form = useRef();
     const otpInputElement = useRef();
-    const firstNameErrorElement = useRef();
-    const lastNameErrorElement = useRef();
-    const mailErrorElement = useRef();
-    const [_, setMail] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [isEmailValid, setIsEmaliValid] = useState(false);
-    const [isFirstNameValid, setIsFirstNameValid] = useState(false);
-    const [isLastNameValid, setIsLastNameValid] = useState(false);
     const [confirmObj, setConfirmObj] = useState({});
     const [time, setTime] = useState();
     const [countDown, setCountDown] = useState();
-    const [value, setValue] = useState();
     const [otpSendStatus, setOtpSendStatus] = useState(false);
     const [numberVerified, setNumberVerified] = useState(false);
 
 
+    // *********
+    const { inputValue: firstNameInputValue, inputFieldHasError: firstNameHasError, inputChangeHandler: firstNameInputChangeHandler, inputBlurHandler: firstNameInputBlurHandler, isInputValueValid: isFirstNameValid, reset: resetFirstNameInput } = useInput(value => config.nameRegex.test(value));
+
+
+    const { inputValue: lastNameInputValue, inputFieldHasError: lastNameHasError, inputChangeHandler: lastNameInputChangeHandler, inputBlurHandler: lastNameInputBlurHandler, isInputValueValid: isLastNameValid, reset: resetLastNameInput } = useInput(value => config.nameRegex.test(value));
+
+
+    const { inputValue: mailInputValue, inputFieldHasError: mailHasError, inputChangeHandler: mailInputChangeHandler, inputBlurHandler: mailInputBlurHandler, isInputValueValid: isEmailValid, reset: resetMailInput } = useInput(value => config.validEmailRegex.test(value));
+
+
+    const { inputValue: numberInputValue, inputFieldHasError: numberHasError, inputChangeHandler: numberInputChangeHandler, inputBlurHandler: numberInputBlurHandler, isInputValueValid: isNumberValid, reset: resetNumberInput } = useInput(value => config.phoneNumberRegex.test(value));
+
+    console.log(numberHasError);
     // Verifies and render the Captcha
     const reCaptchaVerfication = (number) => {
         window.reCaptchaVerfier = new RecaptchaVerifier("recaptch-container", {}, auth);
@@ -75,11 +80,11 @@ const Contact = () => {
 
         try {
             // Checking if number is valid
-            if (!(value && isPossiblePhoneNumber(value))) {
+            if (!(numberInputValue && isPossiblePhoneNumber(numberInputValue))) {
                 throw new Error('Not a valid number');
             }
             // awaiting the response for OTP send status
-            const response = await reCaptchaVerfication(value, auth);
+            const response = await reCaptchaVerfication(numberInputValue, auth);
 
             // Set the otp send status
             setOtpSendStatus(true);
@@ -119,55 +124,7 @@ const Contact = () => {
         setCountDown(timer);
     };
 
-    // Checks if the First name is correct 
-    const handleFirstNameChange = (e) => {
 
-        const inputFirstName = e.target.value;
-
-
-        if (config.nameRegex.test(inputFirstName)) {
-            setFirstName(inputFirstName);
-            firstNameErrorElement.current.textContent = "";
-            setIsFirstNameValid(true);
-        } else {
-            firstNameErrorElement.current.textContent = "*Invalid Input";
-            setIsFirstNameValid(false);
-        }
-    };
-
-    // Checks if the last name is correct
-    const handleLastNameChange = (e) => {
-        const inputLastName = e.target.value;
-
-        if (config.nameRegex.test(inputLastName)) {
-            setLastName(inputLastName);
-            // console.log(inputLastName);
-            lastNameErrorElement.textContent = "";
-            setIsLastNameValid(true);
-        } else {
-            lastNameErrorElement.current.textContent = "*Invalid Input";
-            setIsLastNameValid(false);
-        }
-    };
-
-
-    // Checks if the mail entered is correct?
-
-
-    const handleMailChange = (e) => {
-
-        const inputMail = e.target.value;
-
-        if (config.validEmailRegex.test(inputMail)) {
-            setMail(inputMail);
-            // console.log(inputMail);
-            mailErrorElement.textContent = "";
-            setIsEmaliValid(true);
-        } else {
-            mailErrorElement.current.textContent = "*Invalid E-mail";
-            setIsEmaliValid(false);
-        }
-    };
 
     // To submit the form and send the mail to contact support team.
 
@@ -197,8 +154,13 @@ const Contact = () => {
             notifySuccessfull();
             setNumberVerified(false);
             setOtpSendStatus(false);
+
             e.target.reset();
-            setValue('');
+
+            resetFirstNameInput();
+            resetLastNameInput();
+            resetMailInput();
+            resetNumberInput();
 
             // Signout a user
             await signOut(auth);
@@ -237,12 +199,16 @@ const Contact = () => {
                                 name="first_name"
                                 placeholder="Anuj"
                                 required
-                                onChange={handleFirstNameChange}
+                                value={firstNameInputValue}
+                                onChange={firstNameInputChangeHandler}
+                                onBlur={firstNameInputBlurHandler}
                             />
-                            <div ref={firstNameErrorElement} className="error first-name-error" required>
-                                {" "}
-                            </div>
+                            {firstNameHasError && <div className="error first-name-error" required>
+                                <p>* Invalid Input</p>
+                            </div>}
                         </div>
+
+
                         <div>
                             <label htmlFor="last-name">Last Name</label>
                             <input
@@ -252,11 +218,13 @@ const Contact = () => {
                                 name="last_name"
                                 placeholder="Sharma"
                                 required
-                                onChange={handleLastNameChange}
+                                value={lastNameInputValue}
+                                onBlur={lastNameInputBlurHandler}
+                                onChange={lastNameInputChangeHandler}
                             />
-                            <div ref={lastNameErrorElement} className="error last-name-error" required>
-                                {" "}
-                            </div>
+                            {lastNameHasError && <div className="error last-name-error" required>
+                                <p>* Invalid Input</p>
+                            </div>}
                         </div>
 
                         <div>
@@ -268,9 +236,13 @@ const Contact = () => {
                                 name="user_email"
                                 placeholder="abc@example.com"
                                 required
-                                onChange={handleMailChange}
+                                onChange={mailInputChangeHandler}
+                                onBlur={mailInputBlurHandler}
+                                value={mailInputValue}
                             />
-                            <div ref={mailErrorElement} className="error mail-error"> </div>
+                            {mailHasError && <div className="error mail-error" required>
+                                <p>* Invalid E-mail address</p>
+                            </div>}
                         </div>
 
                         <div>
@@ -280,16 +252,12 @@ const Contact = () => {
                                     name="number"
                                     className="phoneInput"
                                     placeholder="Enter phone number"
-                                    value={value}
-                                    onChange={(input) => {
-                                        setValue(input);
-                                        setOtpSendStatus(false);
-                                        setNumberVerified(false);
-                                    }}
+                                    value={numberInputValue}
+                                    onChange={numberInputChangeHandler}
+                                    onBlur={numberInputBlurHandler}
                                     defaultCountry="IN"
                                     international
                                     countryCallingCodeEditable={false}
-                                    error={value ? (isPossiblePhoneNumber(value) ? undefined : 'Invalid phone number') : 'Phone number required'}
                                 />
                                 {numberVerified ? <span className="verifiedText animate__animated animate__bounceIn animate__delay-1s" style={{ color: 'green' }}>Verified! ✅</span> : <div className="otp-input__container">
                                     <input ref={otpInputElement} type="text" id="otp-input" placeholder="Enter OTP" style={{ display: `${otpSendStatus ? 'block' : 'none'}` }} />
@@ -300,9 +268,9 @@ const Contact = () => {
                                 </div>}
 
                             </div>
-                            <div className="error phone-error">
-                                {value && isPossiblePhoneNumber(value) ? '' : 'Enter a valid Number'}
-                            </div>
+                            {numberHasError && <div className="error number-error" required>
+                                <p>* Invalid Number</p>
+                            </div>}
                             <div className="countdown" style={{ display: `${otpSendStatus ? 'block' : 'none'}` }}>
                                 {`${String(Math.floor(time / 60)).padStart(2, '0')}:${String(Math.floor(time % 60)).padStart(2, '0')}`}
                             </div>
@@ -323,7 +291,7 @@ const Contact = () => {
                             ></textarea>
                         </div>
 
-                        <button type="submit" value="Send" className="btn btn--form " id="sign-in-button" style={{ backgroundColor: `${numberVerified ? 'var(--color-primary)' : 'var(--color-subtext-light)'}`, opacity: `${numberVerified ? '100%' : '50%'}` }}>
+                        <button type="submit" value="Send" className="btn btn--form " id="sign-in-button" style={{ backgroundColor: `${numberVerified ? 'var(--color-primary)' : 'var(--color-subtext-light)'}`, opacity: `${numberVerified ? '100%' : '50%'}`, border:'none' }}>
                             SUBMIT
                         </button>
 
