@@ -13,31 +13,32 @@ export const SkillCounter = () => {
     return (
         <section className='skills-data home-section'>
             <div className='skill-container'>
-                <div className='skill-items'>
+                {/* <div className='skill-items'>
                     <img src={icon2} className="skill-counter-icon" alt='icon' />
                     <h2 className='counter-numbers'><CountUp start={0} end={26} duration={2} delay={0} suffix="+" /></h2>
 
                     <p>INVESTED PLANS</p>
-                </div>
+                </div> */}
                 <div className='skill-items'>
                     <img src={icon3} className="skill-counter-icon" alt='icon' />
                     <h2 className='counter-numbers'><CountUp start={0} end={12} duration={2} delay={0} suffix="+" /> </h2>
-                    <p>TEAM</p>
+                    <h3>TEAM</h3>
                 </div>
                 <div className='skill-items'>
                     <img src={icon5} className="skill-counter-icon" alt='icon' />
-                    <h2 className='counter-numbers'><CountUp start={0} end={150} duration={2} delay={0} suffix="+" /> </h2>
-                    <p>HAPPY CLIENTS</p>
+                    <h2 className='counter-numbers'><CountUp start={0} end={250} duration={2} delay={0} suffix="+" /> </h2>
+                    <h3>HAPPY CLIENTS</h3>
                 </div>
                 <div className='skill-items'>
                     <img src={icon4} className="skill-counter-icon" alt='icon'/>
-                    <h2 className='counter-numbers'><CountUp start={0} end={1145000} duration={2} delay={0} suffix="+" /></h2>
-                    <p>Monthly SIP</p>
+                    <h2 className='counter-numbers'><CountUp start={0} end={1800000} duration={2} delay={0} suffix="+" /></h2>
+                    <h3>Monthly SIP</h3>
                 </div>
                 <div className='skill-items'>
                     <img src={icon1} className="skill-counter-icon" alt='icon' />
-                    <h2 className='counter-numbers'><CountUp start={0} end={285} duration={2} delay={0} suffix=" Lac+" />  </h2>
-                    <p>AUM</p>
+                    <h2 className='counter-numbers'><CountUp start={0} end={8} duration={2} delay={0} suffix=" Cr+" />  </h2>
+                    <h3>AUM</h3>
+                    <p>100 Cr. by 2025</p>
                 </div>
             </div>
 

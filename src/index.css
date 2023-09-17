@@ -20,6 +20,7 @@ html {
   /* Now 1rem  = 10px */
   font-size: 62.5%;
   overflow-x: hidden;
+ 
 }
 
 body {
@@ -47,4 +48,8 @@ body {
   --color-subtext-light: #747474;
 
   --transition: all 500ms ease;
+
+  --vh:1vh;
+  --rem:1rem;
+  --vw:1vw; 
 }

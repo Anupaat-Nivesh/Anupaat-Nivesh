@@ -1,53 +1,20 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 
 
 const TeamPersonCard = (props) => {
 
-  const [_, setProfileVisible] = React.useState(false);
-
-
-
-  const mouseEnterHandler = (event) => {
-    event.target.closest('.team-person-card').querySelector('.person-profiles').classList.add('show-person-profiles');
-    event.target.closest('.team-person-card').querySelector('.person-info').style.color = "#fff";
-    event.target.closest('.team-person-card').querySelector('.person-designation').style.color = "#fff";
-    event.target.closest('.team-person-card').querySelector('.image-container').classList.add('enlarge');
-
-
-
-    // console.log(event.target.closest('.team-person-card'));
-
-    setProfileVisible(true);
-  };
-
-
-
-
-  const mouseLeaveHandler = (event) => {
-    event.target.closest('.team-person-card').querySelector('.person-profiles').classList.remove('show-person-profiles');
-    event.target.closest('.team-person-card').querySelector('.person-info').style.color = "#000";
-    event.target.closest('.team-person-card').querySelector('.person-designation').style.color = "#FE0101";
-
-    event.target.closest('.team-person-card').querySelector('.image-container').classList.remove('enlarge');
-
-    setProfileVisible(false);
-  }
-
-
-
-
-
-
   return <div className="team-person-card" data-aos="fade-up"
     data-aos-duration="1000">
-    <div className="image-container" onMouseEnter={mouseEnterHandler} onMouseLeave={mouseLeaveHandler}>
-      <img src={props.image} alt="" className="person-image" />
+    <div className="image-container" >
+      {props.image === "" ? <FontAwesomeIcon icon={faCircleUser} className="default-person-avatar" /> : <img src={props.image} alt="" className="person-image" />}
     </div>
-    <div className="person-info" onMouseEnter={mouseEnterHandler} onMouseLeave={mouseLeaveHandler}>
+    <div className="person-info" >
       <p className="person-name">{props.name}</p>
       <p className="person-designation">{props.designation}</p>
     </div>
-    <div className="person-profiles" onMouseEnter={mouseEnterHandler}>
+    <div className="person-profiles">
 
       {/* <div className="profile"><a href='#'><img src={LinkedInLogo} alt="logo" /></a></div> */}
 
