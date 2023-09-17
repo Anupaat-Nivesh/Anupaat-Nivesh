@@ -24,20 +24,11 @@ const OurTeam = () => {
       designation: "Business Consultant",
       img: require("../../assets/teamProfiles/beant.webp")
     },
+    
     {
-      name: "Kanishk Jhorar",
-      designation: "Marketing Officer",
-      img: require("../../assets/teamProfiles/kanishk.webp")
-    },
-    {
-      name: "Mohit Rai",
-      designation: "Operation Executive",
-      img: require("../../assets/teamProfiles/mohit.webp")
-    },
-    {
-      name: "Harshita Singh",
-      designation: "Technical Executive",
-      img: require("../../assets/teamProfiles/harshita.webp")
+      name: "Bhumika",
+      designation: "Operation executive",
+      img: "",
     },
     {
       name: "Lokesh Singh",

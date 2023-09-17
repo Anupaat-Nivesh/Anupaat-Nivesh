@@ -2,11 +2,7 @@
     margin-top: 9.6rem;
     width: 100%;
     background: var(--color-bg-dark);
-
     justify-content: space-between;
-
-
-
 
 }
 
@@ -17,7 +13,7 @@
     display: flex;
     flex-direction: row;
     margin: auto;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 2rem 1rem;
 
 }
@@ -47,7 +43,8 @@
 }
 
 .skill-items p {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 400;
 }
 
 .skill-counter-icon {
@@ -62,39 +59,64 @@
         width: 100%;
     }
 
+ 
+
 
     .skill-items {
-        height: 35vmin;
-        width: 30vmin;
+        
         font-size: 2.2rem;
         margin: 1.2rem;
+        padding: 1rem 2rem;
 
+    }
+    .skill-items h2{
+        font-size: 2rem;
+    }
+
+    .skill-items h3{
+        font-size: 1.6rem;
+    }
+
+    .skill-items p{
+        font-size: 1.2rem;
     }
 
     .skill-container {
-        padding: 0rem 3rem;
+        padding: 1rem 2rem;
     }
 
 }
 
 @media screen and (max-width:840px) {
     .skill-container {
-
-        flex-wrap: wrap;
         gap: 2rem;
         padding: 0rem 2rem;
+        flex-wrap: wrap;
 
-
+    }
+    .skill-counter-icon {
+        width: 4rem;
+        height: 4rem;
+        padding: 0.5rem;
+        border-radius: 1rem;
     }
 
     .skill-items {
-        width: 25vmin;
-        height: 30vmin;
+       
         font-size: 1.8rem;
         font-weight: 500;
 
 
     }
+    .skill-items h2{
+        font-size: 2rem;
+    }
+
+    .skill-items h3{
+        font-size: 1.4rem;
+    }
+
+ 
 }
 
 @media screen and (max-width:750px) {
@@ -102,10 +124,12 @@
         gap: 1.5rem;
     }
 
-    .skill-items {
-        width: 100%;
-        height: 30vmin;
-        font-size: 2.8rem;
+   
+    .skill-counter-icon {
+        width: 6.6rem;
+        height: 6.6rem;
+        padding: 0.5rem;
+        border-radius: 1rem;
     }
 }
 
@@ -116,9 +140,9 @@
 
     .skill-items {
         width: 100%;
-        height: 32vmin;
+        
         font-size: 1.4rem;
-        padding: 1rem;
+        padding: 1rem 3rem;
     }
 
     .skill-counter-icon {
@@ -126,5 +150,6 @@
         height: 4.5rem;
 
     }
+ 
 
 }
