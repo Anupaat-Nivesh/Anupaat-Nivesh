@@ -123,7 +123,8 @@ const MutualFund = () => {
                 </div>
             </div>
             <div className="footer">
-                <h2>Ready to invest? Click <span style={{color:'#FE0101'}}>"Invest Now"</span> and let's get started!</h2>
+                <h2>Excited to be part of the jounrney. 
+                    Let's get started!</h2>
                 <button type="button" className='btn-invest-now' onClick={(e) => {
                     setModal(true);
                     setFundType(e.target.dataset.fundType);

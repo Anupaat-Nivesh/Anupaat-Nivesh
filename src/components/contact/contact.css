@@ -80,6 +80,10 @@ align-items: center;
   padding: 1rem;
 }
 
+.number-error{
+  padding-left: 6rem;
+}
+
 .cta *:focus {
   outline: 0;
   box-shadow: 0 0 0.3rem var(--color-subtext-light);

@@ -34,7 +34,7 @@ const links = [
         id: 'contact'
 
     },
-]
+];
 
 const Navbar = () => {
     const [toggleMenu, setToggleMenu] = useState(false);
@@ -64,11 +64,11 @@ const Navbar = () => {
                 </div>
                 <ul className="anupaat__navbar-links_container">
                     {
-                        links.map(({name, id, }) => {
+                        links.map(({ name, id, }) => {
                             return (
                                 <li key={name} >
 
-                                    <Link  className="nav-link" to={id} exact='true'>{name} </Link>
+                                    <Link className="nav-link" to={id} exact='true'>{name} </Link>
 
                                 </li>
                             )
@@ -77,23 +77,49 @@ const Navbar = () => {
                 </ul>
 
             </div>
-            <div className="anupaat__navbar-sign">
+            <div className="anupaat__navbar-sign nav-action__btn">
 
                 <Link to='ourApp'>
-                    <button type="button" >GET THE APP</button></Link>
+                    <button type="button" >GET THE APP</button>
+                </Link>
+
+            </div>
+            <div className="anupaat__navbar-login nav-action__btn">
+
+                <Link to='https://anupaatnivesh.wealthmagic.in/' target="_self">
+                    <button type="button" >Login</button>
+                </Link>
 
             </div>
 
+
+
+
+            {/* Mobile Navigation Modal */}
+
             <div className="anupaat__navbar-menu">
                 {toggleMenu
-                    ? <RiCloseLine className='animate__animated animate__fadeIn' color="#000" size={32} onClick={(event) => { setToggleMenu(prev => !prev); }} />
+                    ? <RiCloseLine className='animate__animated animate__fadeIn' color="#000" size={32} onClick={(event) => {
+                        setToggleMenu(prev => !prev);
+                        const htmlElementCollection = window.document.getElementsByTagName("html");
+                        const htmlElement = Array.from(htmlElementCollection)[0];
+                        htmlElement.style.overflowY = "scroll";
+                    }} />
                     : <RiMenu3Line className='animate__animated animate__fadeIn' color="#000" size={27} onClick={(event) => {
                         setToggleMenu(true);
+                        const htmlElementCollection = window.document.getElementsByTagName("html");
+                        const htmlElement = Array.from(htmlElementCollection)[0];
+                        htmlElement.style.overflowY = "hidden";
                     }} />}
 
 
-                
-                <div className='backdrop-blur' style={{backdropFilter:`${toggleMenu?'blur(10px)':'blur(0)'}`,display:`${toggleMenu?'block':'none'}`}} onClick={(event) => { setToggleMenu(prev => !prev); }}></div>
+
+                <div className='backdrop-blur' style={{ backdropFilter: `${toggleMenu ? 'blur(10px)' : 'blur(0)'}`, display: `${toggleMenu ? 'block' : 'none'}` }} onClick={(event) => {
+                    setToggleMenu(prev => !prev);
+                    const htmlElementCollection = window.document.getElementsByTagName("html");
+                    const htmlElement = Array.from(htmlElementCollection)[0];
+                    htmlElement.style.overflowY = "scroll";
+                }}></div>
                 <div className="anupaat__navbar-menu_container scale-up-center" style={{ transform: `${toggleMenu ? 'translate(0,0)' : 'translate(100%,0)'}` }}>
                     <ul className="anupaat__navbar-menu_container-links">
                         {
@@ -114,7 +140,7 @@ const Navbar = () => {
 
                     </div>
                 </div>
-               
+
             </div>
         </div >
 
