@@ -25,7 +25,7 @@ import "aos/dist/aos.css";
 
 import "./App.css";
 import ScrollToTop from "./components/ScrollToTop";
-import OneCroreClub from "./components/oneCroreClub/OneCroroeClub";
+
 
 AOS.init();
 
