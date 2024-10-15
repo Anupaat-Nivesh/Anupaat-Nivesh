@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "./static/css/main.7add53a5.css",
-    "main.js": "./static/js/main.26b3118c.js",
+    "main.css": "./static/css/main.906be946.css",
+    "main.js": "./static/js/main.ede89e76.js",
     "static/media/partner.png": "./static/media/partner.eac866038228374b4cd5.png",
     "static/media/carousel4-illustration.webp": "./static/media/carousel4-illustration.47398d72cf080659ef1b.webp",
     "static/media/mf.webp": "./static/media/mf.ea767559547954427c67.webp",
@@ -20,7 +20,7 @@
     "static/media/partnerInvestment.svg": "./static/media/partnerInvestment.281416960b8e81e8862c0c01a1545670.svg",
     "static/media/appScreenShot.webp": "./static/media/appScreenShot.c2d73d7efdd35277615b.webp",
     "static/media/whyAnupaatIllustration.webp": "./static/media/whyAnupaatIllustration.70ac54597e1cf8b0a045.webp",
-    "static/media/loanAgainstSecuritiesIllustration.svg": "./static/media/loanAgainstSecuritiesIllustration.2eea6b74d13fda0b5ad8afec99d98df6.svg",
+    "static/media/loanAgainstSecuritiesIllustration.svg": "./static/media/loanAgainstSecuritiesIllustration.0e999f5032360f2545c820a143ed2e51.svg",
     "static/media/partnerTechnology.svg": "./static/media/partnerTechnology.3959d3ae1b3b8d66eec1fbc7d53e98fb.svg",
     "static/media/carousel1-illustration-1120w.webp": "./static/media/carousel1-illustration-1120w.d9e8e6b1ec7716f01f8f.webp",
     "static/media/naveen.webp": "./static/media/naveen.c0a85fb8699cb2f0c516.webp",
@@ -78,10 +78,8 @@
     "static/media/apple-store-badge.svg": "./static/media/apple-store-badge.8c4986ee4828b47d16f5cd694ef065f2.svg",
     "static/media/carousel2-illustration-560w.webp": "./static/media/carousel2-illustration-560w.0bfaf656909d6f218e54.webp",
     "static/media/india.png": "./static/media/india.5b3166b26b75b13cd582.png",
-    "static/media/lokesh.webp": "./static/media/lokesh.0e0e254e5ce418d98401.webp",
     "static/media/diagram.png": "./static/media/diagram.906e6629eba97d8bb9b5.png",
     "static/media/pre-customer-support.webp": "./static/media/pre-customer-support.3e1bb8ff61233e95a002.webp",
-    "static/media/vimple.webp": "./static/media/vimple.2c1ee30b47c190692ef2.webp",
     "static/media/carousel3-illustration-560w.webp": "./static/media/carousel3-illustration-560w.c551a488e612fb641964.webp",
     "static/media/logo.webp": "./static/media/logo.7cc07457317647f956bd.webp",
     "static/media/priya.webp": "./static/media/priya.9f1c8ed3b74d22331168.webp",
@@ -91,7 +89,7 @@
     "static/media/team.svg": "./static/media/team.3be641eac951c5646d7b26027fb6c98a.svg"
   },
   "entrypoints": [
-    "static/css/main.7add53a5.css",
-    "static/js/main.26b3118c.js"
+    "static/css/main.906be946.css",
+    "static/js/main.ede89e76.js"
   ]
 }
