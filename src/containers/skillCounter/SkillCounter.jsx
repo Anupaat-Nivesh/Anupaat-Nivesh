@@ -26,17 +26,17 @@ export const SkillCounter = () => {
                 </div>
                 <div className='skill-items'>
                     <img src={icon5} className="skill-counter-icon" alt='icon' />
-                    <h2 className='counter-numbers'><CountUp start={0} end={250} duration={2} delay={0} suffix="+" /> </h2>
+                    <h2 className='counter-numbers'><CountUp start={0} end={350} duration={2} delay={0} suffix="+" /> </h2>
                     <h3>HAPPY CLIENTS</h3>
                 </div>
                 <div className='skill-items'>
                     <img src={icon4} className="skill-counter-icon" alt='icon'/>
-                    <h2 className='counter-numbers'><CountUp start={0} end={1800000} duration={2} delay={0} suffix="+" /></h2>
+                    <h2 className='counter-numbers'><CountUp start={0} end={2500000} duration={2} delay={0} suffix="+" /></h2>
                     <h3>Monthly SIP</h3>
                 </div>
                 <div className='skill-items'>
                     <img src={icon1} className="skill-counter-icon" alt='icon' />
-                    <h2 className='counter-numbers'><CountUp start={0} end={8} duration={2} delay={0} suffix=" Cr+" />  </h2>
+                    <h2 className='counter-numbers'><CountUp start={0} end={15} duration={2} delay={0} suffix=" Cr+" />  </h2>
                     <h3>AUM</h3>
                     <p>100 Cr. by 2025</p>
                 </div>

@@ -26,19 +26,19 @@ const OurTeam = () => {
     },
     
     {
-      name: "Bhumika",
+      name: "Preet Kaur",
       designation: "Operation executive",
       img: "",
     },
     {
-      name: "Lokesh Singh",
-      designation: "Technical Executive",
-      img: require("../../assets/teamProfiles/lokesh.webp")
+      name: "Jatin Duggal",
+      designation: "Marketing Executive",
+      img: "",
     },
     {
-      name: "Vimple",
+      name: "Nirmal Singh",
       designation: "Business Executive",
-      img: require("../../assets/teamProfiles/vimple.webp")
+      img: "",
     }
   ];
 
