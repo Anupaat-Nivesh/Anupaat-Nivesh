@@ -27,7 +27,7 @@ const OurTeam = () => {
     
     {
       name: "Preet Kaur",
-      designation: "Operation executive",
+      designation: "Operation Executive",
       img: "",
     },
     {

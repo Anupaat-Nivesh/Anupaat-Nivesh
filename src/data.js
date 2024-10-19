@@ -22,14 +22,13 @@ import partnerDataImg1 from '../src/assets/illustrations/partnerTrust.svg';
 import partnerDataImg2 from '../src/assets/illustrations/partnerTechnology.svg';
 import partnerDataImg3 from '../src/assets/illustrations/partnerInvestment.svg';
 import {
-  Chart, ArcElement, Tooltip, Legend
+  Chart, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, registerables
 } from 'chart.js';
 
 
 
-
-Chart.register(ArcElement, Tooltip, Legend);
-
+Chart.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale);
+Chart.register(...registerables);
 
 export const featuresData = [
   {

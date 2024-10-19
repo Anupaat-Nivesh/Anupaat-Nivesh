@@ -4,14 +4,15 @@ import ContactModal from '../../../components/contact/contactModal/ContactModal'
 import Card from 'react-bootstrap/Card';
 import { mutualFundData } from '../../../data';
 import {
-    Chart, ArcElement, Tooltip, Legend
-} from 'chart.js';
+    Chart, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, registerables
+  } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import mutualFundImg from "../../../assets/illustrations/mutual-fund.svg";
 
 
-
-Chart.register(ArcElement, Tooltip, Legend);
+ // Register all the necessary components (using registerables to include everything)
+Chart.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale);
+Chart.register(...registerables);
 
 const MutualFund = () => {
 
