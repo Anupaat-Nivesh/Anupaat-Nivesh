@@ -46,7 +46,7 @@ const Contact = () => {
 
     const { inputValue: numberInputValue, inputFieldHasError: numberHasError, inputChangeHandler: numberInputChangeHandler, inputBlurHandler: numberInputBlurHandler, isInputValueValid: isNumberValid, reset: resetNumberInput } = useInput(value => config.phoneNumberRegex.test(value));
 
-    console.log(numberHasError);
+    //*console.log(numberHasError);
     // Verifies and render the Captcha
     const reCaptchaVerfication = (number) => {
         window.reCaptchaVerfier = new RecaptchaVerifier("recaptch-container", {}, auth);
@@ -70,6 +70,7 @@ const Contact = () => {
             clearInterval(countDown);
         } catch (err) {
             notifyFailure(err.message);
+            
         }
 
     };
@@ -83,15 +84,18 @@ const Contact = () => {
             if (!(numberInputValue && isPossiblePhoneNumber(numberInputValue))) {
                 throw new Error('Not a valid number');
             }
+            // Debug: Check the number being sent to Firebase
+            console.log("Number being sent to Firebase: ", numberInputValue);
             // awaiting the response for OTP send status
             const response = await reCaptchaVerfication(numberInputValue, auth);
 
+             // Debug: Check if the response from Firebase is correct
+            console.log("Response from reCaptchaVerfication: ", response);
+
             // Set the otp send status
             setOtpSendStatus(true);
-
             // set the key from response of recaptcha verification
             setConfirmObj(response);
-
 
             // Clear the recaptcha
             window.reCaptchaVerfier.clear();
@@ -99,6 +103,7 @@ const Contact = () => {
 
         } catch (err) {
             // console.log(err);
+            console.error("Firebase error:", err);  // Log the full error response
             notifyFailure(err.message);
             window.reCaptchaVerfier.clear();
         }
