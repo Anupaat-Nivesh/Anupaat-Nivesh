@@ -278,7 +278,7 @@ const data3 = {
   }],
   labels: [
     'Fund 1 : Large Cap',
-    'Fund 2 : Large Cap',
+    'Fund 2 : Hybrid Fund',
     'Fund 3 : Mid Cap',
     'Fund 4 : Multi Cap'
      
@@ -302,7 +302,7 @@ const data4 = {
   labels: [
     'Fund 1 : Multi Cap',
     'Fund 2 : Flexi Cap',
-    'Fund 3 : Flexi Cap'
+    'Fund 3 : Hybrid Fund'
      
   ]
 };
