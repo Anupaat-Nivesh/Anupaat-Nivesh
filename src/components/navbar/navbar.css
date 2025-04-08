@@ -255,8 +255,6 @@ font-weight: 450
     }
 }
 
-
-
 /* ******************************** */
 /* BELOW 704px (Smaller Tablets) */
 /* ******************************** */
@@ -266,20 +264,14 @@ font-weight: 450
         display: none;
     }
 
-
     .anupaat__navbar-menu_container-links-sign a button {
         display: block;
-
     }
 
     .anupaat__navbar-links_logo {
-
         width: 20rem;
     }
-
-
 }
-
 
 /* ******************************** */
 /* BELOW 544px (Phones) */
@@ -311,4 +303,31 @@ font-weight: 450
     to {
         transform: translate(0, 0);
     }
+}
+
+/* Add new menu */
+.anupaat__navbar-links_container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.anupaat__navbar-links_container li {
+    margin: 0 1rem;
+}
+
+.anupaat__navbar-links_container .tools-menu {
+    margin-left: auto; /* Push to the right */
+}
+
+.anupaat__navbar-links_container .tools-menu ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.anupaat__navbar-links_container .tools-menu li {
+    margin: 0 1rem;
 }

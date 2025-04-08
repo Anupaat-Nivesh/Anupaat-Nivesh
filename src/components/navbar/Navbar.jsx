@@ -28,11 +28,15 @@ const links = [
         path: '/offerings',
         id: 'offerings'
     },
+    /*{
+        name: "Tools", // New heading
+        path: '/tools', // Set the path for the Tools page
+        id: 'tools' // Set the id for the Tools heading
+    },*/
     {
         name: "Contact",
         path: '/contact',
         id: 'contact'
-
     },
 ];
 
@@ -128,23 +132,23 @@ const Navbar = () => {
                                     <li key={name}>
                                         <NavLink to={path} onClick={() => setToggleMenu(prev => !prev)} >{name}</NavLink>
                                     </li>
-                                )
-                            })
-                        }
-
-                    </ul>
-                    <div className="anupaat__navbar-menu_container-links-sign">
-                        <NavLink to='ourApp' onClick={() => setToggleMenu(prev => !prev)}>
-                            <button type="button">GET THE APP</button></NavLink>
-
-
+                                    )
+                                })
+                            }
+    
+                        </ul>
+                        <div className="anupaat__navbar-menu_container-links-sign">
+                            <NavLink to='ourApp' onClick={() => setToggleMenu(prev => !prev)}>
+                                <button type="button">GET THE APP</button></NavLink>
+    
+    
+                        </div>
                     </div>
+    
                 </div>
-
-            </div>
-        </div >
-
-    );
-};
-
-export default Navbar
+            </div >
+    
+        );
+    };
+    
+    export default Navbar;

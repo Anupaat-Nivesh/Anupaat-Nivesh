@@ -232,11 +232,11 @@ const data1 = {
       hoverOffset: 4
   }],
   labels: [
-      'Fund 1 : Flexi Cap',
-      'Fund 2 : Mid Cap',
+      'Fund 1 : Large Cap',
+      'Fund 2 : Mid/Small Cap',
       'Fund 3 : Value Fund',
-      'Fund 4 : Mid Cap',
-      'Fund 4 : Large Cap'
+      'Fund 4 : Hybrid Fund',
+      'Fund 5 : Flexi Cap'
   ]
 };
 

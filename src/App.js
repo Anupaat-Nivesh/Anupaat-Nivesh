@@ -26,6 +26,7 @@ import "aos/dist/aos.css";
 import "./App.css";
 import ScrollToTop from "./components/ScrollToTop";
 
+import Tools from './containers/tools/Tools';
 
 AOS.init();
 
@@ -59,6 +60,8 @@ function App() {
           path="loan-against-securities"
           element={<LoanAgainstSecurities />}
         />
+        <Route path="/tools" element={<Tools />} />
+
       </Routes>
 
       <Footer />

@@ -17,28 +17,22 @@ const OurTeam = () => {
     {
       name: "Gourav Chugh",
       designation: "Advisory Partner",
-      img: require("../../assets/teamProfiles/gaurav.webp")
+      img: require("../../assets/teamProfiles/gourav.webp")
     },
     {
       name: "Beant Singh",
       designation: "Business Consultant",
       img: require("../../assets/teamProfiles/beant.webp")
     },
-    
-    {
-      name: "Preet Kaur",
-      designation: "Operation Executive",
-      img: "",
-    },
     {
       name: "Jatin Duggal",
       designation: "Marketing Executive",
-      img: "",
+      img: require("../../assets/teamProfiles/jatin.webp"),
     },
     {
       name: "Nirmal Singh",
       designation: "Business Executive",
-      img: "",
+      img: require("../../assets/teamProfiles/nirmal.webp"),
     }
   ];
 

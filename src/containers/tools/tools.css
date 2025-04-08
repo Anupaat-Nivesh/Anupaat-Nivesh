@@ -1,0 +1,128 @@
+/* Tools Container Styling */
+.tools-container {
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .tools-header {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .tools-description {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 2rem;
+  }
+  
+  .tools-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+  }
+  
+  .tool-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    width: 300px;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .tool-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .tool-item h2 {
+    font-size: 1.5rem;
+    color: #111;
+    margin-bottom: 0.5rem;
+  }
+  
+  .tool-item p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+  
+  .tool-link {
+    font-size: 1rem;
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+  }
+  
+  .tool-link:hover {
+    color: #003399;
+  }
+/* Modal Styles */
+.form-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .form-container {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .form-container h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .form-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-container input {
+    width: calc(100% - 1rem);
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .form-container button {
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+    border: none;
+    background-color: #0066cc;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .form-container button:hover {
+    background-color: #005bb5;
+  }
+  
+  .form-container button[type="button"] {
+    background-color: #ddd;
+    color: #333;
+  }
+  
+  .form-container button[type="button"]:hover {
+    background-color: #ccc;
+  }
+    
