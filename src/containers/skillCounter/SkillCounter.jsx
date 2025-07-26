@@ -21,24 +21,24 @@ export const SkillCounter = () => {
                 </div> */}
                 <div className='skill-items'>
                     <img src={icon3} className="skill-counter-icon" alt='icon' />
-                    <h2 className='counter-numbers'><CountUp start={0} end={12} duration={2} delay={0} suffix="+" /> </h2>
+                    <h2 className='counter-numbers'><CountUp start={0} end={6} duration={2} delay={0} suffix="+" /> </h2>
                     <h3>TEAM</h3>
                 </div>
                 <div className='skill-items'>
                     <img src={icon5} className="skill-counter-icon" alt='icon' />
-                    <h2 className='counter-numbers'><CountUp start={0} end={350} duration={2} delay={0} suffix="+" /> </h2>
+                    <h2 className='counter-numbers'><CountUp start={0} end={500} duration={2} delay={0} suffix="+" /> </h2>
                     <h3>HAPPY CLIENTS</h3>
                 </div>
                 <div className='skill-items'>
                     <img src={icon4} className="skill-counter-icon" alt='icon'/>
-                    <h2 className='counter-numbers'><CountUp start={0} end={2500000} duration={2} delay={0} suffix="+" /></h2>
+                    <h2 className='counter-numbers'><CountUp start={0} end={4000000} duration={2} delay={0} suffix="+" /></h2>
                     <h3>Monthly SIP</h3>
                 </div>
                 <div className='skill-items'>
                     <img src={icon1} className="skill-counter-icon" alt='icon' />
-                    <h2 className='counter-numbers'><CountUp start={0} end={15} duration={2} delay={0} suffix=" Cr+" />  </h2>
+                    <h2 className='counter-numbers'><CountUp start={0} end={25} duration={2} delay={0} suffix=" Cr+" />  </h2>
                     <h3>AUM</h3>
-                    <p>100 Cr. by 2025</p>
+                    <p>Target 100 by 2026</p>
                 </div>
             </div>
 
