@@ -127,6 +127,38 @@ font-weight: 450
 
 .anupaat__navbar-login {
     margin-left: 1rem;
+    position: relative;
+}
+
+.login-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    border-radius: 8px;
+    display: none;
+    flex-direction: column;
+    min-width: 220px;
+    z-index: 50;
+    overflow: hidden;
+}
+
+.login-dropdown a {
+    padding: 0.9rem 1.2rem;
+    color: var(--color-text);
+    text-align: left;
+    transition: background 0.2s, color 0.2s;
+}
+
+.login-dropdown a:hover {
+    background: var(--color-grey-light);
+    color: var(--color-primary);
+}
+
+.login-dropdown.open {
+    display: flex;
 }
 
 /* ****************************************** */
@@ -218,6 +250,29 @@ font-weight: 450
     transition: all 0.3s;
 
 
+}
+
+.mobile-login-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mobile-login-links p {
+    margin: 0;
+    font-weight: 600;
+}
+
+.mobile-login-links a {
+    color: var(--color-text);
+    font-weight: 500;
+    padding: 0.4rem 0;
+    transition: color 0.2s;
+}
+
+.mobile-login-links a:hover {
+    color: var(--color-primary);
 }
 
 

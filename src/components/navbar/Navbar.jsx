@@ -40,9 +40,19 @@ const links = [
     },
 ];
 
+const loginLinks = [
+    { label: 'Admin Login', href: 'https://login.anupaatnivesh.com/arn-login' },
+    { label: 'Client Login', href: 'https://login.anupaatnivesh.com/client-login' },
+    { label: 'Employee Login', href: 'https://login.anupaatnivesh.com/emp-login' },
+    { label: 'Branch Login', href: 'https://login.anupaatnivesh.com/branch-login' },
+    { label: 'Sub-broker Login', href: 'https://login.anupaatnivesh.com/broker-login' },
+    { label: 'RM Login', href: 'https://login.anupaatnivesh.com/rm-login' },
+];
+
 const Navbar = () => {
     const [toggleMenu, setToggleMenu] = useState(false);
     const [anupaat__navbar, setNavbar] = useState(false);
+    const [showLoginMenu, setShowLoginMenu] = useState(false);
     const changeNav = () => {
         if (window.scrollY >= 80) {
             setNavbar(true);
@@ -54,6 +64,11 @@ const Navbar = () => {
     useEffect(() => {
         window.addEventListener('scroll', changeNav)
     }, []);
+    useEffect(() => {
+        if (!toggleMenu) {
+            setShowLoginMenu(false);
+        }
+    }, [toggleMenu]);
     /*On clicking the logo it will scroll to top*/
     const toggleHome = () => {
         animateScroll.scrollToTop();
@@ -90,9 +105,21 @@ const Navbar = () => {
             </div>
             <div className="anupaat__navbar-login nav-action__btn">
 
-                <Link to='https://anupaatnivesh.wealthmagic.in/' target="_self">
-                    <button type="button" >Login</button>
-                </Link>
+                <button
+                    type="button"
+                    onClick={() => setShowLoginMenu(prev => !prev)}
+                    aria-expanded={showLoginMenu}
+                    aria-haspopup="true"
+                >
+                    Login
+                </button>
+                <div className={`login-dropdown ${showLoginMenu ? 'open' : ''}`}>
+                    {loginLinks.map(link => (
+                        <a key={link.href} href={link.href} target="_self" rel="noreferrer" onClick={() => setShowLoginMenu(false)}>
+                            {link.label}
+                        </a>
+                    ))}
+                </div>
 
             </div>
 
@@ -132,23 +159,32 @@ const Navbar = () => {
                                     <li key={name}>
                                         <NavLink to={path} onClick={() => setToggleMenu(prev => !prev)} >{name}</NavLink>
                                     </li>
-                                    )
-                                })
-                            }
-    
-                        </ul>
-                        <div className="anupaat__navbar-menu_container-links-sign">
-                            <NavLink to='ourApp' onClick={() => setToggleMenu(prev => !prev)}>
-                                <button type="button">GET THE APP</button></NavLink>
-    
-    
+                                )
+                            })
+                        }
+
+                    </ul>
+                    <div className="anupaat__navbar-menu_container-links-sign">
+                        <NavLink to='ourApp' onClick={() => setToggleMenu(prev => !prev)}>
+                            <button type="button">GET THE APP</button></NavLink>
+
+                        <div className="mobile-login-links">
+                            <p>Login</p>
+                            {loginLinks.map(link => (
+                                <a key={link.href} href={link.href} target="_self" rel="noreferrer" onClick={() => setToggleMenu(false)}>
+                                    {link.label}
+                                </a>
+                            ))}
                         </div>
+
+
                     </div>
-    
                 </div>
-            </div >
-    
-        );
-    };
-    
-    export default Navbar;
+
+            </div>
+        </div >
+
+    );
+};
+
+export default Navbar;
