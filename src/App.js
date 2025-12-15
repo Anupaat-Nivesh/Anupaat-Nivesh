@@ -28,9 +28,17 @@ import ScrollToTop from "./components/ScrollToTop";
 
 import Tools from './containers/tools/Tools';
 
-AOS.init();
+import { useEffect } from "react";
+
 
 function App() {
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      duration: 800,
+      easing: "ease-in-out",
+    });
+  }, []);
   return (
     <BrowserRouter>
       <ScrollToTop />
