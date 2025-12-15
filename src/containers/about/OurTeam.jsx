@@ -25,11 +25,6 @@ const OurTeam = () => {
       img: require("../../assets/teamProfiles/beant.webp")
     },
     {
-      name: "Jatin Duggal",
-      designation: "Marketing Executive",
-      img: require("../../assets/teamProfiles/jatin.webp"),
-    },
-    {
       name: "Nirmal Singh",
       designation: "Business Executive",
       img: require("../../assets/teamProfiles/nirmal.webp"),
