@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
 import {
-  Footer,
   About,
   Offerings,
   Whyanupaat,
@@ -16,7 +15,6 @@ import {
 import {
   NotFound,
   Contact,
-  Navbar,
   OurApp,
   PartnerWithUs,
   CorporateCorner,
@@ -25,8 +23,6 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 import "./App.css";
-import ScrollToTop from "./components/ScrollToTop";
-
 import Tools from './containers/tools/Tools';
 
 import { useEffect } from "react";
@@ -42,9 +38,6 @@ function App() {
   }, []);
   return (
     <BrowserRouter>
-      <ScrollToTop />
-      <Navbar />
-
       <Routes>
         <Route element={<MainLayout />}>
           <Route index element={<Home />} />
@@ -73,8 +66,6 @@ function App() {
           <Route path="/tools" element={<Tools />} />
         </Route>
       </Routes>
-
-      <Footer />
     </BrowserRouter>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 import './navbar.css';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { animateScroll } from 'react-scroll';
 import 'animate.css';
 
@@ -41,10 +41,10 @@ const links = [
 ];
 
 const loginLinks = [
-    { label: 'Admin Login', href: 'https://login.anupaatnivesh.com/arn-login' },
-    { label: 'Client Login', href: 'https://login.anupaatnivesh.com/client-login' },
-    { label: 'Employee Login', href: 'https://login.anupaatnivesh.com/emp-login' },
-    { label: 'Branch Login', href: 'https://login.anupaatnivesh.com/branch-login' },
+    //{ label: 'Admin Login', href: 'https://login.anupaatnivesh.com/arn-login' },
+    { label: 'Investor Login', href: 'https://login.anupaatnivesh.com/client-login' },
+    //{ label: 'Employee Login', href: 'https://login.anupaatnivesh.com/emp-login' },
+    //{ label: 'Branch Login', href: 'https://login.anupaatnivesh.com/branch-login' },
     { label: 'Sub-broker Login', href: 'https://login.anupaatnivesh.com/broker-login' },
     { label: 'RM Login', href: 'https://login.anupaatnivesh.com/rm-login' },
 ];
@@ -53,6 +53,7 @@ const Navbar = () => {
     const [toggleMenu, setToggleMenu] = useState(false);
     const [anupaat__navbar, setNavbar] = useState(false);
     const [showLoginMenu, setShowLoginMenu] = useState(false);
+    const location = useLocation();
     const changeNav = () => {
         if (window.scrollY >= 80) {
             setNavbar(true);
@@ -69,6 +70,10 @@ const Navbar = () => {
             setShowLoginMenu(false);
         }
     }, [toggleMenu]);
+    useEffect(() => {
+        // Close login dropdown whenever the route changes
+        setShowLoginMenu(false);
+    }, [location.pathname]);
     /*On clicking the logo it will scroll to top*/
     const toggleHome = () => {
         animateScroll.scrollToTop();
@@ -87,7 +92,14 @@ const Navbar = () => {
                             return (
                                 <li key={name} >
 
-                                    <Link className="nav-link" to={id} exact='true'>{name} </Link>
+                                    <Link
+                                        className="nav-link"
+                                        to={id}
+                                        exact='true'
+                                        onClick={() => setShowLoginMenu(false)}
+                                    >
+                                        {name}
+                                    </Link>
 
                                 </li>
                             )
@@ -99,7 +111,7 @@ const Navbar = () => {
             <div className="anupaat__navbar-sign nav-action__btn">
 
                 <Link to='ourApp'>
-                    <button type="button" >GET THE APP</button>
+                    <button type="button" onClick={() => setShowLoginMenu(false)}>GET THE APP</button>
                 </Link>
 
             </div>
@@ -115,7 +127,13 @@ const Navbar = () => {
                 </button>
                 <div className={`login-dropdown ${showLoginMenu ? 'open' : ''}`}>
                     {loginLinks.map(link => (
-                        <a key={link.href} href={link.href} target="_self" rel="noreferrer" onClick={() => setShowLoginMenu(false)}>
+                        <a
+                            key={link.href}
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => setShowLoginMenu(false)}
+                        >
                             {link.label}
                         </a>
                     ))}
@@ -171,7 +189,13 @@ const Navbar = () => {
                         <div className="mobile-login-links">
                             <p>Login</p>
                             {loginLinks.map(link => (
-                                <a key={link.href} href={link.href} target="_self" rel="noreferrer" onClick={() => setToggleMenu(false)}>
+                                <a
+                                    key={link.href}
+                                    href={link.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => setToggleMenu(false)}
+                                >
                                     {link.label}
                                 </a>
                             ))}

@@ -187,7 +187,7 @@ font-weight: 450
     width: 100vw;
     height: 100vh;
 
-    
+
 }
 
 .anupaat__navbar-menu_container {
@@ -207,7 +207,7 @@ font-weight: 450
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     z-index: 10;
     transition: all 0.5s;
-   
+
 }
 
 .anupaat__navbar-menu_container-links {
@@ -215,7 +215,7 @@ font-weight: 450
     flex-direction: column;
     gap: 2rem;
     width: 100%;
-   
+
 }
 
 .anupaat__navbar-menu_container-links li {
@@ -225,7 +225,7 @@ font-weight: 450
     font-weight: 600;
     padding: 1rem 0;
     border-radius: 10px;
-    
+
 }
 
 .anupaat__navbar-menu_container-links li:hover,
@@ -274,10 +274,6 @@ font-weight: 450
 .mobile-login-links a:hover {
     color: var(--color-primary);
 }
-
-
-
-
 
 /* ****************************************** */
 /* Media Queries (Responsiveness) */
@@ -373,7 +369,8 @@ font-weight: 450
 }
 
 .anupaat__navbar-links_container .tools-menu {
-    margin-left: auto; /* Push to the right */
+    margin-left: auto;
+    /* Push to the right */
 }
 
 .anupaat__navbar-links_container .tools-menu ul {
