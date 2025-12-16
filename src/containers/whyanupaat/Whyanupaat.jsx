@@ -20,14 +20,12 @@ const Whyanupaat = () => {
 
                     <div className='anupaat_whyanupaat-heading-explanation' data-aos="zoom-in-right" data-aos-duration="1000">
                         <div className='whyanupaat-subheading '>
-                            <h2 className='secondary-heading'>Experience An Enhanced Online Investment Platform</h2>
+                            <h2 className='secondary-heading'>Your Trusted Partner in Wealth Creation</h2>
                         </div>
 
-                        <div><p className='why-description'>Welcome to the town of investment! </p></div>
+                        <div><p className='why-description'>Comprehensive investment solutions for every investor</p></div>
 
-                        <div className='why-description2'><p>From Mutual Funds to Direct Equity,
-                            we have a lot in store, to suit the goals and needs of every individual investor and every
-                            risk appetite.
+                        <div className='why-description2'><p>From mutual funds to direct equity investments, we offer a complete suite of products designed to match your financial goals and risk tolerance. Our expert advisors help you navigate the investment landscape with confidence.
                         </p></div>
                     </div>
                 </div>
@@ -43,7 +41,7 @@ const Whyanupaat = () => {
                 {
                     whyanupaatData.map(({ icon, title, text }, id) => {
                         return (
-                            <FeatureCard heading={title} icon={icon} description={text} id={id}/>
+                            <FeatureCard heading={title} icon={icon} description={text} id={id} />
                         )
                     })
                 }

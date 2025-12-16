@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import './home.css';
 import { Carousel } from './Carousel';
 import { Testimonials } from '../testimonials/Testimonials';
@@ -38,7 +39,56 @@ const Home = () => {
 
             <div className='anupaat_home' id="home">
 
-                <div className="home-section hero-section" >
+                <section className="home-hero home-section">
+                    <div className="hero-content">
+                        <p className="eyebrow">AMFI Registered Mutual Fund Distributor</p>
+                        <h1>Plan. Invest. Grow.<br />With a trusted partner.</h1>
+                        <p className="hero-subtitle">
+                            Human advice backed by data, disciplined SIPs, and proactive reviews to keep every goal on track.
+                        </p>
+                        <div className="hero-actions">
+                            <Link to="/contact" className="btn btn-primary">Book a call</Link>
+                            <Link to="/offerings" className="btn btn-ghost">View offerings</Link>
+                        </div>
+                        <div className="hero-pills">
+                            <span>Goal-based plans</span>
+                            <span>Tax-efficient strategies</span>
+                            <span>100% paperless onboarding</span>
+                        </div>
+                    </div>
+                    <div className="hero-panel" data-aos="fade-up">
+                        <div className="hero-panel__badge">Trusted by growing families & professionals</div>
+                        <div className="hero-panel__stat">
+                            <div>
+                                <p className="stat-label">AUM managed</p>
+                                <p className="stat-value">₹25 Cr+</p>
+                                <p className="stat-hint">Target ₹100 Cr by 2026</p>
+                            </div>
+                            <div>
+                                <p className="stat-label">Monthly SIPs</p>
+                                <p className="stat-value">₹40 Lac+</p>
+                                <p className="stat-hint">Disciplined, goal-aligned</p>
+                            </div>
+                        </div>
+                        <div className="hero-panel__stat">
+                            <div>
+                                <p className="stat-label">Happy clients</p>
+                                <p className="stat-value">500+</p>
+                                <p className="stat-hint">Across India & abroad</p>
+                            </div>
+                            <div>
+                                <p className="stat-label">Experience</p>
+                                <p className="stat-value">8 Years+</p>
+                                <p className="stat-hint">Advisory & reviews</p>
+                            </div>
+                        </div>
+                        <div className="hero-panel__note">
+                            We pair expert advisors with digital tracking so you always know where your money stands.
+                        </div>
+                    </div>
+                </section>
+
+                <div className="home-section hero-carousel">
                     <Carousel />
                 </div>
 

@@ -69,15 +69,21 @@
     flex-direction: column;
     color: var(--color-text);
     text-align: left;
-    border: 1px solid gray;
-    border-radius: 1rem;
-    border-width: thin;
+    border: 1px solid rgba(254, 1, 1, 0.15);
+    border-radius: 20px;
     z-index: 1;
-    padding: 1rem 1rem;
-    transition: var(--transition);
-    gap: 1.1rem;
+    padding: 2.5rem;
+    transition: all 0.3s ease;
+    gap: 1.5rem;
     overflow: visible;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
 
+.mutualfund_data:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(254, 1, 1, 0.15);
+    border-color: var(--color-primary);
 }
 
 
@@ -85,11 +91,11 @@
 
 .card-info {
     --color: #181818;
-    background: #fff;
+    background: transparent;
     color: #000;
     overflow: visible;
-    border-radius: .2rem;
-    border-width: thin;
+    border-radius: 0;
+    border-width: 0;
 }
 
 .data-value {
@@ -132,36 +138,48 @@
 }
 
 .mutualcard-body {
-    border-radius: 2rem;
+    border-radius: 16px;
     display: grid;
-    padding: 1rem;
+    padding: 2rem;
     margin-top: 1rem;
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(2, 1fr);
-    background-color: var( --color-grey-light);
+    background: linear-gradient(135deg, rgba(254, 1, 1, 0.05) 0%, rgba(254, 1, 1, 0.02) 100%);
     row-gap: 2rem;
     column-gap: 2rem;
+    border: 1px solid rgba(254, 1, 1, 0.1);
 }
 
 .footer {
-  margin: 4rem 2;
+  margin: 6rem 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-text-align: center;
-    border-radius: 1rem;
+    text-align: center;
+    border-radius: 24px;
     color: #000000;
-    font-size: 5rem;
-
+    font-size: 3.5rem;
+    padding: 4rem;
+    background: linear-gradient(135deg, rgba(254, 1, 1, 0.05) 0%, rgba(254, 1, 1, 0.02) 100%);
+    border: 1px solid rgba(254, 1, 1, 0.1);
 }
 
 .btn-invest-now{
     margin-top: 2rem;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    padding: 1.4rem 3rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #d40000 100%);
+    color: #fff;
+    border: none;
+    font-size: 1.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(254, 1, 1, 0.3);
 }
 .btn-invest-now:hover{
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(254, 1, 1, 0.4);
 }
 
 

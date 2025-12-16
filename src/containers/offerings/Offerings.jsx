@@ -10,9 +10,9 @@ export const Offerings = () => {
     return (
         <div id='offerings' className='offerings-container section__padding'>
             <div className='offerings-title'>
-                <h1 ><span className='section-heading-focus'>Offerings</span></h1>
-                <div className='lead'>Confused, Where you should start with your investment ?  </div>
-                <div className='offerings-description'>We have a wide range of products to start your investment journey.</div>
+                <h1>Our <span className='section-heading-focus'>Investment Solutions</span></h1>
+                <div className='lead'>Expert-curated products to help you achieve your financial goals</div>
+                <div className='offerings-description'>From mutual funds to equity baskets, we offer comprehensive investment solutions tailored to your risk profile and objectives.</div>
 
             </div>
 
@@ -25,12 +25,11 @@ export const Offerings = () => {
                 <div className='offerings__content' data-aos="fade-left">
                     <h2 className='offering_article-title'>Mutual Fund Basket</h2>
                     <p>
-                        Choose & invest from a range of expert curated baskets of quality mutual funds to achieve your financial goals in a stipulated time period and based on your risk taking ability.
-                        Child’s education, retirement, saving tax or creating wealth, there is a basket of quality mutual funds for all your financial goal planning needs and requirements.
+                        Invest in expertly curated mutual fund baskets designed to help you achieve specific financial goals. Whether it's your child's education, retirement planning, tax savings, or wealth creation, we have a basket tailored to your needs and risk appetite.
                     </p>
                     <div className='offering-btn'>
                         <Link to="/mutual-funds" className='btn '>
-                            Learn More
+                            Explore Funds
                         </Link>
 
 
@@ -45,11 +44,10 @@ export const Offerings = () => {
                     data-aos-easing="ease-in-sine">
                     <h2 className='offering_article-title'>Equity Basket</h2>
                     <p>
-                        Invest in iBaskets to achieve your financial goals.
-                        Equity Baskets are created and managed by Registered Investment Advisors (RIAs) who are SEBI-registered professionals.
+                        Access professionally managed equity portfolios created by SEBI-registered Investment Advisors. Our equity baskets are designed to help you build long-term wealth through strategic stock selection and portfolio management.
                     </p>
                     <div className='offering-btn'>
-                        <Link to="/equity-basket" className='btn '>Learn More</Link>
+                        <Link to="/equity-basket" className='btn '>View Baskets</Link>
                     </div>
                 </div>
                 <div className='offerings-img offerings-img2' data-aos="fade-left">
@@ -67,11 +65,10 @@ export const Offerings = () => {
 
                     <h2 className='offering_article-title'>Loan Against Securities</h2>
                     <p>
-                        Safeguard your investment by opting for quick capital against securities. Your units will remain yours,
-                        and you’ll keep on earning from them during your tenure for an instant loan for low credit score.
+                        Unlock liquidity without selling your investments. Get quick capital against your securities while continuing to earn returns. Perfect for urgent financial needs without disrupting your investment strategy.
                     </p>
                     <div className='offering-btn'>
-                        <Link to="/loan-against-securities" className='btn '>Learn More</Link>
+                        <Link to="/loan-against-securities" className='btn '>Get Started</Link>
                     </div>
                 </div>
 

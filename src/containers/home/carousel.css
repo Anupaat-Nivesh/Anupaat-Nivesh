@@ -26,17 +26,22 @@ padding,margin,gap: 1rem, 4rem
 
 .carousel-item {
     display: grid;
-    margin-top: 6.5rem;
+    margin-top: 0;
     grid-template-columns: 55% 45%;
     align-items: center;
     justify-content: center;
-    background-color: #fff;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
     position: relative;
-    gap: 1rem;
-    padding: 2rem 4rem;
+    gap: 3rem;
+    padding: 4rem 5rem;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-
-
+.carousel-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
 }
 
 
@@ -55,12 +60,11 @@ padding,margin,gap: 1rem, 4rem
 .carousel-item-text {
     white-space: normal;
     font-family: var(--font-family);
-    font-weight: 500;
-    font-size: 5rem;
-    line-height: 1.2;
-    letter-spacing: -0.03em;
-
-
+    font-weight: 700;
+    font-size: clamp(3.2rem, 5vw, 5.6rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: #1a1a1a;
 }
 
 .bold-text {
@@ -69,25 +73,27 @@ padding,margin,gap: 1rem, 4rem
 }
 
 .carousel-item-subDes {
-    font-size: 1.8rem;
-    margin-top: 4rem;
+    font-size: 1.9rem;
+    margin-top: 2.5rem;
     font-weight: 500;
-    color: var(--color-subtext-light);
+    color: var(--color-subtext);
     font-style: italic;
-    /* overflow-wrap: break-word; */
+    line-height: 1.6;
+    max-width: 90%;
 }
 
 .carousel-item-subtext {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 500;
-    /* white-space:initial; */
+    color: var(--color-subtext);
+    margin-top: 1rem;
+    line-height: 1.5;
 }
 
 
 
 .img-container {
     padding: 2rem;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -96,9 +102,9 @@ padding,margin,gap: 1rem, 4rem
     animation-timing-function: ease-in-out;
     position: relative;
     height: fit-content;
-    /* width: ; */
     width: 60rem;
-
+    background: linear-gradient(135deg, rgba(254, 1, 1, 0.05) 0%, rgba(254, 1, 1, 0.02) 100%);
+    border-radius: 20px;
 }
 
 

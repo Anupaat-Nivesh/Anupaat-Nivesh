@@ -1,11 +1,12 @@
 .app-section {
-  /* background-color: var(--color-primary-light); */
-
-  /* width: 1300px; */
   display: grid;
   grid-template-columns: 1fr 2fr;
   column-gap: 6rem;
   margin-top: 8rem;
+  padding: 4rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
 }
 
 
@@ -28,6 +29,12 @@
 
 .app-screenshot-img {
   width: 30rem;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.15));
+  transition: transform 0.3s ease;
+}
+
+.app-screenshot-img:hover {
+  transform: translateY(-8px);
 }
 
 .description {
@@ -55,11 +62,13 @@
 .store-img {
   width: 20rem;
   border-radius: 1rem;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
 }
 
 .store-img:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px);
+  filter: drop-shadow(0 6px 15px rgba(0, 0, 0, 0.2));
 }
 
 

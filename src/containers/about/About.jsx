@@ -19,47 +19,47 @@ const About = () => {
 
             <div className='aboutus-description-section'>
                 <div className='aboutus-decription-content1'>
-                    <p className='aboutus-description1'> Started in 2018, Anupaat Nivesh is providing one2one consulting to start with your investment journey. Anupaat Nivesh aim to reach out to the common man and extend the opportunity to create wealth by providing them valuable and ethical financial advice. Equity investing has always been an grey area for most of people. However, historically there has been no better way to grow your money exponentially.
+                    <p className='aboutus-description1'> Founded in 2018, Anupaat Nivesh is a trusted financial advisory firm dedicated to helping individuals build wealth through strategic investments. We believe that everyone deserves access to quality financial advice, regardless of their background. While equity investing may seem complex, we make it accessible by providing personalized guidance tailored to your unique financial situation.
                     </p><br></br>
-                    <p>We at Anupaat Nivesh help our customers with true and quality advise about investment options which can be huge wealth creator to middle class.</p>
+                    <p>At Anupaat Nivesh, we empower our clients with transparent, ethical, and data-driven investment recommendations that have the potential to create significant wealth over time.</p>
                 </div>
 
                 <div className='aboutus-decription-content2'>
-                    <div className='aboutus-description2'>Investing in the stock market is risky. But if managed and predicted correctly, it will have a high growth rate.</div>
+                    <div className='aboutus-description2'>Smart investing requires expertise. With proper guidance and strategic management, equity markets offer unparalleled growth potential.</div>
 
                 </div>
 
                 <div className='aboutus-description-points'>
                     <picture>
-                        <source srcSet={aboutUsIllustration} type='image/webp'/>
-                        <source srcSet={preAboutUsIllustration} type='image/webp'/>
+                        <source srcSet={aboutUsIllustration} type='image/webp' />
+                        <source srcSet={preAboutUsIllustration} type='image/webp' />
                         <img src={aboutUsIllustration} className="aboutus-illustration" alt='illustration' data-aos="fade-right"
                             data-aos-offset="300"
                             data-aos-easing="ease-in-sine" data-aos-duration="500" />
                     </picture>
 
                     <div data-aos="fade-left" data-aos-duration="500">
-                        <h2 className='secondary-heading secondary-about-heading' >How we help our customers:</h2><br></br>
+                        <h2 className='secondary-heading secondary-about-heading' >How We Help You Succeed:</h2><br></br>
                         <div className=' aboutus-points'>
                             <div className='aboutus-wrapper'>
                                 <div className="check-pointer"> <BsFillCheckCircleFill className='check-icon' /></div>
-                                <div className="points-text">By Assessing individual's requirements and goals</div>
+                                <div className="points-text">Personalized assessment of your financial goals and risk profile</div>
                             </div>
                             <div className='aboutus-wrapper'>
                                 <div className="check-pointer"> <BsFillCheckCircleFill className='check-icon' /></div>
-                                <div className="points-text">  By Creating awareness about financial freedom</div>
+                                <div className="points-text">Education and guidance on building long-term wealth</div>
                             </div>
                             <div className='aboutus-wrapper'>
                                 <div className="check-pointer"><BsFillCheckCircleFill className='check-icon' /></div>
-                                <div className="points-text"> By Providing coaching to avoid financial issues related to Investment needs and TAX benefits</div>
+                                <div className="points-text">Strategic tax planning and investment optimization</div>
                             </div>
                             <div className='aboutus-wrapper'>
                                 <div className="check-pointer"><BsFillCheckCircleFill className='check-icon' /></div>
-                                <div className="points-text"> By Providing platform for Investment in Equity MFs and our curated equity baskets</div>
+                                <div className="points-text">Access to curated mutual funds and equity baskets</div>
                             </div>
                             <div className='aboutus-wrapper'>
                                 <div className="check-pointer"><BsFillCheckCircleFill className='check-icon' /></div>
-                                <div className="points-text">  By Managing their investments for higher returns</div>
+                                <div className="points-text">Ongoing portfolio management for optimal returns</div>
                             </div>
 
 

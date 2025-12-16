@@ -125,7 +125,16 @@ const Contact = () => {
                 notifyFailure("Invalid phone number. Please enter a valid phone number.");
                 return;
             }
-            if (!isEmailValid || !isFirstNameValid || !isLastNameValid) throw new Error('Invalid Input, Kindly check and try again!');
+            if (!isEmailValid || !isFirstNameValid || !isLastNameValid) {
+                notifyFailure('Invalid Input, Kindly check and try again!');
+                return;
+            }
+
+            // Ensure phone number is set in the hidden input for EmailJS
+            const phoneInput = form.current.querySelector('input[name="number"]');
+            if (phoneInput) {
+                phoneInput.value = numberInputValue || '';
+            }
 
             const res = await emailjs.sendForm(
                 config.emailJSserviceID,
@@ -134,7 +143,9 @@ const Contact = () => {
                 config.emailJSKey
             );
 
-            if (res.status !== 200) throw new Error(`Something went wrong, Status: ${res.status}`);
+            if (res.status !== 200) {
+                throw new Error(`Something went wrong, Status: ${res.status}`);
+            }
 
             notifySuccessfull();
             // Removed numberVerified and otpSendStatus reset
@@ -149,7 +160,24 @@ const Contact = () => {
             // await signOut(auth);
 
         } catch (err) {
-            notifyFailure(err.message);
+            console.error('Form submission error:', err);
+            // Provide more specific error messages
+            if (err.text) {
+                // EmailJS specific error
+                let errorMessage = err.text;
+                
+                if (err.text.includes('Invalid grant') || err.text.includes('Gmail_API') || err.text.includes('insufficient authentication scopes')) {
+                    errorMessage = 'Email service needs to be reconfigured. Please contact the website administrator.';
+                } else if (err.text.includes('412')) {
+                    errorMessage = 'Form validation failed. Please check all fields are filled correctly and phone number is valid.';
+                }
+                
+                notifyFailure(errorMessage);
+            } else if (err.status === 412) {
+                notifyFailure('Form validation failed. Please check all fields are filled correctly.');
+            } else {
+                notifyFailure(err.message || 'Failed to send message. Please try again.');
+            }
         }
     };
 
@@ -213,7 +241,6 @@ const Contact = () => {
                             <label htmlFor="contact-number">Phone</label>
                             <div className="mobile-number__input-container">
                                 <PhoneInput
-                                    name="number"
                                     className="phoneInput"
                                     placeholder="Enter phone number"
                                     value={numberInputValue}
@@ -222,6 +249,11 @@ const Contact = () => {
                                     defaultCountry="IN"
                                     international
                                     countryCallingCodeEditable={false}
+                                />
+                                <input
+                                    type="hidden"
+                                    name="number"
+                                    value={numberInputValue || ''}
                                 />
                             </div>
                             {!phoneNumberValid && <div className="error number-error" required><p>* Invalid Number</p></div>}

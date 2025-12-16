@@ -1,31 +1,47 @@
 .offerings-title {
   text-align: center;
   margin-top: 8rem;
-  margin-bottom: 5rem;
+  margin-bottom: 6rem;
   color: #000;
-
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
 .offerings__article {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 5rem;
+  gap: 6rem;
   align-items: center;
-  margin-top: 6rem;
-  margin-bottom: 5.5rem;
+  margin-top: 8rem;
+  margin-bottom: 8rem;
+  padding: 4rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-radius: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.offerings__article:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
 .offerings-description {
-  color: var(--color-primary);
-  font-size: 2rem;
-  font-weight: 500;
+  color: var(--color-subtext);
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-top: 1.5rem;
+  line-height: 1.6;
 }
 
 .offering_article-title {
   color: #000;
-  margin-bottom: 2.5rem;
-
+  margin-bottom: 2rem;
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .offering_article-title p {
@@ -48,7 +64,10 @@
 }
 
 .offerings__content p {
-  color: grey;
+  color: var(--color-subtext);
+  font-size: 1.7rem;
+  line-height: 1.8;
+  margin-bottom: 2rem;
 }
 
 

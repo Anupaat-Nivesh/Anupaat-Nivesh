@@ -1,45 +1,48 @@
 .skills-data {
     margin-top: 9.6rem;
     width: 100%;
-    background: var(--color-bg-dark);
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     justify-content: space-between;
-
+    padding: 6rem 0;
 }
 
 .skill-container {
-
-
     color: #fff;
     display: flex;
     flex-direction: row;
     margin: auto;
     justify-content: space-around;
     padding: 2rem 1rem;
-
+    max-width: 1400px;
+    gap: 2rem;
 }
 
 .skill-items {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 2rem 3.5rem;
+    padding: 3rem 2.5rem;
     font-family: var(--font-family);
     font-weight: 800;
     font-size: 2.8rem;
     align-items: center;
-    background: var(--color-secondary-dark);
-    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 2rem;
     position: relative;
-    border-bottom: 1rem solid #FE0101;
-    transition: all 0.5s ease-in-out;
-
+    border: 2px solid rgba(254, 1, 1, 0.3);
+    transition: all 0.4s ease-in-out;
+    flex: 1;
+    min-width: 200px;
 }
 
 .skill-items:hover {
-    background: var(--color-secondary-light);
-    color: #000;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--color-primary);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(254, 1, 1, 0.2);
     cursor: pointer;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.4s ease-in-out;
 }
 
 .skill-items p {
@@ -59,25 +62,26 @@
         width: 100%;
     }
 
- 
+
 
 
     .skill-items {
-        
+
         font-size: 2.2rem;
         margin: 1.2rem;
         padding: 1rem 2rem;
 
     }
-    .skill-items h2{
+
+    .skill-items h2 {
         font-size: 2rem;
     }
 
-    .skill-items h3{
+    .skill-items h3 {
         font-size: 1.6rem;
     }
 
-    .skill-items p{
+    .skill-items p {
         font-size: 1.2rem;
     }
 
@@ -94,6 +98,7 @@
         flex-wrap: wrap;
 
     }
+
     .skill-counter-icon {
         width: 4rem;
         height: 4rem;
@@ -102,21 +107,22 @@
     }
 
     .skill-items {
-       
+
         font-size: 1.8rem;
         font-weight: 500;
 
 
     }
-    .skill-items h2{
+
+    .skill-items h2 {
         font-size: 2rem;
     }
 
-    .skill-items h3{
+    .skill-items h3 {
         font-size: 1.4rem;
     }
 
- 
+
 }
 
 @media screen and (max-width:750px) {
@@ -124,7 +130,7 @@
         gap: 1.5rem;
     }
 
-   
+
     .skill-counter-icon {
         width: 6.6rem;
         height: 6.6rem;
@@ -140,7 +146,7 @@
 
     .skill-items {
         width: 100%;
-        
+
         font-size: 1.4rem;
         padding: 1rem 3rem;
     }
@@ -150,6 +156,6 @@
         height: 4.5rem;
 
     }
- 
+
 
 }
