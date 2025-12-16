@@ -23,8 +23,7 @@ const Footer = () => (
 
                     <p> Anupaat Nivesh is an independent financial investment advisory firm, providing guidance to customer for investment in
                         Equity Asset class. We are BSE certified mutual fund distributor. </p>
-                    <p className='focused-text'>Equity Investment are subjected to market risk.
-                        Read all scheme-related documents carefully before Investing.</p>
+
 
 
                 </div>
@@ -64,10 +63,25 @@ const Footer = () => (
                 </div>
             </div>
         </div>
+        <div className='footer-disclaimer'>
+            <p><strong>Anupaat Nivesh Pvt. Ltd</strong> CIN - U66190CH2025PTC046615</p>
+            <p>AMFI - Registered Mutual Fund Distributor ARN – 347085 | Date of Registration : 02.12.2025 | Valid Till 01.12.2028</p>
+            <p>BSE Membership ID - 65566</p>
+            <p>Start-Up India Certified | Regn No. - DIPP233072</p>
+            <p>Head Office Address: Anupaat Nivesh Pvt. Ltd., Next57 Coworking, Plot 341, 5th Floor, Phase 9 Industrial Area, Mohali, Punjab, India - 160062</p >
+            <p>Registered Address: Anupaat Nivesh Pvt. Ltd., #162 / 2, Dadu Majra, Chandigarh, India - 160014</p >
+            <p><strong>Disclaimers:</strong></p>
+            <p>Mutual Funds and securities investments are subject to market risks and there is no assurance or guarantee that the objective of the Scheme will be achieved. Past performance of the Sponsor/AMC/Fund or that of any scheme of the Fund does not indicate the future performance of the Schemes of the Fund. Please read the Offer Document carefully before investing.</p>
+            <p>SEBI has vide its circular dated November 26, 2010, stipulated that with respect to purchase of units of income/ debt oriented schemes (other than liquid schemes) with amount equal to or more than 1 Cr., irrespective of the time of application, the closing NAV of day on which funds are available for utilization shall be applicable. All Investors are advised to keep in mind said circular while investing in income/ debt oriented schemes (other than liquid schemes).</p>
+            <p>Investment in Securities markets are subject to market risks, read all the related documents carefully before investing.</p>
+            <p>Insurance, NPS are not Exchange-traded products and Anupaat Nivesh Pvt Ltd is just acting as distributor.</p>
+            <p>All disputes with respect to the distribution activity, would not have access to the Exchange Investor Redressal Forum or Arbitration mechanism.</p>
+        </div >
         <div className='copyright-section'>
             <p className='copyright-section-text'><FaRegCopyright /> 2023 Anupaat Nivesh. All rights reserved</p>
         </div>
-    </div>
+
+    </div >
 );
 
 export default Footer;
