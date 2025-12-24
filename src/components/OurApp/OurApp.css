@@ -23,12 +23,15 @@
 .appScreenShot-box {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   justify-self: start;
+  gap: 3rem;
 }
 
 .app-screenshot-img {
-  width: 30rem;
+  width: 22rem;
+  height: auto;
+  object-fit: contain;
   filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.15));
   transition: transform 0.3s ease;
 }
@@ -54,9 +57,10 @@
 .app-store_box {
   height: 40px;
   display: flex;
-  gap: 4rem;
+  gap: 2rem;
   flex-direction: column;
-  transform: translate(0, -100%);
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .store-img {
@@ -124,7 +128,15 @@
 
 
   .app-screenshot-img {
-    width: 25rem;
+    width: 20rem;
+  }
+
+  .app-store_box {
+    gap: 1.5rem;
+  }
+
+  .appScreenShot-box {
+    gap: 2.5rem;
   }
 
   .app-description-list {
@@ -151,6 +163,13 @@
 
   .appScreenShot-box {
     justify-self: center;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .app-store_box {
+    margin-left: 0;
+    align-items: center;
   }
 
   .app-description-box {
@@ -179,7 +198,7 @@
 
 @media(max-width: 34em) {
   .app-screenshot-img {
-    width: 20rem;
+    width: 18rem;
   }
 
   .app-heading {
@@ -198,13 +217,13 @@
   .store-img {
     width: 12rem;
     height: relative;
+  }
 
+  .app-store_box {
+    gap: 1.5rem;
   }
 
   .android-app {
     width: 15rem;
-
   }
-
-
 }

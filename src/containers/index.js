@@ -10,4 +10,5 @@ export {default as Privacypolicy} from './footer/company/privacyPolicy/Privacypo
 export {default as MutualFund} from './offerings/mutualFund/MutualFund';
 export {default as EquityBasket} from './offerings/equityBasket/EquityBasket';
 export {default as LoanAgainstSecurities} from './offerings/loanAgainstSecurities/LoanAgainstSecurities';
+export {default as Calculators} from './calculators/Calculators';
 

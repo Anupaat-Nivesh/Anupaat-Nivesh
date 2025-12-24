@@ -24,6 +24,11 @@ const links = [
         id: 'whyanupaat'
     },
     {
+        name: "Calculators",
+        path: '/calculators',
+        id: 'calculators'
+    },
+    {
         name: "Offerings",
         path: '/offerings',
         id: 'offerings'

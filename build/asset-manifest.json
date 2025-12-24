@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "./static/css/main.bf59531f.css",
-    "main.js": "./static/js/main.2c1b97e5.js",
+    "main.css": "./static/css/main.e38e4201.css",
+    "main.js": "./static/js/main.aa85f267.js",
     "static/media/nirmal.webp": "./static/media/nirmal.96c18cb00e74df995ca0.webp",
     "static/media/akash.webp": "./static/media/akash.ba2fdb49f44c4d2c9594.webp",
     "static/media/partner.png": "./static/media/partner.eac866038228374b4cd5.png",
@@ -11,6 +11,7 @@
     "static/media/equity.webp": "./static/media/equity.aef8280a43ea076620ee.webp",
     "static/media/carousel3-illustration.webp": "./static/media/carousel3-illustration.b7eba6a34356da6cf5a8.webp",
     "static/media/carousel2-illustration.webp": "./static/media/carousel2-illustration.d25d73a23c3e0d024f56.webp",
+    "static/media/appScreenShot.webp": "./static/media/appScreenShot.e112cc1e88a3a4d65297.webp",
     "static/media/loan.webp": "./static/media/loan.cb9eda1859f3f08ab909.webp",
     "static/media/empanelment1.png": "./static/media/empanelment1.937a0fcc1717ec8da84d.png",
     "static/media/jaspal.webp": "./static/media/jaspal.dc3d75acf7bf165025fa.webp",
@@ -22,7 +23,6 @@
     "static/media/empanelment5.png": "./static/media/empanelment5.fb6baf5e4236a44b022c.png",
     "static/media/corporate.svg": "./static/media/corporate.9601a78ddff378ef552139a158857bea.svg",
     "static/media/partnerInvestment.svg": "./static/media/partnerInvestment.281416960b8e81e8862c0c01a1545670.svg",
-    "static/media/appScreenShot.webp": "./static/media/appScreenShot.c2d73d7efdd35277615b.webp",
     "static/media/whyAnupaatIllustration.webp": "./static/media/whyAnupaatIllustration.70ac54597e1cf8b0a045.webp",
     "static/media/loanAgainstSecuritiesIllustration.svg": "./static/media/loanAgainstSecuritiesIllustration.0e999f5032360f2545c820a143ed2e51.svg",
     "static/media/partnerTechnology.svg": "./static/media/partnerTechnology.3959d3ae1b3b8d66eec1fbc7d53e98fb.svg",
@@ -90,7 +90,7 @@
     "static/media/team.svg": "./static/media/team.3be641eac951c5646d7b26027fb6c98a.svg"
   },
   "entrypoints": [
-    "static/css/main.bf59531f.css",
-    "static/js/main.2c1b97e5.js"
+    "static/css/main.e38e4201.css",
+    "static/js/main.aa85f267.js"
   ]
 }

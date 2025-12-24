@@ -11,6 +11,7 @@ import {
   MutualFund,
   EquityBasket,
   LoanAgainstSecurities,
+  Calculators,
 } from "./containers";
 import {
   NotFound,
@@ -47,6 +48,7 @@ function App() {
           <Route path="offerings" element={<Offerings />} />
           <Route path="contact" element={<Contact />} />
           <Route path="ourApp" element={<OurApp />} />
+          <Route path="calculators" element={<Calculators />} />
 
           <Route path="*" element={<NotFound />} />
           {/* footer pages  */}
