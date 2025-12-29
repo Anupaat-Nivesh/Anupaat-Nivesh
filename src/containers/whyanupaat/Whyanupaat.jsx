@@ -41,7 +41,7 @@ const Whyanupaat = () => {
                 {
                     whyanupaatData.map(({ icon, title, text }, id) => {
                         return (
-                            <FeatureCard heading={title} icon={icon} description={text} id={id} />
+                            <FeatureCard key={id} heading={title} icon={icon} description={text} id={id} />
                         )
                     })
                 }

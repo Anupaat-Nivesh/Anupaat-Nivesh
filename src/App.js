@@ -25,6 +25,7 @@ import "aos/dist/aos.css";
 
 import "./App.css";
 import Tools from './containers/tools/Tools';
+import ChatBotPage from './pages/ChatBotPage';
 
 import { useEffect } from "react";
 
@@ -38,7 +39,12 @@ function App() {
     });
   }, []);
   return (
-    <BrowserRouter>
+    <BrowserRouter
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true,
+      }}
+    >
       <Routes>
         <Route element={<MainLayout />}>
           <Route index element={<Home />} />
@@ -67,6 +73,10 @@ function App() {
           />
           <Route path="/tools" element={<Tools />} />
         </Route>
+        {/* Standalone Chatbot Page - ArthAI */}
+        <Route path="/ArthAI" element={<ChatBotPage />} />
+        {/* Legacy route for backward compatibility */}
+        <Route path="/chatbot" element={<ChatBotPage />} />
       </Routes>
     </BrowserRouter>
   );

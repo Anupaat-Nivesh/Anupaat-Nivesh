@@ -316,6 +316,10 @@ font-weight: 450
 /* ******************************** */
 
 @media(max-width: 44em) {
+    .anupaat__navbar {
+        padding: 1rem 2rem;
+    }
+
     .anupaat__navbar-sign {
         display: none;
     }
@@ -325,7 +329,13 @@ font-weight: 450
     }
 
     .anupaat__navbar-links_logo {
-        width: 20rem;
+        width: 18rem;
+        min-width: 18rem;
+    }
+
+    .anupaat__navbar-menu_container {
+        min-width: 80vw;
+        top: 90px;
     }
 }
 
@@ -335,17 +345,29 @@ font-weight: 450
 
 @media(max-width: 34em) {
     .anupaat__navbar {
-        padding: 1rem 2rem;
+        padding: 1rem 1.5rem;
+    }
+
+    .anupaat__navbar-links_logo {
+        width: 15rem;
+        min-width: 15rem;
     }
 
     .anupaat__navbar-login button {
         font-size: 1.2rem;
         margin-left: 0.5rem;
-        padding: 0.5rem 1.4rem;
+        padding: 0.5rem 1.2rem;
     }
 
     .anupaat__navbar-menu {
-        margin-left: 1rem;
+        margin-left: 0.5rem;
+    }
+
+    .anupaat__navbar-menu_container {
+        min-width: 85vw;
+        right: 1rem;
+        top: 80px;
+        padding: 1.5rem;
     }
 }
 

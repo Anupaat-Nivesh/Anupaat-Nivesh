@@ -55,7 +55,7 @@ const [mobile, setMobile] = useState('');
       mobile: mobile, // Use the state variable for mobile number
     };
   
-    console.log('Submitting form data:', formData); // Log form data for debugging
+    // Removed console.log for production security
   
     try {
       // Save form data to Google Sheets

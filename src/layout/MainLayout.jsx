@@ -4,6 +4,7 @@ import Navbar from "../components/navbar/Navbar";
 import Footer from "../containers/footer/Footer";
 import ScrollToTop from "../components/ScrollToTop";
 import ScrollToTopButton from "../components/ScrollToTopButton";
+import ChatBot from "../components/chatbot/ChatBot";
 
 const MainLayout = () => {
     return (
@@ -13,6 +14,7 @@ const MainLayout = () => {
             <Outlet />
             <Footer />
             <ScrollToTopButton />
+            <ChatBot />
         </>
     );
 };

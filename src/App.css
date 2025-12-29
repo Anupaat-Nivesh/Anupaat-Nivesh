@@ -60,7 +60,7 @@ a {
 .section__padding {
   max-width: 100%;
   padding: 4rem 5rem;
-
+  box-sizing: border-box;
 }
 
 .section__margin {
