@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FaRobot, FaTimes, FaPaperPlane, FaUser, FaPhone, FaEnvelope, FaGlobe, FaMobileAlt, FaLanguage, FaMicrophone, FaMicrophoneSlash } from 'react-icons/fa';
+import { FaRobot, FaTimes, FaPaperPlane, FaUser, FaPhone, FaEnvelope, FaGlobe, FaMobileAlt, FaLanguage, FaMicrophone, FaMicrophoneSlash, FaChartLine, FaBrain, FaCoins } from 'react-icons/fa';
+import arthAILogo from '../../assets/ArthAI.png';
 import { Link } from 'react-router-dom';
 import { translations } from './translations';
 import {
@@ -21,6 +22,10 @@ import { sendContactEmails } from './emailService';
 import { voiceService, VOICE_CONFIG } from './voiceService';
 import logger from '../../utils/logger';
 import { createResponse, extractTextFromAIResponse, validateResponse } from './responseHandler';
+import { conversationEngine } from './conversationEngine';
+import { registerAllFlows } from './flowDefinitions';
+import { registerCTAFlows } from './ctaFlowDefinitions';
+import analytics from './analyticsService';
 import './ChatBot.css';
 
 // Helper function to get default quick replies based on language
@@ -134,6 +139,26 @@ const ChatBot = ({ standalone = false }) => {
       }
     }
   }, [language]);
+
+  // Initialize conversation engine and flows
+  useEffect(() => {
+    // Register all flow definitions (legacy flows)
+    registerAllFlows(conversationEngine);
+
+    // Register enterprise CTA flows (JSON-based structure)
+    registerCTAFlows(conversationEngine);
+
+    // Initialize conversation state with current language
+    const state = conversationEngine.getState();
+    state.userProfile.language = language;
+
+    // Track session start
+    analytics.track('session_started', {
+      language,
+      timestamp: new Date().toISOString()
+    });
+  }, []);
+
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [showLanguageMenu, setShowLanguageMenu] = useState(false);
@@ -167,31 +192,81 @@ const ChatBot = ({ standalone = false }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [showLanguageMenu]);
 
-  // Voice mode handlers
+  // Enhanced voice mode handlers with automatic language detection
   const handleVoiceInput = async () => {
-    if (!isVoiceMode) return;
+    if (!isVoiceMode || !voiceService.isReady()) {
+      if (!voiceService.isSupported()) {
+        const errorMsg = {
+          id: `msg-${++messageIdCounter.current}`,
+          text: language === LANGUAGES.HINGLISH
+            ? "Aapke browser mein voice support nahi hai. Kya aap text mode use kar sakte hain?"
+            : "Your browser doesn't support voice input. Can you use text mode?",
+          sender: 'bot',
+          timestamp: new Date()
+        };
+        setMessages(prev => [...prev, errorMsg]);
+      }
+      return;
+    }
 
     try {
       setIsListening(true);
-      const transcript = await voiceService.startListening();
+
+      // Start listening with current language as preference, but will auto-detect
+      const result = await voiceService.startListening(language);
       setIsListening(false);
 
-      if (transcript) {
+      if (result && result.text) {
+        const { text: transcript, language: detectedLanguage, confidence } = result;
+
+        // Update language if detected language is different and confidence is high
+        if (detectedLanguage && detectedLanguage !== language && confidence > 0.7) {
+          logger.debug('Language detected from voice', {
+            detected: detectedLanguage,
+            current: language,
+            confidence
+          });
+
+          // Update language state to match detected language
+          setLanguage(detectedLanguage);
+
+          // Show language detection message
+          const langMsg = {
+            id: `msg-${++messageIdCounter.current}`,
+            text: detectedLanguage === 'hi' || detectedLanguage === 'hinglish'
+              ? `मैंने ${detectedLanguage === 'hi' ? 'हिंदी' : 'Hinglish'} में आपकी बात समझी।`
+              : `I detected you're speaking in ${detectedLanguage === 'en' ? 'English' : detectedLanguage}.`,
+            sender: 'bot',
+            timestamp: new Date(),
+            isSystemMessage: true
+          };
+          setMessages(prev => [...prev, langMsg]);
+        }
+
+        // Set transcript in input field
         setInputMessage(transcript);
-        // Auto-send voice input
+
+        // Auto-send voice input with detected language
         setTimeout(() => {
           const syntheticEvent = { preventDefault: () => { } };
-          handleSendMessage(syntheticEvent, transcript);
+          // Pass detected language to handleSendMessage
+          handleSendMessage(syntheticEvent, transcript, detectedLanguage || language);
         }, 100);
       }
     } catch (error) {
       setIsListening(false);
       logger.error('Voice input error:', error);
+
+      // Get user-friendly error message
+      const errorMessage = voiceService.getErrorMessage(error.message || error.error || 'unknown');
+
       const errorMsg = {
         id: `msg-${++messageIdCounter.current}`,
         text: language === LANGUAGES.HINGLISH
-          ? "Voice samajh nahi aaya. Kya aap text mode use kar sakte hain?"
-          : "I couldn't understand that. Can you use text mode?",
+          ? errorMessage.includes('Microphone')
+            ? "Microphone access nahi mila. Kya aap browser settings mein microphone permission de sakte hain?"
+            : "Voice samajh nahi aaya. Kya aap phir se try kar sakte hain ya text mode use kar sakte hain?"
+          : errorMessage,
         sender: 'bot',
         timestamp: new Date()
       };
@@ -268,7 +343,7 @@ const ChatBot = ({ standalone = false }) => {
     });
   };
 
-  const handleQuickReply = async (reply) => {
+  const handleQuickReply = async (reply, ctaData = null) => {
     // CRITICAL: Validate and normalize reply to prevent empty object dispatch
     // This prevents double-dispatch bugs where empty objects are passed
     let replyText;
@@ -291,6 +366,168 @@ const ChatBot = ({ standalone = false }) => {
       return;
     }
 
+    // Check if this is a flow-based CTA (has flow navigation data)
+    if (ctaData && ctaData.flowId && ctaData.nodeId && ctaData.ctaId) {
+      // Handle flow-based navigation
+      const state = conversationEngine.getState();
+      state.userProfile.language = language;
+
+      const result = conversationEngine.processUserAction({
+        flowId: ctaData.flowId,
+        nodeId: ctaData.nodeId,
+        ctaId: ctaData.ctaId
+      }, normalizedReply, {
+        language,
+        conversationDepth: state.conversationDepth
+      });
+
+      if (result && result.node) {
+        const nextNode = result.node;
+        const nodeMessage = nextNode.getMessage(state);
+        const nodeCTAs = nextNode.getCTAs(state);
+
+        // Create user message
+        const userMessage = {
+          id: `msg-${++messageIdCounter.current}`,
+          text: normalizedReply,
+          sender: 'user',
+          timestamp: new Date()
+        };
+        setMessages(prev => [...prev, userMessage]);
+
+        setIsTyping(true);
+
+        // Track CTA click
+        analytics.trackCTAClick(ctaData.ctaId, ctaData.flowId, ctaData.nodeId, {
+          depth: state.conversationDepth,
+          maturity: state.userProfile.maturityLevel,
+          language: state.userProfile.language
+        });
+
+        // If node requires LLM, get AI response
+        if (nextNode.requiresLLM) {
+          try {
+            const llmResponse = await llmAgentInstance.processMessage(
+              normalizedReply,
+              language,
+              nextNode.intent,
+              {
+                ...userContext,
+                goal: goalContext || userContext.goal,
+                goalContext: goalContext,
+                conversationHistory: messages.slice(-4).map(m => ({
+                  role: m.sender === 'user' ? 'user' : 'assistant',
+                  content: m.text
+                })),
+                stateSummary: state.getStateSummary()
+              }
+            );
+
+            if (llmResponse && llmResponse.text) {
+              const botResponse = {
+                id: `msg-${++messageIdCounter.current}`,
+                text: llmResponse.text,
+                sender: 'bot',
+                timestamp: new Date(),
+                quickReplies: nodeCTAs.map(cta => cta.label),
+                showCTAs: true,
+                ctaType: 'flow',
+                flowData: {
+                  flowId: ctaData.flowId,
+                  nodeId: nextNode.id,
+                  ctas: nodeCTAs.map(cta => ({
+                    id: cta.id,
+                    label: cta.label,
+                    next: cta.next,
+                    flowId: ctaData.flowId
+                  }))
+                }
+              };
+              setMessages(prev => [...prev, botResponse]);
+            } else {
+              // Fallback to node message if LLM fails
+              const botResponse = {
+                id: `msg-${++messageIdCounter.current}`,
+                text: nodeMessage,
+                sender: 'bot',
+                timestamp: new Date(),
+                quickReplies: nodeCTAs.map(cta => cta.label),
+                showCTAs: true,
+                ctaType: 'flow',
+                flowData: {
+                  flowId: ctaData.flowId,
+                  nodeId: nextNode.id,
+                  ctas: nodeCTAs.map(cta => ({
+                    id: cta.id,
+                    label: cta.label,
+                    next: cta.next,
+                    flowId: ctaData.flowId
+                  }))
+                }
+              };
+              setMessages(prev => [...prev, botResponse]);
+            }
+          } catch (error) {
+            logger.error('LLM error in flow node:', error);
+            // Fallback to node message
+            const botResponse = {
+              id: `msg-${++messageIdCounter.current}`,
+              text: nodeMessage,
+              sender: 'bot',
+              timestamp: new Date(),
+              quickReplies: nodeCTAs.map(cta => cta.label),
+              showCTAs: true,
+              ctaType: 'flow',
+              flowData: {
+                flowId: ctaData.flowId,
+                nodeId: nextNode.id,
+                ctas: nodeCTAs.map(cta => ({
+                  id: cta.id,
+                  label: cta.label,
+                  next: cta.next,
+                  flowId: ctaData.flowId
+                }))
+              }
+            };
+            setMessages(prev => [...prev, botResponse]);
+          }
+        } else {
+          // Use node message directly
+          const botResponse = {
+            id: `msg-${++messageIdCounter.current}`,
+            text: nodeMessage,
+            sender: 'bot',
+            timestamp: new Date(),
+            quickReplies: nodeCTAs.map(cta => cta.label),
+            showCTAs: true,
+            ctaType: 'flow',
+            showContactForm: nextNode.requiresContactForm || false, // Show contact form if required
+            flowData: {
+              flowId: ctaData.flowId,
+              nodeId: nextNode.id,
+              ctas: nodeCTAs.map(cta => ({
+                id: cta.id,
+                label: cta.label,
+                next: cta.next,
+                flowId: ctaData.flowId,
+                action: cta.action || null
+              }))
+            }
+          };
+          setMessages(prev => [...prev, botResponse]);
+        }
+
+        // Show contact form if node requires it
+        if (nextNode.requiresContactForm) {
+          setShowContactForm(true);
+        }
+
+        setIsTyping(false);
+        return;
+      }
+    }
+
+    // Fallback to regular quick reply handling (existing logic)
     // Create user message
     const userMessage = {
       id: `msg-${++messageIdCounter.current}`,
@@ -662,10 +899,72 @@ const ChatBot = ({ standalone = false }) => {
     const t = translations[currentLang] || translations.en;
     const lowerUserMessage = messageText.toLowerCase();
 
+    // Get conversation state and update language
+    const state = conversationEngine.getState();
+    state.userProfile.language = currentLang;
+
+    // Assess user maturity based on conversation signals
+    state.assessMaturityLevel({
+      keywords: userMessage.split(/\s+/),
+      questionType: detectIntent(userMessage, currentLang) === INTENTS.BEGINNER_QUERY ? 'basic' : 'strategy',
+      conversationDepth: state.conversationDepth
+    });
+
     // Use ArthAI System for intent detection and response generation
     const intent = detectIntent(userMessage, currentLang);
     // We may override intent for certain UI-driven flows (e.g., Goal Planning sub-options, SIP queries)
     let effectiveIntent = intent;
+
+    // Update conversation state intent
+    state.updateIntent(effectiveIntent);
+
+    // CRITICAL: Check for "investment in mutual fund" queries FIRST (before other routers)
+    // These should NOT default to HOW_TO_START_INVESTING
+    const isInvestmentInMFQuery = lowerUserMessage.match(/(investment in mutual fund|invest in mutual fund|mutual fund investment|mutual fund mein invest|start investment in mutual fund)/i);
+
+    if (isInvestmentInMFQuery) {
+      // If asking about USP, help, services, or how company can help
+      if (lowerUserMessage.match(/(how.*help|usp|unique|service|anupaat|company|can help|tell me|batao|samjhao)/i)) {
+        effectiveIntent = INTENTS.PRODUCT_EXPLORATION;
+        setUserContext(prev => ({ ...prev, interest: 'mutual_funds' }));
+        state.updateIntent(INTENTS.PRODUCT_EXPLORATION);
+        // Skip SIP router - go directly to LLM Agent with PRODUCT_EXPLORATION intent
+      }
+      // If it's a "why" question
+      else if (lowerUserMessage.match(/(why|kyun|kya fayda|reason|benefit|advantage)/i)) {
+        effectiveIntent = INTENTS.PRODUCT_EXPLORATION;
+        setUserContext(prev => ({ ...prev, interest: 'mutual_funds' }));
+        state.updateIntent(INTENTS.PRODUCT_EXPLORATION);
+      }
+      // If explicitly asking "how to start", then allow HOW_TO_START_INVESTING
+      else if (lowerUserMessage.match(/(how to start|kaise start|how to begin|kaise shuru)/i)) {
+        // Keep HOW_TO_START_INVESTING intent
+      }
+      // Otherwise, default to PRODUCT_EXPLORATION for informational queries
+      else {
+        effectiveIntent = INTENTS.PRODUCT_EXPLORATION;
+        setUserContext(prev => ({ ...prev, interest: 'mutual_funds' }));
+        state.updateIntent(INTENTS.PRODUCT_EXPLORATION);
+      }
+    }
+
+    // CRITICAL: Check for benefits/advantages/features questions (before SIP router)
+    // These should go to PRODUCT_EXPLORATION, not HOW_TO_START_INVESTING
+    const isBenefitsQuestion = lowerUserMessage.match(/(benefit|advantage|feature|pros?|cons?|why|kyun|kya fayda|kya labh|merit|demerit|good|bad|positive|negative|reason|reasons|what are|what are the)/i);
+    const isMutualFundOrSipMention = lowerUserMessage.includes('mutual fund') ||
+      lowerUserMessage.includes('mutual funds') ||
+      lowerUserMessage.includes('mf') ||
+      lowerUserMessage.includes('mutual') ||
+      lowerUserMessage.includes('sip') ||
+      lowerUserMessage.includes('systematic investment');
+
+    // If asking about benefits/advantages of mutual funds/SIP, route to PRODUCT_EXPLORATION
+    if (isBenefitsQuestion && isMutualFundOrSipMention && !isInvestmentInMFQuery) {
+      effectiveIntent = INTENTS.PRODUCT_EXPLORATION;
+      setUserContext(prev => ({ ...prev, interest: 'mutual_funds' }));
+      state.updateIntent(INTENTS.PRODUCT_EXPLORATION);
+      // Skip SIP router - go directly to LLM Agent with PRODUCT_EXPLORATION intent
+    }
 
     // ------------------------------------------------------------
     // SIP ROUTER (FUNCTIONAL, ALWAYS CONSISTENT)
@@ -710,37 +1009,53 @@ const ChatBot = ({ standalone = false }) => {
 
     // Detect SIP-related queries (including "sip", "systematic investment plan", SIP CTAs)
     // Route to LLM Agent with appropriate intent for contextual, interactive responses
-    const isSipMention = /\b(sip|systematic\s+investment\s+plan|systemeatic\s+investment\s+plan)\b/i.test(messageText);
-    const isSipCalcCTA =
-      lowerUserMessage.includes((t.sipCalculation || '').toLowerCase()) ||
-      lowerUserMessage.includes('sip calculation') ||
-      lowerUserMessage.includes('sip calculator') ||
-      lowerUserMessage.includes('calculate sip') ||
-      lowerUserMessage.includes('sip गणना') ||
-      lowerUserMessage.includes('sip ਗਣਨਾ');
+    // BUT: Skip this if it's a benefits question (already handled above)
+    if (effectiveIntent !== INTENTS.PRODUCT_EXPLORATION) {
+      const isSipMention = /\b(sip|systematic\s+investment\s+plan|systemeatic\s+investment\s+plan)\b/i.test(messageText);
+      const isSipCalcCTA =
+        lowerUserMessage.includes((t.sipCalculation || '').toLowerCase()) ||
+        lowerUserMessage.includes('sip calculation') ||
+        lowerUserMessage.includes('sip calculator') ||
+        lowerUserMessage.includes('calculate sip') ||
+        lowerUserMessage.includes('sip गणना') ||
+        lowerUserMessage.includes('sip ਗਣਨਾ');
 
-    // If SIP-related query detected, route ALL SIP queries to LLM Agent (OpenAI API)
-    // This ensures all SIP responses use AI capabilities for contextual, interactive responses
-    if (isSipMention || isSipCalcCTA) {
-      setUserContext(prev => ({ ...prev, interest: 'sip' }));
-      
-      // Override intent to ensure LLM Agent handles SIP queries appropriately
-      // Use HOW_TO_START_INVESTING for "how to start" queries, BEGINNER_QUERY for "what is" queries
-      if (lowerUserMessage.includes('kaise') || lowerUserMessage.includes('how to') || 
-          lowerUserMessage.includes('start') || lowerUserMessage.includes('shuru') ||
-          lowerUserMessage.includes('kaise start') || lowerUserMessage.includes('how to start')) {
-        effectiveIntent = INTENTS.HOW_TO_START_INVESTING;
-      } else if (lowerUserMessage.includes('kya') || lowerUserMessage.includes('what is') ||
-                 lowerUserMessage.includes('batao') || lowerUserMessage.includes('samjhao') ||
-                 lowerUserMessage.includes('want to know') || lowerUserMessage.includes('explain') ||
-                 lowerUserMessage.includes('tell me about') || lowerUserMessage.includes('understand')) {
-        effectiveIntent = INTENTS.BEGINNER_QUERY;
-      } else {
-        // Default to BEGINNER_QUERY for general SIP queries (more appropriate for "what is" type questions)
-        effectiveIntent = INTENTS.BEGINNER_QUERY;
+      // If SIP-related query detected, route ALL SIP queries to LLM Agent (OpenAI API)
+      // This ensures all SIP responses use AI capabilities for contextual, interactive responses
+      if (isSipMention || isSipCalcCTA) {
+        setUserContext(prev => ({ ...prev, interest: 'sip' }));
+
+        // CRITICAL: Check for informational SIP queries BEFORE defaulting to HOW_TO_START_INVESTING
+        // If asking "why SIP" or about benefits/advantages
+        if (lowerUserMessage.match(/(why|kyun|kya fayda|kya labh|reason|benefit|advantage|fayde|merit)/i)) {
+          effectiveIntent = INTENTS.PRODUCT_EXPLORATION;
+          state.updateIntent(INTENTS.PRODUCT_EXPLORATION);
+        }
+        // If asking "what is SIP" or general information (including "samjhao", "batao", "explain", "kya hai")
+        // CRITICAL: This pattern must be comprehensive to catch ALL informational queries
+        // Including: "SIP kya hai", "sip kya hai", "SIP samjhao", "sip samjhao", "is it same thing as SIP", etc.
+        if (lowerUserMessage.match(/(what is|kya hai|kya|about|information|details|samjhao|explain|batao|tell me about|same thing|same as|what|is it|samj|bata)/i)) {
+          effectiveIntent = INTENTS.BEGINNER_QUERY;
+          state.updateIntent(INTENTS.BEGINNER_QUERY);
+        }
+        // If explicitly asking "how to start" or "how to invest"
+        else if (lowerUserMessage.match(/(how to start|kaise start|how to begin|kaise shuru|how to invest|kaise invest|kaise karein)/i)) {
+          effectiveIntent = INTENTS.HOW_TO_START_INVESTING;
+          state.updateIntent(INTENTS.HOW_TO_START_INVESTING);
+        }
+        // For calculation requests
+        else if (isSipCalcCTA) {
+          effectiveIntent = INTENTS.CALCULATOR;
+          state.updateIntent(INTENTS.CALCULATOR);
+        }
+        // Default to BEGINNER_QUERY for general SIP queries (more appropriate for informational queries)
+        else {
+          effectiveIntent = INTENTS.BEGINNER_QUERY;
+          state.updateIntent(INTENTS.BEGINNER_QUERY);
+        }
+        // Continue to LLM Agent flow below - ALL SIP queries will use OpenAI API
+        // The LLM Agent will provide contextual, interactive responses with follow-up questions
       }
-      // Continue to LLM Agent flow below - ALL SIP queries will use OpenAI API
-      // The LLM Agent will provide contextual, interactive responses with follow-up questions
     }
 
     // Track intent for conversation continuity (stored in LLM agent + conversationFlow)
@@ -963,23 +1278,11 @@ const ChatBot = ({ standalone = false }) => {
       // Continue to LLM Agent flow
     }
     // SIP Education (do NOT auto-open calculator) - Route to LLM Agent instead of rule-based
-    else if (
-      // education phrasing / FAQ
-      message.includes('what is sip') ||
-      message.includes('sip kya') ||
-      message.includes('sip क्या') ||
-      message.includes('sip samj') ||
-      message.includes('understand sip') ||
-      message.includes('sip samjhao') ||
-      message.includes('sip समझाओ') ||
-      // general SIP mention (should still educate first)
-      (message.includes('sip') && !message.includes('calculate') && !message.includes('calculator') && !message.includes('sip calculation'))
-    ) {
-      setUserContext(prev => ({ ...prev, interest: 'sip' }));
-      // Route to LLM Agent with HOW_TO_START_INVESTING or BEGINNER_QUERY intent
-      effectiveIntent = INTENTS.HOW_TO_START_INVESTING;
-      // Continue to LLM Agent flow below (do NOT return early)
-    }
+    // CRITICAL: Only handle SIP queries that haven't been caught by the SIP router above
+    // The SIP router (lines 1006-1053) already handles all SIP queries with proper intent routing
+    // This section should NOT override the intent for informational SIP queries
+    // REMOVED: This was causing all SIP queries to default to HOW_TO_START_INVESTING
+    // Now all SIP queries are handled by the SIP router above with correct intent detection
     // Loan Against Securities
     else if (message.includes('loan') || message.includes('liquidity') || message.includes('borrow')) {
       setUserContext(prev => ({ ...prev, interest: 'loan' }));
@@ -1085,6 +1388,118 @@ const ChatBot = ({ standalone = false }) => {
         // Extract user information from message
         llmAgentInstance.extractUserInfo(userMessage);
 
+        // CRITICAL: Check if this query should trigger a flow-based response
+        // This ensures flow-based CTAs are shown instead of default quick replies
+        let flowNode = null;
+        let flowId = null;
+        let flowNodeId = null;
+
+        // Detect flow entry points based on user query
+        const lowerMsg = userMessage.toLowerCase().trim();
+
+        // "What is Mutual Fund?" → what_is_mutual_fund flow level_1
+        // Match patterns: "what is mutual fund", "mutual fund kya hai", "mutual fund", etc.
+        if (lowerMsg.match(/(what is mutual fund|mutual fund kya hai|mutual fund.*what|mutual fund.*kya|mutual fund|mutual funds)/i) &&
+          !lowerMsg.match(/(how to|kaise|start|begin|invest)/i)) {
+          flowId = 'what_is_mutual_fund';
+          flowNodeId = 'what_is_mutual_fund_level_1';
+          flowNode = conversationEngine.getCurrentNode(flowId, flowNodeId);
+          logger.debug('Flow detected: what_is_mutual_fund', { flowId, flowNodeId, found: !!flowNode });
+        }
+        // "What is Equity Investment?" → equity_investment flow level_1_intro
+        else if (lowerMsg.match(/(what is equity|equity investment kya hai|equity.*what|equity.*kya|equity investment)/i) &&
+          !lowerMsg.match(/(how to|kaise|start|begin)/i)) {
+          flowId = 'equity_investment';
+          flowNodeId = 'equity_investment_level_1_intro';
+          flowNode = conversationEngine.getCurrentNode(flowId, flowNodeId);
+          logger.debug('Flow detected: equity_investment', { flowId, flowNodeId, found: !!flowNode });
+        }
+        // "What is SIP?" → Could add SIP flow here, but currently handled by SIP router
+        // Goal Planning → goal_planning flow select_goal
+        else if (lowerMsg.match(/(goal planning|goal.*plan|financial goal)/i)) {
+          flowId = 'goal_planning';
+          flowNodeId = 'goal_planning_select_goal';
+          flowNode = conversationEngine.getCurrentNode(flowId, flowNodeId);
+          logger.debug('Flow detected: goal_planning', { flowId, flowNodeId, found: !!flowNode });
+        }
+
+        // If flow node found, use it for CTAs
+        if (flowNode) {
+          const state = conversationEngine.getState();
+          state.userProfile.language = currentLang;
+          state.currentFlowNode = flowNodeId;
+
+          // Update navigation stack
+          state.pushNavigation(flowNodeId);
+
+          // Get CTAs from flow node
+          const flowCTAs = flowNode.getCTAs(state);
+
+          // Use LLM Agent for intelligent, context-aware response
+          // Always use currentLang (persisted conversation language)
+          // CRITICAL: Pass goal context explicitly so LLM Agent knows which goal user selected
+          let agentResponse = null;
+          try {
+            agentResponse = await llmAgentInstance.processMessage(
+              userMessage,
+              currentLang,
+              flowNode.intent || effectiveIntent, // Use flow node intent if available
+              {
+                ...userContext,
+                questionsAsked: messages.filter(m => m.sender === 'user').map(m => m.text),
+                goal: goalContext || userContext.goal, // Pass goalContext explicitly
+                goalContext: goalContext, // Also pass as goalContext for clarity
+                goalAmount: userContext.goalAmount, // Pass goal amount if selected
+                interest: userContext.interest,
+                flowIntent: flowNode.flowIntent // Pass flow intent for better context
+              }
+            );
+          } catch (error) {
+            logger.error('LLM error in flow node:', error);
+          }
+
+          // Extract response text
+          let responseText = null;
+          if (agentResponse && agentResponse.text) {
+            responseText = extractTextFromAIResponse(agentResponse);
+            if (responseText && typeof responseText === 'string' && responseText.trim().length > 0) {
+              responseText = responseText.trim();
+            } else {
+              responseText = null;
+            }
+          }
+
+          // If LLM response is available, use it; otherwise use node message
+          const finalResponseText = responseText || flowNode.getMessage(state);
+
+          // Always use flow CTAs instead of default quick replies
+          logger.debug('Using flow CTAs', {
+            flowId,
+            flowNodeId,
+            ctaCount: flowCTAs.length,
+            ctas: flowCTAs.map(cta => cta.label)
+          });
+
+          response = createResponse(finalResponseText, {
+            quickReplies: flowCTAs.map(cta => cta.label),
+            showCTAs: true,
+            ctaType: 'flow',
+            flowData: {
+              flowId: flowId,
+              nodeId: flowNodeId,
+              ctas: flowCTAs.map(cta => ({
+                id: cta.id,
+                label: cta.label,
+                next: cta.next,
+                flowId: flowId
+              }))
+            },
+            language: currentLang
+          });
+          setIsTyping(false);
+          return response;
+        }
+
         // Use LLM Agent for intelligent, context-aware response
         // Always use currentLang (persisted conversation language)
         // CRITICAL: Pass goal context explicitly so LLM Agent knows which goal user selected
@@ -1125,122 +1540,122 @@ const ChatBot = ({ standalone = false }) => {
 
           // If LLM Agent provided a response, use it
           if (responseText && responseText.trim().length > 0) {
-          // Process and normalize the extracted text
-          let finalText = responseText;
-          if (typeof responseText !== 'string') {
-            if (Array.isArray(responseText)) {
-              finalText = responseText
-                .map(v => typeof v === 'string' ? v : (v?.text || v?.content || String(v || '')))
-                .filter(v => v.length > 0)
-                .join(' ');
-            } else if (typeof responseText === 'object' && responseText !== null) {
-              finalText = responseText.text || responseText.content || responseText.message || JSON.stringify(responseText);
+            // Process and normalize the extracted text
+            let finalText = responseText;
+            if (typeof responseText !== 'string') {
+              if (Array.isArray(responseText)) {
+                finalText = responseText
+                  .map(v => typeof v === 'string' ? v : (v?.text || v?.content || String(v || '')))
+                  .filter(v => v.length > 0)
+                  .join(' ');
+              } else if (typeof responseText === 'object' && responseText !== null) {
+                finalText = responseText.text || responseText.content || responseText.message || JSON.stringify(responseText);
+              } else {
+                finalText = String(responseText || '');
+              }
+            }
+            finalText = finalText.trim();
+
+            // Validate that finalText is not empty after normalization
+            if (!finalText || finalText.length === 0) {
+              console.warn('⚠️ LLM Agent response text is empty after normalization', {
+                originalResponse: agentResponse
+              });
+              // Explicitly set response to null to trigger fallback - don't leave it as empty object
+              response = null;
             } else {
-              finalText = String(responseText || '');
-            }
-          }
-          finalText = finalText.trim();
+              // Determine quick replies based on conversation state
+              // DO NOT show full menu during active conversation - only show contextual options
+              let contextualQuickReplies = [];
+              if (agentResponse.quickReplies && agentResponse.quickReplies.length > 0) {
+                contextualQuickReplies = agentResponse.quickReplies;
+              } else if (conversationStage === 'greeting' || isRestartRequest) {
+                // Only show full menu on greeting or explicit restart
+                contextualQuickReplies = getDefaultQuickReplies(language, !hasShownAdvisorCTA);
+              } else {
+                // During active conversation, show minimal contextual options
+                contextualQuickReplies = [
+                  currentLang === LANGUAGES.HINGLISH ? 'Aur samjhao' :
+                    currentLang === LANGUAGES.HINDI ? 'और समझाएं' :
+                      currentLang === LANGUAGES.PUNJABI ? 'ਹੋਰ ਸਮਝਾਓ' :
+                        'Tell me more',
+                  ...(goalContext ? [] : [t.goalPlanning]),
+                  ...(!hasShownAdvisorCTA ? [t.talkToAdvisor] : [])
+                ];
+              }
 
-          // Validate that finalText is not empty after normalization
-          if (!finalText || finalText.length === 0) {
-            console.warn('⚠️ LLM Agent response text is empty after normalization', {
-              originalResponse: agentResponse
-            });
-            // Explicitly set response to null to trigger fallback - don't leave it as empty object
-            response = null;
+              // Use unified response handler
+              response = createResponse(finalText, {
+                quickReplies: contextualQuickReplies,
+                showCTAs: agentResponse.showCTAs !== undefined ? agentResponse.showCTAs : (conversationStage !== 'greeting'),
+                ctaType: agentResponse.ctaType || 'general',
+                language: currentLang
+              });
+            }
+
+            // Follow-through is handled via the LLM agent memory + contextual quick replies
+
+            // Update user context from agent's memory
+            const profile = llmAgentInstance.memory.userProfile;
+            if (profile.age) setUserContext(prev => ({ ...prev, age: profile.age }));
+            if (profile.goals && profile.goals.length > 0) {
+              setUserContext(prev => ({ ...prev, goal: profile.goals[0] }));
+            }
+            if (profile.experience) {
+              setUserContext(prev => ({ ...prev, experience: profile.experience }));
+            }
+
+            // Handle calculator display based on agent's intelligent assessment
+            if (agentResponse.showCalculator) {
+              setShowCalculator(true);
+            }
+
+            // Handle advisor connect - only show contact form if high-intent detected
+            // Use soft, trust-oriented approach - don't show immediately, let AI suggest it first
+            if (agentResponse.ctaType === 'advisor' && agentResponse.text) {
+              // Check if response already mentions contact/advisor help
+              const mentionsContact = agentResponse.text.toLowerCase().includes('contact') ||
+                agentResponse.text.toLowerCase().includes('advisor') ||
+                agentResponse.text.toLowerCase().includes('team') ||
+                agentResponse.text.toLowerCase().includes('connect');
+
+              // Only show form if AI explicitly suggests it or user shows high intent
+              if (mentionsContact || intent === INTENTS.LEAD_CAPTURE_OPPORTUNITY) {
+                setTimeout(() => {
+                  setShowContactForm(true);
+                  setHasShownAdvisorCTA(true); // Mark as shown - will not appear again
+                }, 3000); // Give user time to read the response first
+              }
+            }
+
+            // Save learning pattern
+            saveLearningPattern(userMessage, intent, agentResponse, currentLang);
+
+            logger.debug('Using LLM Agent response');
           } else {
-            // Determine quick replies based on conversation state
-            // DO NOT show full menu during active conversation - only show contextual options
-            let contextualQuickReplies = [];
-            if (agentResponse.quickReplies && agentResponse.quickReplies.length > 0) {
-              contextualQuickReplies = agentResponse.quickReplies;
-            } else if (conversationStage === 'greeting' || isRestartRequest) {
-              // Only show full menu on greeting or explicit restart
-              contextualQuickReplies = getDefaultQuickReplies(language, !hasShownAdvisorCTA);
+            // LLM Agent returned null or empty - try one more extraction attempt
+            const extractedText = extractTextFromAIResponse(agentResponse);
+
+            logger.warn('agent', 'LLM Agent returned no response or empty text, using fallback', {
+              intent,
+              language: currentLang,
+              userMessage: userMessage.substring(0, 200),
+              hasAgentResponse: !!agentResponse,
+              extractedText: extractedText ? extractedText.substring(0, 100) : null
+            });
+
+            // If extraction found text, use it
+            if (extractedText && extractedText.trim().length > 0) {
+              console.log('✅ Found text in extraction, using it');
+              response = createResponse(extractedText, {
+                quickReplies: getDefaultQuickReplies(currentLang, !hasShownAdvisorCTA),
+                language: currentLang
+              });
             } else {
-              // During active conversation, show minimal contextual options
-              contextualQuickReplies = [
-                currentLang === LANGUAGES.HINGLISH ? 'Aur samjhao' :
-                  currentLang === LANGUAGES.HINDI ? 'और समझाएं' :
-                    currentLang === LANGUAGES.PUNJABI ? 'ਹੋਰ ਸਮਝਾਓ' :
-                      'Tell me more',
-                ...(goalContext ? [] : [t.goalPlanning]),
-                ...(!hasShownAdvisorCTA ? [t.talkToAdvisor] : [])
-              ];
-            }
-
-            // Use unified response handler
-            response = createResponse(finalText, {
-              quickReplies: contextualQuickReplies,
-              showCTAs: agentResponse.showCTAs !== undefined ? agentResponse.showCTAs : (conversationStage !== 'greeting'),
-              ctaType: agentResponse.ctaType || 'general',
-              language: currentLang
-            });
-          }
-
-          // Follow-through is handled via the LLM agent memory + contextual quick replies
-
-          // Update user context from agent's memory
-          const profile = llmAgentInstance.memory.userProfile;
-          if (profile.age) setUserContext(prev => ({ ...prev, age: profile.age }));
-          if (profile.goals && profile.goals.length > 0) {
-            setUserContext(prev => ({ ...prev, goal: profile.goals[0] }));
-          }
-          if (profile.experience) {
-            setUserContext(prev => ({ ...prev, experience: profile.experience }));
-          }
-
-          // Handle calculator display based on agent's intelligent assessment
-          if (agentResponse.showCalculator) {
-            setShowCalculator(true);
-          }
-
-          // Handle advisor connect - only show contact form if high-intent detected
-          // Use soft, trust-oriented approach - don't show immediately, let AI suggest it first
-          if (agentResponse.ctaType === 'advisor' && agentResponse.text) {
-            // Check if response already mentions contact/advisor help
-            const mentionsContact = agentResponse.text.toLowerCase().includes('contact') ||
-              agentResponse.text.toLowerCase().includes('advisor') ||
-              agentResponse.text.toLowerCase().includes('team') ||
-              agentResponse.text.toLowerCase().includes('connect');
-
-            // Only show form if AI explicitly suggests it or user shows high intent
-            if (mentionsContact || intent === INTENTS.LEAD_CAPTURE_OPPORTUNITY) {
-              setTimeout(() => {
-                setShowContactForm(true);
-                setHasShownAdvisorCTA(true); // Mark as shown - will not appear again
-              }, 3000); // Give user time to read the response first
+              // Set response to null to trigger fallback
+              response = null;
             }
           }
-
-          // Save learning pattern
-          saveLearningPattern(userMessage, intent, agentResponse, currentLang);
-
-          logger.debug('Using LLM Agent response');
-        } else {
-          // LLM Agent returned null or empty - try one more extraction attempt
-          const extractedText = extractTextFromAIResponse(agentResponse);
-
-          logger.warn('agent', 'LLM Agent returned no response or empty text, using fallback', {
-            intent,
-            language: currentLang,
-            userMessage: userMessage.substring(0, 200),
-            hasAgentResponse: !!agentResponse,
-            extractedText: extractedText ? extractedText.substring(0, 100) : null
-          });
-
-          // If extraction found text, use it
-          if (extractedText && extractedText.trim().length > 0) {
-            console.log('✅ Found text in extraction, using it');
-            response = createResponse(extractedText, {
-              quickReplies: getDefaultQuickReplies(currentLang, !hasShownAdvisorCTA),
-              language: currentLang
-            });
-          } else {
-            // Set response to null to trigger fallback
-            response = null;
-          }
-        }
         }
       } catch (error) {
         console.error('❌ ChatBot: LLM Agent Error, using fallback:', error);
@@ -1329,8 +1744,8 @@ const ChatBot = ({ standalone = false }) => {
           if (lowerUserMessage.includes('sip') || lowerUserMessage.includes('systematic investment')) {
             intentResponse = langResponses.whatIsSIP;
           } else {
-            // For other beginner queries, use greeting or whatIsSIP as fallback
-            intentResponse = langResponses.whatIsSIP || langResponses.greeting;
+            // For other beginner queries, use whatIsSIP as fallback
+            intentResponse = langResponses.whatIsSIP || langResponses.howToStart;
           }
         } else if (finalIntent === INTENTS.GOAL_PLANNING) {
           // CRITICAL: Use goal-specific response based on goalContext
@@ -1382,7 +1797,9 @@ const ChatBot = ({ standalone = false }) => {
             if (finalIntent === INTENTS.HOW_TO_START_INVESTING) {
               intentResponse2 = langResponses.howToStart;
             } else if (finalIntent === INTENTS.BEGINNER_QUERY) {
-              intentResponse2 = langResponses.whatIsSIP;
+              // CRITICAL: For BEGINNER_QUERY (especially SIP queries), always use whatIsSIP
+              // Never fall back to greeting for SIP queries
+              intentResponse2 = langResponses.whatIsSIP || langResponses.howToStart;
             } else if (finalIntent === INTENTS.GOAL_PLANNING) {
               intentResponse2 = langResponses.goalRetirement;
             } else if (finalIntent === INTENTS.UNREALISTIC_RETURN_EXPECTATION) {
@@ -1538,8 +1955,8 @@ const ChatBot = ({ standalone = false }) => {
       const lowerFallbackMessage = userMessage.toLowerCase();
 
       // SIP-specific fallback (most common query)
-      if (finalIntent === INTENTS.BEGINNER_QUERY && 
-          (lowerFallbackMessage.includes('sip') || lowerFallbackMessage.includes('systematic investment'))) {
+      if (finalIntent === INTENTS.BEGINNER_QUERY &&
+        (lowerFallbackMessage.includes('sip') || lowerFallbackMessage.includes('systematic investment'))) {
         if (currentLang === LANGUAGES.HINGLISH) {
           fallbackText = "**SIP (Systematic Investment Plan) — Simple Explanation** 💡\n\n**SIP matlab:** Har mahine ek fixed amount invest karna — jaise mobile recharge, waise hi disciplined investing.\n\n**Kyun SIP?**\n✓ Discipline banta hai (auto-invest)\n✓ Small start (₹500 se bhi)\n✓ Market ups/downs ka impact average ho jata hai\n✓ Long-term mein compounding help karta hai\n\n**Example:** ₹5,000/month × 20 years (12% return) = ~₹50 lakh (invested ₹12 lakh)\n\nReturns **market-linked** hote hain — guaranteed nahi.\n\n**Kya aap SIP ke baare mein aur janna chahte hain?**";
         } else if (currentLang === LANGUAGES.HINDI) {
@@ -1711,10 +2128,10 @@ const ChatBot = ({ standalone = false }) => {
 
   return (
     <>
-      {/* Floating Chat Button */}
-      {!standalone && (
+      {/* Floating Chat Button - Only show when chatbot is closed */}
+      {!standalone && !isOpen && (
         <button
-          className={`chatbot-toggle ${isOpen ? 'active' : ''}`}
+          className="chatbot-toggle"
           onClick={() => {
             if (!language) {
               setIsOpen(true);
@@ -1724,7 +2141,16 @@ const ChatBot = ({ standalone = false }) => {
           }}
           aria-label="Open AI Chatbot"
         >
-          {isOpen ? <FaTimes /> : <FaRobot />}
+          <img
+            src={arthAILogo}
+            alt="ArthAI"
+            onError={(e) => {
+              e.target.style.display = 'none';
+              const fallback = document.createElement('div');
+              fallback.innerHTML = '<svg><use xlink:href="#robot-icon"></use></svg>';
+              e.target.parentElement?.appendChild(fallback);
+            }}
+          />
         </button>
       )}
 
@@ -1784,22 +2210,62 @@ const ChatBot = ({ standalone = false }) => {
         <div className={`chatbot-container ${standalone ? 'standalone' : ''}`}>
           <div className="chatbot-header">
             <div className="chatbot-header-content">
-              <FaRobot className="chatbot-icon" />
+              <div className="arthai-icon-wrapper">
+                <img
+                  src={arthAILogo}
+                  alt="ArthAI"
+                  className="arthai-logo-img"
+                  onError={(e) => {
+                    // Fallback to icon if image fails to load
+                    e.target.style.display = 'none';
+                    const fallback = e.target.parentElement?.querySelector('.arthai-icon-fallback');
+                    if (fallback) fallback.classList.remove('arthai-fallback-hidden');
+                  }}
+                />
+                <div className="arthai-icon-fallback arthai-fallback-hidden">
+                  <FaChartLine className="arthai-icon-primary" />
+                  <FaBrain className="arthai-icon-overlay" />
+                  <FaCoins className="arthai-icon-accent" />
+                </div>
+              </div>
               <div>
                 <h3>ArthAI</h3>
-                <p className="chatbot-status">Anupaat Nivesh's AI Finance Assistant</p>
               </div>
             </div>
             <div className="chatbot-header-actions">
-              {/* Voice Mode Toggle (Future-Ready) */}
+              {/* Close Button - Moved to Header (Top Right) */}
+              {!standalone && (
+                <button
+                  className="chatbot-close-header"
+                  onClick={toggleChat}
+                  aria-label="Close chat"
+                  title="Close"
+                >
+                  <FaTimes />
+                </button>
+              )}
+
+              {/* Voice Mode Toggle */}
               {VOICE_CONFIG.enabled && (
                 <button
                   className={`voice-toggle-btn ${isVoiceMode ? 'active' : ''}`}
                   onClick={() => {
                     setIsVoiceMode(!isVoiceMode);
                     if (!isVoiceMode) {
+                      // Initialize voice service with current language
                       voiceService.initializeSTT(language);
                       voiceService.initializeTTS(language);
+                      // Show voice mode enabled message
+                      const voiceMsg = {
+                        id: `msg-${++messageIdCounter.current}`,
+                        text: language === LANGUAGES.HINGLISH || language === LANGUAGES.HINDI
+                          ? "🎤 Voice mode enable ho gaya hai! Ab aap bol kar baat kar sakte hain. Microphone button par click karein."
+                          : "🎤 Voice mode enabled! You can now speak. Click the microphone button.",
+                        sender: 'bot',
+                        timestamp: new Date(),
+                        isSystemMessage: true
+                      };
+                      setMessages(prev => [...prev, voiceMsg]);
                     } else {
                       voiceService.stopListening();
                     }
@@ -1817,6 +2283,7 @@ const ChatBot = ({ standalone = false }) => {
                   className="language-switcher-btn"
                   onClick={() => setShowLanguageMenu(!showLanguageMenu)}
                   aria-label="Change language"
+                  title="Change Language"
                 >
                   <FaLanguage />
                 </button>
@@ -1894,15 +2361,6 @@ const ChatBot = ({ standalone = false }) => {
                   </div>
                 )}
               </div>
-              {!standalone && (
-                <button
-                  className="chatbot-close"
-                  onClick={toggleChat}
-                  aria-label="Close chat"
-                >
-                  <FaTimes />
-                </button>
-              )}
             </div>
           </div>
 
@@ -1916,7 +2374,17 @@ const ChatBot = ({ standalone = false }) => {
                     {message.sender === 'user' ? (
                       <FaUser />
                     ) : (
-                      <FaRobot />
+                      <img
+                        src={arthAILogo}
+                        alt="ArthAI"
+                        className="arthai-avatar-img"
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          const fallback = document.createElement('div');
+                          fallback.innerHTML = '<svg><use xlink:href="#robot-icon"></use></svg>';
+                          e.target.parentElement?.appendChild(fallback);
+                        }}
+                      />
                     )}
                   </div>
                   <div className="message-content">
@@ -1944,15 +2412,33 @@ const ChatBot = ({ standalone = false }) => {
                 {/* Quick Reply Buttons */}
                 {message.quickReplies && message.sender === 'bot' && (
                   <div className="quick-replies">
-                    {message.quickReplies.map((reply, index) => (
-                      <button
-                        key={index}
-                        className="quick-reply-btn"
-                        onClick={() => handleQuickReply(reply)}
-                      >
-                        {reply}
-                      </button>
-                    ))}
+                    {message.quickReplies.map((reply, index) => {
+                      // Check if this message has flow data for CTA navigation
+                      const flowData = message.flowData;
+                      const ctaData = flowData?.ctas?.[index];
+
+                      return (
+                        <button
+                          key={index}
+                          className="quick-reply-btn"
+                          onClick={() => {
+                            if (ctaData && flowData) {
+                              // Flow-based CTA navigation
+                              handleQuickReply(reply, {
+                                flowId: flowData.flowId,
+                                nodeId: flowData.nodeId,
+                                ctaId: ctaData.id
+                              });
+                            } else {
+                              // Regular quick reply
+                              handleQuickReply(reply);
+                            }
+                          }}
+                        >
+                          {reply}
+                        </button>
+                      );
+                    })}
                   </div>
                 )}
 
@@ -2031,7 +2517,17 @@ const ChatBot = ({ standalone = false }) => {
             {isTyping && (
               <div className="message bot-message typing">
                 <div className="message-avatar">
-                  <FaRobot />
+                  <img
+                    src={arthAILogo}
+                    alt="ArthAI"
+                    className="arthai-avatar-img"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      const fallback = document.createElement('div');
+                      fallback.innerHTML = '<svg><use xlink:href="#robot-icon"></use></svg>';
+                      e.target.parentElement?.appendChild(fallback);
+                    }}
+                  />
                 </div>
                 <div className="message-content">
                   <div className="typing-indicator">
@@ -2427,12 +2923,23 @@ const ChatBot = ({ standalone = false }) => {
           )}
 
           <form className="chatbot-input-form" onSubmit={handleSendMessage}>
-            {/* Voice Input Button (Future-Ready) */}
+            {/* Voice Listening Indicator */}
+            {VOICE_CONFIG.enabled && isVoiceMode && isListening && (
+              <div className="voice-listening-indicator">
+                <div className="pulse-animation"></div>
+                <span>{language === LANGUAGES.HINGLISH || language === LANGUAGES.HINDI
+                  ? "सुन रहा हूं... (Listening...)"
+                  : "Listening..."}</span>
+              </div>
+            )}
+
+            {/* Voice Input Button */}
             {VOICE_CONFIG.enabled && isVoiceMode && (
               <button
                 type="button"
                 className={`voice-input-btn ${isListening ? 'listening' : ''}`}
                 onClick={handleVoiceInput}
+                disabled={isListening}
                 aria-label="Voice input"
                 title={isListening ? 'Listening...' : 'Click to speak'}
               >

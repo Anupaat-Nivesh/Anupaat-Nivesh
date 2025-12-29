@@ -95,39 +95,69 @@ export const INTENTS = {
 // ============================================
 
 export const detectIntent = (message, language = LANGUAGES.HINGLISH) => {
-    const msg = message.toLowerCase();
+    const msg = message.toLowerCase().trim();
 
-    // Beginner Query
-    if (msg.match(/(sip|systematic investment|monthly investment)/i) &&
-        msg.match(/(kya|what|kaise|how|kya hai|what is)/i)) {
-        return INTENTS.BEGINNER_QUERY;
-    }
-
-    // How to Start Investing (direct intent - works even without "mutual fund" keyword)
-    // Examples: "how to start investment", "how to start investing", "how to invest", "start investing"
-    if (msg.match(/(how\s+to\s+start\s+(investment|investing)|how\s+to\s+invest|start\s+(investment|investing)|begin\s+(investment|investing))/i) ||
-        msg.match(/(invest\s+kaise\s+start|investment\s+kaise\s+start|kaise\s+invest\s+karein|mutual\s+fund\s+mein\s+investment\s+kaise\s+karein)/i)) {
-        return INTENTS.HOW_TO_START_INVESTING;
-    }
-
-    // SIP Education queries (understand, explain, samjhao, start, kaise) - HIGH PRIORITY
-    // This should catch ALL SIP-related queries first before other patterns
-    if (msg.match(/(sip|systematic investment)/i)) {
-        // SIP education/understanding queries
-        if (msg.match(/(understand|explain|samjhao|samj|kya hai|what is|क्या|समझाओ|ਕੀ|ਸਮਝਾਓ|kaise|how|start|shuru|शुरू|ਸ਼ੁਰੂ)/i)) {
-            return INTENTS.HOW_TO_START_INVESTING;
+    // CRITICAL: Check for SIP queries FIRST (highest priority) - before any other patterns
+    // This ensures all SIP queries are properly routed, regardless of other keywords
+    if (/\b(sip|systematic\s+investment\s+plan|systemeatic\s+investment\s+plan)\b/i.test(msg)) {
+        // If asking "why SIP" or about benefits/advantages
+        if (msg.match(/(why|kyun|kya fayda|kya labh|reason|benefit|advantage|fayde|merit)/i)) {
+            return INTENTS.PRODUCT_EXPLORATION;
+        }
+        // If asking "what is SIP" or general information (including "kya hai", "samjhao", "explain", "batao")
+        // CRITICAL: This pattern must be comprehensive to catch ALL informational queries
+        // Including: "SIP kya hai", "sip kya hai", "SIP samjhao", "sip samjhao", "is it same thing as SIP", etc.
+        if (msg.match(/(what is|kya hai|kya|about|information|details|samjhao|explain|batao|tell me about|same thing|same as|what|is it|samj|bata)/i)) {
+            return INTENTS.BEGINNER_QUERY;
         }
         // SIP calculation queries
         if (msg.match(/(calculate|calculator|calc|गणना|ਗਣਨਾ)/i)) {
             return INTENTS.CALCULATOR;
         }
-        // General SIP queries (default to education)
+        // Only route to HOW_TO_START_INVESTING if explicitly asking "how to start" or "how to invest"
+        if (msg.match(/(how to start|kaise start|how to begin|kaise shuru|how to invest|kaise invest|kaise karein)/i)) {
+            return INTENTS.HOW_TO_START_INVESTING;
+        }
+        // Default to BEGINNER_QUERY for ANY SIP query (catches all SIP mentions)
+        // This ensures "SIP kya hai", "sip kya hai", "SIP samjhao" all get proper responses
+        return INTENTS.BEGINNER_QUERY;
+    }
+
+    // How to Start Investing (direct intent - works even without "mutual fund" keyword)
+    // Examples: "how to start investment", "how to start investing", "how to invest", "start investing"
+    // BUT: Only if it's NOT a SIP query (already handled above)
+    if (msg.match(/(how\s+to\s+start\s+(investment|investing)|how\s+to\s+invest|start\s+(investment|investing)|begin\s+(investment|investing))/i) ||
+        msg.match(/(invest\s+kaise\s+start|investment\s+kaise\s+start|kaise\s+invest\s+karein|mutual\s+fund\s+mein\s+investment\s+kaise\s+karein)/i)) {
         return INTENTS.HOW_TO_START_INVESTING;
     }
     
-    // How to Start Investing (mutual fund queries without SIP)
+    // CRITICAL: Check for "investment in mutual fund" queries BEFORE "how to start" pattern
+    // These should go to PRODUCT_EXPLORATION or BEGINNER_QUERY, not HOW_TO_START_INVESTING
+    if (msg.match(/(investment in mutual fund|invest in mutual fund|mutual fund investment|mutual fund mein invest|start investment in mutual fund)/i)) {
+        // If asking about USP, help, services, or how company can help
+        if (msg.match(/(how.*help|usp|unique|service|anupaat|company|can help|tell me|batao|samjhao)/i)) {
+            return INTENTS.PRODUCT_EXPLORATION;
+        }
+        // If it's a "why" question
+        if (msg.match(/(why|kyun|kya fayda|reason|benefit|advantage)/i)) {
+            return INTENTS.PRODUCT_EXPLORATION;
+        }
+        // If it's asking "what is" or general information
+        if (msg.match(/(what|kya|about|information|details)/i)) {
+            return INTENTS.BEGINNER_QUERY;
+        }
+        // Only route to HOW_TO_START_INVESTING if explicitly asking "how to start"
+        if (msg.match(/(how to start|kaise start|kaise shuru|how to begin|kaise begin)/i)) {
+            return INTENTS.HOW_TO_START_INVESTING;
+        }
+        // Default to PRODUCT_EXPLORATION for "investment in mutual fund" queries
+        return INTENTS.PRODUCT_EXPLORATION;
+    }
+
+    // How to Start Investing (mutual fund queries without SIP) - MORE SPECIFIC
+    // Only match when user explicitly asks "how to start" or "how to invest"
     if (msg.match(/(mutual fund|mf|mutual)/i) &&
-        msg.match(/(kaise|how|invest|start|karna|karne)/i)) {
+        msg.match(/(how to start|kaise start|how to begin|kaise shuru|how to invest|kaise invest)/i)) {
         return INTENTS.HOW_TO_START_INVESTING;
     }
 
@@ -153,7 +183,13 @@ export const detectIntent = (message, language = LANGUAGES.HINGLISH) => {
         return INTENTS.FEAR_OR_RISK_CONCERN;
     }
 
-    // Product Exploration
+    // Product Exploration - Benefits, advantages, features, pros/cons
+    if (msg.match(/(benefit|advantage|feature|pros?|cons?|why|kyun|kya fayda|kya labh|merit|demerit|good|bad|positive|negative|reason|reasons)/i) &&
+        msg.match(/(mutual fund|mf|mutual|sip|investment|invest|equity|debt|portfolio|fund)/i)) {
+        return INTENTS.PRODUCT_EXPLORATION;
+    }
+    
+    // Product Exploration - General product queries
     if (msg.match(/(product|service|offer|basket|equity|debt|gold|portfolio)/i)) {
         return INTENTS.PRODUCT_EXPLORATION;
     }
