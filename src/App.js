@@ -20,6 +20,7 @@ import {
   PartnerWithUs,
   CorporateCorner,
 } from "./components";
+import AppDownload from "./components/AppDownload/AppDownload";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -54,6 +55,7 @@ function App() {
           <Route path="offerings" element={<Offerings />} />
           <Route path="contact" element={<Contact />} />
           <Route path="ourApp" element={<OurApp />} />
+          <Route path="appdownload" element={<AppDownload />} />
           <Route path="calculators" element={<Calculators />} />
 
           <Route path="*" element={<NotFound />} />
