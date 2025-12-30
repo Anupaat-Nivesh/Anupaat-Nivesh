@@ -2467,7 +2467,28 @@ const ChatBot = ({ standalone = false }) => {
                       </a>
                     )}
 
-                    {/* Advisor CTA - Show prominently for advisor type or high-intent conversations */}
+                    {/* Website CTA - Show for general type or when user might want more info - Placed before Advisor to ensure they appear together in last row */}
+                    {(message.ctaType === 'general' || !message.ctaType || message.ctaType === 'planning') && (
+                      <Link
+                        to={message.ctaType === 'calculators' ? '/calculators' : message.ctaType === 'mutual_funds' ? '/mutual-funds' : message.ctaType === 'equity' ? '/equity-basket' : message.ctaType === 'loan' ? '/loan-against-securities' : '/'}
+                        className="cta-button website-cta"
+                        onClick={() => {
+                          setIsOpen(false);
+                          // Track website visit for analytics
+                          if (window.gtag) {
+                            window.gtag('event', 'website_visit', {
+                              'event_category': 'chatbot',
+                              'event_label': message.ctaType || 'general'
+                            });
+                          }
+                        }}
+                      >
+                        <FaGlobe />
+                        <span>{language === LANGUAGES.HINGLISH ? 'Website visit karein' : language === LANGUAGES.HINDI ? 'वेबसाइट देखें' : language === LANGUAGES.PUNJABI ? 'ਵੈਬਸਾਈਟ ਵੇਖੋ' : 'Visit Website'}</span>
+                      </Link>
+                    )}
+
+                    {/* Advisor CTA - Show prominently for advisor type or high-intent conversations - Placed last to appear with Website in last row */}
                     {(message.ctaType === 'advisor' || message.ctaType === 'general' || !message.ctaType) && !hasShownAdvisorCTA && (
                       <button
                         className={`cta-button advisor-cta ${message.ctaType === 'advisor' ? 'primary-cta' : ''}`}
@@ -2487,27 +2508,6 @@ const ChatBot = ({ standalone = false }) => {
                         <FaUser />
                         <span>{language === LANGUAGES.HINGLISH ? 'Advisor se baat' : language === LANGUAGES.HINDI ? 'सलाहकार से बात करें' : language === LANGUAGES.PUNJABI ? 'ਸਲਾਹਕਾਰ ਨਾਲ ਗੱਲ ਕਰੋ' : 'Talk to Advisor'}</span>
                       </button>
-                    )}
-
-                    {/* Website CTA - Show for general type or when user might want more info */}
-                    {(message.ctaType === 'general' || !message.ctaType || message.ctaType === 'planning') && (
-                      <Link
-                        to={message.ctaType === 'calculators' ? '/calculators' : message.ctaType === 'mutual_funds' ? '/mutual-funds' : message.ctaType === 'equity' ? '/equity-basket' : message.ctaType === 'loan' ? '/loan-against-securities' : '/'}
-                        className="cta-button website-cta"
-                        onClick={() => {
-                          setIsOpen(false);
-                          // Track website visit for analytics
-                          if (window.gtag) {
-                            window.gtag('event', 'website_visit', {
-                              'event_category': 'chatbot',
-                              'event_label': message.ctaType || 'general'
-                            });
-                          }
-                        }}
-                      >
-                        <FaGlobe />
-                        <span>{language === LANGUAGES.HINGLISH ? 'Website visit karein' : language === LANGUAGES.HINDI ? 'वेबसाइट देखें' : language === LANGUAGES.PUNJABI ? 'ਵੈਬਸਾਈਟ ਵੇਖੋ' : 'Visit Website'}</span>
-                      </Link>
                     )}
                   </div>
                 )}
