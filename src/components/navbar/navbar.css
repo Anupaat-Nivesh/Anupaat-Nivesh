@@ -23,8 +23,7 @@ font-weight: 450
     backdrop-filter: blur(10px);
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
-
-
+    overflow: visible;
 }
 
 .anupaat__navbar.active {
@@ -230,38 +229,97 @@ font-weight: 450
 /* Mobile Submenu */
 .mobile-submenu-item {
     width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-.mobile-submenu-header a {
-    display: flex;
+.mobile-submenu-header-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 1.2rem 1rem;
+    display: flex !important;
     justify-content: space-between;
     align-items: center;
+    font-family: var(--font-family);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--color-text) !important;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s ease;
+    min-height: 48px;
+    box-sizing: border-box;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.mobile-submenu-header-btn:hover,
+.mobile-submenu-header-btn:focus {
+    color: var(--color-primary);
+    outline: none;
+}
+
+.mobile-submenu-header-btn span:first-child {
+    flex: 1;
+}
+
+.mobile-submenu-arrow {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+    margin-left: 1rem;
+    color: var(--color-primary);
+}
+
+.mobile-submenu-arrow.open {
+    transform: rotate(180deg);
 }
 
 .mobile-submenu {
     display: none;
     flex-direction: column;
-    gap: 0.5rem;
-    padding-left: 2rem;
+    gap: 0;
+    padding: 0;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
     margin-top: 0.5rem;
 }
 
 .mobile-submenu.open {
     display: flex;
+    max-height: 600px;
+    padding: 0.8rem 0;
+    margin-top: 0.5rem;
 }
 
 .mobile-submenu li {
-    padding: 0.5rem 0;
+    padding: 0;
+    margin: 0;
     font-size: 1.6rem;
+    list-style: none;
 }
 
 .mobile-submenu li a {
+    display: block;
+    padding: 0.8rem 1.5rem;
     color: var(--color-subtext);
-    transition: color 0.2s;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    font-weight: 500;
 }
 
-.mobile-submenu li a:hover {
+.mobile-submenu li a:hover,
+.mobile-submenu li a:active,
+.mobile-submenu li a.active {
     color: var(--color-primary);
+    background: rgba(254, 1, 1, 0.05);
+    border-left-color: var(--color-primary);
+    padding-left: 2rem;
 }
 
 /* ****************************************** */
@@ -271,10 +329,10 @@ font-weight: 450
 
 .anupaat__navbar-menu {
     margin-left: 4rem;
-
-    display: none;
-    /* position: relative; */
-    overflow-y: scroll;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1001;
 }
 
 .anupaat__navbar-menu svg {
@@ -283,62 +341,176 @@ font-weight: 450
 }
 
 .backdrop-blur {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    transition: all 1s;
     width: 100vw;
     height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    animation: fadeIn 0.3s ease;
+}
 
-
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .anupaat__navbar-menu_container {
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
+    display: flex !important;
+    text-align: left;
+    justify-content: flex-start;
+    align-items: stretch;
     flex-direction: column;
-    background: rgba(241, 243, 245, 1);
-    padding: 2rem;
-    position: absolute;
-    right: 0;
-    top: 100px;
-    gap: 2rem;
-    min-width: 30vw;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-    z-index: 10;
-    transition: all 0.5s;
+    background: #ffffff !important;
+    padding: 0;
+    position: fixed !important;
+    right: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    gap: 0;
+    width: 85vw !important;
+    max-width: 400px;
+    min-height: 100vh;
+    border-radius: 0;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+    z-index: 10000 !important;
+    transform: translateX(0) !important;
+    animation: slideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    overflow-x: hidden;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: all !important;
+}
 
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.mobile-menu-header {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1.5rem;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    background: #fff !important;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    flex-shrink: 0;
+}
+
+.mobile-menu-header h3 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.mobile-menu-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text);
+    transition: all 0.2s ease;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.mobile-menu-close:hover {
+    background: rgba(254, 1, 1, 0.1);
+    color: var(--color-primary);
 }
 
 .anupaat__navbar-menu_container-links {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    width: 100%;
-
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 1rem 0 !important;
+    list-style: none !important;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: visible;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 200px;
 }
 
 .anupaat__navbar-menu_container-links li {
     color: var(--color-text);
     width: 100%;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 600;
-    padding: 1rem 0;
-    border-radius: 10px;
-
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: background 0.2s ease;
+    display: block;
+    visibility: visible;
+    opacity: 1;
 }
 
-.anupaat__navbar-menu_container-links li:hover,
-.anupaat__navbar-menu_container-links:focus {
+.anupaat__navbar-menu_container-links li:last-child {
+    border-bottom: none;
+}
+
+.anupaat__navbar-menu_container-links li a {
+    display: flex !important;
+    align-items: center;
+    padding: 1.2rem 1rem;
+    color: var(--color-text) !important;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 48px;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.anupaat__navbar-menu_container-links li a:hover,
+.anupaat__navbar-menu_container-links li a:active,
+.anupaat__navbar-menu_container-links li a.active {
     color: var(--color-primary);
+    background: rgba(254, 1, 1, 0.08);
+    padding-left: 1.5rem;
 }
 
 
 
 /*only shows on medium and small screens*/
+.anupaat__navbar-menu_container-links-sign {
+    display: flex !important;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: stretch;
+    padding: 1.5rem 1rem 2rem 1rem;
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+    margin-top: auto;
+    flex-shrink: 0;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
 .anupaat__navbar-menu_container-links-sign a button {
     display: none;
     padding: 1rem 2rem;
@@ -351,8 +523,7 @@ font-weight: 450
     cursor: pointer;
     border-radius: 1rem;
     transition: all 0.3s;
-
-
+    width: 100%;
 }
 
 .mobile-login-links {
@@ -406,6 +577,7 @@ font-weight: 450
 
     .anupaat__navbar-menu {
         display: flex;
+        align-items: center;
     }
 }
 
@@ -424,6 +596,9 @@ font-weight: 450
 
     .anupaat__navbar-menu_container-links-sign a button {
         display: block;
+        width: 100%;
+        padding: 1.2rem 2rem;
+        font-size: 1.6rem;
     }
 
     .anupaat__navbar-links_logo {
@@ -432,8 +607,25 @@ font-weight: 450
     }
 
     .anupaat__navbar-menu_container {
-        min-width: 80vw;
-        top: 90px;
+        width: 85vw;
+        max-width: 350px;
+        top: 0;
+        padding: 1.5rem 1rem;
+    }
+
+    .anupaat__navbar-menu_container-links li a {
+        font-size: 1.6rem;
+        padding: 1rem 0.8rem;
+    }
+
+    .mobile-submenu-header-btn {
+        font-size: 1.6rem;
+        padding: 1rem 0.8rem;
+    }
+
+    .mobile-submenu li a {
+        font-size: 1.4rem;
+        padding: 0.7rem 1.2rem;
     }
 }
 
@@ -462,10 +654,35 @@ font-weight: 450
     }
 
     .anupaat__navbar-menu_container {
-        min-width: 85vw;
-        right: 1rem;
-        top: 80px;
-        padding: 1.5rem;
+        width: 90vw;
+        max-width: 320px;
+        right: 0;
+        top: 0;
+        padding: 1.2rem 0.8rem;
+    }
+
+    .anupaat__navbar-menu_container-links li a {
+        font-size: 1.5rem;
+        padding: 1rem 0.8rem;
+    }
+
+    .mobile-submenu-header-btn {
+        font-size: 1.5rem;
+        padding: 1rem 0.8rem;
+    }
+
+    .mobile-submenu li a {
+        font-size: 1.3rem;
+        padding: 0.7rem 1rem;
+    }
+
+    .mobile-login-links {
+        gap: 0.8rem;
+    }
+
+    .mobile-login-links a {
+        font-size: 1.4rem;
+        padding: 0.6rem 0;
     }
 }
 

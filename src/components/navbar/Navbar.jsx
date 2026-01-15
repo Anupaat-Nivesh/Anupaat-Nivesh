@@ -75,7 +75,22 @@ const Navbar = () => {
     const [anupaat__navbar, setNavbar] = useState(false);
     const [showLoginMenu, setShowLoginMenu] = useState(false);
     const [showCalculatorMenu, setShowCalculatorMenu] = useState(false);
+    const [showMobileCalculatorMenu, setShowMobileCalculatorMenu] = useState(false);
     const location = useLocation();
+    
+    // Helper function to restore scrolling
+    const restoreScrolling = () => {
+        const htmlElement = document.documentElement;
+        htmlElement.style.overflowY = "";
+        htmlElement.style.overflow = "";
+    };
+    
+    // Helper function to disable scrolling
+    const disableScrolling = () => {
+        const htmlElement = document.documentElement;
+        htmlElement.style.overflowY = "hidden";
+    };
+    
     const changeNav = () => {
         if (window.scrollY >= 80) {
             setNavbar(true);
@@ -90,13 +105,25 @@ const Navbar = () => {
     useEffect(() => {
         if (!toggleMenu) {
             setShowLoginMenu(false);
+            // Restore scrolling when menu closes
+            restoreScrolling();
         }
     }, [toggleMenu]);
     useEffect(() => {
         // Close login dropdown whenever the route changes
         setShowLoginMenu(false);
         setShowCalculatorMenu(false);
+        setShowMobileCalculatorMenu(false);
+        // Restore scrolling when route changes
+        restoreScrolling();
     }, [location.pathname]);
+
+    useEffect(() => {
+        // Close mobile calculator menu when main menu closes
+        if (!toggleMenu) {
+            setShowMobileCalculatorMenu(false);
+        }
+    }, [toggleMenu]);
     /*On clicking the logo it will scroll to top*/
     const toggleHome = () => {
         animateScroll.scrollToTop();
@@ -208,90 +235,121 @@ const Navbar = () => {
                 {toggleMenu
                     ? <RiCloseLine className='animate__animated animate__fadeIn' color="#000" size={32} onClick={(event) => {
                         setToggleMenu(prev => !prev);
-                        const htmlElementCollection = window.document.getElementsByTagName("html");
-                        const htmlElement = Array.from(htmlElementCollection)[0];
-                        htmlElement.style.overflowY = "scroll";
+                        restoreScrolling();
                     }} />
                     : <RiMenu3Line className='animate__animated animate__fadeIn' color="#000" size={27} onClick={(event) => {
                         setToggleMenu(true);
-                        const htmlElementCollection = window.document.getElementsByTagName("html");
-                        const htmlElement = Array.from(htmlElementCollection)[0];
-                        htmlElement.style.overflowY = "hidden";
+                        disableScrolling();
                     }} />}
 
 
 
-                <div className='backdrop-blur' style={{ backdropFilter: `${toggleMenu ? 'blur(10px)' : 'blur(0)'}`, display: `${toggleMenu ? 'block' : 'none'}` }} onClick={(event) => {
-                    setToggleMenu(prev => !prev);
-                    const htmlElementCollection = window.document.getElementsByTagName("html");
-                    const htmlElement = Array.from(htmlElementCollection)[0];
-                    htmlElement.style.overflowY = "scroll";
-                }}></div>
-                <div className="anupaat__navbar-menu_container scale-up-center" style={{ transform: `${toggleMenu ? 'translate(0,0)' : 'translate(100%,0)'}` }}>
-                    <ul className="anupaat__navbar-menu_container-links">
-                        {
-                            links.map(({ name, path, hasSubmenu }) => {
-                                if (hasSubmenu) {
-                                    return (
-                                        <li key={name} className="mobile-submenu-item">
-                                            <div className="mobile-submenu-header">
-                                                <NavLink to={path} onClick={(e) => {
-                                                    e.preventDefault();
-                                                    const submenu = e.currentTarget.nextElementSibling;
-                                                    if (submenu) {
-                                                        submenu.classList.toggle('open');
-                                                    }
-                                                }}>
-                                                    {name} <span>▼</span>
-                                                </NavLink>
-                                            </div>
-                                            <ul className="mobile-submenu">
-                                                {calculatorLinks.map(calc => (
-                                                    <li key={calc.tab}>
-                                                        <NavLink 
-                                                            to={`${calc.path}?tab=${calc.tab}`} 
-                                                            onClick={() => setToggleMenu(prev => !prev)}
-                                                        >
-                                                            {calc.name}
-                                                        </NavLink>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </li>
-                                    );
-                                }
-                                return (
-                                    <li key={name}>
-                                        <NavLink to={path} onClick={() => setToggleMenu(prev => !prev)} >{name}</NavLink>
-                                    </li>
-                                )
-                            })
-                        }
-
-                    </ul>
-                    <div className="anupaat__navbar-menu_container-links-sign">
-                        <NavLink to='ourApp' onClick={() => setToggleMenu(prev => !prev)}>
-                            <button type="button">GET THE APP</button></NavLink>
-
-                        <div className="mobile-login-links">
-                            <p>Login</p>
-                            {loginLinks.map(link => (
-                                <a
-                                    key={link.href}
-                                    href={link.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    onClick={() => setToggleMenu(false)}
+                {toggleMenu && (
+                    <>
+                        <div 
+                            className='backdrop-blur' 
+                            onClick={(event) => {
+                                setToggleMenu(false);
+                                setShowMobileCalculatorMenu(false);
+                                restoreScrolling();
+                            }}
+                        ></div>
+                        <div className="anupaat__navbar-menu_container">
+                            <div className="mobile-menu-header">
+                                <h3>Menu</h3>
+                                <button 
+                                    className="mobile-menu-close"
+                                    onClick={() => {
+                                        setToggleMenu(false);
+                                        setShowMobileCalculatorMenu(false);
+                                        restoreScrolling();
+                                    }}
+                                    aria-label="Close menu"
                                 >
-                                    {link.label}
-                                </a>
-                            ))}
+                                    <RiCloseLine size={24} />
+                                </button>
+                            </div>
+                            <ul className="anupaat__navbar-menu_container-links">
+                                {
+                                    links.map(({ name, path, hasSubmenu }) => {
+                                        if (hasSubmenu) {
+                                            return (
+                                                <li key={name} className="mobile-submenu-item">
+                                                    <button
+                                                        className="mobile-submenu-header-btn"
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            setShowMobileCalculatorMenu(prev => !prev);
+                                                        }}
+                                                        aria-expanded={showMobileCalculatorMenu}
+                                                    >
+                                                        <span>{name}</span>
+                                                        <span className={`mobile-submenu-arrow ${showMobileCalculatorMenu ? 'open' : ''}`}>▼</span>
+                                                    </button>
+                                                    <ul className={`mobile-submenu ${showMobileCalculatorMenu ? 'open' : ''}`}>
+                                                        {calculatorLinks.map(calc => (
+                                                            <li key={calc.tab}>
+                                                                <NavLink 
+                                                                    to={`${calc.path}?tab=${calc.tab}`} 
+                                                                    onClick={() => {
+                                                                        setToggleMenu(false);
+                                                                        setShowMobileCalculatorMenu(false);
+                                                                        restoreScrolling();
+                                                                    }}
+                                                                >
+                                                                    {calc.name}
+                                                                </NavLink>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </li>
+                                            );
+                                        }
+                                        return (
+                                            <li key={name}>
+                                                <NavLink 
+                                                    to={path} 
+                                                    onClick={() => {
+                                                        setToggleMenu(false);
+                                                        setShowMobileCalculatorMenu(false);
+                                                        restoreScrolling();
+                                                    }}
+                                                >
+                                                    {name}
+                                                </NavLink>
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+                            <div className="anupaat__navbar-menu_container-links-sign">
+                                <NavLink to='ourApp' onClick={() => {
+                                    setToggleMenu(false);
+                                    restoreScrolling();
+                                }}>
+                                    <button type="button">GET THE APP</button>
+                                </NavLink>
+                                <div className="mobile-login-links">
+                                    <p>Login</p>
+                                    {loginLinks.map(link => (
+                                        <a
+                                            key={link.href}
+                                            href={link.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            onClick={() => {
+                                                setToggleMenu(false);
+                                                restoreScrolling();
+                                            }}
+                                        >
+                                            {link.label}
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
-
-
-                    </div>
-                </div>
-
+                    </>
+                )}
             </div>
         </div >
 
