@@ -93,6 +93,30 @@ const Home = () => {
                 </div>
 
                 <section className='home-section offerings-section'>   <Offerings /></section>
+                
+                {/* Consulting Session Section */}
+                <section className='home-section consulting-session-promo'>
+                    <div className="consulting-promo-container">
+                        <div className="consulting-promo-content">
+                            <div className="consulting-promo-badge">Limited Time Offer</div>
+                            <h2 className="consulting-promo-title">
+                                ₹99 Financial Planning Session
+                            </h2>
+                            <p className="consulting-promo-description">
+                                Get expert financial guidance at an introductory price. This comprehensive session includes financial planning, income-expense clarity, investment planning, and goal clarification.
+                            </p>
+                            <div className="consulting-promo-price">
+                                <span className="price-old">₹9,999</span>
+                                <span className="price-new">₹99</span>
+                                <span className="price-discount">Save 99%</span>
+                            </div>
+                            <Link to="/consulting-session" className="btn btn-primary consulting-promo-cta">
+                                Book Session for ₹99
+                            </Link>
+                        </div>
+                    </div>
+                </section>
+
                 <section className='home-section about-section'> <About /></section>
 
                 <section className='home-section why-section'><Whyanupaat /></section>

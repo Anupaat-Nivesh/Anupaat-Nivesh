@@ -1,0 +1,173 @@
+.lead-form-container {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2.4rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  z-index: 1000;
+  pointer-events: auto;
+  isolation: isolate;
+}
+
+.lead-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  pointer-events: auto;
+  position: relative;
+  z-index: 1001;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: #0f1215;
+}
+
+.form-group input,
+.form-group select {
+  padding: 1.2rem 1.6rem;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  background: #fff;
+  color: #0f1215;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  pointer-events: auto;
+  touch-action: manipulation;
+  -webkit-user-select: text;
+  user-select: text;
+  position: relative;
+  z-index: 1002;
+}
+
+.form-group input:disabled,
+.form-group select:disabled {
+  background: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  pointer-events: auto;
+  z-index: 1003;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #fe0101;
+  box-shadow: 0 0 0 3px rgba(254, 1, 1, 0.1);
+}
+
+.form-group input.error,
+.form-group select.error {
+  border-color: #dc3545;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 1.3rem;
+  margin-top: -0.4rem;
+}
+
+.lead-form-submit {
+  margin-top: 0.8rem;
+  padding: 1.4rem 2.4rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lead-form-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-disclaimer {
+  font-size: 1.2rem;
+  color: #666;
+  text-align: center;
+  margin-top: 1.2rem;
+  line-height: 1.5;
+}
+
+.form-disclaimer a {
+  color: #fe0101;
+  text-decoration: underline;
+}
+
+/* Phone input styling - matches Contact form */
+.mobile-number__input-container {
+  width: 100%;
+}
+
+.PhoneInput {
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.PhoneInput:focus-within {
+  border-color: #fe0101;
+  box-shadow: 0 0 0 3px rgba(254, 1, 1, 0.1);
+}
+
+.PhoneInputInput {
+  border: none;
+  padding: 1.2rem 1.6rem;
+  font-size: 1.5rem;
+  outline: none;
+  flex: 1;
+  font-family: inherit;
+}
+
+.PhoneInputCountryIcon {
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.PhoneInputCountrySelect {
+  padding: 0.8rem;
+  font-size: 1.4rem;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .lead-form-container {
+    padding: 2rem;
+    border-radius: 12px;
+  }
+  
+  .form-group input,
+  .form-group select {
+    padding: 1.4rem 1.6rem;
+    font-size: 1.6rem; /* Larger for mobile tap targets */
+  }
+  
+  .lead-form-submit {
+    padding: 1.6rem 2.4rem;
+    font-size: 1.7rem;
+    min-height: 48px; /* Minimum tap target size */
+  }
+}
+

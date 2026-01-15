@@ -27,6 +27,11 @@ import "aos/dist/aos.css";
 import "./App.css";
 import Tools from './containers/tools/Tools';
 import ChatBotPage from './pages/ChatBotPage';
+import ConsultingSession from './pages/ConsultingSession/ConsultingSession';
+import Booking from './pages/Booking/Booking';
+import Payment from './pages/Payment/Payment';
+import PaymentSuccess from './pages/PaymentSuccess/PaymentSuccess';
+import PaymentError from './pages/PaymentError/PaymentError';
 
 import { useEffect } from "react";
 
@@ -57,6 +62,11 @@ function App() {
           <Route path="ourApp" element={<OurApp />} />
           <Route path="appdownload" element={<AppDownload />} />
           <Route path="calculators" element={<Calculators />} />
+          <Route path="consulting-session" element={<ConsultingSession />} />
+          <Route path="booking" element={<Booking />} />
+          <Route path="payment" element={<Payment />} />
+          <Route path="payment-success" element={<PaymentSuccess />} />
+          <Route path="payment-error" element={<PaymentError />} />
 
           <Route path="*" element={<NotFound />} />
           {/* footer pages  */}

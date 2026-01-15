@@ -1,0 +1,140 @@
+.how-we-work {
+  background: #f8f9fa;
+  padding: 8rem 0;
+}
+
+.how-we-work .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 6rem;
+}
+
+.section-title {
+  font-size: clamp(3.2rem, 4vw, 4.8rem);
+  font-weight: 700;
+  color: #0f1215;
+  margin-bottom: 1.6rem;
+}
+
+/* .section-heading-focus styling is inherited from App.css */
+/* Original styling: background: var(--color-primary), color: #fff, border-radius: 2rem, padding: 0 1rem */
+
+.section-description {
+  font-size: 1.8rem;
+  color: #666;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+  margin-bottom: 5rem;
+}
+
+.step-card {
+  background: #fff;
+  padding: 3rem 2.4rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.step-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #fe0101, #ff4444);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.step-card:hover::before {
+  transform: scaleX(1);
+}
+
+.step-number {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #fe0101;
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+.step-icon {
+  font-size: 4rem;
+  margin-bottom: 1.6rem;
+}
+
+.step-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #0f1215;
+  margin-bottom: 1.2rem;
+}
+
+.step-description {
+  font-size: 1.5rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.cta-section {
+  text-align: center;
+  padding-top: 4rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.cta-text {
+  font-size: 1.8rem;
+  color: #0f1215;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .how-we-work {
+    padding: 6rem 0;
+  }
+
+  .section-header {
+    margin-bottom: 4rem;
+  }
+
+  .steps-grid {
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+  }
+
+  .step-card {
+    padding: 2.4rem 2rem;
+  }
+
+  .step-title {
+    font-size: 2rem;
+  }
+
+  .step-description {
+    font-size: 1.4rem;
+  }
+}
+

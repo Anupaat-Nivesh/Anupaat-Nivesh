@@ -1,0 +1,76 @@
+/* WhatsApp Sticky CTA - Mobile Optimized */
+.whatsapp-cta {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #25D366;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.whatsapp-cta:hover {
+  background: #20BA5A;
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.whatsapp-text {
+  display: none;
+}
+
+/* Show text on larger screens */
+@media (min-width: 768px) {
+  .whatsapp-cta {
+    padding: 14px 24px;
+    font-size: 15px;
+  }
+  
+  .whatsapp-text {
+    display: inline;
+  }
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.6);
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 767px) {
+  .whatsapp-cta {
+    bottom: 80px; /* Above mobile navigation if present */
+    right: 15px;
+    padding: 14px;
+    min-width: 56px;
+    min-height: 56px;
+    justify-content: center;
+  }
+  
+  .whatsapp-icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+
