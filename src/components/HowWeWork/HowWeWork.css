@@ -1,140 +1,148 @@
+/**
+ * HowWeWork Component Styles
+ * 
+ * Responsive grid layout with educational focus
+ * Conversion-friendly design without aggressive selling
+ */
+
 .how-we-work {
-  background: #f8f9fa;
-  padding: 8rem 0;
+  background: var(--color-bg);
+  padding: 8rem 5rem;
 }
 
-.how-we-work .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.section-header {
+.how-we-work__header {
   text-align: center;
   margin-bottom: 6rem;
 }
 
-.section-title {
-  font-size: clamp(3.2rem, 4vw, 4.8rem);
-  font-weight: 700;
-  color: #0f1215;
+.how-we-work__header h2 {
   margin-bottom: 1.6rem;
 }
 
-/* .section-heading-focus styling is inherited from App.css */
-/* Original styling: background: var(--color-primary), color: #fff, border-radius: 2rem, padding: 0 1rem */
-
-.section-description {
-  font-size: 1.8rem;
-  color: #666;
-  max-width: 700px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-.steps-grid {
+.how-we-work__steps {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 3rem;
-  margin-bottom: 5rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.step-card {
+.how-we-work__step {
   background: #fff;
-  padding: 3rem 2.4rem;
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 3rem 2.5rem;
   text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
-.step-card::before {
+.how-we-work__step::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #fe0101, #ff4444);
+  background: linear-gradient(90deg, var(--color-primary), #ff6b6b);
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
 
-.step-card:hover {
+.how-we-work__step:hover {
   transform: translateY(-8px);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
-.step-card:hover::before {
+.how-we-work__step:hover::before {
   transform: scaleX(1);
 }
 
-.step-number {
+.how-we-work__step-number {
   font-size: 1.4rem;
   font-weight: 600;
-  color: #fe0101;
+  color: rgba(0, 0, 0, 0.2);
   margin-bottom: 1rem;
-  opacity: 0.7;
+  letter-spacing: 0.1em;
 }
 
-.step-icon {
+.how-we-work__step-icon {
   font-size: 4rem;
   margin-bottom: 1.6rem;
+  line-height: 1;
 }
 
-.step-title {
+.how-we-work__step-title {
   font-size: 2.4rem;
-  font-weight: 700;
-  color: #0f1215;
+  font-weight: 600;
+  color: var(--color-text);
   margin-bottom: 1.2rem;
 }
 
-.step-description {
-  font-size: 1.5rem;
-  color: #666;
+.how-we-work__step-description {
+  font-size: 1.6rem;
+  color: var(--color-subtext);
   line-height: 1.6;
 }
 
-.cta-section {
-  text-align: center;
-  padding-top: 4rem;
-  border-top: 1px solid #e0e0e0;
-}
-
-.cta-text {
-  font-size: 1.8rem;
-  color: #0f1215;
-  margin-bottom: 2rem;
-  font-weight: 600;
-}
-
-/* Mobile optimizations */
+/* Tablet adjustments */
 @media (max-width: 768px) {
   .how-we-work {
-    padding: 6rem 0;
+    padding: 6rem 3rem;
   }
-
-  .section-header {
+  
+  .how-we-work__header {
     margin-bottom: 4rem;
   }
+  
+  .how-we-work__steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  
+  .how-we-work__step {
+    padding: 2.5rem 2rem;
+  }
+  
+  .how-we-work__step-icon {
+    font-size: 3.5rem;
+  }
+  
+  .how-we-work__step-title {
+    font-size: 2.2rem;
+  }
+}
 
-  .steps-grid {
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  .how-we-work {
+    padding: 4rem 2rem;
+  }
+  
+  .how-we-work__header {
+    margin-bottom: 3rem;
+  }
+  
+  .how-we-work__steps {
     grid-template-columns: 1fr;
-    gap: 2.4rem;
+    gap: 2rem;
   }
-
-  .step-card {
-    padding: 2.4rem 2rem;
+  
+  .how-we-work__step {
+    padding: 2rem 1.5rem;
   }
-
-  .step-title {
+  
+  .how-we-work__step-icon {
+    font-size: 3rem;
+  }
+  
+  .how-we-work__step-title {
     font-size: 2rem;
   }
-
-  .step-description {
-    font-size: 1.4rem;
+  
+  .how-we-work__step-description {
+    font-size: 1.5rem;
   }
 }
 

@@ -131,6 +131,24 @@
   margin-bottom: 1rem;
   margin-top: 1rem;
   align-items: flex-start;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  padding-bottom: 0.5rem;
+}
+
+.calc-tabs::-webkit-scrollbar {
+  height: 6px;
+}
+
+.calc-tabs::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.calc-tabs::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 10px;
 }
 
 .tab {

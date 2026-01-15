@@ -51,7 +51,7 @@ const ContactModal = function (props) {
 
     toast.promise(emailjs.sendForm(emailJSserviceID, emailJSMFtemplteID, form.current, emailJSKey), {
       pending: 'Sending Message',
-      success: 'Message Sent!',
+      success: 'Message Sent Successfully!',
       error: 'Please try later!'
     }).then(res => { setTimeout(closeModalWindow, 3000) }).catch(err => { notifyFailure(); });
   };
