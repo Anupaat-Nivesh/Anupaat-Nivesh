@@ -5,3 +5,6 @@ export {default as OurApp} from './OurApp/OurApp';
 export {default as PartnerWithUs} from './partnerWithUs/PartnerWithUs';
 export {default as CorporateCorner} from './corporate/CorporateCorner';
 export {default as ChatBot} from './chatbot/ChatBot';
+export { default as WhatsAppCTA } from './WhatsAppCTA';
+export { default as HowWeWork } from './HowWeWork';
+export { default as ComplianceDisclaimer } from './ComplianceDisclaimer';

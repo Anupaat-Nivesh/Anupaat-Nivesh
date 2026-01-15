@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import './home.css';
 import { Carousel } from './Carousel';
@@ -10,6 +10,8 @@ import About from '../about/About';
 import Offerings from '../offerings/Offerings';
 import Contact from '../../components/contact/Contact';
 import { OurApp } from '../../components';
+import HowWeWork from '../../components/HowWeWork/HowWeWork';
+import { updateSEO } from '../../utils/seo';
 
 
 
@@ -18,8 +20,16 @@ import { OurApp } from '../../components';
 
 
 const Home = () => {
-
-
+    // SEO updates for homepage
+    useEffect(() => {
+        updateSEO({
+            title: 'Financial Planning & Mutual Fund Advisory | Anupaat Nivesh',
+            description: 'Get expert financial planning guidance with goal-based mutual fund investments. AMFI registered advisor helping you build long-term wealth through disciplined SIPs and regular portfolio reviews.',
+            keywords: 'mutual funds, financial planning, SIP, investment advisor, AMFI registered, financial advisory, goal-based investing, portfolio management',
+            canonical: '/',
+            ogType: 'website'
+        });
+    }, []);
 
     const img1 = require('../../assets/ImpanelmentsImages/empanelment1.png')
     const img2 = require('../../assets/ImpanelmentsImages/empanelment2.png')
@@ -42,18 +52,18 @@ const Home = () => {
                 <section className="home-hero home-section">
                     <div className="hero-content">
                         <p className="eyebrow">AMFI Registered Mutual Fund Distributor</p>
-                        <h1>Plan. Invest. Grow.<br />With a trusted partner.</h1>
+                        <h1>Build Long-Term Wealth<br />Through Clarity & Discipline</h1>
                         <p className="hero-subtitle">
-                            Human advice backed by data, disciplined SIPs, and proactive reviews to keep every goal on track.
+                            Get personalized financial planning guidance that helps you understand your goals, allocate wisely, and grow your wealth systematically. No promises, just transparent advice backed by data and regular reviews.
                         </p>
                         <div className="hero-actions">
-                            <Link to="/contact" className="btn btn-primary">Book a call</Link>
-                            <Link to="/offerings" className="btn btn-ghost">View offerings</Link>
+                            <Link to="/contact" className="btn btn-primary">Get Financial Clarity</Link>
+                            <Link to="/contact" className="btn btn-ghost">Talk to an Advisor</Link>
                         </div>
                         <div className="hero-pills">
-                            <span>Goal-based plans</span>
-                            <span>Tax-efficient strategies</span>
-                            <span>100% paperless onboarding</span>
+                            <span>Goal-based planning</span>
+                            <span>Disciplined investing</span>
+                            <span>Regular portfolio reviews</span>
                         </div>
                     </div>
                     <div className="hero-panel" data-aos="fade-up">
@@ -96,6 +106,7 @@ const Home = () => {
                 <section className='home-section about-section'> <About /></section>
 
                 <section className='home-section why-section'><Whyanupaat /></section>
+                <section className='home-section how-we-work-section'><HowWeWork /></section>
                 <SkillCounter />
                 <section className='home-section testimonials-section'><Testimonials /></section>
 

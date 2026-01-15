@@ -1,0 +1,144 @@
+/**
+ * ComplianceDisclaimer Component Styles
+ * 
+ * Clear, readable compliance information
+ * Neutral, professional design
+ */
+
+.compliance-disclaimer {
+  background: #f7f7f9;
+  border-top: 1px solid #e0e0e0;
+}
+
+.compliance-disclaimer__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.compliance-disclaimer__content {
+  padding: 3rem 2rem;
+}
+
+.compliance-disclaimer__title {
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.compliance-disclaimer__statements {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  margin-bottom: 2.4rem;
+}
+
+.compliance-disclaimer__statement {
+  font-size: 1.5rem;
+  line-height: 1.7;
+  color: #4a4a4a;
+  padding-left: 1.6rem;
+  position: relative;
+}
+
+.compliance-disclaimer__statement::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+.compliance-disclaimer__statement strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.compliance-disclaimer__links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  padding-top: 2rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.compliance-disclaimer__link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.compliance-disclaimer__link:hover {
+  color: #a40000;
+  text-decoration: underline;
+}
+
+.compliance-disclaimer__separator {
+  color: #999;
+  font-size: 1.5rem;
+}
+
+.compliance-disclaimer__text {
+  font-size: 1.4rem;
+  color: #666;
+}
+
+/* Tablet adjustments */
+@media (max-width: 768px) {
+  .compliance-disclaimer__content {
+    padding: 2.5rem 1.5rem;
+  }
+  
+  .compliance-disclaimer__title {
+    font-size: 2.2rem;
+    margin-bottom: 1.8rem;
+  }
+  
+  .compliance-disclaimer__statements {
+    gap: 1.4rem;
+    margin-bottom: 2rem;
+  }
+  
+  .compliance-disclaimer__statement {
+    font-size: 1.4rem;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  .compliance-disclaimer__content {
+    padding: 2rem 1.2rem;
+  }
+  
+  .compliance-disclaimer__title {
+    font-size: 2rem;
+    margin-bottom: 1.6rem;
+  }
+  
+  .compliance-disclaimer__statements {
+    gap: 1.2rem;
+    margin-bottom: 1.8rem;
+  }
+  
+  .compliance-disclaimer__statement {
+    font-size: 1.3rem;
+    padding-left: 1.4rem;
+  }
+  
+  .compliance-disclaimer__links {
+    flex-direction: column;
+    gap: 0.8rem;
+    padding-top: 1.6rem;
+  }
+  
+  .compliance-disclaimer__separator {
+    display: none;
+  }
+}
+

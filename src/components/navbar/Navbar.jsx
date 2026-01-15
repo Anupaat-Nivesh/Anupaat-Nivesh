@@ -7,6 +7,21 @@ import 'animate.css';
 
 import logo from '../../assets/logo.webp';
 
+const calculatorLinks = [
+    { name: "SIP Calculator", path: '/calculators', tab: 'sip' },
+    { name: "Step-up SIP", path: '/calculators', tab: 'step' },
+    { name: "Lumpsum Calculator", path: '/calculators', tab: 'lumpsum' },
+    { name: "Time Value (PV)", path: '/calculators', tab: 'pv' },
+    { name: "SWP Calculator", path: '/calculators', tab: 'swp' },
+    { name: "Retirement Planning", path: '/calculators', tab: 'retirement' },
+    { name: "Child Education", path: '/calculators', tab: 'education' },
+    { name: "Goal Planning", path: '/calculators', tab: 'goal' },
+    { name: "Term Insurance", path: '/calculators', tab: 'term' },
+    { name: "Home Loan", path: '/calculators', tab: 'homeloan' },
+    { name: "EMI Calculator", path: '/calculators', tab: 'emi' },
+    { name: "Inflation Calculator", path: '/calculators', tab: 'inflation' },
+];
+
 const links = [
     {
         name: "Home",
@@ -26,7 +41,8 @@ const links = [
     {
         name: "Calculators",
         path: '/calculators',
-        id: 'calculators'
+        id: 'calculators',
+        hasSubmenu: true
     },
     {
         name: "Offerings",
@@ -58,6 +74,7 @@ const Navbar = () => {
     const [toggleMenu, setToggleMenu] = useState(false);
     const [anupaat__navbar, setNavbar] = useState(false);
     const [showLoginMenu, setShowLoginMenu] = useState(false);
+    const [showCalculatorMenu, setShowCalculatorMenu] = useState(false);
     const location = useLocation();
     const changeNav = () => {
         if (window.scrollY >= 80) {
@@ -78,6 +95,7 @@ const Navbar = () => {
     useEffect(() => {
         // Close login dropdown whenever the route changes
         setShowLoginMenu(false);
+        setShowCalculatorMenu(false);
     }, [location.pathname]);
     /*On clicking the logo it will scroll to top*/
     const toggleHome = () => {
@@ -93,19 +111,54 @@ const Navbar = () => {
                 </div>
                 <ul className="anupaat__navbar-links_container">
                     {
-                        links.map(({ name, id, }) => {
+                        links.map(({ name, id, hasSubmenu }) => {
+                            if (hasSubmenu) {
+                                return (
+                                    <li key={name} className="nav-item-with-dropdown">
+                                        <button
+                                            className="nav-link"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setShowCalculatorMenu(prev => !prev);
+                                                setShowLoginMenu(false);
+                                            }}
+                                            onMouseEnter={() => setShowCalculatorMenu(true)}
+                                        >
+                                            {name} <span style={{ marginLeft: '0.3rem' }}>▼</span>
+                                        </button>
+                                        <div 
+                                            className={`calculator-dropdown ${showCalculatorMenu ? 'open' : ''}`}
+                                            onMouseLeave={() => setShowCalculatorMenu(false)}
+                                        >
+                                            {calculatorLinks.map(calc => (
+                                                <Link
+                                                    key={calc.tab}
+                                                    to={`${calc.path}?tab=${calc.tab}`}
+                                                    onClick={() => {
+                                                        setShowCalculatorMenu(false);
+                                                        setShowLoginMenu(false);
+                                                    }}
+                                                >
+                                                    {calc.name}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    </li>
+                                );
+                            }
                             return (
                                 <li key={name} >
-
                                     <Link
                                         className="nav-link"
                                         to={id}
                                         exact='true'
-                                        onClick={() => setShowLoginMenu(false)}
+                                        onClick={() => {
+                                            setShowLoginMenu(false);
+                                            setShowCalculatorMenu(false);
+                                        }}
                                     >
                                         {name}
                                     </Link>
-
                                 </li>
                             )
                         })
@@ -177,7 +230,36 @@ const Navbar = () => {
                 <div className="anupaat__navbar-menu_container scale-up-center" style={{ transform: `${toggleMenu ? 'translate(0,0)' : 'translate(100%,0)'}` }}>
                     <ul className="anupaat__navbar-menu_container-links">
                         {
-                            links.map(({ name, path }) => {
+                            links.map(({ name, path, hasSubmenu }) => {
+                                if (hasSubmenu) {
+                                    return (
+                                        <li key={name} className="mobile-submenu-item">
+                                            <div className="mobile-submenu-header">
+                                                <NavLink to={path} onClick={(e) => {
+                                                    e.preventDefault();
+                                                    const submenu = e.currentTarget.nextElementSibling;
+                                                    if (submenu) {
+                                                        submenu.classList.toggle('open');
+                                                    }
+                                                }}>
+                                                    {name} <span>▼</span>
+                                                </NavLink>
+                                            </div>
+                                            <ul className="mobile-submenu">
+                                                {calculatorLinks.map(calc => (
+                                                    <li key={calc.tab}>
+                                                        <NavLink 
+                                                            to={`${calc.path}?tab=${calc.tab}`} 
+                                                            onClick={() => setToggleMenu(prev => !prev)}
+                                                        >
+                                                            {calc.name}
+                                                        </NavLink>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </li>
+                                    );
+                                }
                                 return (
                                     <li key={name}>
                                         <NavLink to={path} onClick={() => setToggleMenu(prev => !prev)} >{name}</NavLink>

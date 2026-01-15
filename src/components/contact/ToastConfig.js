@@ -12,7 +12,7 @@ export const toastOptions = {
 };
 
 export const notifySuccessfull = () => {
-  toast.success("Message sent successfully! 😀", toastOptions);
+  toast.success("Message sent successfully!", toastOptions);
 };
 
 export const notifyFailure = (

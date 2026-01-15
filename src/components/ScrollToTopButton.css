@@ -43,9 +43,20 @@
   .scroll-to-top {
     width: 4.5rem;
     height: 4.5rem;
-    bottom: 2rem;
+    /* Positioned above ChatBot toggle: ChatBot is at bottom: 80px, height: 56px
+       So ChatBot top edge is at 136px from bottom. Add 20px spacing = 156px.
+       With button height 45px, bottom position = 156px = 15.6rem */
+    bottom: 15.6rem;
     right: 2rem;
     font-size: 1.6rem;
+  }
+}
+
+/* Extra small mobile screens - ensure proper spacing */
+@media (max-width: 480px) {
+  .scroll-to-top {
+    /* Slightly higher on smaller screens for better spacing */
+    bottom: 15rem;
   }
 }
 

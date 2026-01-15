@@ -71,6 +71,10 @@ const Footer = () => (
             <p>Head Office Address: Anupaat Nivesh Pvt. Ltd., Next57 Coworking, Plot 341, 5th Floor, Phase 9 Industrial Area, Mohali, Punjab, India - 160062</p >
             <p>Registered Address: Anupaat Nivesh Pvt. Ltd., #162 / 2, Dadu Majra, Chandigarh, India - 160014</p >
             <p><strong>Disclaimers:</strong></p>
+            <p><strong>Investments are subject to market risks.</strong> Please read all scheme related documents carefully before investing.</p>
+            <p>Past performance is not indicative of future results. We do not guarantee any returns or provide any assurance of profits.</p>
+            <p>We are an <strong>AMFI Registered Mutual Fund Distributor</strong> and provide advisory services in compliance with SEBI regulations. All investments are executed through <strong>BSE STAR MF</strong> platform, ensuring transparency and security.</p>
+            <p>We do not provide stock tips, trading recommendations, or guaranteed returns. Our services focus on goal-based financial planning and mutual fund investments.</p>
             <p>Mutual Funds and securities investments are subject to market risks and there is no assurance or guarantee that the objective of the Scheme will be achieved. Past performance of the Sponsor/AMC/Fund or that of any scheme of the Fund does not indicate the future performance of the Schemes of the Fund. Please read the Offer Document carefully before investing.</p>
             <p>SEBI has vide its circular dated November 26, 2010, stipulated that with respect to purchase of units of income/ debt oriented schemes (other than liquid schemes) with amount equal to or more than 1 Cr., irrespective of the time of application, the closing NAV of day on which funds are available for utilization shall be applicable. All Investors are advised to keep in mind said circular while investing in income/ debt oriented schemes (other than liquid schemes).</p>
             <p>Investment in Securities markets are subject to market risks, read all the related documents carefully before investing.</p>

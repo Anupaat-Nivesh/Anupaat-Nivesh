@@ -5,6 +5,7 @@ import Footer from "../containers/footer/Footer";
 import ScrollToTop from "../components/ScrollToTop";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import ChatBot from "../components/chatbot/ChatBot";
+import WhatsAppCTA from "../components/WhatsAppCTA/WhatsAppCTA";
 
 const MainLayout = () => {
     return (
@@ -15,6 +16,7 @@ const MainLayout = () => {
             <Footer />
             <ScrollToTopButton />
             <ChatBot />
+            <WhatsAppCTA />
         </>
     );
 };

@@ -1,15 +1,12 @@
-GENERATE_SOURCEMAP=false
 # Anupaat Nivesh - Environment Variables
 # Copy this file to .env and update with your actual values
 
 # WhatsApp CTA Configuration
 # Format: Country code + number without + or spaces
 # Example: 919876543210 (for India: +91 98765 43210)
-REACT_APP_WHATSAPP_NUMBER=919501195200
+REACT_APP_WHATSAPP_NUMBER=
 
 # Base URL for SEO (optional)
 # Used for canonical URLs and Open Graph images
 # Example: https://www.anupaatnivesh.com
-REACT_APP_BASE_URL=https://www.anupaatnivesh.com
-REACT_APP_SITE_NAME=Anupaat Nivesh
-REACT_APP_DEFAULT_OG_IMAGE=/og-default.jpg
+REACT_APP_BASE_URL=
