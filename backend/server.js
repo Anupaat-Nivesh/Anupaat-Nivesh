@@ -12,7 +12,6 @@ const Razorpay = require('razorpay');
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-// Middleware
 // CORS configuration - allow both www and non-www domains
 const allowedOrigins = [
   process.env.FRONTEND_URL,
@@ -21,20 +20,66 @@ const allowedOrigins = [
   'http://localhost:3000' // For local development
 ].filter(Boolean); // Remove undefined values
 
+// Helper function to set CORS headers
+const setCorsHeaders = (req, res) => {
+  const origin = req.headers.origin;
+  if (origin) {
+    const isAllowed = allowedOrigins.length === 0 || allowedOrigins.includes(origin);
+    if (isAllowed) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+      res.setHeader('Access-Control-Allow-Credentials', 'true');
+    }
+  }
+};
+
+// Handle preflight OPTIONS requests explicitly (critical for Vercel)
+app.options('*', (req, res) => {
+  const origin = req.headers.origin;
+
+  // Always set CORS headers for OPTIONS (preflight) requests
+  if (origin) {
+    // Check if origin is in allowed list
+    const isAllowed = allowedOrigins.length === 0 || allowedOrigins.includes(origin);
+
+    if (isAllowed) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept');
+      res.setHeader('Access-Control-Allow-Credentials', 'true');
+      res.setHeader('Access-Control-Max-Age', '86400'); // 24 hours
+    }
+  } else {
+    // No origin header, allow it
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept');
+  }
+
+  res.status(204).end();
+});
+
+// CORS middleware for all other requests
 app.use(cors({
   origin: function (origin, callback) {
     // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    
-    if (allowedOrigins.indexOf(origin) !== -1) {
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    // Check if origin is in allowed list or if allowedOrigins is empty (allow all)
+    if (allowedOrigins.length === 0 || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(null, true); // Allow all origins in production (or restrict as needed)
+      // Log for debugging
+      console.log('CORS blocked origin:', origin);
+      callback(null, true); // Allow all for now, can restrict later
     }
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  exposedHeaders: ['Content-Length', 'Content-Type'],
+  maxAge: 86400 // 24 hours
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -72,11 +117,15 @@ app.get('/api/health', (req, res) => {
 
 // Create Razorpay Order
 app.post('/api/payments/create-order', async (req, res) => {
+  // Set CORS headers explicitly for this endpoint
+  setCorsHeaders(req, res);
+
   try {
     const { amount, currency = 'INR', userData, bookingData, notes } = req.body;
 
     // Validate required fields
     if (!amount || amount <= 0) {
+      setCorsHeaders(req, res);
       return res.status(400).json({
         error: 'Invalid amount. Amount must be greater than 0.'
       });
@@ -122,11 +171,15 @@ app.post('/api/payments/create-order', async (req, res) => {
 
 // Verify Payment
 app.post('/api/payments/verify', async (req, res) => {
+  // Set CORS headers explicitly for this endpoint
+  setCorsHeaders(req, res);
+
   try {
     const { paymentId, orderId, signature, userData, bookingData } = req.body;
 
     // Validate required fields
     if (!paymentId || !orderId || !signature) {
+      setCorsHeaders(req, res);
       return res.status(400).json({
         error: 'Missing required payment verification fields'
       });
@@ -142,6 +195,7 @@ app.post('/api/payments/verify', async (req, res) => {
 
     if (generatedSignature !== signature) {
       console.error('❌ Payment signature verification failed');
+      setCorsHeaders(req, res);
       return res.status(400).json({
         verified: false,
         error: 'Invalid payment signature'
@@ -159,6 +213,7 @@ app.post('/api/payments/verify', async (req, res) => {
     });
   } catch (error) {
     console.error('❌ Error verifying payment:', error);
+    setCorsHeaders(req, res);
     res.status(500).json({
       verified: false,
       error: 'Failed to verify payment',
