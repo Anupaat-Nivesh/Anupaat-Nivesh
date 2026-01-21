@@ -17,8 +17,8 @@ export const Carousel = () => {
             bold: " INVESTING!",
             subDescription: "High income does not lead to wealth. It is high savings with right Investment.",
             subText: "Stack up with your financial foundation and get personalized advisory",
-            img560w:require("../../assets/illustrations/carousel1-illustration-560w.webp"),
-            img1120w:require("../../assets/illustrations/carousel1-illustration-1120w.webp"),
+            img560w: require("../../assets/illustrations/carousel1-illustration-560w.webp"),
+            img1120w: require("../../assets/illustrations/carousel1-illustration-1120w.webp"),
             img: require("../../assets/illustrations/carousel1-illustration.webp"),
         },
         {
@@ -28,8 +28,8 @@ export const Carousel = () => {
             bold: 'Financial Freedom',
             subDescription: "When it comes to long-term investing, doing 'LESS' is often 'MORE'.",
             subText: "Start SIP to meet your long-term financial goals",
-            img560w:require("../../assets/illustrations/carousel2-illustration-560w.webp"),
-            img1120w:require("../../assets/illustrations/carousel2-illustration-1120w.webp"),
+            img560w: require("../../assets/illustrations/carousel2-illustration-560w.webp"),
+            img1120w: require("../../assets/illustrations/carousel2-illustration-1120w.webp"),
             img: require("../../assets/illustrations/carousel2-illustration.webp"),
         },
         {
@@ -39,8 +39,8 @@ export const Carousel = () => {
             bold: 'Investment Wave',
             subDescription: "You will make big money if you don't go behind quick money.",
             subText: "Subscribe to our curated Equity Baskets & be ahead in your investment journey",
-            img560w:require("../../assets/illustrations/carousel3-illustration-560w.webp"),
-            img1120w:require("../../assets/illustrations/carousel3-illustration-1120w.webp"),
+            img560w: require("../../assets/illustrations/carousel3-illustration-560w.webp"),
+            img1120w: require("../../assets/illustrations/carousel3-illustration-1120w.webp"),
             img: require("../../assets/illustrations/carousel3-illustration.webp"),
         },
         {
@@ -50,8 +50,8 @@ export const Carousel = () => {
             bold: 'KAIZEN SIP',
             subDescription: "Sometime just a small step is required to start of the journey",
             subText: "Because we know, slow and steady wins the race",
-            img560w:require("../../assets/illustrations/carousel4-illustration-560w.webp"),
-            img1120w:require("../../assets/illustrations/carousel4-illustration-1120w.webp"),
+            img560w: require("../../assets/illustrations/carousel4-illustration-560w.webp"),
+            img1120w: require("../../assets/illustrations/carousel4-illustration-1120w.webp"),
             img: require("../../assets/illustrations/carousel4-illustration.webp"),
 
         }
@@ -66,13 +66,13 @@ export const Carousel = () => {
             loop={true}
             autoplay={{
                 delay: 5000,
-               disableOnInteraction:true,
-               pauseOnMouseEnter:true
+                disableOnInteraction: true,
+                pauseOnMouseEnter: true
             }}
 
             navigation={false} grabCursor={true} pagination={{
                 clickable: true,
-            }} modules={[Navigation, Pagination,Autoplay]}
+            }} modules={[Navigation, Pagination, Autoplay]}
             className="carousel-swiper"
         >
 

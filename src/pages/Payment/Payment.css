@@ -89,6 +89,51 @@
   margin: 0;
 }
 
+.payment-error-warning {
+  background: #fff3cd;
+  color: #856404;
+  border: 2px solid #ffc107;
+  text-align: left;
+}
+
+.payment-error-warning p {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.backend-setup-instructions {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(133, 100, 4, 0.2);
+}
+
+.backend-setup-instructions h4 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: #856404;
+}
+
+.backend-setup-instructions ol {
+  margin: 0;
+  padding-left: 2rem;
+}
+
+.backend-setup-instructions li {
+  font-size: 1.4rem;
+  margin-bottom: 0.8rem;
+  line-height: 1.6;
+  color: #856404;
+}
+
+.backend-setup-instructions code {
+  background: rgba(133, 100, 4, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 1.3rem;
+  color: #856404;
+}
+
 .payment-actions {
   text-align: center;
   margin-bottom: 2rem;

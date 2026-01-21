@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import './home.css';
 import { Carousel } from './Carousel';
@@ -20,6 +20,8 @@ import { updateSEO } from '../../utils/seo';
 
 
 const Home = () => {
+    const [heroScreen, setHeroScreen] = useState(0); // 0 = Talk to Advisor, 1 = Consulting Session
+
     // SEO updates for homepage
     useEffect(() => {
         updateSEO({
@@ -29,6 +31,13 @@ const Home = () => {
             canonical: '/',
             ogType: 'website'
         });
+
+        // Auto-rotate hero screens every 6 seconds
+        const interval = setInterval(() => {
+            setHeroScreen(prev => (prev === 0 ? 1 : 0));
+        }, 6000);
+
+        return () => clearInterval(interval);
     }, []);
 
     const img1 = require('../../assets/ImpanelmentsImages/empanelment1.png')
@@ -50,43 +59,43 @@ const Home = () => {
             <div className='anupaat_home' id="home">
 
                 <section className="home-hero home-section">
+                    <div className="hero-slider-container">
+                        {/* Screen 1: Talk to Advisor (Free) */}
+                        <div className={`hero-screen ${heroScreen === 0 ? 'active' : ''}`}>
                     <div className="hero-content">
                         <p className="eyebrow">AMFI Registered Mutual Fund Distributor</p>
-                        <h1>Build Long-Term Wealth<br />Through Clarity & Discipline</h1>
-                        <p className="hero-subtitle">
-                            Get personalized financial planning guidance that helps you understand your goals, allocate wisely, and grow your wealth systematically. No promises, just transparent advice backed by data and regular reviews.
-                        </p>
+                                <h1>Build Long-Term Wealth<br />Through Clarity & Discipline</h1>
+                                <p className="hero-benefit">Expert guidance for goal-based investing with disciplined SIPs and regular portfolio reviews.</p>
                         <div className="hero-actions">
-                            <Link to="/contact" className="btn btn-primary">Get Financial Clarity</Link>
-                            <Link to="/contact" className="btn btn-ghost">Talk to an Advisor</Link>
+                                    <Link to="/contact" className="btn btn-primary hero-cta-btn">Talk to an Advisor</Link>
                         </div>
                         <div className="hero-pills">
-                            <span>Goal-based planning</span>
-                            <span>Disciplined investing</span>
-                            <span>Regular portfolio reviews</span>
+                                    <span>✓ Free Consultation</span>
+                                    <span>✓ Expert Guidance</span>
+                                    <span>✓ Personalized Planning</span>
                         </div>
                     </div>
                     <div className="hero-panel" data-aos="fade-up">
                         <div className="hero-panel__badge">Trusted by growing families & professionals</div>
                         <div className="hero-panel__stat">
-                            <div>
+                                    <div className="stat-item">
                                 <p className="stat-label">AUM managed</p>
                                 <p className="stat-value">₹25 Cr+</p>
                                 <p className="stat-hint">Target ₹100 Cr by 2026</p>
                             </div>
-                            <div>
+                                    <div className="stat-item">
                                 <p className="stat-label">Monthly SIPs</p>
                                 <p className="stat-value">₹40 Lac+</p>
                                 <p className="stat-hint">Disciplined, goal-aligned</p>
                             </div>
                         </div>
                         <div className="hero-panel__stat">
-                            <div>
+                                    <div className="stat-item">
                                 <p className="stat-label">Happy clients</p>
                                 <p className="stat-value">500+</p>
                                 <p className="stat-hint">Across India & abroad</p>
                             </div>
-                            <div>
+                                    <div className="stat-item">
                                 <p className="stat-label">Experience</p>
                                 <p className="stat-value">8 Years+</p>
                                 <p className="stat-hint">Advisory & reviews</p>
@@ -95,6 +104,74 @@ const Home = () => {
                         <div className="hero-panel__note">
                             We pair expert advisors with digital tracking so you always know where your money stands.
                         </div>
+                            </div>
+                        </div>
+
+                        {/* Screen 2: Consulting Session (Paid) */}
+                        <div className={`hero-screen ${heroScreen === 1 ? 'active' : ''}`}>
+                            <div className="hero-content">
+                                <div className="consulting-badge">Limited Time Offer</div>
+                                <h1>1-on-1 Financial Consulting<br />Session</h1>
+                                <p className="hero-benefit">Get personalized financial planning, investment strategies, and goal achievement roadmap in one session.</p>
+                                <div className="hero-consulting-price">
+                                    <div className="price-group">
+                                        <span className="price-old">₹9,999</span>
+                                        <span className="price-new">₹99</span>
+                                        <span className="price-discount">Save 99%</span>
+                                    </div>
+                                    <Link to="/consulting-session" className="btn btn-primary hero-cta-btn hero-price-btn">Book Session</Link>
+                                </div>
+                                <div className="hero-pills">
+                                    <span>✓ AMFI Registered</span>
+                                    <span>✓ BSE STAR MF</span>
+                                    <span>✓ 8+ Years Experience</span>
+                                </div>
+                            </div>
+                            <div className="hero-panel" data-aos="fade-up">
+                                <div className="hero-panel__badge">What's Included</div>
+                                <div className="hero-panel__stat">
+                                    <div className="stat-item">
+                                        <p className="stat-label">Session Duration</p>
+                                        <p className="stat-value">30 Minutes</p>
+                                        <p className="stat-hint">One-on-one consultation</p>
+                                    </div>
+                                    <div className="stat-item">
+                                        <p className="stat-label">Format</p>
+                                        <p className="stat-value">Online</p>
+                                        <p className="stat-hint">Video call / Web conferencing</p>
+                                    </div>
+                                </div>
+                                <div className="hero-panel__stat">
+                                    <div className="stat-item">
+                                        <p className="stat-label">Includes</p>
+                                        <p className="stat-value">Financial Planning</p>
+                                        <p className="stat-hint">Investment guidance & goal setting</p>
+                                    </div>
+                                    <div className="stat-item">
+                                        <p className="stat-label">Value</p>
+                                        <p className="stat-value">₹9,999</p>
+                                        <p className="stat-hint">Now just ₹99 (99% off)</p>
+                                    </div>
+                                </div>
+                                <div className="hero-panel__note">
+                                    This session is educational and advisory in nature. No guaranteed returns or stock tips.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Hero Navigation Dots */}
+                    <div className="hero-navigation">
+                        <button 
+                            className={`hero-dot ${heroScreen === 0 ? 'active' : ''}`}
+                            onClick={() => setHeroScreen(0)}
+                            aria-label="Talk to Advisor"
+                        />
+                        <button 
+                            className={`hero-dot ${heroScreen === 1 ? 'active' : ''}`}
+                            onClick={() => setHeroScreen(1)}
+                            aria-label="Consulting Session"
+                        />
                     </div>
                 </section>
 
@@ -103,29 +180,6 @@ const Home = () => {
                 </div>
 
                 <section className='home-section offerings-section'>   <Offerings /></section>
-                
-                {/* Consulting Session Section */}
-                <section className='home-section consulting-session-promo'>
-                    <div className="consulting-promo-container">
-                        <div className="consulting-promo-content">
-                            <div className="consulting-promo-badge">Limited Time Offer</div>
-                            <h2 className="consulting-promo-title">
-                                ₹99 Financial Planning Session
-                            </h2>
-                            <p className="consulting-promo-description">
-                                Get expert financial guidance at an introductory price. This comprehensive session includes financial planning, income-expense clarity, investment planning, and goal clarification.
-                            </p>
-                            <div className="consulting-promo-price">
-                                <span className="price-old">₹9,999</span>
-                                <span className="price-new">₹99</span>
-                                <span className="price-discount">Save 99%</span>
-                            </div>
-                            <Link to="/consulting-session" className="btn btn-primary consulting-promo-cta">
-                                Book Session for ₹99
-                            </Link>
-                        </div>
-                    </div>
-                </section>
 
                 <section className='home-section about-section'> <About /></section>
 

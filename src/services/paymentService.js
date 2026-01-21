@@ -1,10 +1,12 @@
 /**
  * Payment Service
  * Handles Razorpay payment integration
- * Note: Payment verification MUST be done on backend
+ * Architecture: Frontend handles UI, Backend handles payment operations
  */
 
 import paymentConfig, { formatAmountForRazorpay } from '../utils/paymentConfig';
+import { createOrder as apiCreateOrder, verifyPayment as apiVerifyPayment } from '../api/paymentApi';
+import { isBackendAvailable } from '../api/config';
 
 /**
  * Load Razorpay script dynamically
@@ -27,32 +29,51 @@ export const loadRazorpayScript = () => {
 };
 
 /**
- * Create Razorpay order (backend call)
- * TODO: Replace with actual backend API call
+ * Create Razorpay order via backend API
+ * Falls back to mock mode in development if backend is not available
  * @param {Object} userData - User information
  * @param {Object} bookingData - Booking information
  * @returns {Promise<Object>} Order data with order_id
  */
 export const createRazorpayOrder = async (userData, bookingData) => {
-  // TODO: Replace with actual backend API call
-  // Example: const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/payments/create-order`, {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify({ amount: paymentConfig.consultingSessionPrice, userData, bookingData })
-  // });
-  // return await response.json();
+  // Use backend API if available
+  if (isBackendAvailable()) {
+    try {
+      const orderData = await apiCreateOrder({
+        amount: paymentConfig.consultingSessionPrice,
+        userData,
+        bookingData
+      });
+      return orderData;
+    } catch (error) {
+      console.error('Failed to create order via backend:', error);
+      // In production, throw error
+      if (process.env.NODE_ENV === 'production') {
+        throw new Error('Failed to create payment order. Please try again.');
+      }
+      // In development, fall back to mock mode
+      console.warn('Falling back to mock order creation (development mode)');
+    }
+  }
 
-  // Placeholder: Generate mock order ID for development
-  // In production, this MUST come from backend
-  const mockOrderId = `order_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-  
-  console.warn('Using mock order ID. Replace with backend API call.');
-  
-  return {
-    order_id: mockOrderId,
-    amount: formatAmountForRazorpay(paymentConfig.consultingSessionPrice),
-    currency: paymentConfig.currency
-  };
+  // Development mode: Without backend, we cannot create real Razorpay orders
+  // Razorpay requires server-side order creation for security
+  if (process.env.NODE_ENV === 'development') {
+    console.warn('⚠️ Development Mode: Backend API not configured.');
+    console.warn('⚠️ Payment testing requires a backend server to create Razorpay orders.');
+    console.warn('⚠️ Set REACT_APP_API_BASE_URL to your backend URL, or use Razorpay test mode with a test backend.');
+    
+    // Return a placeholder that will fail gracefully
+    // This allows the UI to show the error to the user
+    throw new Error(
+      'Payment processing requires a backend server. ' +
+      'Please configure REACT_APP_API_BASE_URL in .env file and start your backend server. ' +
+      'For testing, you can use Razorpay test mode with a test backend.'
+    );
+  }
+
+  // Production mode: Backend is required
+  throw new Error('Backend API is required for payment processing. Please configure REACT_APP_API_BASE_URL.');
 };
 
 /**
@@ -92,6 +113,13 @@ export const initializeRazorpayCheckout = async ({
       handler: async function(response) {
         // Payment successful - verify on backend
         try {
+          // In development mode without backend, skip verification
+          if (process.env.NODE_ENV === 'development' && !isBackendAvailable()) {
+            console.warn('⚠️ Development Mode: Skipping payment verification. Backend not available.');
+            onSuccess(response);
+            return;
+          }
+
           const verified = await verifyPayment({
             paymentId: response.razorpay_payment_id,
             orderId: response.razorpay_order_id,
@@ -107,7 +135,13 @@ export const initializeRazorpayCheckout = async ({
           }
         } catch (error) {
           console.error('Payment verification error:', error);
+          // In development, allow payment to proceed even if verification fails
+          if (process.env.NODE_ENV === 'development' && !isBackendAvailable()) {
+            console.warn('⚠️ Development Mode: Payment verification failed, but allowing to proceed.');
+            onSuccess(response);
+          } else {
           onFailure(error);
+          }
         }
       },
       modal: {
@@ -133,26 +167,37 @@ export const initializeRazorpayCheckout = async ({
 };
 
 /**
- * Verify payment signature (backend call)
- * TODO: Replace with actual backend API call
+ * Verify payment signature via backend API
+ * Falls back to mock mode in development if backend is not available
  * @param {Object} paymentData - Payment data
  * @returns {Promise<boolean>} True if payment is verified
  */
 export const verifyPayment = async (paymentData) => {
-  // TODO: Replace with actual backend API call
-  // Example: const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/payments/verify`, {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify(paymentData)
-  // });
-  // const result = await response.json();
-  // return result.verified === true;
+  // Use backend API if available
+  if (isBackendAvailable()) {
+    try {
+      const result = await apiVerifyPayment(paymentData);
+      return result.verified === true;
+    } catch (error) {
+      console.error('Failed to verify payment via backend:', error);
+      // In production, throw error
+      if (process.env.NODE_ENV === 'production') {
+        throw new Error('Payment verification failed. Please contact support.');
+      }
+      // In development, fall back to mock mode
+      console.warn('Falling back to mock payment verification (development mode)');
+    }
+  }
 
-  // Placeholder: For development, assume payment is verified
-  // In production, this MUST verify signature on backend
-  console.warn('Using mock payment verification. Replace with backend API call.');
-  
+  // Development mode: Mock verification
+  // This should only be used when backend is not available in development
+  if (process.env.NODE_ENV === 'development') {
+    console.warn('⚠️ Development Mode: Using mock payment verification. Backend API not configured.');
   return true;
+  }
+
+  // Production mode: Backend is required
+  throw new Error('Backend API is required for payment verification. Please configure REACT_APP_API_BASE_URL.');
 };
 
 /**

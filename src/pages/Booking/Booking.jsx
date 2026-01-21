@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BookingWidget from '../../components/BookingWidget/BookingWidget';
 import { getStoredUserData, storeBookingData, generateBookingReference } from '../../utils/bookingHandler';
+import checkEnvVars from '../../utils/envCheck';
 import './Booking.css';
 
 /**
@@ -15,6 +16,15 @@ const Booking = () => {
   const [userData, setUserData] = useState(null);
   const [bookingComplete, setBookingComplete] = useState(false);
   const [bookingData, setBookingData] = useState(null);
+
+  // Check environment variables only once on mount
+  useEffect(() => {
+    // Debug: Check environment variables (only in development, only once)
+    if (process.env.NODE_ENV === 'development' && !window.__ENV_CHECKED__) {
+      checkEnvVars();
+      window.__ENV_CHECKED__ = true;
+    }
+  }, []);
 
   useEffect(() => {
     // Get user data from location state or sessionStorage
@@ -31,18 +41,11 @@ const Booking = () => {
     setUserData(data);
 
     // Listen for Calendly booking completion
-    window.addEventListener('message', handleCalendlyEvent);
-    
-    // Load Calendly script if not already loaded
-    if (!document.querySelector('script[src*="calendly.com"]')) {
-      const script = document.createElement('script');
-      script.src = 'https://assets.calendly.com/assets/external/widget.js';
-      script.async = true;
-      document.body.appendChild(script);
-    }
+    const messageHandler = (event) => handleCalendlyEvent(event);
+    window.addEventListener('message', messageHandler);
 
     return () => {
-      window.removeEventListener('message', handleCalendlyEvent);
+      window.removeEventListener('message', messageHandler);
     };
   }, [location, navigate]);
 
@@ -123,36 +126,12 @@ const Booking = () => {
   return (
     <div className="booking-page">
       <div className="booking-container">
-        <div className="booking-header">
-          <h1>Select Your Preferred Time</h1>
-          <p>Choose a convenient time slot for your consulting session</p>
-        </div>
-
-        <div className="booking-info">
-          <div className="info-item">
-            <strong>Name:</strong> {userData.firstName} {userData.lastName}
-          </div>
-          <div className="info-item">
-            <strong>Email:</strong> {userData.email}
-          </div>
-          <div className="info-item">
-            <strong>Phone:</strong> {userData.phone}
-          </div>
-        </div>
-
-        <div className="booking-widget-wrapper">
-          <BookingWidget
-            type="calendly"
-            calendlyUrl={process.env.REACT_APP_CALENDLY_CONSULTING_URL}
-            title="Book Your Consultation"
-            subtitle="Select a date and time that works for you"
-            userData={userData}
-          />
-        </div>
-
-        <div className="booking-note">
-          <p>After selecting your time slot, you'll be redirected to complete the payment.</p>
-        </div>
+        <BookingWidget
+          type="calendly"
+          calendlyUrl={process.env.REACT_APP_CALENDLY_CONSULTING_URL}
+          userData={userData}
+          showHeader={false}
+        />
       </div>
     </div>
   );

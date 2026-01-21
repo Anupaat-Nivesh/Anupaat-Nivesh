@@ -1,27 +1,39 @@
 /**
  * Booking Service
  * Handles booking storage and retrieval
- * TODO: Replace with actual backend API calls
+ * Architecture: Frontend makes API calls to backend
  */
+
+import { createBooking as apiCreateBooking, getBooking as apiGetBooking, updateBookingStatus as apiUpdateBookingStatus, saveCompleteBooking as apiSaveCompleteBooking } from '../api/bookingApi';
+import { isBackendAvailable } from '../api/config';
 
 /**
  * Save booking to backend
+ * Falls back to mock mode in development if backend is not available
  * @param {Object} bookingData - Complete booking data
  * @returns {Promise<Object>} Saved booking with booking_id
  */
 export const saveBooking = async (bookingData) => {
-  // TODO: Replace with actual backend API call
-  // Example: const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/bookings`, {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify(bookingData)
-  // });
-  // return await response.json();
+  // Use backend API if available
+  if (isBackendAvailable()) {
+    try {
+      return await apiCreateBooking(bookingData);
+    } catch (error) {
+      console.error('Failed to save booking via backend:', error);
+      // In production, throw error
+      if (process.env.NODE_ENV === 'production') {
+        throw new Error('Failed to save booking. Please try again.');
+      }
+      // In development, fall back to mock mode
+      console.warn('Falling back to mock booking storage (development mode)');
+    }
+  }
 
-  // Placeholder: Generate mock booking ID for development
-  const mockBookingId = `booking_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-  
-  console.warn('Using mock booking storage. Replace with backend API call.');
+  // Development mode: Generate mock booking ID
+  // This should only be used when backend is not available in development
+  if (process.env.NODE_ENV === 'development') {
+    console.warn('⚠️ Development Mode: Using mock booking storage. Backend API not configured.');
+    const mockBookingId = `booking_mock_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   
   return {
     booking_id: mockBookingId,
@@ -29,6 +41,10 @@ export const saveBooking = async (bookingData) => {
     status: 'confirmed',
     ...bookingData
   };
+  }
+
+  // Production mode: Backend is required
+  throw new Error('Backend API is required for booking storage. Please configure REACT_APP_API_BASE_URL.');
 };
 
 /**
@@ -37,17 +53,28 @@ export const saveBooking = async (bookingData) => {
  * @returns {Promise<Object>} Booking data
  */
 export const getBooking = async (bookingId) => {
-  // TODO: Replace with actual backend API call
-  // Example: const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/bookings/${bookingId}`);
-  // return await response.json();
+  if (isBackendAvailable()) {
+    try {
+      return await apiGetBooking(bookingId);
+    } catch (error) {
+      console.error('Failed to get booking via backend:', error);
+      if (process.env.NODE_ENV === 'production') {
+        throw error;
+      }
+    }
+  }
 
-  console.warn('Using mock booking retrieval. Replace with backend API call.');
-  
+  // Development mode: Mock response
+  if (process.env.NODE_ENV === 'development') {
+    console.warn('⚠️ Development Mode: Using mock booking retrieval.');
   return {
     booking_id: bookingId,
     status: 'confirmed',
-    message: 'Mock booking data - replace with backend API'
+      message: 'Mock booking data - Backend API not configured'
   };
+  }
+
+  throw new Error('Backend API is required. Please configure REACT_APP_API_BASE_URL.');
 };
 
 /**
@@ -57,21 +84,28 @@ export const getBooking = async (bookingId) => {
  * @returns {Promise<Object>} Updated booking
  */
 export const updateBookingStatus = async (bookingId, status) => {
-  // TODO: Replace with actual backend API call
-  // Example: const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/bookings/${bookingId}/status`, {
-  //   method: 'PUT',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify({ status })
-  // });
-  // return await response.json();
+  if (isBackendAvailable()) {
+    try {
+      return await apiUpdateBookingStatus(bookingId, status);
+    } catch (error) {
+      console.error('Failed to update booking status via backend:', error);
+      if (process.env.NODE_ENV === 'production') {
+        throw error;
+      }
+    }
+  }
 
-  console.warn('Using mock booking status update. Replace with backend API call.');
-  
+  // Development mode: Mock response
+  if (process.env.NODE_ENV === 'development') {
+    console.warn('⚠️ Development Mode: Using mock booking status update.');
   return {
     booking_id: bookingId,
     status,
     updated_at: new Date().toISOString()
   };
+  }
+
+  throw new Error('Backend API is required. Please configure REACT_APP_API_BASE_URL.');
 };
 
 /**
@@ -81,6 +115,23 @@ export const updateBookingStatus = async (bookingId, status) => {
  * @returns {Promise<Object>} Saved booking
  */
 export const saveCompleteBooking = async (data) => {
+  // Use backend API if available
+  if (isBackendAvailable()) {
+    try {
+      return await apiSaveCompleteBooking(data);
+    } catch (error) {
+      console.error('Failed to save complete booking via backend:', error);
+      // In production, throw error
+      if (process.env.NODE_ENV === 'production') {
+        throw new Error('Failed to save booking. Please contact support.');
+      }
+      // In development, fall back to mock mode
+      console.warn('Falling back to mock booking storage (development mode)');
+    }
+  }
+
+  // Development mode: Use local saveBooking function
+  if (process.env.NODE_ENV === 'development') {
   const bookingData = {
     bookingReference: data.bookingReference,
     userData: {
@@ -113,6 +164,10 @@ export const saveCompleteBooking = async (data) => {
   };
 
   return await saveBooking(bookingData);
+  }
+
+  // Production mode: Backend is required
+  throw new Error('Backend API is required for booking storage. Please configure REACT_APP_API_BASE_URL.');
 };
 
 export default {

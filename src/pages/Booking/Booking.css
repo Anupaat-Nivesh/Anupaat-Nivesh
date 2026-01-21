@@ -2,71 +2,18 @@
 
 .booking-page {
   min-height: 100vh;
-  background: var(--color-bg);
-  padding: 8rem 2rem 4rem;
-}
-
-.booking-container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.booking-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.booking-header h1 {
-  font-size: clamp(2.8rem, 4vw, 4rem);
-  color: var(--color-text);
-  margin-bottom: 1rem;
-}
-
-.booking-header p {
-  font-size: 1.6rem;
-  color: var(--color-subtext);
-}
-
-.booking-info {
-  background: #fff;
-  padding: 2rem;
-  border-radius: 18px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-  margin-bottom: 3rem;
+  background: #f8f9fa;
+  padding: 6rem 2rem 2rem;
   display: flex;
-  gap: 3rem;
-  flex-wrap: wrap;
+  align-items: flex-start;
   justify-content: center;
 }
 
-.info-item {
-  font-size: 1.5rem;
-  color: var(--color-text);
-}
-
-.info-item strong {
-  color: var(--color-primary);
-  margin-right: 0.5rem;
-}
-
-.booking-widget-wrapper {
-  background: #fff;
-  padding: 3rem;
-  border-radius: 18px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  margin-bottom: 2rem;
-}
-
-.booking-note {
-  text-align: center;
-  padding: 2rem;
-  background: var(--color-grey-light);
-  border-radius: 12px;
-}
-
-.booking-note p {
-  font-size: 1.5rem;
-  color: var(--color-subtext);
+.booking-container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  min-width: 1100px; /* Ensure Calendly can display its native two-column layout */
 }
 
 .booking-loading,
@@ -105,18 +52,19 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+  .booking-container {
+    min-width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
   .booking-page {
     padding: 6rem 1rem 2rem;
   }
 
-  .booking-widget-wrapper {
-    padding: 1.5rem;
-  }
-
-  .booking-info {
-    flex-direction: column;
-    gap: 1.5rem;
+  .booking-container {
+    min-width: 100%;
   }
 }
 

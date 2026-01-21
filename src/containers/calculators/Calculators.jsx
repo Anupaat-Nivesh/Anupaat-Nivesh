@@ -2042,8 +2042,8 @@ const Calculators = () => {
                   ₹{formatIndianNumber(inflationResult.currentAmount)} today will have the same purchasing power as ₹{formatIndianNumber(inflationResult.futureValue)} in {inflationResult.years} years. 
                   You'll need to invest to beat inflation and preserve your purchasing power.
                 </p>
-              </div>
             </div>
+          </div>
           </div>
         )}
       </div>

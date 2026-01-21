@@ -1,74 +1,194 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
+import { buildCalendlyUrl, validateCalendlyConfig } from '../../utils/calendlyConfig';
 import './BookingWidget.css';
 
 /**
  * Booking Widget Component
  * Supports Calendly and Google Booking integrations
- * TODO: Replace with actual Calendly URL or Google Booking embed
+ * Uses centralized Calendly configuration
  */
 const BookingWidget = ({ 
   type = 'calendly', // 'calendly' or 'google'
-  calendlyUrl = null, // e.g., 'https://calendly.com/anupaat-nivesh/consultation'
+  calendlyUrl = null, // Override Calendly URL (optional)
   googleBookingUrl = null,
   title = "Book a Free Consultation",
   subtitle = "Schedule a time that works for you",
-  userData = null // User data for prefill
+  userData = null, // User data for prefill
+  showHeader = true // Show header section (default true for backward compatibility)
 }) => {
-  // Get Calendly URL from environment or prop
-  const defaultCalendlyUrl = process.env.REACT_APP_CALENDLY_CONSULTING_URL || 
-                              process.env.REACT_APP_CALENDLY_URL || 
-                              calendlyUrl || 
-                              'https://calendly.com/anupaat-nivesh/consultation';
+  // Validate Calendly configuration
+  useEffect(() => {
+    if (type === 'calendly') {
+      validateCalendlyConfig();
+    }
+  }, [type]);
   
-  // Build Calendly URL with prefill parameters
-  const getCalendlyUrl = () => {
-    if (!userData) return defaultCalendlyUrl;
+  // Build Calendly URL with prefill parameters using config utility
+  const getCalendlyUrl = useCallback(() => {
+    // Priority: prop > REACT_APP_CALENDLY_CONSULTING_URL > REACT_APP_CALENDLY_URL > config utility
+    const propUrl = calendlyUrl;
+    const envConsultingUrl = process.env.REACT_APP_CALENDLY_CONSULTING_URL;
+    const envUrl = process.env.REACT_APP_CALENDLY_URL;
+    const configUrl = buildCalendlyUrl(userData);
     
-    const params = new URLSearchParams();
-    params.append('name', `${userData.firstName} ${userData.lastName}`);
-    if (userData.email) params.append('email', userData.email);
-    if (userData.phone) params.append('a1', userData.phone); // Custom field for phone
+    const urlToUse = propUrl || envConsultingUrl || envUrl || configUrl;
     
-    // Add custom fields if Calendly supports them
-    if (userData.age) params.append('a2', userData.age);
-    if (userData.incomeRange) params.append('a3', userData.incomeRange);
-    if (userData.primaryConcern) params.append('a4', userData.primaryConcern);
-    
-    return `${defaultCalendlyUrl}?${params.toString()}`;
-  };
+    if (!urlToUse || urlToUse.trim() === '') {
+      console.warn('Calendly URL not found. Checked:', {
+        propUrl,
+        envConsultingUrl,
+        envUrl,
+        configUrl
+      });
+      return '';
+    }
 
+    // Return base URL without query params (we'll use prefill in initInlineWidget)
+    return urlToUse;
+  }, [calendlyUrl, userData]);
+  
+  const defaultCalendlyUrl = getCalendlyUrl();
+
+  // Load and initialize Calendly widget using JavaScript API
   useEffect(() => {
     if (type === 'calendly' && defaultCalendlyUrl) {
+      const containerId = 'calendly-inline-widget-container';
+      let isMounted = true;
+      
+      // Function to initialize Calendly widget
+      const initCalendly = () => {
+        if (!isMounted) return;
+        
+        if (window.Calendly && window.Calendly.initInlineWidget) {
+          const container = document.getElementById(containerId);
+          if (container && isMounted) {
+            // Clear any existing content
+            container.innerHTML = '';
+            
+            // Prepare prefill data
+            const prefillData = userData ? {
+              name: userData.firstName && userData.lastName 
+                ? `${userData.firstName} ${userData.lastName}` 
+                : undefined,
+              email: userData.email || undefined,
+              customAnswers: {
+                a1: userData.phone || undefined,
+                a2: userData.age || undefined,
+                a3: userData.incomeRange || undefined,
+                a4: userData.primaryConcern || undefined,
+              }
+            } : undefined;
+            
+            // Initialize inline widget using JavaScript API
+            try {
+              window.Calendly.initInlineWidget({
+                url: defaultCalendlyUrl,
+                parentElement: container,
+                prefill: prefillData,
+                // Ensure full booking flow is visible on one screen
+                utm: {},
+                hideEventTypeDetails: false,
+                hideLandingPageDetails: false,
+              });
+            } catch (error) {
+              console.error('Error initializing Calendly widget:', error);
+            }
+          }
+        }
+      };
+
+      // Check if Calendly is already loaded
+      if (window.Calendly && window.Calendly.initInlineWidget) {
+        // Small delay to ensure DOM is ready
+        setTimeout(initCalendly, 50);
+        return () => {
+          isMounted = false;
+        };
+      }
+
+      // Check if script is already in DOM
+      if (document.querySelector('script[src*="calendly.com"]')) {
+        // Script exists, wait for it to load
+        const checkInterval = setInterval(() => {
+          if (window.Calendly && window.Calendly.initInlineWidget) {
+            clearInterval(checkInterval);
+            initCalendly();
+          }
+        }, 100);
+        
+        // Cleanup after 5 seconds if still not loaded
+        const timeout = setTimeout(() => clearInterval(checkInterval), 5000);
+        
+        return () => {
+          isMounted = false;
+          clearInterval(checkInterval);
+          clearTimeout(timeout);
+        };
+      }
+
       // Load Calendly widget script
       const script = document.createElement('script');
       script.src = 'https://assets.calendly.com/assets/external/widget.js';
       script.async = true;
+      script.onload = () => {
+        if (isMounted) {
+          // Wait a bit for Calendly to fully initialize
+          setTimeout(initCalendly, 100);
+        }
+      };
+      script.onerror = () => {
+        console.error('Failed to load Calendly widget script');
+      };
       document.body.appendChild(script);
 
       return () => {
-        // Cleanup
-        const calendlyScript = document.querySelector('script[src*="calendly.com"]');
-        if (calendlyScript) {
-          calendlyScript.remove();
-        }
+        isMounted = false;
       };
     }
-  }, [type, defaultCalendlyUrl]);
+  }, [type, defaultCalendlyUrl, userData]);
 
-  if (type === 'calendly' && defaultCalendlyUrl) {
-    const calendlyUrlWithPrefill = getCalendlyUrl();
-    
+  // Show error state if Calendly URL is not configured
+  if (type === 'calendly' && !defaultCalendlyUrl) {
     return (
       <div className="booking-widget-container">
         <div className="booking-widget-header">
           <h3>{title}</h3>
           <p>{subtitle}</p>
         </div>
-        <div 
-          className="calendly-inline-widget" 
-          data-url={calendlyUrlWithPrefill}
-          style={{ minWidth: '320px', height: '630px' }}
-        />
+        <div className="booking-widget-error">
+          <p>⚠️ Calendly is not configured.</p>
+          <p>Please set <code>REACT_APP_CALENDLY_CONSULTING_URL</code> in your <code>.env</code> file and restart the dev server.</p>
+          <div className="booking-note" style={{ marginTop: '1.5rem' }}>
+            <p><strong>Current values checked:</strong></p>
+            <ul style={{ textAlign: 'left', marginTop: '1rem', paddingLeft: '2rem' }}>
+              <li>Prop URL: {calendlyUrl || 'Not provided'}</li>
+              <li>REACT_APP_CALENDLY_CONSULTING_URL: {process.env.REACT_APP_CALENDLY_CONSULTING_URL || 'Not set'}</li>
+              <li>REACT_APP_CALENDLY_URL: {process.env.REACT_APP_CALENDLY_URL || 'Not set'}</li>
+            </ul>
+            <p style={{ marginTop: '1.5rem' }}>
+              <strong>Note:</strong> After updating <code>.env</code>, you must restart the development server for changes to take effect.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === 'calendly' && defaultCalendlyUrl) {
+    return (
+      <div className={`booking-widget-container ${!showHeader ? 'booking-widget-fullscreen' : ''}`}>
+        {showHeader && (
+          <div className="booking-widget-header">
+            <h3>{title}</h3>
+            <p>{subtitle}</p>
+          </div>
+        )}
+        <div className="calendly-widget-wrapper">
+          <div 
+            id="calendly-inline-widget-container"
+            className="calendly-inline-widget-container"
+          />
+        </div>
       </div>
     );
   }

@@ -27,8 +27,14 @@ cp .env.example .env
 ```
 
 4. Configure environment variables in `.env`:
-   - `REACT_APP_WHATSAPP_NUMBER`: Your WhatsApp number in international format (e.g., `919876543210`)
-   - `REACT_APP_BASE_URL`: Your website base URL (optional, for SEO)
+   - **WhatsApp**: `REACT_APP_WHATSAPP_NUMBER` - Your WhatsApp number in international format (e.g., `919876543210`)
+   - **Razorpay**: `REACT_APP_RAZORPAY_KEY_ID` - Your Razorpay Key ID from dashboard
+   - **Calendly**: `REACT_APP_CALENDLY_CONSULTING_URL` - Your Calendly event URL
+   - **Pricing**: `REACT_APP_CONSULTING_SESSION_PRICE` and `REACT_APP_CONSULTING_SESSION_ACTUAL_PRICE`
+   - **Backend API**: `REACT_APP_API_BASE_URL` - Your backend API URL (optional for development)
+   - **SEO**: `REACT_APP_BASE_URL` - Your website base URL (optional, for SEO)
+   
+   See `.env.example` for all available environment variables.
 
 5. Start the development server
 ```bash
@@ -138,12 +144,126 @@ The build folder will contain the optimized production build.
 - Accessible components with ARIA labels
 - Performance optimized with lazy loading considerations
 
+## 🏗️ Architecture
+
+### Frontend-Backend Separation
+
+This application follows a **clean architecture** with clear separation between frontend and backend:
+
+#### Frontend (This Repository)
+- **React Application**: UI components and client-side logic
+- **API Client Layer**: `src/api/` - Centralized API communication
+- **Service Layer**: `src/services/` - Business logic services
+- **No Secrets**: All sensitive operations handled by backend
+
+#### Backend (Separate Repository)
+- **API Server**: Node.js/Express backend
+- **Payment Processing**: Razorpay order creation and verification
+- **Database**: Booking and payment storage
+- **Secret Management**: Razorpay secret keys, API tokens
+
+#### Communication
+- **RESTful API**: Frontend communicates with backend via HTTP/HTTPS
+- **Environment-Based**: Configure `REACT_APP_API_BASE_URL` for backend connection
+- **Development Mode**: Works without backend (uses mock data)
+- **Production Mode**: Requires backend API
+
+### Project Structure
+
+```
+src/
+├── api/                    # API client layer
+│   ├── config.js          # API configuration
+│   ├── client.js          # HTTP client
+│   ├── paymentApi.js      # Payment API calls
+│   ├── bookingApi.js      # Booking API calls
+│   └── index.js           # API exports
+├── services/               # Business logic services
+│   ├── paymentService.js  # Payment operations
+│   ├── bookingService.js  # Booking operations
+│   └── notificationService.js
+├── utils/                  # Utilities
+│   ├── paymentConfig.js   # Payment configuration
+│   ├── calendlyConfig.js  # Calendly configuration
+│   └── seo.js             # SEO utilities
+└── components/             # React components
+```
+
+### Development Modes
+
+#### With Backend (Recommended)
+1. Set `REACT_APP_API_BASE_URL=http://localhost:8000` in `.env`
+2. Start backend API server
+3. Frontend makes real API calls to backend
+4. All operations use actual backend services
+
+#### Without Backend (Development Only)
+1. Don't set `REACT_APP_API_BASE_URL` or leave it empty
+2. Frontend uses mock implementations
+3. Console warnings indicate mock mode
+4. **Not recommended for production**
+
+## 💳 Payment Integration (Razorpay)
+
+### Setup
+1. Get your Razorpay Key ID from [Razorpay Dashboard](https://dashboard.razorpay.com) > Settings > API Keys
+2. Add `REACT_APP_RAZORPAY_KEY_ID` to your `.env` file
+3. Configure pricing: `REACT_APP_CONSULTING_SESSION_PRICE` and `REACT_APP_CONSULTING_SESSION_ACTUAL_PRICE`
+4. **Backend Setup**: Configure Razorpay Secret Key in backend (see `BACKEND_API.md`)
+
+### Features
+- Secure payment gateway integration
+- Support for UPI, Cards, Net Banking
+- Payment verification via backend API
+- Success/Error handling pages
+- Google Analytics tracking
+
+### Payment Flow
+1. User fills consulting session form (`/consulting-session`)
+2. User selects time slot via Calendly (`/booking`)
+3. Frontend calls backend to create Razorpay order
+4. User completes payment via Razorpay (`/payment`)
+5. Frontend calls backend to verify payment
+6. Backend saves booking and payment data
+7. Redirect to success page (`/payment-success`)
+
+### Backend Integration
+⚠️ **Important**: Payment verification MUST be done on backend for security.
+
+See `BACKEND_API.md` for complete backend API documentation.
+
+**Backend Requirements:**
+- Razorpay Secret Key (never in frontend)
+- Payment order creation endpoint
+- Payment verification endpoint
+- Booking storage endpoint
+
+## 📅 Calendly Integration
+
+### Setup
+1. Create a Calendly event type for consulting sessions
+2. Get the event URL from Calendly > Event Types > Share
+3. Add `REACT_APP_CALENDLY_CONSULTING_URL` to your `.env` file
+
+### Features
+- Embedded Calendly widget
+- User data prefill (name, email, phone)
+- Custom field mapping
+- Booking completion tracking
+- Automatic redirect to payment after booking
+
+### Configuration
+- Location: `src/utils/calendlyConfig.js`
+- Customize prefill options and field mappings
+- Widget styling matches brand colors
+
 ## 🔒 Compliance
 
 - All content follows SEBI/AMFI compliance guidelines
 - No return guarantees or stock tips
 - Clear risk disclosures
 - Privacy policy linked in compliance section
+- Payment data handled securely via Razorpay
 
 ## 📄 License
 

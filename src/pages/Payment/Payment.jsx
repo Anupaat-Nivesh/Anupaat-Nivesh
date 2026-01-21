@@ -5,6 +5,7 @@ import { createRazorpayOrder, initializeRazorpayCheckout } from '../../services/
 import { saveCompleteBooking } from '../../services/bookingService';
 import { sendAllNotifications } from '../../services/notificationService';
 import paymentConfig, { formatAmountForDisplay } from '../../utils/paymentConfig';
+import { isBackendAvailable } from '../../api/config';
 import './Payment.css';
 
 /**
@@ -18,8 +19,13 @@ const Payment = () => {
   const [bookingData, setBookingData] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState(null);
+  const [backendAvailable, setBackendAvailable] = useState(false);
 
   useEffect(() => {
+    // Check if backend is available
+    const backendStatus = isBackendAvailable();
+    setBackendAvailable(backendStatus);
+    
     // Get data from location state or sessionStorage
     const stateData = location.state;
     const storedBooking = getStoredBookingData();
@@ -36,6 +42,15 @@ const Payment = () => {
 
     setUserData(finalUserData);
     setBookingData(finalBookingData);
+    
+    // Show warning if backend is not available (only in development)
+    if (!backendStatus && process.env.NODE_ENV === 'development') {
+      setError(
+        'Payment processing requires a backend server. ' +
+        'Please configure REACT_APP_API_BASE_URL in .env file and start your backend server. ' +
+        'For testing, you can use Razorpay test mode with a test backend.'
+      );
+    }
 
     // Track payment page view
     if (window.gtag) {
@@ -154,7 +169,17 @@ const Payment = () => {
       });
     } catch (error) {
       console.error('Payment initialization error:', error);
-      setError(error.message || 'Failed to initialize payment. Please try again.');
+      
+      // Provide user-friendly error messages
+      let errorMessage = error.message || 'Failed to initialize payment. Please try again.';
+      
+      if (error.message && error.message.includes('Backend API')) {
+        errorMessage = 'Payment processing requires a backend server. Please contact support or try again later.';
+      } else if (error.message && error.message.includes('network')) {
+        errorMessage = 'Network error. Please check your internet connection and try again.';
+      }
+      
+      setError(errorMessage);
       setIsProcessing(false);
     }
   };
@@ -210,8 +235,19 @@ const Payment = () => {
         </div>
 
         {error && (
-          <div className="payment-error">
+          <div className={`payment-error ${!backendAvailable && process.env.NODE_ENV === 'development' ? 'payment-error-warning' : ''}`}>
             <p>{error}</p>
+            {!backendAvailable && process.env.NODE_ENV === 'development' && (
+              <div className="backend-setup-instructions">
+                <h4>Setup Instructions:</h4>
+                <ol>
+                  <li>Set <code>REACT_APP_API_BASE_URL=http://localhost:8000</code> in your <code>.env</code> file</li>
+                  <li>Start your backend server on port 8000</li>
+                  <li>Ensure your backend has the payment endpoints configured (see <code>BACKEND_API.md</code>)</li>
+                  <li>Restart your React development server after updating <code>.env</code></li>
+                </ol>
+              </div>
+            )}
           </div>
         )}
 
@@ -219,7 +255,7 @@ const Payment = () => {
           <button
             className="btn btn-primary payment-button"
             onClick={handlePayment}
-            disabled={isProcessing}
+            disabled={isProcessing || (!backendAvailable && process.env.NODE_ENV === 'development')}
           >
             {isProcessing ? 'Processing...' : `Pay ${formatAmountForDisplay(paymentConfig.consultingSessionPrice)}`}
           </button>
