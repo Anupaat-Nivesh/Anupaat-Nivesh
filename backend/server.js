@@ -26,6 +26,22 @@ const razorpay = new Razorpay({
   key_secret: process.env.RAZORPAY_KEY_SECRET
 });
 
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({
+    service: 'Anupaat Nivesh API',
+    status: 'running',
+    version: '1.0.0',
+    endpoints: {
+      health: '/api/health',
+      createOrder: '/api/payments/create-order',
+      verifyPayment: '/api/payments/verify',
+      createBooking: '/api/bookings'
+    },
+    documentation: 'See /api/health for service status'
+  });
+});
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({
