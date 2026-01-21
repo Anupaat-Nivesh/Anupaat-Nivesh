@@ -38,8 +38,8 @@ ls vercel.json
    ```
    NODE_ENV=production
    FRONTEND_URL=https://www.anupaatnivesh.com
-   RAZORPAY_KEY_ID=rzp_live_S46rOVxN6EPLPl
-   RAZORPAY_KEY_SECRET=C6D1F9oxRsgYmQ2ejxGBmwHy
+   RAZORPAY_KEY_ID=rzp_live_xxxxxxxxxxxxx
+   RAZORPAY_KEY_SECRET=your_production_secret_key_here
    ```
 6. **Deploy:** Click "Deploy"
 7. **Get URL:** Note your backend URL (e.g., `https://anupaat-backend.vercel.app`)
@@ -60,7 +60,7 @@ Edit `.env` file:
 ```env
 REACT_APP_API_BASE_URL=https://your-backend-url.vercel.app
 REACT_APP_BASE_URL=https://www.anupaatnivesh.com
-REACT_APP_RAZORPAY_KEY_ID=rzp_live_S46rOVxN6EPLPl
+REACT_APP_RAZORPAY_KEY_ID=rzp_live_xxxxxxxxxxxxx
 # ... other variables
 ```
 

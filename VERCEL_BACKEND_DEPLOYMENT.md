@@ -68,8 +68,8 @@ Make sure `package.json` has:
    NODE_ENV=production
    PORT=8000
    FRONTEND_URL=https://www.anupaatnivesh.com
-   RAZORPAY_KEY_ID=rzp_live_S46rOVxN6EPLPl
-   RAZORPAY_KEY_SECRET=C6D1F9oxRsgYmQ2ejxGBmwHy
+   RAZORPAY_KEY_ID=rzp_live_xxxxxxxxxxxxx
+   RAZORPAY_KEY_SECRET=your_production_secret_key_here
    ```
    
    **How to add:**
@@ -140,7 +140,7 @@ After deployment, test your backend:
 
 ```bash
 # Replace with your Vercel URL
-curl https://your-backend-url.vercel.app/api/health
+curl https://anupaat-nivesh-hvmvuwi5t-anupaat-nivesh.vercel.app/api/health
 ```
 
 Should return:

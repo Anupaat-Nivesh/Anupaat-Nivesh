@@ -34,7 +34,7 @@ Before building, make sure `.env` has production values:
 ```env
 REACT_APP_API_BASE_URL=https://your-backend-url.vercel.app
 REACT_APP_BASE_URL=https://www.anupaatnivesh.com
-REACT_APP_RAZORPAY_KEY_ID=rzp_live_S46rOVxN6EPLPl
+REACT_APP_RAZORPAY_KEY_ID=rzp_live_xxxxxxxxxxxxx
 REACT_APP_CONSULTING_SESSION_PRICE=99
 REACT_APP_CONSULTING_SESSION_ACTUAL_PRICE=9999
 REACT_APP_CALENDLY_CONSULTING_URL=https://calendly.com/anupaatnivesh/financial-planning-session
