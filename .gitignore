@@ -1,9 +1,8 @@
 node_modules
 .env
+.env*
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 # Keep .env.production.example for reference
-!.env.example
-!.env.production.example
