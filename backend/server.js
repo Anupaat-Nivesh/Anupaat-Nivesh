@@ -327,11 +327,16 @@ app.use((req, res) => {
   });
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Anupaat Nivesh API Server running on port ${PORT}`);
-  console.log(`📍 Health check: http://localhost:${PORT}/api/health`);
-  console.log(`🔑 Razorpay Key ID: ${process.env.RAZORPAY_KEY_ID ? '✅ Configured' : '❌ Missing'}`);
-  console.log(`🔐 Razorpay Secret: ${process.env.RAZORPAY_KEY_SECRET ? '✅ Configured' : '❌ Missing'}`);
-});
+// Export app for Vercel serverless functions
+module.exports = app;
+
+// Start server only when running locally (not on Vercel)
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`🚀 Anupaat Nivesh API Server running on port ${PORT}`);
+    console.log(`📍 Health check: http://localhost:${PORT}/api/health`);
+    console.log(`🔑 Razorpay Key ID: ${process.env.RAZORPAY_KEY_ID ? '✅ Configured' : '❌ Missing'}`);
+    console.log(`🔐 Razorpay Secret: ${process.env.RAZORPAY_KEY_SECRET ? '✅ Configured' : '❌ Missing'}`);
+  });
+}
 
