@@ -28,7 +28,7 @@ import "./App.css";
 import Tools from './containers/tools/Tools';
 import ChatBotPage from './pages/ChatBotPage';
 import ConsultingSession from './pages/ConsultingSession/ConsultingSession';
-import BookingMultiColumn from './pages/Booking/BookingMultiColumn';
+import Booking from './pages/Booking/Booking';
 import BookingWizardPage from './pages/BookingWizard/BookingWizardPage';
 import Payment from './pages/Payment/Payment';
 import PaymentSuccess from './pages/PaymentSuccess/PaymentSuccess';
@@ -64,7 +64,7 @@ function App() {
           <Route path="appdownload" element={<AppDownload />} />
           <Route path="calculators" element={<Calculators />} />
           <Route path="consulting-session" element={<ConsultingSession />} />
-          <Route path="booking" element={<BookingMultiColumn />} />
+          <Route path="booking" element={<Booking />} />
           <Route path="book-session" element={<BookingWizardPage />} />
           <Route path="payment" element={<Payment />} />
           <Route path="payment-success" element={<PaymentSuccess />} />
