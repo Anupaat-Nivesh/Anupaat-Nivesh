@@ -1,8 +1,20 @@
+const ALLOWED_ORIGINS = [
+  'https://www.anupaatnivesh.com',
+  'https://anupaatnivesh.com',
+  'http://localhost:3000' // For local development
+];
+
 export function applyCors(req, res) {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://www.anupaatnivesh.com"
-  );
+  const origin = req.headers.origin || req.headers.Origin;
+  
+  // Check if origin is allowed
+  if (origin && ALLOWED_ORIGINS.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  } else if (!origin) {
+    // Allow requests with no origin (like curl, Postman)
+    res.setHeader("Access-Control-Allow-Origin", "*");
+  }
+  
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET,POST,OPTIONS"
@@ -11,6 +23,7 @@ export function applyCors(req, res) {
     "Access-Control-Allow-Headers",
     "Content-Type"
   );
+  res.setHeader("Access-Control-Allow-Credentials", "true");
 
   if (req.method === "OPTIONS") {
     res.status(200).end();
