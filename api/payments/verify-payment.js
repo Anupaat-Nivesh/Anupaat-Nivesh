@@ -1,87 +1,35 @@
-/**
- * Verify Razorpay Payment
- * Vercel Serverless Function
- * Handles POST requests to verify payment signatures
- */
+import crypto from "crypto";
+import { applyCors } from "../_cors.js";
 
-const crypto = require('crypto');
-const { setCorsHeaders, handleOptions } = require('../_cors');
+export default function handler(req, res) {
+  if (applyCors(req, res)) return;
 
-module.exports = async (req, res) => {
-  // Handle OPTIONS preflight
-  if (handleOptions(req, res)) {
-    return;
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
-  // Set CORS headers
-  setCorsHeaders(req, res);
+  // Support both field name formats (razorpay_* and camelCase)
+  const orderId = req.body.razorpay_order_id || req.body.order_id || req.body.orderId;
+  const paymentId = req.body.razorpay_payment_id || req.body.payment_id || req.body.paymentId;
+  const signature = req.body.razorpay_signature || req.body.signature;
 
-  // Only allow POST method
-  if (req.method !== 'POST') {
-    return res.status(405).json({
-      error: 'Method not allowed',
-      allowedMethods: ['POST', 'OPTIONS']
+  if (!orderId || !paymentId || !signature) {
+    return res.status(400).json({ 
+      success: false,
+      error: "Missing required fields: orderId, paymentId, signature"
     });
   }
 
-  try {
-    const { paymentId, orderId, signature, userData, bookingData } = req.body;
+  const body = `${orderId}|${paymentId}`;
 
-    // Validate required fields
-    if (!paymentId || !orderId || !signature) {
-      setCorsHeaders(req, res);
-      return res.status(400).json({
-        verified: false,
-        error: 'Missing required payment verification fields'
-      });
-    }
+  const expectedSignature = crypto
+    .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+    .update(body)
+    .digest("hex");
 
-    // Validate Razorpay secret is configured
-    if (!process.env.RAZORPAY_KEY_SECRET) {
-      console.error('❌ Razorpay secret not configured');
-      setCorsHeaders(req, res);
-      return res.status(500).json({
-        verified: false,
-        error: 'Payment service configuration error'
-      });
-    }
-
-    // Verify payment signature using Razorpay algorithm
-    const text = `${orderId}|${paymentId}`;
-    const generatedSignature = crypto
-      .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
-      .update(text)
-      .digest('hex');
-
-    if (generatedSignature !== signature) {
-      console.error('❌ Payment signature verification failed');
-      setCorsHeaders(req, res);
-      return res.status(400).json({
-        verified: false,
-        error: 'Invalid payment signature'
-      });
-    }
-
-    console.log('✅ Payment verified successfully:', paymentId);
-
-    // Payment is verified
-    res.status(200).json({
-      verified: true,
-      paymentId,
-      orderId,
-      message: 'Payment verified successfully'
-    });
-  } catch (error) {
-    console.error('❌ Error verifying payment:', error);
-    
-    // Set CORS headers even on error
-    setCorsHeaders(req, res);
-    
-    res.status(500).json({
-      verified: false,
-      error: 'Failed to verify payment',
-      message: error.message || 'Unknown error occurred'
-    });
+  if (expectedSignature === signature) {
+    return res.status(200).json({ success: true });
   }
-};
 
+  return res.status(400).json({ success: false });
+}
