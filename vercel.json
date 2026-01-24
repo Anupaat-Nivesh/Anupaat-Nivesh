@@ -19,7 +19,11 @@
       "dest": "/api/$1"
     },
     {
-      "src": "^(?!/api/).*",
+      "src": "^/(static|favicon.ico|manifest.json|robots.txt|asset-manifest.json)/(.*)?$",
+      "dest": "/$0"
+    },
+    {
+      "src": "^/(.*)$",
       "dest": "/index.html"
     }
   ]
