@@ -1,7 +1,8 @@
 import crypto from "crypto";
 import { applyCors } from "../_cors.js";
+import { appendPaymentToSheet } from "../services/sheets.js";
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   if (applyCors(req, res)) return;
 
   if (req.method !== "POST") {
@@ -12,6 +13,7 @@ export default function handler(req, res) {
   const orderId = req.body.razorpay_order_id || req.body.order_id || req.body.orderId;
   const paymentId = req.body.razorpay_payment_id || req.body.payment_id || req.body.paymentId;
   const signature = req.body.razorpay_signature || req.body.signature;
+  const { userData, bookingData, amount, currency } = req.body;
 
   if (!orderId || !paymentId || !signature) {
     return res.status(400).json({ 
@@ -28,8 +30,19 @@ export default function handler(req, res) {
     .digest("hex");
 
   if (expectedSignature === signature) {
+    // Log to Google Sheet
+    await appendPaymentToSheet({
+      paymentId,
+      orderId,
+      amount,
+      currency,
+      userData,
+      bookingData,
+      status: 'Verified'
+    });
+
     return res.status(200).json({ success: true });
   }
 
   return res.status(400).json({ success: false });
-  }
+}

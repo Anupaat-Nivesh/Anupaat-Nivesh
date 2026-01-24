@@ -20,6 +20,7 @@
     "emailjs-com": "^3.2.0",
     "firebase": "^12.6.0",
     "framer-motion": "^10.0.1",
+    "googleapis": "^170.1.0",
     "openai": "^6.15.0",
     "razorpay": "^2.9.6",
     "react": "^18.2.0",
