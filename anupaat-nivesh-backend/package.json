@@ -1,9 +1,0 @@
-{
-  "name": "anupaat-nivesh-backend",
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "razorpay": "^2.9.4"
-  }
-}
-
