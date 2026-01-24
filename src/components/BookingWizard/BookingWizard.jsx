@@ -82,123 +82,20 @@ const BookingWizard = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // ... (rest of the code)
-
-  return (
-    <div className="booking-wizard">
-      {/* ... (progress bar) ... */}
-
-      <div className="wizard-container">
-        {/* Main Content */}
-        <div className="wizard-main">
-          {/* ... (steps) ... */}
-        </div>
-
-        {/* Side Content Panel */}
-        <div className="wizard-sidebar">
-          <div className="sidebar-content">
-            <div className="sidebar-header">
-              <h3>Financial Planning Session</h3>
-              <div className="price-display">
-                <span className="price-old">₹9,999</span>
-                <span className="price-new">₹99</span>
-                <span className="price-discount">Save 99%</span>
-              </div>
-            </div>
-
-            {/* Collapsible content for mobile */}
-            {!isMobile && (
-              <>
-                <div className="sidebar-section">
-                  <h4>What's Included</h4>
-                  <ul className="sidebar-list">
-                    <li>✓ Comprehensive Financial Planning</li>
-                    <li>✓ Income-Expense Analysis</li>
-                    <li>✓ Investment Recommendations</li>
-                    <li>✓ Goal Clarification & Roadmap</li>
-                    <li>✓ Personalized Action Plan</li>
-                  </ul>
-                </div>
-
-                <div className="sidebar-section">
-                  <h4>Session Details</h4>
-                  <div className="session-details">
-                    <div className="detail-item">
-                      <span className="detail-icon">⏱️</span>
-                      <span>Duration: 60-90 minutes</span>
-                    </div>
-                    <div className="detail-item">
-                      <span className="detail-icon">💻</span>
-                      <span>Format: Online (Video Call)</span>
-                    </div>
-                    <div className="detail-item">
-                      <span className="detail-icon">📅</span>
-                      <span>Flexible Scheduling</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="sidebar-section">
-                  <h4>Why Choose Us</h4>
-                  <ul className="sidebar-list">
-                    <li>✓ AMFI Registered Advisor</li>
-                    <li>✓ 8+ Years Experience</li>
-                    <li>✓ ₹25 Cr+ AUM Managed</li>
-                    <li>✓ 500+ Happy Clients</li>
-                    <li>✓ No Sales Pressure</li>
-                  </ul>
-                </div>
-              </>
-            )}
-
-            {/* Always show user summary on desktop, or if it's the current step on mobile */}
-            {(currentStep > 1 && formData) && (
-              <div className="sidebar-section user-summary">
-                <h4>Your Information</h4>
-                <div className="user-summary-content">
-                  <p><strong>Name:</strong> {formData.firstName} {formData.lastName}</p>
-                  <p><strong>Email:</strong> {formData.email}</p>
-                  <p><strong>Phone:</strong> {formData.phone}</p>
-                </div>
-              </div>
-            )}
-            
-            {/* Always show booking summary */}
-            {currentStep === 3 && bookingData?.bookingData?.startTime && (
-              <div className="sidebar-section booking-summary">
-                <h4>Your Booking</h4>
-                <div className="booking-summary-content">
-                  <p>
-                    <strong>Date & Time:</strong><br />
-                    {new Date(bookingData.bookingData.startTime).toLocaleDateString('en-IN', {
-                      weekday: 'long',
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                      hour: '2-digit',
-                      minute: '2-digit'
-                    })}
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  // Check backend availability
   useEffect(() => {
-    if (currentStep === 2) {
-      const messageHandler = (event) => handleCalendlyEvent(event);
-      window.addEventListener('message', messageHandler);
-
-      return () => {
-        window.removeEventListener('message', messageHandler);
-      };
+    const backendStatus = isBackendAvailable();
+    setBackendAvailable(backendStatus);
+    
+    if (!backendStatus && currentStep === 3 && process.env.NODE_ENV === 'development') {
+      setPaymentError(
+        'Payment processing requires a backend server. ' +
+        'Please configure REACT_APP_API_BASE_URL in .env file and start your backend server.'
+      );
     }
   }, [currentStep]);
 
-  const handleCalendlyEvent = (event) => {
+  const handleCalendlyEvent = React.useCallback((event) => {
     if (event.data.event && event.data.event === 'calendly.event_scheduled') {
       const calendlyData = event.data.payload || {};
       
@@ -237,7 +134,19 @@ const BookingWizard = () => {
         setCurrentStep(3);
       }, 1000);
     }
-  };
+  }, [formData]);
+
+  // Listen for Calendly booking completion (step 2 → step 3)
+  useEffect(() => {
+    if (currentStep === 2) {
+      const messageHandler = (event) => handleCalendlyEvent(event);
+      window.addEventListener('message', messageHandler);
+
+      return () => {
+        window.removeEventListener('message', messageHandler);
+      };
+    }
+  }, [currentStep, handleCalendlyEvent]);
 
   // Send admin notification
   const sendAdminNotification = async (userData) => {
@@ -755,60 +664,64 @@ Please follow up with this user for their booking.`,
               </div>
             </div>
 
-            <div className="sidebar-section">
-              <h4>What's Included</h4>
-              <ul className="sidebar-list">
-                <li>✓ Comprehensive Financial Planning</li>
-                <li>✓ Income-Expense Analysis</li>
-                <li>✓ Investment Recommendations</li>
-                <li>✓ Goal Clarification & Roadmap</li>
-                <li>✓ Personalized Action Plan</li>
-              </ul>
-            </div>
-
-            <div className="sidebar-section">
-              <h4>Session Details</h4>
-              <div className="session-details">
-                <div className="detail-item">
-                  <span className="detail-icon">⏱️</span>
-                  <span>Duration: 60-90 minutes</span>
+            {/* Collapsible content for mobile */}
+            {!isMobile && (
+              <>
+                <div className="sidebar-section">
+                  <h4>What's Included</h4>
+                  <ul className="sidebar-list">
+                    <li>✓ Comprehensive Financial Planning</li>
+                    <li>✓ Income-Expense Analysis</li>
+                    <li>✓ Investment Recommendations</li>
+                    <li>✓ Goal Clarification & Roadmap</li>
+                    <li>✓ Personalized Action Plan</li>
+                  </ul>
                 </div>
-                <div className="detail-item">
-                  <span className="detail-icon">💻</span>
-                  <span>Format: Online (Video Call)</span>
-                </div>
-                <div className="detail-item">
-                  <span className="detail-icon">📅</span>
-                  <span>Flexible Scheduling</span>
-                </div>
-              </div>
-            </div>
 
-            <div className="sidebar-section">
-              <h4>Why Choose Us</h4>
-              <ul className="sidebar-list">
-                <li>✓ AMFI Registered Advisor</li>
-                <li>✓ 8+ Years Experience</li>
-                <li>✓ ₹25 Cr+ AUM Managed</li>
-                <li>✓ 500+ Happy Clients</li>
-                <li>✓ No Sales Pressure</li>
-              </ul>
-            </div>
+                <div className="sidebar-section">
+                  <h4>Session Details</h4>
+                  <div className="session-details">
+                    <div className="detail-item">
+                      <span className="detail-icon">⏱️</span>
+                      <span>Duration: 60-90 minutes</span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="detail-icon">💻</span>
+                      <span>Format: Online (Video Call)</span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="detail-icon">📅</span>
+                      <span>Flexible Scheduling</span>
+                    </div>
+                  </div>
+                </div>
 
-            {currentStep > 1 && formData && (
+                <div className="sidebar-section">
+                  <h4>Why Choose Us</h4>
+                  <ul className="sidebar-list">
+                    <li>✓ AMFI Registered Advisor</li>
+                    <li>✓ 8+ Years Experience</li>
+                    <li>✓ ₹25 Cr+ AUM Managed</li>
+                    <li>✓ 500+ Happy Clients</li>
+                    <li>✓ No Sales Pressure</li>
+                  </ul>
+                </div>
+              </>
+            )}
+
+            {/* Always show user summary on desktop, or if it's the current step on mobile */}
+            {(currentStep > 1 && formData) && (
               <div className="sidebar-section user-summary">
                 <h4>Your Information</h4>
                 <div className="user-summary-content">
                   <p><strong>Name:</strong> {formData.firstName} {formData.lastName}</p>
                   <p><strong>Email:</strong> {formData.email}</p>
                   <p><strong>Phone:</strong> {formData.phone}</p>
-                  {formData.primaryConcern && (
-                    <p><strong>Focus:</strong> {formData.primaryConcern}</p>
-                  )}
                 </div>
               </div>
             )}
-
+            
+            {/* Always show booking summary */}
             {currentStep === 3 && bookingData?.bookingData?.startTime && (
               <div className="sidebar-section booking-summary">
                 <h4>Your Booking</h4>
@@ -824,9 +737,6 @@ Please follow up with this user for their booking.`,
                       minute: '2-digit'
                     })}
                   </p>
-                  <p>
-                    <strong>Reference:</strong> {bookingData.bookingReference}
-                  </p>
                 </div>
               </div>
             )}
@@ -838,4 +748,3 @@ Please follow up with this user for their booking.`,
 };
 
 export default BookingWizard;
-
