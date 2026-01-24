@@ -1,7 +1,8 @@
 const ALLOWED_ORIGINS = [
   'https://www.anupaatnivesh.com',
   'https://anupaatnivesh.com',
-  'http://localhost:3000' // For local development
+  'http://localhost:3000',
+  'https://anupaat-nivesh.vercel.app' // Allow Vercel domain
 ];
 
 export function applyCors(req, res) {
