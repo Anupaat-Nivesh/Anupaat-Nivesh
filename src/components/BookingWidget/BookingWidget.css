@@ -264,6 +264,7 @@
 
   .calendly-inline-widget iframe {
     min-height: 800px !important;
+    overflow-y: hidden !important; /* Force hide vertical scroll */
   }
 
   .google-booking-iframe {
