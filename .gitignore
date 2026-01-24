@@ -5,4 +5,6 @@ node_modules
 .env.development.local
 .env.test.local
 .env.production.local
+build
+
 # Keep .env.production.example for reference
