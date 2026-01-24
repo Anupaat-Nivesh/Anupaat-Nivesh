@@ -15,15 +15,11 @@
   ],
   "routes": [
     {
-      "src": "^/api/(.*)$",
+      "src": "/api/(.*)",
       "dest": "/api/$1"
     },
     {
-      "src": "^/(static|favicon.ico|manifest.json|robots.txt|asset-manifest.json)/(.*)?$",
-      "dest": "/$0"
-    },
-    {
-      "src": "^/(.*)$",
+      "src": "/(.*)",
       "dest": "/index.html"
     }
   ]
