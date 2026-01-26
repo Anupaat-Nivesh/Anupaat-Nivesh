@@ -77,18 +77,48 @@ export default async function handler(req, res) {
     }
 
     const event = req.body.event;
-    const payload = req.body.payload;
+    const payload = req.body.payload || req.body;
 
     console.log(`📥 Webhook received: ${event}`);
+    console.log('📦 Webhook payload structure:', {
+      hasPayload: !!payload,
+      payloadKeys: payload ? Object.keys(payload) : [],
+      event: event
+    });
 
     // Handle payment.captured event
     if (event === "payment.captured") {
-      const payment = payload.payment?.entity || payload.payment;
-      const order = payload.order?.entity || payload.order;
+      // Try multiple possible payload structures
+      let payment = payload.payment?.entity || payload.payment?.payment?.entity || payload.payment;
+      let order = payload.order?.entity || payload.order?.order?.entity || payload.order;
+
+      // If still not found, check if payment/order are at root level
+      if (!payment && req.body.payment) {
+        payment = req.body.payment.entity || req.body.payment;
+      }
+      if (!order && req.body.order) {
+        order = req.body.order.entity || req.body.order;
+      }
+
+      console.log('🔍 Extracted data:', {
+        hasPayment: !!payment,
+        hasOrder: !!order,
+        paymentId: payment?.id,
+        orderId: order?.id
+      });
 
       if (!payment || !order) {
         console.error("❌ Missing payment or order data in webhook");
-        return res.status(400).json({ error: "Invalid webhook payload" });
+        console.error("📋 Full webhook body:", JSON.stringify(req.body, null, 2));
+        console.error("📋 Payload structure:", JSON.stringify(payload, null, 2));
+        return res.status(400).json({ 
+          error: "Invalid webhook payload",
+          received: {
+            event: event,
+            hasPayload: !!payload,
+            payloadKeys: payload ? Object.keys(payload) : []
+          }
+        });
       }
 
       // Extract payment details
@@ -100,13 +130,26 @@ export default async function handler(req, res) {
 
       // Extract user data from order notes
       const notes = order.notes || {};
-      const userData = notes.userData ? JSON.parse(notes.userData) : null;
-      const bookingData = notes.bookingData ? JSON.parse(notes.bookingData) : null;
-      const bookingReference = notes.bookingReference || bookingData?.bookingReference || "N/A";
+      let userData = null;
+      let bookingData = null;
+      let bookingReference = "N/A";
+
+      try {
+        if (notes.userData) {
+          userData = typeof notes.userData === 'string' ? JSON.parse(notes.userData) : notes.userData;
+        }
+        if (notes.bookingData) {
+          bookingData = typeof notes.bookingData === 'string' ? JSON.parse(notes.bookingData) : notes.bookingData;
+        }
+        bookingReference = notes.bookingReference || bookingData?.bookingReference || notes.bookingReference || "N/A";
+      } catch (parseError) {
+        console.warn('⚠️ Error parsing notes:', parseError.message);
+        // Continue with null values
+      }
 
       // Log to Google Sheet
       try {
-        await appendPaymentToSheet({
+        const sheetData = {
           paymentId,
           orderId,
           amount,
@@ -115,10 +158,25 @@ export default async function handler(req, res) {
           bookingData,
           bookingReference,
           status: "Confirmed (Webhook)"
+        };
+
+        console.log('📊 Logging to Google Sheet:', {
+          paymentId,
+          orderId,
+          amount,
+          hasUserData: !!userData,
+          hasBookingData: !!bookingData,
+          bookingReference
         });
+
+        await appendPaymentToSheet(sheetData);
         console.log("✅ Payment confirmed via webhook and logged to Google Sheet");
       } catch (sheetError) {
-        console.error("⚠️ Failed to log webhook payment to Google Sheet:", sheetError.message);
+        console.error("⚠️ Failed to log webhook payment to Google Sheet:", sheetError);
+        console.error("Error details:", {
+          message: sheetError.message,
+          stack: sheetError.stack
+        });
         // Don't fail the webhook if sheet logging fails
       }
 
@@ -130,8 +188,24 @@ export default async function handler(req, res) {
 
     // Handle payment.failed event
     if (event === "payment.failed") {
-      const payment = payload.payment?.entity || payload.payment;
-      const order = payload.order?.entity || payload.order;
+      // Try multiple possible payload structures
+      let payment = payload.payment?.entity || payload.payment?.payment?.entity || payload.payment;
+      let order = payload.order?.entity || payload.order?.order?.entity || payload.order;
+
+      // If still not found, check if payment/order are at root level
+      if (!payment && req.body.payment) {
+        payment = req.body.payment.entity || req.body.payment;
+      }
+      if (!order && req.body.order) {
+        order = req.body.order.entity || req.body.order;
+      }
+
+      console.log('🔍 Failed payment data:', {
+        hasPayment: !!payment,
+        hasOrder: !!order,
+        paymentId: payment?.id,
+        orderId: order?.id
+      });
 
       if (payment && order) {
         const paymentId = payment.id;
@@ -141,9 +215,22 @@ export default async function handler(req, res) {
 
         // Extract user data from order notes
         const notes = order.notes || {};
-        const userData = notes.userData ? JSON.parse(notes.userData) : null;
-        const bookingData = notes.bookingData ? JSON.parse(notes.bookingData) : null;
-        const bookingReference = notes.bookingReference || bookingData?.bookingReference || "N/A";
+        let userData = null;
+        let bookingData = null;
+        let bookingReference = "N/A";
+
+        try {
+          if (notes.userData) {
+            userData = typeof notes.userData === 'string' ? JSON.parse(notes.userData) : notes.userData;
+          }
+          if (notes.bookingData) {
+            bookingData = typeof notes.bookingData === 'string' ? JSON.parse(notes.bookingData) : notes.bookingData;
+          }
+          bookingReference = notes.bookingReference || bookingData?.bookingReference || notes.bookingReference || "N/A";
+        } catch (parseError) {
+          console.warn('⚠️ Error parsing notes:', parseError.message);
+          // Continue with null values
+        }
 
         // Log failed payment to Google Sheet
         try {

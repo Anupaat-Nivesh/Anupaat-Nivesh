@@ -25,16 +25,34 @@ export default async function handler(req, res) {
       key_secret: process.env.RAZORPAY_KEY_SECRET,
     });
 
+    // Prepare notes for Razorpay order
+    // Store userData and bookingData as JSON strings so webhook can access them
+    const orderNotes = {
+      service: 'consulting_session',
+      bookingReference: bookingData?.bookingReference || notes?.bookingReference || 'N/A',
+      userEmail: userData?.email || 'N/A',
+      ...notes
+    };
+
+    // Store full userData and bookingData as JSON strings for webhook access
+    if (userData) {
+      orderNotes.userData = JSON.stringify(userData);
+    }
+    if (bookingData) {
+      orderNotes.bookingData = JSON.stringify(bookingData);
+    }
+
     const order = await razorpay.orders.create({
       amount: amount * 100, // Convert to paise
       currency: currency,
       receipt: `receipt_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      notes: {
-        service: 'consulting_session',
-        bookingReference: bookingData?.bookingReference || 'N/A',
-        userEmail: userData?.email || 'N/A',
-        ...notes
-      }
+      notes: orderNotes
+    });
+
+    console.log('📝 Order notes stored:', {
+      bookingReference: orderNotes.bookingReference,
+      hasUserData: !!orderNotes.userData,
+      hasBookingData: !!orderNotes.bookingData
     });
 
     console.log('✅ Razorpay order created:', order.id);
