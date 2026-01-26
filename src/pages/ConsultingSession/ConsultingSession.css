@@ -21,11 +21,28 @@
   background: var(--color-bg);
 }
 
+/* Header Section - Centered at top */
+.consulting-header-section {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding: 2rem 0;
+}
+
 .consulting-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: flex-start;
+}
+
+/* Form comes first in order */
+.consulting-form-column {
+  order: 1;
+}
+
+/* Overview comes second */
+.consulting-overview {
+  order: 2;
 }
 
 /* Left Column: Overview */
@@ -269,6 +286,11 @@
 
   .consulting-overview {
     position: static;
+    order: 2; /* Overview comes after form on mobile too */
+  }
+
+  .consulting-form-column {
+    order: 1; /* Form comes first on mobile */
   }
 
   .consulting-overview,

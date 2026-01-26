@@ -21,26 +21,48 @@ const ConsultingSession = () => {
 
   return (
     <div className="consulting-session-page">
-      {/* Main Content Section - Two Column Layout */}
+      {/* Main Content Section - Form First, Then Overview */}
       <section className="consulting-main-section section__padding">
         <div className="container">
-          <div className="consulting-layout">
-            {/* Left Column: Overview & Benefits */}
-            <div className="consulting-overview">
-              <div className="consulting-badge">Limited Time Offer</div>
-              <h1 className="consulting-title">
-                1-on-1 Financial Consulting Session
-              </h1>
-              
-              <div className="consulting-price-section">
-                <div className="price-comparison">
-                  <span className="price-old">₹9,999</span>
-                  <span className="price-new">₹99</span>
-                </div>
-                <div className="price-discount">Save 99% - Introductory Offer</div>
+          {/* Header Section */}
+          <div className="consulting-header-section">
+            <div className="consulting-badge">Limited Time Offer</div>
+            <h1 className="consulting-title">
+              1-on-1 Financial Consulting Session
+            </h1>
+            
+            <div className="consulting-price-section">
+              <div className="price-comparison">
+                <span className="price-old">₹9,999</span>
+                <span className="price-new">₹99</span>
               </div>
+              <div className="price-discount">Save 99% - Introductory Offer</div>
+            </div>
 
-              {/* Why This Session */}
+            {/* Trust Badges */}
+            <div className="consulting-trust-badges">
+              <span>✓ AMFI Registered</span>
+              <span>✓ BSE STAR MF</span>
+              <span>✓ 8+ Years Experience</span>
+            </div>
+          </div>
+
+          <div className="consulting-layout">
+            {/* First: User Details Form - Priority */}
+            <div className="consulting-form-column">
+              <div className="form-column-header">
+                <h2 className="form-column-title">
+                  Book Your <span className="form-title-highlight">Session</span>
+                </h2>
+                <p className="form-column-description">
+                  Fill in your details to get started. We'll schedule a convenient time for your consultation.
+                </p>
+              </div>
+              <ConsultingSessionForm />
+            </div>
+
+            {/* Second: Overview & Benefits - After Form */}
+            <div className="consulting-overview">
               {/* Why This Session */}
               <div className="overview-section">
                 <h2 className="overview-section-title">
@@ -114,26 +136,6 @@ const ConsultingSession = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Trust Badges */}
-              <div className="consulting-trust-badges">
-                <span>✓ AMFI Registered</span>
-                <span>✓ BSE STAR MF</span>
-                <span>✓ 8+ Years Experience</span>
-              </div>
-            </div>
-
-            {/* Right Column: User Details Form */}
-            <div className="consulting-form-column">
-              <div className="form-column-header">
-                <h2 className="form-column-title">
-                  Book Your <span className="form-title-highlight">Session</span>
-                </h2>
-                <p className="form-column-description">
-                  Fill in your details to get started. We'll schedule a convenient time for your consultation.
-                </p>
-              </div>
-              <ConsultingSessionForm />
             </div>
           </div>
         </div>

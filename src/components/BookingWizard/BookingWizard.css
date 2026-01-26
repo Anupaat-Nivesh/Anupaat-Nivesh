@@ -7,6 +7,8 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #0f1215 0%, #1a1f24 100%);
   padding: 2rem 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  max-width: 100vw; /* Constrain to viewport width */
 }
 
 /* Progress Bar */
@@ -572,6 +574,28 @@
   .wizard-main {
     padding: 1.5rem;
     min-height: auto;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .wizard-step.step-2 {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .wizard-step.step-2 .step-header {
+    padding: 0 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .wizard-step.step-2 .user-info-summary {
+    margin: 0 1.5rem 1.5rem;
+  }
+
+  .wizard-step.step-2 .step-note {
+    margin: 1.5rem;
   }
 
   .step-header h2 {
@@ -596,6 +620,20 @@
 
   .booking-widget-wrapper {
     min-height: 500px;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    max-width: 100%;
+    width: 100%;
+    margin: 0 -1.5rem; /* Remove side padding on mobile */
+    width: calc(100% + 3rem); /* Extend to full width */
+  }
+
+  .step-2 .booking-widget-wrapper {
+    margin: 0 -1.5rem;
+    width: calc(100% + 3rem);
+    height: calc(100vh - 20rem); /* Full viewport height minus header/progress */
+    min-height: calc(100vh - 20rem);
+    max-height: calc(100vh - 20rem);
+    overflow: hidden;
   }
 
   .price-display {

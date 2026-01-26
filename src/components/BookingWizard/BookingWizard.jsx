@@ -576,6 +576,7 @@ Please follow up with this user for their booking.`,
                   title="Book Your Consultation"
                   subtitle="Select a date and time that works for you"
                   userData={formData}
+                  showHeader={!isMobile}
                 />
               </div>
 
@@ -664,8 +665,40 @@ Please follow up with this user for their booking.`,
               </div>
             </div>
 
-            {/* Collapsible content for mobile */}
-            {!isMobile && (
+            {/* User Information - Priority: Show first when available (after Step 1) */}
+            {(currentStep > 1 && formData && formData.firstName) && (
+              <div className="sidebar-section user-summary">
+                <h4>Your Information</h4>
+                <div className="user-summary-content">
+                  <p><strong>Name:</strong> {formData.firstName} {formData.lastName}</p>
+                  <p><strong>Email:</strong> {formData.email}</p>
+                  <p><strong>Phone:</strong> {formData.phone}</p>
+                </div>
+              </div>
+            )}
+            
+            {/* Booking Summary - Show after user info when available */}
+            {currentStep === 3 && bookingData?.bookingData?.startTime && (
+              <div className="sidebar-section booking-summary">
+                <h4>Your Booking</h4>
+                <div className="booking-summary-content">
+                  <p>
+                    <strong>Date & Time:</strong><br />
+                    {new Date(bookingData.bookingData.startTime).toLocaleDateString('en-IN', {
+                      weekday: 'long',
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit'
+                    })}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Supplementary Material - Show ONLY after user details are filled (Step 2+) */}
+            {!isMobile && currentStep > 1 && formData && formData.firstName && (
               <>
                 <div className="sidebar-section">
                   <h4>What's Included</h4>
@@ -707,38 +740,6 @@ Please follow up with this user for their booking.`,
                   </ul>
                 </div>
               </>
-            )}
-
-            {/* Always show user summary on desktop, or if it's the current step on mobile */}
-            {(currentStep > 1 && formData) && (
-              <div className="sidebar-section user-summary">
-                <h4>Your Information</h4>
-                <div className="user-summary-content">
-                  <p><strong>Name:</strong> {formData.firstName} {formData.lastName}</p>
-                  <p><strong>Email:</strong> {formData.email}</p>
-                  <p><strong>Phone:</strong> {formData.phone}</p>
-                </div>
-              </div>
-            )}
-            
-            {/* Always show booking summary */}
-            {currentStep === 3 && bookingData?.bookingData?.startTime && (
-              <div className="sidebar-section booking-summary">
-                <h4>Your Booking</h4>
-                <div className="booking-summary-content">
-                  <p>
-                    <strong>Date & Time:</strong><br />
-                    {new Date(bookingData.bookingData.startTime).toLocaleDateString('en-IN', {
-                      weekday: 'long',
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                      hour: '2-digit',
-                      minute: '2-digit'
-                    })}
-                  </p>
-                </div>
-              </div>
             )}
           </div>
         </div>
