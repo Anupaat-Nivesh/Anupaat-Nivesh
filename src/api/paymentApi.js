@@ -50,7 +50,10 @@ export const verifyPayment = async (paymentData) => {
     order_id: paymentData.orderId,
     signature: paymentData.signature,
     userData: paymentData.userData,
-    bookingData: paymentData.bookingData
+    bookingData: paymentData.bookingData,
+    bookingReference: paymentData.bookingReference,
+    amount: paymentData.amount,
+    currency: paymentData.currency || 'INR'
   });
 
   return {

@@ -6,9 +6,18 @@ import { google } from 'googleapis';
  */
 export async function appendPaymentToSheet(data) {
   try {
+    console.log('📊 Google Sheets logging attempt:', {
+      hasCredentials: !!process.env.GOOGLE_SHEETS_CREDENTIALS,
+      hasSheetId: !!process.env.GOOGLE_SHEET_ID,
+      sheetId: process.env.GOOGLE_SHEET_ID ? 'Set' : 'Missing'
+    });
+    
     if (!process.env.GOOGLE_SHEETS_CREDENTIALS || !process.env.GOOGLE_SHEET_ID) {
-      console.warn('⚠️ Google Sheets credentials not found. Skipping sheet update.');
-      return;
+      console.error('❌ Google Sheets credentials not found. Missing:', {
+        credentials: !process.env.GOOGLE_SHEETS_CREDENTIALS ? 'GOOGLE_SHEETS_CREDENTIALS' : '',
+        sheetId: !process.env.GOOGLE_SHEET_ID ? 'GOOGLE_SHEET_ID' : ''
+      });
+      throw new Error('Google Sheets credentials not configured. Please set GOOGLE_SHEETS_CREDENTIALS and GOOGLE_SHEET_ID in Vercel environment variables.');
     }
 
     const credentials = JSON.parse(process.env.GOOGLE_SHEETS_CREDENTIALS);
@@ -26,35 +35,52 @@ export async function appendPaymentToSheet(data) {
       currency,
       userData,
       bookingData,
-      status
+      status,
+      bookingReference
     } = data;
 
+    // Enhanced row with all required fields:
+    // Timestamp | Payment ID | Order ID | Amount | Currency | Name | Email | Phone | Booking Reference | Status | Notes
     const row = [
       new Date().toISOString(), // Timestamp
-      paymentId,
-      orderId,
+      paymentId || 'N/A',
+      orderId || 'N/A',
       amount || 'N/A',
       currency || 'INR',
-      status || 'Success',
-      userData ? `${userData.firstName} ${userData.lastName}` : 'N/A', // Name
+      userData ? `${userData.firstName || ''} ${userData.lastName || ''}`.trim() : 'N/A', // Name
       userData?.email || 'N/A',
       userData?.phone || 'N/A',
-      bookingData?.eventName || 'Consulting Session',
-      bookingData?.startTime || 'N/A'
+      bookingReference || bookingData?.bookingReference || 'N/A', // Booking Reference
+      status || 'Paid',
+      bookingData?.eventName || 'Consulting Session' // Notes/Event Name
     ];
 
-    await sheets.spreadsheets.values.append({
+    console.log('📝 Appending row to sheet:', {
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: 'Sheet1!A:K', // Adjust sheet name if needed
+      range: 'Payments!A:K',
+      rowData: row
+    });
+
+    const result = await sheets.spreadsheets.values.append({
+      spreadsheetId: process.env.GOOGLE_SHEET_ID,
+      range: 'Payments!A:K', // Use 'Payments' sheet (create if doesn't exist)
       valueInputOption: 'USER_ENTERED',
       resource: {
         values: [row],
       },
     });
 
-    console.log('✅ Payment logged to Google Sheet');
+    console.log('✅ Payment logged to Google Sheet successfully:', {
+      updatedCells: result.data.updates?.updatedCells,
+      updatedRange: result.data.updates?.updatedRange
+    });
   } catch (error) {
-    console.error('❌ Error logging to Google Sheet:', error);
-    // Don't throw error to prevent failing the payment response
+    console.error('❌ Error logging to Google Sheet:', {
+      message: error.message,
+      code: error.code,
+      details: error.response?.data || error.stack
+    });
+    // Re-throw to allow caller to handle
+    throw error;
   }
 }

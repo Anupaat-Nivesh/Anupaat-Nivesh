@@ -30,18 +30,43 @@ export default async function handler(req, res) {
     .digest("hex");
 
   if (expectedSignature === signature) {
-    // Log to Google Sheet
-    await appendPaymentToSheet({
-      paymentId,
-      orderId,
-      amount,
-      currency,
-      userData,
-      bookingData,
-      status: 'Verified'
-    });
+    // Log to Google Sheet with all required fields
+    try {
+      const sheetData = {
+        paymentId,
+        orderId,
+        amount: amount || bookingData?.amount || req.body.amount || 99,
+        currency: currency || req.body.currency || 'INR',
+        userData: userData || req.body.userData,
+        bookingData: bookingData || req.body.bookingData || {},
+        bookingReference: bookingData?.bookingReference || req.body.bookingReference || 'N/A',
+        status: 'Paid'
+      };
+      
+      console.log('📝 Attempting to log payment to Google Sheet:', {
+        paymentId,
+        orderId,
+        hasUserData: !!sheetData.userData,
+        hasBookingData: !!sheetData.bookingData,
+        bookingReference: sheetData.bookingReference
+      });
+      
+      await appendPaymentToSheet(sheetData);
+      console.log('✅ Payment details logged to Google Sheet successfully');
+    } catch (sheetError) {
+      console.error('⚠️ Failed to log payment to Google Sheet:', sheetError);
+      console.error('Error details:', {
+        message: sheetError.message,
+        code: sheetError.code,
+        hasCredentials: !!process.env.GOOGLE_SHEETS_CREDENTIALS,
+        hasSheetId: !!process.env.GOOGLE_SHEET_ID,
+        sheetId: process.env.GOOGLE_SHEET_ID || 'NOT SET'
+      });
+      // Don't block payment verification if sheet logging fails
+      // But log the error for debugging
+    }
 
-    return res.status(200).json({ success: true });
+    return res.status(200).json({ success: true, verified: true });
   }
 
   return res.status(400).json({ success: false });

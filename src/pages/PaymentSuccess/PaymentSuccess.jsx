@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { formatBookingDate } from '../../utils/bookingHandler';
 import { formatAmountForDisplay } from '../../utils/paymentConfig';
 import { clearBookingData, clearUserData } from '../../utils/bookingHandler';
+import { buildCalendlyUrl, calendlyConfig } from '../../utils/calendlyConfig';
 import './PaymentSuccess.css';
 
 /**
@@ -15,6 +16,8 @@ const PaymentSuccess = () => {
   const navigate = useNavigate();
   const bookingData = location.state?.bookingData;
   const paymentResponse = location.state?.paymentResponse;
+  const [countdown, setCountdown] = useState(5);
+  const [showRedirect, setShowRedirect] = useState(false);
 
   useEffect(() => {
     // Clear stored data after successful payment
@@ -37,6 +40,27 @@ const PaymentSuccess = () => {
       setTimeout(() => {
         navigate('/consulting-session');
       }, 3000);
+      return;
+    }
+
+    // Auto-redirect to Calendly after showing success message
+    if (calendlyConfig.consultingUrl && bookingData?.bookingReference) {
+      setShowRedirect(true);
+      const timer = setInterval(() => {
+        setCountdown((prev) => {
+          if (prev <= 1) {
+            clearInterval(timer);
+            // Build Calendly URL with booking reference
+            const calendlyUrl = buildCalendlyUrl(bookingData.userData);
+            const finalUrl = `${calendlyUrl}${calendlyUrl.includes('?') ? '&' : '?'}booking_ref=${encodeURIComponent(bookingData.bookingReference)}`;
+            window.location.href = finalUrl;
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+
+      return () => clearInterval(timer);
     }
   }, [bookingData, paymentResponse, navigate]);
 
@@ -110,19 +134,43 @@ const PaymentSuccess = () => {
           )}
         </div>
 
+        {showRedirect && calendlyConfig.consultingUrl && (
+          <div className="calendly-redirect-notice">
+            <div className="redirect-icon">📅</div>
+            <h3>Next Step: Book Your Session</h3>
+            <p>You'll be redirected to Calendly in {countdown} seconds to schedule your session.</p>
+            <a
+              href={`${buildCalendlyUrl(bookingData.userData)}${buildCalendlyUrl(bookingData.userData).includes('?') ? '&' : '?'}booking_ref=${encodeURIComponent(bookingData.bookingReference)}`}
+              className="btn btn-primary btn-large"
+              onClick={(e) => {
+                e.preventDefault();
+                const url = `${buildCalendlyUrl(bookingData.userData)}${buildCalendlyUrl(bookingData.userData).includes('?') ? '&' : '?'}booking_ref=${encodeURIComponent(bookingData.bookingReference)}`;
+                window.location.href = url;
+              }}
+            >
+              Book Your Session Now →
+            </a>
+          </div>
+        )}
+
         <div className="next-steps">
           <h3>What Happens Next?</h3>
           <ul>
+            <li>Schedule your session using the Calendly link above</li>
             <li>Check your email for confirmation and session details</li>
-            <li>You'll receive a calendar invite (if applicable)</li>
+            <li>You'll receive a calendar invite once scheduled</li>
             <li>Our advisor will contact you 24 hours before the session</li>
             <li>Prepare your financial documents and questions</li>
           </ul>
         </div>
 
         <div className="success-ctas">
-          <Link to="/" className="btn btn-primary">Back to Home</Link>
-          <Link to="/calculators" className="btn btn-secondary">Explore Calculators</Link>
+          {!showRedirect && (
+            <>
+              <Link to="/" className="btn btn-primary">Back to Home</Link>
+              <Link to="/calculators" className="btn btn-secondary">Explore Calculators</Link>
+            </>
+          )}
           <a
             href="https://wa.me/919501195200"
             target="_blank"

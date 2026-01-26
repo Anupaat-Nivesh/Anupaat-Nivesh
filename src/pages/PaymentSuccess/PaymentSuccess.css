@@ -102,6 +102,67 @@
   font-weight: 700;
 }
 
+/* Calendly Redirect Notice */
+.calendly-redirect-notice {
+  background: linear-gradient(135deg, rgba(254, 1, 1, 0.08) 0%, rgba(254, 1, 1, 0.03) 100%);
+  border: 2px solid rgba(254, 1, 1, 0.2);
+  border-radius: 16px;
+  padding: 3rem;
+  margin: 3rem 0;
+  text-align: center;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(254, 1, 1, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(254, 1, 1, 0);
+  }
+}
+
+.redirect-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.calendly-redirect-notice h3 {
+  font-size: 2.4rem;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.calendly-redirect-notice p {
+  font-size: 1.6rem;
+  color: var(--color-subtext);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.calendly-redirect-notice .btn-large {
+  padding: 1.5rem 3rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 4px 12px rgba(254, 1, 1, 0.3);
+}
+
+.calendly-redirect-notice .btn-large:hover {
+  background: #d00000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(254, 1, 1, 0.4);
+}
+
 .next-steps {
   text-align: left;
   margin: 3rem 0;

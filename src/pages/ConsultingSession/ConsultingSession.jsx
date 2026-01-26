@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ConsultingSession.css';
 import ConsultingSessionForm from '../../components/ConsultingSessionForm/ConsultingSessionForm';
 import ComplianceDisclaimer from '../../components/ComplianceDisclaimer/ComplianceDisclaimer';
@@ -9,6 +9,8 @@ import ComplianceDisclaimer from '../../components/ComplianceDisclaimer/Complian
  * Minimal steps for better user experience
  */
 const ConsultingSession = () => {
+  const [sessionsLeft, setSessionsLeft] = useState(23); // Monthly cap
+
   useEffect(() => {
     // Track page view
     if (window.gtag) {
@@ -17,6 +19,18 @@ const ConsultingSession = () => {
         page_location: window.location.href
       });
     }
+
+    // Calculate sessions left (mock - in production, fetch from backend)
+    // This would typically come from your booking system
+    const calculateSessionsLeft = () => {
+      // Mock calculation - replace with actual API call
+      const currentMonth = new Date().getMonth();
+      const totalCapacity = 50; // Total sessions per month
+      const bookedThisMonth = 27; // Mock - replace with actual count
+      setSessionsLeft(Math.max(0, totalCapacity - bookedThisMonth));
+    };
+
+    calculateSessionsLeft();
   }, []);
 
   return (
@@ -38,6 +52,16 @@ const ConsultingSession = () => {
               </div>
               <div className="price-discount">Save 99% - Introductory Offer</div>
             </div>
+
+            {/* Limited-Time Counter */}
+            {sessionsLeft > 0 && (
+              <div className="sessions-counter">
+                <span className="counter-icon">⏰</span>
+                <span className="counter-text">
+                  <strong>{sessionsLeft} sessions left</strong> this month
+                </span>
+              </div>
+            )}
 
             {/* Trust Badges */}
             <div className="consulting-trust-badges">
@@ -63,6 +87,40 @@ const ConsultingSession = () => {
 
             {/* Second: Overview & Benefits - After Form */}
             <div className="consulting-overview">
+              {/* Value Breakdown Section */}
+              <div className="overview-section value-breakdown-section">
+                <h2 className="overview-section-title">
+                  What You Get in This <span className="section-heading-focus">Session</span>
+                </h2>
+                <div className="value-breakdown-grid">
+                  <div className="value-item">
+                    <div className="value-icon">🏥</div>
+                    <h3>Personal Financial Health Check</h3>
+                    <p>Complete assessment of your current financial status</p>
+                  </div>
+                  <div className="value-item">
+                    <div className="value-icon">📊</div>
+                    <h3>Real Asset & Liability Review</h3>
+                    <p>Detailed analysis of what you own and owe</p>
+                  </div>
+                  <div className="value-item">
+                    <div className="value-icon">🎯</div>
+                    <h3>Goal Clarity & Prioritization</h3>
+                    <p>Define and rank your financial objectives</p>
+                  </div>
+                  <div className="value-item">
+                    <div className="value-icon">🗺️</div>
+                    <h3>Actionable Investment Roadmap</h3>
+                    <p>Step-by-step plan tailored to your goals</p>
+                  </div>
+                  <div className="value-item value-highlight">
+                    <div className="value-icon">🚫</div>
+                    <h3>No Product Pushing</h3>
+                    <p>Pure advisory focus - we help you understand options without sales pressure</p>
+                  </div>
+                </div>
+              </div>
+
               {/* Why This Session */}
               <div className="overview-section">
                 <h2 className="overview-section-title">
@@ -135,6 +193,51 @@ const ConsultingSession = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="consulting-testimonials section__padding">
+        <div className="container">
+          <h2 className="testimonials-title">
+            Trusted by <span className="section-heading-focus">Professionals</span>
+          </h2>
+          <div className="testimonials-grid">
+            <div className="testimonial-card">
+              <div className="testimonial-content">
+                <p className="testimonial-text">
+                  "The session helped me understand my financial position clearly. The advisor was patient, knowledgeable, and gave me a roadmap I could actually follow. No sales pitch, just genuine advice."
+                </p>
+                <div className="testimonial-author">
+                  <div className="author-info">
+                    <strong>Rajesh Kumar</strong>
+                    <span>Software Engineer, Bangalore</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="testimonial-card">
+              <div className="testimonial-content">
+                <p className="testimonial-text">
+                  "As someone new to investing, I was overwhelmed. This session broke everything down into simple steps. The advisor helped me prioritize my goals and create a realistic plan. Highly recommended!"
+                </p>
+                <div className="testimonial-author">
+                  <div className="author-info">
+                    <strong>Priya Sharma</strong>
+                    <span>Marketing Manager, Mumbai</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="testimonial-card testimonial-authority">
+              <div className="testimonial-content">
+                <div className="authority-badge">15+ Years Combined Experience</div>
+                <p className="testimonial-text">
+                  Our team has worked with professionals across IT, Finance, Healthcare, and Education sectors, helping hundreds achieve their financial goals.
+                </p>
               </div>
             </div>
           </div>

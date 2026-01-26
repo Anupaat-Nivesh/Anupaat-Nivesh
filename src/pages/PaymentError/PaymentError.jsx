@@ -43,15 +43,25 @@ const PaymentError = () => {
     <div className="payment-error-page">
       <div className="error-container">
         <div className="error-icon">✗</div>
-        <h1>Payment Failed</h1>
-        <p className="error-message">{error}</p>
+        <h1>Payment Didn't Go Through</h1>
+        
+        <div className="error-reassurance">
+          <p className="reassurance-message">
+            <strong>Don't worry — no money was deducted.</strong>
+          </p>
+          <p className="error-message">
+            {error.includes('Failed to create payment order') 
+              ? 'We encountered an issue setting up your payment. This could be due to a temporary network issue or server problem.'
+              : error}
+          </p>
+        </div>
 
         <div className="error-actions">
           <button
             className="btn btn-primary error-retry"
             onClick={handleRetry}
           >
-            Try Again
+            🔄 Retry Payment
           </button>
           <Link to="/consulting-session" className="btn btn-secondary">
             Start Over
@@ -59,22 +69,23 @@ const PaymentError = () => {
         </div>
 
         <div className="error-help">
-          <h3>Need Help?</h3>
-          <p>If you continue to experience issues, please contact us:</p>
+          <h3>Need Immediate Help?</h3>
+          <p>Our team is here to assist you. Reach out via WhatsApp for instant support:</p>
+          <a
+            href="https://wa.me/919501195200?text=Hi, I'm having trouble with payment. Can you help?"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-whatsapp"
+          >
+            💬 Get Help on WhatsApp
+          </a>
+          
           <div className="help-contacts">
             <a href="tel:+919501195200" className="help-link">
               📞 +91 95011 95200
             </a>
             <a href="mailto:contact@anupaatnivesh.com" className="help-link">
               ✉️ contact@anupaatnivesh.com
-            </a>
-            <a
-              href="https://wa.me/919501195200"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="help-link"
-            >
-              💬 WhatsApp
             </a>
           </div>
         </div>

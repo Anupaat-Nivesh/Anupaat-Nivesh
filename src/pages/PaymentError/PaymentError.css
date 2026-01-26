@@ -48,14 +48,33 @@
   margin-bottom: 1rem;
 }
 
+.error-reassurance {
+  margin-bottom: 3rem;
+}
+
+.reassurance-message {
+  font-size: 1.8rem;
+  color: var(--color-text);
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(40, 167, 69, 0.05) 100%);
+  border-radius: 12px;
+  border-left: 4px solid #28a745;
+}
+
+.reassurance-message strong {
+  color: #28a745;
+  font-weight: 700;
+}
+
 .error-message {
   font-size: 1.6rem;
-  color: #dc3545;
-  margin-bottom: 3rem;
+  color: var(--color-subtext);
+  margin-bottom: 0;
   padding: 1.5rem;
-  background: #f8d7da;
+  background: #f8f9fa;
   border-radius: 12px;
-  border-left: 4px solid #dc3545;
+  line-height: 1.6;
 }
 
 .error-actions {
@@ -117,6 +136,28 @@
   font-size: 1.5rem;
   color: var(--color-subtext);
   margin-bottom: 2rem;
+}
+
+.btn-whatsapp {
+  display: inline-block;
+  padding: 1.4rem 2.8rem;
+  font-size: 1.7rem;
+  font-weight: 700;
+  background: #25D366;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  text-decoration: none;
+  margin-bottom: 2rem;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.btn-whatsapp:hover {
+  background: #20ba5a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+  color: #fff;
 }
 
 .help-contacts {
