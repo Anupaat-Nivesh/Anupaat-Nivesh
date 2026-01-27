@@ -53,7 +53,8 @@ export const verifyPayment = async (paymentData) => {
     bookingData: paymentData.bookingData,
     bookingReference: paymentData.bookingReference,
     amount: paymentData.amount,
-    currency: paymentData.currency || 'INR'
+    currency: paymentData.currency || 'INR',
+    source: paymentData.source || paymentData.userData?.source || paymentData.bookingData?.source
   });
 
   return {

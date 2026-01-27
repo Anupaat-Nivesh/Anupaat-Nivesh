@@ -40,18 +40,18 @@ const ConsultingSession = () => {
         <div className="container">
           {/* Header Section */}
           <div className="consulting-header-section">
-            <div className="consulting-badge">Limited Time Offer</div>
-            <h1 className="consulting-title">
-              1-on-1 Financial Consulting Session
-            </h1>
-            
-            <div className="consulting-price-section">
-              <div className="price-comparison">
-                <span className="price-old">₹9,999</span>
-                <span className="price-new">₹99</span>
+              <div className="consulting-badge">Limited Time Offer</div>
+              <h1 className="consulting-title">
+                1-on-1 Financial Consulting Session
+              </h1>
+              
+              <div className="consulting-price-section">
+                <div className="price-comparison">
+                  <span className="price-old">₹9,999</span>
+                  <span className="price-new">₹99</span>
+                </div>
+                <div className="price-discount">Save 99% - Introductory Offer</div>
               </div>
-              <div className="price-discount">Save 99% - Introductory Offer</div>
-            </div>
 
             {/* Limited-Time Counter */}
             {sessionsLeft > 0 && (

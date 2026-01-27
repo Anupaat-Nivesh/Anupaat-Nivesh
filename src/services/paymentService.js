@@ -128,7 +128,8 @@ export const initializeRazorpayCheckout = async ({
             bookingData: userData.bookingData || {},
             bookingReference: userData.bookingReference || userData.bookingData?.bookingReference,
             amount: paymentConfig.consultingSessionPrice,
-            currency: paymentConfig.currency || 'INR'
+            currency: paymentConfig.currency || 'INR',
+            source: userData.source || userData.bookingData?.source
           });
 
           if (verified) {

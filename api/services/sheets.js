@@ -36,11 +36,12 @@ export async function appendPaymentToSheet(data) {
       userData,
       bookingData,
       status,
-      bookingReference
+      bookingReference,
+      source
     } = data;
 
     // Enhanced row with all required fields:
-    // Timestamp | Payment ID | Order ID | Amount | Currency | Name | Email | Phone | Booking Reference | Status | Notes
+    // Timestamp | Payment ID | Order ID | Amount | Currency | Name | Email | Phone | Booking Reference | Status | Notes | Source
     const row = [
       new Date().toISOString(), // Timestamp
       paymentId || 'N/A',
@@ -52,7 +53,8 @@ export async function appendPaymentToSheet(data) {
       userData?.phone || 'N/A',
       bookingReference || bookingData?.bookingReference || 'N/A', // Booking Reference
       status || 'Paid',
-      bookingData?.eventName || 'Consulting Session' // Notes/Event Name
+      bookingData?.eventName || 'Consulting Session', // Notes/Event Name
+      source || userData?.source || bookingData?.source || 'N/A' // Source (mobile-consulting-funnel, etc.)
     ];
 
     console.log('📝 Appending row to sheet:', {
@@ -63,7 +65,7 @@ export async function appendPaymentToSheet(data) {
 
     const result = await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: 'Payments!A:K', // Use 'Payments' sheet (create if doesn't exist)
+      range: 'Payments!A:L', // Updated to include Source column (L)
       valueInputOption: 'USER_ENTERED',
       resource: {
         values: [row],

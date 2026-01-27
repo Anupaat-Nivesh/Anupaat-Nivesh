@@ -1,0 +1,543 @@
+/* Mobile-First Consulting Booking Funnel */
+/* Optimized for max-width 420px (mobile ads, Instagram, WhatsApp) */
+/* Standalone page - No MainLayout */
+
+.mobile-funnel-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #fafbfc 0%, #ffffff 100%);
+  padding: 2rem 1.5rem 8rem; /* Extra bottom padding for sticky button */
+  font-family: var(--font-family);
+  padding-top: 2rem; /* No navbar, so no top padding needed */
+}
+
+.mobile-funnel-container {
+  max-width: 420px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* SECTION 1: HERO */
+.hero-section {
+  text-align: center;
+  padding: 3rem 0 2rem;
+}
+
+.hero-section h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.2;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-subtext {
+  font-size: 1.5rem;
+  color: #4a5568;
+  line-height: 1.6;
+  margin-bottom: 2.4rem;
+  letter-spacing: -0.01em;
+}
+
+.price-display {
+  background: linear-gradient(135deg, rgba(254, 1, 1, 0.06) 0%, rgba(254, 1, 1, 0.03) 100%);
+  border: 2px solid rgba(254, 1, 1, 0.12);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.price-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.price-old {
+  font-size: 2rem;
+  color: #8b8b8b;
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  font-weight: 500;
+}
+
+.price-new {
+  font-size: 3.6rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.price-label {
+  font-size: 1.4rem;
+  color: #d97706;
+  font-weight: 600;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.6rem;
+  background: #f8f9fa;
+  border-radius: 50px;
+  font-size: 1.3rem;
+  color: #2d3748;
+  margin-top: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.trust-badge span {
+  color: #28a745;
+  font-weight: 700;
+}
+
+/* SECTION 2: WHAT YOU GET */
+.benefits-section {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2.4rem 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.benefits-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1.8rem;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.benefits-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  font-size: 1.5rem;
+  color: #2d3748;
+  line-height: 1.6;
+}
+
+.benefit-icon {
+  flex-shrink: 0;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(254, 1, 1, 0.12) 0%, rgba(254, 1, 1, 0.06) 100%);
+  border-radius: 50%;
+  color: #FE0101;
+  font-weight: 700;
+  font-size: 1.3rem;
+  border: 1px solid rgba(254, 1, 1, 0.2);
+}
+
+/* SECTION 3: CTA */
+.cta-section {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+/* SECTION 4: FORM */
+.form-section {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2.4rem 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.form-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 2rem;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+.form-group {
+  margin-bottom: 2rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.01em;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 1.2rem 1.6rem;
+  font-size: 1.6rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #1a1a1a;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #FE0101;
+  box-shadow: 0 0 0 3px rgba(254, 1, 1, 0.1);
+}
+
+.form-group input.error {
+  border-color: #dc3545;
+}
+
+.form-group input::placeholder {
+  color: #9ca3af;
+}
+
+.error-text {
+  display: block;
+  font-size: 1.3rem;
+  color: #dc3545;
+  margin-top: 0.6rem;
+}
+
+/* BUTTONS */
+.btn {
+  width: 100%;
+  padding: 1.6rem 2.4rem;
+  font-size: 1.7rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-family);
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #FE0101 0%, #d40000 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(254, 1, 1, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #d40000 0%, #b30000 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(254, 1, 1, 0.4);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #f8f9fa;
+  color: #1a1a1a;
+  border: 2px solid #e5e7eb;
+}
+
+.btn-secondary:hover {
+  background: #e9ecef;
+}
+
+.btn-large {
+  padding: 1.8rem 2.4rem;
+  font-size: 1.8rem;
+}
+
+.btn-whatsapp {
+  background: #25D366;
+  color: #ffffff;
+}
+
+.btn-whatsapp:hover {
+  background: #20ba5a;
+}
+
+/* CALENDLY SCREEN */
+.calendly-screen {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.calendly-screen h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.calendly-screen > p {
+  font-size: 1.5rem;
+  color: #4a5568;
+  margin-bottom: 2rem;
+}
+
+.calendly-container {
+  margin-top: 2rem;
+}
+
+.calendly-iframe {
+  width: 100%;
+  min-height: 600px;
+  border: none;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.calendly-fallback {
+  padding: 3rem 2rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  margin: 2rem 0;
+}
+
+/* PAYMENT SCREEN */
+.payment-screen {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.payment-screen h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 2.4rem;
+  letter-spacing: -0.02em;
+}
+
+.payment-summary {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 1.5rem;
+}
+
+.summary-row:last-child {
+  border-bottom: none;
+}
+
+.summary-row span:first-child {
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.summary-row .amount {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #FE0101;
+}
+
+.payment-note {
+  font-size: 1.3rem;
+  color: #6b7280;
+  margin-top: 1.5rem;
+}
+
+/* SUCCESS SCREEN */
+.success-screen {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.success-icon {
+  font-size: 6rem;
+  margin-bottom: 1.5rem;
+}
+
+.success-screen h1 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.02em;
+}
+
+.success-message {
+  font-size: 1.6rem;
+  color: #4a5568;
+  line-height: 1.6;
+  margin-bottom: 2.4rem;
+}
+
+.booking-ref {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.6rem;
+  margin: 2rem 0;
+  font-size: 1.4rem;
+}
+
+.booking-ref strong {
+  display: block;
+  color: #4a5568;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.booking-ref span {
+  display: block;
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 1.6rem;
+  font-family: monospace;
+}
+
+.next-steps {
+  text-align: left;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+  border: 1px solid #e5e7eb;
+}
+
+.next-steps h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.next-steps ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.next-steps li {
+  font-size: 1.5rem;
+  color: #4a5568;
+  padding: 1rem 0;
+  padding-left: 2.5rem;
+  position: relative;
+  line-height: 1.6;
+}
+
+.next-steps li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #28a745;
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+.success-ctas {
+  margin-top: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.btn-app {
+  background: #ffffff;
+  color: #1a1a1a;
+  border: 2px solid #e5e7eb;
+  font-size: 1.6rem;
+  padding: 1.4rem 2rem;
+}
+
+.btn-app:hover {
+  background: #f8f9fa;
+  border-color: #FE0101;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-home {
+  margin-top: 0.5rem;
+  background: #f8f9fa;
+  color: #1a1a1a;
+  border: 2px solid #e5e7eb;
+}
+
+.btn-home:hover {
+  background: #e9ecef;
+  border-color: #1a1a1a;
+}
+
+/* Sticky CTA Button (Mobile) */
+.sticky-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  padding: 1.2rem 1.5rem;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  border-top: 1px solid #e5e7eb;
+}
+
+.sticky-cta .btn {
+  margin: 0;
+}
+
+/* Hide sticky CTA on success/payment/calendly screens */
+.payment-screen .sticky-cta,
+.calendly-screen .sticky-cta,
+.success-screen .sticky-cta {
+  display: none;
+}
+
+/* Responsive adjustments for slightly larger screens */
+@media (min-width: 421px) {
+  .mobile-funnel-container {
+    max-width: 420px;
+  }
+}
+
+/* Ensure no horizontal scroll */
+@media (max-width: 420px) {
+  .mobile-funnel-page {
+    padding: 1.5rem 1rem;
+  }
+
+  .hero-section h1 {
+    font-size: 2.2rem;
+  }
+
+  .price-new {
+    font-size: 3.2rem;
+  }
+}
+

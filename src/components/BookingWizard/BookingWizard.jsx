@@ -700,45 +700,45 @@ Please follow up with this user for their booking.`,
             {/* Supplementary Material - Show ONLY after user details are filled (Step 2+) */}
             {!isMobile && currentStep > 1 && formData && formData.firstName && (
               <>
-                <div className="sidebar-section">
-                  <h4>What's Included</h4>
-                  <ul className="sidebar-list">
-                    <li>✓ Comprehensive Financial Planning</li>
-                    <li>✓ Income-Expense Analysis</li>
-                    <li>✓ Investment Recommendations</li>
-                    <li>✓ Goal Clarification & Roadmap</li>
-                    <li>✓ Personalized Action Plan</li>
-                  </ul>
-                </div>
+            <div className="sidebar-section">
+              <h4>What's Included</h4>
+              <ul className="sidebar-list">
+                <li>✓ Comprehensive Financial Planning</li>
+                <li>✓ Income-Expense Analysis</li>
+                <li>✓ Investment Recommendations</li>
+                <li>✓ Goal Clarification & Roadmap</li>
+                <li>✓ Personalized Action Plan</li>
+              </ul>
+            </div>
 
-                <div className="sidebar-section">
-                  <h4>Session Details</h4>
-                  <div className="session-details">
-                    <div className="detail-item">
-                      <span className="detail-icon">⏱️</span>
-                      <span>Duration: 60-90 minutes</span>
-                    </div>
-                    <div className="detail-item">
-                      <span className="detail-icon">💻</span>
-                      <span>Format: Online (Video Call)</span>
-                    </div>
-                    <div className="detail-item">
-                      <span className="detail-icon">📅</span>
-                      <span>Flexible Scheduling</span>
-                    </div>
-                  </div>
+            <div className="sidebar-section">
+              <h4>Session Details</h4>
+              <div className="session-details">
+                <div className="detail-item">
+                  <span className="detail-icon">⏱️</span>
+                  <span>Duration: 60-90 minutes</span>
                 </div>
+                <div className="detail-item">
+                  <span className="detail-icon">💻</span>
+                  <span>Format: Online (Video Call)</span>
+                </div>
+                <div className="detail-item">
+                  <span className="detail-icon">📅</span>
+                  <span>Flexible Scheduling</span>
+                </div>
+              </div>
+            </div>
 
-                <div className="sidebar-section">
-                  <h4>Why Choose Us</h4>
-                  <ul className="sidebar-list">
-                    <li>✓ AMFI Registered Advisor</li>
-                    <li>✓ 8+ Years Experience</li>
-                    <li>✓ ₹25 Cr+ AUM Managed</li>
-                    <li>✓ 500+ Happy Clients</li>
-                    <li>✓ No Sales Pressure</li>
-                  </ul>
-                </div>
+            <div className="sidebar-section">
+              <h4>Why Choose Us</h4>
+              <ul className="sidebar-list">
+                <li>✓ AMFI Registered Advisor</li>
+                <li>✓ 8+ Years Experience</li>
+                <li>✓ ₹25 Cr+ AUM Managed</li>
+                <li>✓ 500+ Happy Clients</li>
+                <li>✓ No Sales Pressure</li>
+              </ul>
+            </div>
               </>
             )}
           </div>

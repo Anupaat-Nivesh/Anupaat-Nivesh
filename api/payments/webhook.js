@@ -147,6 +147,9 @@ export default async function handler(req, res) {
         // Continue with null values
       }
 
+      // Extract source from userData, bookingData, or notes
+      const source = userData?.source || bookingData?.source || notes.source || 'N/A';
+
       // Log to Google Sheet
       try {
         const sheetData = {
@@ -157,7 +160,8 @@ export default async function handler(req, res) {
           userData,
           bookingData,
           bookingReference,
-          status: "Confirmed (Webhook)"
+          status: "Confirmed (Webhook)",
+          source: source // Include source for Google Sheets
         };
 
         console.log('📊 Logging to Google Sheet:', {
@@ -166,7 +170,8 @@ export default async function handler(req, res) {
           amount,
           hasUserData: !!userData,
           hasBookingData: !!bookingData,
-          bookingReference
+          bookingReference,
+          source: source
         });
 
         await appendPaymentToSheet(sheetData);
@@ -232,6 +237,9 @@ export default async function handler(req, res) {
           // Continue with null values
         }
 
+        // Extract source from userData, bookingData, or notes
+        const source = userData?.source || bookingData?.source || notes.source || 'N/A';
+
         // Log failed payment to Google Sheet
         try {
           await appendPaymentToSheet({
@@ -242,7 +250,8 @@ export default async function handler(req, res) {
             userData,
             bookingData,
             bookingReference,
-            status: "Failed"
+            status: "Failed",
+            source: source // Include source for Google Sheets
           });
           console.log("⚠️ Payment failed logged to Google Sheet");
         } catch (sheetError) {

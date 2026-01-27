@@ -40,7 +40,8 @@ export default async function handler(req, res) {
         userData: userData || req.body.userData,
         bookingData: bookingData || req.body.bookingData || {},
         bookingReference: bookingData?.bookingReference || req.body.bookingReference || 'N/A',
-        status: 'Paid'
+        status: 'Paid',
+        source: userData?.source || bookingData?.source || req.body.source || 'N/A'
       };
       
       console.log('📝 Attempting to log payment to Google Sheet:', {
@@ -70,4 +71,4 @@ export default async function handler(req, res) {
   }
 
   return res.status(400).json({ success: false });
-}
+  }

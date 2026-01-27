@@ -78,17 +78,20 @@ export const saveCompleteBooking = async (data) => {
       phone: data.userData.phone,
       age: data.userData.age,
       incomeRange: data.userData.incomeRange,
-      primaryConcern: data.userData.primaryConcern
+      primaryConcern: data.userData.primaryConcern,
+      source: data.userData.source || data.source // Include source from userData or top level
     },
     bookingData: {
-      calendlyEventId: data.bookingData.calendlyEventId,
-      calendlyEventUri: data.bookingData.calendlyEventUri,
-      calendlyInviteeUri: data.bookingData.calendlyInviteeUri,
-      startTime: data.bookingData.startTime,
-      endTime: data.bookingData.endTime,
-      timezone: data.bookingData.timezone,
-      location: data.bookingData.location,
-      eventName: data.bookingData.eventName
+      calendlyEventId: data.bookingData?.calendlyEventId,
+      calendlyEventUri: data.bookingData?.calendlyEventUri,
+      calendlyInviteeUri: data.bookingData?.calendlyInviteeUri,
+      startTime: data.bookingData?.startTime,
+      endTime: data.bookingData?.endTime,
+      timezone: data.bookingData?.timezone,
+      location: data.bookingData?.location,
+      eventName: data.bookingData?.eventName || 'Consulting Session',
+      bookingReference: data.bookingReference,
+      source: data.bookingData?.source || data.source // Include source
     },
     paymentData: {
       paymentId: data.paymentData.paymentId,
@@ -99,6 +102,7 @@ export const saveCompleteBooking = async (data) => {
       status: 'captured',
       timestamp: data.paymentData.timestamp
     },
+    source: data.source || data.userData?.source || data.bookingData?.source || 'N/A', // Top-level source
     status: 'confirmed'
   };
 

@@ -167,8 +167,8 @@ const PaymentSuccess = () => {
         <div className="success-ctas">
           {!showRedirect && (
             <>
-              <Link to="/" className="btn btn-primary">Back to Home</Link>
-              <Link to="/calculators" className="btn btn-secondary">Explore Calculators</Link>
+          <Link to="/" className="btn btn-primary">Back to Home</Link>
+          <Link to="/calculators" className="btn btn-secondary">Explore Calculators</Link>
             </>
           )}
           <a
