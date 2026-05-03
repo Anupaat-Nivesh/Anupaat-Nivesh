@@ -27,38 +27,25 @@ const __dirname = dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-// Middleware — allow Vercel preview URLs (*.vercel.app) for API calls
-const corsStaticOrigins = [
-  'https://www.anupaatnivesh.com',
-  'https://anupaatnivesh.com',
-  'http://localhost:3000',
-  'https://anupaat-nivesh.vercel.app',
-];
-app.use(
-  cors({
-    origin(origin, callback) {
-      if (!origin || corsStaticOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-      try {
-        const { hostname } = new URL(origin);
-        if (hostname.endsWith('.vercel.app')) {
-          return callback(null, true);
-        }
-      } catch {
-        /* ignore */
-      }
-      return callback(null, false);
-    },
-    credentials: true,
-    methods: ['GET', 'POST', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'x-razorpay-signature'],
-  })
-);
+// Middleware
+app.use(cors({
+  origin: [
+    'https://www.anupaatnivesh.com',
+    'https://anupaatnivesh.com',
+    'http://localhost:3000',
+    'https://anupaat-nivesh.vercel.app'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'x-razorpay-signature']
+}));
 
 // Body parser middleware (skip for webhook to preserve raw body)
 app.use((req, res, next) => {
-  if (req.path === '/api/payments/webhook' && req.method === 'POST') {
+  const isPaymentWebhook =
+    (req.path === '/api/payments/webhook' || req.path === '/payments/webhook') &&
+    req.method === 'POST';
+  if (isPaymentWebhook) {
     // Use raw body for webhook signature verification
     return rawBodyMiddleware(req, res, (err) => {
       if (err) return next(err);
@@ -79,13 +66,12 @@ app.use((req, res, next) => {
 
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// API Routes
+// API routes (Vercel may invoke with or without /api prefix — register both)
 app.use('/api/health', healthRouter);
-app.use('/api/payments', paymentsRouter);
-app.use('/api/onboarding', onboardingRouter);
-// Vercel/serverless: some invocations forward paths without the /api prefix
 app.use('/health', healthRouter);
+app.use('/api/payments', paymentsRouter);
 app.use('/payments', paymentsRouter);
+app.use('/api/onboarding', onboardingRouter);
 app.use('/onboarding', onboardingRouter);
 
 // Root endpoint

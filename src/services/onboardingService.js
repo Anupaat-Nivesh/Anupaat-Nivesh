@@ -11,7 +11,6 @@ export const createOnboardingFolder = async ({
   pan,
   firstName,
   lastName,
-  taxStatus,
   parentFolderId,
 }) => {
   if (!isBackendAvailable()) {
@@ -21,7 +20,6 @@ export const createOnboardingFolder = async ({
     pan,
     firstName,
     lastName,
-    taxStatus,
     parentFolderId,
   });
 };

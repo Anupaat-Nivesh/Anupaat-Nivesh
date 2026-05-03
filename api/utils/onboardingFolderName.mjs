@@ -1,7 +1,7 @@
 /**
- * Drive folder name: FirstName_LastNameParts_PAN
- * - First name: single segment (no spaces allowed in UI).
- * - Last name: optional; multiple words split with underscores.
+ * Drive folder name: FirstName[_Middle...]_LastName[_...]_PAN
+ * - Words in the first-name field are joined with underscores.
+ * - Words in the last-name field are appended the same way (optional field).
  * - Last-name tokens matching null / n.a. / na / - are skipped (treated as empty).
  */
 
@@ -14,8 +14,12 @@ function sanitizeNameToken(word) {
 
 function tokenizeFirstName(str) {
   if (!str || !String(str).trim()) return [];
-  const t = sanitizeNameToken(String(str).trim());
-  return t ? [t] : [];
+  return String(str)
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .map(sanitizeNameToken)
+    .filter(Boolean);
 }
 
 function isPlaceholderToken(word) {

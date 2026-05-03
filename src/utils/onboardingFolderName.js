@@ -1,5 +1,6 @@
 /**
  * Must stay in sync with api/utils/onboardingFolderName.mjs
+ * Drive folder name: FirstName[_Middle...]_LastName[_...]_PAN
  */
 
 const PLACEHOLDER_TOKEN = /^(null|n\/a|na|[-.]+)$/i;
@@ -11,8 +12,12 @@ function sanitizeNameToken(word) {
 
 function tokenizeFirstName(str) {
   if (!str || !String(str).trim()) return [];
-  const t = sanitizeNameToken(String(str).trim());
-  return t ? [t] : [];
+  return String(str)
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .map(sanitizeNameToken)
+    .filter(Boolean);
 }
 
 function isPlaceholderToken(word) {

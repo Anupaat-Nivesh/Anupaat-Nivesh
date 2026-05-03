@@ -4,7 +4,7 @@ import {
   submitOnboarding,
   uploadOnboardingDocument,
 } from '../../services/onboardingService';
-import { validatePanForTaxStatus } from '../../utils/panValidation';
+import { INVALID_PAN_MESSAGE, isValidIndianPan } from '../../utils/panValidation';
 import './OnboardingWizard.css';
 
 const steps = ['Personal', 'Financial', 'Nominee', 'Documents', 'Review'];
@@ -72,13 +72,10 @@ const OnboardingWizard = () => {
     if (step === 0) {
       const p = form.personal;
       if (!p.firstName.trim()) errors['personal.firstName'] = 'First name is required';
-      if (/\s/.test(p.firstName)) {
-        errors['personal.firstName'] = 'Spaces are not allowed in first name; use Last name for surname';
-      }
+      if (/\s/.test(p.firstName)) errors['personal.firstName'] = 'No spaces — use last name field';
       if (!MOBILE_REGEX.test(p.mobile)) errors['personal.mobile'] = 'Enter valid 10-digit Indian mobile';
       if (!EMAIL_REGEX.test(p.email)) errors['personal.email'] = 'Enter valid email';
-      const panResult = validatePanForTaxStatus(p.pan, p.taxStatus);
-      if (!panResult.ok) errors['personal.pan'] = panResult.message;
+      if (!isValidIndianPan(p.pan)) errors['personal.pan'] = INVALID_PAN_MESSAGE;
       if (!p.dob) errors['personal.dob'] = 'Date of birth is required';
       if (!p.occupation) errors['personal.occupation'] = 'Occupation is required';
       if (!p.taxStatus) errors['personal.taxStatus'] = 'Tax status is required';
@@ -90,7 +87,7 @@ const OnboardingWizard = () => {
       if (!f.riskAppetite) errors['financial.riskAppetite'] = 'Risk appetite is required';
       if (!f.investmentHorizon) errors['financial.investmentHorizon'] = 'Investment horizon is required';
       if (!/^\d{9,18}$/.test(f.bankAccountNumber)) errors['financial.bankAccountNumber'] = 'Enter valid account number';
-      if (!IFSC_REGEX.test((f.ifsc || '').toUpperCase())) errors['financial.ifsc'] = 'Enter valid IFSC (e.g. HDFC0001234)';
+      if (!IFSC_REGEX.test((f.ifsc || '').toUpperCase())) errors['financial.ifsc'] = 'Enter valid IFSC (e.g. SBIN0001234)';
     }
     if (step === 2) {
       const n = form.nominee;
@@ -129,7 +126,6 @@ const OnboardingWizard = () => {
       pan: form.personal.pan.toUpperCase(),
       firstName: form.personal.firstName,
       lastName: form.personal.lastName,
-      taxStatus: form.personal.taxStatus,
     });
     setFolderInfo(created);
     return created;
@@ -229,7 +225,7 @@ const OnboardingWizard = () => {
                 onChange={(e) =>
                   setNestedValue('personal', 'firstName', e.target.value.replace(/\s/g, ''))
                 }
-                placeholder="Single word, no spaces (e.g. Gourav)"
+                placeholder="Rohit"
                 autoComplete="given-name"
               />
               <div className="onboarding-error">{fieldErrors['personal.firstName']}</div>
@@ -239,18 +235,30 @@ const OnboardingWizard = () => {
               <input
                 value={form.personal.lastName}
                 onChange={(e) => setNestedValue('personal', 'lastName', e.target.value)}
-                placeholder="e.g. Chugh or Chugh Kumar"
+                placeholder="Kumar"
                 autoComplete="family-name"
               />
             </div>
             <div className="onboarding-group">
               <label>Mobile Number</label>
-              <input value={form.personal.mobile} onChange={(e) => setNestedValue('personal', 'mobile', e.target.value.replace(/\D/g, ''))} maxLength={10} />
+              <input
+                value={form.personal.mobile}
+                onChange={(e) => setNestedValue('personal', 'mobile', e.target.value.replace(/\D/g, ''))}
+                maxLength={10}
+                placeholder="9876543210"
+                inputMode="numeric"
+              />
               <div className="onboarding-error">{fieldErrors['personal.mobile']}</div>
             </div>
             <div className="onboarding-group">
               <label>Email</label>
-              <input value={form.personal.email} onChange={(e) => setNestedValue('personal', 'email', e.target.value)} />
+              <input
+                type="email"
+                value={form.personal.email}
+                onChange={(e) => setNestedValue('personal', 'email', e.target.value)}
+                placeholder="rohit@email.com"
+                autoComplete="email"
+              />
               <div className="onboarding-error">{fieldErrors['personal.email']}</div>
             </div>
             <div className="onboarding-group">
@@ -259,9 +267,9 @@ const OnboardingWizard = () => {
                 value={form.personal.pan}
                 onChange={(e) => setNestedValue('personal', 'pan', e.target.value.toUpperCase())}
                 maxLength={10}
-                spellCheck={false}
+                placeholder="ABCPD1234E"
+                autoComplete="off"
               />
-              <div className="onboarding-hint">4th letter must match tax status (e.g. P for individual).</div>
               <div className="onboarding-error">{fieldErrors['personal.pan']}</div>
             </div>
             <div className="onboarding-group">
@@ -280,22 +288,14 @@ const OnboardingWizard = () => {
               </select>
               <div className="onboarding-error">{fieldErrors['personal.occupation']}</div>
             </div>
-            <div className="onboarding-group onboarding-full">
+            <div className="onboarding-group">
               <label>Tax Status</label>
               <select value={form.personal.taxStatus} onChange={(e) => setNestedValue('personal', 'taxStatus', e.target.value)}>
                 <option value="">Select tax status</option>
-                <option value="individual">Individual (PAN 4th letter P)</option>
-                <option value="minor">Minor (PAN 4th letter P)</option>
-                <option value="nri-nre">NRI - NRE (PAN 4th letter P)</option>
-                <option value="nri-nro">NRI - NRO (PAN 4th letter P)</option>
-                <option value="huf">HUF (PAN 4th letter H)</option>
-                <option value="firm">Partnership firm (PAN 4th letter F)</option>
-                <option value="company">Company (PAN 4th letter C)</option>
-                <option value="trust">Trust (PAN 4th letter T)</option>
-                <option value="aop">Association of persons (PAN 4th letter A)</option>
-                <option value="boi">Body of individuals (PAN 4th letter B)</option>
-                <option value="local-authority">Local authority (PAN 4th letter L)</option>
-                <option value="government">Government (PAN 4th letter G)</option>
+                <option value="individual">Individual</option>
+                <option value="minor">Minor</option>
+                <option value="nri-nre">NRI - NRE</option>
+                <option value="nri-nro">NRI - NRO</option>
               </select>
               <div className="onboarding-error">{fieldErrors['personal.taxStatus']}</div>
             </div>
@@ -357,12 +357,22 @@ const OnboardingWizard = () => {
             </div>
             <div className="onboarding-group">
               <label>Bank Account Number</label>
-              <input value={form.financial.bankAccountNumber} onChange={(e) => setNestedValue('financial', 'bankAccountNumber', e.target.value.replace(/\D/g, ''))} />
+              <input
+                value={form.financial.bankAccountNumber}
+                onChange={(e) => setNestedValue('financial', 'bankAccountNumber', e.target.value.replace(/\D/g, ''))}
+                placeholder="Account number"
+                inputMode="numeric"
+              />
               <div className="onboarding-error">{fieldErrors['financial.bankAccountNumber']}</div>
             </div>
             <div className="onboarding-group">
               <label>IFSC</label>
-              <input value={form.financial.ifsc} onChange={(e) => setNestedValue('financial', 'ifsc', e.target.value.toUpperCase())} maxLength={11} />
+              <input
+                value={form.financial.ifsc}
+                onChange={(e) => setNestedValue('financial', 'ifsc', e.target.value.toUpperCase())}
+                maxLength={11}
+                placeholder="SBIN0001234"
+              />
               <div className="onboarding-error">{fieldErrors['financial.ifsc']}</div>
             </div>
           </div>
@@ -372,7 +382,11 @@ const OnboardingWizard = () => {
           <div className="onboarding-grid">
             <div className="onboarding-group">
               <label>Nominee Name</label>
-              <input value={form.nominee.name} onChange={(e) => setNestedValue('nominee', 'name', e.target.value)} />
+              <input
+                value={form.nominee.name}
+                onChange={(e) => setNestedValue('nominee', 'name', e.target.value)}
+                placeholder="Priya"
+              />
               <div className="onboarding-error">{fieldErrors['nominee.name']}</div>
             </div>
             <div className="onboarding-group">
