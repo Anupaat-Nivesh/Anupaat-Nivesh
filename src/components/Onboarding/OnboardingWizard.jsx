@@ -22,6 +22,13 @@ const IFSC_REGEX = /^[A-Z]{4}0[A-Z0-9]{6}$/;
 const MOBILE_REGEX = /^[6-9]\d{9}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/** Vercel serverless request body ~4.5MB cap — keep default safely under */
+const maxUploadMbEnv = Number(process.env.REACT_APP_MAX_UPLOAD_MB);
+const MAX_UPLOAD_BYTES =
+  Number.isFinite(maxUploadMbEnv) && maxUploadMbEnv > 0
+    ? maxUploadMbEnv * 1024 * 1024
+    : 4 * 1024 * 1024;
+
 const OnboardingWizard = () => {
   const [step, setStep] = useState(0);
   const [busy, setBusy] = useState(false);
@@ -132,6 +139,12 @@ const OnboardingWizard = () => {
   };
 
   const handleDocUpload = async (docKey, file) => {
+    if (file.size > MAX_UPLOAD_BYTES) {
+      setFormError(
+        `This file is too large (max ${Math.round(MAX_UPLOAD_BYTES / 1024 / 1024)} MB). Compress the document or use a smaller scan and try again.`
+      );
+      return;
+    }
     try {
       setFormError('');
       setBusy(true);
