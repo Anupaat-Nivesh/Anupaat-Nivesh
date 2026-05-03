@@ -1,5 +1,4 @@
 import { google } from 'googleapis';
-import { Readable } from 'stream';
 import { buildOnboardingFolderName } from '../utils/onboardingFolderName.mjs';
 
 /**
@@ -86,33 +85,57 @@ export function formatDriveApiError(err) {
 
 export async function uploadFileToFolder({ folderId, file }) {
   const drive = getDriveClient();
+  const parent = String(folderId).trim();
   const mime =
-    file.mimetype && file.mimetype !== 'application/octet-stream'
+    file.mimetype && String(file.mimetype).trim()
       ? file.mimetype
       : 'application/octet-stream';
 
-  const media = {
-    mimeType: mime,
-    body: Readable.from(file.buffer),
-  };
+  const safeName = String(file.originalname || 'document')
+    .replace(/[/\\?%*:|"<>]/g, '_')
+    .slice(0, 200);
 
   try {
-    const result = await drive.files.create({
+    /**
+     * Single-request multipart `files.create` + media often returns 403 “no storage quota” for
+     * service accounts because content upload may not inherit parents correctly. Folder-only
+     * create works (same as createClientFolder). Use metadata-only create under `parents`, then
+     * `files.update` with media — files land in your shared folder / Shared drive quota.
+     */
+    const created = await drive.files.create({
       requestBody: {
-        name: file.originalname,
-        parents: [String(folderId).trim()],
+        name: safeName,
+        mimeType: mime,
+        parents: [parent],
       },
-      media,
+      fields: 'id,name',
+      supportsAllDrives: true,
+    });
+
+    const fileId = created.data.id;
+
+    await drive.files.update({
+      fileId,
+      media: {
+        mimeType: mime,
+        body: file.buffer,
+      },
+      supportsAllDrives: true,
+    });
+
+    const meta = await drive.files.get({
+      fileId,
       fields: 'id,name,mimeType,size,webViewLink',
       supportsAllDrives: true,
     });
 
+    const d = meta.data;
     return {
-      fileId: result.data.id,
-      name: result.data.name,
-      mimeType: result.data.mimeType,
-      size: result.data.size,
-      link: result.data.webViewLink || '',
+      fileId: d.id,
+      name: d.name,
+      mimeType: d.mimeType,
+      size: d.size,
+      link: d.webViewLink || '',
     };
   } catch (err) {
     const msg = formatDriveApiError(err);
