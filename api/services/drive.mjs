@@ -1,6 +1,5 @@
 import { google } from 'googleapis';
 import { Readable } from 'stream';
-import { buildOnboardingFolderName } from '../utils/onboardingFolderName.mjs';
 
 function getDriveClient() {
   if (!process.env.GOOGLE_DRIVE_CREDENTIALS) {
@@ -25,11 +24,14 @@ export function getConfiguredParentFolderId(overrideParentFolderId) {
   );
 }
 
-export async function createClientFolder({ firstName, lastName, pan, parentFolderId }) {
+export async function createClientFolder({ pan, fullName, parentFolderId }) {
   const drive = getDriveClient();
-  const folderName =
-    buildOnboardingFolderName({ firstName, lastName, pan }) ||
-    `ONBOARDING_${Date.now()}`;
+  const safePan = String(pan || '').trim().toUpperCase();
+  const safeName = String(fullName || '')
+    .trim()
+    .replace(/\s+/g, '_')
+    .replace(/[^a-zA-Z0-9_]/g, '');
+  const folderName = `${safePan}_${safeName}` || `ONBOARDING_${Date.now()}`;
 
   const metadata = {
     name: folderName,

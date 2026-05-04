@@ -5,7 +5,6 @@ import {
   getConfiguredParentFolderId,
   uploadFileToFolder,
 } from '../services/drive.mjs';
-import { validatePanForTaxStatus } from '../utils/panValidation.mjs';
 
 const router = express.Router();
 const upload = multer({
@@ -17,24 +16,16 @@ const onboardingStore = new Map();
 
 router.post('/create-folder', async (req, res) => {
   try {
-    const { pan, parentFolderId, firstName, lastName, fullName, taxStatus } = req.body;
-    const resolvedFirst =
-      (firstName != null && String(firstName).trim() !== '') ? firstName : fullName;
+    const { pan, fullName, parentFolderId } = req.body;
 
-    if (!pan || !resolvedFirst || !String(resolvedFirst).trim()) {
-      return res.status(400).json({ error: 'PAN and first name are required' });
-    }
-
-    const panCheck = validatePanForTaxStatus(pan, taxStatus);
-    if (!panCheck.ok) {
-      return res.status(400).json({ error: panCheck.message });
+    if (!pan || !fullName) {
+      return res.status(400).json({ error: 'PAN and full name are required' });
     }
 
     const resolvedParentFolderId = getConfiguredParentFolderId(parentFolderId);
     const folder = await createClientFolder({
-      firstName: resolvedFirst,
-      lastName: lastName || '',
-      pan: panCheck.normalized,
+      pan,
+      fullName,
       parentFolderId: resolvedParentFolderId || undefined,
     });
 

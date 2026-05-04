@@ -4,7 +4,6 @@ import {
   submitOnboarding,
   uploadOnboardingDocument,
 } from '../../services/onboardingService';
-import { validatePanForTaxStatus } from '../../utils/panValidation';
 import './OnboardingWizard.css';
 
 const steps = ['Personal', 'Financial', 'Nominee', 'Documents', 'Review'];
@@ -18,6 +17,7 @@ const requiredDocs = [
   { key: 'nomineeProof', label: 'Nominee Proof', required: false },
 ];
 
+const PAN_REGEX = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
 const IFSC_REGEX = /^[A-Z]{4}0[A-Z0-9]{6}$/;
 const MOBILE_REGEX = /^[6-9]\d{9}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -32,8 +32,7 @@ const OnboardingWizard = () => {
 
   const [form, setForm] = useState({
     personal: {
-      firstName: '',
-      lastName: '',
+      fullName: '',
       mobile: '',
       email: '',
       pan: '',
@@ -71,14 +70,10 @@ const OnboardingWizard = () => {
     const errors = {};
     if (step === 0) {
       const p = form.personal;
-      if (!p.firstName.trim()) errors['personal.firstName'] = 'First name is required';
-      if (/\s/.test(p.firstName)) {
-        errors['personal.firstName'] = 'Spaces are not allowed in first name; use Last name for surname';
-      }
+      if (!p.fullName.trim()) errors['personal.fullName'] = 'Full name is required';
       if (!MOBILE_REGEX.test(p.mobile)) errors['personal.mobile'] = 'Enter valid 10-digit Indian mobile';
       if (!EMAIL_REGEX.test(p.email)) errors['personal.email'] = 'Enter valid email';
-      const panResult = validatePanForTaxStatus(p.pan, p.taxStatus);
-      if (!panResult.ok) errors['personal.pan'] = panResult.message;
+      if (!PAN_REGEX.test((p.pan || '').toUpperCase())) errors['personal.pan'] = 'PAN format should be ABCDE1234F';
       if (!p.dob) errors['personal.dob'] = 'Date of birth is required';
       if (!p.occupation) errors['personal.occupation'] = 'Occupation is required';
       if (!p.taxStatus) errors['personal.taxStatus'] = 'Tax status is required';
@@ -127,9 +122,7 @@ const OnboardingWizard = () => {
     if (folderInfo?.folderId) return folderInfo;
     const created = await createOnboardingFolder({
       pan: form.personal.pan.toUpperCase(),
-      firstName: form.personal.firstName,
-      lastName: form.personal.lastName,
-      taxStatus: form.personal.taxStatus,
+      fullName: form.personal.fullName,
     });
     setFolderInfo(created);
     return created;
@@ -222,26 +215,10 @@ const OnboardingWizard = () => {
 
         {step === 0 && (
           <div className="onboarding-grid">
-            <div className="onboarding-group">
-              <label>First name (as per PAN) *</label>
-              <input
-                value={form.personal.firstName}
-                onChange={(e) =>
-                  setNestedValue('personal', 'firstName', e.target.value.replace(/\s/g, ''))
-                }
-                placeholder="Single word, no spaces (e.g. Gourav)"
-                autoComplete="given-name"
-              />
-              <div className="onboarding-error">{fieldErrors['personal.firstName']}</div>
-            </div>
-            <div className="onboarding-group">
-              <label>Last name (optional)</label>
-              <input
-                value={form.personal.lastName}
-                onChange={(e) => setNestedValue('personal', 'lastName', e.target.value)}
-                placeholder="e.g. Chugh or Chugh Kumar"
-                autoComplete="family-name"
-              />
+            <div className="onboarding-group onboarding-full">
+              <label>Full Name (as per PAN)</label>
+              <input value={form.personal.fullName} onChange={(e) => setNestedValue('personal', 'fullName', e.target.value)} />
+              <div className="onboarding-error">{fieldErrors['personal.fullName']}</div>
             </div>
             <div className="onboarding-group">
               <label>Mobile Number</label>
@@ -255,13 +232,7 @@ const OnboardingWizard = () => {
             </div>
             <div className="onboarding-group">
               <label>PAN</label>
-              <input
-                value={form.personal.pan}
-                onChange={(e) => setNestedValue('personal', 'pan', e.target.value.toUpperCase())}
-                maxLength={10}
-                spellCheck={false}
-              />
-              <div className="onboarding-hint">4th letter must match tax status (e.g. P for individual).</div>
+              <input value={form.personal.pan} onChange={(e) => setNestedValue('personal', 'pan', e.target.value.toUpperCase())} maxLength={10} />
               <div className="onboarding-error">{fieldErrors['personal.pan']}</div>
             </div>
             <div className="onboarding-group">
@@ -280,22 +251,14 @@ const OnboardingWizard = () => {
               </select>
               <div className="onboarding-error">{fieldErrors['personal.occupation']}</div>
             </div>
-            <div className="onboarding-group onboarding-full">
+            <div className="onboarding-group">
               <label>Tax Status</label>
               <select value={form.personal.taxStatus} onChange={(e) => setNestedValue('personal', 'taxStatus', e.target.value)}>
                 <option value="">Select tax status</option>
-                <option value="individual">Individual (PAN 4th letter P)</option>
-                <option value="minor">Minor (PAN 4th letter P)</option>
-                <option value="nri-nre">NRI - NRE (PAN 4th letter P)</option>
-                <option value="nri-nro">NRI - NRO (PAN 4th letter P)</option>
-                <option value="huf">HUF (PAN 4th letter H)</option>
-                <option value="firm">Partnership firm (PAN 4th letter F)</option>
-                <option value="company">Company (PAN 4th letter C)</option>
-                <option value="trust">Trust (PAN 4th letter T)</option>
-                <option value="aop">Association of persons (PAN 4th letter A)</option>
-                <option value="boi">Body of individuals (PAN 4th letter B)</option>
-                <option value="local-authority">Local authority (PAN 4th letter L)</option>
-                <option value="government">Government (PAN 4th letter G)</option>
+                <option value="individual">Individual</option>
+                <option value="minor">Minor</option>
+                <option value="nri-nre">NRI - NRE</option>
+                <option value="nri-nro">NRI - NRO</option>
               </select>
               <div className="onboarding-error">{fieldErrors['personal.taxStatus']}</div>
             </div>
@@ -404,6 +367,7 @@ const OnboardingWizard = () => {
 
         {step === 3 && (
           <div>
+            <p>Folder naming convention: <strong>{(form.personal.pan || 'PAN').toUpperCase()}_{(form.personal.fullName || 'NAME').replace(/\s+/g, '_')}</strong></p>
             {fieldErrors['documents.folder'] ? <div className="onboarding-error">{fieldErrors['documents.folder']}</div> : null}
             {requiredDocs.map((doc) => (
               <div className="upload-row" key={doc.key}>

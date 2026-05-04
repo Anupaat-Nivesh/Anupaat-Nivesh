@@ -7,23 +7,11 @@ const ONBOARDING_ENDPOINTS = {
   UPLOAD: '/api/onboarding/upload',
 };
 
-export const createOnboardingFolder = async ({
-  pan,
-  firstName,
-  lastName,
-  taxStatus,
-  parentFolderId,
-}) => {
+export const createOnboardingFolder = async ({ pan, fullName, parentFolderId }) => {
   if (!isBackendAvailable()) {
     throw new Error('Backend API is required. Configure REACT_APP_API_BASE_URL');
   }
-  return apiPost(ONBOARDING_ENDPOINTS.CREATE_FOLDER, {
-    pan,
-    firstName,
-    lastName,
-    taxStatus,
-    parentFolderId,
-  });
+  return apiPost(ONBOARDING_ENDPOINTS.CREATE_FOLDER, { pan, fullName, parentFolderId });
 };
 
 export const uploadOnboardingDocument = async ({ folderId, docType, file }) => {
