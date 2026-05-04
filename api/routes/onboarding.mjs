@@ -35,28 +35,18 @@ router.post('/create-folder', async (req, res) => {
       return res.status(400).json({ error: INVALID_PAN_MESSAGE });
     }
 
-    const resolvedParentFolderId = String(
-      getConfiguredParentFolderId(parentFolderId) || ''
-    ).trim();
-    if (!resolvedParentFolderId) {
-      return res.status(503).json({
-        error: 'Google Drive parent folder is not configured',
-        message:
-          'Set GOOGLE_DRIVE_ONBOARDING_PARENT_FOLDER_ID (folder ID from the Drive URL). Share that folder with your service account email as Editor. Service accounts have no Drive quota unless files are created inside your folder or a Shared drive.',
-      });
-    }
-
+    const resolvedParentFolderId = getConfiguredParentFolderId(parentFolderId);
     const folder = await createClientFolder({
       firstName: fname,
       lastName: lastName || '',
       pan: panNorm,
-      parentFolderId: resolvedParentFolderId,
+      parentFolderId: resolvedParentFolderId || undefined,
     });
 
     return res.status(200).json({
       success: true,
       ...folder,
-      parentFolderId: resolvedParentFolderId,
+      parentFolderId: resolvedParentFolderId || null,
     });
   } catch (error) {
     console.error('Create onboarding folder error:', error);
@@ -67,56 +57,32 @@ router.post('/create-folder', async (req, res) => {
   }
 });
 
-router.post(
-  '/upload',
-  (req, res, next) => {
-    upload.single('file')(req, res, (err) => {
-      if (!err) return next();
-      if (err.code === 'LIMIT_FILE_SIZE') {
-        return res.status(413).json({
-          error: 'File too large',
-          message:
-            'This file exceeds the server upload limit. Try a smaller PDF/image or compress the file.',
-        });
-      }
-      console.error('Multer error:', err);
-      return res.status(400).json({
-        error: 'Upload parse failed',
-        message: err.message || 'Could not read uploaded file',
-      });
-    });
-  },
-  async (req, res) => {
-    try {
-      const { folderId, docType } = req.body;
+router.post('/upload', upload.single('file'), async (req, res) => {
+  try {
+    const { folderId, docType } = req.body;
 
-      if (!folderId) {
-        return res.status(400).json({ error: 'folderId is required' });
-      }
-      if (!req.file || !req.file.buffer?.length) {
-        return res.status(400).json({
-          error: 'file is required',
-          message:
-            'No file was received. On Vercel, uploads over ~4.5 MB fail before the server runs — use smaller files or host the API where larger bodies are allowed.',
-        });
-      }
-
-      const uploaded = await uploadFileToFolder({ folderId, file: req.file });
-
-      return res.status(200).json({
-        success: true,
-        docType: docType || 'unknown',
-        ...uploaded,
-      });
-    } catch (error) {
-      console.error('Onboarding upload error:', error);
-      return res.status(500).json({
-        error: 'Failed to upload document',
-        message: error.message,
-      });
+    if (!folderId) {
+      return res.status(400).json({ error: 'folderId is required' });
     }
+    if (!req.file) {
+      return res.status(400).json({ error: 'file is required' });
+    }
+
+    const uploaded = await uploadFileToFolder({ folderId, file: req.file });
+
+    return res.status(200).json({
+      success: true,
+      docType: docType || 'unknown',
+      ...uploaded,
+    });
+  } catch (error) {
+    console.error('Onboarding upload error:', error);
+    return res.status(500).json({
+      error: 'Failed to upload document',
+      message: error.message,
+    });
   }
-);
+});
 
 router.post('/submit', async (req, res) => {
   try {
