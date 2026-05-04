@@ -5,7 +5,7 @@ import {
   getConfiguredParentFolderId,
   uploadFileToFolder,
 } from '../services/drive.mjs';
-import { INVALID_PAN_MESSAGE, isValidIndianPan } from '../utils/panValidation.mjs';
+import { validatePanForTaxStatus } from '../utils/panValidation.mjs';
 
 const router = express.Router();
 const upload = multer({
@@ -17,7 +17,7 @@ const onboardingStore = new Map();
 
 router.post('/create-folder', async (req, res) => {
   try {
-    const { pan, parentFolderId, firstName, lastName, fullName } = req.body;
+    const { pan, parentFolderId, firstName, lastName, fullName, taxStatus } = req.body;
     const resolvedFirst =
       (firstName != null && String(firstName).trim() !== '') ? firstName : fullName;
 
@@ -25,21 +25,16 @@ router.post('/create-folder', async (req, res) => {
       return res.status(400).json({ error: 'PAN and first name are required' });
     }
 
-    const fname = String(resolvedFirst).trim();
-    if (/\s/.test(fname)) {
-      return res.status(400).json({ error: 'First name must not contain spaces' });
-    }
-
-    const panNorm = String(pan).trim().toUpperCase();
-    if (!isValidIndianPan(panNorm)) {
-      return res.status(400).json({ error: INVALID_PAN_MESSAGE });
+    const panCheck = validatePanForTaxStatus(pan, taxStatus);
+    if (!panCheck.ok) {
+      return res.status(400).json({ error: panCheck.message });
     }
 
     const resolvedParentFolderId = getConfiguredParentFolderId(parentFolderId);
     const folder = await createClientFolder({
-      firstName: fname,
+      firstName: resolvedFirst,
       lastName: lastName || '',
-      pan: panNorm,
+      pan: panCheck.normalized,
       parentFolderId: resolvedParentFolderId || undefined,
     });
 
