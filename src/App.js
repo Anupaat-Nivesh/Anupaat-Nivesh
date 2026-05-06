@@ -34,6 +34,7 @@ import Payment from './pages/Payment/Payment';
 import PaymentSuccess from './pages/PaymentSuccess/PaymentSuccess';
 import PaymentError from './pages/PaymentError/PaymentError';
 import BookConsultationMobile from './pages/BookConsultationMobile/BookConsultationMobile';
+import ClientOnboardingPage from './pages/ClientOnboarding/ClientOnboardingPage';
 
 import { useEffect } from "react";
 
@@ -94,6 +95,7 @@ function App() {
         <Route path="/chatbot" element={<ChatBotPage />} />
         {/* Standalone Mobile Booking Funnel - No MainLayout */}
         <Route path="/book-consultation" element={<BookConsultationMobile />} />
+        <Route path="/client-onboarding" element={<ClientOnboardingPage />} />
       </Routes>
     </BrowserRouter>
   );

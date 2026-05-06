@@ -7,4 +7,7 @@ node_modules
 .env.production.local
 build
 
+# Client onboarding uploads (local API)
+uploads/
+
 # Keep .env.production.example for reference

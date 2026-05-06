@@ -16,6 +16,7 @@ import { dirname, join } from 'path';
 // Import route handlers
 import healthRouter from './api/routes/health.mjs';
 import paymentsRouter from './api/routes/payments.mjs';
+import onboardingRouter from './api/routes/onboarding.mjs';
 
 // Raw body middleware for webhook signature verification
 const rawBodyMiddleware = express.raw({ type: 'application/json', limit: '10mb' });
@@ -26,14 +27,23 @@ const __dirname = dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 8000;
 
+const defaultOrigins = [
+  'https://www.anupaatnivesh.com',
+  'https://anupaatnivesh.com',
+  'http://localhost:3000',
+  'https://anupaat-nivesh.vercel.app'
+];
+
+const allowedOrigins = (process.env.CORS_ALLOWED_ORIGINS || '')
+  .split(',')
+  .map((v) => v.trim())
+  .filter(Boolean);
+
+const corsOrigins = allowedOrigins.length > 0 ? allowedOrigins : defaultOrigins;
+
 // Middleware
 app.use(cors({
-  origin: [
-    'https://www.anupaatnivesh.com',
-    'https://anupaatnivesh.com',
-    'http://localhost:3000',
-    'https://anupaat-nivesh.vercel.app'
-  ],
+  origin: corsOrigins,
   credentials: true,
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'x-razorpay-signature']
@@ -65,6 +75,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // API Routes
 app.use('/api/health', healthRouter);
 app.use('/api/payments', paymentsRouter);
+app.use('/api/onboarding', onboardingRouter);
 
 // Root endpoint
 app.get('/', (req, res) => {
@@ -77,6 +88,9 @@ app.get('/', (req, res) => {
         createOrder: '/api/payments/create-order',
         verifyPayment: '/api/payments/verify-payment',
         webhook: '/api/payments/webhook'
+      },
+      onboarding: {
+        submit: '/api/onboarding/submit'
       }
     }
   });

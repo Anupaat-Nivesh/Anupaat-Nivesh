@@ -63,7 +63,12 @@ export const API_ENDPOINTS = {
   },
   
   // Health check
-  HEALTH: '/api/health'
+  HEALTH: '/api/health',
+
+  // Client onboarding (KYC documents)
+  ONBOARDING: {
+    SUBMIT: '/api/onboarding/submit'
+  }
 };
 
 /**
