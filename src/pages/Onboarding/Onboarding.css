@@ -1,0 +1,137 @@
+.onboarding-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+}
+
+.onboarding-header {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid #e6ebf5;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(6px);
+}
+
+.onboarding-brand {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1b365d;
+  letter-spacing: 0.01em;
+}
+
+.onboarding-subtitle {
+  margin: 0;
+  font-size: 0.88rem;
+  color: #506383;
+}
+
+.onboarding-content {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+.onboarding-frame {
+  width: 100%;
+  height: 100%;
+  min-height: calc(100vh - 60px);
+  border: none;
+  background: #fff;
+}
+
+.onboarding-loader {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #314870;
+  text-align: center;
+  padding: 24px;
+}
+
+.onboarding-spinner {
+  width: 42px;
+  height: 42px;
+  border: 4px solid #d8e2f4;
+  border-top-color: #1f5bb8;
+  border-radius: 50%;
+  animation: onboarding-spin 0.85s linear infinite;
+}
+
+.onboarding-fallback-toggle {
+  margin: 10px auto 20px;
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 0.86rem;
+  background: #1f5bb8;
+  color: #fff;
+  cursor: pointer;
+}
+
+.onboarding-fallback {
+  max-width: 520px;
+  margin: 40px auto;
+  padding: 24px;
+  border: 1px solid #d6e0f2;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(31, 91, 184, 0.08);
+  text-align: center;
+}
+
+.onboarding-fallback h1 {
+  margin: 0 0 10px;
+  font-size: 1.4rem;
+  color: #1b365d;
+}
+
+.onboarding-fallback p {
+  margin: 0 0 18px;
+  color: #3f5272;
+}
+
+.onboarding-fallback a {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 8px;
+  background: #1f5bb8;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+@keyframes onboarding-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .onboarding-header {
+    padding: 12px 14px;
+  }
+
+  .onboarding-brand {
+    font-size: 1rem;
+  }
+
+  .onboarding-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .onboarding-frame {
+    min-height: calc(100vh - 54px);
+  }
+}
