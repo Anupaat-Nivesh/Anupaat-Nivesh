@@ -1,10 +1,9 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
 import {
   About,
   Offerings,
-  Whyanupaat,
   Home,
   FAQs,
   Privacypolicy,
@@ -60,7 +59,9 @@ function App() {
           <Route index element={<Home />} />
           <Route path="home" element={<Home />} />
           <Route path="about" element={<About />} />
-          <Route path="whyanupaat" element={<Whyanupaat />} />
+          {/* Why Anupaat Nivesh content is now merged into the About page.
+              Redirect any old /whyanupaat links so external bookmarks keep working. */}
+          <Route path="whyanupaat" element={<Navigate to="/about" replace />} />
           <Route path="offerings" element={<Offerings />} />
           <Route path="contact" element={<Contact />} />
           <Route path="ourApp" element={<OurApp />} />

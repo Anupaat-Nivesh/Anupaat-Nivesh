@@ -8,3 +8,5 @@ export {default as ChatBot} from './chatbot/ChatBot';
 export { default as WhatsAppCTA } from './WhatsAppCTA';
 export { default as HowWeWork } from './HowWeWork';
 export { default as ComplianceDisclaimer } from './ComplianceDisclaimer';
+export { default as TrustHighlights } from './TrustHighlights';
+export { default as MediaPresence } from './MediaPresence';

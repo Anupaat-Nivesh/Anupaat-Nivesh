@@ -6,6 +6,7 @@ import aboutUsIllustration from "../../assets/illustrations/customer-support.web
 import preAboutUsIllustration from "../../assets/illustrations/pre-customer-support.webp";
 import './about.css';
 import OurTeam from './OurTeam';
+import Whyanupaat from '../whyanupaat/Whyanupaat';
 import { BsFillCheckCircleFill } from "react-icons/bs";
 
 
@@ -99,6 +100,13 @@ const About = () => {
 
 
             </div>
+
+            {/* Why Anupaat Nivesh content — merged into About per nav simplification.
+                Reuses the existing Whyanupaat container as-is (no duplication). */}
+            <div className='aboutus-whyanupaat-section'>
+                <Whyanupaat />
+            </div>
+
             <div className='aboutus-description-section3'>
                 <OurTeam />
             </div>

@@ -6,10 +6,9 @@ import { Testimonials } from '../testimonials/Testimonials';
 import { SkillCounter } from '../skillCounter/SkillCounter';
 
 import Whyanupaat from '../whyanupaat/Whyanupaat';
-import About from '../about/About';
 import Offerings from '../offerings/Offerings';
 import Contact from '../../components/contact/Contact';
-import { OurApp } from '../../components';
+import { OurApp, TrustHighlights, MediaPresence } from '../../components';
 import HowWeWork from '../../components/HowWeWork/HowWeWork';
 import { updateSEO } from '../../utils/seo';
 
@@ -181,11 +180,17 @@ const Home = () => {
 
                 <section className='home-section offerings-section'>   <Offerings /></section>
 
-                <section className='home-section about-section'> <About /></section>
+                {/* Merged About area: TrustHighlights (compact about) + Whyanupaat
+                    (detailed why-us). The standalone /whyanupaat menu has been
+                    removed; both render together as one cohesive About story. */}
+                <section className='home-section about-section'>
+                    <TrustHighlights />
+                    <Whyanupaat />
+                </section>
 
-                <section className='home-section why-section'><Whyanupaat /></section>
                 <section className='home-section how-we-work-section'><HowWeWork /></section>
                 <SkillCounter />
+                <section className='home-section media-presence-section'><MediaPresence /></section>
                 <section className='home-section testimonials-section'><Testimonials /></section>
 
 

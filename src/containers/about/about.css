@@ -73,6 +73,22 @@
   text-align: center;
 }
 
+/* Whyanupaat content embedded inside the About page (merged from former /whyanupaat) */
+.aboutus-whyanupaat-section {
+  margin-top: 6rem;
+}
+
+.aboutus-whyanupaat-section .anupaat__whyanupaat {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+@media (max-width: 60em) {
+  .aboutus-whyanupaat-section {
+    margin-top: 4rem;
+  }
+}
+
 
 .aboutus-description-block {
   display: flex;

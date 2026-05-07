@@ -34,11 +34,6 @@ const links = [
         id: 'about'
     },
     {
-        name: "Why Anupaat Nivesh",
-        path: '/whyanupaat',
-        id: 'whyanupaat'
-    },
-    {
         name: "Calculators",
         path: '/calculators',
         id: 'calculators',
