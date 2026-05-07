@@ -129,6 +129,26 @@ font-weight: 450
     /* box-shadow: inset 0 0 0 2px var(--color-blog); */
 }
 
+/* Primary-fill variant — used for the Sign Up CTA */
+.nav-action__btn--primary {
+    margin-left: 1rem;
+}
+
+.nav-action__btn--primary button {
+    background: var(--color-primary);
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(254, 1, 1, 0.18);
+    border: 2px solid var(--color-primary);
+}
+
+.nav-action__btn--primary button:hover {
+    background: #d80000;
+    border-color: #d80000;
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(254, 1, 1, 0.28);
+}
+
 .anupaat__navbar-login {
     margin-left: 1rem;
     position: relative;
@@ -526,6 +546,34 @@ font-weight: 450
     width: 100%;
 }
 
+/* Mobile Sign Up — primary-fill, always shown in drawer regardless of breakpoint */
+.anupaat__navbar-menu_container-links-sign .mobile-signup-link {
+    width: 100%;
+}
+
+.anupaat__navbar-menu_container-links-sign .mobile-signup-btn {
+    display: block;
+    width: 100%;
+    padding: 1.2rem 2rem;
+    color: #fff;
+    background: var(--color-primary);
+    font-family: var(--font-family);
+    font-weight: 600;
+    font-size: 1.8rem;
+    outline: none;
+    cursor: pointer;
+    border: 2px solid var(--color-primary);
+    border-radius: 1rem;
+    transition: all 0.3s;
+    box-shadow: 0 6px 16px rgba(254, 1, 1, 0.20);
+}
+
+.anupaat__navbar-menu_container-links-sign .mobile-signup-btn:hover,
+.anupaat__navbar-menu_container-links-sign .mobile-signup-btn:focus {
+    background: #d80000;
+    border-color: #d80000;
+}
+
 .mobile-login-links {
     display: flex;
     flex-direction: column;
@@ -590,7 +638,8 @@ font-weight: 450
         padding: 1rem 2rem;
     }
 
-    .anupaat__navbar-sign {
+    .anupaat__navbar-sign,
+    .anupaat__navbar-signup {
         display: none;
     }
 

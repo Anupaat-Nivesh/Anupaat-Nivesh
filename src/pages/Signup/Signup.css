@@ -1,0 +1,717 @@
+/* ==========================================================================
+   Signup Page — refined for clarity, hierarchy and conversion.
+   --------------------------------------------------------------------------
+   Design tokens (no new colors) used:
+       --color-primary, --color-primary-light, --color-grey-light,
+       --color-text, --color-subtext, --color-subtext-light,
+       --color-secondary-dark, --font-family, --transition
+
+   Utility classes reused from the rest of the site:
+       .section__padding, .home-section, .section-heading-focus,
+       .section-description
+   ========================================================================== */
+
+.signup-page {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    background: var(--color-bg);
+}
+
+/* ============================================================
+   HERO — slim, high-contrast, fewer elements
+   ============================================================ */
+
+.signup-hero {
+    position: relative;
+    margin: 9.6rem auto 0 auto;
+    padding: 5rem 4rem;
+    border-radius: 24px;
+    color: #fff;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(254, 1, 1, 0.10), transparent 30%),
+        radial-gradient(circle at 80% 0%, rgba(22, 26, 29, 0.10), transparent 25%),
+        linear-gradient(135deg, #0c0f12, #161a1d);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+    overflow: hidden;
+}
+
+.signup-hero__inner {
+    max-width: 80rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.signup-hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    margin-bottom: 1.6rem;
+}
+
+.signup-hero__title {
+    font-family: var(--font-family);
+    font-size: clamp(2.8rem, 4.6vw, 5rem);
+    line-height: 1.15;
+    color: #fff;
+    margin: 0 0 1.4rem 0;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.signup-hero__title .section-heading-focus {
+    background: var(--color-primary);
+    color: #fff;
+}
+
+.signup-hero__subtitle {
+    font-size: 1.6rem;
+    color: rgba(255, 255, 255, 0.78);
+    max-width: 60rem;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* ============================================================
+   OPTIONS SECTION — generous breathing room
+   ============================================================ */
+
+.signup-options {
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+}
+
+.signup-options__header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.signup-options__header h2 {
+    font-size: clamp(2.2rem, 3.2vw, 3.4rem);
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.2;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+.signup-options__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.4rem;
+    align-items: stretch;
+}
+
+/* ============================================================
+   OPTION CARDS — strong hierarchy, single CTA, soft shadows
+   ============================================================ */
+
+.signup-option-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    border-radius: 20px;
+    padding: 3.2rem 2.8rem 2.8rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    border: 1px solid transparent;
+    height: 100%;
+    isolation: isolate;
+}
+
+.signup-option-card--light {
+    background: linear-gradient(180deg, #ffffff 0%, var(--color-primary-light) 100%);
+    color: var(--color-text);
+    border-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 28px rgba(15, 18, 21, 0.06);
+}
+
+.signup-option-card--dark {
+    background:
+        radial-gradient(circle at 100% 0%, rgba(254, 1, 1, 0.16), transparent 40%),
+        linear-gradient(135deg, #0c0f12, var(--color-secondary-dark));
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+.signup-option-card--recommended {
+    border-color: rgba(254, 1, 1, 0.35);
+    box-shadow: 0 16px 36px rgba(254, 1, 1, 0.12);
+}
+
+.signup-option-card:hover {
+    transform: translateY(-4px);
+}
+
+.signup-option-card--light:hover {
+    box-shadow: 0 18px 40px rgba(15, 18, 21, 0.10);
+    border-color: rgba(254, 1, 1, 0.25);
+}
+
+.signup-option-card--dark:hover {
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.30);
+    border-color: rgba(254, 1, 1, 0.35);
+}
+
+/* Floating "Recommended" ribbon — only on Option 1 */
+.signup-option-card__ribbon {
+    position: absolute;
+    top: -1.4rem;
+    right: 2.4rem;
+    z-index: 2;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    box-shadow: 0 8px 18px rgba(254, 1, 1, 0.32);
+}
+
+/* Header */
+.signup-option-card__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.signup-option-card__option-label {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    background: rgba(254, 1, 1, 0.10);
+    color: var(--color-primary);
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+}
+
+.signup-option-card--dark .signup-option-card__option-label {
+    background: rgba(255, 255, 255, 0.10);
+    color: #fff;
+}
+
+.signup-option-card__title {
+    font-family: var(--font-family);
+    font-size: clamp(2.4rem, 2.6vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0;
+    color: inherit;
+    letter-spacing: -0.01em;
+}
+
+.signup-option-card__subtitle {
+    font-size: 1.4rem;
+    line-height: 1.4;
+    margin: 0;
+    color: var(--color-subtext-light);
+    font-weight: 500;
+}
+
+.signup-option-card--dark .signup-option-card__subtitle {
+    color: rgba(255, 255, 255, 0.62);
+}
+
+.signup-option-card__description {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    margin: 0.4rem 0 0 0;
+    color: var(--color-subtext);
+}
+
+.signup-option-card--dark .signup-option-card__description {
+    color: rgba(255, 255, 255, 0.82);
+}
+
+/* Compact icon-bullet feature list */
+.signup-option-card__features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.signup-option-card__feature {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    font-size: 1.4rem;
+    line-height: 1.4;
+    color: var(--color-subtext);
+}
+
+.signup-option-card--dark .signup-option-card__feature {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.signup-option-card__feature-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 10px;
+    background: rgba(254, 1, 1, 0.10);
+    color: var(--color-primary);
+}
+
+.signup-option-card--dark .signup-option-card__feature-icon {
+    background: rgba(254, 1, 1, 0.18);
+    color: #ff6b6b;
+}
+
+.signup-option-card__feature-label {
+    font-weight: 500;
+}
+
+/* Features + aside (store badges) — fills horizontal space, aligns CTAs */
+.signup-option-card__features-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(10rem, 12.5rem);
+    gap: 1.6rem 2rem;
+    align-items: start;
+}
+
+.signup-option-card__features-aside {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    min-width: 0;
+}
+
+.signup-option-card__features-row .signup-option-card__features {
+    min-width: 0;
+}
+
+/* Footer with single primary CTA */
+.signup-option-card__footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    padding-top: 0.6rem;
+}
+
+.signup-option-card__secondary {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* CTA — bold, full width, large tap target */
+.signup-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 5.2rem;
+    padding: 1.4rem 2rem;
+    font-family: var(--font-family);
+    font-size: 1.6rem;
+    font-weight: 600;
+    border-radius: 12px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    border: 2px solid transparent;
+    letter-spacing: 0.01em;
+}
+
+.signup-cta--primary {
+    background: var(--color-primary);
+    color: #fff !important;
+    border-color: var(--color-primary);
+    box-shadow: 0 10px 22px rgba(254, 1, 1, 0.20);
+}
+
+.signup-cta--primary:hover,
+.signup-cta--primary:focus-visible {
+    background: #d80000;
+    border-color: #d80000;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(254, 1, 1, 0.30);
+    outline: none;
+}
+
+.signup-cta--on-dark {
+    box-shadow: 0 10px 28px rgba(254, 1, 1, 0.40);
+}
+
+/* Subtle "ready to go" pulse on the recommended primary CTA */
+@keyframes signupCtaPulse {
+    0%   { box-shadow: 0 10px 22px rgba(254, 1, 1, 0.20); }
+    50%  { box-shadow: 0 10px 22px rgba(254, 1, 1, 0.20), 0 0 0 6px rgba(254, 1, 1, 0.12); }
+    100% { box-shadow: 0 10px 22px rgba(254, 1, 1, 0.20); }
+}
+
+.signup-option-card--recommended .signup-cta--primary {
+    animation: signupCtaPulse 2.6s ease-in-out infinite;
+}
+
+/* App store badges — stacked in aside column beside feature list */
+.signup-app-card__stores {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 0.8rem;
+    width: 100%;
+}
+
+.signup-app-card__store-img {
+    width: 100%;
+    max-width: 11.5rem;
+    height: auto;
+    border-radius: 0.6rem;
+    transition: transform 0.25s ease, filter 0.25s ease;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.10));
+}
+
+.signup-app-card__store-img:hover {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.18));
+}
+
+/* ============================================================
+   TRUST RIBBON — compact chip row, no longer a heavy section
+   ============================================================ */
+
+.signup-trust {
+    margin-top: 4rem;
+}
+
+.signup-trust__ribbon {
+    list-style: none;
+    margin: 0;
+    padding: 1.6rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem 1.4rem;
+    background: var(--color-primary-light);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 16px;
+}
+
+.signup-trust__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    color: var(--color-text);
+    font-size: 1.3rem;
+    font-weight: 500;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.signup-trust__chip:hover {
+    transform: translateY(-2px);
+    border-color: rgba(254, 1, 1, 0.30);
+}
+
+.signup-trust__chip-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+}
+
+.signup-trust__chip-label {
+    white-space: nowrap;
+}
+
+/* ============================================================
+   FAQ — locally compact (overrides the global .faq look only here)
+   ============================================================ */
+
+.signup-faqs {
+    padding: 4rem 2rem 6rem;
+    max-width: 80rem;
+    margin: 0 auto;
+}
+
+.signup-faqs__header {
+    text-align: center;
+    margin-bottom: 2.4rem;
+}
+
+.signup-faqs__header h2 {
+    font-size: clamp(2rem, 2.6vw, 2.8rem);
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0;
+    color: var(--color-text);
+}
+
+.signup-faqs__container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+/* Local override of the global .faq look — keeps global FAQs unchanged */
+.signup-faqs--compact .faq {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    padding: 1.4rem 1.6rem;
+    gap: 1.2rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.signup-faqs--compact .faq:hover {
+    background: #fff;
+    border-color: rgba(254, 1, 1, 0.30);
+    color: var(--color-text);
+    box-shadow: 0 6px 16px rgba(15, 18, 21, 0.05);
+}
+
+.signup-faqs--compact .faqs__icon {
+    font-size: 1.8rem;
+    color: var(--color-primary);
+}
+
+.signup-faqs--compact .faq_question {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--color-text);
+}
+
+.signup-faqs--compact .faq_answer {
+    margin-top: 0.8rem;
+    font-size: 1.4rem;
+    line-height: 1.55;
+    color: var(--color-subtext);
+    font-weight: 400;
+}
+
+/* ============================================================
+   RESPONSIVE — match the rest of the site (75 / 60 / 47 / 40 / 34 em)
+   ============================================================ */
+
+@media (max-width: 75em) {
+    .signup-hero {
+        padding: 4rem 3rem;
+    }
+
+    .signup-options__grid {
+        gap: 1.8rem;
+    }
+}
+
+@media (max-width: 60em) {
+    .signup-hero {
+        margin-top: 8rem;
+        padding: 3.5rem 2.5rem;
+    }
+
+    .signup-options {
+        padding-top: 4.5rem;
+    }
+
+    .signup-options__grid {
+        grid-template-columns: 1fr;
+        gap: 2.4rem;
+    }
+
+    .signup-trust {
+        margin-top: 3rem;
+    }
+}
+
+@media (max-width: 47em) {
+    .signup-hero {
+        padding: 3rem 2rem;
+        border-radius: 18px;
+    }
+
+    .signup-hero__subtitle {
+        font-size: 1.4rem;
+    }
+
+    .signup-option-card {
+        padding: 2.6rem 2rem 2.4rem;
+        border-radius: 18px;
+        gap: 1.8rem;
+    }
+
+    .signup-option-card__ribbon {
+        right: 1.6rem;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .signup-option-card__title {
+        font-size: 2.4rem;
+    }
+
+    .signup-option-card__feature-icon {
+        width: 2.8rem;
+        height: 2.8rem;
+    }
+
+    /* Stack store badges under bullets on narrow viewports */
+    .signup-option-card__features-row {
+        grid-template-columns: 1fr;
+        gap: 1.4rem;
+    }
+
+    .signup-option-card__features-aside {
+        justify-content: flex-start;
+    }
+
+    .signup-app-card__stores {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+    }
+
+    .signup-app-card__store-img {
+        max-width: 10.5rem;
+        width: auto;
+    }
+
+    /* Mobile-first: compact FAQ even tighter on phones */
+    .signup-faqs {
+        padding: 3rem 1.6rem 5rem;
+    }
+
+    .signup-faqs--compact .faq {
+        padding: 1.2rem 1.4rem;
+    }
+
+    .signup-faqs--compact .faq_question {
+        font-size: 1.4rem;
+    }
+
+    .signup-faqs--compact .faq_answer {
+        font-size: 1.3rem;
+    }
+
+    /* Mobile sticky CTA — surfaces the recommended action once the user
+       scrolls past the hero. Single CTA, mirrors Option 1. */
+    .signup-mobile-cta {
+        position: fixed;
+        left: 1.4rem;
+        right: 1.4rem;
+        bottom: 1.4rem;
+        z-index: 51;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 5rem;
+        padding: 0 2rem;
+        font-family: var(--font-family);
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #fff !important;
+        background: var(--color-primary);
+        border-radius: 12px;
+        text-decoration: none;
+        box-shadow: 0 12px 26px rgba(254, 1, 1, 0.30);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        pointer-events: none;
+    }
+
+    .signup-page.signup-page--show-sticky .signup-mobile-cta {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+}
+
+@media (min-width: 47.0625em) {
+    /* Sticky mobile CTA only renders on phones */
+    .signup-mobile-cta {
+        display: none;
+    }
+}
+
+@media (max-width: 40em) {
+    .signup-hero {
+        margin-top: 6rem;
+    }
+
+    .signup-trust__ribbon {
+        padding: 1.2rem 1.4rem;
+    }
+
+    .signup-trust__chip {
+        font-size: 1.2rem;
+        padding: 0.5rem 1rem;
+    }
+}
+
+@media (max-width: 34em) {
+    .signup-hero {
+        margin-top: 4rem;
+        padding: 2.4rem 1.6rem;
+        border-radius: 14px;
+    }
+
+    .signup-hero__title {
+        font-size: 2.6rem;
+    }
+
+    .signup-option-card {
+        padding: 2.4rem 1.8rem;
+        border-radius: 14px;
+    }
+
+    .signup-option-card__title {
+        font-size: 2.2rem;
+    }
+
+    .signup-option-card__feature {
+        font-size: 1.3rem;
+    }
+
+    .signup-app-card__store-img {
+        max-width: 9.5rem;
+    }
+}
+
+/* Reduced motion: honour user preference */
+@media (prefers-reduced-motion: reduce) {
+    .signup-option-card,
+    .signup-cta,
+    .signup-trust__chip,
+    .signup-app-card__store-img,
+    .signup-mobile-cta,
+    .signup-faqs--compact .faq {
+        transition: none;
+    }
+
+    .signup-option-card--recommended .signup-cta--primary {
+        animation: none;
+    }
+}

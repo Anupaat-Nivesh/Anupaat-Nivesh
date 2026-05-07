@@ -200,6 +200,15 @@ const Navbar = () => {
                 </Link>
 
             </div>
+            <div className="anupaat__navbar-signup nav-action__btn nav-action__btn--primary">
+
+                <Link to='/signup'>
+                    <button type="button" onClick={() => setShowLoginMenu(false)}>
+                        Sign Up
+                    </button>
+                </Link>
+
+            </div>
             <div className="anupaat__navbar-login nav-action__btn">
 
                 <button
@@ -323,6 +332,12 @@ const Navbar = () => {
                                 }
                             </ul>
                             <div className="anupaat__navbar-menu_container-links-sign">
+                                <NavLink to='/signup' onClick={() => {
+                                    setToggleMenu(false);
+                                    restoreScrolling();
+                                }} className="mobile-signup-link">
+                                    <button type="button" className="mobile-signup-btn">Sign Up</button>
+                                </NavLink>
                                 <NavLink to='ourApp' onClick={() => {
                                     setToggleMenu(false);
                                     restoreScrolling();

@@ -35,6 +35,7 @@ import PaymentSuccess from './pages/PaymentSuccess/PaymentSuccess';
 import PaymentError from './pages/PaymentError/PaymentError';
 import BookConsultationMobile from './pages/BookConsultationMobile/BookConsultationMobile';
 import Onboarding from "./pages/Onboarding/Onboarding";
+import SignupPage from "./pages/Signup/Signup";
 
 import { useEffect } from "react";
 
@@ -71,6 +72,7 @@ function App() {
           <Route path="payment" element={<Payment />} />
           <Route path="payment-success" element={<PaymentSuccess />} />
           <Route path="payment-error" element={<PaymentError />} />
+          <Route path="signup" element={<SignupPage />} />
 
           <Route path="*" element={<NotFound />} />
           {/* footer pages  */}

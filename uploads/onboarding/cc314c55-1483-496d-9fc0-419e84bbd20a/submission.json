@@ -1,0 +1,30 @@
+{
+  "submissionId": "cc314c55-1483-496d-9fc0-419e84bbd20a",
+  "receivedAt": "2026-05-06T10:17:04.805Z",
+  "personal": {
+    "fullName": "gourav chugh",
+    "mobile": "9988776655",
+    "email": "gouravmeets@gmail.com",
+    "pan": "AOTIC0710L",
+    "dob": "1899-07-13",
+    "occupation": "Salaried",
+    "taxStatus": "INDIVIDUAL"
+  },
+  "financial": {
+    "annualIncome": "Below ₹3 Lakh",
+    "investmentGoal": "Retirement",
+    "investmentType": "Both",
+    "riskAppetite": "Conservative",
+    "horizon": "1–3 years",
+    "bankAccount": "910010030381149",
+    "ifsc": "UTIB0000686"
+  },
+  "nominees": [
+    {
+      "name": "gourav",
+      "relationship": "Father",
+      "allocation": 100,
+      "isMinor": "No"
+    }
+  ]
+}
