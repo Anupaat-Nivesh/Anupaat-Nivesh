@@ -68,6 +68,17 @@ export const API_ENDPOINTS = {
   // Client onboarding (KYC documents)
   ONBOARDING: {
     SUBMIT: '/api/onboarding/submit'
+  },
+
+  MEDIA: {
+    PUBLIC_LIST: '/api/media/public',
+    AUTH_LOGIN: '/api/media/auth/login',
+    AUTH_LOGOUT: '/api/media/auth/logout',
+    AUTH_ME: '/api/media/auth/me',
+    ADMIN_LIST: '/api/media/admin/list',
+    ADMIN_CREATE: '/api/media/admin/create',
+    ADMIN_UPDATE: '/api/media/admin/:id',
+    ADMIN_DELETE: '/api/media/admin/:id'
   }
 };
 

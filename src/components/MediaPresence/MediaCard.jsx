@@ -1,134 +1,206 @@
-import React from 'react';
-import {
-    HiOutlinePlay,
-    HiOutlineNewspaper,
-    HiOutlinePhotograph,
-    HiOutlineExternalLink,
-    HiOutlineSpeakerphone,
-} from 'react-icons/hi';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { HiOutlineExternalLink, HiOutlinePhotograph, HiOutlinePlay } from 'react-icons/hi';
 
 import { youtubeThumb } from './mediaData';
+import { getPhotoUrls } from './mediaItemUtils';
+import { inferSocialPlatform } from './socialLinkUtils';
 
-/**
- * Type → label + icon for the corner badge.
- * Centralised so the layout stays consistent across all media types.
- */
 const TYPE_META = {
     youtube: {
         label: 'Video',
         icon: <HiOutlinePlay size={14} aria-hidden="true" />,
     },
-    article: {
-        label: 'Article',
-        icon: <HiOutlineNewspaper size={14} aria-hidden="true" />,
-    },
-    news: {
-        label: 'News',
-        icon: <HiOutlineSpeakerphone size={14} aria-hidden="true" />,
+    youtubeShort: {
+        label: 'Short',
+        icon: <HiOutlinePlay size={14} aria-hidden="true" />,
     },
     photo: {
         label: 'Photo',
         icon: <HiOutlinePhotograph size={14} aria-hidden="true" />,
     },
+    socialPost: {
+        label: 'Social',
+        icon: <HiOutlineExternalLink size={14} aria-hidden="true" />,
+    },
 };
 
 /**
- * MediaCard
- *
- * Single reusable card that handles every media type defined in mediaData.js.
- * - YouTube + article + news: opens external link in a new tab.
- * - Photo: triggers the parent-supplied lightbox via `onPhotoClick`.
- *
- * The whole card is one tap target. We pick the wrapping element based on
- * intent: <a> for external, <button> for the lightbox, plain <div> when
- * there's no action.
+ * MediaCard — gallery thumbnail: visual-first, minimal copy.
+ * Opens the parent viewer via `onItemClick` for all supported types.
  */
-const MediaCard = ({ item, onPhotoClick }) => {
-    const meta = TYPE_META[item.type] || TYPE_META.article;
+const MediaCard = ({ item, onItemClick }) => {
+    /** When natural aspect is tall, bias `object-fit: cover` toward the top (faces). */
+    const [autoPortraitCrop, setAutoPortraitCrop] = useState(false);
+
+    useEffect(() => {
+        setAutoPortraitCrop(false);
+    }, [item.id]);
+
+    const photoUrls = getPhotoUrls(item);
+    const multiPhoto = item.type === 'photo' && photoUrls.length > 1;
+    const socialPlatform = item.type === 'socialPost' ? inferSocialPlatform(item.url || '') : null;
+    const baseMeta = TYPE_META[item.type] || TYPE_META.photo;
+    const meta =
+        multiPhoto
+            ? { label: 'Album', icon: baseMeta.icon }
+            : item.type === 'socialPost' && socialPlatform === 'linkedin'
+              ? { label: 'LinkedIn', icon: <HiOutlineExternalLink size={14} aria-hidden="true" /> }
+              : item.type === 'socialPost' && socialPlatform === 'x'
+                ? { label: 'X', icon: <HiOutlineExternalLink size={14} aria-hidden="true" /> }
+                : item.type === 'socialPost'
+                  ? { label: 'Social', icon: TYPE_META.socialPost.icon }
+                  : baseMeta;
 
     const thumbnail =
         item.thumbnail ||
-        (item.type === 'youtube' ? youtubeThumb(item.videoId) : '');
+        (item.type === 'youtube' || item.type === 'youtubeShort' ? youtubeThumb(item.videoId) : '') ||
+        (item.type === 'photo' ? item.url || '' : '');
 
-    // Choose the wrapping element based on action affordance
-    const isPhoto = item.type === 'photo';
-    const hasExternalUrl = !isPhoto && item.url && item.url !== '#';
+    const showPlay = item.type === 'youtube' || item.type === 'youtubeShort';
+    const snippet = item.shortDescription;
+
+    const isSocialOgPreview =
+        item.type === 'socialPost' &&
+        Boolean(thumbnail) &&
+        /^https?:\/\//i.test(String(thumbnail));
+
+    const socialThumbClass =
+        item.type === 'socialPost' && !item.thumbnail
+            ? socialPlatform === 'linkedin'
+                ? 'media-card__thumb-wrap--social media-card__thumb-wrap--social-linkedin'
+                : socialPlatform === 'x'
+                  ? 'media-card__thumb-wrap--social media-card__thumb-wrap--social-x'
+                  : 'media-card__thumb-wrap--social media-card__thumb-wrap--social-generic'
+            : '';
+
+    const handleActivate = () => {
+        if (onItemClick) onItemClick(item);
+    };
+
+    const thumbFocus = item.thumbFocus;
+
+    const singleThumbClassName = useMemo(() => {
+        const parts = ['media-card__thumb'];
+        if (thumbFocus === 'top') parts.push('media-card__thumb--focus-top');
+        else if (thumbFocus === 'bottom') parts.push('media-card__thumb--focus-bottom');
+        else if (thumbFocus === 'center') parts.push('media-card__thumb--focus-center');
+        else if (autoPortraitCrop) parts.push('media-card__thumb--focus-portrait-auto');
+        return parts.join(' ');
+    }, [thumbFocus, autoPortraitCrop]);
+
+    const onSingleImageLoad = useCallback(
+        (e) => {
+            if (multiPhoto || thumbFocus) return;
+            const { naturalWidth: w, naturalHeight: h } = e.currentTarget;
+            if (!w || !h) return;
+            const tall = h / w > 1.08;
+            setAutoPortraitCrop((prev) => (prev === tall ? prev : tall));
+        },
+        [multiPhoto, thumbFocus]
+    );
 
     const innerMarkup = (
         <>
-            <div className="media-card__thumb-wrap">
-                {thumbnail ? (
+            <div
+                className={
+                    multiPhoto
+                        ? 'media-card__thumb-wrap media-card__thumb-wrap--stack'
+                        : isSocialOgPreview
+                          ? 'media-card__thumb-wrap media-card__thumb-wrap--social-preview'
+                          : socialThumbClass
+                            ? `media-card__thumb-wrap ${socialThumbClass}`
+                            : 'media-card__thumb-wrap'
+                }
+            >
+                {multiPhoto ? (
+                    <>
+                        {photoUrls.slice(0, 3).map((src, i) => {
+                            const focusCls =
+                                thumbFocus === 'top'
+                                    ? ' media-card__thumb--focus-top'
+                                    : thumbFocus === 'bottom'
+                                      ? ' media-card__thumb--focus-bottom'
+                                      : thumbFocus === 'center'
+                                        ? ' media-card__thumb--focus-center'
+                                        : '';
+                            return (
+                                <div
+                                    key={`${src}-${i}`}
+                                    className={`media-card__stack-cell media-card__stack-cell--${i}`}
+                                >
+                                    <img
+                                        src={src}
+                                        alt=""
+                                        className={`media-card__thumb media-card__thumb--stack-inner${focusCls}`}
+                                        loading="lazy"
+                                    />
+                                </div>
+                            );
+                        })}
+                        <span className="media-card__stack-pill" aria-hidden="true">
+                            {photoUrls.length}
+                        </span>
+                    </>
+                ) : thumbnail ? (
                     <img
                         src={thumbnail}
-                        alt={item.title}
-                        className="media-card__thumb"
+                        alt=""
+                        className={singleThumbClassName}
                         loading="lazy"
+                        onLoad={onSingleImageLoad}
                     />
+                ) : item.type === 'socialPost' ? (
+                    <span className="media-card__social-placeholder" aria-hidden="true">
+                        <HiOutlineExternalLink size={44} />
+                    </span>
                 ) : (
                     <div className="media-card__thumb media-card__thumb--placeholder" aria-hidden="true" />
                 )}
 
-                {item.type === 'youtube' && (
+                {showPlay && (
                     <span className="media-card__play" aria-hidden="true">
                         <HiOutlinePlay size={28} />
                     </span>
                 )}
 
-                <span className={`media-card__badge media-card__badge--${item.type}`}>
+                <span
+                    className={`media-card__badge media-card__badge--${item.type}${
+                        item.type === 'socialPost' && socialPlatform === 'x' ? ' media-card__badge--social-x' : ''
+                    }`}
+                >
                     {meta.icon}
                     <span>{meta.label}</span>
                 </span>
-
-                {hasExternalUrl && (
-                    <span className="media-card__external" aria-hidden="true">
-                        <HiOutlineExternalLink size={14} />
-                    </span>
-                )}
             </div>
 
             <div className="media-card__body">
                 {item.source && <span className="media-card__source">{item.source}</span>}
                 <h3 className="media-card__title">{item.title}</h3>
-                {item.description && (
-                    <p className="media-card__description">{item.description}</p>
+                {snippet && (
+                    <p className="media-card__snippet">{snippet}</p>
                 )}
             </div>
         </>
     );
 
-    if (isPhoto) {
+    if (!onItemClick) {
         return (
-            <button
-                type="button"
-                className="media-card media-card--photo"
-                onClick={() => onPhotoClick && onPhotoClick(item)}
-                aria-label={`Open photo: ${item.title}`}
-                data-aos="fade-up"
-            >
+            <div className="media-card media-card--static" data-aos="fade-up">
                 {innerMarkup}
-            </button>
-        );
-    }
-
-    if (hasExternalUrl) {
-        return (
-            <a
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="media-card"
-                aria-label={`${meta.label}: ${item.title} (opens in new tab)`}
-                data-aos="fade-up"
-            >
-                {innerMarkup}
-            </a>
+            </div>
         );
     }
 
     return (
-        <div className="media-card media-card--static" data-aos="fade-up">
+        <button
+            type="button"
+            className="media-card media-card--interactive"
+            onClick={handleActivate}
+            aria-label={`Open ${meta.label}: ${item.title}`}
+            data-aos="fade-up"
+        >
             {innerMarkup}
-        </div>
+        </button>
     );
 };
 

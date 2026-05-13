@@ -1,49 +1,50 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { HiX } from 'react-icons/hi';
+import React, { useEffect, useMemo, useState } from 'react';
 
-import MediaCard from './MediaCard';
+import MediaGallery from './MediaGallery';
+import MediaViewerModal from './MediaViewerModal';
 import mediaData from './mediaData';
+import { mediaPublicList } from '../../api/mediaApi';
 
 import './MediaPresence.css';
 
 /**
  * MediaPresence
  *
- * Modern social-proof grid that surfaces media coverage, videos, articles
- * and event photos. Data lives entirely in `mediaData.js` so adding or
- * removing items requires no markup changes.
- *
- * UX:
- *  - Desktop / tablet: responsive masonry-feel grid.
- *  - Mobile:           horizontal snap scroller — minimal scrolling fatigue.
- *  - Photo cards:      open in a lightweight, accessible lightbox modal.
- *  - Video / article:  open in a new tab (no embedded iframes for perf).
+ * Public homepage media gallery: Swiper (same behaviour stack as Testimonials); opens viewer on card tap.
+ * Content is driven by `mediaData.js` (update via repo / internal admin tool).
  */
 const MediaPresence = ({ items = mediaData }) => {
-    const [activePhoto, setActivePhoto] = useState(null);
+    const [activeItem, setActiveItem] = useState(null);
+    const [liveItems, setLiveItems] = useState([]);
+    const [didLoadLive, setDidLoadLive] = useState(false);
 
-    const handlePhotoOpen = useCallback((item) => setActivePhoto(item), []);
-    const handlePhotoClose = useCallback(() => setActivePhoto(null), []);
-
-    // Lock background scroll + close on ESC while the lightbox is open
     useEffect(() => {
-        if (!activePhoto) return undefined;
-
-        const previousOverflow = document.body.style.overflow;
-        document.body.style.overflow = 'hidden';
-
-        const onKey = (event) => {
-            if (event.key === 'Escape') handlePhotoClose();
+        let cancelled = false;
+        const load = async () => {
+            try {
+                const result = await mediaPublicList();
+                if (!cancelled && Array.isArray(result) && result.length > 0) {
+                    setLiveItems(result);
+                }
+            } catch {
+                // Static fallback keeps homepage resilient.
+            } finally {
+                if (!cancelled) setDidLoadLive(true);
+            }
         };
-        document.addEventListener('keydown', onKey);
-
+        load();
         return () => {
-            document.body.style.overflow = previousOverflow;
-            document.removeEventListener('keydown', onKey);
+            cancelled = true;
         };
-    }, [activePhoto, handlePhotoClose]);
+    }, []);
 
-    if (!items.length) return null;
+    const finalItems = useMemo(() => {
+        if (liveItems.length > 0) return liveItems;
+        if (didLoadLive) return items;
+        return items;
+    }, [didLoadLive, items, liveItems]);
+
+    if (!finalItems.length) return null;
 
     return (
         <section
@@ -60,45 +61,15 @@ const MediaPresence = ({ items = mediaData }) => {
                 </p>
             </div>
 
-            <ul className="media-presence__grid">
-                {items.map((item) => (
-                    <li key={item.id} className="media-presence__item">
-                        <MediaCard item={item} onPhotoClick={handlePhotoOpen} />
-                    </li>
-                ))}
-            </ul>
+            <MediaGallery items={finalItems} onSelectItem={setActiveItem} />
 
-            {activePhoto && (
-                <div
-                    className="media-lightbox"
-                    role="dialog"
-                    aria-modal="true"
-                    aria-label={activePhoto.title}
-                    onClick={handlePhotoClose}
-                >
-                    <button
-                        type="button"
-                        className="media-lightbox__close"
-                        onClick={handlePhotoClose}
-                        aria-label="Close photo"
-                    >
-                        <HiX size={22} />
-                    </button>
-                    <figure
-                        className="media-lightbox__figure"
-                        onClick={(event) => event.stopPropagation()}
-                    >
-                        <img
-                            src={activePhoto.thumbnail}
-                            alt={activePhoto.title}
-                            className="media-lightbox__image"
-                        />
-                        <figcaption className="media-lightbox__caption">
-                            <strong>{activePhoto.title}</strong>
-                            {activePhoto.description && <span>{activePhoto.description}</span>}
-                        </figcaption>
-                    </figure>
-                </div>
+            {activeItem && (
+                <MediaViewerModal
+                    item={activeItem}
+                    items={finalItems}
+                    onActiveItemChange={setActiveItem}
+                    onClose={() => setActiveItem(null)}
+                />
             )}
         </section>
     );

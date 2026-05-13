@@ -50,6 +50,7 @@ export const apiRequest = async (endpoint, options = {}) => {
   // Prepare request options
   const requestOptions = {
     method,
+    credentials: 'include',
     headers: {
       ...apiConfig.headers,
       ...headers
@@ -69,7 +70,15 @@ export const apiRequest = async (endpoint, options = {}) => {
 
   // Add body for POST/PUT requests
   if (body && (method === 'POST' || method === 'PUT' || method === 'PATCH')) {
-    requestOptions.body = JSON.stringify(body);
+    const isFormData = typeof FormData !== 'undefined' && body instanceof FormData;
+    if (isFormData) {
+      requestOptions.body = body;
+      if (requestOptions.headers && requestOptions.headers['Content-Type']) {
+        delete requestOptions.headers['Content-Type'];
+      }
+    } else {
+      requestOptions.body = JSON.stringify(body);
+    }
   }
 
   try {

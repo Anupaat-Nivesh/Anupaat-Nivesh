@@ -35,6 +35,7 @@ import PaymentError from './pages/PaymentError/PaymentError';
 import BookConsultationMobile from './pages/BookConsultationMobile/BookConsultationMobile';
 import Onboarding from "./pages/Onboarding/Onboarding";
 import SignupPage from "./pages/Signup/Signup";
+import AdminMediaPanel from "./pages/AdminMediaPanel/AdminMediaPanel";
 
 import { useEffect } from "react";
 
@@ -99,6 +100,8 @@ function App() {
         {/* Standalone Mobile Booking Funnel - No MainLayout */}
         <Route path="/book-consultation" element={<BookConsultationMobile />} />
         <Route path="/onboarding" element={<Onboarding />} />
+        <Route path="/internal/media-library" element={<AdminMediaPanel />} />
+        <Route path="/mediadata" element={<AdminMediaPanel />} />
       </Routes>
     </BrowserRouter>
   );
