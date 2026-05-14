@@ -36,6 +36,15 @@ import BookConsultationMobile from './pages/BookConsultationMobile/BookConsultat
 import Onboarding from "./pages/Onboarding/Onboarding";
 import SignupPage from "./pages/Signup/Signup";
 import AdminMediaPanel from "./pages/AdminMediaPanel/AdminMediaPanel";
+import { BasketUserProvider } from "./basket/context/BasketUserContext";
+import BasketLayout from "./basket/layout/BasketLayout";
+import BasketLanding from "./basket/pages/BasketLanding";
+import BasketDetail from "./basket/pages/BasketDetail";
+import RiskProfilePage from "./basket/pages/RiskProfilePage";
+import GoalGPSPage from "./basket/pages/GoalGPSPage";
+import BasketDashboardPage from "./basket/pages/BasketDashboardPage";
+import BasketPaymentSuccessPage from "./basket/pages/BasketPaymentSuccessPage";
+import BasketAdminPage from "./basket/pages/BasketAdminPage";
 
 import { useEffect } from "react";
 
@@ -102,6 +111,24 @@ function App() {
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/internal/media-library" element={<AdminMediaPanel />} />
         <Route path="/mediadata" element={<AdminMediaPanel />} />
+
+        {/* Elemental Basket Investing Platform */}
+        <Route
+          path="/invest"
+          element={
+            <BasketUserProvider>
+              <BasketLayout />
+            </BasketUserProvider>
+          }
+        >
+          <Route index element={<BasketLanding />} />
+          <Route path="basket/:id" element={<BasketDetail />} />
+          <Route path="risk-profile" element={<RiskProfilePage />} />
+          <Route path="goals" element={<GoalGPSPage />} />
+          <Route path="dashboard" element={<BasketDashboardPage />} />
+          <Route path="payment-success" element={<BasketPaymentSuccessPage />} />
+          <Route path="admin" element={<BasketAdminPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

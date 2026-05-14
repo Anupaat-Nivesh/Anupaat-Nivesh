@@ -44,6 +44,11 @@ const links = [
         path: '/offerings',
         id: 'offerings'
     },
+    {
+        name: "Elemental",
+        path: '/invest',
+        id: 'elemental'
+    },
     /*{
         name: "Tools", // New heading
         path: '/tools', // Set the path for the Tools page
