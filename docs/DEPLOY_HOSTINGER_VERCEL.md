@@ -71,6 +71,10 @@ curl -sS "${VERCEL_ORIGIN}/api/payments/webhook" | head -c 300
 
 Expect **JSON** (not HTML). `/api/payments/webhook` GET should mention whether the webhook secret is configured.
 
+**Preview URLs (`*-git-*-*.vercel.app`)** may have **Vercel Deployment Protection** (SSO). Anonymous `curl` then returns HTML “Authentication Required” (401), not JSON. Use **`vercel curl`** (authenticated CLI), temporarily **disable protection** on that preview, or test against your **public** deployment (e.g. `https://anupaat-nivesh.vercel.app` or a production API domain).
+
+**Hostinger apex/www** (`https://www.anupaatnivesh.com/api/...`) will usually return **HTML** (the React app), because the API is on **Vercel**, not Hostinger — that is expected. Validate `/api/*` against the **Vercel origin** you set in `REACT_APP_API_BASE_URL`.
+
 **CORS preflight** (replace `https://www.anupaatnivesh.com` with your real Hostinger URL):
 
 ```bash
