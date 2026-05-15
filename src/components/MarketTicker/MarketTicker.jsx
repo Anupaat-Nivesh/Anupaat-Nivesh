@@ -112,7 +112,17 @@ export default function MarketTicker() {
   const load = useCallback(async () => {
     try {
       const res = await fetch(getMarketTickerApiUrl(), { credentials: "omit" });
-      const json = await res.json().catch(() => ({}));
+      const text = await res.text();
+      let json = {};
+      try {
+        json = text ? JSON.parse(text) : {};
+      } catch {
+        throw new Error(
+          res.ok
+            ? "Ticker API returned non-JSON (often mis-routed /api on deploy — check Vercel routes to server.mjs)."
+            : "Ticker response was not JSON"
+        );
+      }
       if (!res.ok) throw new Error(json.error || res.statusText || "Request failed");
       const list = Array.isArray(json.quotes) ? json.quotes : [];
       setQuotes(list);

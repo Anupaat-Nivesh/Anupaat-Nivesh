@@ -35,21 +35,50 @@ const FUTURES_FX = [
 const CACHE_TTL_MS = 45_000;
 let cache = { at: 0, payload: null };
 
+const YAHOO_CHART_HOSTS = [
+  'https://query1.finance.yahoo.com',
+  'https://query2.finance.yahoo.com',
+];
+
+const yahooFetchHeaders = {
+  'User-Agent': UA,
+  Accept: 'application/json, text/plain, */*',
+  'Accept-Language': 'en-US,en;q=0.9',
+  Referer: 'https://finance.yahoo.com/',
+};
+
 async function fetchYahooChart(symbol) {
   const enc = encodeURIComponent(symbol);
-  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${enc}?range=1d&interval=5m`;
-  const res = await fetch(url, {
-    headers: { 'User-Agent': UA, Accept: 'application/json' },
-  });
-  if (!res.ok) {
-    const t = await res.text().catch(() => '');
-    throw new Error(`Yahoo HTTP ${res.status} ${t.slice(0, 120)}`);
+  let lastErr = null;
+  for (const host of YAHOO_CHART_HOSTS) {
+    const url = `${host}/v8/finance/chart/${enc}?range=1d&interval=5m`;
+    try {
+      const res = await fetch(url, { headers: yahooFetchHeaders });
+      if (!res.ok) {
+        const t = await res.text().catch(() => '');
+        lastErr = new Error(`Yahoo HTTP ${res.status} ${t.slice(0, 120)}`);
+        continue;
+      }
+      const json = await res.json().catch(() => ({}));
+      const chartErr = json?.chart?.error;
+      if (chartErr) {
+        lastErr = new Error(chartErr.description || chartErr.code || 'Yahoo chart error');
+        continue;
+      }
+      const result = json?.chart?.result?.[0];
+      if (!result?.meta) {
+        lastErr = new Error('No chart result');
+        continue;
+      }
+      return parseYahooChartResult(symbol, result);
+    } catch (e) {
+      lastErr = e;
+    }
   }
-  const json = await res.json();
-  const err = json?.chart?.error;
-  if (err) throw new Error(err.description || err.code || 'Yahoo chart error');
-  const result = json?.chart?.result?.[0];
-  if (!result?.meta) throw new Error('No chart result');
+  throw lastErr || new Error('Yahoo unreachable');
+}
+
+function parseYahooChartResult(symbol, result) {
   const m = result.meta;
   const price =
     typeof m.regularMarketPrice === 'number'

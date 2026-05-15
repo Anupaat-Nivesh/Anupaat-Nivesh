@@ -47,9 +47,23 @@ const allowedOrigins = (process.env.CORS_ALLOWED_ORIGINS || '')
 
 const corsOrigins = allowedOrigins.length > 0 ? allowedOrigins : defaultOrigins;
 
+const corsOriginCallback = (origin, callback) => {
+  if (!origin) return callback(null, true);
+  if (corsOrigins.includes(origin)) return callback(null, true);
+  try {
+    const { hostname } = new URL(origin);
+    if (hostname === 'localhost' || hostname.endsWith('.vercel.app')) {
+      return callback(null, true);
+    }
+  } catch {
+    return callback(null, false);
+  }
+  return callback(null, false);
+};
+
 // Middleware
 app.use(cors({
-  origin: corsOrigins,
+  origin: corsOriginCallback,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'x-razorpay-signature']
@@ -147,6 +161,7 @@ if (process.env.VERCEL !== '1') {
   });
 }
 
-// Export for Vercel serverless
+// Export for Vercel serverless (allow time for parallel Yahoo chart calls on cold start)
+export const maxDuration = 30;
 export default app;
 
