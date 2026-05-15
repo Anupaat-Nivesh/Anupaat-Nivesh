@@ -2,8 +2,8 @@
  * Public market snapshot for homepage ticker.
  * Proxies Yahoo Finance chart API (server-side; avoids browser CORS).
  *
- * Indices + crude from Yahoo; USD/INR from USDINR=X; gold & silver as indicative
- * INR per 10 g from COMEX GC=F and SI=F (USD/oz) × USDINR=X → INR, then troy oz → gram × 10.
+ * Indices + crude from Yahoo; USD/INR from USDINR=X; gold as indicative INR per 10 g
+ * from COMEX GC=F (USD/oz) × USDINR=X; silver as indicative INR per kg from SI=F the same way.
  * ~45s in-memory cache to limit upstream calls.
  */
 
@@ -186,16 +186,17 @@ router.get('/', async (_req, res) => {
     usdInr.previousClose != null
   ) {
     const goldPer10 = round2(((gc.price * usdInr.price) / GRAMS_PER_TROY_OZ) * 10);
-    const silverPer10 = round2(((si.price * usdInr.price) / GRAMS_PER_TROY_OZ) * 10);
+    /** Silver shown per kg (10 g × 100). Gold remains per 10 g. */
+    const silverPerKg = round2(((si.price * usdInr.price) / GRAMS_PER_TROY_OZ) * 10 * 100);
     const prevGold10 = round2(((gc.previousClose * usdInr.previousClose) / GRAMS_PER_TROY_OZ) * 10);
-    const prevSilver10 = round2(((si.previousClose * usdInr.previousClose) / GRAMS_PER_TROY_OZ) * 10);
+    const prevSilverKg = round2(((si.previousClose * usdInr.previousClose) / GRAMS_PER_TROY_OZ) * 10 * 100);
     const goldCh =
       goldPer10 != null && prevGold10 != null && prevGold10 !== 0
         ? ((goldPer10 - prevGold10) / prevGold10) * 100
         : null;
     const silverCh =
-      silverPer10 != null && prevSilver10 != null && prevSilver10 !== 0
-        ? ((silverPer10 - prevSilver10) / prevSilver10) * 100
+      silverPerKg != null && prevSilverKg != null && prevSilverKg !== 0
+        ? ((silverPerKg - prevSilverKg) / prevSilverKg) * 100
         : null;
 
     const mt = Math.max(gc.marketTime || 0, si.marketTime || 0, usdInr.marketTime || 0);
@@ -203,7 +204,7 @@ router.get('/', async (_req, res) => {
     goldQuote = buildInrPer10gQuote({
       id: 'gold-inr-10g',
       label: 'Gold',
-      sublabel: 'GC=F · INR / 10 g',
+      sublabel: 'GC=F · INR / 10 gram',
       kind: 'comexInrPer10g',
       title:
         'Indicative INR per 10 g: COMEX gold continuous future (GC=F), USD per troy oz, converted with Yahoo USD/INR (USDINR=X). Not an Indian exchange official print.',
@@ -212,13 +213,13 @@ router.get('/', async (_req, res) => {
       marketTime: mt || null,
     });
     silverQuote = buildInrPer10gQuote({
-      id: 'silver-inr-10g',
+      id: 'silver-inr-kg',
       label: 'Silver',
-      sublabel: 'SI=F · INR / 10 g',
-      kind: 'comexInrPer10g',
+      sublabel: 'SI=F · INR / kg',
+      kind: 'comexInrPerKg',
       title:
-        'Indicative INR per 10 g: COMEX silver continuous future (SI=F), USD per troy oz, converted with Yahoo USD/INR (USDINR=X). Not an Indian exchange official print.',
-      price: silverPer10,
+        'Indicative INR per kg: COMEX silver continuous future (SI=F), USD per troy oz, converted with Yahoo USD/INR (USDINR=X). Not an Indian exchange official print.',
+      price: silverPerKg,
       changePct: silverCh,
       marketTime: mt || null,
     });
@@ -227,16 +228,16 @@ router.get('/', async (_req, res) => {
       ok: false,
       id: 'gold-inr-10g',
       label: 'Gold',
-      sublabel: 'GC=F · INR / 10 g',
+      sublabel: 'GC=F · INR / 10 gram',
       kind: 'comexInrPer10g',
       error: 'GC=F or USDINR=X unavailable',
     };
     silverQuote = {
       ok: false,
-      id: 'silver-inr-10g',
+      id: 'silver-inr-kg',
       label: 'Silver',
-      sublabel: 'SI=F · INR / 10 g',
-      kind: 'comexInrPer10g',
+      sublabel: 'SI=F · INR / kg',
+      kind: 'comexInrPerKg',
       error: 'SI=F or USDINR=X unavailable',
     };
   }
@@ -263,7 +264,7 @@ router.get('/', async (_req, res) => {
     fetchedAt: now,
     quotes,
     disclaimer:
-      'Indicative data from Yahoo Finance (unofficial chart API). USD/INR is USDINR=X. Gold and silver are COMEX GC=F and SI=F (USD/oz) converted to approximate INR per 10 g using that rate; contract specs, taxes, and local premia differ. Not investment advice.',
+      'Indicative data from Yahoo Finance (unofficial chart API). USD/INR is USDINR=X. Gold: COMEX GC=F (USD/oz) to approximate INR per 10 g. Silver: SI=F to approximate INR per kg. Contract specs, taxes, and local premia differ. Not investment advice.',
   });
 });
 

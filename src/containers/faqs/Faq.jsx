@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 
 const Faq = ({ question, answer }) => {
   const [show, setShow] = useState(false);
@@ -14,7 +14,7 @@ const Faq = ({ question, answer }) => {
         onClick={() => setShow((v) => !v)}
       >
         <span className="faq-trigger__icon" aria-hidden>
-          {show ? <AiOutlineMinus size={28} /> : <AiOutlinePlus size={28} />}
+          {show ? <IoChevronUp size={24} /> : <IoChevronDown size={24} />}
         </span>
         <span className="faq-trigger__question">{question}</span>
       </button>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useLayoutEffect, useState, useRef, useCallback } from 'react';
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 import './navbar.css';
 import { Link, NavLink, useLocation } from 'react-router-dom';
@@ -51,7 +51,22 @@ const Navbar = () => {
     const whatWeDoWrapRef = useRef(null);
     const insightsWrapRef = useRef(null);
     const companyWrapRef = useRef(null);
+    const navRootRef = useRef(null);
     const location = useLocation();
+
+    useLayoutEffect(() => {
+        const syncNavHeight = () => {
+            const el = navRootRef.current;
+            const h = el?.getBoundingClientRect?.().height ?? 72;
+            document.documentElement.style.setProperty('--navbar-height', `${Math.ceil(h)}px`);
+        };
+        syncNavHeight();
+        window.addEventListener('resize', syncNavHeight);
+        return () => {
+            window.removeEventListener('resize', syncNavHeight);
+            document.documentElement.style.removeProperty('--navbar-height');
+        };
+    }, []);
 
     const closeNavDropdowns = useCallback(() => {
         setShowWhatWeDoMenu(false);
@@ -131,7 +146,10 @@ const Navbar = () => {
     };
 
     return (
-        <div className={anupaat__navbar ? 'anupaat__navbar active' : 'anupaat__navbar'}>
+        <div
+            ref={navRootRef}
+            className={anupaat__navbar ? 'anupaat__navbar active' : 'anupaat__navbar'}
+        >
             <div className="anupaat__navbar-links">
                 <div className="anupaat__navbar-links_logo">
                     <Link to="/" className="logo" onClick={toggleHome} aria-label="Anupaat Nivesh — Home">

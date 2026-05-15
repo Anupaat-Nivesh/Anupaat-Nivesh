@@ -22,15 +22,15 @@ export default function MarketDeploymentIntelligencePage() {
         Padding must live on this inner wrapper or it never applies to the page.
       */}
       <div
-        className="min-h-screen scroll-pt-28 bg-mdif-canvas pb-12 pt-28 font-sans text-[1.0625rem] text-mdif-text antialiased leading-[1.65] sm:scroll-pt-32 sm:pb-10 sm:pt-[7.5rem] sm:text-[1.075rem] sm:leading-relaxed md:pt-32 lg:pt-36"
+        className="min-h-screen scroll-pt-20 bg-mdif-canvas pb-12 pt-4 font-sans text-[1.0625rem] text-mdif-text antialiased leading-[1.65] sm:scroll-pt-24 sm:pb-10 sm:pt-5 sm:text-[1.075rem] sm:leading-relaxed md:pt-6 lg:pt-6"
       >
         <a
           href="#mdif-main"
-          className="fixed left-4 top-28 z-[110] -translate-y-24 rounded-md bg-mdif-brand px-3 py-2.5 text-sm font-semibold text-white opacity-0 shadow-md transition hover:bg-mdif-brandDark focus:translate-y-0 focus:opacity-100 sm:top-32"
+          className="fixed left-4 top-20 z-[110] -translate-y-16 rounded-md bg-mdif-brand px-3 py-2.5 text-sm font-semibold text-white opacity-0 shadow-md transition hover:bg-mdif-brandDark focus:translate-y-0 focus:opacity-100 sm:top-24"
         >
           Skip to content
         </a>
-        <main id="mdif-main" className="scroll-mt-28 sm:scroll-mt-32">
+        <main id="mdif-main" className="scroll-mt-16 sm:scroll-mt-20">
           <HeroSection />
           <MarketPlainSpeak />
           <ClientSessionInsight />

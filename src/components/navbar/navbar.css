@@ -16,7 +16,7 @@ font-weight: 450
     /*for sticky navbar on top, Don't change*/
     width: 100%;
     /*for full size navbar Don't change*/
-    z-index: 99;
+    z-index: 101;
     color: var(--color-secondary);
     font-family: var(--font-family);
     background: rgba(255, 255, 255, 0.95);

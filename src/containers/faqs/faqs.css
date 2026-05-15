@@ -1,7 +1,7 @@
 /*================FAQS (redesigned)==============*/
 
 .faqs-page {
-  padding-top: clamp(6rem, 12vw, 9rem);
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
   padding-bottom: 4rem;
 }
 
@@ -54,6 +54,8 @@
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
   overflow: hidden;
   transition: box-shadow 0.25s ease, border-color 0.25s ease;
+  position: relative;
+  isolation: isolate;
 }
 
 .faq-card:hover {
@@ -64,7 +66,7 @@
 .faq-trigger {
   width: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 1.2rem;
   padding: 1.8rem 2rem;
   background: none;
@@ -83,6 +85,7 @@
   flex-shrink: 0;
   width: 3.2rem;
   height: 3.2rem;
+  min-width: 3.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,14 +94,19 @@
   color: var(--color-primary);
   font-size: 2.4rem;
   font-weight: 300;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
 }
 
 .faq-trigger__question {
+  flex: 1;
+  min-width: 0;
   font-size: clamp(1.7rem, 2.1vw, 2rem);
   font-weight: 600;
   line-height: 1.35;
   color: var(--color-text);
-  padding-top: 0.2rem;
+  padding-top: 0;
 }
 
 .faq-panel-wrap {

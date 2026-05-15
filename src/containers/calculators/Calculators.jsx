@@ -30,24 +30,30 @@ ChartJS.register(
 const percentageLabelPlugin = {
   id: "percentageLabel",
   afterDatasetsDraw: (chart) => {
+    // Only stacked bar charts (calculators). Doughnut / pie charts have one dataset — skip.
+    const type = chart?.config?.type;
+    if (type !== "bar") return;
+    const datasets = chart?.data?.datasets;
+    if (!Array.isArray(datasets) || datasets.length < 2) return;
+
     const ctx = chart.ctx;
     const chartArea = chart.chartArea;
-    
-    // Get datasets
+
     const investedMeta = chart.getDatasetMeta(0);
     const returnsMeta = chart.getDatasetMeta(1);
-    
+
     if (!investedMeta || !returnsMeta) return;
-    
+    if (!chartArea) return;
+
     // Calculate percentages from chart data (these are already percentages)
-    const investedPercent = chart.data.datasets[0].data[0];
-    const returnsPercent = chart.data.datasets[1].data[0];
+    const investedPercent = datasets[0]?.data?.[0];
+    const returnsPercent = datasets[1]?.data?.[0];
+    if (investedPercent == null || returnsPercent == null) return;
     
     // Calculate center Y position
     const centerY = chartArea.top + (chartArea.bottom - chartArea.top) / 2;
     
     // Get the scale to convert percentage to pixel position
-    const xScale = chart.scales.x;
     const chartWidth = chartArea.right - chartArea.left;
     
     // Draw percentage for invested segment (left segment)

@@ -1,189 +1,161 @@
-import React, { useState } from 'react';
-import './tools.css'; // Import the CSS file for Tools styling
-import { Link } from 'react-router-dom';
-import emailjs from 'emailjs-com';
+import React, { useState } from "react";
+import "./tools.css";
+import { Link } from "react-router-dom";
+import { FaCalculator, FaChartPie, FaLayerGroup, FaFileInvoiceDollar } from "react-icons/fa";
 
 const toolsData = [
   {
-    name: 'FIDOK',
-    description: 'Assess our premium tool - Financial Information and Document Organizer Kit.',
-    key: 'fidok', // Link to your existing risk profile form
+    id: "fidok",
+    title: "FIDOK",
+    description:
+      "Financial Information and Document Organizer Kit — structure your records before you invest.",
+    icon: FaFileInvoiceDollar,
+    action: "modal",
   },
   {
-    name: 'Equity Basket Builder',
-    description: 'Create a diversified equity portfolio tailored to your needs.',
-    link: '/offerings/equityBasket', // Placeholder link
+    id: "equity-basket",
+    title: "Equity basket builder",
+    description: "Explore diversified equity baskets aligned to themes and risk appetite.",
+    icon: FaLayerGroup,
+    href: "/equity-basket",
   },
   {
-    name: 'Loan Assessment Tool',
-    description: 'Evaluate loan options and manage your financial needs.',
-    link: '/offerings/loanAgainstSecurities', // Placeholder link
+    id: "loan-assessment",
+    title: "Loan against securities",
+    description: "Understand how securities-backed loans work and when they may fit your plan.",
+    icon: FaChartPie,
+    href: "/loan-against-securities",
   },
   {
-    name: 'Mutual Fund Selector',
-    description: 'Find the best mutual fund options for your portfolio.',
-    link: '/offerings/mutualFund', // Placeholder link
+    id: "mf-selector",
+    title: "Mutual fund baskets",
+    description: "Curated mutual fund baskets with clear risk labels and horizons.",
+    icon: FaCalculator,
+    href: "/mutual-funds",
   },
-
 ];
 
 const Tools = () => {
   const [showModal, setShowModal] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    mobile: '',
-  });
-
-  // Add state variables for form inputs
-const [clientName, setClientName] = useState('');
-const [clientEmail, setClientEmail] = useState('');
-const [mobile, setMobile] = useState('');
-//const [showModal, setShowModal] = useState(false); // To control the modal visibility
-
-  const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const [clientName, setClientName] = useState("");
+  const [clientEmail, setClientEmail] = useState("");
+  const [mobile, setMobile] = useState("");
 
   const handleFormSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-  
-    // Construct formData using state variables
-    const formData = {
-      name: clientName, // Use the state variable for name
-      email: clientEmail, // Use the state variable for email
-      mobile: mobile, // Use the state variable for mobile number
-    };
-  
-    // Removed console.log for production security
-  
+    e.preventDefault();
+    const formData = { name: clientName, email: clientEmail, mobile };
     try {
-      // Save form data to Google Sheets
       await saveToGoogleSheet(formData);
-  
-      // Notify the user about the successful submission
-      alert('Thank you! The FIDOK Tool has been sent to your email.');
-  
-      // Clear the form and close the modal
-      setClientName('');
-      setClientEmail('');
-      setMobile('');
+      alert("Thank you! The FIDOK Tool has been sent to your email.");
+      setClientName("");
+      setClientEmail("");
+      setMobile("");
       setShowModal(false);
     } catch (error) {
-      console.error('Error submitting form:', error);
-      alert('There was an issue submitting your request. Please try again.');
+      alert("There was an issue submitting your request. Please try again.");
     }
   };
-  
-  
-
-  
 
   const saveToGoogleSheet = async (data) => {
-    const sheetId = '1f8znptWwqldOXeY5w3_Qo9a1ky0AAAFzt_4oHJEbZq8'; // Replace with your Google Sheet ID
-    const apiKey = 'AIzaSyAN6b7Ce_khLDghjzmvIoylQqGhfWwt5Ro'; // Replace with your Google API key
-    const range = 'FIDOK!A1'; // Replace with your Google Sheet range
-  
-    const body = {
-      values: [[data.name, data.mobile, data.email]],
-    };
-  
-    try {
-      const response = await fetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}:append?valueInputOption=USER_ENTERED&key=${apiKey}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        }
-      );
-  
-      const result = await response.json();
-  
-      if (response.ok) {
-        console.log('Data saved to Google Sheet:', result);
-      } else {
-        console.error('Error saving to Google Sheet:', result);
+    const sheetId = "1f8znptWwqldOXeY5w3_Qo9a1ky0AAAFzt_4oHJEbZq8";
+    const apiKey = "AIzaSyAN6b7Ce_khLDghjzmvIoylQqGhfWwt5Ro";
+    const range = "FIDOK!A1";
+    const body = { values: [[data.name, data.mobile, data.email]] };
+    const response = await fetch(
+      `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}:append?valueInputOption=USER_ENTERED&key=${apiKey}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
       }
-    } catch (error) {
-      console.error('Error occurred while saving to Google Sheet:', error);
+    );
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result?.error?.message || "Sheet append failed");
     }
   };
 
-  const sendEmailWithAttachment = async (data) => {
-    const emailParams = {
-      user_name: data.name,
-      user_email: data.email,
-      message: 'Please find attached the FIDOK tool.',
-      attachment_url: 'URL_TO_YOUR_EXCEL_DOCUMENT', // Replace with actual file URL
-    };
-  
-    emailjs
-      .send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', emailParams, 'YOUR_USER_ID')
-      .then((response) => console.log('Email sent:', response))
-      .catch((error) => console.error('Error sending email:', error));
-  };
-  
-
   return (
-    <div className="tools-container">
-      <h1 className="tools-header">Our Tools</h1>
-      <div className="tools-list">
-        {toolsData.map((tool) => (
-          <div key={tool.key} className="tool-item">
-            <h2>{tool.name}</h2>
-            <p>{tool.description}</p>
-            <button onClick={() => setShowModal(true)} className="tool-link">
-              Access Tool
-            </button>
-          </div>
-        ))}
-      </div>
+    <div className="tools-page section__padding section__margin">
+      <header className="tools-hero">
+        <p className="tools-eyebrow">Insights &amp; utilities</p>
+        <h1>
+          Tools built for <span className="section-heading-focus">clarity</span>
+        </h1>
+        <p className="tools-lede">
+          Calculators, organisers, and guided journeys — the same disciplined lens we use in advisory,
+          packaged so you can explore at your own pace.
+        </p>
+        <div className="tools-hero-actions">
+          <Link to="/calculators" className="tools-btn tools-btn--primary">
+            <FaCalculator aria-hidden /> Smart calculators
+          </Link>
+          <Link to="/valuation" className="tools-btn tools-btn--ghost">
+            MarketCompass
+          </Link>
+        </div>
+      </header>
 
-      {/* Form Modal */}
-      {showModal && (
-        <div className="form-modal">
-          <div className="form-container">
-            <h2>Access FIDOK Tool</h2>
-            <form onSubmit={handleFormSubmit}>
+      <section className="tools-grid-section" aria-label="Tool directory">
+        <div className="tools-grid">
+          {toolsData.map((tool) => {
+            const Icon = tool.icon;
+            const isModal = tool.action === "modal";
+            return (
+              <article key={tool.id} className="tools-card">
+                <div className="tools-card-icon" aria-hidden>
+                  <Icon />
+                </div>
+                <h2>{tool.title}</h2>
+                <p>{tool.description}</p>
+                {isModal ? (
+                  <button type="button" className="tools-card-cta" onClick={() => setShowModal(true)}>
+                    Request FIDOK
+                  </button>
+                ) : (
+                  <Link to={tool.href} className="tools-card-cta tools-card-cta--link">
+                    Open
+                  </Link>
+                )}
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      {showModal ? (
+        <div className="tools-modal" role="dialog" aria-modal="true" aria-labelledby="fidok-modal-title">
+          <div className="tools-modal-panel">
+            <button type="button" className="tools-modal-close" onClick={() => setShowModal(false)} aria-label="Close">
+              ×
+            </button>
+            <h2 id="fidok-modal-title">Access FIDOK</h2>
+            <p className="tools-modal-note">Share your details — we will send the organizer kit to your inbox.</p>
+            <form className="tools-modal-form" onSubmit={handleFormSubmit}>
               <label>
-                Name:
-                <input
-                  type="text"
-                  name="name"
-                  value={clientName}
-                  onChange={(e) => setClientName(e.target.value)}
-                  required
-                />
+                Name
+                <input type="text" value={clientName} onChange={(e) => setClientName(e.target.value)} required />
               </label>
               <label>
-                Mobile Number:
-                <input
-                  type="tel"
-                  name="mobile"
-                  value={mobile}
-                  onChange={(e) => setMobile(e.target.value)}
-                  required
-                />
+                Mobile
+                <input type="tel" value={mobile} onChange={(e) => setMobile(e.target.value)} required />
               </label>
               <label>
-                Email:
-                <input
-                  type="email"
-                  name="email"
-                  value={clientEmail}
-                  onChange={(e) => setClientEmail(e.target.value)}
-                  required
-                />
+                Email
+                <input type="email" value={clientEmail} onChange={(e) => setClientEmail(e.target.value)} required />
               </label>
-              <button type="submit">Submit</button>
-              <button type="button" onClick={() => setShowModal(false)}>
-                Cancel
-              </button>
+              <div className="tools-modal-actions">
+                <button type="submit" className="tools-btn tools-btn--primary">
+                  Submit
+                </button>
+                <button type="button" className="tools-btn tools-btn--ghost" onClick={() => setShowModal(false)}>
+                  Cancel
+                </button>
+              </div>
             </form>
           </div>
         </div>
-      )}
+      ) : null}
     </div>
   );
 };

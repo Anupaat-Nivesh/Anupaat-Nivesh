@@ -41,7 +41,9 @@ function QuoteChip({ q }) {
   if (!q.ok) {
     return (
       <span className="market-ticker__chip market-ticker__chip--muted">
-        <span className="market-ticker__chip-label">{q.label}</span>
+        <span className="market-ticker__chip-meta">
+          <span className="market-ticker__chip-label">{q.label}</span>
+        </span>
         <span className="market-ticker__chip-price">—</span>
       </span>
     );
@@ -61,9 +63,9 @@ function QuoteChip({ q }) {
 
   return (
     <span className="market-ticker__chip" title={titleParts.join(" · ")}>
-      <span className="market-ticker__chip-label">
-        {q.label}
-        {q.sublabel ? <span className="market-ticker__chip-sublabel"> {q.sublabel}</span> : null}
+      <span className="market-ticker__chip-meta">
+        <span className="market-ticker__chip-label">{q.label}</span>
+        {q.sublabel ? <span className="market-ticker__chip-sublabel">{q.sublabel}</span> : null}
       </span>
       <span className="market-ticker__chip-mid">
         <span className="market-ticker__chip-price">{priceStr}</span>
@@ -92,6 +94,20 @@ export default function MarketTicker() {
   const [marqueeHover, setMarqueeHover] = useState(false);
   const segmentRef = useRef(null);
   const railRef = useRef(null);
+  const asideRef = useRef(null);
+
+  /** Repeat quotes so each marquee loop is wider than typical viewports (avoids empty gaps mid-scroll). */
+  const quotesForStrip = useMemo(() => {
+    if (!quotes.length) return [];
+    const MIN_CYCLES = 3;
+    const out = [];
+    for (let c = 0; c < MIN_CYCLES; c++) {
+      quotes.forEach((q, i) => {
+        out.push({ ...q, stripUid: `${q.id}-c${c}-i${i}` });
+      });
+    }
+    return out;
+  }, [quotes]);
 
   const load = useCallback(async () => {
     try {
@@ -114,25 +130,35 @@ export default function MarketTicker() {
   }, [load]);
 
   useLayoutEffect(() => {
-    const syncTop = () => {
+    const syncLayout = () => {
       const nav = document.querySelector(".anupaat__navbar");
-      const h = nav?.getBoundingClientRect?.().height ?? 72;
-      document.documentElement.style.setProperty("--market-ticker-top", `${Math.ceil(h)}px`);
+      const navH = nav?.getBoundingClientRect?.().height ?? 72;
+      document.documentElement.style.setProperty("--market-ticker-top", `${Math.ceil(navH)}px`);
+      const strip = asideRef.current;
+      const stripH = strip?.getBoundingClientRect?.().height ?? 44;
+      document.documentElement.style.setProperty("--market-ticker-strip", `${Math.ceil(stripH)}px`);
     };
-    syncTop();
-    window.addEventListener("resize", syncTop);
+    syncLayout();
+    window.addEventListener("resize", syncLayout);
     document.body.classList.add("has-market-ticker");
+    const ro =
+      typeof ResizeObserver !== "undefined" && asideRef.current
+        ? new ResizeObserver(syncLayout)
+        : null;
+    ro?.observe(asideRef.current);
     return () => {
-      window.removeEventListener("resize", syncTop);
+      window.removeEventListener("resize", syncLayout);
+      ro?.disconnect();
       document.body.classList.remove("has-market-ticker");
       document.documentElement.style.removeProperty("--market-ticker-top");
+      document.documentElement.style.removeProperty("--market-ticker-strip");
     };
   }, []);
 
   useLayoutEffect(() => {
     const el = segmentRef.current;
     const rail = railRef.current;
-    if (!quotes.length || !el || !rail) return;
+    if (!quotesForStrip.length || !el || !rail) return;
 
     const apply = () => {
       const w = el.offsetWidth;
@@ -149,13 +175,13 @@ export default function MarketTicker() {
       ro?.disconnect();
       window.removeEventListener("resize", apply);
     };
-  }, [quotes]);
+  }, [quotesForStrip]);
 
   const segments = useMemo(() => {
-    if (!quotes.length) return null;
+    if (!quotesForStrip.length) return null;
     const renderOne = (suffix) =>
-      quotes.map((q, i) => (
-        <Fragment key={`${suffix}-${q.id}`}>
+      quotesForStrip.map((q, i) => (
+        <Fragment key={`${suffix}-${q.stripUid}`}>
           {i > 0 ? (
             <span className="market-ticker__sep" aria-hidden="true">
               ·
@@ -175,16 +201,17 @@ export default function MarketTicker() {
         </div>
       </>
     );
-  }, [quotes]);
+  }, [quotesForStrip]);
 
   return (
     <aside
+      ref={asideRef}
       className="market-ticker"
       role="region"
       aria-label="Market snapshot: Nifty, Bank Nifty, Sensex, USD/INR, gold, silver, WTI crude — scrolling on a loop"
     >
       <div className="market-ticker__inner">
-        {loadError && !quotes.length ? (
+        {loadError && !quotesForStrip.length ? (
           <span className="market-ticker__status market-ticker__status--error">{loadError}</span>
         ) : null}
         <div

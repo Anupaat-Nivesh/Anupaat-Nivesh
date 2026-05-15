@@ -93,7 +93,7 @@ function App() {
             path="loan-against-securities"
             element={<LoanAgainstSecurities />}
           />
-          <Route path="/tools" element={<Tools />} />
+          <Route path="tools" element={<Tools />} />
         </Route>
         {/* Standalone Chatbot Page - ArthAI */}
         <Route path="/ArthAI" element={<ChatBotPage />} />
