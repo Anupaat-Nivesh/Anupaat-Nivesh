@@ -14,7 +14,7 @@ import "./testimonials.css";
 
 // import required modules
 
-import { Autoplay, EffectCoverflow, Pagination, Navigation } from "swiper";
+import { Autoplay, EffectCoverflow, Pagination, Navigation } from "swiper/modules";
 import { testimonials } from '../../data';
 
 

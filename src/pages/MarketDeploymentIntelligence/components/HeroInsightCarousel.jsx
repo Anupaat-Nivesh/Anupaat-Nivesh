@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper";
+import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 

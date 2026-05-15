@@ -48,7 +48,7 @@
     "react18-input-otp": "^1.1.3",
     "resend": "^6.12.2",
     "serve": "^14.2.0",
-    "swiper": "^9.1.0",
+    "swiper": "^12.1.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -95,6 +95,9 @@
     "@svgr/plugin-svgo": "^6.5.1",
     "@svgr/webpack": "^6.5.1",
     "css-select": "^5.1.0",
+    "underscore": "^1.13.7",
+    "node-forge": "^1.3.4",
+    "picomatch": "^2.3.2",
     "react-scripts": {
       "webpack-dev-server": "^4.15.1",
       "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15"
