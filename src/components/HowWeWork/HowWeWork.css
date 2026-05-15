@@ -68,9 +68,22 @@
 }
 
 .how-we-work__step-icon {
-  font-size: 4rem;
-  margin-bottom: 1.6rem;
-  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  margin: 0 auto 1.6rem;
+  border-radius: 12px;
+  background: rgba(254, 1, 1, 0.1);
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.how-we-work__step-icon svg {
+  width: 2.6rem;
+  height: 2.6rem;
+  stroke-width: 1.75;
 }
 
 .how-we-work__step-title {
@@ -106,7 +119,14 @@
   }
   
   .how-we-work__step-icon {
-    font-size: 3.5rem;
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .how-we-work__step-icon svg {
+    width: 2.4rem;
+    height: 2.4rem;
   }
   
   .how-we-work__step-title {
@@ -134,7 +154,14 @@
   }
   
   .how-we-work__step-icon {
-    font-size: 3rem;
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .how-we-work__step-icon svg {
+    width: 2.35rem;
+    height: 2.35rem;
   }
   
   .how-we-work__step-title {

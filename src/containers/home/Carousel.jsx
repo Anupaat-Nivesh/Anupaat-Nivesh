@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import './carousel.css';
 import { CarouselItem } from "./CarouselItem";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -34,6 +34,20 @@ export const Carousel = () => {
         },
         {
             id: 3,
+            title: "MarketCompass",
+            description: "Deploy with ",
+            bold: "probability, not noise",
+            subDescription:
+                "The same valuation evidence others skim — normalized, de-noised, and read as a single deployment posture for fresh money.",
+            subText: "Lump sum vs STP, sleeves, and risk bands — not forecasts. Coming soon on Anupaat Nivesh.",
+            ctaPath: "/valuation",
+            ctaLabel: "See how it works",
+            img560w: require("../../assets/illustrations/carousel1-illustration-560w.webp"),
+            img1120w: require("../../assets/illustrations/carousel1-illustration-1120w.webp"),
+            img: require("../../assets/illustrations/carousel1-illustration.webp"),
+        },
+        {
+            id: 4,
             title: "Stocks",
             description: "Be a part of the next ",
             bold: 'Investment Wave',
@@ -43,24 +57,10 @@ export const Carousel = () => {
             img1120w: require("../../assets/illustrations/carousel3-illustration-1120w.webp"),
             img: require("../../assets/illustrations/carousel3-illustration.webp"),
         },
-        {
-            id: 4,
-            title: "KAIZEN",
-            description: "Start with ",
-            bold: 'KAIZEN SIP',
-            subDescription: "Sometime just a small step is required to start of the journey",
-            subText: "Because we know, slow and steady wins the race",
-            img560w: require("../../assets/illustrations/carousel4-illustration-560w.webp"),
-            img1120w: require("../../assets/illustrations/carousel4-illustration-1120w.webp"),
-            img: require("../../assets/illustrations/carousel4-illustration.webp"),
-
-        }
     ];
-
 
     return (
         <Swiper
-
             spaceBetween={50}
             slidesPerView={1}
             loop={true}
@@ -69,19 +69,19 @@ export const Carousel = () => {
                 disableOnInteraction: true,
                 pauseOnMouseEnter: true
             }}
-
-            navigation={false} grabCursor={true} pagination={{
+            navigation={false}
+            grabCursor={true}
+            pagination={{
                 clickable: true,
-            }} modules={[Navigation, Pagination, Autoplay]}
+            }}
+            modules={[Navigation, Pagination, Autoplay]}
             className="carousel-swiper"
         >
-
             {items.map((item) => {
                 return <SwiperSlide className="carousel-swiper-slide" key={item.id}>
                     <CarouselItem item={item} width={"100%"} />
                 </SwiperSlide>
             })}
-
         </Swiper>
     );
 };

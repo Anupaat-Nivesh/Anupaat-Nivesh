@@ -1,49 +1,65 @@
-import React from 'react'
-import './skillCounter.css'
+import React from 'react';
 import CountUp from 'react-countup';
-import icon1 from '../../assets/SkillCounter icons/icon1.jpg';
-import icon2 from '../../assets/SkillCounter icons/icon2.jpg';
-import icon3 from '../../assets/SkillCounter icons/icon3.jpg';
-import icon4 from '../../assets/SkillCounter icons/icon4.jpg';
-import icon5 from '../../assets/SkillCounter icons/icon5.jpg';
+import {
+  HiOutlineClock,
+  HiOutlineUserGroup,
+  HiOutlineCash,
+  HiOutlineChartPie,
+} from 'react-icons/hi';
+import './skillCounter.css';
 
+/**
+ * Stats strip — icons match TrustHighlights / HowWeWork: Hi outline + primary chip.
+ */
+const STATS = [
+  {
+    icon: <HiOutlineClock size={28} aria-hidden="true" />,
+    count: <CountUp start={0} end={10} duration={1} delay={0} suffix=" Years+" />,
+    title: 'Track Record',
+    subtitle: null,
+    label: 'Years of advisory experience',
+  },
+  {
+    icon: <HiOutlineUserGroup size={28} aria-hidden="true" />,
+    count: <CountUp start={0} end={500} duration={1} delay={0} suffix="+" />,
+    title: 'Happy Clients',
+    subtitle: null,
+    label: 'Families and professionals served',
+  },
+  {
+    icon: <HiOutlineCash size={28} aria-hidden="true" />,
+    count: <CountUp start={0} end={50} duration={1} delay={0} suffix=" Lac+" />,
+    title: 'Monthly SIP',
+    subtitle: null,
+    label: 'Disciplined monthly flows',
+  },
+  {
+    icon: <HiOutlineChartPie size={28} aria-hidden="true" />,
+    count: <CountUp start={0} end={30} duration={1} delay={0} suffix=" Cr+" />,
+    title: 'AUM',
+    subtitle: 'Goal ₹100 Cr by 2027',
+    label: 'Assets under guidance',
+  },
+];
 
 export const SkillCounter = () => {
+  return (
+    <section className="skills-data home-section" aria-label="Firm statistics">
+      <div className="skill-container">
+        {STATS.map(({ icon, count, title, subtitle, label }) => (
+          <div key={title} className="skill-items">
+            <span className="skill-counter__icon" aria-hidden="true">
+              {icon}
+            </span>
+            <h2 className="counter-numbers">{count}</h2>
+            <h3>{title}</h3>
+            {subtitle ? <p>{subtitle}</p> : null}
+            <span className="skill-counter__sr-only">{label}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
 
-    return (
-        <section className='skills-data home-section'>
-            <div className='skill-container'>
-                {/* <div className='skill-items'>
-                    <img src={icon2} className="skill-counter-icon" alt='icon' />
-                    <h2 className='counter-numbers'><CountUp start={0} end={26} duration={2} delay={0} suffix="+" /></h2>
-
-                    <p>INVESTED PLANS</p>
-                </div> */}
-                <div className='skill-items'>
-                    <img src={icon3} className="skill-counter-icon" alt='icon' />
-                    <h2 className='counter-numbers'><CountUp start={0} end={8} duration={1} delay={0} suffix=" Years+" /> </h2>
-                    <h3>Track Record</h3>
-                </div>
-                <div className='skill-items'>
-                    <img src={icon5} className="skill-counter-icon" alt='icon' />
-                    <h2 className='counter-numbers'><CountUp start={0} end={500} duration={1} delay={0} suffix="+" /> </h2>
-                    <h3>HAPPY CLIENTS</h3>
-                </div>
-                <div className='skill-items'>
-                    <img src={icon4} className="skill-counter-icon" alt='icon' />
-                    <h2 className='counter-numbers'><CountUp start={0} end={40} duration={1} delay={0} suffix=" Lac+" /></h2>
-                    <h3>Monthly SIP</h3>
-                </div>
-                <div className='skill-items'>
-                    <img src={icon1} className="skill-counter-icon" alt='icon' />
-                    <h2 className='counter-numbers'><CountUp start={0} end={25} duration={1} delay={0} suffix=" Cr+" />  </h2>
-                    <h3>AUM</h3>
-                    <p>Target 100 by 2026</p>
-                </div>
-            </div>
-
-        </section>
-    )
-}
-
-export default SkillCounter
+export default SkillCounter;

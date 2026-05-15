@@ -20,6 +20,7 @@ import healthRouter from './api/routes/health.mjs';
 import paymentsRouter from './api/routes/payments.mjs';
 import onboardingRouter from './api/routes/onboarding.mjs';
 import mediaRouter from './api/routes/media.mjs';
+import marketTickerRouter from './api/routes/market-ticker.mjs';
 import { getMediaUploadDir } from './api/services/mediaStorageHostinger.mjs';
 
 // Raw body middleware for webhook signature verification
@@ -98,6 +99,7 @@ app.use('/api/health', healthRouter);
 app.use('/api/payments', paymentsRouter);
 app.use('/api/onboarding', onboardingRouter);
 app.use('/api/media', mediaRouter);
+app.use('/api/market-ticker', marketTickerRouter);
 
 // Root endpoint
 app.get('/', (req, res) => {
@@ -117,7 +119,8 @@ app.get('/', (req, res) => {
       media: {
         publicList: '/api/media/public',
         adminLogin: '/api/media/auth/login'
-      }
+      },
+      marketTicker: '/api/market-ticker'
     }
   });
 });

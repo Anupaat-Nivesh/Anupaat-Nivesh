@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 
 export const CarouselItem = ({ item }) => {
@@ -14,6 +15,13 @@ export const CarouselItem = ({ item }) => {
 
                 <div className="carousel-item-subDes"><q>{item.subDescription}</q></div>
                 <div className="carousel-item-subtext">{item.subText}</div>
+                {item.ctaPath && item.ctaLabel ? (
+                    <div className="carousel-item-cta-row">
+                        <Link to={item.ctaPath} className="carousel-cta-btn carousel-cta-btn--outline">
+                            {item.ctaLabel}
+                        </Link>
+                    </div>
+                ) : null}
 
             </div>
             <div className="img-container">

@@ -34,8 +34,8 @@ REACT_APP_RAZORPAY_KEY_ID=rzp_test_xxxxxxxxxxxxx
 # Note: Key Secret should NEVER be in frontend - backend only
 
 # Consulting Session Pricing
-REACT_APP_CONSULTING_SESSION_PRICE=99
-REACT_APP_CONSULTING_SESSION_ACTUAL_PRICE=9999
+REACT_APP_CONSULTING_SESSION_PRICE=999
+REACT_APP_CONSULTING_SESSION_ACTUAL_PRICE=999
 
 # Calendly Integration
 REACT_APP_CALENDLY_CONSULTING_URL=https://calendly.com/anupaat-nivesh/consulting-session

@@ -33,12 +33,21 @@ const Footer = () => (
                 <div className='footer-links'>
                     <Link to='/'>Home</Link>
                     <Link to='about'>About Us</Link>
+                    <Link to='valuation'>MarketCompass</Link>
                     <Link to='partner-with-us'>Partner With Us</Link>
                     <Link to='corporate'>Corporate Corner</Link>
-
-
                 </div>
 
+            </div>
+            <div className="anupaat__footer-links_div">
+                <h3 className='footer-heading'>Services &amp; tools</h3>
+                <div className='footer-links'>
+                    <Link to='calculators'>Calculators</Link>
+                    <Link to='offerings'>Offerings</Link>
+                    <Link to='faqs'>FAQs</Link>
+                    <Link to='ourApp'>Our App</Link>
+                    <Link to='appdownload'>App Download</Link>
+                </div>
             </div>
             <div className="anupaat__footer-links_div">
                 <h3 className='footer-heading'>Company</h3>

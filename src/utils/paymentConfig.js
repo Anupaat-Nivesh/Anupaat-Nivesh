@@ -8,9 +8,9 @@ export const paymentConfig = {
   // Razorpay Key ID (public key - safe for frontend)
   razorpayKeyId: process.env.REACT_APP_RAZORPAY_KEY_ID || '',
   
-  // Consulting session pricing
-  consultingSessionPrice: parseInt(process.env.REACT_APP_CONSULTING_SESSION_PRICE || '99', 10),
-  consultingSessionActualPrice: parseInt(process.env.REACT_APP_CONSULTING_SESSION_ACTUAL_PRICE || '9999', 10),
+  // Consulting session pricing (INR; Razorpay uses rupees in our API layer)
+  consultingSessionPrice: parseInt(process.env.REACT_APP_CONSULTING_SESSION_PRICE || '999', 10),
+  consultingSessionActualPrice: parseInt(process.env.REACT_APP_CONSULTING_SESSION_ACTUAL_PRICE || '999', 10),
   
   // Currency
   currency: 'INR',
@@ -70,8 +70,11 @@ export const validatePaymentConfig = () => {
  * @returns {number} Discount percentage
  */
 export const getDiscountPercentage = () => {
-  const discount = paymentConfig.consultingSessionActualPrice - paymentConfig.consultingSessionPrice;
-  return Math.round((discount / paymentConfig.consultingSessionActualPrice) * 100);
+  const actual = paymentConfig.consultingSessionActualPrice;
+  const price = paymentConfig.consultingSessionPrice;
+  if (!actual || actual <= price) return 0;
+  const discount = actual - price;
+  return Math.round((discount / actual) * 100);
 };
 
 /**

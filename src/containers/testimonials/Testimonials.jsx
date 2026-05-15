@@ -1,5 +1,6 @@
 
 // Import Swiper React components
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
@@ -20,7 +21,6 @@ import { testimonials } from '../../data';
 
 
 export const Testimonials = () => {
-
 
     return (
         <section className="testimonials" id="testimonials">
@@ -96,7 +96,5 @@ export const Testimonials = () => {
     )
 }
 export default Testimonials
-
-
 
 

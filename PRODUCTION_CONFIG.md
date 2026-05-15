@@ -27,8 +27,8 @@ REACT_APP_API_BASE_URL=https://api.anupaatnivesh.com
 REACT_APP_RAZORPAY_KEY_ID=rzp_live_xxxxxxxxxxxxx
 
 # Pricing Configuration
-REACT_APP_CONSULTING_SESSION_PRICE=99
-REACT_APP_CONSULTING_SESSION_ACTUAL_PRICE=9999
+REACT_APP_CONSULTING_SESSION_PRICE=999
+REACT_APP_CONSULTING_SESSION_ACTUAL_PRICE=999
 
 # Calendly Integration
 REACT_APP_CALENDLY_CONSULTING_URL=https://calendly.com/anupaatnivesh/financial-planning-session

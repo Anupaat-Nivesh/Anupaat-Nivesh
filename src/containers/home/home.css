@@ -111,6 +111,21 @@ font-size: 1.6rem
     box-shadow: 0 8px 24px rgba(254, 1, 1, 0.3);
 }
 
+/* Secondary CTA on dark hero (MarketCompass slide) */
+.hero-cta-btn--outline-dark {
+    color: #fff !important;
+    background: transparent !important;
+    border: 2px solid rgba(255, 255, 255, 0.85) !important;
+    box-shadow: none !important;
+}
+
+.hero-cta-btn--outline-dark:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    color: #fff !important;
+    border-color: #fff !important;
+    transform: translateY(-2px);
+}
+
 .hero-pills {
     margin-top: 1.2rem;
     display: flex;
@@ -119,11 +134,11 @@ font-size: 1.6rem
 }
 
 .hero-pills span {
-    padding: 0.6rem 1rem;
+    padding: 0.65rem 1.1rem;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.08);
     color: #e8e9ec;
-    font-size: 1.2rem;
+    font-size: 1.35rem;
     white-space: nowrap;
 }
 
@@ -191,17 +206,35 @@ font-size: 1.6rem
 }
 
 .hero-panel__note {
-    font-size: 1.2rem;
+    font-size: 1.35rem;
     color: #1b1f25;
     background: #f7f7f9;
     padding: 0.9rem 1.1rem;
     border-radius: 12px;
-    line-height: 1.5;
+    line-height: 1.55;
     margin-top: 0.8rem;
 }
 
 .hero-carousel {
     margin-top: 4rem;
+}
+
+/* MarketCompass hero badge */
+.marketcompass-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffd7d7;
+    font-weight: 700;
+    font-size: 1.35rem;
+    margin-bottom: 0.8rem;
+    border: 1px solid rgba(254, 1, 1, 0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
 }
 
 /* Consulting Session Screen Styles */
@@ -214,7 +247,7 @@ font-size: 1.6rem
     background: rgba(254, 1, 1, 0.25);
     color: #ff6b6b;
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: 1.35rem;
     margin-bottom: 0.8rem;
     border: 1px solid rgba(254, 1, 1, 0.3);
     text-transform: uppercase;
@@ -332,9 +365,11 @@ font-size: 1.6rem
     margin-top: 1.2rem;
 }
 
-/* Hero Navigation Dots */
+/* Hero Navigation Dots + pause/play */
 .hero-navigation {
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
     gap: 1rem;
     margin-top: 2rem;

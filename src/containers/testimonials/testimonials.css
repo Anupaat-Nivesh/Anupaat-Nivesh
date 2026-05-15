@@ -188,3 +188,14 @@
         padding: 2rem;
     }
 }
+
+.mySwiper .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: rgba(0, 0, 0, 0.18);
+    opacity: 1;
+}
+
+.mySwiper .swiper-pagination-bullet-active {
+    background: var(--color-primary, #fe0101);
+}
