@@ -37,22 +37,24 @@ const defaultOrigins = [
   'https://www.anupaatnivesh.com',
   'https://anupaatnivesh.com',
   'http://localhost:3000',
-  'https://anupaat-nivesh.vercel.app'
+  'http://127.0.0.1:3000',
+  'https://anupaat-nivesh.vercel.app',
 ];
 
-const allowedOrigins = (process.env.CORS_ALLOWED_ORIGINS || '')
+/** Extra origins from env (Hostinger preview URL, alternate apex, etc.) — merged with defaults */
+const extraOrigins = (process.env.CORS_ALLOWED_ORIGINS || '')
   .split(',')
   .map((v) => v.trim())
   .filter(Boolean);
 
-const corsOrigins = allowedOrigins.length > 0 ? allowedOrigins : defaultOrigins;
+const corsOrigins = [...new Set([...defaultOrigins, ...extraOrigins])];
 
 const corsOriginCallback = (origin, callback) => {
   if (!origin) return callback(null, true);
   if (corsOrigins.includes(origin)) return callback(null, true);
   try {
     const { hostname } = new URL(origin);
-    if (hostname === 'localhost' || hostname.endsWith('.vercel.app')) {
+    if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname.endsWith('.vercel.app')) {
       return callback(null, true);
     }
   } catch {
@@ -66,7 +68,12 @@ app.use(cors({
   origin: corsOriginCallback,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'x-razorpay-signature']
+  allowedHeaders: [
+    'Content-Type',
+    'x-razorpay-signature',
+    'Authorization',
+    'X-Requested-With',
+  ],
 }));
 app.use(cookieParser());
 app.use(

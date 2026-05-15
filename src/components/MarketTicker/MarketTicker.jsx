@@ -1,14 +1,15 @@
 import React, { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import "./MarketTicker.css";
+import { normalizeReactAppApiOrigin } from "../../api/config";
 
 /**
  * Market ticker must hit the Node app that implements `/api/market-ticker` (Yahoo proxy).
  * - Dev: same-origin `/api/...` + package.json `proxy` → localhost:8000 (run `npm run server`).
  * - Vercel: same-origin `/api/...` → server.mjs (vercel.json); no separate API host needed.
- * - Split deploy: set REACT_APP_API_BASE_URL to the API origin that exposes this route.
+ * - Split deploy: set REACT_APP_API_BASE_URL to the API *origin* only (no trailing `/api`), e.g. https://my-app.vercel.app
  */
 function getMarketTickerApiUrl() {
-  const override = (process.env.REACT_APP_API_BASE_URL || "").trim().replace(/\/$/, "");
+  const override = normalizeReactAppApiOrigin(process.env.REACT_APP_API_BASE_URL);
   if (override) return `${override}/api/market-ticker`;
   return "/api/market-ticker";
 }

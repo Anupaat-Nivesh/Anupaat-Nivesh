@@ -9,17 +9,31 @@
  */
 
 /**
+ * CRA env: origin only (e.g. https://my-app.vercel.app), never a path ending in /api.
+ * If someone sets .../api, appending "/api/..." would double the segment → 404.
+ *
+ * Split deploy (React on Hostinger, API on Vercel): set REACT_APP_API_BASE_URL at build time
+ * to your Vercel API origin, and list your Hostinger site origin in Vercel CORS_ALLOWED_ORIGINS.
+ */
+export function normalizeReactAppApiOrigin(raw) {
+  if (raw == null) return "";
+  let s = String(raw).trim();
+  if (!s) return "";
+  s = s.replace(/\/+$/, "");
+  s = s.replace(/\/api\/?$/i, "");
+  return s.replace(/\/+$/, "");
+}
+
+/**
  * Get API base URL from environment or use default
  * @returns {string} API base URL
  */
 export const getApiBaseUrl = () => {
-  // In development, can use local backend or mock mode
+  const fromEnv = normalizeReactAppApiOrigin(process.env.REACT_APP_API_BASE_URL);
   if (process.env.NODE_ENV === 'development') {
-    return process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000';
+    return fromEnv || 'http://localhost:8000';
   }
-  
-  // In production, must have API base URL configured
-  return process.env.REACT_APP_API_BASE_URL || '';
+  return fromEnv || '';
 };
 
 /**
