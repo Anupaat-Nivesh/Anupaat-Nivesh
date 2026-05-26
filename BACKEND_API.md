@@ -87,7 +87,7 @@ Create a Razorpay order for payment processing.
 - Use Razorpay SDK to create order
 - Store order details in database
 - Use Razorpay Secret Key (from environment): `Fvj0EC80HEhLNMO5O2yVw8v9`
-- Amount should be in paise (99 INR = 9900 paise)
+- Amount should be in paise (999 INR = 99900 paise)
 
 ---
 

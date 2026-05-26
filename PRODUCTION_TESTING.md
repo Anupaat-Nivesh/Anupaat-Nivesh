@@ -44,7 +44,7 @@ curl -X POST https://api.anupaatnivesh.com/api/payments/create-order \
   }'
 ```
 - [ ] Returns order_id (starts with `order_`)
-- [ ] Amount is correct (9900 paise = ₹99)
+- [ ] Amount is correct (99900 paise = ₹999)
 - [ ] Status is "created"
 - [ ] No errors in server logs
 
@@ -97,7 +97,7 @@ curl -X POST https://api.anupaatnivesh.com/api/payments/create-order \
 
 3. **Razorpay Checkout**
    - [ ] Razorpay modal opens
-   - [ ] Payment amount is correct (₹99)
+   - [ ] Payment amount is correct (₹999)
    - [ ] User details pre-filled
    - [ ] Payment methods available (UPI, Card, Net Banking)
 

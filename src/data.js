@@ -178,40 +178,51 @@ export const testimonials = [
 export const faqsData = [
   {
     id: 1,
-    question: "How does this work?",
-
+    question: "What is Anupaat Nivesh, and how do you help investors?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ",
+      "Anupaat Nivesh is an independent mutual fund distribution and investment advisory firm. We focus on goal-based planning, disciplined SIPs, portfolio reviews, and clear asset allocation — so you invest with a process, not on tips or noise.",
   },
   {
     id: 2,
-    question: "How does this work?",
+    question: "Are you AMFI-registered? Where do my mutual fund investments go?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ",
+      "We are an AMFI-registered mutual fund distributor. Our ARN and validity dates are published in the website footer and statutory disclosures. Investments are placed through regulated rails (e.g. BSE STAR MF) with transparent reporting.",
   },
   {
     id: 3,
-    question: "How does this work?",
+    question: "What is a SIP, and how little can I start with?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ",
+      "A SIP (Systematic Investment Plan) invests a fixed amount every month in chosen mutual funds. Many schemes allow starting small (often from ₹500/month). It builds discipline and averages purchase cost over time; suitability still depends on your goals and horizon.",
   },
   {
     id: 4,
-    question: "How does this work?",
+    question: "What is MarketCompass? Is it stock tips or guaranteed returns?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ",
+      "MarketCompass (coming soon) is a deployment-intelligence layer: a simple read of market conditions to help with timing (e.g. lump sum vs STP) and broad equity posture. It is not stock tips, not a trading signal, and not a guarantee of returns. Final decisions stay with you and your advisor.",
   },
   {
     id: 5,
-    question: "How does this work?",
+    question: "How do I talk to an advisor or book a paid consultation?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ",
+      "Use Contact on the website for a free conversation, or book a structured session from our consulting / booking flows. We will understand your goals, risk capacity, and timeline before suggesting any fund or allocation.",
   },
   {
     id: 6,
-    question: "How does this work?",
+    question: "What calculators and tools do you offer on the website?",
     answer:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ",
+      "We host calculators for SIP, step-up SIP, lumpsum projections, and goal planning under Insights → Calculators (and related tools under Insights → Tools) in the menu. They are educational aids; outputs depend on assumptions you enter and are not advice by themselves.",
+  },
+  {
+    id: 7,
+    question: "How do you use my personal data and keep investments secure?",
+    answer:
+      "KYC and transactions follow regulator-mandated processes. We do not ask for passwords to your bank or demat accounts on chat. Use official app and login links only. For privacy specifics, see our Privacy Policy page.",
+  },
+  {
+    id: 8,
+    question: "Do mutual funds guarantee profits? What risks should I remember?",
+    answer:
+      "No. Mutual funds are subject to market risks; past performance does not predict future results. Read scheme documents, match funds to your goal horizon, and keep an emergency fund separate. We explain risks plainly so you can decide with open eyes.",
   },
 ];
 

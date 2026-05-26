@@ -33,6 +33,9 @@ const BookConsultationMobile = () => {
   const [bookingReference, setBookingReference] = useState(null);
   const [userData, setUserData] = useState(null);
 
+  const consultingHasDiscount =
+    paymentConfig.consultingSessionActualPrice > paymentConfig.consultingSessionPrice;
+
   // Track source for analytics
   const source = 'mobile-consulting-funnel';
 
@@ -459,10 +462,18 @@ const BookConsultationMobile = () => {
 
             <div className="price-display">
               <div className="price-row">
-                <span className="price-old">₹9,999</span>
-                <span className="price-new">₹99</span>
+                {consultingHasDiscount ? (
+                  <>
+                    <span className="price-old">{formatAmountForDisplay(paymentConfig.consultingSessionActualPrice)}</span>
+                    <span className="price-new">{formatAmountForDisplay(paymentConfig.consultingSessionPrice)}</span>
+                  </>
+                ) : (
+                  <span className="price-new">{formatAmountForDisplay(paymentConfig.consultingSessionPrice)}</span>
+                )}
               </div>
-              <p className="price-label">Introductory Offer</p>
+              <p className="price-label">
+                {consultingHasDiscount ? 'Introductory Offer' : 'Session fee'}
+              </p>
             </div>
 
             <div className="trust-badge">

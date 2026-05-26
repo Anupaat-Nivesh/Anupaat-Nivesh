@@ -561,6 +561,31 @@
     white-space: pre-line;
 }
 
+.media-viewer__article-cta {
+    margin-top: 1.4rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    min-height: 4.2rem;
+    padding: 0.2rem 1.4rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--color-primary);
+    border: 2px solid rgba(254, 1, 1, 0.35);
+    box-shadow: 0 8px 22px rgba(254, 1, 1, 0.28);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.media-viewer__article-cta:hover,
+.media-viewer__article-cta:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(254, 1, 1, 0.36);
+    outline: none;
+}
+
 @media (max-width: 60em) {
     .media-viewer {
         padding: 1rem;

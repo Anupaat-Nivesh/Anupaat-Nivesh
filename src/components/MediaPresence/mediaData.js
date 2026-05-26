@@ -38,6 +38,10 @@ import panelDiscussionChandigarh from '../../assets/illustrations/panel-discussi
 import teamCiiFestivalOct2025 from '../../assets/illustrations/team-anupaat-niwesh-cii-festival-oct-2025-1120w.jpg';
 import edelweissEventRadhikaA from '../../assets/illustrations/event-edelweiss-radhika-gupta-with-founders-a-1120w.jpg';
 import edelweissEventRadhikaB from '../../assets/illustrations/event-edelweiss-radhika-gupta-with-founders-b-1120w.jpg';
+import etWealthCoverStory from '../../assets/illustrations/et-wealth-cover-story-full.png';
+import etWealthFounderFeature from '../../assets/illustrations/et-wealth-founder-feature-infographic-v2.png';
+import etWealthQualityLifeCostIndex from '../../assets/illustrations/et-wealth-quality-life-cost-index.png';
+import etWealthPropertyRatesTier2 from '../../assets/illustrations/et-wealth-property-rates-rent-tier2.png';
 
 export const youtubeThumb = (videoId) =>
     videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : '';
@@ -146,6 +150,29 @@ const mediaData = [
         date: 'May 2026',
         articleContent:
             'Founders Akash Garg and Gourav Chugh spent an evening with Radhika Gupta, CEO of Edelweiss Mutual Fund, at an event she helped organise—conversation stayed on investor outcomes, distribution duty, and the long arc of trusted advice rather than sound bites. Moments like this sharpen our bar for transparency. We are grateful for the warmth and candour; these frames belong in the gallery as quiet proof that stewardship is a shared discipline across firms. Thank you to Radhika Gupta and the Edelweiss team for hosting us with such care.',
+    },
+    {
+        id: 'photo-et-wealth-metro-small-town-cover-story',
+        type: 'photo',
+        title: 'Metro to small town? The money math of moving out',
+        thumbnail: etWealthCoverStory,
+        url: etWealthCoverStory,
+        photoUrls: [
+            etWealthCoverStory,
+            etWealthFounderFeature,
+            etWealthQualityLifeCostIndex,
+            etWealthPropertyRatesTier2,
+        ],
+        articleUrl: '/static/media/et-wealth-edition-may-18-24-2026.pdf',
+        thumbFocus: 'top',
+        shortDescription:
+            'ET Wealth cover story (May 2026) with founder feature plus metro-vs-tier-2 data charts.',
+        source: 'The Economic Times Wealth',
+        date: 'May 18–24, 2026',
+        articleContent:
+            'The Economic Times Wealth (Vol. 16, No. 20, May 18–24, 2026) features our founder Akashdeep Garg and Rohita Rani in its cover story on leaving metros for tier-2 cities. After moving from Delhi NCR to Chandigarh in 2022, they report unchanged income but living costs down roughly twenty-five to thirty percent—lower rent, traffic, pollution, and fuel—while noting fewer IT job openings locally. In print, Garg says he has no regrets: life feels better than a metro on every count that matters day to day. We share it as press context on real trade-offs, not as relocation or tax advice for readers.',
+        fullArticleContent:
+            'Publication: The Economic Times Wealth · Cover story · Issue dated May 18–24, 2026 (Volume 16, Number 20).\n\nHeadline: “Metro to small town? The money math of moving out.”\n\nFeatured: Akashdeep Garg (40), financial adviser, and Rohita Rani (39), data engineer—relocated from Delhi NCR to Chandigarh in 2022.\n\nBenefits cited: lower rentals and construction costs; less traffic, pollution, and fuel spend.\n\nDrawbacks cited: fewer job opportunities, especially in IT.\n\nFinancial snapshot in the feature: no change in income; expenses down an estimated 25–30%.\n\nQuote: “I have no regrets about shifting because it’s better than a metro in every way.”\n\nThis gallery entry uses licensed scan excerpts for recognition only; read the full edition for complete reporting and context.',
     },
     {
         id: 'photo-press-feature',

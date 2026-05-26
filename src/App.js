@@ -36,6 +36,7 @@ import BookConsultationMobile from './pages/BookConsultationMobile/BookConsultat
 import Onboarding from "./pages/Onboarding/Onboarding";
 import SignupPage from "./pages/Signup/Signup";
 import AdminMediaPanel from "./pages/AdminMediaPanel/AdminMediaPanel";
+import MarketDeploymentIntelligencePage from "./pages/MarketDeploymentIntelligence/MarketDeploymentIntelligencePage";
 import { BasketUserProvider } from "./basket/context/BasketUserContext";
 import BasketLayout from "./basket/layout/BasketLayout";
 import BasketLanding from "./basket/pages/BasketLanding";
@@ -84,6 +85,7 @@ function App() {
           <Route path="payment-success" element={<PaymentSuccess />} />
           <Route path="payment-error" element={<PaymentError />} />
           <Route path="signup" element={<SignupPage />} />
+          <Route path="valuation" element={<MarketDeploymentIntelligencePage />} />
 
           <Route path="*" element={<NotFound />} />
           {/* footer pages  */}
@@ -100,7 +102,7 @@ function App() {
             path="loan-against-securities"
             element={<LoanAgainstSecurities />}
           />
-          <Route path="/tools" element={<Tools />} />
+          <Route path="tools" element={<Tools />} />
         </Route>
         {/* Standalone Chatbot Page - ArthAI */}
         <Route path="/ArthAI" element={<ChatBotPage />} />
@@ -111,6 +113,10 @@ function App() {
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/internal/media-library" element={<AdminMediaPanel />} />
         <Route path="/mediadata" element={<AdminMediaPanel />} />
+        <Route
+          path="/market-deployment-intelligence"
+          element={<Navigate to="/valuation" replace />}
+        />
 
         {/* Elemental Basket Investing Platform */}
         <Route

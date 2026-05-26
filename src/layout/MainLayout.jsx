@@ -6,13 +6,17 @@ import ScrollToTop from "../components/ScrollToTop";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import ChatBot from "../components/chatbot/ChatBot";
 import WhatsAppCTA from "../components/WhatsAppCTA/WhatsAppCTA";
+import MarketTicker from "../components/MarketTicker/MarketTicker";
 
 const MainLayout = () => {
     return (
         <>
             <ScrollToTop />
             <Navbar />
-            <Outlet />
+            <MarketTicker />
+            <main className="layout-outlet">
+                <Outlet />
+            </main>
             <Footer />
             <ScrollToTopButton />
             <ChatBot />

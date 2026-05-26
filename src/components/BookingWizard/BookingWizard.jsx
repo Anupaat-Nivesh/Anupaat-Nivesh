@@ -8,7 +8,7 @@ import { storeUserData, storeBookingData, generateBookingReference, getStoredUse
 import { createRazorpayOrder, initializeRazorpayCheckout } from '../../services/paymentService';
 import { saveCompleteBooking } from '../../services/bookingService';
 import { sendAllNotifications } from '../../services/notificationService';
-import paymentConfig, { formatAmountForDisplay } from '../../utils/paymentConfig';
+import paymentConfig, { formatAmountForDisplay, getDiscountPercentage } from '../../utils/paymentConfig';
 import { isBackendAvailable } from '../../api/config';
 import BookingWidget from '../BookingWidget/BookingWidget';
 import './BookingWizard.css';
@@ -62,6 +62,9 @@ const BookingWizard = () => {
     'Portfolio Review',
     'Other'
   ];
+
+  const consultingHasDiscount =
+    paymentConfig.consultingSessionActualPrice > paymentConfig.consultingSessionPrice;
 
   // Check if user data exists in session (for step 2)
   useEffect(() => {
@@ -659,9 +662,15 @@ Please follow up with this user for their booking.`,
             <div className="sidebar-header">
               <h3>Financial Planning Session</h3>
               <div className="price-display">
-                <span className="price-old">₹9,999</span>
-                <span className="price-new">₹99</span>
-                <span className="price-discount">Save 99%</span>
+                {consultingHasDiscount ? (
+                  <>
+                    <span className="price-old">{formatAmountForDisplay(paymentConfig.consultingSessionActualPrice)}</span>
+                    <span className="price-new">{formatAmountForDisplay(paymentConfig.consultingSessionPrice)}</span>
+                    <span className="price-discount">Save {getDiscountPercentage()}%</span>
+                  </>
+                ) : (
+                  <span className="price-new">{formatAmountForDisplay(paymentConfig.consultingSessionPrice)}</span>
+                )}
               </div>
             </div>
 
@@ -733,8 +742,8 @@ Please follow up with this user for their booking.`,
               <h4>Why Choose Us</h4>
               <ul className="sidebar-list">
                 <li>✓ AMFI Registered Advisor</li>
-                <li>✓ 8+ Years Experience</li>
-                <li>✓ ₹25 Cr+ AUM Managed</li>
+                <li>✓ 10+ Years Experience</li>
+                <li>✓ ₹30 Cr+ AUM Managed</li>
                 <li>✓ 500+ Happy Clients</li>
                 <li>✓ No Sales Pressure</li>
               </ul>

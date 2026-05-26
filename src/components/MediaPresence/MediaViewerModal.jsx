@@ -402,6 +402,7 @@ const MediaViewerModal = ({ item, items, onActiveItemChange, onClose }) => {
         item.articleContent ||
         item.description ||
         'Context for this appearance will appear here as our media library grows.';
+    const articleUrl = String(item.articleUrl || '').trim();
 
     return (
         <div className="media-viewer" role="presentation">
@@ -474,6 +475,17 @@ const MediaViewerModal = ({ item, items, onActiveItemChange, onClose }) => {
                         </header>
                         <div className="media-viewer__article-body">
                             <p className="media-viewer__article-text">{article}</p>
+                            {articleUrl && (
+                                <a
+                                    href={articleUrl}
+                                    className="media-viewer__article-cta"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <HiOutlineExternalLink size={18} aria-hidden="true" />
+                                    <span>Read full article (PDF)</span>
+                                </a>
+                            )}
                         </div>
                     </div>
                 </div>

@@ -20,6 +20,7 @@ import healthRouter from './api/routes/health.mjs';
 import paymentsRouter from './api/routes/payments.mjs';
 import onboardingRouter from './api/routes/onboarding.mjs';
 import mediaRouter from './api/routes/media.mjs';
+import marketTickerRouter from './api/routes/market-ticker.mjs';
 import { getMediaUploadDir } from './api/services/mediaStorageHostinger.mjs';
 
 // Raw body middleware for webhook signature verification
@@ -36,22 +37,43 @@ const defaultOrigins = [
   'https://www.anupaatnivesh.com',
   'https://anupaatnivesh.com',
   'http://localhost:3000',
-  'https://anupaat-nivesh.vercel.app'
+  'http://127.0.0.1:3000',
+  'https://anupaat-nivesh.vercel.app',
 ];
 
-const allowedOrigins = (process.env.CORS_ALLOWED_ORIGINS || '')
+/** Extra origins from env (Hostinger preview URL, alternate apex, etc.) — merged with defaults */
+const extraOrigins = (process.env.CORS_ALLOWED_ORIGINS || '')
   .split(',')
   .map((v) => v.trim())
   .filter(Boolean);
 
-const corsOrigins = allowedOrigins.length > 0 ? allowedOrigins : defaultOrigins;
+const corsOrigins = [...new Set([...defaultOrigins, ...extraOrigins])];
+
+const corsOriginCallback = (origin, callback) => {
+  if (!origin) return callback(null, true);
+  if (corsOrigins.includes(origin)) return callback(null, true);
+  try {
+    const { hostname } = new URL(origin);
+    if (hostname === 'localhost' || hostname === '127.0.0.1' || hostname.endsWith('.vercel.app')) {
+      return callback(null, true);
+    }
+  } catch {
+    return callback(null, false);
+  }
+  return callback(null, false);
+};
 
 // Middleware
 app.use(cors({
-  origin: corsOrigins,
+  origin: corsOriginCallback,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'x-razorpay-signature']
+  allowedHeaders: [
+    'Content-Type',
+    'x-razorpay-signature',
+    'Authorization',
+    'X-Requested-With',
+  ],
 }));
 app.use(cookieParser());
 app.use(
@@ -98,6 +120,7 @@ app.use('/api/health', healthRouter);
 app.use('/api/payments', paymentsRouter);
 app.use('/api/onboarding', onboardingRouter);
 app.use('/api/media', mediaRouter);
+app.use('/api/market-ticker', marketTickerRouter);
 
 // Root endpoint
 app.get('/', (req, res) => {
@@ -117,7 +140,8 @@ app.get('/', (req, res) => {
       media: {
         publicList: '/api/media/public',
         adminLogin: '/api/media/auth/login'
-      }
+      },
+      marketTicker: '/api/market-ticker'
     }
   });
 });
@@ -144,6 +168,7 @@ if (process.env.VERCEL !== '1') {
   });
 }
 
-// Export for Vercel serverless
+// Export for Vercel serverless (allow time for parallel Yahoo chart calls on cold start)
+export const maxDuration = 30;
 export default app;
 

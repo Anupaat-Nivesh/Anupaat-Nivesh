@@ -11,6 +11,7 @@ import Contact from '../../components/contact/Contact';
 import { OurApp, TrustHighlights, MediaPresence } from '../../components';
 import HowWeWork from '../../components/HowWeWork/HowWeWork';
 import { updateSEO } from '../../utils/seo';
+import { paymentConfig, formatAmountForDisplay, getDiscountPercentage } from '../../utils/paymentConfig';
 
 
 
@@ -19,7 +20,8 @@ import { updateSEO } from '../../utils/seo';
 
 
 const Home = () => {
-    const [heroScreen, setHeroScreen] = useState(0); // 0 = Talk to Advisor, 1 = Consulting Session
+    const [heroScreen, setHeroScreen] = useState(0); // 0 Advisor, 1 Consulting, 2 MarketCompass
+    const [heroMouseInside, setHeroMouseInside] = useState(false);
 
     // SEO updates for homepage
     useEffect(() => {
@@ -30,14 +32,19 @@ const Home = () => {
             canonical: '/',
             ogType: 'website'
         });
-
-        // Auto-rotate hero screens every 6 seconds
-        const interval = setInterval(() => {
-            setHeroScreen(prev => (prev === 0 ? 1 : 0));
-        }, 6000);
-
-        return () => clearInterval(interval);
     }, []);
+
+    // Auto-rotate hero screens every 6 seconds; pause while pointer is over the hero (read time)
+    useEffect(() => {
+        if (heroMouseInside) return undefined;
+        const interval = setInterval(() => {
+            setHeroScreen(prev => (prev + 1) % 3);
+        }, 6000);
+        return () => clearInterval(interval);
+    }, [heroMouseInside]);
+
+    const consultingHasDiscount =
+        paymentConfig.consultingSessionActualPrice > paymentConfig.consultingSessionPrice;
 
     const img1 = require('../../assets/ImpanelmentsImages/empanelment1.png')
     const img2 = require('../../assets/ImpanelmentsImages/empanelment2.png')
@@ -57,7 +64,11 @@ const Home = () => {
 
             <div className='anupaat_home' id="home">
 
-                <section className="home-hero home-section">
+                <section
+                    className="home-hero home-section"
+                    onMouseEnter={() => setHeroMouseInside(true)}
+                    onMouseLeave={() => setHeroMouseInside(false)}
+                >
                     <div className="hero-slider-container">
                         {/* Screen 1: Talk to Advisor (Free) */}
                         <div className={`hero-screen ${heroScreen === 0 ? 'active' : ''}`}>
@@ -79,12 +90,12 @@ const Home = () => {
                         <div className="hero-panel__stat">
                                     <div className="stat-item">
                                 <p className="stat-label">AUM managed</p>
-                                <p className="stat-value">₹25 Cr+</p>
-                                <p className="stat-hint">Target ₹100 Cr by 2026</p>
+                                <p className="stat-value">₹30 Cr+</p>
+                                <p className="stat-hint">Goal ₹100 Cr by 2027</p>
                             </div>
                                     <div className="stat-item">
                                 <p className="stat-label">Monthly SIPs</p>
-                                <p className="stat-value">₹40 Lac+</p>
+                                <p className="stat-value">₹50 Lac+</p>
                                 <p className="stat-hint">Disciplined, goal-aligned</p>
                             </div>
                         </div>
@@ -96,7 +107,7 @@ const Home = () => {
                             </div>
                                     <div className="stat-item">
                                 <p className="stat-label">Experience</p>
-                                <p className="stat-value">8 Years+</p>
+                                <p className="stat-value">10 Years+</p>
                                 <p className="stat-hint">Advisory & reviews</p>
                             </div>
                         </div>
@@ -109,21 +120,27 @@ const Home = () => {
                         {/* Screen 2: Consulting Session (Paid) */}
                         <div className={`hero-screen ${heroScreen === 1 ? 'active' : ''}`}>
                             <div className="hero-content">
-                                <div className="consulting-badge">Limited Time Offer</div>
+                                <div className="consulting-badge">{consultingHasDiscount ? 'Limited Time Offer' : 'Session fee'}</div>
                                 <h1>1-on-1 Financial Consulting<br />Session</h1>
                                 <p className="hero-benefit">Get personalized financial planning, investment strategies, and goal achievement roadmap in one session.</p>
                                 <div className="hero-consulting-price">
                                     <div className="price-group">
-                                        <span className="price-old">₹9,999</span>
-                                        <span className="price-new">₹99</span>
-                                        <span className="price-discount">Save 99%</span>
+                                        {consultingHasDiscount ? (
+                                            <>
+                                                <span className="price-old">{formatAmountForDisplay(paymentConfig.consultingSessionActualPrice)}</span>
+                                                <span className="price-new">{formatAmountForDisplay(paymentConfig.consultingSessionPrice)}</span>
+                                                <span className="price-discount">Save {getDiscountPercentage()}%</span>
+                                            </>
+                                        ) : (
+                                            <span className="price-new">{formatAmountForDisplay(paymentConfig.consultingSessionPrice)}</span>
+                                        )}
                                     </div>
                                     <Link to="/consulting-session" className="btn btn-primary hero-cta-btn hero-price-btn">Book Session</Link>
                                 </div>
                                 <div className="hero-pills">
                                     <span>✓ AMFI Registered</span>
                                     <span>✓ BSE STAR MF</span>
-                                    <span>✓ 8+ Years Experience</span>
+                                    <span>✓ 10+ Years Experience</span>
                                 </div>
                             </div>
                             <div className="hero-panel" data-aos="fade-up">
@@ -148,12 +165,69 @@ const Home = () => {
                                     </div>
                                     <div className="stat-item">
                                         <p className="stat-label">Value</p>
-                                        <p className="stat-value">₹9,999</p>
-                                        <p className="stat-hint">Now just ₹99 (99% off)</p>
+                                        <p className="stat-value">{formatAmountForDisplay(paymentConfig.consultingSessionPrice)}</p>
+                                        <p className="stat-hint">
+                                            {consultingHasDiscount
+                                                ? `Now ${formatAmountForDisplay(paymentConfig.consultingSessionPrice)} (${getDiscountPercentage()}% off)`
+                                                : 'Flat session fee · 30 minutes'}
+                                        </p>
                                     </div>
                                 </div>
                                 <div className="hero-panel__note">
                                     This session is educational and advisory in nature. No guaranteed returns or stock tips.
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Screen 3: MarketCompass (coming soon) */}
+                        <div className={`hero-screen ${heroScreen === 2 ? 'active' : ''}`}>
+                            <div className="hero-content">
+                                <div className="marketcompass-hero-badge">Coming soon</div>
+                                <h1>MarketCompass<br />Market-ready guidance</h1>
+                                <p className="hero-benefit">
+                                    Simple hints on when to add money (lump sum vs step-by-step) and where equities fit
+                                    the backdrop — built on 20+ years of Indian market data, not rumours or fixed PE
+                                    rules.
+                                </p>
+                                <div className="hero-actions">
+                                    <Link to="/valuation" className="btn btn-primary hero-cta-btn">View MarketCompass</Link>
+                                    <Link to="/contact" className="btn hero-cta-btn hero-cta-btn--outline-dark">Notify me at launch</Link>
+                                </div>
+                                <div className="hero-pills">
+                                    <span>✓ 20+ years tested</span>
+                                    <span>✓ All market phases</span>
+                                    <span>✓ Not stock tips</span>
+                                </div>
+                            </div>
+                            <div className="hero-panel" data-aos="fade-up">
+                                <div className="hero-panel__badge">What you will get</div>
+                                <div className="hero-panel__stat">
+                                    <div className="stat-item">
+                                        <p className="stat-label">Focus</p>
+                                        <p className="stat-value">Timing</p>
+                                        <p className="stat-hint">Lump sum vs STP style pacing</p>
+                                    </div>
+                                    <div className="stat-item">
+                                        <p className="stat-label">Focus</p>
+                                        <p className="stat-value">Allocation</p>
+                                        <p className="stat-hint">Equity posture &amp; sleeves</p>
+                                    </div>
+                                </div>
+                                <div className="hero-panel__stat">
+                                    <div className="stat-item">
+                                        <p className="stat-label">Data depth</p>
+                                        <p className="stat-value">20+ yrs</p>
+                                        <p className="stat-hint">Booms, crashes, events</p>
+                                    </div>
+                                    <div className="stat-item">
+                                        <p className="stat-label">Status</p>
+                                        <p className="stat-value">Waitlist</p>
+                                        <p className="stat-hint">Early access opening soon</p>
+                                    </div>
+                                </div>
+                                <div className="hero-panel__note">
+                                    Same research discipline as our advisory — packaged as a clear score for deployment
+                                    decisions. Not live advice; read disclaimers on the product page.
                                 </div>
                             </div>
                         </div>
@@ -170,6 +244,11 @@ const Home = () => {
                             className={`hero-dot ${heroScreen === 1 ? 'active' : ''}`}
                             onClick={() => setHeroScreen(1)}
                             aria-label="Consulting Session"
+                        />
+                        <button 
+                            className={`hero-dot ${heroScreen === 2 ? 'active' : ''}`}
+                            onClick={() => setHeroScreen(2)}
+                            aria-label="MarketCompass coming soon"
                         />
                     </div>
                 </section>

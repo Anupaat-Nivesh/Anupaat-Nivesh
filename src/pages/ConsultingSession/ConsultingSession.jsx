@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './ConsultingSession.css';
 import ConsultingSessionForm from '../../components/ConsultingSessionForm/ConsultingSessionForm';
 import ComplianceDisclaimer from '../../components/ComplianceDisclaimer/ComplianceDisclaimer';
+import { paymentConfig, formatAmountForDisplay, getDiscountPercentage } from '../../utils/paymentConfig';
 
 /**
  * Consulting Session Page
@@ -10,6 +11,9 @@ import ComplianceDisclaimer from '../../components/ComplianceDisclaimer/Complian
  */
 const ConsultingSession = () => {
   const [sessionsLeft, setSessionsLeft] = useState(23); // Monthly cap
+
+  const consultingHasDiscount =
+    paymentConfig.consultingSessionActualPrice > paymentConfig.consultingSessionPrice;
 
   useEffect(() => {
     // Track page view
@@ -40,17 +44,27 @@ const ConsultingSession = () => {
         <div className="container">
           {/* Header Section */}
           <div className="consulting-header-section">
-              <div className="consulting-badge">Limited Time Offer</div>
+              <div className="consulting-badge">{consultingHasDiscount ? 'Limited Time Offer' : 'Session fee'}</div>
               <h1 className="consulting-title">
                 1-on-1 Financial Consulting Session
               </h1>
               
               <div className="consulting-price-section">
                 <div className="price-comparison">
-                  <span className="price-old">₹9,999</span>
-                  <span className="price-new">₹99</span>
+                  {consultingHasDiscount ? (
+                    <>
+                      <span className="price-old">{formatAmountForDisplay(paymentConfig.consultingSessionActualPrice)}</span>
+                      <span className="price-new">{formatAmountForDisplay(paymentConfig.consultingSessionPrice)}</span>
+                    </>
+                  ) : (
+                    <span className="price-new">{formatAmountForDisplay(paymentConfig.consultingSessionPrice)}</span>
+                  )}
                 </div>
-                <div className="price-discount">Save 99% - Introductory Offer</div>
+                {consultingHasDiscount ? (
+                  <div className="price-discount">Save {getDiscountPercentage()}% - Introductory Offer</div>
+                ) : (
+                  <div className="price-discount">30-minute online advisory session</div>
+                )}
               </div>
 
             {/* Limited-Time Counter */}
@@ -67,7 +81,7 @@ const ConsultingSession = () => {
             <div className="consulting-trust-badges">
               <span>✓ AMFI Registered</span>
               <span>✓ BSE STAR MF</span>
-              <span>✓ 8+ Years Experience</span>
+              <span>✓ 10+ Years Experience</span>
             </div>
           </div>
 
@@ -131,7 +145,7 @@ const ConsultingSession = () => {
                     <div className="overview-icon">✓</div>
                     <div className="overview-item-content">
                       <h3>Expert Guidance</h3>
-                      <p>Get advice from AMFI registered advisors with 8+ years of experience in financial planning.</p>
+                      <p>Get advice from AMFI registered advisors with 10+ years of experience in financial planning.</p>
                     </div>
                   </div>
                   <div className="overview-item">
