@@ -163,7 +163,7 @@ const mediaData = [
             etWealthQualityLifeCostIndex,
             etWealthPropertyRatesTier2,
         ],
-        articleUrl: '/media/et-wealth-edition-may-18-24-2026.pdf',
+        articleUrl: '/static/media/et-wealth-edition-may-18-24-2026.pdf',
         thumbFocus: 'top',
         shortDescription:
             'ET Wealth cover story (May 2026) with founder feature plus metro-vs-tier-2 data charts.',
