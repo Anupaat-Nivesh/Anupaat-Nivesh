@@ -33,7 +33,12 @@ export const getApiBaseUrl = () => {
   if (process.env.NODE_ENV === 'development') {
     return fromEnv || 'http://localhost:8000';
   }
-  return fromEnv || '';
+  // Unified Vercel deploy: same-origin /api when env is empty
+  if (fromEnv) return fromEnv;
+  if (typeof window !== 'undefined' && window.location?.origin) {
+    return window.location.origin;
+  }
+  return '';
 };
 
 /**

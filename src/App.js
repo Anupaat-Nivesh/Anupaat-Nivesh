@@ -7,9 +7,12 @@ import {
   Home,
   FAQs,
   Privacypolicy,
-  MutualFund,
-  EquityBasket,
   LoanAgainstSecurities,
+  FixedIncomeAlternativesHub,
+  FixedDeposits,
+  Bonds,
+  UnlistedStocks,
+  P2PLending,
   Calculators,
 } from "./containers";
 import {
@@ -38,14 +41,17 @@ import SignupPage from "./pages/Signup/Signup";
 import AdminMediaPanel from "./pages/AdminMediaPanel/AdminMediaPanel";
 import MarketDeploymentIntelligencePage from "./pages/MarketDeploymentIntelligence/MarketDeploymentIntelligencePage";
 import { BasketUserProvider } from "./basket/context/BasketUserContext";
-import BasketLayout from "./basket/layout/BasketLayout";
+import InvestLayout from "./basket/layout/InvestLayout";
+import MutualFundScreener from "./basket/pages/MutualFundScreener";
+import MutualFundDetail from "./basket/pages/MutualFundDetail";
 import BasketLanding from "./basket/pages/BasketLanding";
 import BasketDetail from "./basket/pages/BasketDetail";
 import RiskProfilePage from "./basket/pages/RiskProfilePage";
 import GoalGPSPage from "./basket/pages/GoalGPSPage";
-import BasketDashboardPage from "./basket/pages/BasketDashboardPage";
 import BasketPaymentSuccessPage from "./basket/pages/BasketPaymentSuccessPage";
 import BasketAdminPage from "./basket/pages/BasketAdminPage";
+import ScreenersHub from "./screeners/pages/ScreenersHub";
+import SectorRotationDashboard from "./screeners/pages/SectorRotationDashboard";
 
 import { useEffect } from "react";
 
@@ -96,13 +102,48 @@ function App() {
           <Route path="privacy-policy" element={<Privacypolicy />} />
 
           {/* Offering pages  */}
-          <Route path="mutual-funds" element={<MutualFund />} />
-          <Route path="equity-basket" element={<EquityBasket />} />
+          <Route path="mutual-funds" element={<Navigate to="/invest/baskets" replace />} />
+          <Route path="equity-basket" element={<Navigate to="/invest/baskets" replace />} />
           <Route
             path="loan-against-securities"
             element={<LoanAgainstSecurities />}
           />
+          <Route
+            path="fixed-income-alternatives"
+            element={<FixedIncomeAlternativesHub />}
+          />
+          <Route path="fixed-deposits" element={<FixedDeposits />} />
+          <Route path="bonds" element={<Bonds />} />
+          <Route path="unlisted-stocks" element={<UnlistedStocks />} />
+          <Route path="p2p-lending" element={<P2PLending />} />
           <Route path="tools" element={<Tools />} />
+          <Route path="screeners" element={<ScreenersHub />} />
+          <Route path="screeners/sector-rotation" element={<SectorRotationDashboard />} />
+          <Route path="baskets/fire-s" element={<Navigate to="/invest/basket/fire" replace />} />
+          <Route path="baskets/water" element={<Navigate to="/invest/basket/water" replace />} />
+          <Route path="baskets/earth" element={<Navigate to="/invest/basket/earth" replace />} />
+          <Route path="baskets" element={<Navigate to="/invest/baskets" replace />} />
+
+          {/* Mutual fund baskets (FIRE · WATER · EARTH) */}
+          <Route
+            path="invest"
+            element={
+              <BasketUserProvider>
+                <InvestLayout />
+              </BasketUserProvider>
+            }
+          >
+            <Route index element={<Navigate to="/invest/baskets" replace />} />
+            <Route path="funds" element={<MutualFundScreener />} />
+            <Route path="fund/:schemeCode" element={<MutualFundDetail />} />
+            <Route path="baskets" element={<BasketLanding />} />
+            <Route path="basket/:id" element={<BasketDetail />} />
+            <Route path="risk-profile" element={<RiskProfilePage />} />
+            <Route path="goals" element={<GoalGPSPage />} />
+            <Route path="dashboard" element={<Navigate to="/invest/baskets" replace />} />
+            <Route path="payment-success" element={<BasketPaymentSuccessPage />} />
+            <Route path="admin" element={<BasketAdminPage />} />
+          </Route>
         </Route>
         {/* Standalone Chatbot Page - ArthAI */}
         <Route path="/ArthAI" element={<ChatBotPage />} />
@@ -118,23 +159,6 @@ function App() {
           element={<Navigate to="/valuation" replace />}
         />
 
-        {/* Elemental Basket Investing Platform */}
-        <Route
-          path="/invest"
-          element={
-            <BasketUserProvider>
-              <BasketLayout />
-            </BasketUserProvider>
-          }
-        >
-          <Route index element={<BasketLanding />} />
-          <Route path="basket/:id" element={<BasketDetail />} />
-          <Route path="risk-profile" element={<RiskProfilePage />} />
-          <Route path="goals" element={<GoalGPSPage />} />
-          <Route path="dashboard" element={<BasketDashboardPage />} />
-          <Route path="payment-success" element={<BasketPaymentSuccessPage />} />
-          <Route path="admin" element={<BasketAdminPage />} />
-        </Route>
       </Routes>
     </BrowserRouter>
   );

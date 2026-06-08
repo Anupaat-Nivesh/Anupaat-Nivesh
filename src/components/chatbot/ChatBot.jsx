@@ -2470,7 +2470,7 @@ const ChatBot = ({ standalone = false }) => {
                     {/* Website CTA - Show for general type or when user might want more info - Placed before Advisor to ensure they appear together in last row */}
                     {(message.ctaType === 'general' || !message.ctaType || message.ctaType === 'planning') && (
                       <Link
-                        to={message.ctaType === 'calculators' ? '/calculators' : message.ctaType === 'mutual_funds' ? '/mutual-funds' : message.ctaType === 'equity' ? '/equity-basket' : message.ctaType === 'loan' ? '/loan-against-securities' : '/'}
+                        to={message.ctaType === 'calculators' ? '/calculators' : message.ctaType === 'mutual_funds' || message.ctaType === 'equity' ? '/invest/baskets' : message.ctaType === 'loan' ? '/loan-against-securities' : '/'}
                         className="cta-button website-cta"
                         onClick={() => {
                           setIsOpen(false);

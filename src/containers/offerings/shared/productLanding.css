@@ -1,0 +1,310 @@
+.product-landing {
+  margin-top: 1.5rem;
+}
+
+.product-landing__hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding: 1.75rem 1.85rem;
+  background: linear-gradient(135deg, #fafbfc 0%, #ffffff 55%, #fff8f8 100%);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 1.15rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+}
+
+.product-landing__tagline {
+  margin-top: 1rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-subtext);
+}
+
+.product-landing__intro {
+  margin-top: 1.25rem;
+  color: var(--color-subtext-light);
+  line-height: 1.65;
+}
+
+.product-landing__cta {
+  margin-top: 0;
+}
+
+.product-landing__hero-img img {
+  width: 90%;
+  max-width: 400px;
+  margin: 0 auto;
+  display: block;
+}
+
+.product-landing__status {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+}
+
+.product-landing__section {
+  margin-bottom: 3rem;
+}
+
+.product-landing__eyebrow {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.product-landing__section-title {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.product-landing__benefits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+  gap: 1.25rem;
+}
+
+.product-landing__benefit-card {
+  position: relative;
+  border: 1px solid rgba(254, 1, 1, 0.12);
+  border-radius: 1rem;
+  padding: 1.35rem 1.5rem 1.35rem 1.35rem;
+  background: #fff;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.product-landing__benefit-card:hover {
+  border-color: rgba(254, 1, 1, 0.22);
+  box-shadow: 0 8px 28px rgba(254, 1, 1, 0.08);
+}
+
+.product-landing__benefit-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  margin-bottom: 0.75rem;
+  border-radius: 0.55rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  background: rgba(254, 1, 1, 0.08);
+}
+
+.product-landing__benefit-card h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.product-landing__benefit-card p {
+  color: var(--color-subtext-light);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Who is it for */
+.product-landing__ideal {
+  margin-bottom: 2.5rem;
+  padding: 1.75rem 1.85rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 1.15rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.product-landing__ideal-head {
+  margin-bottom: 1.35rem;
+}
+
+.product-landing__ideal .product-landing__section-title {
+  margin-bottom: 0.5rem;
+}
+
+.product-landing__ideal-lead {
+  margin: 0;
+  max-width: 42rem;
+  color: var(--color-subtext-light);
+  line-height: 1.6;
+  font-size: 1.35rem;
+}
+
+.product-landing__ideal-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 0.85rem;
+}
+
+.product-landing__ideal-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  margin: 0;
+  padding: 1rem 1.1rem;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 0.85rem;
+  color: var(--color-text);
+  font-size: 1.35rem;
+  line-height: 1.5;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.product-landing__ideal-check {
+  flex-shrink: 0;
+  width: 1.65rem;
+  height: 1.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-primary), #ff6b6b);
+  margin-top: 0.1rem;
+}
+
+/* Consultation strip */
+.product-landing__consult {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem 2rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem 1.75rem;
+  border-radius: 1.15rem;
+  border: 2px solid rgba(254, 1, 1, 0.18);
+  background: linear-gradient(135deg, rgba(254, 1, 1, 0.04) 0%, #ffffff 100%);
+}
+
+.product-landing__consult-copy h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.75rem;
+}
+
+.product-landing__consult-copy p {
+  margin: 0;
+  max-width: 36rem;
+  color: var(--color-subtext-light);
+  line-height: 1.55;
+  font-size: 1.3rem;
+}
+
+.product-landing__consult-cta {
+  margin-top: 0;
+}
+
+.product-landing__crosslinks {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  align-items: center;
+}
+
+.product-landing__crosslinks span {
+  font-weight: 700;
+  color: var(--color-subtext);
+}
+
+.product-landing__crosslinks a {
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.product-landing__crosslinks a:hover {
+  text-decoration: underline;
+}
+
+.product-landing__back {
+  margin-bottom: 1.5rem;
+}
+
+.product-landing__back a {
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.product-landing__back a:hover {
+  text-decoration: underline;
+}
+
+.product-landing__disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin: 0;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1rem;
+  background: #f8f9fa;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-left: 4px solid var(--color-primary);
+}
+
+.product-landing__disclaimer-icon {
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: 800;
+  font-style: italic;
+  color: var(--color-primary);
+  background: rgba(254, 1, 1, 0.1);
+}
+
+.product-landing__disclaimer p {
+  margin: 0;
+  color: var(--color-subtext-light);
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .product-landing__hero {
+    grid-template-columns: 1fr;
+    padding: 1.35rem;
+  }
+
+  .product-landing__hero-img {
+    order: -1;
+  }
+
+  .product-landing__ideal {
+    padding: 1.35rem;
+  }
+
+  .product-landing__consult {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1.35rem;
+  }
+
+  .product-landing__consult-cta {
+    width: 100%;
+  }
+}

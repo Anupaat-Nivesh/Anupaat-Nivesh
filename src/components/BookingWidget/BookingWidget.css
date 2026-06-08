@@ -1,9 +1,9 @@
 .booking-widget-container {
   background: #fff;
   border-radius: 16px;
-  padding: 2.4rem;
+  padding: 2rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  max-width: 800px;
+  max-width: 100%;
   width: 100%;
   margin: 0 auto;
 }
@@ -57,6 +57,8 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-height: clamp(680px, 74vh, 860px);
+  height: clamp(680px, 74vh, 860px);
 }
 
 .booking-widget-fullscreen .calendly-widget-wrapper {
@@ -72,7 +74,7 @@
 .calendly-inline-widget-container {
   width: 100% !important;
   height: 100% !important;
-  min-height: 700px;
+  min-height: 100%;
   overflow: hidden;
   border: none;
   flex: 1;
@@ -88,7 +90,7 @@
 .calendly-inline-widget {
   width: 100% !important;
   height: 100% !important;
-  min-height: 700px !important;
+  min-height: 100% !important;
   overflow: hidden !important;
   border: none !important;
   border-radius: 12px;
@@ -105,7 +107,7 @@
   width: 100% !important;
   max-width: 100% !important;
   height: 100% !important;
-  min-height: 700px !important;
+  min-height: 100% !important;
   overflow: hidden !important;
   overflow-x: hidden !important; /* Prevent horizontal scroll */
   border: none !important;

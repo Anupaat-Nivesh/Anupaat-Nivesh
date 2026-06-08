@@ -64,7 +64,7 @@ export async function openBasketCheckout({
       service: 'basket_unlock',
       basketId: basket.id,
     },
-    theme: { color: '#0B1F3A' },
+    theme: { color: '#FE0101' },
     handler: async function handler(response) {
       try {
         if (process.env.NODE_ENV === 'development' && !isBackendAvailable()) {

@@ -21,6 +21,10 @@ import paymentsRouter from './api/routes/payments.mjs';
 import onboardingRouter from './api/routes/onboarding.mjs';
 import mediaRouter from './api/routes/media.mjs';
 import marketTickerRouter from './api/routes/market-ticker.mjs';
+import corporateActionsRouter from './api/routes/corporate-actions.mjs';
+import screenersRouter from './api/routes/screeners.mjs';
+import mutualFundsRouter from './api/routes/mutual-funds.mjs';
+import basketsRouter from './api/routes/baskets.mjs';
 import { getMediaUploadDir } from './api/services/mediaStorageHostinger.mjs';
 
 // Raw body middleware for webhook signature verification
@@ -121,6 +125,10 @@ app.use('/api/payments', paymentsRouter);
 app.use('/api/onboarding', onboardingRouter);
 app.use('/api/media', mediaRouter);
 app.use('/api/market-ticker', marketTickerRouter);
+app.use('/api/corporate-actions', corporateActionsRouter);
+app.use('/api/screeners', screenersRouter);
+app.use('/api/mutual-funds', mutualFundsRouter);
+app.use('/api/baskets', basketsRouter);
 
 // Root endpoint
 app.get('/', (req, res) => {
@@ -141,7 +149,20 @@ app.get('/', (req, res) => {
         publicList: '/api/media/public',
         adminLogin: '/api/media/auth/login'
       },
-      marketTicker: '/api/market-ticker'
+      marketTicker: '/api/market-ticker',
+      corporateActions: '/api/corporate-actions',
+      screenersHub: '/api/screeners/hub',
+      screenersIndices: '/api/screeners/indices',
+      mutualFunds: {
+        enrich: '/api/mutual-funds/enrich/:schemeCode',
+        enrichBulk: '/api/mutual-funds/enrich/bulk',
+        profile: '/api/mutual-funds/profile/:schemeCode'
+      },
+      baskets: {
+        master: '/api/baskets/master',
+        analytics: '/api/baskets/:id/analytics',
+        refresh: 'POST /api/baskets/refresh'
+      }
     }
   });
 });

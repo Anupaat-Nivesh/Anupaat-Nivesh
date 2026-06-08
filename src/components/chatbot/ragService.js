@@ -34,23 +34,23 @@ const WEBSITE_KNOWLEDGE_BASE = {
         chunks: [
             {
                 id: 'service_1',
-                content: 'Mutual Fund Investment: We help you invest in mutual funds through SIP (Systematic Investment Plan) or lumpsum investments. Our app-based platform makes it easy to start, track, and manage your investments.',
-                section: 'Mutual Funds',
-                page_url: '/mutual-funds',
+                content: 'Mutual Fund Baskets: Curated direct-plan portfolios — FIRE (aggressive growth), WATER (balanced), and EARTH (conservative). Pay a one-time unlock fee to see full fund holdings; our team supports onboarding. Analytics and allocation are free before purchase.',
+                section: 'Mutual Fund Baskets',
+                page_url: '/invest/baskets',
                 language: 'en'
             },
             {
                 id: 'service_2',
-                content: 'Equity Basket: Diversified equity portfolios designed for long-term wealth creation. Managed by experienced advisors with focus on quality stocks and disciplined allocation. Our equity baskets combine multiple equity mutual funds to create a balanced, risk-managed portfolio that aligns with your financial goals.',
-                section: 'Equity Basket',
-                page_url: '/equity-basket',
+                content: 'Mutual Fund Baskets combine multiple mutual funds into risk-calibrated portfolios (FIRE, WATER, EARTH) for long-term goals. Unlock once via Razorpay to receive fund details and advisory onboarding.',
+                section: 'Mutual Fund Baskets',
+                page_url: '/invest/baskets',
                 language: 'en'
             },
             {
                 id: 'service_2_hinglish',
-                content: 'Equity Basket: Ek diversified portfolio jo different equity mutual funds ko combine karta hai. Long-term wealth creation ke liye designed, experienced advisors ke saath managed. Quality stocks aur disciplined allocation par focus.',
-                section: 'Equity Basket',
-                page_url: '/equity-basket',
+                content: 'Mutual Fund Baskets: FIRE, WATER, aur EARTH — teen curated mutual fund portfolios. Ek baar unlock fee se fund list milti hai; team onboarding mein help karti hai.',
+                section: 'Mutual Fund Baskets',
+                page_url: '/invest/baskets',
                 language: 'hinglish'
             },
             {
@@ -58,6 +58,41 @@ const WEBSITE_KNOWLEDGE_BASE = {
                 content: 'Loan Against Securities: Use your existing investments as collateral to get loans at competitive rates. Quick processing, flexible repayment options.',
                 section: 'Loan Against Securities',
                 page_url: '/loan-against-securities',
+                language: 'en'
+            },
+            {
+                id: 'service_fia_hub',
+                content: 'Fixed Income & Alternatives: Explore fixed deposits (FD), bonds, unlisted stocks, and P2P lending with a consultation-first approach. Hub page: /fixed-income-alternatives. Not investment advice; partner terms apply.',
+                section: 'Fixed Income & Alternatives',
+                page_url: '/fixed-income-alternatives',
+                language: 'en'
+            },
+            {
+                id: 'service_fd',
+                content: 'Fixed Deposits (FD): Bank or NBFC deposits with fixed tenure and predetermined interest. Suited for capital preservation and predictable income. Learn more at /fixed-deposits. Book consultation for guidance.',
+                section: 'Fixed Deposits',
+                page_url: '/fixed-deposits',
+                language: 'en'
+            },
+            {
+                id: 'service_bonds',
+                content: 'Bonds: Government, PSU, and corporate debt instruments for income and portfolio diversification. Credit and interest-rate risks apply. Learn more at /bonds.',
+                section: 'Bonds',
+                page_url: '/bonds',
+                language: 'en'
+            },
+            {
+                id: 'service_unlisted',
+                content: 'Unlisted Stocks: Pre-IPO and private-market equity access for experienced investors. Illiquidity and valuation risks differ from listed equities. Learn more at /unlisted-stocks.',
+                section: 'Unlisted Stocks',
+                page_url: '/unlisted-stocks',
+                language: 'en'
+            },
+            {
+                id: 'service_p2p',
+                content: 'P2P Lending: Peer-to-peer lending via RBI-regulated NBFC-P2P platforms. Higher yield potential with credit and platform risk — not guaranteed. Learn more at /p2p-lending.',
+                section: 'P2P Lending',
+                page_url: '/p2p-lending',
                 language: 'en'
             }
         ]
@@ -168,7 +203,10 @@ function semanticSearch(query, language = 'en', limit = 3) {
         }
 
         // Boost score for section relevance
-        const relevantSections = ['sip', 'mutual fund', 'investment', 'goal', 'retirement', 'education'];
+        const relevantSections = [
+            'sip', 'mutual fund', 'investment', 'goal', 'retirement', 'education',
+            'fixed deposit', 'fd', 'bond', 'unlisted', 'p2p', 'lending', 'alternatives',
+        ];
         relevantSections.forEach(section => {
             if (queryLower.includes(section) && contentLower.includes(section)) {
                 score += 2;
@@ -261,7 +299,8 @@ export function needsRAGGrounding(userQuery, intent) {
     const groundingKeywords = [
         'service', 'offering', 'product', 'process', 'how', 'kaise',
         'about', 'company', 'anupaat', 'what is', 'kya hai',
-        'mutual fund', 'sip', 'equity', 'loan'
+        'mutual fund', 'sip', 'equity', 'loan', 'fixed deposit', 'fd', 'bond',
+        'unlisted', 'p2p', 'lending', 'alternatives'
     ];
 
     const needsGrounding = groundingKeywords.some(keyword => queryLower.includes(keyword)) ||

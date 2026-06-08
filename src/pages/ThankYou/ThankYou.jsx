@@ -89,8 +89,7 @@ const ThankYou = () => {
         <div className="thank-you-resources">
           <h3>While You Wait, Explore:</h3>
           <div className="resource-links">
-            <Link to="/mutual-funds">Mutual Funds</Link>
-            <Link to="/equity-basket">Equity Baskets</Link>
+            <Link to="/invest/baskets">Mutual Fund Baskets</Link>
             <Link to="/faqs">FAQs</Link>
             <Link to="/about">About Us</Link>
           </div>

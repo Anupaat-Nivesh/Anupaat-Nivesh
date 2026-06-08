@@ -10,6 +10,7 @@ import Offerings from '../offerings/Offerings';
 import Contact from '../../components/contact/Contact';
 import { OurApp, TrustHighlights, MediaPresence } from '../../components';
 import HowWeWork from '../../components/HowWeWork/HowWeWork';
+import BasketHomePromo from '../../basket/components/basket-analytics/BasketHomePromo';
 import { updateSEO } from '../../utils/seo';
 import { paymentConfig, formatAmountForDisplay, getDiscountPercentage } from '../../utils/paymentConfig';
 
@@ -258,6 +259,8 @@ const Home = () => {
                 </div>
 
                 <section className='home-section offerings-section'>   <Offerings /></section>
+
+                <BasketHomePromo />
 
                 {/* Merged About area: TrustHighlights (compact about) + Whyanupaat
                     (detailed why-us). The standalone /whyanupaat menu has been

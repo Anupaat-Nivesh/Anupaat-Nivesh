@@ -1,0 +1,40 @@
+name: Update AMC factsheet index
+
+on:
+  schedule:
+    # Daily at 02:30 UTC (~8:00 AM IST)
+    - cron: '30 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh-index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Refresh AMC page map
+        run: npm run update:amc-index
+
+      - name: Discover missing factsheet PDFs
+        run: npm run fetch:factsheets -- --only-missing --limit 100
+        env:
+          GOOGLE_CSE_API_KEY: ${{ secrets.GOOGLE_CSE_API_KEY }}
+          GOOGLE_CSE_CX: ${{ secrets.GOOGLE_CSE_CX }}
+
+      - name: Commit index if changed
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: refresh AMC factsheet index'
+          file_pattern: api/data/amc-document-index.json

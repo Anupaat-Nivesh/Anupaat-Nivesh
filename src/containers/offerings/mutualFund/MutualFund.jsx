@@ -1,142 +1,150 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './mutualfund.css';
+import '../offerings-shared.css';
 import ContactModal from '../../../components/contact/contactModal/ContactModal';
 import Card from 'react-bootstrap/Card';
 import { mutualFundData } from '../../../data';
-import {
-    Chart, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, registerables
-  } from 'chart.js';
-import { Doughnut } from 'react-chartjs-2';
 import mutualFundImg from "../../../assets/illustrations/mutual-fund.svg";
 
-
- // Register all the necessary components (using registerables to include everything)
-Chart.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale);
-Chart.register(...registerables);
-
 const MutualFund = () => {
-
     const [modal, setModal] = useState(false);
     const [fundType, setFundType] = useState(false);
 
-
-    const options = {
-        plugins: {
-            legend: {
-                display: true,
-                position: 'right',
-                fullSize: false,
-                labels: {
-                    boxWidth: 10,
-                    align: 'start',
-                }
-            },
-        }
-
-
-    };
-
     return (
-        <div id='mutual-funds' className='mutualfund-container section__padding'>
-            {modal ? <ContactModal setTheModalState={setModal} fundName={fundType} /> : ''}
-            <div className='mutualFund-title'>
-                <h1 >Mutual<span className='section-heading-focus'>Funds</span></h1>
+        <div id="mutual-funds" className="mutualfund-container section__padding">
+            {modal ? <ContactModal setTheModalState={setModal} fundName={fundType} /> : null}
+            <div className="mutualFund-title">
+                <h1>
+                    Invest <span className="section-heading-focus">Hub</span>
+                </h1>
             </div>
-            <div className='mutual-funds-main'>
-
+            <div className="mutual-funds-main">
                 <div className="mutual-funds-heading">
-
-                    <div className='mutual-fund-heading-explanation' data-aos="zoom-in-right" data-aos-duration="1000">
-                        <div className='whyanupaat-subheading '>
-                            <h2 className='secondary-heading'>Unlock Your Investing Potential with Our Expertly Curated Mutual Fund Basket.  Start Building Your Portfolio Today.</h2>
+                    <div className="mutual-fund-heading-explanation" data-aos="zoom-in-right" data-aos-duration="1000">
+                        <div className="whyanupaat-subheading">
+                            <h2 className="secondary-heading">
+                                Elemental portfolios, mutual fund explorer, and market insights — in one flow.
+                            </h2>
                         </div>
-                        <div className='mutual-funds-description'>
+                        <div className="mutual-funds-description">
                             <p>
-                                Invest in the power of diversification with our expertly crafted mutual fund baskets! With a combination of multiple funds in the Indian equity market, you can embark on your investment journey with confidence.
-                                Perfect for first-time investors looking to maximize their gains and minimize their risks.
-                                Don't miss out on this incredible opportunity - start investing now!
-                            </p></div>
-                        <div className='mutual-funds-btn'>
-                            <a href='/contact' className='btn'>Contact Us</a>
-
+                                Start with Elemental baskets or discover funds in the Mutual Fund Explorer. Track market
+                                signals in Screeners Hub, Sector Rotation dashboard, and MarketCompass — then take action
+                                with clarity.
+                            </p>
+                        </div>
+                        <div className="mutual-funds-btn">
+                            <Link to="/invest/baskets" className="btn">Explore Elemental Baskets</Link>
+                            <Link to="/invest" className="btn btn-secondary">Open Mutual Fund Explorer</Link>
                         </div>
                     </div>
-
                 </div>
-                <div className='mutual-funds-title-image' data-aos="zoom-in-left" data-aos-duration="1000">
+                <div className="mutual-funds-title-image" data-aos="zoom-in-left" data-aos-duration="1000">
                     <picture>
-                        <img src={mutualFundImg} alt="Mutual-Fund illustration" className='hero-illustration mutual-fund-illustration' />
-
+                        <img src={mutualFundImg} alt="Mutual fund illustration" className="hero-illustration mutual-fund-illustration" />
                     </picture>
                 </div>
             </div>
-            <div className='mutualFund-wrapper'>
-                <div className='mutualfund-Card-container'>
-                    {
-                        mutualFundData.map(({ icon, title, description, chart, hreturn, ihorizon, mode, lockin, riskprofile, color }, id) => {
-                            return (
 
-                                <Card className="mutualfund_data" key={id}>
-                                    <div className="card-info">
-                                        <div className='card-title'>
-                                            <img src={icon} alt="icon" />
-                                            <h3>{title}</h3>
-                                        </div>
-                                        <p className='card-subtext'>{description}</p>
-                                        <div className="mutualcard-body">
-                                            <div>
-                                                <h3 id='sub-heading'>Historical Return</h3>
-                                                <p className='data-value'>{hreturn}</p>
-                                            </div>
-                                            <div>
-                                                <h3 id='sub-heading'>Investment Horizon</h3>
-                                                <p className='data-value'>{ihorizon}</p>
-                                            </div>
-                                            <div>
-                                                <h3 id='sub-heading'>Investment Mode</h3>
-                                                <p className='data-value'>{mode}</p>
-                                            </div>
-                                            <div>
-                                                <h3 id='sub-heading'>LOCK-IN</h3>
-                                                <p className='data-value'>{lockin}</p>
-                                            </div>
+            <section className="invest-flow-grid">
+                <article className="invest-flow-card invest-flow-card--featured">
+                    <h3>Elemental Baskets</h3>
+                    <p>Goal-based curated portfolios with guided onboarding and one-time unlock.</p>
+                    <Link to="/invest/baskets" className="invest-flow-link">Go to Elemental Baskets →</Link>
+                </article>
+                <article className="invest-flow-card">
+                    <h3>Mutual Fund Explorer</h3>
+                    <p>Filter direct funds by category, AMC, return profile, and fund-level details.</p>
+                    <Link to="/invest" className="invest-flow-link">Open MF Explorer →</Link>
+                </article>
+                <article className="invest-flow-card">
+                    <h3>Screeners Hub</h3>
+                    <p>Live market snapshot, breadth, mood index, and deal/announcement intelligence.</p>
+                    <Link to="/screeners" className="invest-flow-link">Open Screeners Hub →</Link>
+                </article>
+                <article className="invest-flow-card">
+                    <h3>Sector Rotation Dashboard</h3>
+                    <p>Relative strength trends to identify sector leadership shifts.</p>
+                    <Link to="/screeners/sector-rotation" className="invest-flow-link">Open Sector Rotation →</Link>
+                </article>
+                <article className="invest-flow-card">
+                    <h3>MarketCompass</h3>
+                    <p>Macro and valuation context to align deployment decisions.</p>
+                    <Link to="/valuation" className="invest-flow-link">Open MarketCompass →</Link>
+                </article>
+                <article className="invest-flow-card">
+                    <h3>Fixed Income &amp; Alternatives</h3>
+                    <p>FD, bonds, unlisted stocks, and P2P lending — consultation-first discovery.</p>
+                    <Link to="/fixed-income-alternatives" className="invest-flow-link">Explore products →</Link>
+                </article>
+            </section>
 
-
-                                        </div>
-                                        <div className='mutualFund-donut-container'>
-                                            <Doughnut
-                                                data={chart}
-                                                options={options}>
-
-                                            </Doughnut>
-                                        </div>
-
-                                        <small className='alert-message'>*Risk Profile for this basket is considered <span className='risk-profile' style={{ color: `${color}` }} >{riskprofile}</span></small>
-
-
-                                    </div>
-
-                                </Card>
-                            )
-                        })
-                    }
-
+            <section className="legacy-baskets">
+                <div className="legacy-baskets__head">
+                    <h2>Legacy Mutual Fund Baskets</h2>
+                    <p>
+                        Existing baskets are preserved. Elemental portfolios are now the primary journey, while legacy
+                        baskets remain available below.
+                    </p>
                 </div>
-            </div>
+                <div className="mutualFund-wrapper">
+                    <div className="mutualfund-Card-container">
+                        {mutualFundData.map(({ icon, title, description, hreturn, ihorizon, mode, lockin, riskprofile, color }, id) => (
+                            <Card className="mutualfund_data" key={id}>
+                                <div className="card-info">
+                                    <div className="card-title">
+                                        <img src={icon} alt={`${title} icon`} />
+                                        <h3>{title}</h3>
+                                    </div>
+                                    <p className="card-subtext">{description}</p>
+                                    <div className="mutualcard-body">
+                                        <div>
+                                            <h3 id="sub-heading">Historical Return</h3>
+                                            <p className="data-value">{hreturn}</p>
+                                        </div>
+                                        <div>
+                                            <h3 id="sub-heading">Investment Horizon</h3>
+                                            <p className="data-value">{ihorizon}</p>
+                                        </div>
+                                        <div>
+                                            <h3 id="sub-heading">Investment Mode</h3>
+                                            <p className="data-value">{mode}</p>
+                                        </div>
+                                        <div>
+                                            <h3 id="sub-heading">LOCK-IN</h3>
+                                            <p className="data-value">{lockin}</p>
+                                        </div>
+                                    </div>
+                                    <small className="alert-message">
+                                        *Risk profile: <span className="risk-profile" style={{ color }}>{riskprofile}</span>
+                                    </small>
+                                </div>
+                            </Card>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             <div className="footer">
-                <h2>Excited to be part of the jounrney. 
-                    Let's get started!</h2>
-                <button type="button" className='btn-invest-now' onClick={(e) => {
-                    setModal(true);
-                    setFundType(e.target.dataset.fundType);
-                }}>Invest Now</button>
+                <h2>Ready to start your investing journey?</h2>
+                <div className="footer-cta-row">
+                    <Link to="/invest/baskets" className="btn-invest-now">Elemental Baskets</Link>
+                    <Link to="/invest" className="btn-invest-now btn-invest-now--ghost">Mutual Fund Explorer</Link>
+                </div>
+                <button
+                    type="button"
+                    className="btn-invest-now btn-invest-now--outline"
+                    onClick={(e) => {
+                        setModal(true);
+                        setFundType(e.target.dataset.fundType);
+                    }}
+                >
+                    Talk to advisor
+                </button>
             </div>
-
-
         </div >
+    );
+};
 
-
-    )
-}
-
-export default MutualFund
+export default MutualFund;

@@ -515,3 +515,180 @@
     display: none !important;
   }
 }
+
+/* —— Invest zone: matches main Anupaat site (MainLayout) —— */
+.an-invest-zone {
+  --an-accent: var(--color-primary, #fe0101);
+  --an-emerald: var(--color-primary, #fe0101);
+  --an-emerald-dim: rgba(254, 1, 1, 0.08);
+  --an-charcoal: var(--color-text, #1b1b1b);
+  --an-grey-400: var(--color-subtext, #323232);
+  --an-grey-50: var(--color-grey-light, #f1f3f5);
+  --an-grey-100: var(--color-secondary-light, #e5e5e5);
+  --an-navy: var(--color-secondary-dark, #161a1d);
+  --an-radius: 2rem;
+  --an-radius-sm: 1rem;
+  --an-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --an-shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+  --an-font: var(--font-family, 'Poppins', sans-serif);
+
+  font-family: var(--an-font);
+  color: var(--color-text);
+  background: transparent;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+.an-invest-zone.section__padding {
+  padding-top: 2rem;
+  padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+}
+
+.an-invest-inner {
+  width: 100%;
+}
+
+.an-invest-zone .an-muted {
+  color: var(--color-subtext);
+}
+
+.an-invest-zone .an-accent-text {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.an-invest-zone .an-gold-text {
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  color: var(--color-primary);
+}
+
+.an-invest-zone .an-glass-card {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border: none;
+  box-shadow: var(--an-shadow);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  color: var(--color-text);
+}
+
+/* Elemental catalog cards: dark theme in basket-cards.css — do not override here */
+
+.an-invest-zone .an-btn-primary {
+  background: var(--color-grey-light);
+  color: var(--color-text);
+  border: 2px solid var(--color-primary);
+  border-radius: 1rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  padding: 0.85rem 1.5rem;
+}
+
+.an-invest-zone .an-btn-primary:hover {
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: none;
+  transform: none;
+}
+
+.an-invest-zone .an-btn-ghost {
+  border: 2px solid var(--color-primary);
+  color: var(--color-text);
+  border-radius: 1rem;
+  font-size: 1.3rem;
+  padding: 0.75rem 1.25rem;
+}
+
+.an-invest-zone .an-btn-ghost:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.an-invest-zone .an-trust-pill {
+  background: rgba(254, 1, 1, 0.08);
+  color: var(--color-primary);
+}
+
+.an-invest-zone .an-tag {
+  background: var(--color-grey-light);
+  color: var(--color-subtext);
+}
+
+.an-invest-zone .an-vol-bar {
+  background: var(--color-secondary-light);
+}
+
+.an-invest-zone .an-vol-fill {
+  background: linear-gradient(90deg, var(--color-primary), #ff6b6b);
+}
+
+.an-invest-zone .an-compliance {
+  border-color: var(--color-secondary-light);
+  color: var(--color-subtext);
+  opacity: 1;
+}
+
+.an-invest-zone .an-form-group input,
+.an-invest-zone .an-form-group select,
+.an-invest-zone .an-form-group textarea {
+  background: #fff;
+  border-color: var(--color-secondary-light);
+  color: var(--color-text);
+}
+
+.an-invest-zone .an-modal {
+  background: #fff;
+  color: var(--color-text);
+  border: 1px solid var(--color-secondary-light);
+}
+
+.an-invest-zone .an-modal-overlay {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.an-invest-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  display: flex;
+  justify-content: space-around;
+  padding: 0.5rem 0.75rem calc(0.5rem + env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--color-secondary-light);
+  box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.08);
+}
+
+.an-invest-bottom-nav a {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.35rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-subtext-light);
+  text-decoration: none;
+}
+
+.an-invest-bottom-nav a.an-active {
+  color: var(--color-primary);
+}
+
+.an-invest-bottom-nav svg {
+  opacity: 0.85;
+}
+
+.an-invest-bottom-nav a.an-active svg {
+  opacity: 1;
+}
+
+.an-invest-zone .an-sticky-cta {
+  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.98) 25%);
+}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./tools.css";
 import { Link } from "react-router-dom";
-import { FaCalculator, FaChartPie, FaLayerGroup, FaFileInvoiceDollar } from "react-icons/fa";
+import { FaCalculator, FaChartPie, FaFileInvoiceDollar } from "react-icons/fa";
 
 const toolsData = [
   {
@@ -11,13 +11,6 @@ const toolsData = [
       "Financial Information and Document Organizer Kit — structure your records before you invest.",
     icon: FaFileInvoiceDollar,
     action: "modal",
-  },
-  {
-    id: "equity-basket",
-    title: "Equity basket builder",
-    description: "Explore diversified equity baskets aligned to themes and risk appetite.",
-    icon: FaLayerGroup,
-    href: "/equity-basket",
   },
   {
     id: "loan-assessment",
@@ -31,7 +24,7 @@ const toolsData = [
     title: "Mutual fund baskets",
     description: "Curated mutual fund baskets with clear risk labels and horizons.",
     icon: FaCalculator,
-    href: "/mutual-funds",
+    href: "/invest/baskets",
   },
 ];
 

@@ -48,7 +48,7 @@ export default function BasketAdminPage() {
             Unlock admin
           </button>
         </form>
-        <Link to="/invest" style={{ display: 'block', marginTop: 16, fontSize: '0.85rem' }}>
+        <Link to="/invest/baskets" style={{ display: 'block', marginTop: 16, fontSize: '0.85rem' }}>
           ← Back
         </Link>
       </div>
@@ -117,7 +117,7 @@ export default function BasketAdminPage() {
         >
           Reset overrides
         </button>
-        <Link className="an-btn-ghost" to="/invest">
+        <Link className="an-btn-ghost" to="/invest/baskets">
           Exit
         </Link>
       </div>

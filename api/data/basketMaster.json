@@ -1,0 +1,178 @@
+{
+  "baskets": [
+    {
+      "id": "fire",
+      "code": "FIRE",
+      "name": "FIRE",
+      "fullName": "Fast-track Investment through Risk-enhanced Exposure",
+      "riskLevel": "Aggressive",
+      "horizonYears": "7+ Years",
+      "expectedReturn": 13.35,
+      "price": 4999,
+      "fundCount": 6,
+      "assetAllocation": [
+        { "label": "Equity", "pct": 65, "color": "#FE0101" },
+        { "label": "Debt / Liquid", "pct": 5, "color": "#6366f1" },
+        { "label": "Gold", "pct": 10, "color": "#c9a227" },
+        { "label": "Hybrid / Multi Asset", "pct": 20, "color": "#5b8cff" }
+      ],
+      "portfolioConstruction": [
+        { "label": "Large & Mid Cap", "pct": 25, "color": "#FE0101" },
+        { "label": "Flexi Cap", "pct": 25, "color": "#ff6b6b" },
+        { "label": "Multi Asset", "pct": 20, "color": "#5b8cff" },
+        { "label": "Mid Cap", "pct": 15, "color": "#34d399" },
+        { "label": "Gold", "pct": 10, "color": "#c9a227" },
+        { "label": "Liquid", "pct": 5, "color": "#94a3b8" }
+      ],
+      "holdings": [
+        { "schemeCode": 120158, "schemeName": "Kotak Large & Midcap Fund - Direct Growth", "category": "Large & Mid Cap", "weight": 25 },
+        { "schemeCode": 150584, "schemeName": "WhiteOak Capital Mid Cap Fund - Direct Growth", "category": "Mid Cap", "weight": 15 },
+        { "schemeCode": 120685, "schemeName": "ICICI Prudential Gold ETF FOF - Direct Growth", "category": "Gold", "weight": 10 },
+        { "schemeCode": 119766, "schemeName": "Kotak Liquid Fund - Direct Growth", "category": "Liquid", "weight": 5 },
+        { "schemeCode": 122639, "schemeName": "Parag Parikh Flexi Cap Fund - Direct Growth", "category": "Flexi Cap", "weight": 25 },
+        { "schemeCode": 120334, "schemeName": "ICICI Prudential Multi-Asset Fund - Direct Growth", "category": "Multi Asset", "weight": 20 }
+      ],
+      "sectors": [
+        { "label": "Banks", "pct": 13.26 },
+        { "label": "IT Services", "pct": 5.04 },
+        { "label": "Pharmaceuticals", "pct": 4.15 },
+        { "label": "Automobiles", "pct": 3.94 },
+        { "label": "Oil & Gas", "pct": 3.79 },
+        { "label": "Capital Markets", "pct": 2.78 },
+        { "label": "Real Estate", "pct": 2.5 },
+        { "label": "Electric Utilities", "pct": 2.41 },
+        { "label": "Chemicals", "pct": 2.36 }
+      ],
+      "anScore": {
+        "growth": 9.5,
+        "diversification": 8.5,
+        "stability": 6.5,
+        "liquidity": 8,
+        "riskControl": 7,
+        "overall": 8.5
+      },
+      "benchmarks": {
+        "nifty50": { "schemeCode": 148978, "label": "Nifty 50 TRI (proxy)" },
+        "nifty500": { "schemeCode": 152731, "label": "Nifty 500 TRI (proxy)" },
+        "gold": { "schemeCode": 120685, "label": "Gold" },
+        "fd": { "rate": 7, "label": "Fixed Deposit @ 7%" }
+      }
+    },
+    {
+      "id": "water",
+      "code": "WATER",
+      "name": "WATER",
+      "fullName": "Wealth Accumulation through Equilibrium & Resilience",
+      "riskLevel": "Moderate",
+      "horizonYears": "5+ Years",
+      "expectedReturn": 11.15,
+      "price": 4999,
+      "fundCount": 6,
+      "assetAllocation": [
+        { "label": "Equity", "pct": 40, "color": "#FE0101" },
+        { "label": "Debt / Liquid", "pct": 30, "color": "#6366f1" },
+        { "label": "Gold", "pct": 10, "color": "#c9a227" },
+        { "label": "Hybrid / Multi Asset", "pct": 20, "color": "#5b8cff" }
+      ],
+      "portfolioConstruction": [
+        { "label": "Flexi Cap", "pct": 20, "color": "#FE0101" },
+        { "label": "Nifty 50 Index", "pct": 20, "color": "#ff6b6b" },
+        { "label": "Multi Asset", "pct": 20, "color": "#5b8cff" },
+        { "label": "Gold", "pct": 10, "color": "#c9a227" },
+        { "label": "Ultra Short Duration", "pct": 20, "color": "#94a3b8" },
+        { "label": "Corporate Bond", "pct": 10, "color": "#6366f1" }
+      ],
+      "holdings": [
+        { "schemeCode": 122639, "schemeName": "Parag Parikh Flexi Cap Fund - Direct Growth", "category": "Flexi Cap", "weight": 20 },
+        { "schemeCode": 148978, "schemeName": "Kotak Nifty 50 Index Fund - Direct Growth", "category": "Nifty 50 Index", "weight": 20 },
+        { "schemeCode": 120334, "schemeName": "ICICI Prudential Multi-Asset Fund - Direct Growth", "category": "Multi Asset", "weight": 20 },
+        { "schemeCode": 120685, "schemeName": "ICICI Prudential Gold ETF FOF - Direct Growth", "category": "Gold", "weight": 10 },
+        { "schemeCode": 120676, "schemeName": "ICICI Prudential Ultra Short Term Fund - Direct Growth", "category": "Ultra Short Duration", "weight": 20 },
+        { "schemeCode": 146215, "schemeName": "SBI Corporate Bond Fund - Direct Growth", "category": "Corporate Bond", "weight": 10 }
+      ],
+      "sectors": [
+        { "label": "Banks", "pct": 12.38 },
+        { "label": "IT Services", "pct": 4.71 },
+        { "label": "Oil & Gas", "pct": 4.09 },
+        { "label": "Automobiles", "pct": 3.84 },
+        { "label": "Tobacco", "pct": 2.07 },
+        { "label": "Pharmaceuticals", "pct": 2.05 },
+        { "label": "Telecom", "pct": 1.74 },
+        { "label": "Electric Utilities", "pct": 1.66 },
+        { "label": "Insurance", "pct": 1.56 }
+      ],
+      "anScore": {
+        "growth": 7.5,
+        "diversification": 9,
+        "stability": 9,
+        "liquidity": 9,
+        "riskControl": 9,
+        "overall": 8.6
+      },
+      "benchmarks": {
+        "nifty50": { "schemeCode": 148978, "label": "Nifty 50 TRI (proxy)" },
+        "nifty500": { "schemeCode": 152731, "label": "Nifty 500 TRI (proxy)" },
+        "gold": { "schemeCode": 120685, "label": "Gold" },
+        "fd": { "rate": 7, "label": "Fixed Deposit @ 7%" }
+      }
+    },
+    {
+      "id": "earth",
+      "code": "EARTH",
+      "name": "EARTH",
+      "fullName": "Enduring Asset Reserve Through Hybrid Allocation",
+      "riskLevel": "Conservative",
+      "horizonYears": "3+ Years",
+      "expectedReturn": 9.7,
+      "price": 4999,
+      "fundCount": 6,
+      "assetAllocation": [
+        { "label": "Equity", "pct": 25, "color": "#FE0101" },
+        { "label": "Debt / Liquid", "pct": 40, "color": "#6366f1" },
+        { "label": "Gold", "pct": 15, "color": "#c9a227" },
+        { "label": "Hybrid / Multi Asset", "pct": 20, "color": "#5b8cff" }
+      ],
+      "portfolioConstruction": [
+        { "label": "Flexi Cap", "pct": 10, "color": "#FE0101" },
+        { "label": "Nifty 100 Index", "pct": 15, "color": "#ff6b6b" },
+        { "label": "Multi Asset", "pct": 20, "color": "#5b8cff" },
+        { "label": "Corporate Bond", "pct": 20, "color": "#6366f1" },
+        { "label": "Ultra Short Duration", "pct": 20, "color": "#94a3b8" },
+        { "label": "Gold", "pct": 15, "color": "#c9a227" }
+      ],
+      "holdings": [
+        { "schemeCode": 122639, "schemeName": "Parag Parikh Flexi Cap Fund - Direct Growth", "category": "Flexi Cap", "weight": 10 },
+        { "schemeCode": 147666, "schemeName": "Axis Nifty 100 Index Fund - Direct Growth", "category": "Nifty 100 Index", "weight": 15 },
+        { "schemeCode": 120334, "schemeName": "ICICI Prudential Multi-Asset Fund - Direct Growth", "category": "Multi Asset", "weight": 20 },
+        { "schemeCode": 146215, "schemeName": "SBI Corporate Bond Fund - Direct Growth", "category": "Corporate Bond", "weight": 20 },
+        { "schemeCode": 120676, "schemeName": "ICICI Prudential Ultra Short Term Fund - Direct Growth", "category": "Ultra Short Duration", "weight": 20 },
+        { "schemeCode": 120685, "schemeName": "ICICI Prudential Gold ETF FOF - Direct Growth", "category": "Gold", "weight": 15 }
+      ],
+      "sectors": [
+        { "label": "Banks", "pct": 7.01 },
+        { "label": "IT Services", "pct": 2.43 },
+        { "label": "Oil & Gas", "pct": 2.37 },
+        { "label": "Automobiles", "pct": 1.86 },
+        { "label": "Real Estate", "pct": 1.54 },
+        { "label": "Telecom", "pct": 1.37 },
+        { "label": "Diversified Financials", "pct": 1.26 },
+        { "label": "Construction", "pct": 1.14 },
+        { "label": "Capital Markets", "pct": 1.08 }
+      ],
+      "anScore": {
+        "growth": 6,
+        "diversification": 8.5,
+        "stability": 9.5,
+        "liquidity": 9,
+        "riskControl": 9.5,
+        "overall": 8.2
+      },
+      "benchmarks": {
+        "nifty50": { "schemeCode": 148978, "label": "Nifty 50 TRI (proxy)" },
+        "nifty500": { "schemeCode": 152731, "label": "Nifty 500 TRI (proxy)" },
+        "gold": { "schemeCode": 120685, "label": "Gold" },
+        "fd": { "rate": 7, "label": "Fixed Deposit @ 7%" }
+      }
+    }
+  ]
+}

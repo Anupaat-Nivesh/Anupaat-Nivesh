@@ -1,0 +1,88 @@
+{
+  "generatedAt": "2026-06-01T11:25:58.297Z",
+  "amcDocumentPages": {
+    "aditya birla sun life": "https://mutualfund.adityabirlacapital.com/downloads",
+    "nippon india": "https://mf.nipponindiaim.com/FundsAndPerformance/Pages/Factsheet.aspx",
+    "hdfc": "https://www.hdfcfund.com/downloads/factsheet",
+    "icici prudential": "https://www.icicipruamc.com/downloads",
+    "sbi": "https://www.sbimf.com/en-us/downloads",
+    "axis": "https://www.axismf.com/downloads",
+    "kotak": "https://www.kotakmf.com/Information/downloads",
+    "uti": "https://www.utimf.com/forms-and-downloads/factsheet/",
+    "dsp": "https://www.dspim.com/downloads",
+    "mirae asset": "https://www.miraeassetmf.co.in/downloads",
+    "franklin templeton": "https://www.franklintempletonindia.com/downloads",
+    "tata": "https://www.tatamutualfund.com/downloads",
+    "quant": "https://www.quantmutual.com/downloads",
+    "motilal oswal": "https://www.motilaloswalmf.com/downloads",
+    "edelweiss": "https://www.edelweissmf.com/Downloads",
+    "bandhan": "https://bandhanmutual.com/downloads",
+    "mahindra manulife": "https://www.mahindramanulife.com/download-center",
+    "whiteoak": "https://mf.whiteoakamc.com/downloads"
+  },
+  "schemes": {
+    "119544": {
+      "schemeCode": "119544",
+      "schemeName": "Aditya Birla Sun Life ELSS Tax Saver Fund - Growth - Direct Plan",
+      "fundHouse": "Aditya Birla Sun Life Mutual Fund",
+      "factsheetUrl": "https://mutualfund.adityabirlacapital.com/downloads",
+      "managers": [],
+      "source": "local-cache",
+      "updatedAt": "2026-05-29T03:59:58.638Z"
+    },
+    "132009": {
+      "schemeCode": "132009",
+      "schemeName": "Aditya Birla Sun Life Global Excellence Equity Fund Of Fund - Retail Plan - Direct Plan - Growth Option",
+      "fundHouse": "Aditya Birla Sun Life Mutual Fund",
+      "factsheetUrl": "https://mutualfund.adityabirlacapital.com/downloads",
+      "managers": [],
+      "source": "local-cache",
+      "updatedAt": "2026-05-29T03:30:10.813Z"
+    },
+    "148962": {
+      "schemeCode": "148962",
+      "schemeName": "Aditya Birla Sun Life Nifty 50 Equal Weight Index Fund-Direct Growth",
+      "fundHouse": "Aditya Birla Sun Life Mutual Fund",
+      "factsheetUrl": "https://mutualfund.adityabirlacapital.com/downloads",
+      "managers": [],
+      "source": "local-cache",
+      "updatedAt": "2026-05-29T03:38:41.984Z"
+    },
+    "149838": {
+      "schemeCode": "149838",
+      "schemeName": "Aditya Birla Sun Life Nifty Next 50 Index Fund-Direct Growth",
+      "fundHouse": "Aditya Birla Sun Life Mutual Fund",
+      "factsheetUrl": "https://mutualfund.adityabirlacapital.com/downloads",
+      "managers": [],
+      "source": "local-cache",
+      "updatedAt": "2026-05-29T04:18:42.716Z"
+    },
+    "152947": {
+      "schemeCode": "152947",
+      "schemeName": "Aditya Birla Sun Life Crisil-IBX AAA NBFC-HFC Index-Sep 2026 Fund-Direct Growth",
+      "fundHouse": "Aditya Birla Sun Life Mutual Fund",
+      "factsheetUrl": "https://mutualfund.adityabirlacapital.com/downloads",
+      "managers": [],
+      "source": "local-cache",
+      "updatedAt": "2026-05-29T04:17:42.047Z"
+    },
+    "153740": {
+      "schemeCode": "153740",
+      "schemeName": "Aditya Birla Sun Life BSE 500 Quality 50 Index Fund - Direct Growth",
+      "fundHouse": "Aditya Birla Sun Life Mutual Fund",
+      "factsheetUrl": "https://mutualfund.adityabirlacapital.com/downloads",
+      "managers": [],
+      "source": "local-cache",
+      "updatedAt": "2026-06-01T11:25:58.297Z"
+    },
+    "154326": {
+      "schemeCode": "154326",
+      "schemeName": "Axis Nifty India Defence Index Fund - Direct Plan - Growth",
+      "fundHouse": "Axis Mutual Fund",
+      "factsheetUrl": "https://www.axismf.com/downloads",
+      "managers": [],
+      "source": "local-cache",
+      "updatedAt": "2026-05-29T04:18:11.251Z"
+    }
+  }
+}

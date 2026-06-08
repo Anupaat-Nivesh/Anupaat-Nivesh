@@ -2,6 +2,11 @@ import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useBasketUser } from '../context/BasketUserContext';
+import InvestSubNav from '../components/InvestSubNav';
+import { BASKET_PRODUCT_NAME } from '../data/baskets';
+import ElementalIcon, { elementFromBasketId } from '../components/ElementalIcon';
+import '../styles/basket-screener.css';
+import '../styles/basket-analytics.css';
 
 const STEPS = [
   { key: 'age', q: 'What age band are you in?', type: 'select', options: ['18–30', '31–40', '41–50', '51+'] },
@@ -35,9 +40,9 @@ function scoreAnswers(a) {
 }
 
 function basketFromScore(score) {
-  if (score >= 68) return { id: 'fire', label: '🔥 FIRE — aggressive growth sleeve' };
-  if (score >= 44) return { id: 'water', label: '🌊 WATER — balanced glide path' };
-  return { id: 'earth', label: '🌍 EARTH — stability & resilience' };
+  if (score >= 68) return { id: 'fire', title: 'FIRE', subtitle: 'Aggressive growth sleeve' };
+  if (score >= 44) return { id: 'water', title: 'WATER', subtitle: 'Balanced glide path' };
+  return { id: 'earth', title: 'EARTH', subtitle: 'Stability & resilience' };
 }
 
 export default function RiskProfilePage() {
@@ -62,76 +67,82 @@ export default function RiskProfilePage() {
     else {
       const score = scoreAnswers({ ...answers, [cur.key]: val });
       const rec = basketFromScore(score);
-      setRiskProfile({ answers: { ...answers, [cur.key]: val }, score, recommendedId: rec.id, at: new Date().toISOString() });
+      setRiskProfile({
+        answers: { ...answers, [cur.key]: val },
+        score,
+        recommendedId: rec.id,
+        at: new Date().toISOString(),
+      });
       setStep(STEPS.length);
     }
   };
 
   return (
-    <section style={{ maxWidth: 520, margin: '0 auto', paddingTop: '1rem' }}>
-      <h1 style={{ fontSize: '1.75rem', fontWeight: 800 }}>Risk profile</h1>
-      <p className="an-muted" style={{ fontSize: '0.95rem' }}>
-        A short, conversational flow — no jargon overload.
-      </p>
-      <div className="an-vol-bar" style={{ margin: '1.25rem 0', height: 8 }}>
-        <div className="an-vol-fill" style={{ width: `${progress}%` }} />
-      </div>
+    <div className="an-invest-sharp an-risk-profile-page">
+      <InvestSubNav />
+      <Link to="/invest/baskets" className="an-fund-breadcrumb" style={{ display: 'inline-flex', marginBottom: '1rem' }}>
+        ← {BASKET_PRODUCT_NAME}
+      </Link>
 
-      <AnimatePresence mode="wait">
-        {step < STEPS.length && (
-          <motion.div
-            key={cur.key}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -16 }}
-            transition={{ duration: 0.25 }}
-            className="an-glass-card"
-            style={{ padding: '1.5rem' }}
-          >
-            <p style={{ fontSize: '1.05rem', fontWeight: 600, marginBottom: '1rem' }}>{cur.q}</p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {cur.options.map((opt) => (
-                <button
-                  key={opt}
-                  type="button"
-                  className="an-btn-ghost"
-                  style={{ justifyContent: 'flex-start', textAlign: 'left' }}
-                  onClick={() => pick(opt)}
-                >
-                  {opt}
-                </button>
-              ))}
-            </div>
-          </motion.div>
-        )}
+      <section className="an-risk-profile">
+        <h1 className="an-sb-page-title">Risk profile quiz</h1>
+        <p className="an-sb-muted">Six quick questions — no jargon. We map your score to FIRE, WATER, or EARTH.</p>
+        <div className="an-risk-profile__progress" role="progressbar" aria-valuenow={progress} aria-valuemin={0} aria-valuemax={100}>
+          <div className="an-risk-profile__progress-fill" style={{ width: `${progress}%` }} />
+        </div>
 
-        {result && (
-          <motion.div
-            key="result"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="an-glass-card"
-            style={{ padding: '1.5rem' }}
-          >
-            <p style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.08em', color: 'var(--an-emerald)' }}>
-              YOUR RISK SCORE
-            </p>
-            <div style={{ fontSize: '3rem', fontWeight: 800, lineHeight: 1 }}>{result.score}</div>
-            <p style={{ fontSize: '1rem', marginTop: 8 }}>{result.rec.label}</p>
-            <p style={{ fontSize: '0.9rem', opacity: 0.85 }}>
-              Suggested SIP anchor: ₹{result.basket?.sipSuggestionMonthly?.toLocaleString('en-IN') || '—'}/mo (illustrative).
-            </p>
-            <div style={{ marginTop: 16, display: 'flex', flexWrap: 'wrap', gap: 10 }}>
-              <Link className="an-btn-primary" to={`/invest/basket/${result.rec.id}`}>
-                View basket
-              </Link>
-              <Link className="an-btn-ghost" to="/invest/dashboard">
-                Open wealth dashboard
-              </Link>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </section>
+        <AnimatePresence mode="wait">
+          {step < STEPS.length && (
+            <motion.div
+              key={cur.key}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -16 }}
+              transition={{ duration: 0.25 }}
+              className="an-glass-card an-risk-profile__card"
+            >
+              <p className="an-risk-profile__question">{cur.q}</p>
+              <div className="an-risk-profile__options">
+                {cur.options.map((opt) => (
+                  <button key={opt} type="button" className="an-btn-ghost an-risk-profile__option" onClick={() => pick(opt)}>
+                    {opt}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {result && (
+            <motion.div
+              key="result"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="an-glass-card an-risk-profile__card an-risk-profile__result"
+            >
+              <p className="an-risk-profile__score-label">Your risk score</p>
+              <div className="an-risk-profile__score">{result.score}</div>
+              <div className="an-risk-profile__rec-head">
+                <ElementalIcon element={elementFromBasketId(result.rec.id)} size={36} />
+                <div>
+                  <strong>{result.rec.title}</strong>
+                  <span>{result.rec.subtitle}</span>
+                </div>
+              </div>
+              <p className="an-sb-muted">
+                Suggested SIP anchor: ₹{result.basket?.sipSuggestionMonthly?.toLocaleString('en-IN') || '—'}/mo (illustrative).
+              </p>
+              <div className="an-risk-profile__actions">
+                <Link className="an-btn-primary" to={`/invest/basket/${result.rec.id}`}>
+                  View {result.rec.title} analytics
+                </Link>
+                <Link className="an-btn-ghost" to="/invest/baskets">
+                  View all {BASKET_PRODUCT_NAME.toLowerCase()}
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </section>
+    </div>
   );
 }

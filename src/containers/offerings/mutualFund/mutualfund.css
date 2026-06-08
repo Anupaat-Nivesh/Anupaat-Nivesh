@@ -25,6 +25,9 @@
 .mutual-funds-btn {
     margin-top: 2.4rem;
     margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .mutual-funds-title-image img {
@@ -49,6 +52,30 @@
 
 .mutualFund-wrapper{
     margin: 4rem 0;
+}
+
+.invest-flow-link {
+    display: inline-block;
+    margin-top: 0.9rem;
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.legacy-baskets {
+    margin-top: 2.75rem;
+}
+
+.legacy-baskets__head {
+    margin-bottom: 1.2rem;
+}
+
+.legacy-baskets__head h2 {
+    margin-bottom: 0.4rem;
+}
+
+.legacy-baskets__head p {
+    color: var(--color-subtext-light);
 }
 .mutualfund-Card-container {
     display: grid;
@@ -164,6 +191,14 @@ text-align: center;
     border: 1px solid rgba(254, 1, 1, 0.1);
 }
 
+.footer-cta-row {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .btn-invest-now{
     margin-top: 2rem;
     transition: all 0.3s ease;
@@ -176,6 +211,19 @@ text-align: center;
     font-weight: 600;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(254, 1, 1, 0.3);
+}
+
+.btn-secondary,
+.btn-invest-now--ghost {
+    background: #fff;
+    color: var(--color-primary);
+    border: 1px solid rgba(254, 1, 1, 0.35);
+}
+
+.btn-invest-now--outline {
+    background: transparent;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
 }
 .btn-invest-now:hover{
     transform: translateY(-4px);

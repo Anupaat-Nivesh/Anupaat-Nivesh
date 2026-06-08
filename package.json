@@ -52,13 +52,16 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env DANGEROUSLY_DISABLE_HOST_CHECK=true react-scripts start",
     "build": "cross-env GENERATE_SOURCEMAP=false react-scripts build",
     "vercel-build": "npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "node server.mjs",
-    "dev": "react-scripts start"
+    "dev": "cross-env DANGEROUSLY_DISABLE_HOST_CHECK=true react-scripts start",
+    "update:amc-index": "node scripts/update-amc-index.mjs",
+    "fetch:factsheets": "node scripts/fetch-factsheets.mjs",
+    "refresh-baskets": "node scripts/refresh-basket-analytics.mjs"
   },
   "eslintConfig": {
     "extends": [

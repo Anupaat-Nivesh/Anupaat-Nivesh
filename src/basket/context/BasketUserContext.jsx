@@ -33,7 +33,7 @@ export function BasketUserProvider({ children }) {
   const [premium, setPremium] = useState(() => localStorage.getItem(STORAGE_PREMIUM) === '1');
   const [goals, setGoals] = useState(() => readJson(STORAGE_GOALS, []));
   const [riskProfile, setRiskProfile] = useState(() => readJson(STORAGE_RISK, null));
-  const [darkMode, setDarkMode] = useState(() => localStorage.getItem('an_basket_theme') !== 'light');
+  const [darkMode, setDarkMode] = useState(() => localStorage.getItem('an_basket_theme') === 'dark');
   const [adminOverrides, setAdminOverrides] = useState(() => readJson(STORAGE_ADMIN, []));
 
   useEffect(() => {
