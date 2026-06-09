@@ -221,18 +221,28 @@ git push origin main
 
 **Where:** GitHub → `Anupaat-Nivesh/Anupaat-Nivesh` → **Settings**
 
-1. **Settings → Actions → General**
-   - Workflow permissions: **Read and write permissions**
-   - [ ] Save
+1. **Organization settings (required first — repo checkbox is grayed out until this is on)**  
+   **Where:** https://github.com/organizations/Anupaat-Nivesh/settings/actions  
+   - Workflow permissions: **Read and write permissions** → Save  
+   - Enable: **Allow GitHub Actions to create and approve pull requests** → Save  
 
-2. **Actions** tab → **Refresh basket analytics** → **Run workflow** → Run on `main`
+2. **Repository → Settings → Actions → General**  
+   - Workflow permissions: **Read and write permissions** → Save  
+   - Enable: **Allow GitHub Actions to create and approve pull requests** → Save  
+   - If the PR checkbox is grayed out, the org admin must complete step 1 first.
 
-3. Wait for green check (~2–5 min)
+3. **Actions** tab → **Refresh basket analytics** → **Run workflow** → Run on `main`
+
+4. Wait for green check (~2–5 min)
 
 - [ ] Workflow succeeded
 - [ ] If NAV changed: PR opened titled `chore: refresh basket NAV analytics` (branch `chore/basket-nav-refresh`)
 - [ ] Merge that PR into `main` (or enable **auto-merge** for this PR type — see below)
 - [ ] Vercel redeployed after merge (if auto-deploy on push is on)
+
+**If refresh succeeds but PR step fails** with `GitHub Actions is not permitted to create or approve pull requests`: the NAV JSON was still pushed to branch `chore/basket-nav-refresh`. Open the PR manually:  
+https://github.com/Anupaat-Nivesh/Anupaat-Nivesh/compare/main...chore/basket-nav-refresh?expand=1  
+Then fix steps 1–2 above and re-run the workflow.
 
 **Why a PR, not a direct push?** `main` is branch-protected (“changes must be made through a pull request”). The workflow uses `peter-evans/create-pull-request` instead of pushing to `main`. A failed run with `GH006: Protected branch update failed` means the refresh worked but the old workflow tried to push directly — merge this workflow fix first, then re-run.
 
@@ -242,7 +252,8 @@ git push origin main
 
 **Schedule (already in YAML):** daily `30 17 * * *` UTC ≈ 11:00 PM IST.
 
-**Secrets needed for Phase 1:** none.
+**Secrets needed for Phase 1:** none (if org/repo PR permission is enabled).  
+**Fallback:** add repo secret `BASKET_REFRESH_GH_TOKEN` — fine-grained PAT with `contents: write` + `pull-requests: write` on this repo — if org policy cannot allow `GITHUB_TOKEN` to open PRs.
 
 ---
 

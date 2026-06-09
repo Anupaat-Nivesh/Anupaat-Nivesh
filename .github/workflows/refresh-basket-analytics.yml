@@ -29,8 +29,12 @@ jobs:
         run: npm run refresh-baskets
 
       - name: Open PR with refreshed analytics
+        id: cpr
         uses: peter-evans/create-pull-request@v6
         with:
+          # Optional repo secret BASKET_REFRESH_GH_TOKEN (fine-grained PAT with
+          # contents + pull-requests write) if org blocks GITHUB_TOKEN from opening PRs.
+          token: ${{ secrets.BASKET_REFRESH_GH_TOKEN || github.token }}
           commit-message: 'chore: refresh FIRE/WATER/EARTH basket NAV analytics'
           title: 'chore: refresh basket NAV analytics'
           body: |
@@ -41,3 +45,14 @@ jobs:
           delete-branch: true
           add-paths: |
             api/data/basketAnalytics.json
+
+      - name: Manual PR link (if automation blocked)
+        if: failure() && steps.cpr.outcome == 'failure'
+        run: |
+          echo "::error::GitHub Actions could not open the pull request."
+          echo "1) Org admin: https://github.com/organizations/Anupaat-Nivesh/settings/actions"
+          echo "   Enable: Allow GitHub Actions to create and approve pull requests"
+          echo "2) Repo: Settings → Actions → General → same checkbox → Save"
+          echo "3) Or add secret BASKET_REFRESH_GH_TOKEN (PAT with contents + pull-requests write)"
+          echo "4) Open PR manually: https://github.com/${{ github.repository }}/compare/main...chore/basket-nav-refresh?expand=1"
+          exit 1
