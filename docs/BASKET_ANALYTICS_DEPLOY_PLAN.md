@@ -23,7 +23,7 @@ Complete these steps **in order**. Check off each box before moving on.
 **Deploy split reminder:**
 - **Vercel** = API (`server.mjs`, `/api/baskets/*`, payments, screeners)
 - **Hostinger** = React static site (`build/` folder)
-- **GitHub Actions** = daily NAV refresh → commits `basketAnalytics.json`
+- **GitHub Actions** = daily NAV refresh → opens PR to merge `basketAnalytics.json` into `main`
 
 ---
 
@@ -230,8 +230,15 @@ git push origin main
 3. Wait for green check (~2–5 min)
 
 - [ ] Workflow succeeded
-- [ ] If NAV changed: new commit on `main` like `chore: refresh FIRE/WATER/EARTH basket NAV analytics`
-- [ ] Vercel triggered a second deploy (if auto-deploy on push is on)
+- [ ] If NAV changed: PR opened titled `chore: refresh basket NAV analytics` (branch `chore/basket-nav-refresh`)
+- [ ] Merge that PR into `main` (or enable **auto-merge** for this PR type — see below)
+- [ ] Vercel redeployed after merge (if auto-deploy on push is on)
+
+**Why a PR, not a direct push?** `main` is branch-protected (“changes must be made through a pull request”). The workflow uses `peter-evans/create-pull-request` instead of pushing to `main`. A failed run with `GH006: Protected branch update failed` means the refresh worked but the old workflow tried to push directly — merge this workflow fix first, then re-run.
+
+**Optional — hands-off daily updates:** After the first successful PR merge, enable **auto-merge** on the repo (Settings → General → Pull Requests → Allow auto-merge). Then each nightly refresh PR can merge itself once checks pass.
+
+**Alternative (admin only):** Branch protection → **Allow specified actors to bypass required pull requests** → add `github-actions[bot]`. Only use if you prefer direct commits to `main` without PRs.
 
 **Schedule (already in YAML):** daily `30 17 * * *` UTC ≈ 11:00 PM IST.
 
@@ -460,7 +467,7 @@ npm run build
 | Express API | **Vercel** | `/api/baskets/*`, payments, mutual funds API, screeners |
 | Analytics data | **GitHub repo** | `api/data/basketAnalytics.json` — committed, bundled on Vercel deploy |
 | Basket holdings | **GitHub repo** | `api/data/basketMaster.json` + `src/basket/data/config/*.js` |
-| Daily refresh | **GitHub Actions** | Fetches NAV from mfapi.in, recomputes metrics, commits JSON |
+| Daily refresh | **GitHub Actions** | Fetches NAV from mfapi.in, recomputes metrics, opens PR for JSON |
 
 ### Data flow (no database required — Phase 1)
 
@@ -705,11 +712,13 @@ Merge to `main` (or production branch) when Section 7 checklist passes.
 
 2. **Actions → “Refresh basket analytics” → Run workflow**
    - Run manually once after merge
-   - Expect auto-commit if NAV changed: `chore: refresh FIRE/WATER/EARTH basket NAV analytics`
+   - Expect a PR if NAV changed: `chore: refresh basket NAV analytics` → merge to `main`
 
-3. **Schedule:** `30 17 * * *` UTC ≈ **11:00 PM IST** (after AMFI NAV window)
+3. **Protected `main`:** workflow opens a PR; it cannot push directly. Merge the PR (or enable auto-merge).
 
-4. **Secrets for Phase 1:** **None** (mfapi.in is public)
+4. **Schedule:** `30 17 * * *` UTC ≈ **11:00 PM IST** (after AMFI NAV window)
+
+5. **Secrets for Phase 1:** **None** (mfapi.in is public)
 
 ### 4.4 Vercel (API backend)
 
@@ -938,7 +947,7 @@ Run this checklist **every time** before merging to production:
 | When | What happens | Who |
 |------|----------------|-----|
 | Daily ~11 PM IST | GitHub Action fetches NAV, recomputes metrics | Automated |
-| After Action commit | Vercel redeploys API with new JSON | Automated (if deploy on push) |
+| After Action PR merge | Vercel redeploys API with new JSON | Automated (if deploy on push + PR merged) |
 | On config/fund change | Manual `refresh-baskets` + commit + deploy | You |
 | On copy/UI change | `npm run build` + Hostinger upload | You |
 | Weekly (optional) | Spot-check live NAV vs AMFI | You |

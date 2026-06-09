@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   refresh-baskets:
@@ -27,8 +28,16 @@ jobs:
       - name: Fetch NAV history and compute basket metrics
         run: npm run refresh-baskets
 
-      - name: Commit analytics if changed
-        uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Open PR with refreshed analytics
+        uses: peter-evans/create-pull-request@v6
         with:
-          commit_message: 'chore: refresh FIRE/WATER/EARTH basket NAV analytics'
-          file_pattern: api/data/basketAnalytics.json
+          commit-message: chore: refresh FIRE/WATER/EARTH basket NAV analytics
+          title: chore: refresh basket NAV analytics
+          body: |
+            Automated daily refresh of `api/data/basketAnalytics.json`.
+
+            Merge to update live NAV metrics on Vercel (if auto-deploy on push is enabled).
+          branch: chore/basket-nav-refresh
+          delete-branch: true
+          add-paths: |
+            api/data/basketAnalytics.json
