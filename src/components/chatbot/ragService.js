@@ -59,6 +59,34 @@ const WEBSITE_KNOWLEDGE_BASE = {
                 section: 'Loan Against Securities',
                 page_url: '/loan-against-securities',
                 language: 'en'
+            },
+            {
+                id: 'service_4',
+                content: 'P2P Lending: Peer-to-peer lending through RBI-regulated platforms. We help you understand diversification across borrowers, credit risk, expected yields, and liquidity windows. Returns are not guaranteed.',
+                section: 'P2P Lending',
+                page_url: '/p2p-lending',
+                language: 'en'
+            },
+            {
+                id: 'service_5',
+                content: 'Unlisted Stocks: Pre-IPO and private market equity opportunities with a research-led, risk-aware approach. Liquidity can be limited; we help you size allocations appropriately within your portfolio.',
+                section: 'Unlisted Stocks',
+                page_url: '/unlisted-stocks',
+                language: 'en'
+            },
+            {
+                id: 'service_6',
+                content: 'Fixed Deposits: Bank and NBFC fixed deposits for capital preservation. We compare safety, tenure flexibility, DICGC coverage, and post-tax yields to match your conservative allocation goals.',
+                section: 'Fixed Deposits',
+                page_url: '/fixed-deposits',
+                language: 'en'
+            },
+            {
+                id: 'service_7',
+                content: 'Bonds & Debentures: Government and corporate bonds for predictable coupon income and portfolio diversification. We explain yields, credit ratings, and tax implications before you invest.',
+                section: 'Bonds',
+                page_url: '/bonds',
+                language: 'en'
             }
         ]
     },

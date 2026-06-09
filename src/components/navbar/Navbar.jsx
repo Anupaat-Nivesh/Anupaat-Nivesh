@@ -13,6 +13,10 @@ const whatWeDoLinks = [
     { label: 'Mutual funds', path: '/mutual-funds' },
     { label: 'Equity basket', path: '/equity-basket' },
     { label: 'Loan against securities', path: '/loan-against-securities' },
+    { label: 'P2P lending', path: '/p2p-lending' },
+    { label: 'Unlisted stocks', path: '/unlisted-stocks' },
+    { label: 'Fixed deposits', path: '/fixed-deposits' },
+    { label: 'Bonds', path: '/bonds' },
     { label: 'Book a session', path: '/book-session' },
     { label: 'Partner with us', path: '/partner-with-us' },
 ];

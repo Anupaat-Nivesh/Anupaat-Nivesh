@@ -10,6 +10,10 @@ import {
   MutualFund,
   EquityBasket,
   LoanAgainstSecurities,
+  P2PLending,
+  UnlistedStocks,
+  FixedDeposits,
+  Bonds,
   Calculators,
 } from "./containers";
 import {
@@ -93,6 +97,10 @@ function App() {
             path="loan-against-securities"
             element={<LoanAgainstSecurities />}
           />
+          <Route path="p2p-lending" element={<P2PLending />} />
+          <Route path="unlisted-stocks" element={<UnlistedStocks />} />
+          <Route path="fixed-deposits" element={<FixedDeposits />} />
+          <Route path="bonds" element={<Bonds />} />
           <Route path="tools" element={<Tools />} />
         </Route>
         {/* Standalone Chatbot Page - ArthAI */}

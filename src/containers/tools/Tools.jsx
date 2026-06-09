@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./tools.css";
 import { Link } from "react-router-dom";
-import { FaCalculator, FaChartPie, FaLayerGroup, FaFileInvoiceDollar } from "react-icons/fa";
+import { FaCalculator, FaChartPie, FaLayerGroup, FaFileInvoiceDollar, FaHandshake, FaBuilding, FaUniversity, FaLandmark } from "react-icons/fa";
 
 const toolsData = [
   {
@@ -32,6 +32,34 @@ const toolsData = [
     description: "Curated mutual fund baskets with clear risk labels and horizons.",
     icon: FaCalculator,
     href: "/mutual-funds",
+  },
+  {
+    id: "p2p-lending",
+    title: "P2P lending",
+    description: "Understand peer-to-peer lending platforms, risk, and diversification.",
+    icon: FaHandshake,
+    href: "/p2p-lending",
+  },
+  {
+    id: "unlisted-stocks",
+    title: "Unlisted stocks",
+    description: "Explore pre-IPO and private market equity with a research-led approach.",
+    icon: FaBuilding,
+    href: "/unlisted-stocks",
+  },
+  {
+    id: "fixed-deposits",
+    title: "Fixed deposits",
+    description: "Compare bank and NBFC FDs on safety, tenure, and post-tax yield.",
+    icon: FaUniversity,
+    href: "/fixed-deposits",
+  },
+  {
+    id: "bonds",
+    title: "Bonds & debentures",
+    description: "Government and corporate bonds for steady income and diversification.",
+    icon: FaLandmark,
+    href: "/bonds",
   },
 ];
 

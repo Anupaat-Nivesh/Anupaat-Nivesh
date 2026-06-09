@@ -580,4 +580,120 @@ export const cardsData = [
   }
 ];
 
+/*=====================P2P LENDING PAGE DATA============================*/
+
+export const p2pLendingData = [
+  {
+    id: 1,
+    icon: consultation,
+    title: "Diversified Lending",
+    description:
+      "Spread exposure across multiple borrowers and tenures instead of concentrating risk in a single counterparty.",
+    color: "#EEF8F9",
+  },
+  {
+    id: 2,
+    icon: ratio,
+    title: "Curated Platforms",
+    description:
+      "We work with RBI-regulated P2P platforms and help you understand eligibility, fees, and portfolio limits before you invest.",
+    color: "#fcf2f2",
+  },
+  {
+    id: 3,
+    icon: earning,
+    title: "Transparent Returns",
+    description:
+      "Understand expected yields, default risk, and liquidity windows upfront — no guaranteed returns, only informed decisions.",
+    color: "#f2f2ff",
+  },
+];
+
+/*=====================UNLISTED STOCKS PAGE DATA============================*/
+
+export const unlistedStocksData = [
+  {
+    id: 1,
+    icon: tech,
+    title: "Pre-IPO Access",
+    description:
+      "Explore opportunities in companies before they list on public exchanges, with clear disclosure on valuation and holding periods.",
+    color: "#EEF8F9",
+  },
+  {
+    id: 2,
+    icon: framework,
+    title: "Research-Led Selection",
+    description:
+      "We focus on business quality, governance, and growth visibility — not hype — when evaluating unlisted equity opportunities.",
+    color: "#fcf2f2",
+  },
+  {
+    id: 3,
+    icon: india,
+    title: "Liquidity Awareness",
+    description:
+      "Unlisted shares can be illiquid for extended periods. We help you size allocations appropriately within your overall portfolio.",
+    color: "#f2f2ff",
+  },
+];
+
+/*=====================FIXED DEPOSITS PAGE DATA============================*/
+
+export const fixedDepositData = [
+  {
+    id: 1,
+    icon: retirement,
+    title: "Bank & NBFC FDs",
+    description:
+      "Compare fixed deposits from banks and NBFCs on safety, tenure, and post-tax yield — aligned to your capital preservation goals.",
+    color: "#EEF8F9",
+  },
+  {
+    id: 2,
+    icon: team,
+    title: "Tenure Flexibility",
+    description:
+      "Choose from short-term parking to multi-year ladders. We help match FD tenures to upcoming goals and cash-flow needs.",
+    color: "#fcf2f2",
+  },
+  {
+    id: 3,
+    icon: earning,
+    title: "Safety-First Allocation",
+    description:
+      "FDs suit conservative sleeves of a portfolio. We explain DICGC coverage, issuer ratings, and how FDs fit alongside other assets.",
+    color: "#f2f2ff",
+  },
+];
+
+/*=====================BONDS PAGE DATA============================*/
+
+export const bondsData = [
+  {
+    id: 1,
+    icon: ratio,
+    title: "Govt & Corporate Bonds",
+    description:
+      "Access government securities and investment-grade corporate bonds for predictable income and portfolio diversification.",
+    color: "#EEF8F9",
+  },
+  {
+    id: 2,
+    icon: consultation,
+    title: "Yield Clarity",
+    description:
+      "Understand coupon rates, YTM, credit ratings, and tax treatment before committing — so you know what you are earning and why.",
+    color: "#fcf2f2",
+  },
+  {
+    id: 3,
+    icon: framework,
+    title: "Portfolio Diversification",
+    description:
+      "Bonds can reduce equity volatility in a balanced portfolio. We help you decide allocation based on rate outlook and your risk profile.",
+    color: "#f2f2ff",
+  },
+];
+
 
