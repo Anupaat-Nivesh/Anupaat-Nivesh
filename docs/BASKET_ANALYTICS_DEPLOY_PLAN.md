@@ -221,28 +221,62 @@ git push origin main
 
 **Where:** GitHub → `Anupaat-Nivesh/Anupaat-Nivesh` → **Settings**
 
-1. **Settings → Actions → General**
-   - Workflow permissions: **Read and write permissions**
-   - [ ] Save
+1. **Organization settings (required first — repo checkbox is grayed out until this is on)**  
+   **Where:** https://github.com/organizations/Anupaat-Nivesh/settings/actions  
+   - Workflow permissions: **Read and write permissions** → Save  
+   - Enable: **Allow GitHub Actions to create and approve pull requests** → Save  
 
-2. **Actions** tab → **Refresh basket analytics** → **Run workflow** → Run on `main`
+2. **Repository → Settings → Actions → General**  
+   - Workflow permissions: **Read and write permissions** → Save  
+   - Enable: **Allow GitHub Actions to create and approve pull requests** → Save  
+   - If the PR checkbox is grayed out, the org admin must complete step 1 first.
 
-3. Wait for green check (~2–5 min)
+3. **Actions** tab → **Refresh basket analytics** → **Run workflow** → Run on `main`
+
+4. Wait for green check (~2–5 min)
 
 - [ ] Workflow succeeded
 - [ ] If NAV changed: PR opened titled `chore: refresh basket NAV analytics` (branch `chore/basket-nav-refresh`)
 - [ ] Merge that PR into `main` (or enable **auto-merge** for this PR type — see below)
 - [ ] Vercel redeployed after merge (if auto-deploy on push is on)
 
+**If refresh succeeds but PR step fails** with `GitHub Actions is not permitted to create or approve pull requests`: the NAV JSON was still pushed to branch `chore/basket-nav-refresh`. Open the PR manually:  
+https://github.com/Anupaat-Nivesh/Anupaat-Nivesh/compare/main...chore/basket-nav-refresh?expand=1  
+Then fix steps 1–2 above and re-run the workflow.
+
 **Why a PR, not a direct push?** `main` is branch-protected (“changes must be made through a pull request”). The workflow uses `peter-evans/create-pull-request` instead of pushing to `main`. A failed run with `GH006: Protected branch update failed` means the refresh worked but the old workflow tried to push directly — merge this workflow fix first, then re-run.
 
-**Optional — hands-off daily updates:** After the first successful PR merge, enable **auto-merge** on the repo (Settings → General → Pull Requests → Allow auto-merge). Then each nightly refresh PR can merge itself once checks pass.
+**Step 5b — Auto-approve & merge (required for hands-off daily NAV updates)**
 
-**Alternative (admin only):** Branch protection → **Allow specified actors to bypass required pull requests** → add `github-actions[bot]`. Only use if you prefer direct commits to `main` without PRs.
+`main` requires **2 human reviews** and blocks merges from the same actor that opened the PR. The refresh bot cannot satisfy that alone. Use the companion workflow `.github/workflows/auto-merge-basket-nav-refresh.yml` plus one admin PAT:
+
+1. **Create a fine-grained PAT** (repo admin account, e.g. your GitHub user)  
+   - Repository access: `Anupaat-Nivesh` only  
+   - Permissions: **Contents** = Read and write, **Pull requests** = Read and write  
+   - Copy the token once.
+
+2. **Repository → Settings → Secrets and variables → Actions → New repository secret**  
+   - Name: `BASKET_REFRESH_GH_TOKEN`  
+   - Value: the PAT above  
+
+3. **Settings → General → Pull Requests**  
+   - [ ] **Allow auto-merge** (optional; admin merge workflow does not require this)
+
+4. **Settings → Branches → `main` protection rule** (optional but recommended)  
+   Under **Bypass list**, add the GitHub user who owns `BASKET_REFRESH_GH_TOKEN` so admin merge is reliable.  
+   Keep **2 required reviews** for normal human PRs — the auto-merge workflow uses `gh pr merge --admin` only for `chore/basket-nav-refresh` PRs that touch **only** `api/data/basketAnalytics.json`.
+
+**Nightly flow after setup:**  
+`Refresh basket analytics` opens PR → `Auto-merge basket NAV refresh PR` approves (as PAT user) → waits for Vercel/checks → squash-merges to `main`.
 
 **Schedule (already in YAML):** daily `30 17 * * *` UTC ≈ 11:00 PM IST.
 
-**Secrets needed for Phase 1:** none.
+**Secrets summary**
+
+| Secret | Required when | Scopes / notes |
+|--------|----------------|----------------|
+| *(none)* | Org allows `GITHUB_TOKEN` to open PRs | Default refresh workflow |
+| `BASKET_REFRESH_GH_TOKEN` | **Recommended always** | Admin PAT: contents + pull-requests write; used to open PR (if needed), approve, and admin-merge |
 
 ---
 
@@ -707,18 +741,13 @@ Merge to `main` (or production branch) when Section 7 checklist passes.
 
 ### 4.3 GitHub Actions — one-time setup
 
-1. **Repository → Settings → Actions → General**
-   - **Workflow permissions:** “Read and write permissions”
+See **Section 0 → Step 5** (org/repo PR permissions) and **Step 5b** (auto-approve/merge + `BASKET_REFRESH_GH_TOKEN`).
 
-2. **Actions → “Refresh basket analytics” → Run workflow**
-   - Run manually once after merge
-   - Expect a PR if NAV changed: `chore: refresh basket NAV analytics` → merge to `main`
-
-3. **Protected `main`:** workflow opens a PR; it cannot push directly. Merge the PR (or enable auto-merge).
-
-4. **Schedule:** `30 17 * * *` UTC ≈ **11:00 PM IST** (after AMFI NAV window)
-
-5. **Secrets for Phase 1:** **None** (mfapi.in is public)
+1. Enable org + repo **Allow GitHub Actions to create and approve pull requests**.
+2. Add secret **`BASKET_REFRESH_GH_TOKEN`** (admin fine-grained PAT).
+3. Merge `.github/workflows/auto-merge-basket-nav-refresh.yml` to `main`.
+4. Run **Refresh basket analytics** once — expect PR → auto-merge workflow approves and merges after checks.
+5. **Schedule:** `30 17 * * *` UTC ≈ **11:00 PM IST** (after AMFI NAV window)
 
 ### 4.4 Vercel (API backend)
 
