@@ -1,5 +1,11 @@
 {
     "version": 2,
+    "crons": [
+        {
+            "path": "/api/baskets/cron/refresh",
+            "schedule": "35 17 * * *"
+        }
+    ],
     "builds": [
         {
             "src": "server.mjs",

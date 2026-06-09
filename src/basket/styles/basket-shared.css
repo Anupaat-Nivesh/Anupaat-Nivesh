@@ -1,0 +1,478 @@
+/**
+ * Basket invest zone — shared tokens, surfaces, spacing, responsive polish.
+ * Loaded via InvestLayout for all /invest/* routes.
+ */
+
+.an-invest-zone {
+  --basket-radius: 1rem;
+  --basket-radius-lg: 1.15rem;
+  --basket-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
+  --basket-shadow-lg: 0 12px 40px rgba(15, 23, 42, 0.08);
+  --basket-border: var(--color-secondary-light, #e8ecf2);
+  --basket-surface: #ffffff;
+  --basket-muted-surface: #f8fafc;
+  --basket-gap: 1.25rem;
+  --basket-gap-lg: 2rem;
+  --basket-text-sm: 0.875rem;
+  --basket-text-base: 1rem;
+  --basket-text-lg: 1.125rem;
+  --basket-head-sm: 1.25rem;
+  --basket-head-md: 1.5rem;
+  --basket-fire: #fe0101;
+  --basket-water: #5b8cff;
+  --basket-earth: #c9a227;
+  --basket-positive: #047857;
+}
+
+/* Section rhythm */
+.an-invest-zone .an-section-title {
+  font-size: clamp(1.35rem, 2.5vw, 1.65rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: var(--basket-gap-lg) 0 0.75rem;
+  line-height: 1.2;
+}
+
+.an-basket-landing .an-section-title:first-of-type,
+.an-basket-landing-catalog .an-section-title {
+  margin-top: 0;
+}
+
+.an-basket-landing {
+  padding-bottom: 1rem;
+}
+
+.an-invest-subnav a {
+  font-size: var(--basket-text-base) !important;
+}
+
+.an-invest-subnav--single a.an-subnav-active {
+  pointer-events: none;
+  cursor: default;
+}
+
+.an-invest-bottom-nav--single {
+  justify-content: center;
+}
+
+.an-invest-bottom-nav--single a {
+  flex: 1;
+  max-width: 20rem;
+  justify-content: center;
+}
+
+.an-basket-detail-page .an-sb-page-title {
+  font-size: clamp(1.65rem, 3vw, 2.1rem);
+}
+
+/* Landing hero */
+.an-basket-landing-hero {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #fafbfc 0%, #ffffff 60%, #fff8f8 100%);
+  border: 1px solid var(--basket-border);
+  border-radius: var(--basket-radius-lg);
+  box-shadow: var(--basket-shadow);
+  margin-bottom: var(--basket-gap-lg);
+}
+
+.an-basket-landing-eyebrow {
+  font-size: var(--basket-text-sm) !important;
+  letter-spacing: 0.14em;
+}
+
+.an-basket-landing-hero .an-sb-page-title {
+  font-size: clamp(1.75rem, 4vw, 2.35rem);
+  line-height: 1.15;
+}
+
+.an-basket-landing-hero .an-sb-muted {
+  font-size: var(--basket-text-lg);
+  line-height: 1.55;
+  max-width: 36rem;
+}
+
+.an-basket-preview-card {
+  border: 1px solid var(--basket-border);
+  border-radius: var(--basket-radius);
+  background: var(--basket-surface);
+  box-shadow: var(--basket-shadow);
+}
+
+.an-basket-preview-card__head {
+  font-size: var(--basket-text-base) !important;
+}
+
+.an-hero-ctas .an-btn-primary,
+.an-hero-ctas .an-btn-ghost {
+  font-size: var(--basket-text-base);
+  padding: 0.7rem 1.25rem;
+  border-radius: 0.75rem;
+}
+
+.an-invest-zone .an-trust-pill {
+  font-size: var(--basket-text-sm);
+}
+
+/* Discovery band */
+.an-basket-landing-discovery {
+  padding: 1.5rem;
+  background: var(--basket-muted-surface);
+  border: 1px solid var(--basket-border);
+  border-radius: var(--basket-radius-lg);
+}
+
+.an-basket-landing-quiz-link a:hover,
+.an-basket-rec-widget__quiz a:hover,
+.an-basket-rec-widget__cta:hover {
+  text-decoration: underline;
+}
+
+.an-basket-rec-widget__result--fire {
+  border-top: 3px solid var(--basket-fire);
+}
+
+.an-basket-rec-widget__result--water {
+  border-top: 3px solid var(--basket-water);
+}
+
+.an-basket-rec-widget__result--earth {
+  border-top: 3px solid var(--basket-earth);
+}
+
+.an-basket-personality__card h3 {
+  font-size: 1.2rem;
+}
+
+.an-basket-personality__card p {
+  font-size: 1rem !important;
+}
+
+.an-basket-rec-widget__pill {
+  font-size: var(--basket-text-base) !important;
+}
+
+/* Unified analytics surfaces */
+.an-basket-kpi-card,
+.an-basket-detail-profile-stat,
+.an-basket-growth,
+.an-basket-alloc,
+.an-basket-calc,
+.an-an-score,
+.an-basket-rec-widget {
+  border-radius: var(--basket-radius);
+  box-shadow: var(--basket-shadow);
+}
+
+.an-basket-kpi-card {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.an-basket-kpi-card:hover {
+  border-color: rgba(254, 1, 1, 0.2);
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+}
+
+.an-basket-kpi-card__label {
+  font-size: var(--basket-text-sm) !important;
+}
+
+.an-basket-kpi-card__val {
+  font-size: 1.25rem !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.an-card-heading {
+  font-size: var(--basket-head-sm) !important;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* Profile strip — elemental accent by page */
+.an-basket-detail-profile-stat {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.an-basket-detail-profile-stat::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), transparent);
+  opacity: 0.5;
+}
+
+.an-basket-detail-profile-stat:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.07);
+}
+
+.an-basket-detail-profile-stat strong {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Growth chart toggles — pill style */
+.an-basket-growth__toggles .an-period-tab {
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--basket-border);
+  background: var(--basket-surface);
+  font-size: var(--basket-text-sm);
+  transition: all 0.2s ease;
+}
+
+.an-basket-growth__toggles .an-period-tab.is-active {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+.an-basket-growth__toggles .an-period-tab.is-active::after {
+  display: none;
+}
+
+.an-basket-growth__toggles .an-period-tab:not(.is-active):hover {
+  border-color: rgba(254, 1, 1, 0.35);
+  color: var(--color-text);
+}
+
+.an-basket-growth__summary strong {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Allocation + distribution cards */
+.an-basket-allocation-row .an-basket-alloc,
+.an-basket-allocation-row .an-sb-card {
+  height: 100%;
+  margin-bottom: 0;
+}
+
+.an-distribution-card__lead {
+  font-size: var(--basket-text-sm) !important;
+  line-height: 1.45;
+}
+
+.an-basket-alloc-mini__row {
+  font-size: var(--basket-text-base) !important;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.06);
+}
+
+.an-basket-alloc-mini__row:last-child {
+  border-bottom: none;
+}
+
+.an-basket-alloc__legend li {
+  font-size: var(--basket-text-base) !important;
+}
+
+/* Holdings */
+.an-basket-holdings--locked {
+  background: linear-gradient(145deg, #fafbfc, #fff);
+}
+
+.an-basket-holdings__teaser {
+  font-size: 1.25rem !important;
+}
+
+.an-basket-holdings__list li {
+  font-size: var(--basket-text-base) !important;
+}
+
+.an-basket-holdings__cta {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.an-basket-holdings__cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(254, 1, 1, 0.3);
+}
+
+/* Compare table */
+.an-tri-compare__table-wrap {
+  border: 1px solid var(--basket-border);
+  border-radius: var(--basket-radius);
+  -webkit-overflow-scrolling: touch;
+}
+
+.an-tri-compare__table {
+  font-size: var(--basket-text-base) !important;
+  box-shadow: none;
+}
+
+.an-tri-compare__table thead th:nth-child(2) {
+  border-top: 3px solid var(--basket-fire);
+}
+
+.an-tri-compare__table thead th:nth-child(3) {
+  border-top: 3px solid var(--basket-water);
+}
+
+.an-tri-compare__table thead th:nth-child(4) {
+  border-top: 3px solid var(--basket-earth);
+}
+
+.an-tri-compare__table tbody tr:not(.an-tri-compare__section-row):hover td,
+.an-tri-compare__table tbody tr:not(.an-tri-compare__section-row):hover th[scope='row'] {
+  background: #fafbfc;
+}
+
+.an-tri-compare__table td:not(:first-child) {
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.an-tri-compare__table thead th:not(:first-child) {
+  text-align: center;
+}
+
+.an-tri-compare__cta-row .an-tri-compare__link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 0.65rem;
+  border: 1px solid var(--basket-border);
+  background: var(--basket-surface);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.an-tri-compare__cta-row .an-tri-compare__link:hover {
+  border-color: var(--color-primary);
+  background: #fff8f8;
+}
+
+/* Detail page */
+.an-basket-detail-page .an-basket-page-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.an-basket-detail-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+.an-basket-detail-page .an-invest-sidebar {
+  position: sticky;
+  top: calc(var(--market-ticker-top, var(--navbar-height, 5.5rem)) + 1rem);
+  align-self: start;
+}
+
+.an-unlock-panel--success {
+  border-color: rgba(4, 120, 87, 0.35) !important;
+  background: linear-gradient(145deg, #f0fdf4, #fff) !important;
+}
+
+.an-unlock-panel--success .an-unlock-panel__badge {
+  background: var(--basket-positive);
+}
+
+.an-basket-ideal-card,
+.an-basket-why-card,
+.an-basket-research-card {
+  background: var(--basket-surface);
+  border: 1px solid var(--basket-border);
+  border-radius: var(--basket-radius);
+  box-shadow: var(--basket-shadow);
+}
+
+.an-why-basket-bullets li {
+  font-size: var(--basket-text-base) !important;
+}
+
+/* Risk profile + payment */
+.an-risk-profile-page .an-glass-card,
+.an-invest-zone .an-risk-profile__card {
+  background: var(--basket-surface);
+  border: 1px solid var(--basket-border);
+  border-radius: var(--basket-radius-lg);
+  box-shadow: var(--basket-shadow);
+}
+
+.an-risk-profile__option {
+  border: 1.5px solid var(--basket-border) !important;
+  border-radius: 0.75rem !important;
+  padding: 0.75rem 1rem !important;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.an-risk-profile__option:hover {
+  border-color: var(--color-primary) !important;
+  background: #fff8f8;
+}
+
+.an-payment-success {
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem !important;
+  background: var(--basket-surface);
+  border: 1px solid var(--basket-border);
+  border-radius: var(--basket-radius-lg);
+  box-shadow: var(--basket-shadow-lg);
+}
+
+.an-payment-success__icon {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #ecfdf5;
+  border: 2px solid rgba(4, 120, 87, 0.25);
+  font-weight: 800;
+}
+
+/* Catalog cards — tighter mobile type */
+@media (max-width: 767px) {
+  .an-basket-grid--catalog .an-basket-card__title {
+    font-size: 1.65rem;
+  }
+
+  .an-basket-grid--catalog .an-basket-card__tagline {
+    font-size: 1.1rem;
+  }
+
+  .an-basket-grid--catalog .an-basket-card__cta {
+    font-size: 1.1rem;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .an-basket-landing-hero {
+    padding: 1.15rem;
+  }
+
+  .an-basket-landing-discovery {
+    padding: 1rem;
+  }
+
+  .an-basket-detail-page .an-invest-sidebar {
+    position: static;
+    order: -1;
+  }
+
+  .an-basket-detail-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .an-basket-detail-grid .an-basket-detail-main {
+    order: 1;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .an-basket-kpi-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

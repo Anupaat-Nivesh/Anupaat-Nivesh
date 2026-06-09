@@ -1,0 +1,195 @@
+import { applyPresetParams, buildMfExplorerPath } from '../../shared/marketInsights/mfExplorerConfig';
+
+/** Static screener catalog — MF cards deep-link to /invest with shared presets */
+
+export const marketIndices = [
+  { id: 'nifty50', name: 'NIFTY 50', value: '24,835.75', change: 1.12, up: true },
+  { id: 'niftybank', name: 'NIFTY BANK', value: '55,092.9', change: -0.36, up: false },
+  { id: 'niftynext', name: 'NIFTY NEXT 50', value: '70,945.1', change: 0.18, up: true },
+  { id: 'midcap', name: 'NIFTY MIDCAP SELECT', value: '13,102.45', change: 0.79, up: true },
+  { id: 'nifty100', name: 'NIFTY 100', value: '25,412.3', change: -0.21, up: false },
+  { id: 'smallcap', name: 'NIFTY SMALLCAP 100', value: '18,204.6', change: 0.44, up: true },
+];
+
+export const heroThemes = {
+  default: {
+    id: 'default',
+    label: 'Market pulse',
+    gradient: 'linear-gradient(125deg, #1e3a8a 0%, #2563eb 48%, #1d4ed8 100%)',
+    badge: 'Live market data',
+    title: 'Master the Market',
+    titleAccent: 'Real-Time.',
+    subtitle:
+      'Experience the next evolution of trading with AI-powered analytics and institutional-grade insights at your fingertips.',
+    primary: { label: 'NIFTY 50', value: '—', delta: '—', up: true },
+    metrics: [],
+    insight: { kind: 'breadth', title: 'Connecting', detail: 'Loading live market snapshot…', up: true },
+  },
+  growth: {
+    id: 'growth',
+    label: 'Smart money',
+    gradient: 'linear-gradient(125deg, #064e3b 0%, #047857 42%, #14532d 100%)',
+    badge: 'Institutional flows',
+    title: 'Smart Money Moves',
+    titleAccent: 'Revealed.',
+    subtitle:
+      "Track FII/DII flows and insider trades instantly. Don't just watch the market—understand who moves it.",
+    primary: { label: 'FII net (7D)', value: '—', delta: 'Buy — · Sell —', up: true },
+    metrics: [],
+    insight: { kind: 'flow', title: 'Deal flow', detail: 'Loading FII/DII bulk & block deals…', up: true },
+  },
+  insight: {
+    id: 'insight',
+    label: 'Algorithmic edge',
+    gradient: 'linear-gradient(125deg, #1e1b4b 0%, #4c1d95 42%, #312e81 100%)',
+    badge: 'Sector rotation',
+    title: 'Algorithmic Edge',
+    titleAccent: 'Unlocked.',
+    subtitle:
+      'Leverage our proprietary rotational dashboards to spot sector momentum before the crowd catches on.',
+    primary: { label: 'Sector leader', value: '—', delta: '—', up: true },
+    metrics: [],
+    insight: { kind: 'sector', title: 'Rotation', detail: 'Loading sector momentum…', up: true },
+  },
+};
+
+export const stockScreeners = [
+  {
+    id: 'top-gainers',
+    title: 'Top gainers',
+    description: 'Stocks with highest % change today',
+    icon: 'chart-up',
+    count: '248 stocks',
+    tag: 'Intraday',
+    href: '#stock-insights',
+  },
+  {
+    id: 'top-losers',
+    title: 'Top losers',
+    description: 'Largest declines in the session',
+    icon: 'chart-down',
+    count: '248 stocks',
+    tag: 'Intraday',
+    href: '#stock-insights',
+  },
+  {
+    id: 'high-volume',
+    title: 'High volume',
+    description: 'Unusual volume vs 20-day average',
+    icon: 'pulse',
+    iconTone: 'teal',
+    count: '86 stocks',
+    tag: 'Activity',
+    href: '#delivery-insights',
+  },
+  {
+    id: 'week-high',
+    title: '52-week high',
+    description: 'Names at or near annual highs',
+    icon: 'peak',
+    count: '124 stocks',
+    tag: 'Technical',
+    href: '#market-snapshot',
+  },
+  {
+    id: 'dividend',
+    title: 'Dividend stock data',
+    description: 'Upcoming and recent dividend announcements',
+    icon: 'dividend',
+    count: 'View all',
+    tag: 'Corporate action',
+    href: '#corporate-actions-dividend',
+  },
+  {
+    id: 'bonus',
+    title: 'Bonus stock data',
+    description: 'Bonus issue calendar and history',
+    icon: 'bonus',
+    count: 'View all',
+    tag: 'Corporate action',
+    href: '#corporate-actions-bonus',
+  },
+  {
+    id: 'split',
+    title: 'Split stock data',
+    description: 'Face value splits and ratios',
+    icon: 'split',
+    count: 'View all',
+    tag: 'Corporate action',
+    href: '#corporate-actions-split',
+  },
+  {
+    id: 'fii-dii',
+    title: 'FII / DII activity',
+    description: 'Institutional flow summary (EOD)',
+    icon: 'flow',
+    count: 'Daily',
+    tag: 'Flows',
+    href: '#fii-trades',
+  },
+];
+
+export const mutualFundScreeners = [
+  {
+    id: 'top-rated-equity',
+    title: 'Top rated funds',
+    description: 'Highest 3Y risk-adjusted return bucket',
+    icon: 'star',
+    count: 'View screen',
+    tag: 'Equity',
+    href: buildMfExplorerPath(applyPresetParams('top-rated-equity')),
+  },
+  {
+    id: 'large-cap',
+    title: 'Large cap funds',
+    description: 'Blue-chip oriented direct growth plans',
+    icon: 'cap',
+    count: 'View screen',
+    tag: 'Equity',
+    href: buildMfExplorerPath(applyPresetParams('large-cap')),
+  },
+  {
+    id: 'elss',
+    title: 'ELSS / tax saver',
+    description: 'Section 80C eligible equity funds',
+    icon: 'tax',
+    count: 'View screen',
+    tag: 'Tax',
+    href: buildMfExplorerPath(applyPresetParams('elss')),
+  },
+  {
+    id: 'debt',
+    title: 'Debt funds',
+    description: 'Short, medium duration and gilt',
+    icon: 'debt',
+    count: 'View screen',
+    tag: 'Debt',
+    href: buildMfExplorerPath(applyPresetParams('debt')),
+  },
+  {
+    id: 'hybrid',
+    title: 'Hybrid funds',
+    description: 'Balanced advantage and multi-asset',
+    icon: 'hybrid',
+    count: 'View screen',
+    tag: 'Hybrid',
+    href: buildMfExplorerPath(applyPresetParams('hybrid')),
+  },
+  {
+    id: 'sip-ready',
+    title: 'SIP-ready funds',
+    description: 'Direct growth · diversified',
+    icon: 'sip',
+    count: 'View screen',
+    tag: 'SIP',
+    href: buildMfExplorerPath(applyPresetParams('sip-ready')),
+  },
+];
+
+export const sampleStockRows = [
+  { symbol: 'RELIANCE', name: 'Reliance Industries', price: '2,456.30', change: 2.34, volume: '12.4M' },
+  { symbol: 'HDFCBANK', name: 'HDFC Bank', price: '1,642.15', change: -0.82, volume: '8.1M' },
+  { symbol: 'INFY', name: 'Infosys', price: '1,892.50', change: 1.15, volume: '4.2M' },
+  { symbol: 'TCS', name: 'Tata Consultancy', price: '4,128.00', change: 0.67, volume: '1.9M' },
+  { symbol: 'ICICIBANK', name: 'ICICI Bank', price: '1,118.40', change: 1.88, volume: '9.6M' },
+];

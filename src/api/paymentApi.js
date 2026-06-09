@@ -15,15 +15,18 @@ import { API_ENDPOINTS } from './config';
  * @returns {Promise<Object>} Order data with order_id
  */
 export const createOrder = async (data) => {
+  const baseNotes = {
+    service: data.service || data.notes?.service || 'consulting_session',
+    bookingReference: data.bookingData?.bookingReference || data.notes?.bookingReference,
+    ...data.notes,
+  };
+
   const response = await apiPost(API_ENDPOINTS.PAYMENTS.CREATE_ORDER, {
     amount: data.amount,
     currency: 'INR',
     userData: data.userData,
     bookingData: data.bookingData,
-    notes: {
-      service: 'consulting_session',
-      bookingReference: data.bookingData?.bookingReference
-    }
+    notes: baseNotes,
   });
 
   return {

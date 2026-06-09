@@ -1,0 +1,147 @@
+.scr-mmi-gauge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto;
+}
+
+.scr-mmi-gauge__svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.scr-mmi-gauge__needle.is-bull,
+.scr-mmi-gauge__needle.is-mild-bull,
+.scr-mmi-gauge__needle.is-greed,
+.scr-mmi-gauge__needle.is-extreme-greed {
+  stroke: #15803d;
+}
+
+.scr-mmi-gauge__needle.is-bear,
+.scr-mmi-gauge__needle.is-mild-bear,
+.scr-mmi-gauge__needle.is-fear,
+.scr-mmi-gauge__needle.is-extreme-fear {
+  stroke: #dc2626;
+}
+
+.scr-mmi-gauge__needle.is-neutral {
+  stroke: #4b5563;
+}
+
+.scr-mmi-gauge__hub {
+  fill: #1f2937;
+  stroke: #fff;
+  stroke-width: 2;
+}
+
+.scr-mmi-gauge__readout {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.15rem;
+  margin-top: -0.35rem;
+}
+
+.scr-mmi-gauge__score {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #111827;
+  letter-spacing: -0.03em;
+}
+
+.scr-mmi-gauge__of {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #9ca3af;
+}
+
+.scr-mmi-gauge__label {
+  margin: 0.2rem 0 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.25;
+}
+
+.scr-mmi-gauge__label.is-bull,
+.scr-mmi-gauge__label.is-mild-bull {
+  color: #059669;
+}
+
+.scr-mmi-gauge__label.is-bear,
+.scr-mmi-gauge__label.is-mild-bear {
+  color: #dc2626;
+}
+
+.scr-mmi-gauge__label.is-neutral {
+  color: #6b7280;
+}
+
+.scr-mmi-gauge__label.is-extreme-fear,
+.scr-mmi-gauge__label.is-fear {
+  color: #b91c1c;
+}
+
+.scr-mmi-gauge__label.is-greed,
+.scr-mmi-gauge__label.is-extreme-greed {
+  color: #047857;
+}
+
+.scr-mmi-gauge__ticks {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+  max-width: 212px;
+  margin-top: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.15;
+}
+
+.scr-mmi-gauge__tick {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.scr-mmi-gauge__tick:first-child {
+  text-align: left;
+  color: #dc2626;
+}
+
+.scr-mmi-gauge__tick:nth-child(3) {
+  color: #6b7280;
+}
+
+.scr-mmi-gauge__tick:last-child {
+  text-align: right;
+  color: #059669;
+}
+
+.scr-snapshot__mood-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scr-snapshot__mood--greed-fear .scr-mmi-gauge__tick:first-child {
+  color: #991b1b;
+}
+
+.scr-snapshot__mood--greed-fear .scr-mmi-gauge__tick:last-child {
+  color: #15803d;
+}
+
+@media (max-width: 768px) {
+  .scr-mmi-gauge__ticks {
+    font-size: 0.74rem;
+    margin-top: 0.42rem;
+  }
+}

@@ -1,0 +1,43 @@
+name: Refresh basket analytics
+
+on:
+  schedule:
+    # Daily 17:30 UTC ≈ 11:00 PM IST — after AMFI NAV publish
+    - cron: '30 17 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh-baskets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Fetch NAV history and compute basket metrics
+        run: npm run refresh-baskets
+
+      - name: Open PR with refreshed analytics
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: chore: refresh FIRE/WATER/EARTH basket NAV analytics
+          title: chore: refresh basket NAV analytics
+          body: |
+            Automated daily refresh of `api/data/basketAnalytics.json`.
+
+            Merge to update live NAV metrics on Vercel (if auto-deploy on push is enabled).
+          branch: chore/basket-nav-refresh
+          delete-branch: true
+          add-paths: |
+            api/data/basketAnalytics.json

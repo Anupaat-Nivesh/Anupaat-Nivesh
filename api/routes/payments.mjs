@@ -37,10 +37,10 @@ router.post('/create-order', async (req, res) => {
         // Prepare notes for Razorpay order
         // Store userData and bookingData as JSON strings so webhook can access them
         const orderNotes = {
-            service: 'consulting_session',
+            service: notes?.service || 'consulting_session',
             bookingReference: bookingData?.bookingReference || notes?.bookingReference || 'N/A',
             userEmail: userData?.email || 'N/A',
-            ...notes
+            ...notes,
         };
 
         // Store full userData and bookingData as JSON strings for webhook access
@@ -161,7 +161,7 @@ router.get('/webhook', (req, res) => {
     return res.status(200).json({
         status: "Webhook endpoint is active",
         message: "This endpoint handles Razorpay webhook events",
-        events: ["payment.captured", "payment.failed"],
+        events: ["payment.captured", "payment.failed", "subscription.activated"],
         configured: !!process.env.RAZORPAY_WEBHOOK_SECRET
     });
 });
@@ -386,6 +386,14 @@ router.post('/webhook', async (req, res) => {
             return res.status(200).json({
                 success: true,
                 message: "Payment failure logged"
+            });
+        }
+
+        if (event === "subscription.activated") {
+            console.log("✅ subscription.activated — acknowledge for premium sync pipeline");
+            return res.status(200).json({
+                success: true,
+                message: "Subscription activation acknowledged"
             });
         }
 

@@ -10,8 +10,8 @@ import logo from '../../assets/logo.webp';
 /** Core client paths — “What we do” */
 const whatWeDoLinks = [
     { label: 'All offerings', path: '/offerings' },
-    { label: 'Mutual funds', path: '/mutual-funds' },
-    { label: 'Equity basket', path: '/equity-basket' },
+    { label: 'Mutual fund baskets', path: '/invest/baskets' },
+    { label: 'Fixed income & alternatives', path: '/fixed-income-alternatives' },
     { label: 'Loan against securities', path: '/loan-against-securities' },
     { label: 'P2P lending', path: '/p2p-lending' },
     { label: 'Unlisted stocks', path: '/unlisted-stocks' },
@@ -23,7 +23,9 @@ const whatWeDoLinks = [
 
 /** Insights & tools — app install lives in header only (no duplicate Our app / App download). */
 const insightsLinks = [
-    { label: 'MarketCompass', path: '/valuation', badge: 'Coming soon' },
+    { label: 'Screeners', path: '/screeners' },
+    { label: 'Sector rotation', path: '/screeners/sector-rotation' },
+    { label: 'MarketCompass', path: '/valuation' },
     { label: 'Calculators', path: '/calculators' },
     { label: 'Tools', path: '/tools' },
 ];
@@ -56,6 +58,7 @@ const Navbar = () => {
     const insightsWrapRef = useRef(null);
     const companyWrapRef = useRef(null);
     const navRootRef = useRef(null);
+    const navCloseTimerRef = useRef(null);
     const location = useLocation();
 
     useLayoutEffect(() => {
@@ -77,6 +80,30 @@ const Navbar = () => {
         setShowInsightsMenu(false);
         setShowCompanyMenu(false);
     }, []);
+
+    const cancelScheduledClose = useCallback(() => {
+        if (navCloseTimerRef.current) {
+            clearTimeout(navCloseTimerRef.current);
+            navCloseTimerRef.current = null;
+        }
+    }, []);
+
+    const scheduleCloseDropdowns = useCallback(() => {
+        cancelScheduledClose();
+        navCloseTimerRef.current = setTimeout(() => {
+            closeNavDropdowns();
+            navCloseTimerRef.current = null;
+        }, 160);
+    }, [cancelScheduledClose, closeNavDropdowns]);
+
+    const openDesktopDropdown = useCallback((menu) => {
+        cancelScheduledClose();
+        setShowWhatWeDoMenu(menu === 'what');
+        setShowInsightsMenu(menu === 'insights');
+        setShowCompanyMenu(menu === 'company');
+    }, [cancelScheduledClose]);
+
+    useEffect(() => () => cancelScheduledClose(), [cancelScheduledClose]);
 
     const restoreScrolling = () => {
         const htmlElement = document.documentElement;
@@ -117,18 +144,6 @@ const Navbar = () => {
         setMobileCompanyOpen(false);
     }, [location.pathname, closeNavDropdowns]);
 
-    useEffect(() => {
-        const onDocMouseDown = (e) => {
-            const t = e.target;
-            if (whatWeDoWrapRef.current?.contains(t)) return;
-            if (insightsWrapRef.current?.contains(t)) return;
-            if (companyWrapRef.current?.contains(t)) return;
-            closeNavDropdowns();
-        };
-        document.addEventListener('mousedown', onDocMouseDown);
-        return () => document.removeEventListener('mousedown', onDocMouseDown);
-    }, [closeNavDropdowns]);
-
     const toggleHome = () => {
         animateScroll.scrollToTop();
     };
@@ -161,18 +176,23 @@ const Navbar = () => {
                     </Link>
                 </div>
                 <ul className="anupaat__navbar-links_container">
-                    <li className="nav-item-with-dropdown" ref={whatWeDoWrapRef}>
+                    <li
+                        className={`nav-item-with-dropdown${showWhatWeDoMenu ? ' is-open' : ''}`}
+                        ref={whatWeDoWrapRef}
+                        onMouseEnter={() => openDesktopDropdown('what')}
+                        onMouseLeave={scheduleCloseDropdowns}
+                        onFocusCapture={() => openDesktopDropdown('what')}
+                        onBlurCapture={(e) => {
+                            if (!whatWeDoWrapRef.current?.contains(e.relatedTarget)) {
+                                closeNavDropdowns();
+                            }
+                        }}
+                    >
                         <button
                             type="button"
                             className="nav-dropdown-trigger"
                             aria-expanded={showWhatWeDoMenu}
                             aria-haspopup="true"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                setShowInsightsMenu(false);
-                                setShowCompanyMenu(false);
-                                setShowWhatWeDoMenu((v) => !v);
-                            }}
                         >
                             What we do
                             <span className="nav-dropdown-chevron" aria-hidden>▾</span>
@@ -190,18 +210,23 @@ const Navbar = () => {
                             ))}
                         </div>
                     </li>
-                    <li className="nav-item-with-dropdown" ref={insightsWrapRef}>
+                    <li
+                        className={`nav-item-with-dropdown${showInsightsMenu ? ' is-open' : ''}`}
+                        ref={insightsWrapRef}
+                        onMouseEnter={() => openDesktopDropdown('insights')}
+                        onMouseLeave={scheduleCloseDropdowns}
+                        onFocusCapture={() => openDesktopDropdown('insights')}
+                        onBlurCapture={(e) => {
+                            if (!insightsWrapRef.current?.contains(e.relatedTarget)) {
+                                closeNavDropdowns();
+                            }
+                        }}
+                    >
                         <button
                             type="button"
                             className="nav-dropdown-trigger"
                             aria-expanded={showInsightsMenu}
                             aria-haspopup="true"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                setShowWhatWeDoMenu(false);
-                                setShowCompanyMenu(false);
-                                setShowInsightsMenu((v) => !v);
-                            }}
                         >
                             Insights
                             <span className="nav-dropdown-chevron" aria-hidden>▾</span>
@@ -225,18 +250,23 @@ const Navbar = () => {
                             ))}
                         </div>
                     </li>
-                    <li className="nav-item-with-dropdown" ref={companyWrapRef}>
+                    <li
+                        className={`nav-item-with-dropdown${showCompanyMenu ? ' is-open' : ''}`}
+                        ref={companyWrapRef}
+                        onMouseEnter={() => openDesktopDropdown('company')}
+                        onMouseLeave={scheduleCloseDropdowns}
+                        onFocusCapture={() => openDesktopDropdown('company')}
+                        onBlurCapture={(e) => {
+                            if (!companyWrapRef.current?.contains(e.relatedTarget)) {
+                                closeNavDropdowns();
+                            }
+                        }}
+                    >
                         <button
                             type="button"
                             className="nav-dropdown-trigger"
                             aria-expanded={showCompanyMenu}
                             aria-haspopup="true"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                setShowWhatWeDoMenu(false);
-                                setShowInsightsMenu(false);
-                                setShowCompanyMenu((v) => !v);
-                            }}
                         >
                             Company
                             <span className="nav-dropdown-chevron" aria-hidden>▾</span>

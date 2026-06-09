@@ -166,9 +166,8 @@
 }
 
 
-/* CUSTOM BUTTON */
-
-button {
+/* CUSTOM BUTTON — scoped so it does not affect other pages */
+.contactForm-container .btn_container button {
   cursor: pointer;
   font-family: inherit;
   font-size: 2rem;
@@ -184,31 +183,31 @@ button {
   transition: all 0.2s;
 }
 
-button span {
+.contactForm-container .btn_container button span {
   display: block;
   margin-left: 0.3em;
   transition: all 0.3s ease-in-out;
 }
 
-button svg {
+.contactForm-container .btn_container button svg {
   display: block;
   transform-origin: center center;
   transition: transform 0.3s ease-in-out;
 }
 
-button:hover .svg-wrapper {
+.contactForm-container .btn_container button:hover .svg-wrapper {
   animation: fly-1 0.6s ease-in-out infinite alternate;
 }
 
-button:hover svg {
+.contactForm-container .btn_container button:hover svg {
   transform: translateX(1.2em) rotate(45deg) scale(1.1);
 }
 
-button:hover span {
+.contactForm-container .btn_container button:hover span {
   transform: translateX(5em);
 }
 
-button:active {
+.contactForm-container .btn_container button:active {
   transform: scale(0.95);
 }
 

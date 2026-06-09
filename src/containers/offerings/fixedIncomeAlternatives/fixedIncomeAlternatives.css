@@ -1,0 +1,62 @@
+.fia-hub__hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.fia-hub__lead {
+  margin-top: 1.25rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-subtext);
+  line-height: 1.5;
+}
+
+.fia-hub__description {
+  margin-top: 1rem;
+  color: var(--color-subtext-light);
+  line-height: 1.6;
+}
+
+.fia-hub__cta {
+  margin-top: 0;
+}
+
+.fia-hub__hero-copy .primary-heading {
+  line-height: 1.15;
+  margin-bottom: 0.25rem;
+}
+
+.fia-hub__hero-img img {
+  width: 85%;
+  max-width: 420px;
+  margin: 0 auto;
+  display: block;
+}
+
+.fia-hub__section {
+  margin-top: 1rem;
+}
+
+.fia-hub__disclaimer {
+  margin-top: 3rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  background: var(--color-grey-light);
+  color: var(--color-subtext-light);
+  font-size: 1.2rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 900px) {
+  .fia-hub__hero {
+    grid-template-columns: 1fr;
+  }
+
+  .fia-hub__hero-img {
+    order: -1;
+  }
+}
