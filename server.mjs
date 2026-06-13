@@ -25,6 +25,7 @@ import corporateActionsRouter from './api/routes/corporate-actions.mjs';
 import screenersRouter from './api/routes/screeners.mjs';
 import mutualFundsRouter from './api/routes/mutual-funds.mjs';
 import basketsRouter from './api/routes/baskets.mjs';
+import contactRouter from './api/routes/contact.mjs';
 import { getMediaUploadDir } from './api/services/mediaStorageHostinger.mjs';
 
 // Raw body middleware for webhook signature verification
@@ -129,6 +130,7 @@ app.use('/api/corporate-actions', corporateActionsRouter);
 app.use('/api/screeners', screenersRouter);
 app.use('/api/mutual-funds', mutualFundsRouter);
 app.use('/api/baskets', basketsRouter);
+app.use('/api/contact', contactRouter);
 
 // Root endpoint
 app.get('/', (req, res) => {
@@ -162,6 +164,10 @@ app.get('/', (req, res) => {
         master: '/api/baskets/master',
         analytics: '/api/baskets/:id/analytics',
         refresh: 'POST /api/baskets/refresh'
+      },
+      contact: {
+        submit: 'POST /api/contact/submit',
+        health: '/api/contact/health'
       }
     }
   });

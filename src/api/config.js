@@ -98,6 +98,11 @@ export const API_ENDPOINTS = {
     ADMIN_CREATE: '/api/media/admin/create',
     ADMIN_UPDATE: '/api/media/admin/:id',
     ADMIN_DELETE: '/api/media/admin/:id'
+  },
+
+  CONTACT: {
+    SUBMIT: '/api/contact/submit',
+    HEALTH: '/api/contact/health'
   }
 };
 

@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
-import emailjs from '@emailjs/browser';
 import * as config from '../contact/Config';
+import { sendAdminRegistrationNotification } from '../../services/adminNotificationService';
 import { storeUserData, storeBookingData, generateBookingReference, getStoredUserData } from '../../utils/bookingHandler';
 import { createRazorpayOrder, initializeRazorpayCheckout } from '../../services/paymentService';
 import { saveCompleteBooking } from '../../services/bookingService';
@@ -154,34 +154,7 @@ const BookingWizard = () => {
   // Send admin notification
   const sendAdminNotification = async (userData) => {
     try {
-      const userDetails = `
-Name: ${userData.firstName} ${userData.lastName}
-Email: ${userData.email}
-Phone: ${userData.phone || 'Not provided'}
-Age: ${userData.age || 'Not provided'}
-Annual Income Range: ${userData.incomeRange || 'Not provided'}
-Primary Concern: ${userData.primaryConcern || 'Not provided'}
-      `.trim();
-
-      const templateParams = {
-        user_name: 'Anupaat Nivesh Team',
-        user_email: process.env.REACT_APP_ADMIN_EMAIL || 'info@anupaatnivesh.com',
-        user_phone: userData.phone || 'Not provided',
-        message: `New user registered for Financial Planning Session:
-
-${userDetails}
-
-Please follow up with this user for their booking.`,
-        subject: 'New User Registration - Financial Planning Session',
-        service_type: 'Consulting Session Registration'
-      };
-
-      await emailjs.send(
-        config.emailJSserviceID,
-        config.emailJStemplateID,
-        templateParams,
-        config.emailJSKey
-      );
+      await sendAdminRegistrationNotification(userData);
     } catch (error) {
       console.error('Error sending admin notification:', error);
     }

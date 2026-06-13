@@ -4,10 +4,9 @@ import "./ContactModal.css";
 import { RiCloseLine } from 'react-icons/ri';
 import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input'
 
-import { emailJSserviceID, emailJSKey, emailJSMFtemplteID } from "../Config";
-import emailjs from "@emailjs/browser";
 import { ToastContainer, toast } from "react-toastify";
 import { notifyFailure } from "../ToastConfig";
+import { submitContactForm, getContactSubmitErrorMessage } from "../../../services/contactSubmitService";
 
 const ContactModal = function (props) {
 
@@ -41,7 +40,7 @@ const ContactModal = function (props) {
 
 
 
-  const submitModalForm = function (e) {
+  const submitModalForm = async function (e) {
     e.preventDefault();
     if (!isPossiblePhoneNumber(number + '')) {
       notifyFailure('Incorrent Phone Number');
@@ -49,11 +48,31 @@ const ContactModal = function (props) {
       return;
     }
 
-    toast.promise(emailjs.sendForm(emailJSserviceID, emailJSMFtemplteID, form.current, emailJSKey), {
-      pending: 'Sending Message',
-      success: 'Message Sent Successfully!',
-      error: 'Please try later!'
-    }).then(res => { setTimeout(closeModalWindow, 3000) }).catch(err => { notifyFailure(); });
+    const pending = toast.loading('Sending Message');
+
+    try {
+      const nameParts = (formValues.name || '').trim().split(/\s+/);
+      const firstName = nameParts[0] || '';
+      const lastName = nameParts.slice(1).join(' ') || '';
+      const fund = mutualFundType || form.current?.querySelector('[name="fundname"]')?.value || '';
+
+      await submitContactForm({
+        formType: 'mutual_fund',
+        firstName,
+        lastName,
+        email: formValues.mail,
+        phone: number,
+        message: `Mutual fund inquiry: ${fund}`,
+        subject: `Mutual fund inquiry — ${fund}`,
+        metadata: { fundName: fund },
+        website: form.current?.querySelector('input[name="website"]')?.value || '',
+      });
+
+      toast.update(pending, { render: 'Message Sent Successfully!', type: 'success', isLoading: false, autoClose: 3000 });
+      setTimeout(closeModalWindow, 3000);
+    } catch (err) {
+      toast.update(pending, { render: getContactSubmitErrorMessage(err), type: 'error', isLoading: false, autoClose: 5000 });
+    }
   };
 
 
@@ -100,10 +119,8 @@ const ContactModal = function (props) {
 
 
           <div className="fund-box input-box">
-            {/* <label htmlFor="fundname" className="input-label__fundname input-label">Fund Type Selected: </label> */}
-
             <label htmlFor="mutual-fund-type" className="select-mutual-fund__label">Select Mutual Fund</label>
-            <select class="form-control" id="mutual-fund-type" onChange={selectMutualChangeHandler} name="fundname">
+            <select className="form-control" id="mutual-fund-type" onChange={selectMutualChangeHandler} name="fundname">
               <option>Core Portfolio (5FF)</option>
               <option>Tax-Saver</option>
               <option>Active-Passive Combo</option>
@@ -113,8 +130,10 @@ const ContactModal = function (props) {
 
           </div>
 
+          <input type="text" name="website" tabIndex={-1} autoComplete="off" style={{ display: 'none' }} aria-hidden="true" />
+
           <div className="btn_container">
-            <button>
+            <button type="submit">
               <div className="svg-wrapper-1">
                 <div className="svg-wrapper">
                   <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

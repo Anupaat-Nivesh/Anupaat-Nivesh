@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
-import emailjs from '@emailjs/browser';
 import { ToastContainer, toast } from 'react-toastify';
 import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import * as config from '../contact/Config';
 import { notifySuccessfull, notifyFailure } from '../contact/ToastConfig';
+import { submitContactForm, getContactSubmitErrorMessage } from '../../services/contactSubmitService';
 import './LeadForm.css';
 
 /**
@@ -119,34 +119,25 @@ const LeadForm = ({
     setIsSubmitting(true);
 
     try {
-      // Use existing EmailJS configuration from Config.js
-      // Reuse the same template as contact form but with different subject
-      const serviceID = config.emailJSserviceID;
-      const templateID = config.emailJStemplateID; // Reuse contact form template
-      const publicKey = config.emailJSKey;
+      const sourceDescription = formData.source === 'hero_section' ? 'the hero section' :
+                                formData.source === 'homepage' ? 'the homepage section' :
+                                formData.source;
+      const message = `${formData.subject}\n\nFinancial Goal: ${formData.goal}\nSource: ${formData.source}\n\nThis is a ${formType === 'portfolio_review' ? 'Portfolio Review' : 'Free Consultation'} request from ${sourceDescription}.`;
 
-      // Ensure phone number and message are set in hidden fields for EmailJS
-      const phoneInput = formRef.current.querySelector('input[name="number"]');
-      const messageTextarea = formRef.current.querySelector('textarea[name="message"]');
-      
-      if (phoneInput) {
-        phoneInput.value = formData.phone || '';
-      }
-      
-      // Update message with current form data for differentiation
-      if (messageTextarea) {
-        const sourceDescription = formData.source === 'hero_section' ? 'the hero section' : 
-                                  formData.source === 'homepage' ? 'the homepage section' : 
-                                  formData.source;
-        messageTextarea.value = `${formData.subject}\n\nFinancial Goal: ${formData.goal}\nSource: ${formData.source}\n\nThis is a ${formType === 'portfolio_review' ? 'Portfolio Review' : 'Free Consultation'} request from ${sourceDescription}.`;
-      }
-
-      // Send via EmailJS - reusing existing contact form template
-      const res = await emailjs.sendForm(serviceID, templateID, formRef.current, publicKey);
-
-      if (res.status !== 200) {
-        throw new Error(`Something went wrong, Status: ${res.status}`);
-      }
+      await submitContactForm({
+        formType: formType === 'portfolio_review' ? 'portfolio_review' : 'lead',
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        message,
+        subject: formData.subject,
+        metadata: {
+          goal: formData.goal,
+          source: formData.source,
+        },
+        website: formRef.current?.querySelector('input[name="website"]')?.value || '',
+      });
 
       // Track conversion event
       if (window.gtag) {
@@ -184,18 +175,7 @@ const LeadForm = ({
 
     } catch (error) {
       console.error('Lead form submission error:', error);
-      // Provide more specific error messages
-      if (error.text) {
-        let errorMessage = error.text;
-        if (error.text.includes('Invalid grant') || error.text.includes('Gmail_API') || error.text.includes('insufficient authentication scopes')) {
-          errorMessage = 'Email service needs to be reconfigured. Please contact the website administrator.';
-        } else if (error.text.includes('412')) {
-          errorMessage = 'Form validation failed. Please check all fields are filled correctly.';
-        }
-        notifyFailure(errorMessage);
-      } else {
-        notifyFailure(error.message || 'Failed to send message. Please try again.');
-      }
+      notifyFailure(getContactSubmitErrorMessage(error));
     } finally {
       setIsSubmitting(false);
     }
@@ -214,6 +194,7 @@ const LeadForm = ({
         {/* Hidden fields for EmailJS template compatibility - matching Contact form structure */}
         <input type="hidden" name="source" value={formData.source} />
         <input type="hidden" name="number" value={formData.phone || ''} />
+        <input type="text" name="website" tabIndex={-1} autoComplete="off" style={{ display: 'none' }} aria-hidden="true" />
         {/* Message field contains subject and goal info for email differentiation */}
         <textarea 
           name="message" 

@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
 import { ToastContainer } from "react-toastify";
 import { notifyFailure, notifySuccessfull } from "./ToastConfig.js";
 /* Removed Firebase imports
@@ -24,6 +23,7 @@ import YoutubeLogo from "../../assets/youtube.png";
 import LinkedInLogo from "../../assets/linkedin.png";
 
 import useInput from "../../Hooks/use-input.js";
+import { submitContactForm, getContactSubmitErrorMessage } from "../../services/contactSubmitService.js";
 
 const Contact = () => {
     const form = useRef();
@@ -130,22 +130,19 @@ const Contact = () => {
                 return;
             }
 
-            // Ensure phone number is set in the hidden input for EmailJS
-            const phoneInput = form.current.querySelector('input[name="number"]');
-            if (phoneInput) {
-                phoneInput.value = numberInputValue || '';
-            }
+            const messageField = form.current.querySelector('textarea[name="message"]');
+            const message = messageField?.value || '';
+            const website = form.current.querySelector('input[name="website"]')?.value || '';
 
-            const res = await emailjs.sendForm(
-                config.emailJSserviceID,
-                config.emailJStemplateID,
-                form.current,
-                config.emailJSKey
-            );
-
-            if (res.status !== 200) {
-                throw new Error(`Something went wrong, Status: ${res.status}`);
-            }
+            await submitContactForm({
+                formType: 'contact',
+                firstName: firstNameInputValue,
+                lastName: lastNameInputValue,
+                email: mailInputValue,
+                phone: numberInputValue,
+                message,
+                website,
+            });
 
             notifySuccessfull();
             // Removed numberVerified and otpSendStatus reset
@@ -161,23 +158,7 @@ const Contact = () => {
 
         } catch (err) {
             console.error('Form submission error:', err);
-            // Provide more specific error messages
-            if (err.text) {
-                // EmailJS specific error
-                let errorMessage = err.text;
-                
-                if (err.text.includes('Invalid grant') || err.text.includes('Gmail_API') || err.text.includes('insufficient authentication scopes')) {
-                    errorMessage = 'Email service needs to be reconfigured. Please contact the website administrator.';
-                } else if (err.text.includes('412')) {
-                    errorMessage = 'Form validation failed. Please check all fields are filled correctly and phone number is valid.';
-                }
-                
-                notifyFailure(errorMessage);
-            } else if (err.status === 412) {
-                notifyFailure('Form validation failed. Please check all fields are filled correctly.');
-            } else {
-                notifyFailure(err.message || 'Failed to send message. Please try again.');
-            }
+            notifyFailure(getContactSubmitErrorMessage(err));
         }
     };
 
@@ -271,6 +252,9 @@ const Contact = () => {
                                 required
                             ></textarea>
                         </div>
+
+                        {/* Honeypot — leave empty */}
+                        <input type="text" name="website" tabIndex={-1} autoComplete="off" style={{ display: 'none' }} aria-hidden="true" />
 
                         <button type="submit" value="Send" className="btn btn--form " id="sign-in-button">
                             SUBMIT

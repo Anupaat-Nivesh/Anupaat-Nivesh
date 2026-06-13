@@ -1,15 +1,13 @@
-import { Resend } from 'resend';
-
-function getResendClient() {
-  const key = process.env.RESEND_API_KEY;
-  if (!key) return null;
-  return new Resend(key);
-}
+import {
+  getContactFromEmail,
+  getContactToEmail,
+  getResendClient,
+} from './resendClient.mjs';
 
 export async function notifyOnboardingSubmission({ submissionId, payload, filesMeta }) {
   const resend = getResendClient();
-  const toEmail = process.env.ONBOARDING_ALERT_TO_EMAIL;
-  const fromEmail = process.env.ONBOARDING_ALERT_FROM_EMAIL;
+  const toEmail = process.env.ONBOARDING_ALERT_TO_EMAIL || getContactToEmail();
+  const fromEmail = process.env.ONBOARDING_ALERT_FROM_EMAIL || getContactFromEmail();
 
   if (!resend || !toEmail || !fromEmail) {
     return { sent: false, reason: 'Email notifications not configured' };

@@ -1,114 +1,79 @@
 /**
  * Notification Service
- * Handles email, WhatsApp, and admin notifications
+ * Booking confirmations via Resend API (EmailJS fallback when API not configured).
  */
 
-import emailjs from '@emailjs/browser';
-import * as config from '../components/contact/Config';
+import { submitContactForm } from './contactSubmitService';
 
-/**
- * Send email confirmation for consulting session booking
- * @param {Object} data - Booking and payment data
- * @returns {Promise<Object>} EmailJS response
- */
 export const sendEmailConfirmation = async (data) => {
-  try {
-    // TODO: Create a new EmailJS template for consulting session confirmations
-    // For now, use existing template with custom message
-    
-    const templateParams = {
-      user_name: `${data.userData.firstName} ${data.userData.lastName}`,
-      user_email: data.userData.email,
-      user_phone: data.userData.phone,
-      booking_reference: data.bookingReference,
-      booking_date: data.bookingData.startTime || 'To be scheduled',
-      payment_amount: `₹${data.paymentData.amount}`,
-      payment_id: data.paymentData.paymentId,
-      service_type: '1-on-1 Financial Consulting Session',
-      message: `Thank you for booking a consulting session with Anupaat Nivesh!
+  const message = `Thank you for booking a consulting session with Anupaat Nivesh!
 
 Booking Reference: ${data.bookingReference}
 Session Date: ${data.bookingData.startTime || 'To be scheduled'}
 Amount Paid: ₹${data.paymentData.amount}
+Payment ID: ${data.paymentData.paymentId || '—'}
 
-We look forward to helping you achieve your financial goals!`
-    };
+We look forward to helping you achieve your financial goals!`;
 
-    // Use existing EmailJS service
-    const response = await emailjs.send(
-      config.emailJSserviceID,
-      config.emailJStemplateID, // TODO: Create dedicated template for consulting sessions
-      templateParams,
-      config.emailJSKey
-    );
-
-    return response;
-  } catch (error) {
-    console.error('Error sending email confirmation:', error);
-    throw error;
-  }
+  await submitContactForm({
+    formType: 'booking_confirmation',
+    firstName: data.userData.firstName,
+    lastName: data.userData.lastName,
+    email: data.userData.email,
+    phone: data.userData.phone || '',
+    message,
+    subject: `Consulting session confirmed — ${data.bookingReference}`,
+    metadata: {
+      bookingReference: data.bookingReference,
+      paymentId: data.paymentData.paymentId || '',
+      amount: `₹${data.paymentData.amount}`,
+    },
+  });
 };
 
-/**
- * Send WhatsApp confirmation (placeholder)
- * TODO: Integrate with WhatsApp Business API
- * @param {string} phone - Phone number
- * @param {Object} bookingData - Booking data
- * @returns {Promise<boolean>} Success status
- */
 export const sendWhatsAppConfirmation = async (phone, bookingData) => {
-  // TODO: Implement WhatsApp Business API integration
-  // For now, return success placeholder
-  
   console.log('WhatsApp confirmation placeholder:', {
     phone,
     bookingReference: bookingData.bookingReference,
-    message: `Your consulting session is confirmed! Reference: ${bookingData.bookingReference}`
   });
-
-  // Placeholder: In production, this would call WhatsApp Business API
-  // Example: await fetch('https://api.whatsapp.com/send', { ... });
-  
   return true;
 };
 
-/**
- * Send admin notification (placeholder)
- * TODO: Integrate with admin notification system
- * @param {Object} bookingData - Complete booking data
- * @returns {Promise<boolean>} Success status
- */
 export const sendAdminNotification = async (bookingData) => {
-  // TODO: Implement admin notification system
-  // Could use EmailJS ops template, Slack webhook, or custom API
-  
-  console.log('Admin notification placeholder:', {
-    bookingReference: bookingData.bookingReference,
-    userEmail: bookingData.userData.email,
-    amount: bookingData.paymentData.amount
-  });
+  const message = `New paid consulting session booking:
 
-  // Placeholder: In production, this would notify admin team
-  // Example: await emailjs.send(config.emailJSserviceID, config.emailJSOpsTemplateID, ...);
-  
+Reference: ${bookingData.bookingReference}
+User: ${bookingData.userData.firstName} ${bookingData.userData.lastName}
+Email: ${bookingData.userData.email}
+Phone: ${bookingData.userData.phone || '—'}
+Amount: ₹${bookingData.paymentData.amount}`;
+
+  await submitContactForm({
+    formType: 'consulting_registration',
+    firstName: bookingData.userData.firstName,
+    lastName: bookingData.userData.lastName,
+    email: bookingData.userData.email,
+    phone: bookingData.userData.phone || '',
+    message,
+    subject: `New booking — ${bookingData.bookingReference}`,
+    sendUserConfirmation: false,
+    metadata: {
+      bookingReference: bookingData.bookingReference,
+      amount: `₹${bookingData.paymentData.amount}`,
+    },
+  });
   return true;
 };
 
-/**
- * Send all notifications after successful booking
- * @param {Object} bookingData - Complete booking data
- * @returns {Promise<Object>} Notification results
- */
 export const sendAllNotifications = async (bookingData) => {
   const results = {
     email: false,
     whatsapp: false,
     admin: false,
-    errors: []
+    errors: [],
   };
 
   try {
-    // Send email confirmation
     await sendEmailConfirmation(bookingData);
     results.email = true;
   } catch (error) {
@@ -116,14 +81,12 @@ export const sendAllNotifications = async (bookingData) => {
   }
 
   try {
-    // Send WhatsApp confirmation
     results.whatsapp = await sendWhatsAppConfirmation(bookingData.userData.phone, bookingData);
   } catch (error) {
     results.errors.push({ type: 'whatsapp', error: error.message });
   }
 
   try {
-    // Send admin notification
     results.admin = await sendAdminNotification(bookingData);
   } catch (error) {
     results.errors.push({ type: 'admin', error: error.message });
@@ -136,6 +99,5 @@ export default {
   sendEmailConfirmation,
   sendWhatsAppConfirmation,
   sendAdminNotification,
-  sendAllNotifications
+  sendAllNotifications,
 };
-
