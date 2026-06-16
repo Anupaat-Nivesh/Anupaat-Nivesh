@@ -101,7 +101,9 @@ const Footer = () => (
                 AMFI-registered mutual fund distributor; transactions are executed through <strong>BSE STAR MF</strong> in
                 line with applicable regulatory requirements. We do not provide stock tips, trading calls, or
                 guaranteed-return products; our services focus on goal-based financial planning and mutual fund
-                distribution/advisory support. As per SEBI circular dated 26 Nov 2010, for purchases of Rs. 1 crore or
+                distribution/advisory support. Elemental mutual fund baskets (FIRE, WATER, EARTH) use a
+                synthetic model portfolio NAV computed from underlying scheme history; basket unlock is a
+                one-time fee per basket and does not guarantee returns. As per SEBI circular dated 26 Nov 2010, for purchases of Rs. 1 crore or
                 above in income/debt-oriented schemes (other than liquid schemes), applicable NAV is based on fund
                 realization date. Insurance and NPS are not exchange-traded products; Anupaat Nivesh Pvt. Ltd. acts only
                 as distributor; disputes related to distribution activity are not covered under Exchange Investor Redressal

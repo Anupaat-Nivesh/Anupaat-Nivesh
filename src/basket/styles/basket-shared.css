@@ -121,9 +121,9 @@
   border-radius: var(--basket-radius-lg);
 }
 
-.an-basket-landing-quiz-link a:hover,
-.an-basket-rec-widget__quiz a:hover,
-.an-basket-rec-widget__cta:hover {
+.an-basket-rec-widget__profile-link a:hover,
+.an-basket-rec-widget__cta:hover,
+.an-basket-rec-widget__secondary:hover {
   text-decoration: underline;
 }
 

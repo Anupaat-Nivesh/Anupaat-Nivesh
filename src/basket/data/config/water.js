@@ -1,6 +1,4 @@
-import { performanceSeries } from './shared.js';
-
-const BASKET_UNLOCK_PRICE = 4999;
+import { performanceSeries, BASKET_MIN_INVESTMENT, BASKET_UNLOCK_PRICE } from './shared.js';
 
 const water = {
   id: 'water',
@@ -15,7 +13,7 @@ const water = {
   riskScore: 55,
   horizonYears: '5+ Years',
   expectedReturn: 11.15,
-  minInvestment: 15000,
+  minInvestment: BASKET_MIN_INVESTMENT,
   price: BASKET_UNLOCK_PRICE,
   priceLabel: 'One-Time Access',
   fundCount: 6,
@@ -34,8 +32,8 @@ const water = {
     basketId: 'water',
   },
   comparison: {
-    riskScoreDisplay: 6,
-    target: 'Balanced growth',
+    riskScoreRange: '5–8',
+    objective: 'Balanced Growth',
     suitability: 'Balanced',
   },
   growthProjectionHorizons: [5, 10, 15, 20, 30],

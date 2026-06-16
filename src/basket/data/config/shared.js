@@ -1,4 +1,8 @@
-export const BASKET_UNLOCK_PRICE = 4999;
+/** One-time basket unlock fee (₹99 for testing — restore to 999 before production). */
+export const BASKET_UNLOCK_PRICE = 99;
+
+/** Standard minimum lumpsum/SIP entry across all elemental baskets. */
+export const BASKET_MIN_INVESTMENT = 10000;
 
 export const performanceSeries = (base, volatility) => {
   const months = [];
@@ -18,6 +22,11 @@ export function projectLumpsum(principal, cagrPct, years) {
 export function formatLakhINR(amount) {
   if (amount >= 100000) return `₹${(amount / 100000).toFixed(2)} L`;
   return `₹${amount.toLocaleString('en-IN')}`;
+}
+
+export function formatINR(amount) {
+  if (amount == null) return '—';
+  return `₹${Number(amount).toLocaleString('en-IN')}`;
 }
 
 /** Asset allocation slices must sum to 100% — single source of truth for public/compare views. */

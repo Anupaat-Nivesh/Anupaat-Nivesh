@@ -5,16 +5,17 @@ import { useBasketUser } from '../context/BasketUserContext';
 import InvestSubNav from '../components/InvestSubNav';
 import { BASKET_PRODUCT_NAME } from '../data/baskets';
 import ElementalIcon, { elementFromBasketId } from '../components/ElementalIcon';
+import { basketById } from '../data/config/index.js';
 import '../styles/basket-screener.css';
 import '../styles/basket-analytics.css';
 
 const STEPS = [
-  { key: 'age', q: 'What age band are you in?', type: 'select', options: ['18–30', '31–40', '41–50', '51+'] },
-  { key: 'horizon', q: 'Investment horizon for this corpus?', type: 'select', options: ['<3 years', '3–5 years', '5–10 years', '10+ years'] },
-  { key: 'income', q: 'How stable is your primary income?', type: 'select', options: ['Very stable', 'Mostly stable', 'Variable', 'Starting / building'] },
-  { key: 'risk', q: 'When markets drop 20%, you…', type: 'select', options: ['Buy more', 'Hold calmly', 'Unsure', 'Prefer to exit'] },
-  { key: 'emergency', q: 'Emergency fund status?', type: 'select', options: ['>9 months expenses', '6–9 months', '3–6 months', '<3 months'] },
-  { key: 'goal', q: 'Primary goal right now?', type: 'select', options: ['Wealth growth', 'Child future', 'Home', 'Retirement', 'Safety first'] },
+  { key: 'age', q: 'What age band are you in?', options: ['18–30', '31–40', '41–50', '51+'] },
+  { key: 'horizon', q: 'Investment horizon for this corpus?', options: ['<3 years', '3–5 years', '5–10 years', '10+ years'] },
+  { key: 'income', q: 'How stable is your primary income?', options: ['Very stable', 'Mostly stable', 'Variable', 'Starting / building'] },
+  { key: 'risk', q: 'When markets drop 20%, you…', options: ['Buy more', 'Hold calmly', 'Unsure', 'Prefer to exit'] },
+  { key: 'emergency', q: 'Emergency fund status?', options: ['>9 months expenses', '6–9 months', '3–6 months', '<3 months'] },
+  { key: 'goal', q: 'Primary goal right now?', options: ['Wealth growth', 'Child future', 'Home', 'Retirement', 'Safety first'] },
 ];
 
 function scoreAnswers(a) {
@@ -40,26 +41,33 @@ function scoreAnswers(a) {
 }
 
 function basketFromScore(score) {
-  if (score >= 68) return { id: 'fire', title: 'FIRE', subtitle: 'Aggressive growth sleeve' };
-  if (score >= 44) return { id: 'water', title: 'WATER', subtitle: 'Balanced glide path' };
-  return { id: 'earth', title: 'EARTH', subtitle: 'Stability & resilience' };
+  if (score >= 68) return { id: 'fire', ...pickRec('fire') };
+  if (score >= 44) return { id: 'water', ...pickRec('water') };
+  return { id: 'earth', ...pickRec('earth') };
+}
+
+function pickRec(id) {
+  const b = basketById[id];
+  return {
+    title: b?.name || id.toUpperCase(),
+    subtitle: b?.comparison?.objective || '',
+  };
 }
 
 export default function RiskProfilePage() {
-  const { setRiskProfile, catalog } = useBasketUser();
+  const { setRiskProfile } = useBasketUser();
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState({});
 
   const cur = STEPS[step];
-  const progress = ((step + 1) / STEPS.length) * 100;
+  const progress = step < STEPS.length ? ((step + 1) / STEPS.length) * 100 : 100;
 
   const result = useMemo(() => {
     if (step < STEPS.length) return null;
     const score = scoreAnswers(answers);
     const rec = basketFromScore(score);
-    const basket = catalog.find((b) => b.id === rec.id);
-    return { score, rec, basket };
-  }, [step, answers, catalog]);
+    return { score, rec };
+  }, [step, answers]);
 
   const pick = (val) => {
     setAnswers((prev) => ({ ...prev, [cur.key]: val }));
@@ -85,11 +93,18 @@ export default function RiskProfilePage() {
       </Link>
 
       <section className="an-risk-profile">
-        <h1 className="an-sb-page-title">Risk profile quiz</h1>
-        <p className="an-sb-muted">Six quick questions — no jargon. We map your score to FIRE, WATER, or EARTH.</p>
-        <div className="an-risk-profile__progress" role="progressbar" aria-valuenow={progress} aria-valuemin={0} aria-valuemax={100}>
-          <div className="an-risk-profile__progress-fill" style={{ width: `${progress}%` }} />
-        </div>
+        <h1 className="an-sb-page-title">Risk Profiling</h1>
+
+        {step < STEPS.length && (
+          <>
+            <p className="an-risk-profile__step">
+              Question {step + 1} of {STEPS.length}
+            </p>
+            <div className="an-risk-profile__progress" role="progressbar" aria-valuenow={progress} aria-valuemin={0} aria-valuemax={100}>
+              <div className="an-risk-profile__progress-fill" style={{ width: `${progress}%` }} />
+            </div>
+          </>
+        )}
 
         <AnimatePresence mode="wait">
           {step < STEPS.length && (
@@ -119,24 +134,20 @@ export default function RiskProfilePage() {
               animate={{ opacity: 1, y: 0 }}
               className="an-glass-card an-risk-profile__card an-risk-profile__result"
             >
-              <p className="an-risk-profile__score-label">Your risk score</p>
-              <div className="an-risk-profile__score">{result.score}</div>
+              <p className="an-risk-profile__score-label">Your match</p>
               <div className="an-risk-profile__rec-head">
                 <ElementalIcon element={elementFromBasketId(result.rec.id)} size={36} />
                 <div>
-                  <strong>{result.rec.title}</strong>
+                  <strong>{result.rec.title} Basket</strong>
                   <span>{result.rec.subtitle}</span>
                 </div>
               </div>
-              <p className="an-sb-muted">
-                Suggested SIP anchor: ₹{result.basket?.sipSuggestionMonthly?.toLocaleString('en-IN') || '—'}/mo (illustrative).
-              </p>
               <div className="an-risk-profile__actions">
                 <Link className="an-btn-primary" to={`/invest/basket/${result.rec.id}`}>
-                  View {result.rec.title} analytics
+                  Explore {result.rec.title} Basket
                 </Link>
                 <Link className="an-btn-ghost" to="/invest/baskets">
-                  View all {BASKET_PRODUCT_NAME.toLowerCase()}
+                  Compare all baskets
                 </Link>
               </div>
             </motion.div>

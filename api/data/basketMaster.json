@@ -8,7 +8,7 @@
       "riskLevel": "Aggressive",
       "horizonYears": "7+ Years",
       "expectedReturn": 13.35,
-      "price": 4999,
+      "price": 99,
       "fundCount": 6,
       "assetAllocation": [
         { "label": "Equity", "pct": 65, "color": "#FE0101" },
@@ -66,7 +66,7 @@
       "riskLevel": "Moderate",
       "horizonYears": "5+ Years",
       "expectedReturn": 11.15,
-      "price": 4999,
+      "price": 99,
       "fundCount": 6,
       "assetAllocation": [
         { "label": "Equity", "pct": 40, "color": "#FE0101" },
@@ -124,7 +124,7 @@
       "riskLevel": "Conservative",
       "horizonYears": "3+ Years",
       "expectedReturn": 9.7,
-      "price": 4999,
+      "price": 99,
       "fundCount": 6,
       "assetAllocation": [
         { "label": "Equity", "pct": 25, "color": "#FE0101" },

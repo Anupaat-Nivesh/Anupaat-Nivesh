@@ -43,14 +43,15 @@ export function getAssetAllocationCompareLabels() {
   return STANDARD_ASSET_CLASS_LABELS;
 }
 
-/** Non-allocation comparison rows */
+/** Standardized comparison rows — same order and labels on landing + detail. */
 export const COMPARISON_META_ROWS = [
+  { key: 'comparison.objective', label: 'Objective' },
   { key: 'riskLevel', label: 'Risk Level' },
-  { key: 'expectedReturn', label: 'Expected Return', format: 'pct' },
+  { key: 'comparison.riskScoreRange', label: 'Risk Score (out of 10)' },
   { key: 'horizonYears', label: 'Investment Horizon' },
+  { key: 'minInvestment', label: 'Minimum Investment', format: 'inr' },
+  { key: 'expectedReturn', label: 'Expected Return*', format: 'pct' },
   { key: 'comparison.suitability', label: 'Suitable For' },
-  { key: 'comparison.riskScoreDisplay', label: 'Risk Score', format: 'score10' },
-  { key: 'comparison.target', label: 'Target' },
 ];
 
 /** @deprecated Use COMPARISON_META_ROWS + getAssetAllocationCompareLabels */
@@ -73,4 +74,12 @@ export function getAssetAllocationTotal(basket) {
 }
 
 export { fire, water, earth };
-export { projectLumpsum, formatLakhINR, getAssetAllocationPct, sumAllocationPct } from './shared.js';
+export {
+  projectLumpsum,
+  formatLakhINR,
+  formatINR,
+  getAssetAllocationPct,
+  sumAllocationPct,
+  BASKET_MIN_INVESTMENT,
+  BASKET_UNLOCK_PRICE,
+} from './shared.js';

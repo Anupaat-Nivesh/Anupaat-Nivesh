@@ -12,3 +12,4 @@ build
 uploads/
 
 # Keep .env.production.example for reference
+.vercel

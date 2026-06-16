@@ -1,12 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import { Line } from 'react-chartjs-2';
+import { getElementColor, getElementRgba } from '../../data/elementalColors';
+import { buildGrowthChartModel } from '../../utils/growthChartData';
 
-const SERIES = [
-  { id: 'basket', label: 'Basket', color: '#FE0101' },
-  { id: 'nifty50', label: 'Nifty 50', color: '#2563eb' },
-  { id: 'nifty500', label: 'Nifty 500', color: '#7c3aed' },
-  { id: 'gold', label: 'Gold', color: '#c9a227' },
-  { id: 'fd', label: 'FD @ 7%', color: '#64748b' },
+const NIFTY_COLOR = '#2563eb';
+
+const BENCHMARK_SERIES = [
+  { id: 'basket', label: 'Basket NAV', primary: true },
+  { id: 'nifty50', label: 'Nifty 50', primary: true },
 ];
 
 function formatLakh(n) {
@@ -15,90 +16,98 @@ function formatLakh(n) {
   return `₹${n.toLocaleString('en-IN')}`;
 }
 
-export default function BasketGrowthChart({ analytics, loading }) {
-  const [active, setActive] = useState(['basket', 'nifty50', 'gold']);
+export default function BasketGrowthChart({ analytics, basket, loading, element = 'fire' }) {
+  const [active, setActive] = useState(['basket', 'nifty50']);
+  const basketColor = getElementColor(element);
 
-  const chartData = useMemo(() => {
-    if (!analytics?.navHistory?.length) return null;
-    const labels = analytics.navHistory.map((p) => p.date);
-    const datasets = [];
+  const { growth, chartData, usingFallbackNav } = useMemo(() => {
+    const model = buildGrowthChartModel(analytics, basket, { activeSeries: active });
+    const fallback =
+      !analytics?.navHistory?.length && Boolean(basket?.performanceLine?.length);
+    return { ...model, usingFallbackNav: fallback };
+  }, [analytics, basket, active]);
 
-    if (active.includes('basket')) {
-      datasets.push({
-        label: 'Basket',
-        data: analytics.navHistory.map((p) => p.nav),
-        borderColor: '#FE0101',
-        backgroundColor: 'rgba(254,1,1,0.08)',
-        fill: true,
-        tension: 0.3,
-        pointRadius: 0,
-        borderWidth: 2,
-      });
-    }
-
-    SERIES.filter((s) => s.id !== 'basket' && active.includes(s.id)).forEach((s) => {
-      const bm = analytics.benchmarks?.[s.id];
-      if (!bm?.series?.length) return;
-      const map = new Map(bm.series.map((p) => [p.date, p.nav]));
-      datasets.push({
-        label: s.label,
-        data: labels.map((d) => map.get(d) ?? null),
-        borderColor: s.color,
-        tension: 0.3,
-        pointRadius: 0,
-        borderWidth: 1.5,
-        spanGaps: true,
-      });
-    });
-
-    return { labels, datasets };
-  }, [analytics, active]);
-
-  const growth = analytics?.growthComparison;
-  const basketRet = analytics?.returns?.growth1LakhReturn;
+  const chartJsData = useMemo(() => {
+    if (!chartData) return null;
+    return {
+      labels: chartData.labels,
+      datasets: chartData.datasets.map((ds) => {
+        const isBasket = ds.label === 'Basket NAV';
+        const color = isBasket ? basketColor : NIFTY_COLOR;
+        return {
+          ...ds,
+          borderColor: color,
+          backgroundColor: isBasket ? getElementRgba(element, 0.08) : undefined,
+          fill: isBasket,
+          tension: 0.3,
+          pointRadius: 0,
+          borderWidth: 2,
+          spanGaps: !isBasket,
+        };
+      }),
+    };
+  }, [chartData, basketColor, element]);
 
   return (
     <section className="an-basket-growth">
       <div className="an-basket-growth__head">
         <div>
           <h2 className="an-card-heading">Growth of ₹1,00,000</h2>
-          <p className="an-sb-muted">Synthetic basket NAV vs benchmarks (normalized to 100 at inception)</p>
+          <p className="an-sb-muted">
+            Basket NAV vs Nifty 50 — both indexed to 100 at basket inception. Weighted portfolio
+            level, not individual fund performance.
+            {usingFallbackNav && (
+              <>
+                {' '}
+                <span className="an-basket-growth__fallback-note">
+                  Showing illustrative curve — connect live analytics for actual NAV history.
+                </span>
+              </>
+            )}
+          </p>
         </div>
         <div className="an-basket-growth__summary">
           <div>
-            <span>Current value</span>
+            <span>Basket value</span>
             <strong>{loading ? '…' : formatLakh(growth?.basket)}</strong>
           </div>
           <div>
-            <span>Absolute return</span>
-            <strong className="an-return-pos">
-              {loading ? '…' : basketRet != null ? `+${basketRet}%` : '—'}
-            </strong>
+            <span>Nifty 50 value</span>
+            <strong>{loading ? '…' : formatLakh(growth?.nifty50)}</strong>
           </div>
         </div>
       </div>
 
       <div className="an-basket-growth__toggles">
-        {SERIES.map((s) => (
-          <button
-            key={s.id}
-            type="button"
-            className={`an-period-tab ${active.includes(s.id) ? 'is-active' : ''}`}
-            onClick={() =>
-              setActive((prev) =>
-                prev.includes(s.id) ? prev.filter((x) => x !== s.id) : [...prev, s.id]
-              )
-            }
-          >
-            {s.label}
-          </button>
-        ))}
+        {BENCHMARK_SERIES.map((s) => {
+          const color = s.id === 'basket' ? basketColor : NIFTY_COLOR;
+          return (
+            <button
+              key={s.id}
+              type="button"
+              className={`an-period-tab ${active.includes(s.id) ? 'is-active' : ''}`}
+              style={active.includes(s.id) ? { borderColor: color, color } : undefined}
+              onClick={() =>
+                setActive((prev) =>
+                  prev.includes(s.id) ? prev.filter((x) => x !== s.id) : [...prev, s.id]
+                )
+              }
+            >
+              <span
+                className="an-basket-growth__legend-dot"
+                style={{ background: color }}
+                aria-hidden="true"
+              />
+              {s.label}
+            </button>
+          );
+        })}
       </div>
 
       <div className="an-basket-growth__chart">
-        {chartData ? (
+        {chartJsData ? (
           <Line
-            data={chartData}
+            data={chartJsData}
             options={{
               responsive: true,
               maintainAspectRatio: false,

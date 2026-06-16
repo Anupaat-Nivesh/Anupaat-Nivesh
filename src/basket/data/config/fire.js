@@ -1,6 +1,4 @@
-import { performanceSeries } from './shared.js';
-
-const BASKET_UNLOCK_PRICE = 4999;
+import { performanceSeries, BASKET_MIN_INVESTMENT, BASKET_UNLOCK_PRICE } from './shared.js';
 
 const fire = {
   id: 'fire',
@@ -15,7 +13,7 @@ const fire = {
   riskScore: 88,
   horizonYears: '7+ Years',
   expectedReturn: 13.35,
-  minInvestment: 25000,
+  minInvestment: BASKET_MIN_INVESTMENT,
   price: BASKET_UNLOCK_PRICE,
   priceLabel: 'One-Time Access',
   fundCount: 6,
@@ -35,8 +33,8 @@ const fire = {
     basketId: 'fire',
   },
   comparison: {
-    riskScoreDisplay: 9,
-    target: 'Long-term wealth creation',
+    riskScoreRange: '8–10',
+    objective: 'Long-Term Wealth Creation',
     suitability: 'Growth',
   },
   growthProjectionHorizons: [5, 10, 15, 20, 30],

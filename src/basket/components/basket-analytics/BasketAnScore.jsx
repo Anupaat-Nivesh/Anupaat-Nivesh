@@ -1,4 +1,5 @@
 import React from 'react';
+import { getElementColor } from '../../data/elementalColors';
 
 const FACTORS = [
   { key: 'growth', label: 'Growth Potential' },
@@ -8,13 +9,13 @@ const FACTORS = [
   { key: 'riskControl', label: 'Risk Control' },
 ];
 
-function Gauge({ score, label, large }) {
+function Gauge({ score, label, large, accent }) {
   const pct = Math.min(100, Math.max(0, (score / 10) * 100));
   return (
     <div className={`an-an-score-gauge ${large ? 'an-an-score-gauge--lg' : ''}`}>
       <div
         className="an-an-score-gauge__ring"
-        style={{ '--score-pct': `${pct}%` }}
+        style={{ '--score-pct': `${pct}%`, '--score-accent': accent }}
         aria-hidden="true"
       >
         <span className="an-an-score-gauge__val">{score}</span>
@@ -24,19 +25,20 @@ function Gauge({ score, label, large }) {
   );
 }
 
-export default function BasketAnScore({ anScore, risk }) {
+export default function BasketAnScore({ anScore, risk, element = 'fire' }) {
   if (!anScore) return null;
+  const accent = getElementColor(element);
 
   return (
-    <section className="an-an-score">
+    <section className="an-an-score" style={{ '--an-score-accent': accent }}>
       <div className="an-an-score__head">
         <h2 className="an-card-heading">AN Risk Score™</h2>
         <p className="an-sb-muted">Proprietary portfolio intelligence — not a SEBI riskometer substitute</p>
       </div>
       <div className="an-an-score__grid">
-        <Gauge score={anScore.overall} label="Overall" large />
+        <Gauge score={anScore.overall} label="Overall" large accent={accent} />
         {FACTORS.map((f) => (
-          <Gauge key={f.key} score={anScore[f.key]} label={f.label} />
+          <Gauge key={f.key} score={anScore[f.key]} label={f.label} accent={accent} />
         ))}
       </div>
       {risk && (

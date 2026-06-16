@@ -5,21 +5,21 @@ import { BASKET_PRODUCT_NAME, getBasketById } from '../data/baskets';
 import { enrichBasketFunds } from '../utils/enrichBasket';
 import { mergeBasketAnalytics } from '../utils/mergeBasketAnalytics';
 import useBasketAnalytics from '../hooks/useBasketAnalytics';
+import { getResolvedBasketReturns } from '../utils/basketPerformance';
 import { openBasketCheckout } from '../services/basketPayment';
 import { validatePaymentConfig } from '../../utils/paymentConfig';
 import { isBackendAvailable } from '../../api/config';
 import InvestSubNav from '../components/InvestSubNav';
 import BasketInvestSidebar from '../components/basket-detail/BasketInvestSidebar';
-import DistributionCard from '../components/basket-detail/DistributionCard';
-import EquityAnalysisCard from '../components/basket-detail/EquityAnalysisCard';
 import ParametersCard from '../components/basket-detail/ParametersCard';
+import BasketPortfolioConstruction from '../components/basket-detail/BasketPortfolioConstruction';
+import BasketGrowthCalculator from '../components/basket-analytics/BasketGrowthCalculator';
 import ElementalIcon, { elementFromBasketId } from '../components/ElementalIcon';
 import BasketKpiStrip from '../components/basket-analytics/BasketKpiStrip';
 import BasketGrowthChart from '../components/basket-analytics/BasketGrowthChart';
+import BasketBenchmarkPanel from '../components/basket-analytics/BasketBenchmarkPanel';
 import BasketAnScore from '../components/basket-analytics/BasketAnScore';
 import BasketLockedHoldings from '../components/basket-analytics/BasketLockedHoldings';
-import BasketAllocationDonut from '../components/basket-analytics/BasketAllocationDonut';
-import BasketGrowthCalculator from '../components/basket-analytics/BasketGrowthCalculator';
 import '../styles/basket-screener.css';
 import '../styles/basket-cards.css';
 import '../styles/basket-detail.css';
@@ -35,6 +35,10 @@ export default function BasketDetail() {
   const { catalog, hasAccess, unlockBasket, user, setUser } = useBasketUser();
   const raw = useMemo(() => getBasketById(catalog, id), [catalog, id]);
   const { analytics, loading: analyticsLoading, error: analyticsError } = useBasketAnalytics(id);
+  const resolvedReturns = useMemo(
+    () => getResolvedBasketReturns(analytics, raw),
+    [analytics, raw]
+  );
   const basket = useMemo(() => {
     if (!raw) return null;
     const enriched = enrichBasketFunds(raw);
@@ -147,6 +151,14 @@ export default function BasketDetail() {
 
       <div className="an-basket-detail-profile-strip" role="list" aria-label="Basket profile">
         <div className="an-basket-detail-profile-stat" role="listitem">
+          <span>Objective</span>
+          <strong>{basket.comparison?.objective}</strong>
+        </div>
+        <div className="an-basket-detail-profile-stat" role="listitem">
+          <span>Risk score</span>
+          <strong>{basket.comparison?.riskScoreRange}</strong>
+        </div>
+        <div className="an-basket-detail-profile-stat" role="listitem">
           <span>Risk level</span>
           <strong>{basket.riskLevel}</strong>
         </div>
@@ -176,23 +188,32 @@ export default function BasketDetail() {
 
       <div className="an-basket-detail-grid">
         <div className="an-basket-detail-main">
-          <BasketKpiStrip returns={analytics?.returns} loading={analyticsLoading} />
-          <BasketGrowthChart analytics={analytics} loading={analyticsLoading} />
+          <BasketKpiStrip returns={resolvedReturns} loading={analyticsLoading} />
+          <BasketBenchmarkPanel analytics={analytics} basket={raw} loading={analyticsLoading} />
+          <BasketGrowthChart
+            analytics={analytics}
+            basket={raw}
+            loading={analyticsLoading}
+            element={basket.element || elementFromBasketId(basket.id)}
+          />
 
-          <div className="an-basket-allocation-row">
-            <BasketAllocationDonut
-              slices={basket.portfolioConstruction || basket.distributionSlices}
-              title="Portfolio construction"
-            />
-            <DistributionCard assetSlices={basket.assetSlices} />
-          </div>
-
-          {basket.sectors?.length > 0 && (
-            <EquityAnalysisCard marketCap={basket.marketCap} sectors={basket.sectors} />
-          )}
+          <BasketPortfolioConstruction
+            element={basket.element || elementFromBasketId(basket.id)}
+            slices={basket.portfolioConstruction || basket.distributionSlices}
+            assetSlices={basket.assetSlices || basket.allocationPreviewFree}
+            marketCap={basket.marketCap}
+            sectors={basket.sectors}
+            riskScoreRange={basket.comparison?.riskScoreRange}
+            riskLevel={basket.riskLevel}
+            liveVolatilityPct={basket.volatilityPct}
+          />
 
           <div className="an-basket-risk-row">
-            <BasketAnScore anScore={basket.anScore} risk={analytics?.risk} />
+            <BasketAnScore
+              anScore={basket.anScore}
+              risk={analytics?.risk}
+              element={basket.element || elementFromBasketId(basket.id)}
+            />
             <ParametersCard
               sharpe={basket.metrics?.sharpe}
               expenseRatio={basket.expenseRatio}
@@ -203,7 +224,11 @@ export default function BasketDetail() {
 
           <BasketLockedHoldings basket={basket} paid={paid} onUnlock={scrollToUnlockForm} />
 
-          <BasketGrowthCalculator expectedReturn={basket.expectedReturn} basketName={basket.name} />
+          <BasketGrowthCalculator
+            expectedReturn={basket.expectedReturn}
+            basketName={basket.name}
+            liveCagrSinceInception={analytics?.returns?.cagrSinceInception}
+          />
 
           {basket.idealForLabels?.length > 0 && (
             <div className="an-sb-card an-basket-ideal-card">
@@ -257,12 +282,6 @@ export default function BasketDetail() {
           error={err}
         />
       </div>
-
-      <p className="an-compliance an-basket-detail-footnote">
-        *Expected return is illustrative target, not guaranteed. Mutual fund investments are subject to market risks.
-        Past performance does not guarantee future returns. Basket NAV is a synthetic model portfolio computed from
-        underlying scheme NAV history; actual investor returns may differ.
-      </p>
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './ConsultingSession.css';
 import ConsultingSessionForm from '../../components/ConsultingSessionForm/ConsultingSessionForm';
-import ComplianceDisclaimer from '../../components/ComplianceDisclaimer/ComplianceDisclaimer';
 import { paymentConfig, formatAmountForDisplay, getDiscountPercentage } from '../../utils/paymentConfig';
 
 /**
@@ -256,11 +255,6 @@ const ConsultingSession = () => {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Compliance Disclaimer */}
-      <section className="consulting-compliance">
-        <ComplianceDisclaimer />
       </section>
     </div>
   );

@@ -1,6 +1,4 @@
-import { performanceSeries } from './shared.js';
-
-const BASKET_UNLOCK_PRICE = 4999;
+import { performanceSeries, BASKET_MIN_INVESTMENT, BASKET_UNLOCK_PRICE } from './shared.js';
 
 const earth = {
   id: 'earth',
@@ -15,7 +13,7 @@ const earth = {
   riskScore: 32,
   horizonYears: '3+ Years',
   expectedReturn: 9.7,
-  minInvestment: 10000,
+  minInvestment: BASKET_MIN_INVESTMENT,
   price: BASKET_UNLOCK_PRICE,
   priceLabel: 'One-Time Access',
   fundCount: 6,
@@ -35,8 +33,8 @@ const earth = {
     basketId: 'earth',
   },
   comparison: {
-    riskScoreDisplay: 3,
-    target: 'Capital preservation and income',
+    riskScoreRange: 'Below 5',
+    objective: 'Capital Preservation & Income',
     suitability: 'Capital Preservation',
   },
   growthProjectionHorizons: [5, 10, 15, 20, 30],

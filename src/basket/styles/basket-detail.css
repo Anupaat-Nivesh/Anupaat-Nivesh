@@ -246,4 +246,150 @@
   .an-basket-detail-page .an-invest-sidebar {
     position: static;
   }
+
+  .an-portfolio-construction__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .an-portfolio-construction {
+    padding: 1.1rem 1rem 1.25rem;
+  }
+}
+
+/* Portfolio construction — market cap, sectors, risk score */
+.an-portfolio-construction {
+  background: var(--basket-surface, #fff);
+  border: 1px solid var(--basket-border, #e8ecf2);
+  border-radius: var(--an-basket-detail-radius, 1.15rem);
+  padding: 1.35rem 1.4rem 1.5rem;
+  margin-bottom: var(--basket-gap-lg, 2rem);
+  box-shadow: var(--basket-shadow, 0 4px 20px rgba(15, 23, 42, 0.06));
+}
+
+.an-portfolio-construction__head {
+  margin-bottom: 1.25rem;
+}
+
+.an-portfolio-construction__head .an-card-heading {
+  margin: 0 0 0.35rem;
+}
+
+.an-portfolio-construction__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.an-portfolio-construction__panel {
+  background: var(--basket-muted-surface, #f8fafc);
+  border: 1px solid var(--basket-border, #e8ecf2);
+  border-radius: 0.85rem;
+  padding: 1rem 1.1rem;
+}
+
+.an-portfolio-construction__panel--donut .an-basket-alloc {
+  margin: 0;
+}
+
+.an-portfolio-construction__panel--donut .an-card-heading {
+  font-size: 1.05rem;
+  margin-bottom: 0.75rem;
+}
+
+.an-portfolio-construction__subhead {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 0.85rem;
+  letter-spacing: -0.01em;
+}
+
+.an-portfolio-construction__cap-chart {
+  width: 140px;
+  height: 140px;
+  flex-shrink: 0;
+}
+
+.an-portfolio-construction__cap-legend {
+  flex: 1;
+  min-width: 0;
+}
+
+.an-portfolio-construction__sectors {
+  border-top: 1px dashed var(--basket-border, #e8ecf2);
+  padding-top: 1.15rem;
+}
+
+.an-portfolio-risk__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 0.35rem;
+}
+
+.an-portfolio-risk__lead {
+  margin: 0 0 0.85rem;
+  font-size: 0.875rem;
+}
+
+.an-portfolio-risk__score-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.an-portfolio-risk__badge {
+  display: inline-flex;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 2px solid;
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+}
+
+.an-portfolio-risk__level {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.an-portfolio-risk__track {
+  position: relative;
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.an-portfolio-risk__band {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 999px;
+  opacity: 0.92;
+}
+
+.an-portfolio-risk__ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.45rem;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.an-portfolio-risk__live {
+  margin: 0.85rem 0 0;
+  font-size: 0.875rem;
+  color: #475569;
+}
+
+.an-basket-growth__legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 0.4rem;
+  vertical-align: middle;
 }

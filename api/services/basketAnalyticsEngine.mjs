@@ -272,11 +272,92 @@ async function fetchSchemeNav(schemeCode) {
 
 function normalizeFromInception(series, inceptionDate) {
   const inc = new Date(inceptionDate);
-  const base = findNavOnOrBefore(series, inc);
-  if (!base) return [];
+  if (!series.length) return [];
+
+  let base = findNavOnOrBefore(series, inc);
+  let startDate = inc;
+
+  // Index fund may launch after basket inception — align from first available NAV.
+  if (!base) {
+    startDate = series[0].date;
+    base = series[0].nav;
+  }
+
   return series
-    .filter((r) => r.date >= inc)
+    .filter((r) => r.date >= startDate)
     .map((r) => ({ date: r.date, nav: round2((r.nav / base) * 100) }));
+}
+
+function jsonSeriesToNavSeries(jsonSeries) {
+  return (jsonSeries || [])
+    .map((p) => ({ date: new Date(p.date), nav: Number(p.nav) }))
+    .filter((r) => !Number.isNaN(r.nav) && r.date.getTime())
+    .sort((a, b) => a.date - b.date);
+}
+
+const PERIOD_RETURN_KEYS = [
+  'return1m',
+  'return3m',
+  'return6m',
+  'return1y',
+  'cagr3y',
+  'cagr5y',
+  'cagrSinceInception',
+];
+
+function pickPeriodReturns(source) {
+  if (!source) return {};
+  const out = {};
+  for (const key of PERIOD_RETURN_KEYS) {
+    if (source[key] != null && !Number.isNaN(source[key])) out[key] = source[key];
+  }
+  return out;
+}
+
+function coalescePeriodReturns(...sources) {
+  const out = {};
+  for (const key of PERIOD_RETURN_KEYS) {
+    for (const src of sources) {
+      if (src?.[key] != null && !Number.isNaN(src[key])) {
+        out[key] = src[key];
+        break;
+      }
+    }
+  }
+  return out;
+}
+
+function enrichPublicAnalytics(data) {
+  const navSeries = jsonSeriesToNavSeries(data.navHistory);
+  const returnsFromNav = navSeries.length >= 2 ? computeReturns(navSeries) : {};
+  const returns = {
+    ...(data.returns || {}),
+    ...coalescePeriodReturns(data.returns, returnsFromNav),
+  };
+
+  const benchmarks = {};
+  for (const [id, bm] of Object.entries(data.benchmarks || {})) {
+    const fromSeries =
+      bm?.series?.length >= 2 ? computeReturns(jsonSeriesToNavSeries(bm.series)) : {};
+    benchmarks[id] = {
+      ...bm,
+      returns: coalescePeriodReturns(bm?.returns, fromSeries),
+    };
+  }
+
+  return {
+    ...data,
+    returns,
+    benchmarks,
+  };
+}
+
+function attachBenchmarkReturns(benchmarkEntry, navSeries) {
+  const periodReturns = navSeries.length >= 2 ? pickPeriodReturns(computeReturns(navSeries)) : {};
+  return {
+    ...benchmarkEntry,
+    returns: coalescePeriodReturns(benchmarkEntry?.returns, periodReturns),
+  };
 }
 
 export function loadBasketMaster() {
@@ -328,13 +409,16 @@ export async function computeBasketAnalytics(basketConfig, { fetchNav = fetchSch
     try {
       const raw = await fetchNav(bm.nifty50.schemeCode);
       const norm = normalizeFromInception(raw, inceptionDate);
-      benchmarks.nifty50 = {
-        label: bm.nifty50.label,
-        currentNav: norm.length ? norm[norm.length - 1].nav : null,
-        series: downsampleSeries(norm, 200),
-      };
+      benchmarks.nifty50 = attachBenchmarkReturns(
+        {
+          label: bm.nifty50.label,
+          currentNav: norm.length ? norm[norm.length - 1].nav : null,
+          series: downsampleSeries(norm, 200),
+        },
+        norm
+      );
     } catch {
-      benchmarks.nifty50 = { label: bm.nifty50.label, series: [] };
+      benchmarks.nifty50 = attachBenchmarkReturns({ label: bm.nifty50.label, series: [] }, []);
     }
   }
 
@@ -342,13 +426,16 @@ export async function computeBasketAnalytics(basketConfig, { fetchNav = fetchSch
     try {
       const raw = await fetchNav(bm.nifty500.schemeCode);
       const norm = normalizeFromInception(raw, inceptionDate);
-      benchmarks.nifty500 = {
-        label: bm.nifty500.label,
-        currentNav: norm.length ? norm[norm.length - 1].nav : null,
-        series: downsampleSeries(norm, 200),
-      };
+      benchmarks.nifty500 = attachBenchmarkReturns(
+        {
+          label: bm.nifty500.label,
+          currentNav: norm.length ? norm[norm.length - 1].nav : null,
+          series: downsampleSeries(norm, 200),
+        },
+        norm
+      );
     } catch {
-      benchmarks.nifty500 = { label: bm.nifty500.label, series: [] };
+      benchmarks.nifty500 = attachBenchmarkReturns({ label: bm.nifty500.label, series: [] }, []);
     }
   }
 
@@ -356,25 +443,34 @@ export async function computeBasketAnalytics(basketConfig, { fetchNav = fetchSch
     try {
       const raw = await fetchNav(bm.gold.schemeCode);
       const norm = normalizeFromInception(raw, inceptionDate);
-      benchmarks.gold = {
-        label: bm.gold.label,
-        currentNav: norm.length ? norm[norm.length - 1].nav : null,
-        series: downsampleSeries(norm, 200),
-      };
+      benchmarks.gold = attachBenchmarkReturns(
+        {
+          label: bm.gold.label,
+          currentNav: norm.length ? norm[norm.length - 1].nav : null,
+          series: downsampleSeries(norm, 200),
+        },
+        norm
+      );
     } catch {
-      benchmarks.gold = { label: bm.gold.label, series: [] };
+      benchmarks.gold = attachBenchmarkReturns({ label: bm.gold.label, series: [] }, []);
     }
   }
 
   if (bm.fd?.rate) {
-    benchmarks.fd = {
-      label: bm.fd.label,
-      currentNav: round2(100 * (1 + bm.fd.rate / 100) ** ((endDate - new Date(inceptionDate)) / (365.25 * 86400000))),
-      series: downsampleSeries(
-        fdSeries(inceptionDate, endDate, bm.fd.rate).map((r) => ({ date: new Date(r.date), nav: r.nav })),
-        200
-      ),
-    };
+    const fdNavSeries = fdSeries(inceptionDate, endDate, bm.fd.rate).map((r) => ({
+      date: new Date(r.date),
+      nav: r.nav,
+    }));
+    benchmarks.fd = attachBenchmarkReturns(
+      {
+        label: bm.fd.label,
+        currentNav: round2(
+          100 * (1 + bm.fd.rate / 100) ** ((endDate - new Date(inceptionDate)) / (365.25 * 86400000))
+        ),
+        series: downsampleSeries(fdNavSeries, 200),
+      },
+      fdNavSeries
+    );
   }
 
   return {
@@ -417,7 +513,8 @@ export async function getPublicAnalytics(basketId) {
   const store = await loadBasketAnalyticsAsync();
   const data = store.baskets?.[basketId];
   if (!data) return null;
-  const { returns, risk, navHistory, benchmarks, growthComparison, inceptionDate, updatedAt } = data;
+  const { returns, risk, navHistory, benchmarks, growthComparison, inceptionDate, updatedAt } =
+    enrichPublicAnalytics(data);
   return { basketId, returns, risk, navHistory, benchmarks, growthComparison, inceptionDate, updatedAt };
 }
 

@@ -6,9 +6,21 @@ function futureValue(principal, cagrPct, years) {
   return Math.round(principal * (1 + cagrPct / 100) ** years);
 }
 
-export default function BasketGrowthCalculator({ expectedReturn, basketName }) {
+/**
+ * Forward-looking illustration only. Historical growth of ₹1L is on the chart above
+ * (synthetic basket NAV). This calculator uses assumed CAGR — not live basket history.
+ */
+export default function BasketGrowthCalculator({
+  expectedReturn,
+  basketName,
+  liveCagrSinceInception,
+}) {
   const [amount, setAmount] = useState(100000);
   const cagr = expectedReturn ?? 12;
+  const liveLabel =
+    liveCagrSinceInception != null
+      ? ` Basket NAV CAGR since inception: ${liveCagrSinceInception}%.`
+      : '';
 
   const projections = useMemo(
     () =>
@@ -21,9 +33,10 @@ export default function BasketGrowthCalculator({ expectedReturn, basketName }) {
 
   return (
     <section className="an-basket-calc">
-      <h2 className="an-card-heading">Growth calculator</h2>
+      <h2 className="an-card-heading">Forward growth illustration</h2>
       <p className="an-sb-muted">
-        Illustrative lumpsum projection for {basketName} at {cagr}% assumed CAGR — not a guarantee.
+        Hypothetical lumpsum projection for {basketName} at {cagr}% assumed CAGR — not a guarantee.
+        For actual basket history, see Growth of ₹1,00,000 above.{liveLabel}
       </p>
       <div className="an-basket-calc__slider">
         <label htmlFor="calc-amt">
@@ -32,9 +45,9 @@ export default function BasketGrowthCalculator({ expectedReturn, basketName }) {
         <input
           id="calc-amt"
           type="range"
-          min={25000}
+          min={10000}
           max={5000000}
-          step={25000}
+          step={10000}
           value={amount}
           onChange={(e) => setAmount(Number(e.target.value))}
         />

@@ -3,7 +3,7 @@
  * Admin overrides merge at runtime (localStorage).
  */
 
-import { elementalBaskets, ELEMENTAL_BASKET_IDS } from './config/index.js';
+import { elementalBaskets, ELEMENTAL_BASKET_IDS, BASKET_UNLOCK_PRICE } from './config/index.js';
 
 export const BASKET_IDS = ELEMENTAL_BASKET_IDS;
 
@@ -11,7 +11,7 @@ export const BASKET_IDS = ELEMENTAL_BASKET_IDS;
 export const BASKET_PRODUCT_NAME = 'Mutual fund baskets';
 
 /** One-time Razorpay unlock fee per basket (FIRE · WATER · EARTH). */
-export const BASKET_UNLOCK_PRICE = 4999;
+export { BASKET_UNLOCK_PRICE };
 
 export const defaultBaskets = elementalBaskets;
 

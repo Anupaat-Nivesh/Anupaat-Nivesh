@@ -24,11 +24,11 @@ export default function BasketPersonalitySection({ ctaHref = '/invest/baskets' }
               <ElementalIcon element={b.element} size={36} />
             </div>
             <h3>
-              {b.personality?.title || b.name} – {b.personality?.subtitle}
+              {b.personality?.title || b.name} – {b.comparison?.objective || b.personality?.subtitle}
             </h3>
             <p>{b.personality?.pitch}</p>
             <span className="an-basket-personality__meta">
-              {b.riskLevel} · {b.horizonYears}
+              Risk score {b.comparison?.riskScoreRange} · {b.riskLevel} · {b.horizonYears}
             </span>
           </Link>
         ))}

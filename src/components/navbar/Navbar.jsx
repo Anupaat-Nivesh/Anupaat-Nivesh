@@ -7,10 +7,16 @@ import 'animate.css';
 
 import logo from '../../assets/logo.webp';
 
+/** Highlighted primary product — top-level nav (not buried in dropdown). */
+const mutualFundBasketsNav = {
+    label: 'Mutual fund baskets',
+    path: '/invest/baskets',
+    badge: 'New*',
+};
+
 /** Core client paths — “What we do” */
 const whatWeDoLinks = [
     { label: 'All offerings', path: '/offerings' },
-    { label: 'Mutual fund baskets', path: '/invest/baskets' },
     { label: 'Fixed income & alternatives', path: '/fixed-income-alternatives' },
     { label: 'Loan against securities', path: '/loan-against-securities' },
     { label: 'P2P lending', path: '/p2p-lending' },
@@ -164,6 +170,11 @@ const Navbar = () => {
         }
     };
 
+    const isInvestRoute =
+        location.pathname.startsWith('/invest/baskets') ||
+        location.pathname.startsWith('/invest/basket') ||
+        location.pathname.startsWith('/invest/risk-profile');
+
     return (
         <div
             ref={navRootRef}
@@ -176,6 +187,18 @@ const Navbar = () => {
                     </Link>
                 </div>
                 <ul className="anupaat__navbar-links_container">
+                    <li className="nav-highlight-item">
+                        <NavLink
+                            to={mutualFundBasketsNav.path}
+                            className={`nav-highlight-link${isInvestRoute ? ' active' : ''}`}
+                            onClick={closeNavDropdowns}
+                        >
+                            <span>{mutualFundBasketsNav.label}</span>
+                            <span className="nav-item-badge nav-item-badge--highlight" aria-label="New">
+                                {mutualFundBasketsNav.badge}
+                            </span>
+                        </NavLink>
+                    </li>
                     <li
                         className={`nav-item-with-dropdown${showWhatWeDoMenu ? ' is-open' : ''}`}
                         ref={whatWeDoWrapRef}
@@ -384,6 +407,21 @@ const Navbar = () => {
                                         }}
                                     >
                                         Home
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to={mutualFundBasketsNav.path}
+                                        className={`mobile-nav-link--with-badge nav-highlight-link--mobile${isInvestRoute ? ' active' : ''}`}
+                                        onClick={() => {
+                                            setToggleMenu(false);
+                                            restoreScrolling();
+                                        }}
+                                    >
+                                        <span>{mutualFundBasketsNav.label}</span>
+                                        <span className="nav-item-badge nav-item-badge--mobile nav-item-badge--highlight">
+                                            {mutualFundBasketsNav.badge}
+                                        </span>
                                     </NavLink>
                                 </li>
                                 <li className="mobile-submenu-item">

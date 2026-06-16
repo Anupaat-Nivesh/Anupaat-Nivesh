@@ -61,7 +61,8 @@
     "dev": "cross-env DANGEROUSLY_DISABLE_HOST_CHECK=true react-scripts start",
     "update:amc-index": "node scripts/update-amc-index.mjs",
     "fetch:factsheets": "node scripts/fetch-factsheets.mjs",
-    "refresh-baskets": "node scripts/refresh-basket-analytics.mjs"
+    "refresh-baskets": "node scripts/refresh-basket-analytics.mjs",
+    "validate:release": "node scripts/pre-release-validate.mjs"
   },
   "eslintConfig": {
     "extends": [

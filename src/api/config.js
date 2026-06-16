@@ -31,7 +31,8 @@ export function normalizeReactAppApiOrigin(raw) {
 export const getApiBaseUrl = () => {
   const fromEnv = normalizeReactAppApiOrigin(process.env.REACT_APP_API_BASE_URL);
   if (process.env.NODE_ENV === 'development') {
-    return fromEnv || 'http://localhost:8000';
+    // Same-origin + package.json proxy → localhost:8000 (avoids CORS / hard-coded port issues)
+    return fromEnv || '';
   }
   // Unified Vercel deploy: same-origin /api when env is empty
   if (fromEnv) return fromEnv;
