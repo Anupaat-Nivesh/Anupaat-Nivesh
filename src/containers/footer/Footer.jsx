@@ -90,10 +90,11 @@ const Footer = () => (
             <p>AMFI Registered Mutual Fund Distributor | ARN: 347085 | Registered: 02.12.2025 | Valid till: 01.12.2028</p>
             <p>BSE Membership ID: 65566 | Start-Up India Regn No.: DIPP233072</p>
             <p>
-                Head Office: Anupaat Nivesh Pvt. Ltd., Next57 Coworking, Plot 341, 5th Floor, Phase 9 Industrial Area,
-                Mohali, Punjab, India - 160062
+                Registered Office: Anupaat Nivesh Pvt. Ltd., #162/2, Dadu Majra, Chandigarh, Chandigarh 160014
             </p>
-            <p>Registered Office: Anupaat Nivesh Pvt. Ltd., #162/2, Dadu Majra, Chandigarh, India - 160014</p>
+            <p>
+                Branch/Sales Office: Anupaat Nivesh Pvt. Ltd., Suite 333, Medallion 68, Sector 68, Mohali, Punjab 160062
+            </p>
             <p className="footer-disclaimer__single-line">
                 <strong>Disclaimers:</strong> Investments in mutual funds and securities are subject to market risks;
                 please read all scheme and offer-related documents carefully before investing. Past performance does not
