@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   refresh-index:
@@ -33,8 +34,14 @@ jobs:
           GOOGLE_CSE_API_KEY: ${{ secrets.GOOGLE_CSE_API_KEY }}
           GOOGLE_CSE_CX: ${{ secrets.GOOGLE_CSE_CX }}
 
-      - name: Commit index if changed
-        uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Open PR with refreshed factsheet index
+        uses: peter-evans/create-pull-request@v6
         with:
-          commit_message: 'chore: refresh AMC factsheet index'
-          file_pattern: api/data/amc-document-index.json
+          commit-message: 'chore: refresh AMC factsheet index'
+          title: 'chore: refresh AMC factsheet index'
+          body: |
+            Automated refresh of `api/data/amc-document-index.json`.
+          branch: chore/amc-factsheet-index-refresh
+          delete-branch: true
+          add-paths: |
+            api/data/amc-document-index.json
