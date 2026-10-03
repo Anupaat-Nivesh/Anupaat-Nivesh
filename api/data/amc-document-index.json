@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-01T11:25:58.297Z",
+  "generatedAt": "2026-10-03T08:34:00.633Z",
   "amcDocumentPages": {
     "aditya birla sun life": "https://mutualfund.adityabirlacapital.com/downloads",
     "nippon india": "https://mf.nipponindiaim.com/FundsAndPerformance/Pages/Factsheet.aspx",
@@ -21,6 +21,33 @@
     "whiteoak": "https://mf.whiteoakamc.com/downloads"
   },
   "schemes": {
+    "102987": {
+      "schemeCode": "102987",
+      "schemeName": "ICICI Prudential Plan I - Year Plus Plan-Growth-Direct",
+      "fundHouse": "ICICI Prudential",
+      "factsheetUrl": "https://digitalfactsheet.icicipruamc.com/fact/pdf/icici-prudential-short-term-fund.pdf",
+      "managers": [],
+      "source": "factsheet-duckduckgo",
+      "updatedAt": "2026-10-03T08:24:38.447Z"
+    },
+    "118692": {
+      "schemeCode": "118692",
+      "schemeName": "Nippon India Focused Fund - Direct Plan - Growth Option",
+      "fundHouse": "Nippon India",
+      "factsheetUrl": "https://mf.nipponindiaim.com/FundsAndPerformance/ProductNotes/NipponIndia-Focused-Fund-May-2026.pdf",
+      "managers": [],
+      "source": "factsheet-duckduckgo",
+      "updatedAt": "2026-10-03T08:32:03.118Z"
+    },
+    "118701": {
+      "schemeCode": "118701",
+      "schemeName": "Nippon India Liquid Fund - Direct Plan - Growth Option",
+      "fundHouse": "Nippon India",
+      "factsheetUrl": "https://mf.nipponindiaim.com/FundsAndPerformance/ProductNotes/NipponIndia-Liquid-Fund-Aug2023.pdf",
+      "managers": [],
+      "source": "factsheet-duckduckgo",
+      "updatedAt": "2026-10-03T08:32:06.513Z"
+    },
     "119544": {
       "schemeCode": "119544",
       "schemeName": "Aditya Birla Sun Life ELSS Tax Saver Fund - Growth - Direct Plan",
