@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-01T11:25:58.297Z",
+  "generatedAt": "2026-10-17T07:15:45.308Z",
   "amcDocumentPages": {
     "aditya birla sun life": "https://mutualfund.adityabirlacapital.com/downloads",
     "nippon india": "https://mf.nipponindiaim.com/FundsAndPerformance/Pages/Factsheet.aspx",
@@ -21,6 +21,15 @@
     "whiteoak": "https://mf.whiteoakamc.com/downloads"
   },
   "schemes": {
+    "102987": {
+      "schemeCode": "102987",
+      "schemeName": "ICICI Prudential Plan I - Year Plus Plan-Growth-Direct",
+      "fundHouse": "ICICI Prudential",
+      "factsheetUrl": "https://www.icicipruamc.com/blob/downloads/Files/Historic Factsheets/2025-2026/Complete Factsheet January 2026.pdf",
+      "managers": [],
+      "source": "factsheet-duckduckgo",
+      "updatedAt": "2026-10-17T07:06:06.364Z"
+    },
     "119544": {
       "schemeCode": "119544",
       "schemeName": "Aditya Birla Sun Life ELSS Tax Saver Fund - Growth - Direct Plan",
