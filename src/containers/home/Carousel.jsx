@@ -39,7 +39,7 @@ export const Carousel = () => {
             bold: "probability, not noise",
             subDescription:
                 "The same valuation evidence others skim — normalized, de-noised, and read as a single deployment posture for fresh money.",
-            subText: "Lump sum vs STP, sleeves, and risk bands — not forecasts. Coming soon on Anupaat Nivesh.",
+            subText: "Lump sum vs STP, sleeves, and risk bands — not forecasts. Explore the framework, then log in.",
             ctaPath: "/valuation",
             ctaLabel: "See how it works",
             img560w: require("../../assets/illustrations/carousel1-illustration-560w.webp"),

@@ -26,6 +26,7 @@ import screenersRouter from './api/routes/screeners.mjs';
 import mutualFundsRouter from './api/routes/mutual-funds.mjs';
 import basketsRouter from './api/routes/baskets.mjs';
 import { getMediaUploadDir } from './api/services/mediaStorageHostinger.mjs';
+import { isMarketsBreadthHost, proxyMarketsBreadth } from './api/services/marketsBreadthProxy.mjs';
 
 // Raw body middleware for webhook signature verification
 const rawBodyMiddleware = express.raw({ type: 'application/json', limit: '10mb' });
@@ -51,7 +52,17 @@ const extraOrigins = (process.env.CORS_ALLOWED_ORIGINS || '')
   .map((v) => v.trim())
   .filter(Boolean);
 
-const corsOrigins = [...new Set([...defaultOrigins, ...extraOrigins])];
+const corsOrigins = [...new Set([
+  ...defaultOrigins,
+  ...extraOrigins,
+  'https://compass.anupaatnivesh.com',
+  'https://markets.anupaatnivesh.com',
+])];
+
+app.use((req, res, next) => {
+  if (!isMarketsBreadthHost(req)) return next();
+  return proxyMarketsBreadth(req, res);
+});
 
 const corsOriginCallback = (origin, callback) => {
   if (!origin) return callback(null, true);

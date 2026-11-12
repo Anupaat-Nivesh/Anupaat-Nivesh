@@ -21,6 +21,16 @@
     ],
     "routes": [
         {
+            "src": "/(.*)",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "markets.anupaatnivesh.com"
+                }
+            ],
+            "dest": "/server.mjs"
+        },
+        {
             "src": "/api/(.*)",
             "dest": "/server.mjs"
         },

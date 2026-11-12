@@ -9,6 +9,7 @@ import ScreenersHubLive from '../components/ScreenersHubLive';
 import { marketIndices, heroThemes } from '../data/screenerStaticData';
 import useScreenersHub from '../hooks/useScreenersHub';
 import '../styles/screeners.css';
+import { MARKET_BREADTH_URL } from '../../data/insightTools';
 
 /** Matches on-page narrative: pulse → insights → deals → events → explore */
 const HUB_NAV = [
@@ -42,8 +43,14 @@ export default function ScreenersHub() {
               {item.label}
             </a>
           ))}
+          <a href={MARKET_BREADTH_URL} className="scr-subnav__link">
+            Market breadth screener
+          </a>
           <Link to="/screeners/sector-rotation" className="scr-subnav__link">
             Sector rotation dashboard
+          </Link>
+          <Link to="/valuation" className="scr-subnav__link">
+            MarketCompass
           </Link>
           <Link to="/invest/baskets" className="scr-subnav__link scr-subnav__link--cta">
             Mutual fund baskets →

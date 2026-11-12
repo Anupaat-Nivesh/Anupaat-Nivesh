@@ -6,6 +6,7 @@ import { animateScroll } from 'react-scroll';
 import 'animate.css';
 
 import logo from '../../assets/logo.webp';
+import { MARKET_BREADTH_URL } from '../../data/insightTools';
 
 /** Core client paths — “What we do” */
 const whatWeDoLinks = [
@@ -24,11 +25,31 @@ const whatWeDoLinks = [
 /** Insights & tools — app install lives in header only (no duplicate Our app / App download). */
 const insightsLinks = [
     { label: 'Screeners', path: '/screeners' },
+    { label: 'Market breadth', href: MARKET_BREADTH_URL },
     { label: 'Sector rotation', path: '/screeners/sector-rotation' },
     { label: 'MarketCompass', path: '/valuation' },
     { label: 'Calculators', path: '/calculators' },
     { label: 'Tools', path: '/tools' },
 ];
+
+function insightItemKey(item) {
+    return item.href || item.path;
+}
+
+function InsightMenuItem({ item, onClick, className, children }) {
+    if (item.href) {
+        return (
+            <a href={item.href} className={className} onClick={onClick} role="menuitem">
+                {children}
+            </a>
+        );
+    }
+    return (
+        <Link to={item.path} className={className} onClick={onClick} role="menuitem">
+            {children}
+        </Link>
+    );
+}
 
 /** Company & trust — Contact lives here to keep the bar minimal (fintech pattern). */
 const companyLinks = [
@@ -233,10 +254,9 @@ const Navbar = () => {
                         </button>
                         <div className={`navbar-dropdown ${showInsightsMenu ? 'open' : ''}`} role="menu">
                             {insightsLinks.map((l) => (
-                                <Link
-                                    key={l.path}
-                                    to={l.path}
-                                    role="menuitem"
+                                <InsightMenuItem
+                                    key={insightItemKey(l)}
+                                    item={l}
                                     className={l.badge ? 'navbar-dropdown__link navbar-dropdown__link--with-badge' : undefined}
                                     onClick={() => setShowInsightsMenu(false)}
                                 >
@@ -246,7 +266,7 @@ const Navbar = () => {
                                             {l.badge}
                                         </span>
                                     ) : null}
-                                </Link>
+                                </InsightMenuItem>
                             ))}
                         </div>
                     </li>
@@ -424,20 +444,33 @@ const Navbar = () => {
                                     </button>
                                     <ul className={`mobile-submenu ${mobileInsightsOpen ? 'open' : ''}`}>
                                         {insightsLinks.map((l) => (
-                                            <li key={l.path}>
-                                                <NavLink
-                                                    to={l.path}
-                                                    className={l.badge ? 'mobile-nav-link--with-badge' : undefined}
-                                                    onClick={() => {
-                                                        setToggleMenu(false);
-                                                        restoreScrolling();
-                                                    }}
-                                                >
-                                                    <span>{l.label}</span>
-                                                    {l.badge ? (
-                                                        <span className="nav-item-badge nav-item-badge--mobile">{l.badge}</span>
-                                                    ) : null}
-                                                </NavLink>
+                                            <li key={insightItemKey(l)}>
+                                                {l.href ? (
+                                                    <a
+                                                        href={l.href}
+                                                        className={l.badge ? 'mobile-nav-link--with-badge' : undefined}
+                                                        onClick={() => {
+                                                            setToggleMenu(false);
+                                                            restoreScrolling();
+                                                        }}
+                                                    >
+                                                        <span>{l.label}</span>
+                                                    </a>
+                                                ) : (
+                                                    <NavLink
+                                                        to={l.path}
+                                                        className={l.badge ? 'mobile-nav-link--with-badge' : undefined}
+                                                        onClick={() => {
+                                                            setToggleMenu(false);
+                                                            restoreScrolling();
+                                                        }}
+                                                    >
+                                                        <span>{l.label}</span>
+                                                        {l.badge ? (
+                                                            <span className="nav-item-badge nav-item-badge--mobile">{l.badge}</span>
+                                                        ) : null}
+                                                    </NavLink>
+                                                )}
                                             </li>
                                         ))}
                                     </ul>

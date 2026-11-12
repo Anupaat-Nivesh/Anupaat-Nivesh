@@ -13,6 +13,7 @@ import HowWeWork from '../../components/HowWeWork/HowWeWork';
 import BasketHomePromo from '../../basket/components/basket-analytics/BasketHomePromo';
 import { updateSEO } from '../../utils/seo';
 import { paymentConfig, formatAmountForDisplay, getDiscountPercentage } from '../../utils/paymentConfig';
+import { MARKET_COMPASS_LOGIN_PATH } from '../../data/insightTools';
 
 
 
@@ -183,7 +184,7 @@ const Home = () => {
                         {/* Screen 3: MarketCompass (coming soon) */}
                         <div className={`hero-screen ${heroScreen === 2 ? 'active' : ''}`}>
                             <div className="hero-content">
-                                <div className="marketcompass-hero-badge">Coming soon</div>
+                                <div className="marketcompass-hero-badge">Log in</div>
                                 <h1>MarketCompass<br />Market-ready guidance</h1>
                                 <p className="hero-benefit">
                                     Simple hints on when to add money (lump sum vs step-by-step) and where equities fit
@@ -192,7 +193,9 @@ const Home = () => {
                                 </p>
                                 <div className="hero-actions">
                                     <Link to="/valuation" className="btn btn-primary hero-cta-btn">View MarketCompass</Link>
-                                    <Link to="/contact" className="btn hero-cta-btn hero-cta-btn--outline-dark">Notify me at launch</Link>
+                                    <Link to={MARKET_COMPASS_LOGIN_PATH} className="btn hero-cta-btn hero-cta-btn--outline-dark">
+                                        Log in
+                                    </Link>
                                 </div>
                                 <div className="hero-pills">
                                     <span>✓ 20+ years tested</span>

@@ -40,6 +40,7 @@ import Onboarding from "./pages/Onboarding/Onboarding";
 import SignupPage from "./pages/Signup/Signup";
 import AdminMediaPanel from "./pages/AdminMediaPanel/AdminMediaPanel";
 import MarketDeploymentIntelligencePage from "./pages/MarketDeploymentIntelligence/MarketDeploymentIntelligencePage";
+import CompassLoginPage from "./pages/MarketDeploymentIntelligence/CompassLoginPage";
 import { BasketUserProvider } from "./basket/context/BasketUserContext";
 import InvestLayout from "./basket/layout/InvestLayout";
 import MutualFundScreener from "./basket/pages/MutualFundScreener";
@@ -92,6 +93,7 @@ function App() {
           <Route path="payment-error" element={<PaymentError />} />
           <Route path="signup" element={<SignupPage />} />
           <Route path="valuation" element={<MarketDeploymentIntelligencePage />} />
+          <Route path="valuation/login" element={<CompassLoginPage />} />
 
           <Route path="*" element={<NotFound />} />
           {/* footer pages  */}

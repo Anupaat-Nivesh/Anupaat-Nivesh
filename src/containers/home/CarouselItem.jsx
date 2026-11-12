@@ -15,11 +15,17 @@ export const CarouselItem = ({ item }) => {
 
                 <div className="carousel-item-subDes"><q>{item.subDescription}</q></div>
                 <div className="carousel-item-subtext">{item.subText}</div>
-                {item.ctaPath && item.ctaLabel ? (
+                {(item.ctaHref || item.ctaPath) && item.ctaLabel ? (
                     <div className="carousel-item-cta-row">
-                        <Link to={item.ctaPath} className="carousel-cta-btn carousel-cta-btn--outline">
-                            {item.ctaLabel}
-                        </Link>
+                        {item.ctaHref ? (
+                            <a href={item.ctaHref} className="carousel-cta-btn carousel-cta-btn--outline">
+                                {item.ctaLabel}
+                            </a>
+                        ) : (
+                            <Link to={item.ctaPath} className="carousel-cta-btn carousel-cta-btn--outline">
+                                {item.ctaLabel}
+                            </Link>
+                        )}
                     </div>
                 ) : null}
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { MARKET_COMPASS_LOGIN_PATH } from "../../../data/insightTools";
 import { motion } from "framer-motion";
 import HeroInsightCarousel from "./HeroInsightCarousel";
 
@@ -23,7 +24,7 @@ export default function HeroSection() {
             className="inline-flex items-center gap-2 rounded-full border border-mdif-line bg-mdif-surface px-4 py-2 text-sm font-semibold uppercase tracking-[0.12em] text-mdif-textSoft shadow-sm sm:text-[0.9375rem]"
           >
             <span className="h-2 w-2 shrink-0 rounded-full bg-mdif-brand shadow-[0_0_0_3px_rgba(254,1,1,0.2)]" />
-            MarketCompass · coming soon
+            MarketCompass
           </motion.div>
 
           <motion.h1
@@ -55,15 +56,12 @@ export default function HeroSection() {
             transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center"
           >
-            <span className="inline-flex w-fit items-center rounded-xl border border-mdif-line bg-mdif-surface px-5 py-3 text-sm font-bold uppercase tracking-widest text-mdif-textMuted shadow-sm sm:text-[0.8125rem]">
-              Coming soon
-            </span>
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="sm:inline-flex">
               <Link
-                to="/contact"
+                to={MARKET_COMPASS_LOGIN_PATH}
                 className="inline-flex min-h-[52px] items-center justify-center rounded-xl bg-mdif-brand px-8 py-3.5 text-base font-semibold text-white shadow-[0_12px_40px_-12px_rgba(254,1,1,0.55)] transition hover:bg-mdif-brandDark sm:min-h-[56px] sm:px-10 sm:text-lg"
               >
-                Join early access
+                Log in to MarketCompass
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="sm:inline-flex">

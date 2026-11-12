@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { MARKET_BREADTH_URL } from '../../../data/insightTools';
 import './mutualfund.css';
 import '../offerings-shared.css';
 import ContactModal from '../../../components/contact/contactModal/ContactModal';
@@ -67,6 +68,11 @@ const MutualFund = () => {
                     <h3>Sector Rotation Dashboard</h3>
                     <p>Relative strength trends to identify sector leadership shifts.</p>
                     <Link to="/screeners/sector-rotation" className="invest-flow-link">Open Sector Rotation →</Link>
+                </article>
+                <article className="invest-flow-card">
+                    <h3>Market breadth screener</h3>
+                    <p>Session highs and lows, industry clusters, and market thrust.</p>
+                    <a href={MARKET_BREADTH_URL} className="invest-flow-link">Open Market Breadth →</a>
                 </article>
                 <article className="invest-flow-card">
                     <h3>MarketCompass</h3>

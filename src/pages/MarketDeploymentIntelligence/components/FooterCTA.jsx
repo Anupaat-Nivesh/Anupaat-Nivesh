@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { MARKET_COMPASS_LOGIN_PATH } from "../../../data/insightTools";
 
 export default function FooterCTA() {
   const [email, setEmail] = useState("");
@@ -30,10 +31,10 @@ export default function FooterCTA() {
           <div className="rounded-[26px] bg-mdif-surface px-6 py-10 sm:px-12 sm:py-14">
             <div className="text-center">
               <p className="text-sm font-bold uppercase tracking-[0.2em] text-mdif-brand sm:text-base">
-                Coming soon
+                Subscriber login
               </p>
               <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight text-mdif-text sm:text-4xl md:text-[2.75rem] md:leading-[1.12]">
-                Get early access to MarketCompass
+                Log in to MarketCompass
               </h2>
               <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-mdif-textMuted sm:text-xl sm:leading-relaxed">
                 One score for <strong className="font-semibold text-mdif-text">when</strong> to deploy
@@ -45,10 +46,10 @@ export default function FooterCTA() {
             <div className="mt-10 flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:flex-wrap sm:gap-5">
               <motion.div className="flex-1 sm:flex-initial sm:min-w-[220px]" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Link
-                  to="/contact"
+                  to={MARKET_COMPASS_LOGIN_PATH}
                   className="flex min-h-[56px] w-full items-center justify-center rounded-xl bg-mdif-brand px-8 py-4 text-center text-lg font-semibold text-white shadow-[0_14px_40px_-10px_rgba(254,1,1,0.55)] transition hover:bg-mdif-brandDark"
                 >
-                  Get early access
+                  Log in to MarketCompass
                 </Link>
               </motion.div>
               <motion.div className="flex-1 sm:flex-initial sm:min-w-[220px]" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>

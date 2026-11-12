@@ -1,6 +1,18 @@
+import { MARKET_BREADTH_URL } from '../../data/insightTools';
+
 /** Quick-nav catalog cards → in-page anchors (live hub sections). */
 
 export const liveHubNavCards = [
+  {
+    id: 'nav-breadth-screener',
+    tag: 'Breadth',
+    title: 'Market breadth screener',
+    description: 'Highs vs lows, industry clusters, and session thrust',
+    icon: 'pulse',
+    iconTone: 'teal',
+    count: 'Open',
+    href: MARKET_BREADTH_URL,
+  },
   {
     id: 'nav-sector-rotation',
     tag: 'Rotation',

@@ -1,0 +1,26 @@
+.compass-embed-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: calc(
+    100dvh - var(--market-ticker-top, var(--navbar-height, 5.5rem)) -
+      var(--market-ticker-strip, 2.75rem)
+  );
+  background: #f7f4ee;
+}
+
+.compass-embed-page__frame {
+  display: block;
+  width: 100%;
+  flex: 1;
+  min-height: inherit;
+  border: 0;
+  background: #f7f4ee;
+}
+
+.layout-outlet:has(.compass-embed-page) {
+  padding-top: calc(
+    var(--market-ticker-top, var(--navbar-height, 5.5rem)) + var(--market-ticker-strip, 2.75rem)
+  );
+  padding-bottom: 0;
+}
