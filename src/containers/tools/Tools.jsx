@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./tools.css";
 import { Link } from "react-router-dom";
-import { MARKET_BREADTH_URL } from "../../data/insightTools";
+import { MARKET_BREADTH_PATH } from "../../data/insightTools";
 import { FaCalculator, FaChartPie, FaFileInvoiceDollar } from "react-icons/fa";
 
 const toolsData = [
@@ -87,9 +87,9 @@ const Tools = () => {
           <Link to="/valuation" className="tools-btn tools-btn--ghost">
             MarketCompass
           </Link>
-          <a href={MARKET_BREADTH_URL} className="tools-btn tools-btn--ghost">
+          <Link to={MARKET_BREADTH_PATH} className="tools-btn tools-btn--ghost">
             Market breadth
-          </a>
+          </Link>
         </div>
       </header>
 

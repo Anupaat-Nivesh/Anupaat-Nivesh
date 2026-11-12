@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/footer-logo.png';
-import { MARKET_BREADTH_URL } from '../../data/insightTools';
+import { MARKET_BREADTH_PATH } from '../../data/insightTools';
 import { FaRegCopyright, FaPhoneAlt } from 'react-icons/fa';
 import { SiGmail } from "react-icons/si";
 import FacebookLogo from "../../assets/facebook-logo.png";
@@ -46,7 +46,7 @@ const Footer = () => (
                     <h3 className='footer-heading'>Insights &amp; Tools</h3>
                     <div className='footer-links'>
                         <Link to='screeners'>Screeners Hub</Link>
-                        <a href={MARKET_BREADTH_URL}>Market Breadth</a>
+                        <Link to={MARKET_BREADTH_PATH}>Market Breadth</Link>
                         <Link to='screeners/sector-rotation'>Sector Rotation</Link>
                         <Link to='valuation'>MarketCompass</Link>
                         <Link to='calculators'>Calculators</Link>

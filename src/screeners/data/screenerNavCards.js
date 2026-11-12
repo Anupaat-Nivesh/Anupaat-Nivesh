@@ -1,4 +1,4 @@
-import { MARKET_BREADTH_URL } from '../../data/insightTools';
+import { MARKET_BREADTH_PATH } from '../../data/insightTools';
 
 /** Quick-nav catalog cards → in-page anchors (live hub sections). */
 
@@ -11,7 +11,7 @@ export const liveHubNavCards = [
     icon: 'pulse',
     iconTone: 'teal',
     count: 'Open',
-    href: MARKET_BREADTH_URL,
+    href: MARKET_BREADTH_PATH,
   },
   {
     id: 'nav-sector-rotation',

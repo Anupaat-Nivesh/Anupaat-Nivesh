@@ -37,14 +37,15 @@ export const updateSEO = ({
   canonical,
   ogImage,
   ogType = 'website',
-  twitterCard = 'summary_large_image'
+  twitterCard = 'summary_large_image',
+  robots = 'index, follow',
 }) => {
-  // Get base URL from environment or use current origin
-  const baseUrl = process.env.REACT_APP_BASE_URL || window.location.origin;
+  // Prefer configured public origin (www) so canonicals stay consistent.
+  const baseUrl = (process.env.REACT_APP_BASE_URL || (typeof window !== 'undefined' ? window.location.origin : '')).replace(/\/$/, '');
   
-  // Update document title
+  // Update document title (avoid doubling brand if title already includes it)
   if (title) {
-    document.title = `${title} | Anupaat Nivesh`;
+    document.title = /anupaat nivesh/i.test(title) ? title : `${title} | Anupaat Nivesh`;
   }
   
   // Update or create meta tags
@@ -63,6 +64,7 @@ export const updateSEO = ({
   // Basic meta tags
   updateMetaTag('description', description);
   updateMetaTag('keywords', keywords);
+  updateMetaTag('robots', robots);
   
   // Canonical URL
   if (canonical) {
@@ -72,7 +74,14 @@ export const updateSEO = ({
       canonicalLink.setAttribute('rel', 'canonical');
       document.head.appendChild(canonicalLink);
     }
-    canonicalLink.setAttribute('href', canonical.startsWith('http') ? canonical : `${baseUrl}${canonical}`);
+    let canonicalHref;
+    if (canonical.startsWith('http')) {
+      canonicalHref = canonical;
+    } else {
+      const path = canonical === '/' ? '/' : `/${canonical.replace(/^\/+|\/+$/g, '')}`;
+      canonicalHref = path === '/' ? `${baseUrl}/` : `${baseUrl}${path}`;
+    }
+    canonicalLink.setAttribute('href', canonicalHref);
   }
   
   // Open Graph tags

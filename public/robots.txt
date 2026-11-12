@@ -1,3 +1,16 @@
-# https://www.robotstxt.org/robotstxt.html
+# https://www.anupaatnivesh.com/robots.txt
 User-agent: *
-Disallow:
+Allow: /
+
+# Private / transactional surfaces
+Disallow: /payment
+Disallow: /payment-success
+Disallow: /payment-error
+Disallow: /valuation/login
+Disallow: /internal/
+Disallow: /mediadata
+Disallow: /invest/admin
+Disallow: /invest/payment-success
+Disallow: /onboarding
+
+Sitemap: https://www.anupaatnivesh.com/sitemap.xml

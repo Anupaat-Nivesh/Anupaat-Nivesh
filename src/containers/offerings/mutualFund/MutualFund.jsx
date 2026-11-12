@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MARKET_BREADTH_URL } from '../../../data/insightTools';
+import { MARKET_BREADTH_PATH } from '../../../data/insightTools';
 import './mutualfund.css';
 import '../offerings-shared.css';
 import ContactModal from '../../../components/contact/contactModal/ContactModal';
@@ -72,7 +72,7 @@ const MutualFund = () => {
                 <article className="invest-flow-card">
                     <h3>Market breadth screener</h3>
                     <p>Session highs and lows, industry clusters, and market thrust.</p>
-                    <a href={MARKET_BREADTH_URL} className="invest-flow-link">Open Market Breadth →</a>
+                    <Link to={MARKET_BREADTH_PATH} className="invest-flow-link">Open Market Breadth →</Link>
                 </article>
                 <article className="invest-flow-card">
                     <h3>MarketCompass</h3>

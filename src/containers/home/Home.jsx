@@ -11,7 +11,6 @@ import Contact from '../../components/contact/Contact';
 import { OurApp, TrustHighlights, MediaPresence } from '../../components';
 import HowWeWork from '../../components/HowWeWork/HowWeWork';
 import BasketHomePromo from '../../basket/components/basket-analytics/BasketHomePromo';
-import { updateSEO } from '../../utils/seo';
 import { paymentConfig, formatAmountForDisplay, getDiscountPercentage } from '../../utils/paymentConfig';
 import { MARKET_COMPASS_LOGIN_PATH } from '../../data/insightTools';
 
@@ -24,17 +23,6 @@ import { MARKET_COMPASS_LOGIN_PATH } from '../../data/insightTools';
 const Home = () => {
     const [heroScreen, setHeroScreen] = useState(0); // 0 Advisor, 1 Consulting, 2 MarketCompass
     const [heroMouseInside, setHeroMouseInside] = useState(false);
-
-    // SEO updates for homepage
-    useEffect(() => {
-        updateSEO({
-            title: 'Financial Planning & Mutual Fund Advisory | Anupaat Nivesh',
-            description: 'Get expert financial planning guidance with goal-based mutual fund investments. AMFI registered advisor helping you build long-term wealth through disciplined SIPs and regular portfolio reviews.',
-            keywords: 'mutual funds, financial planning, SIP, investment advisor, AMFI registered, financial advisory, goal-based investing, portfolio management',
-            canonical: '/',
-            ogType: 'website'
-        });
-    }, []);
 
     // Auto-rotate hero screens every 6 seconds; pause while pointer is over the hero (read time)
     useEffect(() => {

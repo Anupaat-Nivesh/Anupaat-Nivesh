@@ -82,11 +82,19 @@ export async function proxyMarketsBreadth(req, res) {
   res.status(upstream.status);
 
   upstream.headers.forEach((value, key) => {
-    if (!HOP_BY_HOP.has(key.toLowerCase())) {
-      res.setHeader(key, value);
+    const lower = key.toLowerCase();
+    // Drop frame-blocking headers so the tool can embed under anupaatnivesh.com chrome.
+    if (HOP_BY_HOP.has(lower) || lower === 'x-frame-options' || lower === 'content-security-policy') {
+      return;
     }
+    res.setHeader(key, value);
   });
   res.setHeader('Cache-Control', 'public, max-age=60');
+  res.setHeader(
+    'Content-Security-Policy',
+    "frame-ancestors 'self' https://www.anupaatnivesh.com https://anupaatnivesh.com http://localhost:3000 http://127.0.0.1:3000"
+  );
+  res.removeHeader('X-Frame-Options');
 
   if (contentType.includes('text/html')) {
     const html = rewriteHtml(await upstream.text());

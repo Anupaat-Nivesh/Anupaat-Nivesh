@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { updateSEO } from '../../utils/seo';
 
 import SignupHero from './components/SignupHero';
 import AppOnboardingCard from './components/AppOnboardingCard';
@@ -25,18 +24,6 @@ import './Signup.css';
 const SignupPage = () => {
     const [showStickyCta, setShowStickyCta] = useState(false);
     const heroRef = useRef(null);
-
-    useEffect(() => {
-        updateSEO({
-            title: 'Sign Up — Start Your Investment Journey',
-            description:
-                'Sign up with Anupaat Nivesh — choose between self onboarding via app or assisted onboarding with our team. AMFI registered mutual fund distributor.',
-            keywords:
-                'sign up, anupaat nivesh signup, mutual fund onboarding, self onboarding, assisted onboarding, KYC',
-            canonical: '/signup',
-            ogType: 'website',
-        });
-    }, []);
 
     // Mobile sticky CTA: surface the recommended action when the hero leaves
     // the viewport. Uses IntersectionObserver — no scroll listeners.

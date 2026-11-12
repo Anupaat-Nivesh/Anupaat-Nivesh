@@ -1,4 +1,14 @@
-    Options -MultiViews
-    RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.html [QSA,L]
+Options -MultiViews
+RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Canonical host: apex → www (site already published on www.anupaatnivesh.com)
+RewriteCond %{HTTP_HOST} ^anupaatnivesh\.com$ [NC]
+RewriteRule ^ https://www.anupaatnivesh.com%{REQUEST_URI} [L,R=301]
+
+# SPA fallback
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.html [QSA,L]

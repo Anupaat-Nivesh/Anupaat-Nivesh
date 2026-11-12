@@ -6,7 +6,7 @@ import { animateScroll } from 'react-scroll';
 import 'animate.css';
 
 import logo from '../../assets/logo.webp';
-import { MARKET_BREADTH_URL } from '../../data/insightTools';
+import { MARKET_BREADTH_PATH } from '../../data/insightTools';
 
 /** Core client paths — “What we do” */
 const whatWeDoLinks = [
@@ -25,7 +25,7 @@ const whatWeDoLinks = [
 /** Insights & tools — app install lives in header only (no duplicate Our app / App download). */
 const insightsLinks = [
     { label: 'Screeners', path: '/screeners' },
-    { label: 'Market breadth', href: MARKET_BREADTH_URL },
+    { label: 'Market breadth', path: MARKET_BREADTH_PATH },
     { label: 'Sector rotation', path: '/screeners/sector-rotation' },
     { label: 'MarketCompass', path: '/valuation' },
     { label: 'Calculators', path: '/calculators' },

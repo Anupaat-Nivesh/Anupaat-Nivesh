@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
+import SeoManager from "./components/SeoManager/SeoManager";
+import Analytics from "./components/Analytics/Analytics";
 import {
   About,
   Offerings,
@@ -41,6 +43,7 @@ import SignupPage from "./pages/Signup/Signup";
 import AdminMediaPanel from "./pages/AdminMediaPanel/AdminMediaPanel";
 import MarketDeploymentIntelligencePage from "./pages/MarketDeploymentIntelligence/MarketDeploymentIntelligencePage";
 import CompassLoginPage from "./pages/MarketDeploymentIntelligence/CompassLoginPage";
+import MarketBreadthPage from "./pages/MarketBreadth/MarketBreadthPage";
 import { BasketUserProvider } from "./basket/context/BasketUserContext";
 import InvestLayout from "./basket/layout/InvestLayout";
 import MutualFundScreener from "./basket/pages/MutualFundScreener";
@@ -72,6 +75,8 @@ function App() {
         v7_relativeSplatPath: true,
       }}
     >
+      <SeoManager />
+      <Analytics />
       <Routes>
         <Route element={<MainLayout />}>
           <Route index element={<Home />} />
@@ -94,6 +99,7 @@ function App() {
           <Route path="signup" element={<SignupPage />} />
           <Route path="valuation" element={<MarketDeploymentIntelligencePage />} />
           <Route path="valuation/login" element={<CompassLoginPage />} />
+          <Route path="screeners/market-breadth" element={<MarketBreadthPage />} />
 
           <Route path="*" element={<NotFound />} />
           {/* footer pages  */}
