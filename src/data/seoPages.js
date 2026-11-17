@@ -58,24 +58,26 @@ export const SEO_BY_PATH = {
       'Download the Anupaat Nivesh app to start SIPs, complete KYC, and manage your mutual fund portfolio.',
   },
   '/calculators': {
-    title: 'Investment Calculators',
+    title: 'Investment Planner',
     description:
-      'Use SIP, lumpsum, step-up, and child education planners to estimate long-term investment outcomes. Educational tools from Anupaat Nivesh.',
+      'Free investment planners from Anupaat Nivesh — SIPs, goals, education, and more. Mobile-friendly educational calculators.',
+    ogImage: '/og/calculators/investment-planner.png',
   },
   '/calculators/child-education': {
-    title: 'Child Education Planner',
+    title: 'Investment Planner',
     description:
-      'Estimate future education costs with inflation and the monthly SIP needed for your child’s higher education. Educational calculator from Anupaat Nivesh.',
+      'Free investment planners from Anupaat Nivesh — SIPs, goals, education, and more. Mobile-friendly educational calculators.',
     keywords:
-      'child education calculator, education SIP, education inflation, child education planning, Anupaat Nivesh',
+      'investment planner, child education calculator, education SIP, Anupaat Nivesh',
+    ogImage: '/og/calculators/investment-planner.png',
   },
   '/calculators/child-education-v2': {
-    title: 'Investment Calculator',
+    title: 'Investment Planner',
     description:
-      'Anupaat Nivesh investment calculator — plan your child’s education corpus with current age, target age, lumpsum, and monthly SIP. Mobile-friendly.',
+      'Free investment planners from Anupaat Nivesh — SIPs, goals, education, and more. Mobile-friendly educational calculators.',
     keywords:
-      'investment calculator, child education calculator, education SIP, Anupaat Nivesh',
-    ogImage: '/og/calculators/education-v2.png',
+      'investment planner, child education calculator, education SIP, Anupaat Nivesh',
+    ogImage: '/og/calculators/investment-planner.png',
   },
   '/consulting-session': {
     title: '1-on-1 Consulting Session',

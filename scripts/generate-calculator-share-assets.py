@@ -2,16 +2,18 @@
 """
 Generate WhatsApp/social OG PNGs + short static share HTML for every calculator.
 
-Public share URL shape: https://www.anupaatnivesh.com/s/{shortId}
-(file on disk: public/s/{shortId}/index.html — works on CRA + Hostinger DirectoryIndex)
+All calculator share links use the SAME preview:
+  - Anupaat Nivesh website logo (src/assets/logo.webp)
+  - Title text: Investment Planner
 
-WhatsApp crawlers do not run React JS, so each share URL must be a real HTML
-file with og:* tags pointing at a 1200×630 PNG.
+Public share URL shape: https://www.anupaatnivesh.com/s/{shortId}
+(file on disk: public/s/{shortId}/index.html)
 """
 
 from __future__ import annotations
 
 import json
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -19,10 +21,18 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 META_PATH = ROOT / "src" / "data" / "calculatorShare.json"
 OG_DIR = ROOT / "public" / "og" / "calculators"
+SHARED_OG_NAME = "investment-planner.png"
 SHORT_DIR = ROOT / "public" / "s"
 LEGACY_DIR = ROOT / "public" / "share" / "calculators"
 SITE = "https://www.anupaatnivesh.com"
 VENV = Path(__file__).resolve().parent / ".venv-share"
+
+SHARED_OG_TITLE = "Investment Planner"
+SHARED_OG_DESCRIPTION = (
+    "Free investment planners from Anupaat Nivesh — SIPs, goals, education, and more. "
+    "Mobile-friendly educational calculators."
+)
+SHARED_ACCENT = "#E11D48"
 
 
 def ensure_pillow():
@@ -83,68 +93,68 @@ def wrap_text(draw, text, font, max_width):
     return lines
 
 
-def make_png(item: dict, out_path: Path):
+def load_site_logo():
+    """Same logo asset used on the website navbar."""
+    from PIL import Image
+
+    for candidate in (
+        ROOT / "src" / "assets" / "logo.webp",
+        ROOT / "src" / "assets" / "logo.png",
+    ):
+        if candidate.exists():
+            return Image.open(candidate).convert("RGBA")
+    return None
+
+
+def make_shared_investment_planner_png(out_path: Path):
+    """
+    Unified WhatsApp preview card:
+    dark navy + left accent + website logo + “Investment Planner”.
+    """
     from PIL import Image, ImageDraw
 
     W, H = 1200, 630
-    accent = hex_to_rgb(item.get("accent", "#0B6E4F"))
-    # Education v2: Anupaat Nivesh logo + “Investment Calculator” for WhatsApp preview
-    if item.get("id") == "education-v2":
-        logo_path = ROOT / "src" / "assets" / "logo.png"
-        img = Image.new("RGB", (W, H), (248, 250, 252))
-        draw = ImageDraw.Draw(img)
-        draw.rectangle([0, 0, W, 14], fill=(220, 38, 38))
-        # Dark band so full logo (incl. dark “Nivesh”) stays readable
-        band_top, band_bottom = 70, 300
-        draw.rounded_rectangle(
-            [80, band_top, W - 80, band_bottom],
-            radius=28,
-            fill=(15, 23, 42),
-        )
-        if logo_path.exists():
-            logo = Image.open(logo_path).convert("RGBA")
-            max_w = 620
-            ratio = min(max_w / logo.width, 150 / logo.height)
-            lw, lh = max(1, int(logo.width * ratio)), max(1, int(logo.height * ratio))
-            logo = logo.resize((lw, lh), Image.Resampling.LANCZOS)
-            lx = (W - lw) // 2
-            ly = band_top + ((band_bottom - band_top) - lh) // 2
-            img.paste(logo, (lx, ly), logo)
-        title_font = load_font(58)
-        title = item.get("label") or "Investment Calculator"
-        tw = draw.textlength(title, font=title_font)
-        draw.text(((W - tw) / 2, 360), title, font=title_font, fill=(15, 23, 42))
-        sub_font = load_font(28)
-        sub = "anupaatnivesh.com"
-        sw = draw.textlength(sub, font=sub_font)
-        draw.text(((W - sw) / 2, 450), sub, font=sub_font, fill=(100, 116, 139))
-        out_path.parent.mkdir(parents=True, exist_ok=True)
-        img.save(out_path, "PNG", optimize=True)
-        return
-
+    accent = hex_to_rgb(SHARED_ACCENT)
     bg = (15, 23, 42)
     img = Image.new("RGB", (W, H), bg)
     draw = ImageDraw.Draw(img)
 
+    # Left accent bar (matches reference card style)
     draw.rectangle([0, 0, 18, H], fill=accent)
     draw.rectangle([18, 0, W, 8], fill=accent)
 
-    brand_font = load_font(28)
+    logo = load_site_logo()
+    y = 56
+    if logo is not None:
+        # Same logo as website navbar — sit on a light plate so dark “Nivesh” stays readable
+        max_w, max_h = 520, 100
+        ratio = min(max_w / logo.width, max_h / logo.height)
+        lw = max(1, int(logo.width * ratio))
+        lh = max(1, int(logo.height * ratio))
+        logo = logo.resize((lw, lh), Image.Resampling.LANCZOS)
+        pad_x, pad_y = 28, 18
+        plate = [
+            64 - pad_x,
+            y - pad_y,
+            64 + lw + pad_x,
+            y + lh + pad_y,
+        ]
+        draw.rounded_rectangle(plate, radius=18, fill=(255, 255, 255))
+        img.paste(logo, (64, y), logo)
+        y = y + lh + pad_y + 40
+    else:
+        brand_font = load_font(28)
+        draw.text((64, y), "ANUPAAT NIVESH", font=brand_font, fill=(148, 163, 184))
+        y = y + 56
+
     title_font = load_font(64)
     body_font = load_font(30)
     cta_font = load_font(28)
 
-    draw.text((64, 48), "ANUPAAT NIVESH", font=brand_font, fill=(148, 163, 184))
+    draw.text((64, y), SHARED_OG_TITLE, font=title_font, fill=(248, 250, 252))
+    y += 86
 
-    title_lines = wrap_text(draw, item["label"], title_font, W - 140)
-    y = 140
-    for line in title_lines[:2]:
-        draw.text((64, y), line, font=title_font, fill=(248, 250, 252))
-        y += 74
-
-    desc_lines = wrap_text(draw, item["description"], body_font, W - 160)
-    y += 12
-    for line in desc_lines[:3]:
+    for line in wrap_text(draw, SHARED_OG_DESCRIPTION, body_font, W - 160)[:3]:
         draw.text((64, y), line, font=body_font, fill=(203, 213, 225))
         y += 40
 
@@ -165,12 +175,11 @@ def make_png(item: dict, out_path: Path):
 
 
 def make_html(item: dict, out_path: Path, share_url: str):
-    calc_id = item["id"]
-    title = item["ogTitle"]
-    desc = item["description"]
     redirect = item["redirect"]
-    image = f"{SITE}/og/calculators/{calc_id}.png"
+    image = f"{SITE}/og/calculators/{SHARED_OG_NAME}"
     has_query = "?" in redirect
+    title = SHARED_OG_TITLE
+    desc = SHARED_OG_DESCRIPTION
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -179,7 +188,7 @@ def make_html(item: dict, out_path: Path, share_url: str):
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#0f172a" />
     <meta name="robots" content="index, follow" />
-    <title>{title}</title>
+    <title>{title} | Anupaat Nivesh</title>
     <meta name="description" content="{desc}" />
 
     <meta property="og:type" content="website" />
@@ -191,7 +200,7 @@ def make_html(item: dict, out_path: Path, share_url: str):
     <meta property="og:image" content="{image}" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="{item['label']}" />
+    <meta property="og:image:alt" content="Anupaat Nivesh — Investment Planner" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="{title}" />
@@ -207,7 +216,6 @@ def make_html(item: dict, out_path: Path, share_url: str):
     </style>
     <script>
       (function () {{
-        // Normalize legacy query keys (age/target/…) to short keys (a/t/…)
         var map = {{ age: 'a', target: 't', lump: 'l', sip: 'm', sipYears: 'y', rate: 'r' }};
         var src = new URLSearchParams(window.location.search || '');
         var out = new URLSearchParams();
@@ -224,7 +232,7 @@ def make_html(item: dict, out_path: Path, share_url: str):
   </head>
   <body>
     <div class="wrap">
-      <p>Opening {item['label']}… <a id="continue" href="{redirect}">Continue</a></p>
+      <p>Opening Investment Planner… <a id="continue" href="{redirect}">Continue</a></p>
     </div>
     <script>
       (function () {{
@@ -255,19 +263,22 @@ def main():
     SHORT_DIR.mkdir(parents=True, exist_ok=True)
     LEGACY_DIR.mkdir(parents=True, exist_ok=True)
 
+    shared_png = OG_DIR / SHARED_OG_NAME
+    make_shared_investment_planner_png(shared_png)
+    print(f"wrote shared OG {shared_png.relative_to(ROOT)}")
+
     for item in items:
+        # Keep per-id PNGs as copies of the shared card so old image URLs still work
+        per_id = OG_DIR / f"{item['id']}.png"
+        shutil.copyfile(shared_png, per_id)
+
         short = item.get("shortId") or item["id"]
         short_url = f"{SITE}/s/{short}"
         legacy_url = f"{SITE}/share/calculators/{item['id']}.html"
-        png = OG_DIR / f"{item['id']}.png"
-        short_html = SHORT_DIR / short / "index.html"
-        make_png(item, png)
-        make_html(item, short_html, short_url)
-        # Legacy long paths: full OG page (not a thin redirect) so WhatsApp + browsers work
+        make_html(item, SHORT_DIR / short / "index.html", short_url)
         make_html(item, LEGACY_DIR / f"{item['id']}.html", legacy_url)
-        print(f"wrote /s/{short}/ + legacy share + og/{item['id']}.png")
+        print(f"wrote /s/{short}/ + legacy share (shared Investment Planner preview)")
 
-    # Extra legacy alias used earlier
     edu2 = next(i for i in items if i["id"] == "education-v2")
     make_html(
         edu2,
