@@ -1016,15 +1016,15 @@ const Calculators = () => {
     };
   }, [educationV2Result.invested, educationV2Result.returns]);
 
-  // Short share links: /s/{shortId} — static HTML + OG PNG for WhatsApp previews
+  // Shareable calculator links open the SPA tab directly (Hostinger serves calculators/index.html).
+  // /s/{shortId} remains available for OG-rich WhatsApp cards and redirects here.
   const [copiedShareId, setCopiedShareId] = useState(null);
 
   const getCalculatorShareUrl = useCallback(
     (id, extraParams) => {
-      const shortId = CALC_SHARE_BY_ID[id]?.shortId || id;
-      const params = new URLSearchParams(extraParams || {});
-      const q = params.toString();
-      return `${calcBaseUrl}/s/${shortId}${q ? `?${q}` : ''}`;
+      const tab = CALC_SHARE_BY_ID[id]?.tab || id;
+      const params = new URLSearchParams({ tab, ...(extraParams || {}) });
+      return `${calcBaseUrl}/calculators?${params.toString()}`;
     },
     [calcBaseUrl]
   );

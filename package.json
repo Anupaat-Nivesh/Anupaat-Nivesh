@@ -53,7 +53,7 @@
   },
   "scripts": {
     "start": "cross-env DANGEROUSLY_DISABLE_HOST_CHECK=true react-scripts start",
-    "build": "cross-env GENERATE_SOURCEMAP=false react-scripts build",
+    "build": "cross-env GENERATE_SOURCEMAP=false react-scripts build && node scripts/spa-hostinger-fallback.mjs",
     "vercel-build": "npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
