@@ -1,4 +1,6 @@
 node_modules
+scripts/.venv-share/
+
 # Environment variables
 .env
 .env.development

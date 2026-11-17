@@ -1,0 +1,243 @@
+#!/usr/bin/env python3
+"""
+Generate WhatsApp/social OG PNGs + static share HTML for every calculator.
+
+WhatsApp crawlers do not run React JS, so each share URL must be a real HTML
+file with og:* tags pointing at a 1200×630 PNG.
+"""
+
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+META_PATH = ROOT / "src" / "data" / "calculatorShare.json"
+OG_DIR = ROOT / "public" / "og" / "calculators"
+SHARE_DIR = ROOT / "public" / "share" / "calculators"
+SITE = "https://www.anupaatnivesh.com"
+VENV = Path(__file__).resolve().parent / ".venv-share"
+
+
+def ensure_pillow():
+    try:
+        from PIL import Image, ImageDraw, ImageFont  # noqa: F401
+
+        return
+    except ImportError:
+        pass
+
+    if not VENV.exists():
+        subprocess.check_call([sys.executable, "-m", "venv", str(VENV)])
+    pip = VENV / "bin" / "pip"
+    py = VENV / "bin" / "python"
+    subprocess.check_call([str(pip), "install", "pillow", "-q"])
+    # Re-exec under venv python
+    subprocess.check_call([str(py), str(Path(__file__).resolve()), *sys.argv[1:]])
+    sys.exit(0)
+
+
+def hex_to_rgb(hex_color: str):
+    h = hex_color.lstrip("#")
+    return tuple(int(h[i : i + 2], 16) for i in (0, 2, 4))
+
+
+def load_font(size: int):
+    from PIL import ImageFont
+
+    candidates = [
+        "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
+        "/System/Library/Fonts/Supplemental/Arial.ttf",
+        "/Library/Fonts/Arial.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    ]
+    for path in candidates:
+        if Path(path).exists():
+            try:
+                return ImageFont.truetype(path, size=size)
+            except OSError:
+                continue
+    return ImageFont.load_default()
+
+
+def wrap_text(draw, text, font, max_width):
+    words = text.split()
+    lines = []
+    current = ""
+    for word in words:
+        trial = f"{current} {word}".strip()
+        if draw.textlength(trial, font=font) <= max_width:
+            current = trial
+        else:
+            if current:
+                lines.append(current)
+            current = word
+    if current:
+        lines.append(current)
+    return lines
+
+
+def make_png(item: dict, out_path: Path):
+    from PIL import Image, ImageDraw
+
+    W, H = 1200, 630
+    accent = hex_to_rgb(item.get("accent", "#0B6E4F"))
+    bg = (15, 23, 42)
+    img = Image.new("RGB", (W, H), bg)
+    draw = ImageDraw.Draw(img)
+
+    # Accent bar
+    draw.rectangle([0, 0, 18, H], fill=accent)
+    # Soft accent panel
+    draw.rectangle([18, 0, W, 8], fill=accent)
+
+    brand_font = load_font(28)
+    title_font = load_font(64)
+    body_font = load_font(30)
+    cta_font = load_font(28)
+
+    draw.text((64, 48), "ANUPAAT NIVESH", font=brand_font, fill=(148, 163, 184))
+
+    title = item["label"]
+    title_lines = wrap_text(draw, title, title_font, W - 140)
+    y = 140
+    for line in title_lines[:2]:
+        draw.text((64, y), line, font=title_font, fill=(248, 250, 252))
+        y += 74
+
+    desc_lines = wrap_text(draw, item["description"], body_font, W - 160)
+    y += 12
+    for line in desc_lines[:3]:
+        draw.text((64, y), line, font=body_font, fill=(203, 213, 225))
+        y += 40
+
+    # CTA chip
+    cta = "Open calculator →"
+    pad_x, pad_y = 28, 16
+    tw = draw.textlength(cta, font=cta_font)
+    chip_w, chip_h = int(tw + pad_x * 2), 56
+    chip_x, chip_y = 64, H - 110
+    draw.rounded_rectangle(
+        [chip_x, chip_y, chip_x + chip_w, chip_y + chip_h],
+        radius=14,
+        fill=accent,
+    )
+    draw.text((chip_x + pad_x, chip_y + pad_y), cta, font=cta_font, fill=(255, 255, 255))
+
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    img.save(out_path, "PNG", optimize=True)
+
+
+def make_html(item: dict, out_path: Path):
+    calc_id = item["id"]
+    title = item["ogTitle"]
+    desc = item["description"]
+    redirect = item["redirect"]
+    image = f"{SITE}/og/calculators/{calc_id}.png"
+    share_url = f"{SITE}/share/calculators/{calc_id}.html"
+
+    html = f"""<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="robots" content="index, follow" />
+    <title>{title}</title>
+    <meta name="description" content="{desc}" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Anupaat Nivesh" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:title" content="{title}" />
+    <meta property="og:description" content="{desc}" />
+    <meta property="og:url" content="{share_url}" />
+    <meta property="og:image" content="{image}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="{item['label']}" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{title}" />
+    <meta name="twitter:description" content="{desc}" />
+    <meta name="twitter:image" content="{image}" />
+
+    <link rel="canonical" href="{SITE}{redirect.split('?')[0]}" />
+    <link rel="icon" href="/favicon.ico" />
+    <style>
+      html, body {{ margin: 0; min-height: 100%; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: #f8fafc; color: #0f172a; }}
+      .wrap {{ min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1.5rem; text-align: center; }}
+      a {{ color: #0b6e4f; font-weight: 600; }}
+    </style>
+    <script>
+      (function () {{
+        var target = {json.dumps(redirect)} + (window.location.search || '') + (window.location.hash || '');
+        // If redirect already has ?, append with &
+        if ({json.dumps('?' in redirect)} && window.location.search) {{
+          target = {json.dumps(redirect)} + '&' + window.location.search.slice(1) + (window.location.hash || '');
+        }}
+        window.location.replace(target);
+      }})();
+    </script>
+  </head>
+  <body>
+    <div class="wrap">
+      <p>Opening {item['label']}… <a id="continue" href="{redirect}">Continue</a></p>
+    </div>
+    <script>
+      (function () {{
+        var href = {json.dumps(redirect)};
+        if ({json.dumps('?' in redirect)} && window.location.search) {{
+          href = href + '&' + window.location.search.slice(1);
+        }} else {{
+          href = href + (window.location.search || '');
+        }}
+        href += (window.location.hash || '');
+        document.getElementById('continue').href = href;
+      }})();
+    </script>
+  </body>
+</html>
+"""
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(html, encoding="utf-8")
+
+
+def main():
+    ensure_pillow()
+    items = json.loads(META_PATH.read_text(encoding="utf-8"))
+    OG_DIR.mkdir(parents=True, exist_ok=True)
+    SHARE_DIR.mkdir(parents=True, exist_ok=True)
+
+    for item in items:
+        png = OG_DIR / f"{item['id']}.png"
+        html = SHARE_DIR / f"{item['id']}.html"
+        make_png(item, png)
+        make_html(item, html)
+        print(f"wrote {png.relative_to(ROOT)} + {html.relative_to(ROOT)}")
+
+    # Compatibility alias for earlier education-v2 share path
+    alias = ROOT / "public" / "share" / "child-education-v2.html"
+    edu = next(i for i in items if i["id"] == "education-v2")
+    make_html(
+        {
+            **edu,
+            # keep old public URL working; image still points to new og path via make_html using id
+        },
+        alias,
+    )
+    # Fix alias og:url to old path while still using education-v2 image
+    text = alias.read_text(encoding="utf-8")
+    text = text.replace(
+        f"{SITE}/share/calculators/education-v2.html",
+        f"{SITE}/share/child-education-v2.html",
+    )
+    alias.write_text(text, encoding="utf-8")
+    print(f"wrote alias {alias.relative_to(ROOT)}")
+
+
+if __name__ == "__main__":
+    main()

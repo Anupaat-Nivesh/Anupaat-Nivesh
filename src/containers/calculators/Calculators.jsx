@@ -995,30 +995,54 @@ const Calculators = () => {
     };
   }, [educationV2Result.invested, educationV2Result.returns]);
 
-  // Static HTML share path so WhatsApp/social crawlers get OG preview tags
-  const childEducationV2ShareUrl = useMemo(() => {
-    const params = new URLSearchParams(buildEducationV2ShareParams());
-    return `${calcBaseUrl}/share/child-education-v2.html?${params.toString()}`;
-  }, [buildEducationV2ShareParams, calcBaseUrl]);
+  // Static /share/calculators/{id}.html pages carry OG tags + PNG for WhatsApp previews
+  const [copiedShareId, setCopiedShareId] = useState(null);
 
-  const [educationV2LinkCopied, setEducationV2LinkCopied] = useState(false);
-  const copyChildEducationV2Link = useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(childEducationV2ShareUrl);
-      setEducationV2LinkCopied(true);
-      window.setTimeout(() => setEducationV2LinkCopied(false), 2000);
-    } catch {
-      // Fallback for older browsers
-      const input = document.createElement('input');
-      input.value = childEducationV2ShareUrl;
-      document.body.appendChild(input);
-      input.select();
-      document.execCommand('copy');
-      document.body.removeChild(input);
-      setEducationV2LinkCopied(true);
-      window.setTimeout(() => setEducationV2LinkCopied(false), 2000);
-    }
-  }, [childEducationV2ShareUrl]);
+  const getCalculatorShareUrl = useCallback(
+    (id, extraParams) => {
+      const params = new URLSearchParams(extraParams || {});
+      const q = params.toString();
+      return `${calcBaseUrl}/share/calculators/${id}.html${q ? `?${q}` : ''}`;
+    },
+    [calcBaseUrl]
+  );
+
+  const copyCalculatorShareLink = useCallback(
+    async (id, extraParams) => {
+      const url = getCalculatorShareUrl(id, extraParams);
+      try {
+        await navigator.clipboard.writeText(url);
+      } catch {
+        const input = document.createElement('input');
+        input.value = url;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+      }
+      setCopiedShareId(id);
+      window.setTimeout(() => {
+        setCopiedShareId((current) => (current === id ? null : current));
+      }, 2000);
+    },
+    [getCalculatorShareUrl]
+  );
+
+  const renderShareCopyButton = (id, extraParams) => (
+    <button
+      type="button"
+      className="calc-copy-link"
+      onClick={() => copyCalculatorShareLink(id, extraParams)}
+      aria-label={`Copy share link for ${id}`}
+    >
+      <FaLink aria-hidden /> {copiedShareId === id ? 'Link copied' : 'Copy link'}
+    </button>
+  );
+
+  const childEducationV2ShareUrl = useMemo(
+    () => getCalculatorShareUrl('education-v2', buildEducationV2ShareParams()),
+    [getCalculatorShareUrl, buildEducationV2ShareParams]
+  );
 
   const goalResult = useMemo(
     () =>
@@ -1345,6 +1369,7 @@ const Calculators = () => {
                   Calculate maturity with fixed monthly SIPs.
                 </p>
               </div>
+              {renderShareCopyButton('sip')}
             </div>
             <div className="calc-form">
               <label>
@@ -1406,6 +1431,7 @@ const Calculators = () => {
                 Model yearly increases to align with income growth.
               </p>
             </div>
+            {renderShareCopyButton('step')}
           </div>
           <div className="calc-form">
             <label>
@@ -1478,6 +1504,7 @@ const Calculators = () => {
                 Estimate future value of a lumpsum over your chosen duration.
               </p>
             </div>
+            {renderShareCopyButton('lumpsum')}
           </div>
           <div className="calc-form">
             <label>
@@ -1539,6 +1566,7 @@ const Calculators = () => {
                 Calculate how much you need today to reach a future target.
               </p>
             </div>
+            {renderShareCopyButton('pv')}
           </div>
           <div className="calc-form">
             <label>
@@ -1604,6 +1632,7 @@ const Calculators = () => {
                   Calculate monthly/annual withdrawals from your corpus. Recommended withdrawal: 6-12% annually.
                 </p>
               </div>
+              {renderShareCopyButton('swp')}
             </div>
             <div className="calc-form">
               <label>
@@ -1712,6 +1741,7 @@ const Calculators = () => {
                   Determine the right coverage amount based on your income, liabilities, and dependents.
                 </p>
               </div>
+              {renderShareCopyButton('term')}
             </div>
             <div className="calc-form">
               <label>
@@ -1824,6 +1854,7 @@ const Calculators = () => {
                   Determine how much home loan you can get based on your EMI capacity and tenure.
                 </p>
               </div>
+              {renderShareCopyButton('homeloan')}
             </div>
             <div className="calc-form">
               <label>
@@ -1894,6 +1925,7 @@ const Calculators = () => {
                   Calculate Equated Monthly Installment for Personal, Home, Motor, or any other loan.
                 </p>
               </div>
+              {renderShareCopyButton('emi')}
             </div>
             <div className="calc-form">
               <label>
@@ -1960,6 +1992,7 @@ const Calculators = () => {
                   Calculate how much corpus you need for retirement and the monthly SIP required to achieve it.
                 </p>
               </div>
+              {renderShareCopyButton('retirement')}
             </div>
             <div className="calc-form">
               <label>
@@ -2065,6 +2098,7 @@ const Calculators = () => {
                   Calculate how much you need to invest monthly for your child's higher education.
                 </p>
               </div>
+              {renderShareCopyButton('education')}
             </div>
             <div className="calc-form">
               <label>
@@ -2170,13 +2204,7 @@ const Calculators = () => {
                   Enter your child's current age and target age (usually 18). Add a lumpsum today plus a monthly SIP until then to see the projected corpus.
                 </p>
               </div>
-              <button
-                type="button"
-                className="calc-copy-link"
-                onClick={copyChildEducationV2Link}
-              >
-                <FaLink aria-hidden /> {educationV2LinkCopied ? 'Link copied' : 'Copy link'}
-              </button>
+              {renderShareCopyButton('education-v2', buildEducationV2ShareParams())}
             </div>
             <div className="calc-form">
               <label>
@@ -2327,6 +2355,7 @@ const Calculators = () => {
                   Calculate monthly SIP needed to achieve your specific financial goal.
                 </p>
               </div>
+              {renderShareCopyButton('goal')}
             </div>
             <div className="calc-form">
               <label>
@@ -2428,6 +2457,7 @@ const Calculators = () => {
                   See how inflation affects the value of money over time.
                 </p>
               </div>
+              {renderShareCopyButton('inflation')}
             </div>
             <div className="calc-form">
               <label>
