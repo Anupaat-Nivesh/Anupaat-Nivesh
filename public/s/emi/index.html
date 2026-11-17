@@ -24,7 +24,7 @@
     <meta name="twitter:description" content="Calculate EMI for any loan amount, rate and tenure. Free EMI calculator from Anupaat Nivesh." />
     <meta name="twitter:image" content="https://www.anupaatnivesh.com/og/calculators/emi.png" />
 
-    <link rel="canonical" href="https://www.anupaatnivesh.com/" />
+    <link rel="canonical" href="https://www.anupaatnivesh.com/calculators" />
     <link rel="icon" href="/favicon.ico" />
     <style>
       html, body { margin: 0; min-height: 100%; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: #f8fafc; color: #0f172a; }
@@ -41,7 +41,7 @@
           out.set(map[key] || key, value);
         });
         var q = out.toString();
-        var base = "/?tab=emi";
+        var base = "/calculators?tab=emi";
         var joiner = "&";
         var target = q ? (base + joiner + q) : base;
         window.location.replace(target + (window.location.hash || ''));
@@ -50,7 +50,7 @@
   </head>
   <body>
     <div class="wrap">
-      <p>Opening EMI Calculator… <a id="continue" href="/?tab=emi">Continue</a></p>
+      <p>Opening EMI Calculator… <a id="continue" href="/calculators?tab=emi">Continue</a></p>
     </div>
     <script>
       (function () {
@@ -61,7 +61,7 @@
           out.set(map[key] || key, value);
         });
         var q = out.toString();
-        var base = "/?tab=emi";
+        var base = "/calculators?tab=emi";
         var joiner = "&";
         var href = q ? (base + joiner + q) : base;
         document.getElementById('continue').href = href + (window.location.hash || '');

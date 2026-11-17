@@ -88,6 +88,40 @@ def make_png(item: dict, out_path: Path):
 
     W, H = 1200, 630
     accent = hex_to_rgb(item.get("accent", "#0B6E4F"))
+    # Education v2: Anupaat Nivesh logo + “Investment Calculator” for WhatsApp preview
+    if item.get("id") == "education-v2":
+        logo_path = ROOT / "src" / "assets" / "logo.png"
+        img = Image.new("RGB", (W, H), (248, 250, 252))
+        draw = ImageDraw.Draw(img)
+        draw.rectangle([0, 0, W, 14], fill=(220, 38, 38))
+        # Dark band so full logo (incl. dark “Nivesh”) stays readable
+        band_top, band_bottom = 70, 300
+        draw.rounded_rectangle(
+            [80, band_top, W - 80, band_bottom],
+            radius=28,
+            fill=(15, 23, 42),
+        )
+        if logo_path.exists():
+            logo = Image.open(logo_path).convert("RGBA")
+            max_w = 620
+            ratio = min(max_w / logo.width, 150 / logo.height)
+            lw, lh = max(1, int(logo.width * ratio)), max(1, int(logo.height * ratio))
+            logo = logo.resize((lw, lh), Image.Resampling.LANCZOS)
+            lx = (W - lw) // 2
+            ly = band_top + ((band_bottom - band_top) - lh) // 2
+            img.paste(logo, (lx, ly), logo)
+        title_font = load_font(58)
+        title = item.get("label") or "Investment Calculator"
+        tw = draw.textlength(title, font=title_font)
+        draw.text(((W - tw) / 2, 360), title, font=title_font, fill=(15, 23, 42))
+        sub_font = load_font(28)
+        sub = "anupaatnivesh.com"
+        sw = draw.textlength(sub, font=sub_font)
+        draw.text(((W - sw) / 2, 450), sub, font=sub_font, fill=(100, 116, 139))
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        img.save(out_path, "PNG", optimize=True)
+        return
+
     bg = (15, 23, 42)
     img = Image.new("RGB", (W, H), bg)
     draw = ImageDraw.Draw(img)

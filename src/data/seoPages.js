@@ -70,12 +70,12 @@ export const SEO_BY_PATH = {
       'child education calculator, education SIP, education inflation, child education planning, Anupaat Nivesh',
   },
   '/calculators/child-education-v2': {
-    title: 'Child Education Planner v2',
+    title: 'Investment Calculator',
     description:
-      'Estimate your child’s education corpus with age, lumpsum, and SIP — mobile-friendly planner from Anupaat Nivesh. Default return 14% p.a.',
+      'Anupaat Nivesh investment calculator — plan your child’s education corpus with current age, target age, lumpsum, and monthly SIP. Mobile-friendly.',
     keywords:
-      'child education calculator, education SIP age based, child education planning, mutual fund SIP, Anupaat Nivesh',
-    ogImage: '/og-share.png',
+      'investment calculator, child education calculator, education SIP, Anupaat Nivesh',
+    ogImage: '/og/calculators/education-v2.png',
   },
   '/consulting-session': {
     title: '1-on-1 Consulting Session',
