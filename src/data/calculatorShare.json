@@ -6,7 +6,7 @@
     "label": "SIP Calculator",
     "ogTitle": "SIP Calculator | Anupaat Nivesh",
     "description": "Estimate maturity from fixed monthly SIPs. Open this free calculator from Anupaat Nivesh.",
-    "redirect": "/calculators/?tab=sip",
+    "redirect": "/?tab=sip",
     "accent": "#0B6E4F"
   },
   {
@@ -16,7 +16,7 @@
     "label": "Step-up SIP Calculator",
     "ogTitle": "Step-up SIP Calculator | Anupaat Nivesh",
     "description": "Model SIPs that increase every year with your income. Free planner from Anupaat Nivesh.",
-    "redirect": "/calculators/?tab=step",
+    "redirect": "/?tab=step",
     "accent": "#1D4ED8"
   },
   {
@@ -26,7 +26,7 @@
     "label": "Lumpsum Calculator",
     "ogTitle": "Lumpsum Calculator | Anupaat Nivesh",
     "description": "Project growth on a one-time investment. Free lumpsum calculator from Anupaat Nivesh.",
-    "redirect": "/calculators/?tab=lumpsum",
+    "redirect": "/?tab=lumpsum",
     "accent": "#7C3AED"
   },
   {
@@ -36,7 +36,7 @@
     "label": "Present Value Calculator",
     "ogTitle": "Present Value Calculator | Anupaat Nivesh",
     "description": "Find how much to invest today for a future goal. Free PV calculator from Anupaat Nivesh.",
-    "redirect": "/calculators/?tab=pv",
+    "redirect": "/?tab=pv",
     "accent": "#0369A1"
   },
   {
@@ -46,7 +46,7 @@
     "label": "SWP Calculator",
     "ogTitle": "SWP Calculator | Anupaat Nivesh",
     "description": "Plan systematic withdrawals from your corpus. Free SWP calculator from Anupaat Nivesh.",
-    "redirect": "/calculators/?tab=swp",
+    "redirect": "/?tab=swp",
     "accent": "#B45309"
   },
   {
@@ -56,7 +56,7 @@
     "label": "Term Insurance Calculator",
     "ogTitle": "Term Insurance Calculator | Anupaat Nivesh",
     "description": "Estimate life cover needed for your family. Free term calculator from Anupaat Nivesh.",
-    "redirect": "/calculators/?tab=term",
+    "redirect": "/?tab=term",
     "accent": "#BE123C"
   },
   {
@@ -66,7 +66,7 @@
     "label": "Home Loan Calculator",
     "ogTitle": "Home Loan Calculator | Anupaat Nivesh",
     "description": "Work backwards from EMI to loan affordability. Free home loan tool from Anupaat Nivesh.",
-    "redirect": "/calculators/?tab=homeloan",
+    "redirect": "/?tab=homeloan",
     "accent": "#0F766E"
   },
   {
@@ -76,7 +76,7 @@
     "label": "EMI Calculator",
     "ogTitle": "EMI Calculator | Anupaat Nivesh",
     "description": "Calculate EMI for any loan amount, rate and tenure. Free EMI calculator from Anupaat Nivesh.",
-    "redirect": "/calculators/?tab=emi",
+    "redirect": "/?tab=emi",
     "accent": "#C2410C"
   },
   {
@@ -86,7 +86,7 @@
     "label": "Retirement Calculator",
     "ogTitle": "Retirement Calculator | Anupaat Nivesh",
     "description": "Estimate the corpus you may need for retirement. Free planner from Anupaat Nivesh.",
-    "redirect": "/calculators/?tab=retirement",
+    "redirect": "/?tab=retirement",
     "accent": "#4338CA"
   },
   {
@@ -96,7 +96,7 @@
     "label": "Child Education Planner",
     "ogTitle": "Child Education Planner | Anupaat Nivesh",
     "description": "Estimate education costs with inflation and the SIP you may need. Free planner from Anupaat Nivesh.",
-    "redirect": "/calculators/?tab=education",
+    "redirect": "/?tab=education",
     "accent": "#DB2777"
   },
   {
@@ -106,7 +106,7 @@
     "label": "Child Education Planner v2",
     "ogTitle": "Child Education Planner v2 | Anupaat Nivesh",
     "description": "Project corpus at target age with lumpsum + SIP. Free mobile-friendly planner from Anupaat Nivesh.",
-    "redirect": "/calculators/?tab=education-v2",
+    "redirect": "/?tab=education-v2",
     "accent": "#E11D48"
   },
   {
@@ -116,7 +116,7 @@
     "label": "Goal Planning Calculator",
     "ogTitle": "Goal Planning Calculator | Anupaat Nivesh",
     "description": "Find the SIP needed for a specific financial goal. Free goal planner from Anupaat Nivesh.",
-    "redirect": "/calculators/?tab=goal",
+    "redirect": "/?tab=goal",
     "accent": "#059669"
   },
   {
@@ -126,7 +126,7 @@
     "label": "Inflation Calculator",
     "ogTitle": "Inflation Calculator | Anupaat Nivesh",
     "description": "See how inflation erodes purchasing power over time. Free calculator from Anupaat Nivesh.",
-    "redirect": "/calculators/?tab=inflation",
+    "redirect": "/?tab=inflation",
     "accent": "#CA8A04"
   }
 ]

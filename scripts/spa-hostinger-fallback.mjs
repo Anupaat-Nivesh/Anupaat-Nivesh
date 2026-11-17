@@ -1,7 +1,10 @@
 /**
  * Hostinger/hCDN often returns a real 404 for missing paths instead of
  * applying .htaccess SPA rewrites. Copy build/index.html into important
- * route folders so deep links (and share redirects) resolve to the React app.
+ * route folders so deep links resolve to the React app.
+ *
+ * Calculator folders also get a tiny redirect sibling is unnecessary — the SPA
+ * shell is enough once `calculators/index.html` is uploaded with matching static/.
  */
 import fs from 'fs';
 import path from 'path';
@@ -44,3 +47,6 @@ for (const route of routes) {
   fs.writeFileSync(path.join(dir, 'index.html'), indexHtml);
   console.log(`spa-hostinger-fallback: ${route}/index.html`);
 }
+
+// Extra: lightweight redirect at calculators/redirect.html is unused.
+// Share pages send users to /?tab=… when /calculators is still missing on CDN.

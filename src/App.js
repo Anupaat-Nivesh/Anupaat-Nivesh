@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useSearchParams } from "react-router-dom";
 import MainLayout from "./layout/MainLayout";
 import SeoManager from "./components/SeoManager/SeoManager";
 import Analytics from "./components/Analytics/Analytics";
@@ -59,6 +59,14 @@ import SectorRotationDashboard from "./screeners/pages/SectorRotationDashboard";
 
 import { useEffect } from "react";
 
+/** Hostinger often 404s /calculators; share links land on /?tab=… instead. */
+function HomeOrCalculators() {
+  const [searchParams] = useSearchParams();
+  if (searchParams.get("tab")) {
+    return <Calculators />;
+  }
+  return <Home />;
+}
 
 function App() {
   useEffect(() => {
@@ -79,7 +87,7 @@ function App() {
       <Analytics />
       <Routes>
         <Route element={<MainLayout />}>
-          <Route index element={<Home />} />
+          <Route index element={<HomeOrCalculators />} />
           <Route path="home" element={<Home />} />
           <Route path="about" element={<About />} />
           {/* Why Anupaat Nivesh content is now merged into the About page.

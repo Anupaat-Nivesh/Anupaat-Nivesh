@@ -1016,15 +1016,18 @@ const Calculators = () => {
     };
   }, [educationV2Result.invested, educationV2Result.returns]);
 
-  // Shareable calculator links open the SPA tab directly (Hostinger serves calculators/index.html).
-  // /s/{shortId} remains available for OG-rich WhatsApp cards and redirects here.
+  // Shareable links use /s/{shortId}/ (real Hostinger files + OG). Those pages redirect to /?tab=…
+  // so the app opens even when /calculators 404s on hCDN.
   const [copiedShareId, setCopiedShareId] = useState(null);
 
   const getCalculatorShareUrl = useCallback(
     (id, extraParams) => {
-      const tab = CALC_SHARE_BY_ID[id]?.tab || id;
-      const params = new URLSearchParams({ tab, ...(extraParams || {}) });
-      return `${calcBaseUrl}/calculators?${params.toString()}`;
+      const shortId = CALC_SHARE_BY_ID[id]?.shortId || id;
+      const params = new URLSearchParams({ ...(extraParams || {}) });
+      const q = params.toString();
+      return q
+        ? `${calcBaseUrl}/s/${shortId}/?${q}`
+        : `${calcBaseUrl}/s/${shortId}/`;
     },
     [calcBaseUrl]
   );
