@@ -90,6 +90,8 @@ function App() {
           <Route path="ourApp" element={<OurApp />} />
           <Route path="appdownload" element={<AppDownload />} />
           <Route path="calculators" element={<Calculators />} />
+          <Route path="calculators/child-education" element={<Calculators />} />
+          <Route path="calculators/child-education-v2" element={<Calculators />} />
           <Route path="consulting-session" element={<ConsultingSession />} />
           <Route path="booking" element={<Booking />} />
           <Route path="book-session" element={<BookingWizardPage />} />

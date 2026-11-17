@@ -1,5 +1,5 @@
-import React, { useMemo, useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import React, { useMemo, useState, useEffect, useCallback, useRef } from "react";
+import { useSearchParams, useLocation, useNavigate } from "react-router-dom";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -12,7 +12,7 @@ import {
   ArcElement,
   BarElement,
 } from "chart.js";
-import { FaCalculator, FaChartLine } from "react-icons/fa";
+import { FaCalculator, FaChartLine, FaLink } from "react-icons/fa";
 import "./calculators.css";
 
 ChartJS.register(
@@ -407,36 +407,107 @@ const calculateRetirement = (currentAge, retirementAge, currentExpenses, inflati
   };
 };
 
-// Child Education Planning Calculator
+const CHILD_EDU_MIN_SIP_YEARS = 5;
+
+// Child Education Planning Calculator (v1 — live / production version)
 const calculateChildEducation = (childAge, targetAge, currentCost, inflation, expectedReturn, yearsOfEducation) => {
   const yearsToTarget = targetAge - childAge;
-  
+
   // Calculate future cost at target age (with inflation)
   const futureCostAtTarget = currentCost * Math.pow(1 + inflation / 100, yearsToTarget);
-  
+
   // Calculate total cost for all years of education (with inflation each year)
   let totalCost = 0;
   for (let year = 0; year < yearsOfEducation; year++) {
     totalCost += futureCostAtTarget * Math.pow(1 + inflation / 100, year);
   }
-  
+
   // Calculate monthly SIP needed
   const monthlyRate = expectedReturn / 12 / 100;
   const months = yearsToTarget * 12;
   let monthlySIP = 0;
-  
+
   if (monthlyRate > 0 && months > 0) {
     const sipFactor = ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
     monthlySIP = totalCost / sipFactor;
   } else {
     monthlySIP = totalCost / months;
   }
-  
+
   return {
     totalCost,
     monthlySIP,
     futureCostAtTarget,
-    yearsToTarget
+    yearsToTarget,
+  };
+};
+
+/**
+ * Child Education Planner (v2) — lumpsum + SIP corpus at target age.
+ *
+ * Inputs: child's current age, target age (typically 18), lumpsum today,
+ * monthly SIP for a chosen duration (min 5 years when horizon allows),
+ * expected annualised return.
+ *
+ * Assumptions:
+ * - Investment horizon (years) = max(0, targetAge − currentAge)
+ * - Lumpsum is invested today and compounds for the full horizon
+ * - SIP runs for sipYears (clamped to [min(5, horizon), horizon]), then
+ *   the SIP corpus compounds with no further contributions until target age
+ * - Monthly rate uses nominal annual / 12 (same as SIP / lumpsum calculators)
+ * - Taxes, fees, exit loads, inflation, scheme terms are not modelled
+ */
+const calculateChildEducationV2 = (
+  currentAge,
+  targetAge,
+  lumpsum,
+  monthlySip,
+  annualReturnPercent,
+  sipYearsInput
+) => {
+  const ageNow = Math.max(0, Number(currentAge) || 0);
+  const ageTarget = Math.max(0, Number(targetAge) || 0);
+  const years = Math.max(0, ageTarget - ageNow);
+  const principal = Math.max(0, Number(lumpsum) || 0);
+  const sip = Math.max(0, Number(monthlySip) || 0);
+  const annualPercent = Math.max(0, Number(annualReturnPercent) || 0);
+
+  const minSipYears = years > 0 ? Math.min(CHILD_EDU_MIN_SIP_YEARS, years) : 0;
+  const maxSipYears = years;
+  let sipYears = Number(sipYearsInput);
+  if (Number.isNaN(sipYears)) sipYears = years;
+  sipYears = Math.min(maxSipYears, Math.max(minSipYears, sipYears));
+
+  const lumpsumPart = calculateLumpsum(principal, annualPercent, years);
+  const sipDuring = calculateSip(sip, annualPercent, sipYears);
+  const remainingYears = Math.max(0, years - sipYears);
+  const monthlyRate = annualPercent / 12 / 100;
+  const remainingMonths = Math.floor(remainingYears * 12);
+  const sipMaturity =
+    remainingMonths > 0 && monthlyRate !== 0
+      ? sipDuring.maturity * Math.pow(1 + monthlyRate, remainingMonths)
+      : remainingMonths > 0
+        ? sipDuring.maturity
+        : sipDuring.maturity;
+
+  const maturity = lumpsumPart.maturity + sipMaturity;
+  const invested = lumpsumPart.invested + sipDuring.invested;
+
+  return {
+    maturity,
+    invested,
+    returns: maturity - invested,
+    years,
+    months: Math.floor(years * 12),
+    sipYears,
+    sipMonths: Math.floor(sipYears * 12),
+    remainingYears,
+    minSipYears,
+    maxSipYears,
+    lumpsumMaturity: lumpsumPart.maturity,
+    sipMaturity,
+    currentAge: ageNow,
+    targetAge: ageTarget,
   };
 };
 
@@ -579,6 +650,7 @@ const Calculators = () => {
     lifeExpectancy: 85,
   });
 
+  // v1 — live inflation / cost-based education planner
   const [educationInputs, setEducationInputs] = useState({
     childAge: 5,
     targetAge: 18,
@@ -586,6 +658,16 @@ const Calculators = () => {
     inflation: 8,
     expectedReturn: 12,
     yearsOfEducation: 4,
+  });
+
+  // v2 — lumpsum + SIP corpus at target age
+  const [educationV2Inputs, setEducationV2Inputs] = useState({
+    currentAge: 5,
+    targetAge: 18,
+    lumpsum: 100000,
+    monthly: 10000,
+    sipYears: 13, // default = full horizon (18 − 5)
+    rate: 14,
   });
 
   const [goalInputs, setGoalInputs] = useState({
@@ -602,22 +684,163 @@ const Calculators = () => {
     years: 10,
   });
 
+  const location = useLocation();
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+  const pathnameNorm = location.pathname.replace(/\/$/, '');
+  const isChildEducationV2Path = pathnameNorm.endsWith('/calculators/child-education-v2');
+  const isChildEducationPath =
+    pathnameNorm.endsWith('/calculators/child-education') && !isChildEducationV2Path;
   const tabFromUrl = searchParams.get('tab');
-  const [activeTab, setActiveTab] = useState(tabFromUrl || "sip");
+  const [activeTab, setActiveTab] = useState(
+    isChildEducationV2Path
+      ? 'education-v2'
+      : isChildEducationPath
+        ? 'education'
+        : tabFromUrl || 'sip'
+  );
 
-  // Update active tab when URL parameter changes
+  // Deep-link: /calculators/child-education | /calculators/child-education-v2 | ?tab=
   useEffect(() => {
-    if (tabFromUrl) {
+    if (isChildEducationV2Path) {
+      setActiveTab('education-v2');
+    } else if (isChildEducationPath) {
+      setActiveTab('education');
+    } else if (tabFromUrl) {
       setActiveTab(tabFromUrl);
     }
-  }, [tabFromUrl]);
+  }, [tabFromUrl, isChildEducationPath, isChildEducationV2Path]);
 
-  // Update URL when tab changes (but don't replace if coming from menu)
+  // Hydrate v2 share params
+  const educationV2HydratedRef = useRef(false);
+  useEffect(() => {
+    if (educationV2HydratedRef.current) return;
+    if (!(isChildEducationV2Path || tabFromUrl === 'education-v2')) return;
+    const ageParam = searchParams.get('age');
+    const targetParam = searchParams.get('target');
+    const lumpParam = searchParams.get('lump');
+    const sipParam = searchParams.get('sip');
+    const sipYearsParam = searchParams.get('sipYears');
+    const rateParam = searchParams.get('rate');
+    if (
+      ageParam == null &&
+      targetParam == null &&
+      lumpParam == null &&
+      sipParam == null &&
+      sipYearsParam == null &&
+      rateParam == null
+    ) {
+      return;
+    }
+    educationV2HydratedRef.current = true;
+    setEducationV2Inputs((prev) => {
+      const next = { ...prev };
+      if (ageParam != null && ageParam !== '') {
+        const age = parseFloat(ageParam);
+        if (!Number.isNaN(age) && age >= 0) next.currentAge = age;
+      }
+      if (targetParam != null && targetParam !== '') {
+        const target = parseFloat(targetParam);
+        if (!Number.isNaN(target) && target >= 0) next.targetAge = target;
+      }
+      if (lumpParam != null && lumpParam !== '') {
+        const lump = parseIndianNumber(lumpParam);
+        if (lump >= 0) next.lumpsum = lump;
+      }
+      if (sipParam != null && sipParam !== '') {
+        const sip = parseIndianNumber(sipParam);
+        if (sip >= 0) next.monthly = sip;
+      }
+      if (sipYearsParam != null && sipYearsParam !== '') {
+        const sipYears = parseFloat(sipYearsParam);
+        if (!Number.isNaN(sipYears) && sipYears >= 0) next.sipYears = sipYears;
+      }
+      if (rateParam != null && rateParam !== '') {
+        const rate = parseFloat(rateParam);
+        if (!Number.isNaN(rate) && rate >= 0) next.rate = rate;
+      }
+      return next;
+    });
+  }, [isChildEducationV2Path, tabFromUrl, searchParams]);
+
+  // When ages change: keep SIP at full horizon if it was already full; otherwise clamp to [min 5, horizon]
+  const educationHorizonRef = useRef(
+    Math.max(0, Number(educationV2Inputs.targetAge) - Number(educationV2Inputs.currentAge))
+  );
+  useEffect(() => {
+    const horizon = Math.max(
+      0,
+      Number(educationV2Inputs.targetAge) - Number(educationV2Inputs.currentAge)
+    );
+    if (horizon <= 0) return;
+    const prevHorizon = educationHorizonRef.current;
+    educationHorizonRef.current = horizon;
+    const minSip = Math.min(CHILD_EDU_MIN_SIP_YEARS, horizon);
+    const maxSip = horizon;
+    setEducationV2Inputs((prev) => {
+      const current = Number(prev.sipYears);
+      const wasFullHorizon =
+        Number.isNaN(current) || current === prevHorizon || current >= prevHorizon;
+      const next = wasFullHorizon
+        ? maxSip
+        : Math.min(maxSip, Math.max(minSip, current));
+      if (next === current) return prev;
+      return { ...prev, sipYears: next };
+    });
+  }, [educationV2Inputs.currentAge, educationV2Inputs.targetAge]);
+
+  const calcBaseUrl = useMemo(
+    () =>
+      (process.env.REACT_APP_BASE_URL ||
+        (typeof window !== 'undefined' ? window.location.origin : 'https://www.anupaatnivesh.com')).replace(
+        /\/$/,
+        ''
+      ),
+    []
+  );
+
+  const buildEducationV2ShareParams = useCallback(() => {
+    const age = Math.round(Number(educationV2Inputs.currentAge) || 0);
+    const target = Math.round(Number(educationV2Inputs.targetAge) || 18);
+    const lump = Math.round(Number(educationV2Inputs.lumpsum) || 0);
+    const sip = Math.round(Number(educationV2Inputs.monthly) || 0);
+    const sipYears = Math.round(Number(educationV2Inputs.sipYears) || CHILD_EDU_MIN_SIP_YEARS);
+    const rate = Number(educationV2Inputs.rate) || 14;
+    return {
+      age: String(age),
+      target: String(target),
+      lump: String(lump),
+      sip: String(sip),
+      sipYears: String(sipYears),
+      rate: String(rate),
+    };
+  }, [educationV2Inputs]);
+
   const handleTabChange = (tab) => {
     setActiveTab(tab);
-    setSearchParams({ tab });
-    // Scroll to top of calculator section
+    const onEduDeepPath = isChildEducationPath || isChildEducationV2Path;
+    if (onEduDeepPath && tab !== 'education' && tab !== 'education-v2') {
+      navigate(`/calculators?tab=${tab}`);
+    } else if (tab === 'education') {
+      if (isChildEducationPath) {
+        setSearchParams({});
+      } else if (isChildEducationV2Path) {
+        navigate('/calculators/child-education');
+      } else {
+        setSearchParams({ tab: 'education' });
+      }
+    } else if (tab === 'education-v2') {
+      const params = buildEducationV2ShareParams();
+      if (isChildEducationV2Path) {
+        setSearchParams(params);
+      } else if (isChildEducationPath) {
+        navigate(`/calculators/child-education-v2?${new URLSearchParams(params).toString()}`);
+      } else {
+        setSearchParams({ tab: 'education-v2', ...params });
+      }
+    } else {
+      setSearchParams({ tab });
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -732,6 +955,71 @@ const Calculators = () => {
     [educationInputs]
   );
 
+  const educationV2Result = useMemo(
+    () =>
+      calculateChildEducationV2(
+        Number(educationV2Inputs.currentAge),
+        Number(educationV2Inputs.targetAge),
+        Number(educationV2Inputs.lumpsum),
+        Number(educationV2Inputs.monthly),
+        Number(educationV2Inputs.rate),
+        Number(educationV2Inputs.sipYears)
+      ),
+    [educationV2Inputs]
+  );
+
+  const educationV2BarData = useMemo(() => {
+    const total = educationV2Result.invested + educationV2Result.returns;
+    const investedPercent = total > 0 ? (educationV2Result.invested / total) * 100 : 0;
+    const returnsPercent = total > 0 ? (educationV2Result.returns / total) * 100 : 0;
+    return {
+      labels: [""],
+      datasets: [
+        {
+          label: "Invested",
+          data: [investedPercent],
+          backgroundColor: "rgba(220, 53, 69, 0.9)",
+          borderColor: "rgba(220, 53, 69, 1)",
+          borderWidth: 0,
+          borderRadius: 8,
+        },
+        {
+          label: "Returns",
+          data: [returnsPercent],
+          backgroundColor: "rgba(40, 167, 69, 0.9)",
+          borderColor: "rgba(40, 167, 69, 1)",
+          borderWidth: 0,
+          borderRadius: 8,
+        },
+      ],
+    };
+  }, [educationV2Result.invested, educationV2Result.returns]);
+
+  // Static HTML share path so WhatsApp/social crawlers get OG preview tags
+  const childEducationV2ShareUrl = useMemo(() => {
+    const params = new URLSearchParams(buildEducationV2ShareParams());
+    return `${calcBaseUrl}/share/child-education-v2.html?${params.toString()}`;
+  }, [buildEducationV2ShareParams, calcBaseUrl]);
+
+  const [educationV2LinkCopied, setEducationV2LinkCopied] = useState(false);
+  const copyChildEducationV2Link = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(childEducationV2ShareUrl);
+      setEducationV2LinkCopied(true);
+      window.setTimeout(() => setEducationV2LinkCopied(false), 2000);
+    } catch {
+      // Fallback for older browsers
+      const input = document.createElement('input');
+      input.value = childEducationV2ShareUrl;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+      setEducationV2LinkCopied(true);
+      window.setTimeout(() => setEducationV2LinkCopied(false), 2000);
+    }
+  }, [childEducationV2ShareUrl]);
+
   const goalResult = useMemo(
     () =>
       calculateGoalPlanning(
@@ -800,7 +1088,7 @@ const Calculators = () => {
   const handleChange = (setter) => (e) => {
     const { name, value } = e.target;
     // For amount fields, parse Indian formatted numbers
-    const amountFields = ["monthly", "principal", "futureValue", "corpus", "annualIncome", "existingCoverage", "liabilities", "emi", "currentExpenses", "currentCost", "goalAmount", "existingInvestment", "currentAmount"];
+    const amountFields = ["monthly", "principal", "lumpsum", "futureValue", "corpus", "annualIncome", "existingCoverage", "liabilities", "emi", "currentExpenses", "currentCost", "goalAmount", "existingInvestment", "currentAmount"];
     if (amountFields.includes(name)) {
       const parsedValue = parseIndianNumber(value);
       setter((prev) => ({ ...prev, [name]: parsedValue }));
@@ -811,7 +1099,7 @@ const Calculators = () => {
 
   const handleBlur = (setter, fieldName) => (e) => {
     // Format on blur for amount fields
-    const amountFields = ["monthly", "principal", "futureValue", "corpus", "annualIncome", "existingCoverage", "liabilities", "emi", "currentExpenses", "currentCost", "goalAmount", "existingInvestment", "currentAmount"];
+    const amountFields = ["monthly", "principal", "lumpsum", "futureValue", "corpus", "annualIncome", "existingCoverage", "liabilities", "emi", "currentExpenses", "currentCost", "goalAmount", "existingInvestment", "currentAmount"];
     if (amountFields.includes(fieldName)) {
       const value = e.target.value;
       const parsed = parseIndianNumber(value);
@@ -1025,6 +1313,12 @@ const Calculators = () => {
           onClick={() => handleTabChange("education")}
         >
           Child Education
+        </button>
+        <button
+          className={activeTab === "education-v2" ? "tab active" : "tab"}
+          onClick={() => handleTabChange("education-v2")}
+        >
+          Child Education v2
         </button>
         <button
           className={activeTab === "goal" ? "tab active" : "tab"}
@@ -1862,6 +2156,163 @@ const Calculators = () => {
                   <p className="result-value">{educationResult.yearsToTarget} years</p>
                 </div>
               </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "education-v2" && (
+          <div className="calc-card">
+            <div className="card-header">
+              <div>
+                <p className="eyebrow">Child Education Planning · v2</p>
+                <h3>Education corpus at target age</h3>
+                <p className="muted">
+                  Enter your child's current age and target age (usually 18). Add a lumpsum today plus a monthly SIP until then to see the projected corpus.
+                </p>
+              </div>
+              <button
+                type="button"
+                className="calc-copy-link"
+                onClick={copyChildEducationV2Link}
+              >
+                <FaLink aria-hidden /> {educationV2LinkCopied ? 'Link copied' : 'Copy link'}
+              </button>
+            </div>
+            <div className="calc-form">
+              <label>
+                Child's current age (years)
+                <input
+                  type="number"
+                  min="0"
+                  max="25"
+                  step="1"
+                  name="currentAge"
+                  value={educationV2Inputs.currentAge}
+                  onChange={handleChange(setEducationV2Inputs)}
+                />
+              </label>
+              <label>
+                Target age (years)
+                <input
+                  type="number"
+                  min="1"
+                  max="30"
+                  step="1"
+                  name="targetAge"
+                  value={educationV2Inputs.targetAge}
+                  onChange={handleChange(setEducationV2Inputs)}
+                />
+              </label>
+              <label>
+                Lumpsum amount today (₹)
+                <input
+                  type="text"
+                  name="lumpsum"
+                  value={formatIndianNumber(educationV2Inputs.lumpsum)}
+                  onChange={handleChange(setEducationV2Inputs)}
+                  onBlur={handleBlur(setEducationV2Inputs, "lumpsum")}
+                />
+              </label>
+              <label>
+                Monthly SIP (₹)
+                <input
+                  type="text"
+                  name="monthly"
+                  value={formatIndianNumber(educationV2Inputs.monthly)}
+                  onChange={handleChange(setEducationV2Inputs)}
+                  onBlur={handleBlur(setEducationV2Inputs, "monthly")}
+                />
+              </label>
+              <label>
+                SIP duration (years)
+                <input
+                  type="number"
+                  min={educationV2Result.minSipYears || CHILD_EDU_MIN_SIP_YEARS}
+                  max={educationV2Result.maxSipYears || educationV2Result.years || CHILD_EDU_MIN_SIP_YEARS}
+                  step="1"
+                  name="sipYears"
+                  value={educationV2Inputs.sipYears}
+                  onChange={handleChange(setEducationV2Inputs)}
+                />
+                <span className="muted" style={{ display: "block", marginTop: "0.35rem", fontSize: "1.2rem" }}>
+                  {educationV2Result.years < CHILD_EDU_MIN_SIP_YEARS
+                    ? `Horizon is under ${CHILD_EDU_MIN_SIP_YEARS} years — SIP runs for the full horizon.`
+                    : `Minimum ${CHILD_EDU_MIN_SIP_YEARS} years, maximum ${educationV2Result.years} years (full horizon). After SIP stops, corpus keeps compounding until target age.`}
+                </span>
+              </label>
+              <label>
+                Expected annualised return (% p.a.)
+                <input
+                  type="number"
+                  min="0"
+                  step="0.1"
+                  name="rate"
+                  value={educationV2Inputs.rate}
+                  onChange={handleChange(setEducationV2Inputs)}
+                />
+              </label>
+              <label>
+                Investment horizon (auto)
+                <input
+                  type="text"
+                  readOnly
+                  value={`${educationV2Result.years} years (${educationV2Result.months} months)`}
+                  aria-readonly="true"
+                />
+              </label>
+            </div>
+            <ResultCard
+              title={`Projected corpus at age ${Math.round(Number(educationV2Inputs.targetAge) || 18)}`}
+              maturity={educationV2Result.maturity}
+              invested={educationV2Result.invested}
+              returns={educationV2Result.returns}
+            />
+            <div className="result-grid" style={{ marginTop: "1.2rem" }}>
+              <div>
+                <p className="result-label">From lumpsum</p>
+                <p className="result-value">{formatNumber(educationV2Result.lumpsumMaturity)}</p>
+              </div>
+              <div>
+                <p className="result-label">From SIP</p>
+                <p className="result-value">{formatNumber(educationV2Result.sipMaturity)}</p>
+              </div>
+            </div>
+            <div className="chart-block">
+              <Bar
+                key={`education-v2-${educationV2Result.invested}-${educationV2Result.returns}`}
+                data={educationV2BarData}
+                options={barOptions}
+              />
+            </div>
+            <div className="calc-assumptions">
+              <p className="calc-assumptions__title">How this plan works</p>
+              <ul>
+                <li>
+                  Horizon is <strong>{educationV2Result.years} years</strong> (target age{" "}
+                  {Math.round(Number(educationV2Inputs.targetAge) || 18)} − current age{" "}
+                  {Math.round(Number(educationV2Inputs.currentAge) || 0)}).
+                </li>
+                <li>
+                  Lumpsum of <strong>{formatNumber(educationV2Inputs.lumpsum)}</strong> invested today
+                  compounds for the full horizon.
+                </li>
+                <li>
+                  Monthly SIP of <strong>{formatNumber(educationV2Inputs.monthly)}</strong> for{" "}
+                  <strong>{educationV2Result.sipYears} years</strong> ({educationV2Result.sipMonths} months)
+                  {educationV2Result.remainingYears > 0
+                    ? ` — then no further SIPs for ${educationV2Result.remainingYears} years while the corpus compounds.`
+                    : " — SIP continues until target age."}
+                </li>
+                <li>
+                  Assumed return: <strong>{Number(educationV2Inputs.rate) || 14}%</strong> p.a.
+                  (same compounding conventions as the SIP and lumpsum calculators).
+                </li>
+                <li>Taxes, fees, exit loads, inflation and scheme-specific terms are not modelled.</li>
+              </ul>
+              <p className="calc-share-link">
+                Shareable link (shows preview when pasted on WhatsApp):{' '}
+                <a href={childEducationV2ShareUrl}>{childEducationV2ShareUrl}</a>
+              </p>
             </div>
           </div>
         )}

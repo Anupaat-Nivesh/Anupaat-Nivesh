@@ -60,7 +60,22 @@ export const SEO_BY_PATH = {
   '/calculators': {
     title: 'Investment Calculators',
     description:
-      'Use SIP, lumpsum, and step-up calculators to estimate long-term investment outcomes. Educational tools from Anupaat Nivesh.',
+      'Use SIP, lumpsum, step-up, and child education planners to estimate long-term investment outcomes. Educational tools from Anupaat Nivesh.',
+  },
+  '/calculators/child-education': {
+    title: 'Child Education Planner',
+    description:
+      'Estimate future education costs with inflation and the monthly SIP needed for your child’s higher education. Educational calculator from Anupaat Nivesh.',
+    keywords:
+      'child education calculator, education SIP, education inflation, child education planning, Anupaat Nivesh',
+  },
+  '/calculators/child-education-v2': {
+    title: 'Child Education Planner v2',
+    description:
+      'Estimate your child’s education corpus with age, lumpsum, and SIP — mobile-friendly planner from Anupaat Nivesh. Default return 14% p.a.',
+    keywords:
+      'child education calculator, education SIP age based, child education planning, mutual fund SIP, Anupaat Nivesh',
+    ogImage: '/og-share.png',
   },
   '/consulting-session': {
     title: '1-on-1 Consulting Session',
