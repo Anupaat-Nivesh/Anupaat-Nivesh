@@ -173,14 +173,18 @@ def make_html(item: dict, out_path: Path, share_url: str):
     </style>
     <script>
       (function () {{
+        // Normalize legacy query keys (age/target/…) to short keys (a/t/…)
+        var map = {{ age: 'a', target: 't', lump: 'l', sip: 'm', sipYears: 'y', rate: 'r' }};
+        var src = new URLSearchParams(window.location.search || '');
+        var out = new URLSearchParams();
+        src.forEach(function (value, key) {{
+          out.set(map[key] || key, value);
+        }});
+        var q = out.toString();
         var base = {json.dumps(redirect)};
-        var q = window.location.search || '';
-        var h = window.location.hash || '';
-        var target = base;
-        if (q) {{
-          target = base + ({json.dumps(has_query)} ? '&' + q.slice(1) : q);
-        }}
-        window.location.replace(target + h);
+        var joiner = {json.dumps('&' if has_query else '?')};
+        var target = q ? (base + joiner + q) : base;
+        window.location.replace(target + (window.location.hash || ''));
       }})();
     </script>
   </head>
@@ -190,41 +194,19 @@ def make_html(item: dict, out_path: Path, share_url: str):
     </div>
     <script>
       (function () {{
+        var map = {{ age: 'a', target: 't', lump: 'l', sip: 'm', sipYears: 'y', rate: 'r' }};
+        var src = new URLSearchParams(window.location.search || '');
+        var out = new URLSearchParams();
+        src.forEach(function (value, key) {{
+          out.set(map[key] || key, value);
+        }});
+        var q = out.toString();
         var base = {json.dumps(redirect)};
-        var q = window.location.search || '';
-        var h = window.location.hash || '';
-        var href = base;
-        if (q) {{
-          href = base + ({json.dumps(has_query)} ? '&' + q.slice(1) : q);
-        }}
-        document.getElementById('continue').href = href + h;
+        var joiner = {json.dumps('&' if has_query else '?')};
+        var href = q ? (base + joiner + q) : base;
+        document.getElementById('continue').href = href + (window.location.hash || '');
       }})();
     </script>
-  </body>
-</html>
-"""
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(html, encoding="utf-8")
-
-
-def make_legacy_redirect(to_short_url: str, out_path: Path):
-    html = f"""<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="refresh" content="0;url={to_short_url}" />
-    <link rel="canonical" href="{to_short_url}" />
-    <script>
-      (function () {{
-        var dest = {json.dumps(to_short_url)};
-        window.location.replace(dest + (window.location.search || '') + (window.location.hash || ''));
-      }})();
-    </script>
-    <title>Redirecting…</title>
-  </head>
-  <body>
-    <p>Redirecting to <a href="{to_short_url}">{to_short_url}</a>…</p>
   </body>
 </html>
 """
@@ -242,18 +224,22 @@ def main():
     for item in items:
         short = item.get("shortId") or item["id"]
         short_url = f"{SITE}/s/{short}"
+        legacy_url = f"{SITE}/share/calculators/{item['id']}.html"
         png = OG_DIR / f"{item['id']}.png"
         short_html = SHORT_DIR / short / "index.html"
         make_png(item, png)
         make_html(item, short_html, short_url)
-        # Legacy long paths keep working
-        make_legacy_redirect(short_url, LEGACY_DIR / f"{item['id']}.html")
-        print(f"wrote /s/{short}/ + og/{item['id']}.png")
+        # Legacy long paths: full OG page (not a thin redirect) so WhatsApp + browsers work
+        make_html(item, LEGACY_DIR / f"{item['id']}.html", legacy_url)
+        print(f"wrote /s/{short}/ + legacy share + og/{item['id']}.png")
 
-    # Extra legacy aliases
+    # Extra legacy alias used earlier
     edu2 = next(i for i in items if i["id"] == "education-v2")
-    short_edu2 = f"{SITE}/s/{edu2.get('shortId') or edu2['id']}"
-    make_legacy_redirect(short_edu2, ROOT / "public" / "share" / "child-education-v2.html")
+    make_html(
+        edu2,
+        ROOT / "public" / "share" / "child-education-v2.html",
+        f"{SITE}/share/child-education-v2.html",
+    )
     print("wrote legacy aliases")
 
 

@@ -33,14 +33,18 @@
     </style>
     <script>
       (function () {
+        // Normalize legacy query keys (age/target/…) to short keys (a/t/…)
+        var map = { age: 'a', target: 't', lump: 'l', sip: 'm', sipYears: 'y', rate: 'r' };
+        var src = new URLSearchParams(window.location.search || '');
+        var out = new URLSearchParams();
+        src.forEach(function (value, key) {
+          out.set(map[key] || key, value);
+        });
+        var q = out.toString();
         var base = "/calculators/child-education-v2";
-        var q = window.location.search || '';
-        var h = window.location.hash || '';
-        var target = base;
-        if (q) {
-          target = base + (false ? '&' + q.slice(1) : q);
-        }
-        window.location.replace(target + h);
+        var joiner = "?";
+        var target = q ? (base + joiner + q) : base;
+        window.location.replace(target + (window.location.hash || ''));
       })();
     </script>
   </head>
@@ -50,14 +54,17 @@
     </div>
     <script>
       (function () {
+        var map = { age: 'a', target: 't', lump: 'l', sip: 'm', sipYears: 'y', rate: 'r' };
+        var src = new URLSearchParams(window.location.search || '');
+        var out = new URLSearchParams();
+        src.forEach(function (value, key) {
+          out.set(map[key] || key, value);
+        });
+        var q = out.toString();
         var base = "/calculators/child-education-v2";
-        var q = window.location.search || '';
-        var h = window.location.hash || '';
-        var href = base;
-        if (q) {
-          href = base + (false ? '&' + q.slice(1) : q);
-        }
-        document.getElementById('continue').href = href + h;
+        var joiner = "?";
+        var href = q ? (base + joiner + q) : base;
+        document.getElementById('continue').href = href + (window.location.hash || '');
       })();
     </script>
   </body>
