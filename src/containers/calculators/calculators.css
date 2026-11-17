@@ -233,67 +233,6 @@ body:not(.has-market-ticker) .calc-tabs-wrap {
   margin-bottom: 0.4rem;
 }
 
-.calc-copy-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  border-radius: 12px;
-  padding: 0.9rem 1.4rem;
-  background: #fff;
-  color: #0f172a;
-  font-weight: 700;
-  font-size: 1.35rem;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  white-space: nowrap;
-}
-
-.calc-copy-link:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.1);
-  background: #f8fafc;
-}
-
-.calc-assumptions {
-  margin-top: 0.5rem;
-  padding: 1.4rem 1.6rem;
-  border-radius: 14px;
-  background: rgba(15, 23, 42, 0.03);
-  border: 1px solid rgba(15, 23, 42, 0.08);
-}
-
-.calc-assumptions__title {
-  margin: 0 0 0.8rem;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #1a1a1a;
-}
-
-.calc-assumptions ul {
-  margin: 0;
-  padding-left: 1.4rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-  color: var(--color-subtext);
-  font-size: 1.3rem;
-  line-height: 1.5;
-}
-
-.calc-share-link {
-  margin: 1rem 0 0;
-  font-size: 1.25rem;
-  word-break: break-all;
-  color: var(--color-subtext);
-}
-
-.calc-share-link a {
-  color: var(--color-primary);
-  font-weight: 600;
-}
-
 .calc-form input[readonly] {
   background: #f3f4f6;
   color: #444;
@@ -665,14 +604,6 @@ body:not(.has-market-ticker) .calc-tabs-wrap {
     margin-top: 0;
   }
 
-  .calc-copy-link {
-    width: 100%;
-    justify-content: center;
-    min-height: 44px;
-    font-size: 1.3rem;
-    padding: 0.85rem 1.2rem;
-  }
-
   .calc-form {
     grid-template-columns: 1fr;
     gap: 1.1rem;
@@ -731,23 +662,6 @@ body:not(.has-market-ticker) .calc-tabs-wrap {
   .chart-legend {
     grid-template-columns: 1fr;
   }
-
-  .calc-assumptions {
-    padding: 1.1rem 1.15rem;
-  }
-
-  .calc-assumptions__title {
-    font-size: 1.3rem;
-  }
-
-  .calc-assumptions ul {
-    font-size: 1.2rem;
-    padding-left: 1.2rem;
-  }
-
-  .calc-share-link {
-    font-size: 1.1rem;
-  }
 }
 
 @media (max-width: 480px) {
@@ -778,7 +692,6 @@ body:not(.has-market-ticker) .calc-tabs-wrap {
 /* Prefer reduced motion on touch devices */
 @media (prefers-reduced-motion: reduce) {
   .tab,
-  .calc-copy-link,
   .result-grid > div,
   .calc-form input {
     transition: none;

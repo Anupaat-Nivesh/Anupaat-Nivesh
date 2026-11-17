@@ -12,13 +12,8 @@ import {
   ArcElement,
   BarElement,
 } from "chart.js";
-import { FaCalculator, FaChartLine, FaLink } from "react-icons/fa";
-import calculatorShareMeta from "../../data/calculatorShare.json";
+import { FaCalculator, FaChartLine } from "react-icons/fa";
 import "./calculators.css";
-
-const CALC_SHARE_BY_ID = Object.fromEntries(
-  (calculatorShareMeta || []).map((item) => [item.id, item])
-);
 
 ChartJS.register(
   CategoryScale,
@@ -801,16 +796,6 @@ const Calculators = () => {
     });
   }, [educationV2Inputs.currentAge, educationV2Inputs.targetAge]);
 
-  const calcBaseUrl = useMemo(
-    () =>
-      (process.env.REACT_APP_BASE_URL ||
-        (typeof window !== 'undefined' ? window.location.origin : 'https://www.anupaatnivesh.com')).replace(
-        /\/$/,
-        ''
-      ),
-    []
-  );
-
   const buildEducationV2ShareParams = useCallback(() => {
     const age = Math.round(Number(educationV2Inputs.currentAge) || 0);
     const target = Math.round(Number(educationV2Inputs.targetAge) || 18);
@@ -818,7 +803,7 @@ const Calculators = () => {
     const sip = Math.round(Number(educationV2Inputs.monthly) || 0);
     const sipYears = Math.round(Number(educationV2Inputs.sipYears) || CHILD_EDU_MIN_SIP_YEARS);
     const rate = Number(educationV2Inputs.rate) || 14;
-    // Short keys keep WhatsApp share URLs compact
+    // Short keys for deep-link query params
     return {
       a: String(age),
       t: String(target),
@@ -1016,58 +1001,6 @@ const Calculators = () => {
     };
   }, [educationV2Result.invested, educationV2Result.returns]);
 
-  // Shareable links use /s/{shortId}/ (real Hostinger files + OG). Those pages redirect to /?tab=…
-  // so the app opens even when /calculators 404s on hCDN.
-  const [copiedShareId, setCopiedShareId] = useState(null);
-
-  const getCalculatorShareUrl = useCallback(
-    (id, extraParams) => {
-      const shortId = CALC_SHARE_BY_ID[id]?.shortId || id;
-      const params = new URLSearchParams({ ...(extraParams || {}) });
-      const q = params.toString();
-      return q
-        ? `${calcBaseUrl}/s/${shortId}/?${q}`
-        : `${calcBaseUrl}/s/${shortId}/`;
-    },
-    [calcBaseUrl]
-  );
-
-  const copyCalculatorShareLink = useCallback(
-    async (id, extraParams) => {
-      const url = getCalculatorShareUrl(id, extraParams);
-      try {
-        await navigator.clipboard.writeText(url);
-      } catch {
-        const input = document.createElement('input');
-        input.value = url;
-        document.body.appendChild(input);
-        input.select();
-        document.execCommand('copy');
-        document.body.removeChild(input);
-      }
-      setCopiedShareId(id);
-      window.setTimeout(() => {
-        setCopiedShareId((current) => (current === id ? null : current));
-      }, 2000);
-    },
-    [getCalculatorShareUrl]
-  );
-
-  const renderShareCopyButton = (id, extraParams) => (
-    <button
-      type="button"
-      className="calc-copy-link"
-      onClick={() => copyCalculatorShareLink(id, extraParams)}
-      aria-label={`Copy share link for ${id}`}
-    >
-      <FaLink aria-hidden /> {copiedShareId === id ? 'Link copied' : 'Copy link'}
-    </button>
-  );
-
-  const childEducationV2ShareUrl = useMemo(
-    () => getCalculatorShareUrl('education-v2', buildEducationV2ShareParams()),
-    [getCalculatorShareUrl, buildEducationV2ShareParams]
-  );
 
   const goalResult = useMemo(
     () =>
@@ -1357,7 +1290,6 @@ const Calculators = () => {
                   Calculate maturity with fixed monthly SIPs.
                 </p>
               </div>
-              {renderShareCopyButton('sip')}
             </div>
             <div className="calc-form">
               <label>
@@ -1421,7 +1353,6 @@ const Calculators = () => {
                 Model yearly increases to align with income growth.
               </p>
             </div>
-            {renderShareCopyButton('step')}
           </div>
           <div className="calc-form">
             <label>
@@ -1497,7 +1428,6 @@ const Calculators = () => {
                 Estimate future value of a lumpsum over your chosen duration.
               </p>
             </div>
-            {renderShareCopyButton('lumpsum')}
           </div>
           <div className="calc-form">
             <label>
@@ -1561,7 +1491,6 @@ const Calculators = () => {
                 Calculate how much you need today to reach a future target.
               </p>
             </div>
-            {renderShareCopyButton('pv')}
           </div>
           <div className="calc-form">
             <label>
@@ -1629,7 +1558,6 @@ const Calculators = () => {
                   Calculate monthly/annual withdrawals from your corpus. Recommended withdrawal: 6-12% annually.
                 </p>
               </div>
-              {renderShareCopyButton('swp')}
             </div>
             <div className="calc-form">
               <label>
@@ -1741,7 +1669,6 @@ const Calculators = () => {
                   Determine the right coverage amount based on your income, liabilities, and dependents.
                 </p>
               </div>
-              {renderShareCopyButton('term')}
             </div>
             <div className="calc-form">
               <label>
@@ -1857,7 +1784,6 @@ const Calculators = () => {
                   Determine how much home loan you can get based on your EMI capacity and tenure.
                 </p>
               </div>
-              {renderShareCopyButton('homeloan')}
             </div>
             <div className="calc-form">
               <label>
@@ -1930,7 +1856,6 @@ const Calculators = () => {
                   Calculate Equated Monthly Installment for Personal, Home, Motor, or any other loan.
                 </p>
               </div>
-              {renderShareCopyButton('emi')}
             </div>
             <div className="calc-form">
               <label>
@@ -1999,7 +1924,6 @@ const Calculators = () => {
                   Calculate how much corpus you need for retirement and the monthly SIP required to achieve it.
                 </p>
               </div>
-              {renderShareCopyButton('retirement')}
             </div>
             <div className="calc-form">
               <label>
@@ -2110,7 +2034,6 @@ const Calculators = () => {
                   Calculate how much you need to invest monthly for your child's higher education.
                 </p>
               </div>
-              {renderShareCopyButton('education')}
             </div>
             <div className="calc-form">
               <label>
@@ -2221,7 +2144,6 @@ const Calculators = () => {
                   Enter your child's current age and target age (usually 18). Add a lumpsum today plus a monthly SIP until then to see the projected corpus.
                 </p>
               </div>
-              {renderShareCopyButton('education-v2', buildEducationV2ShareParams())}
             </div>
             <div className="calc-form">
               <label>
@@ -2333,36 +2255,6 @@ const Calculators = () => {
                 options={barOptions}
               />
             </div>
-            <div className="calc-assumptions">
-              <p className="calc-assumptions__title">How this plan works</p>
-              <ul>
-                <li>
-                  Horizon is <strong>{educationV2Result.years} years</strong> (target age{" "}
-                  {Math.round(Number(educationV2Inputs.targetAge) || 18)} − current age{" "}
-                  {Math.round(Number(educationV2Inputs.currentAge) || 0)}).
-                </li>
-                <li>
-                  Lumpsum of <strong>{formatNumber(educationV2Inputs.lumpsum)}</strong> invested today
-                  compounds for the full horizon.
-                </li>
-                <li>
-                  Monthly SIP of <strong>{formatNumber(educationV2Inputs.monthly)}</strong> for{" "}
-                  <strong>{educationV2Result.sipYears} years</strong> ({educationV2Result.sipMonths} months)
-                  {educationV2Result.remainingYears > 0
-                    ? ` — then no further SIPs for ${educationV2Result.remainingYears} years while the corpus compounds.`
-                    : " — SIP continues until target age."}
-                </li>
-                <li>
-                  Assumed return: <strong>{Number(educationV2Inputs.rate) || 14}%</strong> p.a.
-                  (same compounding conventions as the SIP and lumpsum calculators).
-                </li>
-                <li>Taxes, fees, exit loads, inflation and scheme-specific terms are not modelled.</li>
-              </ul>
-              <p className="calc-share-link">
-                Short WhatsApp link:{' '}
-                <a href={childEducationV2ShareUrl}>{childEducationV2ShareUrl}</a>
-              </p>
-            </div>
           </div>
         )}
 
@@ -2376,7 +2268,6 @@ const Calculators = () => {
                   Calculate monthly SIP needed to achieve your specific financial goal.
                 </p>
               </div>
-              {renderShareCopyButton('goal')}
             </div>
             <div className="calc-form">
               <label>
@@ -2481,7 +2372,6 @@ const Calculators = () => {
                   See how inflation affects the value of money over time.
                 </p>
               </div>
-              {renderShareCopyButton('inflation')}
             </div>
             <div className="calc-form">
               <label>
