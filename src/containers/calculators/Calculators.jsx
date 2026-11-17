@@ -12,7 +12,7 @@ import {
   ArcElement,
   BarElement,
 } from "chart.js";
-import { FaCalculator, FaChartLine, FaLink } from "react-icons/fa";
+import { FaCalculator, FaChartLine } from "react-icons/fa";
 import "./calculators.css";
 
 ChartJS.register(
@@ -587,6 +587,26 @@ const ResultCard = ({ title, maturity, invested, returns }) => (
   </div>
 );
 
+const CalcAssumptions = ({ items }) => (
+  <div className="calc-assumptions">
+    <p className="calc-assumptions__title">How this plan works</p>
+    <ul>
+      {items.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+  </div>
+);
+
+const CALC_MF_DISCLAIMER =
+  "Investments in mutual funds and securities are subject to market risks; please read all scheme-related documents carefully before investing. Past performance does not guarantee future results. These calculators are educational illustrations only — outputs depend on the assumptions you enter and are not investment advice, forecasts, or assured returns. Anupaat Nivesh is an AMFI-registered mutual fund distributor.";
+
+const CalcDisclaimer = () => (
+  <p className="calc-disclaimer">
+    <strong>Disclaimer:</strong> {CALC_MF_DISCLAIMER}
+  </p>
+);
+
 const Calculators = () => {
   const [sipInputs, setSipInputs] = useState({
     monthly: 10000,
@@ -789,16 +809,6 @@ const Calculators = () => {
     });
   }, [educationV2Inputs.currentAge, educationV2Inputs.targetAge]);
 
-  const calcBaseUrl = useMemo(
-    () =>
-      (process.env.REACT_APP_BASE_URL ||
-        (typeof window !== 'undefined' ? window.location.origin : 'https://www.anupaatnivesh.com')).replace(
-        /\/$/,
-        ''
-      ),
-    []
-  );
-
   const buildEducationV2ShareParams = useCallback(() => {
     const age = Math.round(Number(educationV2Inputs.currentAge) || 0);
     const target = Math.round(Number(educationV2Inputs.targetAge) || 18);
@@ -806,7 +816,6 @@ const Calculators = () => {
     const sip = Math.round(Number(educationV2Inputs.monthly) || 0);
     const sipYears = Math.round(Number(educationV2Inputs.sipYears) || CHILD_EDU_MIN_SIP_YEARS);
     const rate = Number(educationV2Inputs.rate) || 14;
-    // Short keys for /s/edu2 share links (WhatsApp-friendly)
     return {
       a: String(age),
       t: String(target),
@@ -816,8 +825,6 @@ const Calculators = () => {
       r: String(rate),
     };
   }, [educationV2Inputs]);
-
-  const [educationV2LinkCopied, setEducationV2LinkCopied] = useState(false);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -997,30 +1004,6 @@ const Calculators = () => {
       ],
     };
   }, [educationV2Result.invested, educationV2Result.returns]);
-
-  const childEducationV2ShareUrl = useMemo(() => {
-    const params = new URLSearchParams(buildEducationV2ShareParams());
-    // Static /s/edu2 HTML carries Open Graph tags so WhatsApp shows a preview
-    return `${calcBaseUrl}/s/edu2?${params.toString()}`;
-  }, [buildEducationV2ShareParams, calcBaseUrl]);
-
-  const copyChildEducationV2Link = useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(childEducationV2ShareUrl);
-      setEducationV2LinkCopied(true);
-      window.setTimeout(() => setEducationV2LinkCopied(false), 2000);
-    } catch {
-      // Fallback for older browsers
-      const input = document.createElement('input');
-      input.value = childEducationV2ShareUrl;
-      document.body.appendChild(input);
-      input.select();
-      document.execCommand('copy');
-      document.body.removeChild(input);
-      setEducationV2LinkCopied(true);
-      window.setTimeout(() => setEducationV2LinkCopied(false), 2000);
-    }
-  }, [childEducationV2ShareUrl]);
 
   const goalResult = useMemo(
     () =>
@@ -1395,6 +1378,15 @@ const Calculators = () => {
                 options={barOptions}
               />
             </div>
+            <CalcAssumptions
+              items={[
+                <>Monthly SIP of <strong>{formatNumber(sipInputs.monthly)}</strong> for <strong>{sipInputs.years}</strong> years ({Math.floor(Number(sipInputs.years) * 12)} months).</>,
+                <>Expected return of <strong>{sipInputs.rate}%</strong> p.a., compounded monthly.</>,
+                "Contributions are assumed at the start of each month (annuity-due style).",
+                "Taxes, fees, exit loads, inflation and scheme-specific terms are not modelled.",
+              ]}
+            />
+            <CalcDisclaimer />
           </div>
         )}
 
@@ -1467,6 +1459,15 @@ const Calculators = () => {
               options={barOptions}
             />
           </div>
+          <CalcAssumptions
+            items={[
+              <>Starting monthly SIP of <strong>{formatNumber(stepInputs.monthly)}</strong> for <strong>{stepInputs.years}</strong> years.</>,
+              <>SIP amount increases by <strong>{stepInputs.step}%</strong> every year.</>,
+              <>Expected return of <strong>{stepInputs.rate}%</strong> p.a., compounded monthly.</>,
+              "Taxes, fees, exit loads, inflation and scheme-specific terms are not modelled.",
+            ]}
+          />
+          <CalcDisclaimer />
         </div>
         )}
 
@@ -1528,6 +1529,14 @@ const Calculators = () => {
               options={barOptions}
             />
           </div>
+          <CalcAssumptions
+            items={[
+              <>One-time investment of <strong>{formatNumber(lumpsumInputs.principal)}</strong> held for <strong>{lumpsumInputs.years}</strong> years.</>,
+              <>Expected return of <strong>{lumpsumInputs.rate}%</strong> p.a., compounded annually.</>,
+              "Taxes, fees, exit loads, inflation and scheme-specific terms are not modelled.",
+            ]}
+          />
+          <CalcDisclaimer />
         </div>
         )}
 
@@ -1593,6 +1602,14 @@ const Calculators = () => {
               </div>
             </div>
           </div>
+          <CalcAssumptions
+            items={[
+              <>Future goal of <strong>{formatNumber(pvInputs.futureValue)}</strong> in <strong>{pvInputs.years}</strong> years.</>,
+              <>Discounted at <strong>{pvInputs.rate}%</strong> p.a. to estimate how much is needed today.</>,
+              "Taxes, fees, inflation and scheme-specific terms are not modelled.",
+            ]}
+          />
+          <CalcDisclaimer />
           </div>
         )}
 
@@ -1701,6 +1718,15 @@ const Calculators = () => {
                 )}
               </div>
             </div>
+            <CalcAssumptions
+              items={[
+                <>Starting corpus of <strong>{formatNumber(swpInputs.corpus)}</strong> with annual withdrawals of <strong>{swpInputs.withdrawalPercent}%</strong>.</>,
+                <>Corpus is assumed to grow at <strong>{swpInputs.rate}%</strong> p.a. while withdrawals continue for up to <strong>{swpInputs.years}</strong> years.</>,
+                "Growth is applied monthly before each withdrawal; taxes and fees are not modelled.",
+                "Actual SWP outcomes depend on market returns and scheme terms.",
+              ]}
+            />
+            <CalcDisclaimer />
           </div>
         )}
 
@@ -1813,6 +1839,14 @@ const Calculators = () => {
                 </p>
               </div>
             </div>
+            <CalcAssumptions
+              items={[
+                "Coverage is estimated from income multiples, liabilities, existing cover and years to retirement.",
+                "Human Life Value uses a simple future-income approach for illustration only.",
+                "Actual insurance needs vary by lifestyle, dependents, assets and product features; this is not a policy quote.",
+              ]}
+            />
+            <CalcDisclaimer />
           </div>
         )}
 
@@ -1883,6 +1917,14 @@ const Calculators = () => {
                 </div>
               </div>
             </div>
+            <CalcAssumptions
+              items={[
+                <>Monthly EMI of <strong>{formatNumber(homeLoanInputs.emi)}</strong> at <strong>{homeLoanInputs.rate}%</strong> p.a. for <strong>{homeLoanInputs.tenureYears}</strong> years.</>,
+                "Loan amount is reverse-calculated from EMI using standard reducing-balance EMI maths.",
+                "Processing fees, prepayment charges, floating-rate resets and tax benefits are not modelled.",
+              ]}
+            />
+            <CalcDisclaimer />
           </div>
         )}
 
@@ -1949,6 +1991,14 @@ const Calculators = () => {
                 </div>
               </div>
             </div>
+            <CalcAssumptions
+              items={[
+                <>Loan of <strong>{formatNumber(emiInputs.principal)}</strong> at <strong>{emiInputs.rate}%</strong> p.a. for <strong>{emiInputs.tenureYears}</strong> years.</>,
+                "EMI uses standard reducing-balance formula with monthly compounding of interest.",
+                "Fees, insurance add-ons, prepayments and rate changes are not modelled.",
+              ]}
+            />
+            <CalcDisclaimer />
           </div>
         )}
 
@@ -2054,6 +2104,15 @@ const Calculators = () => {
                 </div>
               </div>
             </div>
+            <CalcAssumptions
+              items={[
+                <>Today’s expenses grow at <strong>{retirementInputs.inflation}%</strong> p.a. until retirement age <strong>{retirementInputs.retirementAge}</strong>.</>,
+                <>Corpus is sized for spending until life expectancy <strong>{retirementInputs.lifeExpectancy}</strong>, using the assumed investment return.</>,
+                <>Monthly SIP is estimated to build that corpus by retirement at <strong>{retirementInputs.expectedReturn}%</strong> p.a.</>,
+                "Healthcare shocks, pension income, taxes and fees are not modelled.",
+              ]}
+            />
+            <CalcDisclaimer />
           </div>
         )}
 
@@ -2159,6 +2218,15 @@ const Calculators = () => {
                 </div>
               </div>
             </div>
+            <CalcAssumptions
+              items={[
+                <>Current education cost of <strong>{formatNumber(educationInputs.currentCost)}</strong> inflated at <strong>{educationInputs.inflation}%</strong> p.a. until target age.</>,
+                <>Total cost covers <strong>{educationInputs.yearsOfEducation}</strong> years of education with inflation each year.</>,
+                <>Monthly SIP is estimated to fund that total cost by target age at <strong>{educationInputs.expectedReturn}%</strong> p.a.</>,
+                "Taxes, fees, scholarships and scheme-specific terms are not modelled.",
+              ]}
+            />
+            <CalcDisclaimer />
           </div>
         )}
 
@@ -2172,13 +2240,6 @@ const Calculators = () => {
                   Enter your child's current age and target age (usually 18). Add a lumpsum today plus a monthly SIP until then to see the projected corpus.
                 </p>
               </div>
-              <button
-                type="button"
-                className="calc-copy-link"
-                onClick={copyChildEducationV2Link}
-              >
-                <FaLink aria-hidden /> {educationV2LinkCopied ? 'Link copied' : 'Copy link'}
-              </button>
             </div>
             <div className="calc-form">
               <label>
@@ -2286,36 +2347,32 @@ const Calculators = () => {
                 options={barOptions}
               />
             </div>
-            <div className="calc-assumptions">
-              <p className="calc-assumptions__title">How this plan works</p>
-              <ul>
-                <li>
+            <CalcAssumptions
+              items={[
+                <>
                   Horizon is <strong>{educationV2Result.years} years</strong> (target age{" "}
                   {Math.round(Number(educationV2Inputs.targetAge) || 18)} − current age{" "}
                   {Math.round(Number(educationV2Inputs.currentAge) || 0)}).
-                </li>
-                <li>
+                </>,
+                <>
                   Lumpsum of <strong>{formatNumber(educationV2Inputs.lumpsum)}</strong> invested today
                   compounds for the full horizon.
-                </li>
-                <li>
+                </>,
+                <>
                   Monthly SIP of <strong>{formatNumber(educationV2Inputs.monthly)}</strong> for{" "}
                   <strong>{educationV2Result.sipYears} years</strong> ({educationV2Result.sipMonths} months)
                   {educationV2Result.remainingYears > 0
                     ? ` — then no further SIPs for ${educationV2Result.remainingYears} years while the corpus compounds.`
                     : " — SIP continues until target age."}
-                </li>
-                <li>
+                </>,
+                <>
                   Assumed return: <strong>{Number(educationV2Inputs.rate) || 14}%</strong> p.a.
                   (same compounding conventions as the SIP and lumpsum calculators).
-                </li>
-                <li>Taxes, fees, exit loads, inflation and scheme-specific terms are not modelled.</li>
-              </ul>
-              <p className="calc-share-link">
-                Shareable link:{' '}
-                <a href={childEducationV2ShareUrl}>{childEducationV2ShareUrl}</a>
-              </p>
-            </div>
+                </>,
+                "Taxes, fees, exit loads, inflation and scheme-specific terms are not modelled.",
+              ]}
+            />
+            <CalcDisclaimer />
           </div>
         )}
 
@@ -2417,6 +2474,15 @@ const Calculators = () => {
                 )}
               </div>
             </div>
+            <CalcAssumptions
+              items={[
+                <>Goal of <strong>{formatNumber(goalInputs.goalAmount)}</strong> by age <strong>{goalInputs.targetAge}</strong>.</>,
+                <>Existing investment of <strong>{formatNumber(goalInputs.existingInvestment)}</strong> grows at <strong>{goalInputs.expectedReturn}%</strong> p.a.</>,
+                "Monthly SIP is sized only for any remaining shortfall after existing investments grow.",
+                "Taxes, fees, inflation on the goal amount and scheme terms are not modelled.",
+              ]}
+            />
+            <CalcDisclaimer />
           </div>
         )}
 
@@ -2503,6 +2569,14 @@ const Calculators = () => {
                 </p>
             </div>
           </div>
+          <CalcAssumptions
+            items={[
+              <>Amount of <strong>{formatNumber(inflationInputs.currentAmount)}</strong> inflated at <strong>{inflationInputs.inflation}%</strong> p.a. for <strong>{inflationInputs.years}</strong> years.</>,
+              "Shows how much more money may be needed later to buy the same goods/services.",
+              "Actual inflation varies by category and year; this is a simple illustrative projection.",
+            ]}
+          />
+          <CalcDisclaimer />
           </div>
         )}
       </div>
