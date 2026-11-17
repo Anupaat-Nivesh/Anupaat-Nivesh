@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """
-Generate WhatsApp/social OG PNGs + static share HTML for every calculator.
+Generate WhatsApp/social OG PNGs + short static share HTML for every calculator.
+
+Public share URL shape: https://www.anupaatnivesh.com/s/{shortId}
+(file on disk: public/s/{shortId}/index.html — works on CRA + Hostinger DirectoryIndex)
 
 WhatsApp crawlers do not run React JS, so each share URL must be a real HTML
 file with og:* tags pointing at a 1200×630 PNG.
@@ -16,7 +19,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 META_PATH = ROOT / "src" / "data" / "calculatorShare.json"
 OG_DIR = ROOT / "public" / "og" / "calculators"
-SHARE_DIR = ROOT / "public" / "share" / "calculators"
+SHORT_DIR = ROOT / "public" / "s"
+LEGACY_DIR = ROOT / "public" / "share" / "calculators"
 SITE = "https://www.anupaatnivesh.com"
 VENV = Path(__file__).resolve().parent / ".venv-share"
 
@@ -34,7 +38,6 @@ def ensure_pillow():
     pip = VENV / "bin" / "pip"
     py = VENV / "bin" / "python"
     subprocess.check_call([str(pip), "install", "pillow", "-q"])
-    # Re-exec under venv python
     subprocess.check_call([str(py), str(Path(__file__).resolve()), *sys.argv[1:]])
     sys.exit(0)
 
@@ -89,9 +92,7 @@ def make_png(item: dict, out_path: Path):
     img = Image.new("RGB", (W, H), bg)
     draw = ImageDraw.Draw(img)
 
-    # Accent bar
     draw.rectangle([0, 0, 18, H], fill=accent)
-    # Soft accent panel
     draw.rectangle([18, 0, W, 8], fill=accent)
 
     brand_font = load_font(28)
@@ -101,8 +102,7 @@ def make_png(item: dict, out_path: Path):
 
     draw.text((64, 48), "ANUPAAT NIVESH", font=brand_font, fill=(148, 163, 184))
 
-    title = item["label"]
-    title_lines = wrap_text(draw, title, title_font, W - 140)
+    title_lines = wrap_text(draw, item["label"], title_font, W - 140)
     y = 140
     for line in title_lines[:2]:
         draw.text((64, y), line, font=title_font, fill=(248, 250, 252))
@@ -114,7 +114,6 @@ def make_png(item: dict, out_path: Path):
         draw.text((64, y), line, font=body_font, fill=(203, 213, 225))
         y += 40
 
-    # CTA chip
     cta = "Open calculator →"
     pad_x, pad_y = 28, 16
     tw = draw.textlength(cta, font=cta_font)
@@ -131,13 +130,13 @@ def make_png(item: dict, out_path: Path):
     img.save(out_path, "PNG", optimize=True)
 
 
-def make_html(item: dict, out_path: Path):
+def make_html(item: dict, out_path: Path, share_url: str):
     calc_id = item["id"]
     title = item["ogTitle"]
     desc = item["description"]
     redirect = item["redirect"]
     image = f"{SITE}/og/calculators/{calc_id}.png"
-    share_url = f"{SITE}/share/calculators/{calc_id}.html"
+    has_query = "?" in redirect
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -174,12 +173,14 @@ def make_html(item: dict, out_path: Path):
     </style>
     <script>
       (function () {{
-        var target = {json.dumps(redirect)} + (window.location.search || '') + (window.location.hash || '');
-        // If redirect already has ?, append with &
-        if ({json.dumps('?' in redirect)} && window.location.search) {{
-          target = {json.dumps(redirect)} + '&' + window.location.search.slice(1) + (window.location.hash || '');
+        var base = {json.dumps(redirect)};
+        var q = window.location.search || '';
+        var h = window.location.hash || '';
+        var target = base;
+        if (q) {{
+          target = base + ({json.dumps(has_query)} ? '&' + q.slice(1) : q);
         }}
-        window.location.replace(target);
+        window.location.replace(target + h);
       }})();
     </script>
   </head>
@@ -189,16 +190,41 @@ def make_html(item: dict, out_path: Path):
     </div>
     <script>
       (function () {{
-        var href = {json.dumps(redirect)};
-        if ({json.dumps('?' in redirect)} && window.location.search) {{
-          href = href + '&' + window.location.search.slice(1);
-        }} else {{
-          href = href + (window.location.search || '');
+        var base = {json.dumps(redirect)};
+        var q = window.location.search || '';
+        var h = window.location.hash || '';
+        var href = base;
+        if (q) {{
+          href = base + ({json.dumps(has_query)} ? '&' + q.slice(1) : q);
         }}
-        href += (window.location.hash || '');
-        document.getElementById('continue').href = href;
+        document.getElementById('continue').href = href + h;
       }})();
     </script>
+  </body>
+</html>
+"""
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(html, encoding="utf-8")
+
+
+def make_legacy_redirect(to_short_url: str, out_path: Path):
+    html = f"""<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content="0;url={to_short_url}" />
+    <link rel="canonical" href="{to_short_url}" />
+    <script>
+      (function () {{
+        var dest = {json.dumps(to_short_url)};
+        window.location.replace(dest + (window.location.search || '') + (window.location.hash || ''));
+      }})();
+    </script>
+    <title>Redirecting…</title>
+  </head>
+  <body>
+    <p>Redirecting to <a href="{to_short_url}">{to_short_url}</a>…</p>
   </body>
 </html>
 """
@@ -210,33 +236,25 @@ def main():
     ensure_pillow()
     items = json.loads(META_PATH.read_text(encoding="utf-8"))
     OG_DIR.mkdir(parents=True, exist_ok=True)
-    SHARE_DIR.mkdir(parents=True, exist_ok=True)
+    SHORT_DIR.mkdir(parents=True, exist_ok=True)
+    LEGACY_DIR.mkdir(parents=True, exist_ok=True)
 
     for item in items:
+        short = item.get("shortId") or item["id"]
+        short_url = f"{SITE}/s/{short}"
         png = OG_DIR / f"{item['id']}.png"
-        html = SHARE_DIR / f"{item['id']}.html"
+        short_html = SHORT_DIR / short / "index.html"
         make_png(item, png)
-        make_html(item, html)
-        print(f"wrote {png.relative_to(ROOT)} + {html.relative_to(ROOT)}")
+        make_html(item, short_html, short_url)
+        # Legacy long paths keep working
+        make_legacy_redirect(short_url, LEGACY_DIR / f"{item['id']}.html")
+        print(f"wrote /s/{short}/ + og/{item['id']}.png")
 
-    # Compatibility alias for earlier education-v2 share path
-    alias = ROOT / "public" / "share" / "child-education-v2.html"
-    edu = next(i for i in items if i["id"] == "education-v2")
-    make_html(
-        {
-            **edu,
-            # keep old public URL working; image still points to new og path via make_html using id
-        },
-        alias,
-    )
-    # Fix alias og:url to old path while still using education-v2 image
-    text = alias.read_text(encoding="utf-8")
-    text = text.replace(
-        f"{SITE}/share/calculators/education-v2.html",
-        f"{SITE}/share/child-education-v2.html",
-    )
-    alias.write_text(text, encoding="utf-8")
-    print(f"wrote alias {alias.relative_to(ROOT)}")
+    # Extra legacy aliases
+    edu2 = next(i for i in items if i["id"] == "education-v2")
+    short_edu2 = f"{SITE}/s/{edu2.get('shortId') or edu2['id']}"
+    make_legacy_redirect(short_edu2, ROOT / "public" / "share" / "child-education-v2.html")
+    print("wrote legacy aliases")
 
 
 if __name__ == "__main__":
