@@ -18,6 +18,7 @@ export default function MarketBreadthPage() {
         src={MARKET_BREADTH_URL}
         title="Market Breadth screener"
         allow="clipboard-write"
+        referrerPolicy="no-referrer-when-downgrade"
       />
     </div>
   );

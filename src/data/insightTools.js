@@ -7,3 +7,13 @@ export const MARKET_BREADTH_PATH = '/screeners/market-breadth';
 
 /** Routes that embed an external tool under site chrome (navbar + ticker). */
 export const EMBEDDED_TOOL_PATHS = [MARKET_COMPASS_LOGIN_PATH, MARKET_BREADTH_PATH];
+
+/** Hostinger often serves `/path/` — normalize before embed-route checks. */
+export function normalizeAppPath(pathname = '') {
+  const trimmed = String(pathname).split('?')[0].replace(/\/+$/, '');
+  return trimmed || '/';
+}
+
+export function isEmbeddedToolPath(pathname) {
+  return EMBEDDED_TOOL_PATHS.includes(normalizeAppPath(pathname));
+}

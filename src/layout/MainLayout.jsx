@@ -7,11 +7,12 @@ import ScrollToTopButton from "../components/ScrollToTopButton";
 import ChatBot from "../components/chatbot/ChatBot";
 import WhatsAppCTA from "../components/WhatsAppCTA/WhatsAppCTA";
 import MarketTicker from "../components/MarketTicker/MarketTicker";
-import { EMBEDDED_TOOL_PATHS } from "../data/insightTools";
+import { isEmbeddedToolPath } from "../data/insightTools";
 
 const MainLayout = () => {
     const { pathname } = useLocation();
-    const isToolEmbed = EMBEDDED_TOOL_PATHS.includes(pathname);
+    // Trailing slash (Hostinger dir mirrors) must still count as embed.
+    const isToolEmbed = isEmbeddedToolPath(pathname);
 
     return (
         <>

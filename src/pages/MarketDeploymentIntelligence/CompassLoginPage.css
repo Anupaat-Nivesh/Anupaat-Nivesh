@@ -1,26 +1,48 @@
+/* Full-viewport embed under fixed navbar + market ticker (no parent page scroll). */
 .compass-embed-page {
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: calc(
+    100dvh - var(--market-ticker-top, var(--navbar-height, 5.5rem)) -
+      var(--market-ticker-strip, 2.75rem)
+  );
   min-height: calc(
     100dvh - var(--market-ticker-top, var(--navbar-height, 5.5rem)) -
       var(--market-ticker-strip, 2.75rem)
   );
+  max-height: calc(
+    100dvh - var(--market-ticker-top, var(--navbar-height, 5.5rem)) -
+      var(--market-ticker-strip, 2.75rem)
+  );
   background: #f7f4ee;
+  overflow: hidden;
 }
 
 .compass-embed-page__frame {
   display: block;
   width: 100%;
-  flex: 1;
-  min-height: inherit;
+  height: 100%;
+  flex: 1 1 auto;
   border: 0;
   background: #f7f4ee;
+  /* Keep tool interactive above stray parent overlays; ticker/nav stay higher. */
+  position: relative;
+  z-index: 1;
 }
 
+.layout-outlet.layout-outlet--embed,
 .layout-outlet:has(.compass-embed-page) {
   padding-top: calc(
     var(--market-ticker-top, var(--navbar-height, 5.5rem)) + var(--market-ticker-strip, 2.75rem)
   );
   padding-bottom: 0;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+/* Prevent parent scroll stealing clicks / covering iframe controls with fixed chrome */
+body:has(.compass-embed-page) {
+  overflow: hidden;
+  max-height: 100dvh;
 }

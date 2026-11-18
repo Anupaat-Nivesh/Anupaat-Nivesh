@@ -19,9 +19,12 @@ const UPSTREAM_LEDGER = (
   'https://breadth-ledger.manas-arora.workers.dev'
 ).replace(/\/+$/, '');
 
-/** Live ledger `data.json` currently 404s; snapshot is the working feed. */
+/**
+ * Live feed includes `near` + `rs` (Industry dropdowns for 52w highs / RS rating).
+ * Snapshot is a smaller fallback without those arrays.
+ */
 const UPSTREAM_DATA_URL =
-  process.env.MARKETS_BREADTH_DATA_URL || `${UPSTREAM_LEDGER}/data-snapshot.json`;
+  process.env.MARKETS_BREADTH_DATA_URL || `${UPSTREAM_LEDGER}/data.json`;
 
 const UPSTREAM_SNAP_URL =
   process.env.MARKETS_BREADTH_SNAP_URL || `${UPSTREAM_LEDGER}/data-snapshot.json`;
@@ -77,11 +80,16 @@ function shouldRedirectToEmbed(req) {
   return dest === 'document';
 }
 
+function isEmbedRequest(req) {
+  const raw = String(req.originalUrl || req.url || '/');
+  return /[?&]embed(=|&|$)/i.test(raw);
+}
+
 /**
  * Rewrite absolute manas / worker URLs to same-origin relative paths.
  * Emails like name@manasarora.com are preserved (never host-substituted).
  */
-function rewriteHtml(html) {
+function rewriteHtml(html, { embed = false } = {}) {
   const emailTokens = [];
   let out = html.replace(/([A-Z0-9._%+-]+)@manasarora\.com/gi, (match) => {
     const token = `__AN_EMAIL_${emailTokens.length}__`;
@@ -119,6 +127,16 @@ function rewriteHtml(html) {
   emailTokens.forEach((email, i) => {
     out = out.split(`__AN_EMAIL_${i}__`).join(email);
   });
+
+  // In Anupaat iframe: hide floating Black Friday bar (covers controls) and keep
+  // absolute menus (Sections) from fighting parent chrome.
+  if (embed && !/id="an-embed-chrome"/i.test(out)) {
+    out = out.replace(
+      /<\/head>/i,
+      `<style id="an-embed-chrome">.fcta{display:none!important}#secPanel{z-index:80}</style>\n</head>`
+    );
+  }
+
   return out;
 }
 
@@ -141,25 +159,65 @@ function targetUrl(req) {
   return `${UPSTREAM_ORIGIN}${raw}`;
 }
 
+function upstreamHeaders(req) {
+  return {
+    Accept: req.headers.accept || '*/*',
+    // Some ledger edges 404 non-browser UAs; prefer the caller UA or a normal browser string.
+    'User-Agent':
+      req.headers['user-agent'] ||
+      'Mozilla/5.0 (compatible; AnupaatNiveshMarkets/1.0; +https://www.anupaatnivesh.com)',
+    Referer: `${UPSTREAM_ORIGIN}/`,
+  };
+}
+
+async function fetchUpstream(url, req) {
+  return fetch(url, {
+    method: req.method,
+    redirect: 'follow',
+    headers: upstreamHeaders(req),
+  });
+}
+
 export async function proxyMarketsBreadth(req, res) {
   if (shouldRedirectToEmbed(req)) {
     res.redirect(302, EMBED_PAGE_URL);
     return;
   }
 
-  const url = targetUrl(req);
+  const path = pathOnly(req);
+  const isDataJson = path === '/data.json' || path.startsWith('/data.json/');
+  // Prefer live ledger even if env still points at snapshot (near/rs power Industry dropdowns).
+  const liveDataUrl = UPSTREAM_DATA_URL.includes('data-snapshot')
+    ? `${UPSTREAM_LEDGER}/data.json`
+    : UPSTREAM_DATA_URL;
+  let url = isDataJson ? liveDataUrl : targetUrl(req);
   let upstream;
   try {
-    upstream = await fetch(url, {
-      method: req.method,
-      redirect: 'follow',
-      headers: {
-        Accept: req.headers.accept || '*/*',
-        'User-Agent': req.headers['user-agent'] || 'AnupaatNiveshMarkets/1.0',
-      },
-    });
+    upstream = await fetchUpstream(url, req);
+    // Live data.json carries near/rs; fall back to snapshot if live fails.
+    if (isDataJson && !upstream.ok && liveDataUrl !== UPSTREAM_SNAP_URL) {
+      console.warn(
+        `Markets breadth live data ${upstream.status}; falling back to snapshot`
+      );
+      url = UPSTREAM_SNAP_URL;
+      upstream = await fetchUpstream(url, req);
+    }
   } catch (err) {
-    console.error('Markets breadth proxy fetch failed:', err?.message || err);
+    if (isDataJson && liveDataUrl !== UPSTREAM_SNAP_URL) {
+      try {
+        console.warn('Markets breadth live data fetch error; falling back to snapshot');
+        upstream = await fetchUpstream(UPSTREAM_SNAP_URL, req);
+      } catch (err2) {
+        console.error('Markets breadth proxy fetch failed:', err2?.message || err2);
+        upstream = null;
+      }
+    } else {
+      console.error('Markets breadth proxy fetch failed:', err?.message || err);
+      upstream = null;
+    }
+  }
+
+  if (!upstream) {
     res.status(502).type('html').send(
       '<!doctype html><html><head><meta charset="utf-8"><title>Market breadth</title></head>' +
         '<body style="font-family:system-ui;padding:2rem"><h1>Market breadth is temporarily unavailable</h1>' +
@@ -187,7 +245,7 @@ export async function proxyMarketsBreadth(req, res) {
   res.removeHeader('X-Frame-Options');
 
   if (contentType.includes('text/html')) {
-    const html = rewriteHtml(await upstream.text());
+    const html = rewriteHtml(await upstream.text(), { embed: isEmbedRequest(req) });
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.send(html);
     return;
