@@ -1,8 +1,8 @@
 /**
  * Hostinger/hCDN often 404s SPA paths instead of rewriting to index.html.
- * Mirror calculator routes so cold loads / shared links resolve.
+ * Mirror public routes so cold loads / shared links resolve.
  *
- * Also inject Investment Planner Open Graph tags into those copies so
+ * Calculator routes also get Investment Planner Open Graph tags so
  * WhatsApp previews work for URLs like /calculators?tab=education-v2
  * (crawlers do not run React JS).
  *
@@ -29,6 +29,59 @@ const OG_DESCRIPTION =
 const OG_IMAGE = 'https://www.anupaatnivesh.com/og/calculators/investment-planner.png';
 const SITE = 'https://www.anupaatnivesh.com';
 
+/** Calculator paths that need Investment Planner OG injection. */
+const CALCULATOR_OG_ROUTES = new Set([
+  'calculators',
+  'calculators/child-education',
+  'calculators/child-education-v2',
+]);
+
+/**
+ * Public SPA paths that Hostinger must cold-load (keep in sync with App.js / seoPages).
+ * Physical index.html mirrors beat flaky hCDN ErrorDocument rewrites.
+ */
+const SPA_MIRROR_ROUTES = [
+  'home',
+  'about',
+  'offerings',
+  'contact',
+  'ourApp',
+  'appdownload',
+  'calculators',
+  'calculators/child-education',
+  'calculators/child-education-v2',
+  'consulting-session',
+  'booking',
+  'book-session',
+  'signup',
+  'valuation',
+  'valuation/login',
+  'faqs',
+  'partner-with-us',
+  'corporate',
+  'privacy-policy',
+  'loan-against-securities',
+  'fixed-income-alternatives',
+  'fixed-deposits',
+  'bonds',
+  'unlisted-stocks',
+  'p2p-lending',
+  'tools',
+  'screeners',
+  'screeners/sector-rotation',
+  'screeners/market-breadth',
+  'invest',
+  'invest/baskets',
+  'invest/funds',
+  'invest/risk-profile',
+  'invest/goals',
+  'invest/basket/fire',
+  'invest/basket/water',
+  'invest/basket/earth',
+  'ArthAI',
+  'chatbot',
+];
+
 function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -42,7 +95,6 @@ function replaceMeta(html, attrName, attrValue, content) {
   if (re.test(html)) {
     return html.replace(re, tag);
   }
-  // Insert before </head> if missing
   return html.replace(/<\/head>/i, `  ${tag}\n</head>`);
 }
 
@@ -65,7 +117,6 @@ function injectInvestmentPlannerOg(html, canonicalPath) {
     `<link rel="canonical" href="${SITE}${canonicalPath}" />`
   );
 
-  // Ensure image dimensions for WhatsApp
   if (!/property=["']og:image:width["']/i.test(out)) {
     out = out.replace(
       /<\/head>/i,
@@ -75,16 +126,14 @@ function injectInvestmentPlannerOg(html, canonicalPath) {
   return out;
 }
 
-const routes = [
-  { route: 'calculators', canonical: '/calculators' },
-  { route: 'calculators/child-education', canonical: '/calculators/child-education' },
-  { route: 'calculators/child-education-v2', canonical: '/calculators/child-education-v2' },
-];
-
-for (const { route, canonical } of routes) {
+for (const route of SPA_MIRROR_ROUTES) {
   const dir = path.join(buildDir, ...route.split('/'));
   fs.mkdirSync(dir, { recursive: true });
-  const html = injectInvestmentPlannerOg(indexHtml, canonical);
+  const canonical = `/${route}`;
+  const html = CALCULATOR_OG_ROUTES.has(route)
+    ? injectInvestmentPlannerOg(indexHtml, canonical)
+    : indexHtml;
   fs.writeFileSync(path.join(dir, 'index.html'), html);
-  console.log(`spa-hostinger-fallback: ${route}/index.html (Investment Planner OG)`);
+  const note = CALCULATOR_OG_ROUTES.has(route) ? ' (Investment Planner OG)' : '';
+  console.log(`spa-hostinger-fallback: ${route}/index.html${note}`);
 }
