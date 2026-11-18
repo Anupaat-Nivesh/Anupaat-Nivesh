@@ -15,13 +15,13 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{DOCUMENT_ROOT}/s/$1/index.html -f
 RewriteRule ^s/([a-z0-9-]+)/?$ /s/$1/index.html [L,QSA]
 
-# Never rewrite real files/dirs (assets, share HTML, og images, etc.)
+# Never rewrite real files/dirs (assets, share HTML, og images, calculators/, screeners/, etc.)
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# SPA fallback — serve index.html for all client routes
+# SPA fallback — serve index.html for all other client routes
 RewriteRule ^ index.html [L,QSA]
 
-# Hostinger/hCDN often surfaces missing paths as 404 before rewrite; map those to SPA
-ErrorDocument 404 /index.html
+# Hostinger/hCDN may surface missing paths as 404 before rewrite
+ErrorDocument 404 /404.html
