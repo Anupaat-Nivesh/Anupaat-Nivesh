@@ -1,4 +1,5 @@
 Options -MultiViews
+DirectoryIndex index.html
 RewriteEngine On
 RewriteBase /
 
@@ -15,13 +16,19 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{DOCUMENT_ROOT}/s/$1/index.html -f
 RewriteRule ^s/([a-z0-9-]+)/?$ /s/$1/index.html [L,QSA]
 
-# Never rewrite real files/dirs (assets, share HTML, og images, calculators/, screeners/, etc.)
+# If a mirrored SPA folder exists, serve its index (cold links / trailing-slash variants)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+RewriteRule ^(.+?)/?$ /$1/index.html [L,QSA]
+
+# Existing files/dirs (assets, og, static, mirrored routes, etc.)
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# SPA fallback — serve index.html for all other client routes
+# SPA fallback for dynamic paths (invest/fund/:code, etc.) when Apache sees the request
 RewriteRule ^ index.html [L,QSA]
 
-# Hostinger/hCDN may surface missing paths as 404 before rewrite
+# When the panel/CDN surfaces a 404, prefer our SPA shell
 ErrorDocument 404 /404.html

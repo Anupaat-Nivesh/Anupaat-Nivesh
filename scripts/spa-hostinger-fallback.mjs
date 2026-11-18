@@ -1,12 +1,15 @@
 /**
- * Hostinger/hCDN often 404s SPA deep links instead of rewriting to index.html.
+ * Hostinger/hCDN returns its own 404 for missing paths BEFORE .htaccess runs.
+ * In-app React Router links work; cold/direct/shared URLs 404 unless a physical
+ * `build/<route>/index.html` exists.
  *
- * Keep the build easy to upload: only two parent folders beyond CRA output —
- *   calculators/   (OG-injected share/cold-load pages + child routes)
- *   screeners/     (market-breadth + sector-rotation cold-load pages)
+ * This script copies build/index.html into every public SPA route folder.
+ * Calculator routes also get Investment Planner Open Graph tags.
  *
- * Other client routes rely on public/.htaccess + ErrorDocument 404 → index.html.
  * Preferred short calculator share URLs remain /s/{shortId}.
+ *
+ * Deploy: upload the full contents of build/ (not a subset). Physical route
+ * folders are required for direct links on Hostinger — .htaccess alone is not enough.
  */
 import fs from 'fs';
 import path from 'path';
@@ -29,49 +32,79 @@ const OG_DESCRIPTION =
 const OG_IMAGE = 'https://www.anupaatnivesh.com/og/calculators/investment-planner.png';
 const SITE = 'https://www.anupaatnivesh.com';
 
-/** Only these two parents (plus their subfolders) are written into build/. */
-const PARENT_FOLDERS = ['calculators', 'screeners'];
-
 const CALCULATOR_OG_ROUTES = new Set([
   'calculators',
   'calculators/child-education',
   'calculators/child-education-v2',
 ]);
 
+/**
+ * Every static public path from App.js that must cold-load on Hostinger.
+ * Keep in sync when adding routes. Dynamic segments (fund/:code) still need
+ * Apache rewrite / panel 404 → index.html if hit directly.
+ */
 const SPA_MIRROR_ROUTES = [
-  'calculators',
-  'calculators/child-education',
-  'calculators/child-education-v2',
-  'screeners',
-  'screeners/market-breadth',
-  'screeners/sector-rotation',
-];
-
-/** Top-level dirs from older builds that used to mirror every SEO route — remove so deploy stays lean. */
-const LEGACY_TOP_LEVEL_MIRRORS = [
+  // Core
   'home',
   'about',
+  'whyanupaat',
   'offerings',
   'contact',
   'ourApp',
   'appdownload',
+  // Calculators (+ OG)
+  'calculators',
+  'calculators/child-education',
+  'calculators/child-education-v2',
+  // Booking / payments
   'consulting-session',
   'booking',
   'book-session',
+  'book-consultation',
+  'payment',
+  'payment-success',
+  'payment-error',
   'signup',
+  'onboarding',
+  // Valuation / compass
   'valuation',
+  'valuation/login',
+  'market-deployment-intelligence',
+  // Company
   'faqs',
   'partner-with-us',
   'corporate',
   'privacy-policy',
+  // Offerings
   'loan-against-securities',
   'fixed-income-alternatives',
   'fixed-deposits',
   'bonds',
   'unlisted-stocks',
   'p2p-lending',
+  'mutual-funds',
+  'equity-basket',
+  // Tools / screeners
   'tools',
+  'screeners',
+  'screeners/sector-rotation',
+  'screeners/market-breadth',
+  // Invest / baskets
   'invest',
+  'invest/baskets',
+  'invest/funds',
+  'invest/risk-profile',
+  'invest/goals',
+  'invest/basket/fire',
+  'invest/basket/water',
+  'invest/basket/earth',
+  'invest/dashboard',
+  'invest/payment-success',
+  'baskets',
+  'baskets/fire-s',
+  'baskets/water',
+  'baskets/earth',
+  // Standalone
   'ArthAI',
   'chatbot',
 ];
@@ -120,21 +153,7 @@ function injectInvestmentPlannerOg(html, canonicalPath) {
   return out;
 }
 
-function rmDirIfExists(dirPath) {
-  if (fs.existsSync(dirPath)) {
-    fs.rmSync(dirPath, { recursive: true, force: true });
-  }
-}
-
-// Drop sprawling legacy mirrors from prior builds
-for (const name of LEGACY_TOP_LEVEL_MIRRORS) {
-  rmDirIfExists(path.join(buildDir, name));
-}
-
-// Rebuild only the two parent trees cleanly
-for (const parent of PARENT_FOLDERS) {
-  rmDirIfExists(path.join(buildDir, parent));
-}
+const parents = new Set();
 
 for (const route of SPA_MIRROR_ROUTES) {
   const dir = path.join(buildDir, ...route.split('/'));
@@ -144,13 +163,14 @@ for (const route of SPA_MIRROR_ROUTES) {
     ? injectInvestmentPlannerOg(indexHtml, canonical)
     : indexHtml;
   fs.writeFileSync(path.join(dir, 'index.html'), html);
+  parents.add(route.split('/')[0]);
   const note = CALCULATOR_OG_ROUTES.has(route) ? ' (Investment Planner OG)' : '';
   console.log(`spa-hostinger-fallback: ${route}/index.html${note}`);
 }
 
-// Hostinger custom 404 panel often ignores ErrorDocument; a real 404.html helps other SPA paths.
+// Hostinger panel custom 404 often wins over ErrorDocument; keep a real 404.html anyway.
 fs.writeFileSync(path.join(buildDir, '404.html'), indexHtml);
 console.log('spa-hostinger-fallback: 404.html (SPA fallback)');
 console.log(
-  'spa-hostinger-fallback: Hostinger extras → static/ + calculators/ + screeners/ (+ 404.html)'
+  `spa-hostinger-fallback: ${SPA_MIRROR_ROUTES.length} routes under ${parents.size} top-level folders — upload full build/`
 );
