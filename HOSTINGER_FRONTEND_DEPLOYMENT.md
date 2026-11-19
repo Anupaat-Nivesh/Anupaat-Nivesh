@@ -1,6 +1,35 @@
 # Deploy Frontend to Hostinger
 
-## 🚀 Step-by-Step Guide
+## Automatic deploy (GitHub Actions)
+
+On every push to `main` (and via **Actions → Deploy frontend to Hostinger → Run workflow**), CI builds `build/` and syncs it to Hostinger over FTPS.
+
+### One-time secrets
+
+Repo → **Settings → Secrets and variables → Actions** → add:
+
+| Secret | Example |
+|--------|---------|
+| `HOSTINGER_FTP_SERVER` | `ftp.anupaatnivesh.com` (from hPanel → Files → FTP Accounts) |
+| `HOSTINGER_FTP_USERNAME` | your FTP user |
+| `HOSTINGER_FTP_PASSWORD` | your FTP password |
+| `REACT_APP_RAZORPAY_KEY_ID` | live/test public key used in production |
+
+Optional **Variables** (Actions → Variables):
+
+| Variable | Default if unset |
+|----------|------------------|
+| `HOSTINGER_FTP_SERVER_DIR` | `public_html/` |
+| `REACT_APP_API_BASE_URL` | `https://anupaat-nivesh.vercel.app` |
+| `REACT_APP_BASE_URL` | `https://www.anupaatnivesh.com` |
+
+Workflow file: `.github/workflows/deploy-hostinger.yml`
+
+After secrets are set, merge/push to `main` — no manual File Manager upload needed for routine releases. Still upload the **full** `build/` contents (SPA route mirrors included).
+
+---
+
+## Manual deploy (File Manager)
 
 ### Prerequisites
 - Hostinger hosting account

@@ -1,0 +1,82 @@
+# Build CRA frontend and sync build/ to Hostinger over FTPS.
+# Triggers on push to main (and manual Run workflow).
+#
+# One-time setup — GitHub → Settings → Secrets and variables → Actions:
+#   HOSTINGER_FTP_SERVER      e.g. ftp.anupaatnivesh.com or the host from hPanel → FTP Accounts
+#   HOSTINGER_FTP_USERNAME    FTP username
+#   HOSTINGER_FTP_PASSWORD    FTP password
+#   REACT_APP_RAZORPAY_KEY_ID optional (payments); EmailJS secrets optional (defaults in workflow)
+# Variables (optional): HOSTINGER_FTP_SERVER_DIR (default public_html/), REACT_APP_API_BASE_URL, REACT_APP_BASE_URL
+#
+# Do NOT use dangerous-clean-slate — keeps unrelated Hostinger files safe.
+# Upload is contents of build/ into the document root (includes SPA route mirrors).
+
+name: Deploy frontend to Hostinger
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hostinger-frontend-deploy
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Production build
+        env:
+          # CRA treats CI=true as fail-on-eslint-warning; our build has known warnings.
+          CI: "false"
+          NODE_ENV: production
+          GENERATE_SOURCEMAP: "false"
+          REACT_APP_API_BASE_URL: ${{ vars.REACT_APP_API_BASE_URL || 'https://anupaat-nivesh.vercel.app' }}
+          REACT_APP_BASE_URL: ${{ vars.REACT_APP_BASE_URL || 'https://www.anupaatnivesh.com' }}
+          REACT_APP_WHATSAPP_NUMBER: ${{ vars.REACT_APP_WHATSAPP_NUMBER || '919501195200' }}
+          REACT_APP_AMFI_ARN: ${{ vars.REACT_APP_AMFI_ARN || 'ARN-347085' }}
+          REACT_APP_CONSULTING_SESSION_PRICE: ${{ vars.REACT_APP_CONSULTING_SESSION_PRICE || '999' }}
+          REACT_APP_CONSULTING_SESSION_ACTUAL_PRICE: ${{ vars.REACT_APP_CONSULTING_SESSION_ACTUAL_PRICE || '999' }}
+          REACT_APP_CALENDLY_CONSULTING_URL: ${{ vars.REACT_APP_CALENDLY_CONSULTING_URL || 'https://calendly.com/anupaatnivesh/financial-planning-session' }}
+          REACT_APP_CALENDLY_URL: ${{ vars.REACT_APP_CALENDLY_URL || 'https://calendly.com/anupaatnivesh' }}
+          REACT_APP_ADMIN_EMAIL: ${{ vars.REACT_APP_ADMIN_EMAIL || 'info@anupaatnivesh.com' }}
+          REACT_APP_RAZORPAY_KEY_ID: ${{ secrets.REACT_APP_RAZORPAY_KEY_ID }}
+          REACT_APP_EMAILJS_SERVICE_ID: ${{ secrets.REACT_APP_EMAILJS_SERVICE_ID || 'service_f3brm8k' }}
+          REACT_APP_EMAILJS_TEMPLATE_ID: ${{ secrets.REACT_APP_EMAILJS_TEMPLATE_ID || 'template_agep8yl' }}
+          REACT_APP_EMAILJS_MF_TEMPLATE_ID: ${{ secrets.REACT_APP_EMAILJS_MF_TEMPLATE_ID || 'template_abk1zsr' }}
+          REACT_APP_EMAILJS_PUBLIC_KEY: ${{ secrets.REACT_APP_EMAILJS_PUBLIC_KEY || '9UdH6e5xO7yZCJSL5' }}
+        run: npm run build
+
+      - name: Verify SPA mirrors exist
+        run: test -f build/privacy-policy/index.html && test -f build/screeners/market-breadth/index.html && test -f build/404.html
+
+      - name: Deploy build/ to Hostinger via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.HOSTINGER_FTP_SERVER }}
+          username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
+          password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+          protocol: ftps
+          security: strict
+          port: 21
+          local-dir: ./build/
+          # Override via repo Variable HOSTINGER_FTP_SERVER_DIR if not public_html/
+          server-dir: ${{ vars.HOSTINGER_FTP_SERVER_DIR || 'public_html/' }}
+          timeout: 600000
+
