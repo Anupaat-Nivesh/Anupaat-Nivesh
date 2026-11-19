@@ -587,6 +587,83 @@ const ResultCard = ({ title, maturity, invested, returns }) => (
   </div>
 );
 
+/** Hidden defaults for post-corpus SWP income illustration (not shown in UI). */
+const SWP_INCOME_WITHDRAWAL_PCT = 8;
+const SWP_INCOME_RETURN_PCT = 12; // moderate return while withdrawing
+const SWP_INCOME_DEFAULT_YEARS = 20;
+
+/**
+ * After a calculator produces a final corpus, show sustainable SWP income.
+ * User can tweak withdrawal years; 8% withdrawal rate stays internal.
+ */
+const SwpIncomeFromCorpus = ({ sourceCorpus }) => {
+  const corpus = Math.max(0, Number(sourceCorpus) || 0);
+  const [years, setYears] = useState(SWP_INCOME_DEFAULT_YEARS);
+
+  const result = useMemo(
+    () =>
+      calculateSWP(
+        corpus,
+        SWP_INCOME_WITHDRAWAL_PCT,
+        SWP_INCOME_RETURN_PCT,
+        Number(years) || 0
+      ),
+    [corpus, years]
+  );
+
+  if (!(corpus > 0)) return null;
+
+  return (
+    <div className="calc-result calc-swp-income">
+      <h4>SWP Projection</h4>
+      <p className="calc-swp-income__lead muted">
+        Estimated monthly income from this corpus via systematic withdrawals (moderate return assumed while withdrawing).
+      </p>
+      <div className="result-grid calc-swp-income__row">
+        <div className="calc-swp-income__years">
+          <p className="result-label">Withdrawal years</p>
+          <input
+            type="number"
+            min="1"
+            max="50"
+            step="1"
+            value={years}
+            onChange={(e) => setYears(e.target.value)}
+            aria-label="Withdrawal duration in years"
+          />
+        </div>
+        <div>
+          <p className="result-label">Monthly withdrawal</p>
+          <p className="result-value">{formatNumber(result.monthlyWithdrawal)}</p>
+        </div>
+        <div>
+          <p className="result-label">Annual withdrawal</p>
+          <p className="result-value">{formatNumber(result.annualWithdrawal)}</p>
+        </div>
+        <div>
+          <p className="result-label">Total withdrawn</p>
+          <p className="result-value success">{formatNumber(result.totalWithdrawn)}</p>
+        </div>
+        <div>
+          <p className="result-label">Remaining corpus</p>
+          <p
+            className={`result-value${result.corpusExhausted ? "" : " success"}`}
+            style={result.corpusExhausted ? { color: "#dc3545" } : undefined}
+          >
+            {formatNumber(result.remainingCorpus)}
+          </p>
+        </div>
+      </div>
+      {result.corpusExhausted && (
+        <p className="calc-swp-income__warn">
+          Corpus may be exhausted after about {result.yearsToExhaust.toFixed(1)} years at this
+          withdrawal pace — try fewer withdrawal years.
+        </p>
+      )}
+    </div>
+  );
+};
+
 const CalcAssumptions = ({ items }) => (
   <div className="calc-assumptions">
     <p className="calc-assumptions__title">How this plan works</p>
@@ -1371,6 +1448,7 @@ const Calculators = () => {
               invested={sipResult.invested}
               returns={sipResult.returns}
             />
+            <SwpIncomeFromCorpus sourceCorpus={sipResult.maturity} />
             <div className="chart-block">
               <Bar
                 key={`sip-${sipResult.invested}-${sipResult.returns}`}
@@ -1452,6 +1530,7 @@ const Calculators = () => {
             invested={stepResult.invested}
             returns={stepResult.returns}
           />
+          <SwpIncomeFromCorpus sourceCorpus={stepResult.maturity} />
           <div className="chart-block">
             <Bar
               key={`step-${stepResult.invested}-${stepResult.returns}`}
@@ -1522,6 +1601,7 @@ const Calculators = () => {
             invested={lumpsumResult.invested}
             returns={lumpsumResult.returns}
           />
+          <SwpIncomeFromCorpus sourceCorpus={lumpsumResult.maturity} />
           <div className="chart-block">
             <Bar
               key={`lumpsum-${lumpsumResult.invested}-${lumpsumResult.returns}`}
@@ -2104,6 +2184,7 @@ const Calculators = () => {
                 </div>
               </div>
             </div>
+            <SwpIncomeFromCorpus sourceCorpus={retirementResult.corpusNeeded} />
             <CalcAssumptions
               items={[
                 <>Today’s expenses grow at <strong>{retirementInputs.inflation}%</strong> p.a. until retirement age <strong>{retirementInputs.retirementAge}</strong>.</>,
@@ -2340,6 +2421,7 @@ const Calculators = () => {
                 <p className="result-value">{formatNumber(educationV2Result.sipMaturity)}</p>
               </div>
             </div>
+            <SwpIncomeFromCorpus sourceCorpus={educationV2Result.maturity} />
             <div className="chart-block">
               <Bar
                 key={`education-v2-${educationV2Result.invested}-${educationV2Result.returns}`}
@@ -2474,6 +2556,7 @@ const Calculators = () => {
                 )}
               </div>
             </div>
+            <SwpIncomeFromCorpus sourceCorpus={goalResult.goalAmount} />
             <CalcAssumptions
               items={[
                 <>Goal of <strong>{formatNumber(goalInputs.goalAmount)}</strong> by age <strong>{goalInputs.targetAge}</strong>.</>,

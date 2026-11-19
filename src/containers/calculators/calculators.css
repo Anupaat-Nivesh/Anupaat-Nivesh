@@ -370,6 +370,68 @@
   font-size: 2.1rem;
 }
 
+/* Post-corpus SWP income illustration */
+.calc-swp-income {
+  margin-top: 1.5rem;
+}
+
+.calc-swp-income__lead {
+  margin: -0.5rem 0 1.25rem;
+  font-size: 1.35rem;
+  line-height: 1.45;
+}
+
+.calc-swp-income__row {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.calc-swp-income__years {
+  justify-content: flex-start;
+}
+
+.calc-swp-income__years input {
+  width: 100%;
+  margin-top: 0.15rem;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  background: #fff;
+  font-family: inherit;
+}
+
+.calc-swp-income__years input:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 4px 12px rgba(254, 1, 1, 0.1);
+}
+
+.calc-swp-income__warn {
+  margin: 1rem 0 0;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #ffc107;
+  background: #fff8e6;
+  color: #856404;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 900px) {
+  .calc-swp-income__row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .calc-swp-income__row {
+    grid-template-columns: 1fr;
+  }
+}
+
 .chart-block {
   height: 80px;
   margin-top: 1.5rem;
