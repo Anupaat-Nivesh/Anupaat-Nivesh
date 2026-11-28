@@ -9,6 +9,7 @@ import {
   Home,
   FAQs,
   Privacypolicy,
+  TermsOfService,
   LoanAgainstSecurities,
   FixedIncomeAlternativesHub,
   FixedDeposits,
@@ -110,6 +111,7 @@ function App() {
           <Route path="corporate" element={<CorporateCorner />} />
 
           <Route path="privacy-policy" element={<Privacypolicy />} />
+          <Route path="terms-of-service" element={<TermsOfService />} />
 
           {/* Offering pages  */}
           <Route path="mutual-funds" element={<Navigate to="/invest/baskets" replace />} />

@@ -119,6 +119,11 @@ export const SEO_BY_PATH = {
     description:
       'How Anupaat Nivesh collects, uses, and protects personal information for advisory and mutual fund distribution services.',
   },
+  '/terms-of-service': {
+    title: 'Terms of Service',
+    description:
+      'Terms governing use of the Anupaat Nivesh website, tools, consulting bookings, and related services.',
+  },
   '/loan-against-securities': {
     title: 'Loan Against Securities',
     description:

@@ -43,6 +43,7 @@ const ROUTES = [
   'partner-with-us',
   'corporate',
   'privacy-policy',
+  'terms-of-service',
   'loan-against-securities',
   'fixed-income-alternatives',
   'fixed-deposits',

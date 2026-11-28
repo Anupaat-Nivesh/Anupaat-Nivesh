@@ -345,7 +345,7 @@ Please follow up with this user for their booking.`,
 
         {/* Disclaimer */}
         <p className="form-disclaimer">
-          By submitting, you agree to our <a href="/privacy-policy">Privacy Policy</a>. 
+          By submitting, you agree to our <a href="/terms-of-service">Terms of Service</a> and <a href="/privacy-policy">Privacy Policy</a>. 
           We'll use this information to schedule your consultation session.
         </p>
       </form>

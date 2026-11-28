@@ -75,6 +75,7 @@ const SPA_MIRROR_ROUTES = [
   'partner-with-us',
   'corporate',
   'privacy-policy',
+  'terms-of-service',
   // Offerings
   'loan-against-securities',
   'fixed-income-alternatives',

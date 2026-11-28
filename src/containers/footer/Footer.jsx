@@ -59,6 +59,7 @@ const Footer = () => (
                     <div className='footer-links'>
                         <Link to='faqs'>FAQs</Link>
                         <Link to='privacy-policy'>Privacy Policy</Link>
+                        <Link to='terms-of-service'>Terms of Service</Link>
                         <Link to='ourApp'>Our App</Link>
                         <Link to='appdownload'>App Download</Link>
                     </div>

@@ -328,7 +328,7 @@ const LeadForm = ({
         </button>
 
         <p className="form-disclaimer">
-          By submitting, you agree to our <a href="/privacy-policy">Privacy Policy</a>. 
+          By submitting, you agree to our <a href="/terms-of-service">Terms of Service</a> and <a href="/privacy-policy">Privacy Policy</a>. 
           We'll never share your information.
         </p>
       </form>
